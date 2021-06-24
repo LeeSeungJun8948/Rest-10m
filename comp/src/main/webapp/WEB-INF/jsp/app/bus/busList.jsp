@@ -10,10 +10,8 @@
 <body>
 
 <h1> 제발 </h1>
-	<!--
 	<c:forEach items="${bus}" var="buss">
 		<h1>${buss.codeId }</h1>
 	</c:forEach>
-	-->
 </body>
 </html>

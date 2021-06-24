@@ -1,4 +1,4 @@
-package com.rest.app.bus.mapper;
+package com.rest.app.bus.service.impl;
 
 import java.util.List;
 

@@ -21,15 +21,14 @@
 
 	<!-- Mybatis Session Template -->
 	<bean id="egov.sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg ref="egov.sqlSession"/>
+		<constructor-arg ref="egov.sqlSession"/>  
 	</bean>
 	
  	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="mes.**.impl" />
+		<property name="basePackage" value="com.**.impl" />
 	</bean> 
 	
-	
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+<!-- 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="app.**.mapper" />
-	</bean>
+	</bean> -->
 </beans>
