@@ -15,6 +15,7 @@ comp/target/*
 bin/
 tmp/
 *.tmp
+*.class
 *.bak
 *.swp
 *~.nib

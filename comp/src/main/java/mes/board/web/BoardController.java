@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+
+import com.rest.app.bus.service.BusinessService;
 
 import egovframework.rte.fdl.property.EgovPropertyService;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
@@ -36,7 +39,9 @@ import mes.board.service.BoardVO;
 @Controller
 @SessionAttributes(types=BoardVO.class)
 public class BoardController {
-
+	@Autowired
+	BusinessService dao;
+	
     @Resource(name = "boardService")
     private BoardService boardService;
     
@@ -60,7 +65,12 @@ public class BoardController {
     public String test2() {
     	return "changeTest.page";
     }
-    
+
+	@RequestMapping("business.do")
+	public String business(Model model) {
+		model.addAttribute("bus", dao.getBus());
+		return "bus/busList.page";
+	}
     @RequestMapping(value="/board/BoardList.do")
     public String selectBoardList(@ModelAttribute("searchVO") BoardDefaultVO searchVO, 
     		ModelMap model)
