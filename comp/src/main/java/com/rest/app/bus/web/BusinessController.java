@@ -10,11 +10,11 @@ import com.rest.app.bus.service.BusinessService;
 @Controller
 public class BusinessController {
 	
-	 @Autowired BusinessService dao;
+//	 @Autowired BusinessService dao;
 	   
 	 @RequestMapping("business.do")
 	 public String business(Model model) {
-	 model.addAttribute("bus", dao.getBus());
-	 return "bus/busList";
+//	 model.addAttribute("bus", dao.getBus());
+	 return "bus/busList.page";
 	 }
 }
