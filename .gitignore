@@ -1,7 +1,7 @@
 /.metadata/
 
-/target/
-/target/*
+comp/target/
+comp/target/*
 .classpath
 .project
 /.settings/
