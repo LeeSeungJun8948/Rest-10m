@@ -39,9 +39,6 @@ import mes.board.service.BoardVO;
 @Controller
 @SessionAttributes(types=BoardVO.class)
 public class BoardController {
-	@Autowired
-	BusinessService dao;
-	
     @Resource(name = "boardService")
     private BoardService boardService;
     
@@ -66,11 +63,6 @@ public class BoardController {
     	return "changeTest.page";
     }
 
-	@RequestMapping("business.do")
-	public String business(Model model) {
-		model.addAttribute("bus", dao.getBus());
-		return "bus/busList.page";
-	}
     @RequestMapping(value="/board/BoardList.do")
     public String selectBoardList(@ModelAttribute("searchVO") BoardDefaultVO searchVO, 
     		ModelMap model)

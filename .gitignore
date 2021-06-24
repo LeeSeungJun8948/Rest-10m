@@ -1,5 +1,4 @@
 /.metadata/
-
 comp/target/
 comp/target/*
 .classpath
