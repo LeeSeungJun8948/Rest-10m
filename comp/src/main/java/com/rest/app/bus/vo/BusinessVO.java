@@ -12,5 +12,5 @@ public class BusinessVO {
 
 	public void setCodeId(String codeId) {
 		this.codeId = codeId;
-	}
+	} 
 }
