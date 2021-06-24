@@ -11,7 +11,7 @@ import com.rest.app.bus.service.BusinessService;
 public class BusinessController {
 	
 	 @Autowired BusinessService dao;
-	  
+	   
 	 @RequestMapping("business.do")
 	 public String business(Model model) {
 	 model.addAttribute("bus", dao.getBus());
