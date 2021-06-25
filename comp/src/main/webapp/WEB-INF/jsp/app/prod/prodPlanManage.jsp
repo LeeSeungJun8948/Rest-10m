@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <h1 class="h3 mb-4 text-gray-700">생산계획 관리</h1>
 <div class="mb-4">
-	<button class="btn btn-primary">조회</button>
-	<button class="btn btn-primary">새자료</button>
-	<button class="btn btn-primary">저장</button>
-	<button class="btn btn-primary">삭제</button>
+	<button type="button" class="btn btn-primary">조회</button>
+	<button type="button" class="btn btn-primary">새자료</button>
+	<button type="button" class="btn btn-primary">저장</button>
+	<button type="button" class="btn btn-primary">삭제</button>
 </div>
 <div class="row">
 	<div class="mb-2 col-lg-6">
@@ -34,13 +34,13 @@
 		<div>
 			<span>납기일자</span> <input type="date">
 			<span>~</span> <input type="date">
-			<button type="button">미생산 읽기</button>
+			<button type="button" class="btn btn-primary">미생산 읽기</button>
 		</div>
 	</div>
 </div>
 <div class="mb-4">
-	<button type="button">추가</button>
-	<button type="button">삭제</button>
+	<button type="button" class="btn btn-primary">추가</button>
+	<button type="button" class="btn btn-primary">삭제</button>
 </div>
 <div class="col-lg-10">
 	<table class="table">
