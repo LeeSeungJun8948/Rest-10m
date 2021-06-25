@@ -3,7 +3,7 @@ package com.rest.app.bus.vo;
 import java.util.Date;
 
 import lombok.Data;
-
+   
 @Data
 public class OrdersVO {
 	int orderNo;
