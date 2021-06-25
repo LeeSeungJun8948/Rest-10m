@@ -7,7 +7,7 @@ public class FacilitiesVO {
 	String facCode;
 	String facilitiesName;
 	String model;
-	String facSize;
+	String size;
 	String productionCompany;
 	String purpose;
 	String volume;
@@ -18,6 +18,4 @@ public class FacilitiesVO {
 	String purchaseDate;
 	String img;
 	String processCode;
-	
-	
 }

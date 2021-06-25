@@ -108,8 +108,8 @@
                 <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="login.html">설비 관리</a>
-                        <a class="collapse-item" href="register.html">설비 조회</a>
-                        <a class="collapse-item" href="forgot-password.html">설비 수리내역 관리</a>
+                        <a class="collapse-item" href="facList.do">설비 조회</a>
+                        <a class="collapse-item" href="repList.do">설비 수리내역 관리</a>
                         <a class="collapse-item" href="404.html">설비 점검내역 관리</a>
                         <a class="collapse-item" href="blank.html">설비생산이력 조회</a>
                     </div>

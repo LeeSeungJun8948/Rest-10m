@@ -6,5 +6,4 @@ import com.rest.app.fac.vo.FacilitiesVO;
 
 public interface FacilitiesMapper {
 	public List<FacilitiesVO> getFac();
-	
 }
