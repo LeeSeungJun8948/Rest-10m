@@ -14,7 +14,7 @@ public class CommController {
 	CommService dao;
 	
 
-	@RequestMapping("main.do")
+	@RequestMapping("/main.do")
 	public String main(Model model) {
 		return "comm/main.page";
 	}
