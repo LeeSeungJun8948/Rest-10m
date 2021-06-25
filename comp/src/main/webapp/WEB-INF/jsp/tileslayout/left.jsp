@@ -23,11 +23,6 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                	메뉴
-            </div>
-
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -36,9 +31,13 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">기준정보관리</h6>
                         <a class="collapse-item" href="buttons.html">공통코드관리</a>
                         <a class="collapse-item" href="cards.html">자재정보관리</a>
+                        <a class="collapse-item" href="cards.html">제품 BOM관리</a>
+                        <a class="collapse-item" href="cards.html">공정관리</a>
+                        <a class="collapse-item" href="cards.html">사원관리</a>
+                        <a class="collapse-item" href="cards.html">불량코드 관리 </a>
+                        <a class="collapse-item" href="cards.html">제품 품질 표준서 관리</a>
                     </div>
                 </div>
             </li>
@@ -51,7 +50,6 @@
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">영업관리</h6>
                         <a class="collapse-item" href="utilities-color.html">주문관리 참조조회</a>
                         <a class="collapse-item" href="utilities-border.html">미생산 의뢰조회</a>
                         <a class="collapse-item" href="utilities-animation.html">출고 관리</a>
@@ -59,14 +57,6 @@
                     </div>
                 </div>
             </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -76,29 +66,53 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">자재관리</h6>
                         <a class="collapse-item" href="login.html">발주관리 참조</a>
                         <a class="collapse-item" href="register.html">자재입고 관리</a>
                         <a class="collapse-item" href="forgot-password.html">자재재고 관리</a>
-                        <div class="collapse-divider"></div>
                         <a class="collapse-item" href="404.html">안전재고 조회</a>
                         <a class="collapse-item" href="blank.html">자재출고 관리</a>
                     </div>
                 </div>
             </li>
 
-            <!-- Nav Item - Charts -->
+			<!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>생산관리</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true" aria-controls="collapsePages2">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>생산관리</span>
+                </a>
+                <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="login.html">생산계획 관리</a>
+                        <a class="collapse-item" href="register.html">생산계획 조회</a>
+                        <a class="collapse-item" href="forgot-password.html">생산지시 관리</a>
+                        <a class="collapse-item" href="404.html">생산지시 조회</a>
+                        <a class="collapse-item" href="blank.html">공정이동표 발행</a>
+                        <a class="collapse-item" href="blank.html">생산공정 실적관리</a>
+                        <a class="collapse-item" href="blank.html">검사공정 실적관리</a>
+                        <a class="collapse-item" href="blank.html">포장공정 실적관리</a>
+                        <a class="collapse-item" href="blank.html">생산 모니터링</a>
+                        <a class="collapse-item" href="blank.html">작업실적 조회</a>
+                        <a class="collapse-item" href="blank.html">불량내역 조회</a>
+                    </div>
+                </div>
             </li>
 
-            <!-- Nav Item - Tables -->
+			<!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>설비관리</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3" aria-expanded="true" aria-controls="collapsePages3">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>설비관리</span>
+                </a>
+                <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="login.html">설비 관리</a>
+                        <a class="collapse-item" href="register.html">설비 조회</a>
+                        <a class="collapse-item" href="forgot-password.html">설비 수리내역 관리</a>
+                        <a class="collapse-item" href="404.html">설비 점검내역 관리</a>
+                        <a class="collapse-item" href="blank.html">설비생산이력 조회</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->
