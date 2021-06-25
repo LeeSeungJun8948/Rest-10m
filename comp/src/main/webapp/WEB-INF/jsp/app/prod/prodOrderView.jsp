@@ -7,6 +7,6 @@
 <title>생산지시 조회</title>
 </head>
 <body>
-
+<h1>생산지시 조회</h1>
 </body>
 </html>

@@ -13,6 +13,12 @@ public class CommController {
 	@Autowired
 	CommService dao;
 	
+
+	@RequestMapping("main.do")
+	public String main(Model model) {
+		return "comm/main.page";
+	}
+	
 	@RequestMapping("commList.do")
 	public String commList(Model model) {
 		

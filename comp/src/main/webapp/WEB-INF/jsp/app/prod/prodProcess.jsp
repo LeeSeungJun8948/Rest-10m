@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공정이동표</title>
+<title>공정이동표 발행</title>
 </head>
 <body>
-
+<h1>공정이동표 발행</h1>
 </body>
 </html>
