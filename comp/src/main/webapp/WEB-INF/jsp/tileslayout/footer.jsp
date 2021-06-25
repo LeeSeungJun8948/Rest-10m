@@ -4,6 +4,6 @@
 
 <div class="container my-auto">
 	<div class="copyright text-center my-auto">
-		<span>Copyright Your Website 2021</span>
+		<span>Copyright Rest-10m 2021</span>
 	</div>
 </div>
