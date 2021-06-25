@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rest.app.bus.service.impl.BusinessMapper">
+	<select id="getBus" resultType="com.rest.app.bus.vo.OrdersVO">
+		select ORDER_NO,
+				PRODUCT_CODE,
+				COMPANY_CODE,
+				ORDER_STATE,
+				IN_DATE,
+				OUT_DATE,
+				ORDER_COUNT,
+				ORDER_PLANCOUNT
+		from orders
+		order by order_no
+	</select>
+</mapper>
