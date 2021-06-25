@@ -60,6 +60,6 @@
 	<!-- Page level plugins -->
 	<script src="vendor/chart.js/Chart.min.js"></script>
 
-<!-- 	<script src="css/sb-admin-2.css"></script> -->
+	<!-- <script src="css/sb-admin-2.css"></script> -->
 </body>
 </html>
