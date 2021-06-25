@@ -40,6 +40,7 @@ public class MaterialController {
 		return "mat/matInForm.page";
 	}
 	
+	
 	@RequestMapping("matStockForm.do")
 	public String matStockForm(Model model) {
 		return "mat/matStockForm.page";
