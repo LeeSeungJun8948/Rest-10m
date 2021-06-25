@@ -7,7 +7,7 @@ public class FacilitiesVO {
 	String facCode;
 	String name;
 	String model;
-	String size;
+	String facSize;
 	String productionCompany;
 	String purpose;
 	String volume;
