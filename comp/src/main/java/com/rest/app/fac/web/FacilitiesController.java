@@ -22,7 +22,7 @@ public class FacilitiesController {
 		return "fac/facList.page";
 	}
 	
-	@RequestMapping("/ajax/facList.do")
+	@RequestMapping("ajax/facList.do")
 	@ResponseBody
 	public List<FacilitiesVO> ajaxGetFac(Model model) {
 		return mapper.getFac();

@@ -25,7 +25,11 @@
         <put-attribute name="body" value="/WEB-INF/jsp/app/{1}/{2}/{3}.jsp" />
     </definition>
 
+
         
+     <definition name="*/*/*/*/*/*.tiles" extends="base">
+		 <put-attribute name="body" value="/WEB-INF/jsp/{1}/{2}/{3}/{4}/{5}/{6}.jsp" />
+ 	</definition>  
     <!-- 메뉴 미표시 
     <definition name="baseEmpty" template="/WEB-INF/jsp/tileslayout/templateEmpty.jsp">
     </definition>
