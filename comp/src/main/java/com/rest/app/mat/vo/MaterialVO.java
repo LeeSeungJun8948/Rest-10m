@@ -6,7 +6,7 @@ import lombok.Data;
 public class MaterialVO {
 	
 	private int materialCode;
-	private String name;
+	private String materialName;
 	private int companyCode;
 	private String companyName; // company와 조인해서 가져올 companyName
 	private String unitId;
