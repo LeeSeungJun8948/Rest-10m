@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class FacilitiesVO {
 	String facCode;
-	String name;
+	String facilitiesName;
 	String model;
 	String facSize;
 	String productionCompany;

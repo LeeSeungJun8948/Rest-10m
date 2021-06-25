@@ -10,8 +10,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
  -->
-<link href="css/sb-admin-2.min.css" rel="stylesheet">
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+ 
+<link href="${pageContext.request.contextPath}/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
 	type="text/css">
 
 <head>
@@ -48,17 +49,17 @@
 	<!-- End of Page Wrapper -->
 
 	<!-- Bootstrap core JavaScript-->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<!-- Core plugin JavaScript-->
-	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script src="${pageContext.request.contextPath}/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<!-- Custom scripts for all pages-->
-	<script src="js/sb-admin-2.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/sb-admin-2.min.js"></script>
 
 	<!-- Page level plugins -->
-	<script src="vendor/chart.js/Chart.min.js"></script>
+	<script src="${pageContext.request.contextPath}/vendor/chart.js/Chart.min.js"></script>
 
 	<!-- <script src="css/sb-admin-2.css"></script> -->
 </body>
