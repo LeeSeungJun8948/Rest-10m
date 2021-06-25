@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.rest.app.fac.service.impl.FacilitiesMapper;
 import com.rest.app.fac.vo.FacilitiesVO;
 
+
 @Controller
 public class FacilitiesController {
 	@Autowired
@@ -22,7 +23,7 @@ public class FacilitiesController {
 		return "fac/facList.page";
 	}
 	
-	@RequestMapping("ajax/facList.do")
+	@RequestMapping("/ajax/facList.do")
 	@ResponseBody
 	public List<FacilitiesVO> ajaxGetFac(Model model) {
 		return mapper.getFac();

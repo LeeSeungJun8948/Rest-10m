@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rest.app.fac.repair.service.impl.RepairMapper">
+	<select id="getRep" resultType="com.rest.app.fac.repair.vo.RepairVO">
+		select  REPAIR_CODE,
+				FAC_CODE,
+				REPAIR_DATE,
+				REPAIR_COMMENT,
+				COMPANY_CODE,
+				COST,
+				ETC
+		from	repair
+		order by repair_code
+	</select>
+</mapper>
