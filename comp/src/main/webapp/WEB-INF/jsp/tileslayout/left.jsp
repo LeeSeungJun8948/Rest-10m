@@ -32,7 +32,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="commList.do">공통코드관리</a>
-                        <a class="collapse-item" href="cards.html">자재정보관리</a>
+                        <a class="collapse-item" href="matForm.do">자재정보관리</a>
                         <a class="collapse-item" href="cards.html">제품 BOM관리</a>
                         <a class="collapse-item" href="cards.html">공정관리</a>
                         <a class="collapse-item" href="cards.html">사원관리</a>
@@ -66,14 +66,15 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="login.html">발주관리 참조</a>
-                        <a class="collapse-item" href="register.html">자재입고 관리</a>
-                        <a class="collapse-item" href="forgot-password.html">자재재고 관리</a>
-                        <a class="collapse-item" href="404.html">안전재고 조회</a>
-                        <a class="collapse-item" href="blank.html">자재출고 관리</a>
+                        <a class="collapse-item" href="inorderForm.do">발주관리 참조</a>
+                        <a class="collapse-item" href="matInForm.do">자재입고 관리</a>
+                        <a class="collapse-item" href="matStockForm.do">자재재고 관리</a>
+                        <a class="collapse-item" href="matSaveStockList.do">안전재고 조회</a>
+                        <a class="collapse-item" href="matOutForm.do">자재출고 관리</a>
                     </div>
                 </div>
             </li>
+
 
 			<!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -116,8 +117,8 @@
             </li>
 
             <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
+ 			<hr class="sidebar-divider">
+ 			
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
