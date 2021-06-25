@@ -36,6 +36,12 @@
 		<property name="webBindingInitializer">
 			<bean class="egovframework.com.cmm.web.EgovBindingInitializer" />
 		</property>
+		<property name="messageConverters">
+	        <list>
+	            <bean class="org.springframework.http.converter.json.MappintJacksonHttpMessageConverter" />
+	            <bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" />
+	        </list>
+    	</property>
 	</bean>
 
 	<!-- setting Locale Locale Interceptor 설정하기 -->
