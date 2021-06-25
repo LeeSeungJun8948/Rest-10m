@@ -107,7 +107,7 @@ public class EgovCcmCmmnDetailCodeManageController {
 			paginationInfo.setTotalRecordCount(totCnt);
 	        model.addAttribute("paginationInfo", paginationInfo);
 
-	        return "egovframework/com/sym/ccm/cde/EgovCcmCmmnDetailCodeList";
+	        return "egovframework/com/sym/ccm/cde/EgovCcmCmmnDetailCodeList.tiles";
 		}
 		
 		/**
