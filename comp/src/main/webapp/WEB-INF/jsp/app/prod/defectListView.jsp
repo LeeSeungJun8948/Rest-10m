@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>불량내역 조회</title>
 </head>
 <body>
-
+<h1>불량내역 조회</h1>
 </body>
 </html>
