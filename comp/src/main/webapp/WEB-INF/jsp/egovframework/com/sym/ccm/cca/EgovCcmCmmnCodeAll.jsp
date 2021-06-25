@@ -39,14 +39,14 @@ $(function() {
 		</tr>
 	</thead>
 	<tbody>
-		<!-- <c:forEach items="${codeList}" var="code">
+	<%--  <c:forEach items="${codeList}" var="code">
 			<tr>
 				<td>${code.codeId}</td>
 				<td>${code.codeIdNm}</td>
 				<td>${code.codeIdDc}</td>
 				<td>${code.clCodeNm}</td>
 			</tr>
-		</c:forEach> -->
+		</c:forEach> --%>
 	</tbody>
 </table>
 </body>

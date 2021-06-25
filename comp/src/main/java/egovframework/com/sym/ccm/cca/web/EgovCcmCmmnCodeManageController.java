@@ -68,14 +68,15 @@ public class EgovCcmCmmnCodeManageController {
 	@Autowired
 	private DefaultBeanValidator beanValidator;
 	
-	@GetMapping("/EgovCcmCmmnCodeAll")
+	@GetMapping("/EgovCcmCmmnCodeAll.do")
 	public String selectCmmnCodeAll(CmmnCodeVO searchVO, Model model) throws Exception {
-//		model.addAttribute("codeList", cmmnCodeManageService.selectCmmnCodeAll(searchVO));
-//		cmmnCodeManageService.selectCmmnCodeAll(searchVO);
-		return "egovframework/com/sym/ccm/cca/EgovCcmCmmnCodeAll";
+		//model.addAttribute("codeList", cmmnCodeManageService.selectCmmnCodeAll(searchVO));
+		//cmmnCodeManageService.selectCmmnCodeAll(searchVO);
+		return "egovframework/com/sym/ccm/cca/EgovCcmCmmnCodeAll.tiles";
 	}
 	
 	@GetMapping("/ajax/EgovCcmCmmnCodeAll")
+	@ResponseBody
 	public ModelAndView selectCmmnCodeAllAjax(CmmnCodeVO searchVO, Model model) throws Exception  {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("jsonView");
@@ -116,7 +117,7 @@ public class EgovCcmCmmnCodeManageController {
 		paginationInfo.setTotalRecordCount(totCnt);
 		model.addAttribute("paginationInfo", paginationInfo);
 
-		return "egovframework/com/sym/ccm/cca/EgovCcmCmmnCodeList";
+		return "egovframework/com/sym/ccm/cca/EgovCcmCmmnCodeList.tiles";
 	}
 	
 	/**
