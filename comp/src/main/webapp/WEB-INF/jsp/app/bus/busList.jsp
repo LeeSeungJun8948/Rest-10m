@@ -24,7 +24,7 @@
 		</p>
 		<br/>
 		
-		<p>진행구분
+		<p>진행구분<br>
 		<input type="radio" name=orderState value=unPlan>미계획
 		<input type="radio" name=orderState value=plan>계획
 		<input type="radio" name=orderState value=planComplete>계획완료 
