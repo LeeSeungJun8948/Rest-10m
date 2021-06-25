@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.rest.app.mat.service.MaterialService;
 import com.rest.app.mat.vo.MaterialVO;
 
+
 @Controller
 public class MaterialController {
 	
@@ -22,7 +23,7 @@ public class MaterialController {
 		return "mat/matForm.page";
 	}
 	
-	@RequestMapping("/ajax/matForm.do")
+	@RequestMapping("/ajax/matList.do")
 	@ResponseBody
 	public List<MaterialVO> ajaxMatForm(Model model) {
 		return dao.getMatList();
