@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rest.app.fac.service.impl.FacilitiesMapper">
+	<select id="getFac" resultType="com.rest.app.fac.vo.FacilitiesVO">
+		select FAC_CODE,
+				NAME,
+				MODEL,
+				"SIZE",
+				PRODUCTION_COMPANY,
+				PURPOSE,
+				VOLUME,
+				PRODUCTION_DATE,
+				EMP_NO,
+				PRICE,
+				FAC_INSPECTION,
+				PURCHASE_DATE,
+				IMG,
+				PROCESS_CODE 
+		from facilities
+		order by fac_code
+	</select>
+</mapper>
