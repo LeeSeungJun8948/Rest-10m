@@ -1,4 +1,4 @@
-package com.rest.app.fac.web;
+package com.rest.app.fac.admin.web;
 
 
 import java.util.List;
@@ -9,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rest.app.fac.service.impl.FacilitiesMapper;
-import com.rest.app.fac.vo.FacilitiesVO;
+import com.rest.app.fac.admin.service.impl.FacilitiesMapper;
+import com.rest.app.fac.admin.vo.FacilitiesVO;
 
 @Controller
 public class FacilitiesController {
@@ -27,4 +27,6 @@ public class FacilitiesController {
 	public List<FacilitiesVO> ajaxGetFac(Model model) {
 		return mapper.getFac();
 	}
+	
+	
 }
