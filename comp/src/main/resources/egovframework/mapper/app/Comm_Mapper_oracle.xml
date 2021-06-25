@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rest.app.comm.service.impl.CommMapper">
+	<select id="getComm" resultType="com.rest.app.comm.vo.CommVO">
+		SELECT code_id, code_id_nm
+		  FROM COMTCCMMNCODE
+		 WHERE code_id LIKE 'R%'
+	</select>
+	<select id="selectComm" resultType="com.rest.app.comm.vo.CommVO">
+		SELECT code,code_nm,code_dc
+  		  FROM COMTCCMMNDETAILCODE
+ 		 WHERE code_id=
+	</select>
+
+</mapper>
