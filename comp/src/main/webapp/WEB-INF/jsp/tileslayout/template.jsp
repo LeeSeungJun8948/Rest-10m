@@ -15,7 +15,7 @@
 	type="text/css">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="EUC-KR" name="viewport" content="width=device-width, initial-scale=1">
 <title>MES</title>
 
 </head>
@@ -59,7 +59,5 @@
 
 	<!-- Page level plugins -->
 	<script src="vendor/chart.js/Chart.min.js"></script>
-
-	<!-- <script src="css/sb-admin-2.css"></script> -->
 </body>
 </html>
