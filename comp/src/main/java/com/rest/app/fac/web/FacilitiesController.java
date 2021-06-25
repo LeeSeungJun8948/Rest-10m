@@ -28,6 +28,4 @@ public class FacilitiesController {
 	public List<FacilitiesVO> ajaxGetFac(Model model) {
 		return mapper.getFac();
 	}
-	
-	
 }
