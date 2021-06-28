@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,16 @@ import com.rest.app.comm.vo.EmployeeVO;
 class GridData {
 	List<EmployeeVO> deletedRows;
 	List<EmployeeVO> updatedRows;
+	List<EmployeeVO> createdRows;
+	
+	
+	
+	public List<EmployeeVO> getCreatedRows() {
+		return createdRows;
+	}
+	public void setCreatedRows(List<EmployeeVO> createdRows) {
+		this.createdRows = createdRows;
+	}
 	public List<EmployeeVO> getDeletedRows() {
 		return deletedRows;
 	}
@@ -71,11 +82,12 @@ public class EmployeeController {
 */		
 		return data;
 	}
-	@DeleteMapping(value = "/ajax/deleteEmp.do")
+	@PostMapping(value = "/ajax/deleteEmp.do")
 	@ResponseBody
-	public Map deleteEmp(@RequestBody GridData gridData, EmployeeVO vo) {
+	public Map deleteEmp(@RequestBody GridData gridData) {
+
 		Map<String,Object> data = new HashMap();
-		dao.deleteEmp(vo);
+		dao.deleteEmp(gridData.deletedRows.get(0));
 		data.put("result", true);
 		data.put("data", gridData.deletedRows);
 		return data;
@@ -84,11 +96,24 @@ public class EmployeeController {
 	@PutMapping(value = "/ajax/updateEmp.do")
 	@ResponseBody
 	public Map updateEmp(@RequestBody GridData gridData) {
-		System.out.println(gridData.updatedRows);
+
 		Map<String,Object> data = new HashMap();
-		dao.updateEmp(gridData.updatedRows.get(0));
+		for(int i =0; i<gridData.updatedRows.size(); i++) {
+			dao.updateEmp(gridData.updatedRows.get(i));	
+		}
 		data.put("result", true);
 		data.put("data", gridData.updatedRows);
 		return data;
 	}
+	   
+	@PostMapping(value = "/ajax/insertEmp.do")
+	@ResponseBody
+	public Map insertEmp(@RequestBody GridData gridData) {
+		Map<String,Object> data = new HashMap();
+		dao.insertEmp(gridData.createdRows.get(0));
+		data.put("result", true);
+		data.put("data", gridData.createdRows);
+		return data;
+	}
+	
 }

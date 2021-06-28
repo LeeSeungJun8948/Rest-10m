@@ -22,10 +22,7 @@
 	    <Logger name="org.springframework" level="INFO" additivity="false">
 	        <AppenderRef ref="console" />
 	    </Logger>
-<<<<<<< HEAD
-=======
-	    
->>>>>>> branch 'master' of https://github.com/LeeSeungJun8948/Rest-10m.git
+
         <Root level="DEBUG">
             <AppenderRef ref="console" />
         </Root>

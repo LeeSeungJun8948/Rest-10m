@@ -24,5 +24,5 @@ public class EmployeeVO {
 	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
 	Date birthDay;
 	
-	
+	  
 }
