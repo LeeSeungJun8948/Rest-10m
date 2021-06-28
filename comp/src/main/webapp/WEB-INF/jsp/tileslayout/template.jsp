@@ -63,7 +63,6 @@
 	<!-- End of Page Wrapper -->
 
 
-<<<<<<< HEAD
 	<!-- Core plugin JavaScript-->
 	<script src="${pageContext.request.contextPath}/vendor/jquery-easing/jquery.easing.min.js"></script>
 

@@ -3,14 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <h1 class="h3 mb-4 text-gray-700">생산계획 관리</h1>
+<<<<<<< HEAD
 
 <div class="mb-4">
 	<button type="button" class="btn btn-primary" id="btnView">조회</button>
 	<button type="button" class="btn btn-primary" id="btnReset">새자료</button>
 	<button type="button" class="btn btn-primary" id="btnSave">저장</button>
 	<button type="button" class="btn btn-primary" id="btnDel">삭제</button>
-</div>
+=======
 <form id="frm">
+	<div class="mb-4" align="right">
+		<button type="button" class="btn btn-primary" id="btnView">조회</button>
+		<button type="reset" class="btn btn-primary" id="btnReset">초기화</button>	
+		<button type="button" class="btn btn-primary" id="btnSave">저장</button>
+		<button type="button" class="btn btn-primary" id="btnDel">삭제</button>
+>>>>>>> branch 'master' of https://github.com/LeeSeungJun8948/Rest-10m.git
+</div>
+<<<<<<< HEAD
+<form id="frm">
+=======
+>>>>>>> branch 'master' of https://github.com/LeeSeungJun8948/Rest-10m.git
 	<div class="row">
 		<div class="mb-2 col-lg-6">
 			<table class="table">

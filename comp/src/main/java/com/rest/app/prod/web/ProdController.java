@@ -25,8 +25,8 @@ public class ProdController {
 	@RequestMapping("ajax/orderRead.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetOrderRead(@RequestParam Map<String, Object> param){
-		 Map<String,Object> datas = new HashMap();
-	      Map<String,Object> data = new HashMap();
+		 Map<String,Object> datas = new HashMap<String, Object>();
+	      Map<String,Object> data = new HashMap<String, Object>();
 	      data.put("result", true);
 	      datas.put("contents", svc.getUnplannedOrders(param));
 	      data.put("data", datas);
