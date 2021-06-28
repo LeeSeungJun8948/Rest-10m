@@ -1,10 +1,14 @@
 package com.rest.app.prod.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.prod.service.ProdService;
 
 @Controller
@@ -17,6 +21,12 @@ public class ProdController {
 		return "prod/prodPlanManage.page";
 	}
 
+	@RequestMapping("ajax/orderRead.do")
+	@ResponseBody
+	public List<OrdersVO> orderRead(Model model) {
+		return svc.getUnplannedOrders();
+	}
+	
 	@RequestMapping("prodPlanView.do")
 	public String prodPlanView(Model model) {
 		return "prod/prodPlanView.page";

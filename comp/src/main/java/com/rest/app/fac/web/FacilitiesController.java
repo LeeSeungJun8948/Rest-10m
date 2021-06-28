@@ -27,12 +27,9 @@ public class FacilitiesController {
 	@ResponseBody
 	public List<FacilitiesVO> ajaxGetFac(Model model) {
 		return mapper.getFac();
-	}
-	
-	// 설비관리
+	}	// 설비관리
 	@RequestMapping("/facAdmin.do")
 	public String facAdmin() {
 		return "fac/facAdmin.page";
 	}
-	
 }

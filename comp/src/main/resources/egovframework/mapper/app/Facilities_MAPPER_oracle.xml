@@ -19,4 +19,6 @@
 		from facilities
 		order by fac_code
 	</select>
+	
+
 </mapper>
