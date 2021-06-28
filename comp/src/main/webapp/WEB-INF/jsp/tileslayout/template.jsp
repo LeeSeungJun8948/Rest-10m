@@ -14,15 +14,12 @@
 	type="text/css">
 
 <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
-<<<<<<< HEAD
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 <link href="${pageContext.request.contextPath}/css/sb-admin-2.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-=======
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
->>>>>>> branch 'master' of https://github.com/LeeSeungJun8948/Rest-10m.git
 
 <!-- Bootstrap core JavaScript-->
 <script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
