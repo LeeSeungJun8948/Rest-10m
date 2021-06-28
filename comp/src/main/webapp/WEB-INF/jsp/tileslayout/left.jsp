@@ -30,6 +30,7 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+<<<<<<< HEAD
                         <a class="collapse-item" href="commList.do">ê³µí†µì½”ë“œê´€ë¦¬</a>
                         <a class="collapse-item" href="matForm.do">ìžìž¬ì •ë³´ê´€ë¦¬</a>
                         <a class="collapse-item" href="cards.html">ì œí’ˆ BOMê´€ë¦¬</a>
@@ -37,6 +38,16 @@
                         <a class="collapse-item" href="cards.html">ì‚¬ì›ê´€ë¦¬</a>
                         <a class="collapse-item" href="cards.html">ë¶ˆëŸ‰ì½”ë“œ ê´€ë¦¬ </a>
                         <a class="collapse-item" href="cards.html">ì œí’ˆ í’ˆì§ˆ í‘œì¤€ì„œ ê´€ë¦¬</a>
+=======
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/sym/ccm/cca/SelectCcmCmmnCodeList.do">°øÅëÄÚµå°ü¸®</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/sym/ccm/cde/SelectCcmCmmnDetailCodeList.do">°øÅëÄÚµå»ó¼¼</a>
+                        <a class="collapse-item" href="matForm.do">ÀÚÀçÁ¤º¸°ü¸®</a>
+                        <a class="collapse-item" href="cards.html">Á¦Ç° BOM°ü¸®</a>
+                        <a class="collapse-item" href="cards.html">°øÁ¤°ü¸®</a>
+                        <a class="collapse-item" href="cards.html">»ç¿ø°ü¸®</a>
+                        <a class="collapse-item" href="cards.html">ºÒ·®ÄÚµå °ü¸® </a>
+                        <a class="collapse-item" href="cards.html">Á¦Ç° Ç°Áú Ç¥ÁØ¼­ °ü¸®</a>
+>>>>>>> branch 'master' of https://github.com/LeeSeungJun8948/Rest-10m.git
                     </div>
                 </div>
             </li>
