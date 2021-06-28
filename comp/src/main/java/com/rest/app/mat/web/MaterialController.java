@@ -29,6 +29,13 @@ public class MaterialController {
 		return dao.getMatList();
 	}
 	
+	@RequestMapping("/ajax/matInfo.do")
+	@ResponseBody
+	public MaterialVO ajaxMatInfo(Model model, MaterialVO vo) {
+		System.out.println(vo.getMaterialCode());
+		return dao.getMatInfo(vo);
+	}
+	
 	@RequestMapping("inorderForm.do")
 	public String inorderForm(Model model) {
 		return "mat/inorderForm.page";

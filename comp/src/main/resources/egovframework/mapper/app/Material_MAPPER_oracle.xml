@@ -3,10 +3,20 @@
 <mapper namespace="com.rest.app.mat.service.impl.MaterialMapper">
 
 	<select id="getMatList" resultType="MatVO">
-		select m.material_code, m.material_name, m.company_code, c.company_name, unit_id, unit_no, cm.code_nm as mat_nm, save_stock, min_stock, max_stock, month_stock 
-		from material m, company c, COMTCCMMNDETAILCODE cm
-		where m.mat_id = cm.code_id and m.mat_no = cm.code and  m.company_Code = c.company_Code
+		select m.material_code, m.material_name, cm.code_nm as mat_nm
+		from material m, COMTCCMMNDETAILCODE cm
+		where m.mat_id = cm.code_id and m.mat_no = cm.code
 	</select>
+	
+	<select id="getMatInfo" resultType="MatVO" parameterType="MatVO">
+		select m.material_code, m.material_name, m.company_code, c.company_name, unit_id, unit_no, save_stock, min_stock, max_stock, month_stock 
+		from material m left join company c 
+		on m.company_Code = c.company_Code
+		join COMTCCMMNDETAILCODE cm
+		on m.mat_no = cm.code and m.mat_id = cm.code_id
+		where m.material_code = #{materialCode}
+	</select>
+	<!-- companyCode는 int인데 null값을 받으면 오류가 생김 -->
 	
 	
 </mapper>

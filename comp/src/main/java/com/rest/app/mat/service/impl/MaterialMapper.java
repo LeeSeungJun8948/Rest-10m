@@ -7,5 +7,6 @@ import com.rest.app.mat.vo.MaterialVO;
 public interface MaterialMapper {
 	
 	public List<MaterialVO> getMatList();
+	public MaterialVO getMatInfo(MaterialVO vo);
 
 }

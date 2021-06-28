@@ -19,4 +19,9 @@ public class MaterialServiceImpl implements MaterialService{
 		return mapper.getMatList();
 	}
 
+	@Override
+	public MaterialVO getMatInfo(MaterialVO vo) {
+		return mapper.getMatInfo(vo);
+	}
+
 }
