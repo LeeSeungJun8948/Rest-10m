@@ -73,10 +73,8 @@
 	<!-- Page level plugins -->
 	<script src="${pageContext.request.contextPath}/vendor/chart.js/Chart.min.js"></script>
 	<script src="${pageContext.request.contextPath}/vendor/chart.js/Chart.min.js"></script>
-=======
 	<!-- Page level plugins
 	<script src="vendor/chart.js/Chart.min.js"></script>
 	<script src="${pageContext.request.contextPath}/vendor/chart.js/Chart.min.js"></script> -->
->>>>>>> branch 'master' of https://github.com/LeeSeungJun8948/Rest-10m.git
 </body>
 </html>
