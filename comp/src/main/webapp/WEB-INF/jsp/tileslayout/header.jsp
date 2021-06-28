@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 
@@ -46,7 +46,7 @@
 		<div
 			class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
 			aria-labelledby="alertsDropdown">
-			<h6 class="dropdown-header">¾Ë¸²</h6>
+			<h6 class="dropdown-header">ì•Œë¦¼</h6>
 			<a class="dropdown-item d-flex align-items-center" href="#">
 				<div class="mr-3">
 					<div class="icon-circle bg-primary">
@@ -54,8 +54,8 @@
 					</div>
 				</div>
 				<div>
-					<div class="small text-gray-500">2021³â 6¿ù 25ÀÏ</div>
-					<span class="font-weight-bold">¾Ë¸²1</span>
+					<div class="small text-gray-500">2021ë…„ 6ì›” 25ì¼</div>
+					<span class="font-weight-bold">ì•Œë¦¼1</span>
 				</div>
 			</a> <a class="dropdown-item d-flex align-items-center" href="#">
 				<div class="mr-3">
@@ -64,8 +64,8 @@
 					</div>
 				</div>
 				<div>
-					<div class="small text-gray-500">2021³â 6¿ù 25ÀÏ</div>
-					¾Ë¸²2
+					<div class="small text-gray-500">2021ë…„ 6ì›” 25ì¼</div>
+					ì•Œë¦¼2
 				</div>
 			</a> <a class="dropdown-item d-flex align-items-center" href="#">
 				<div class="mr-3">
@@ -74,10 +74,10 @@
 					</div>
 				</div>
 				<div>
-					<div class="small text-gray-500">2021³â 6¿ù 25ÀÏ</div>
-					¾Ë¸²3
+					<div class="small text-gray-500">2021ë…„ 6ì›” 25ì¼</div>
+					ì•Œë¦¼3
 				</div>
-			</a> <a class="dropdown-item text-center small text-gray-500" href="#">¸ðµç ¾Ë¸² º¸±â</a>
+			</a> <a class="dropdown-item text-center small text-gray-500" href="#">ëª¨ë“  ì•Œë¦¼ ë³´ê¸°</a>
 		</div></li>
 
 	<!-- Nav Item - Messages -->
@@ -90,7 +90,7 @@
 		<div
 			class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
 			aria-labelledby="messagesDropdown">
-			<h6 class="dropdown-header">¸Þ¼¼Áö</h6>
+			<h6 class="dropdown-header">ë©”ì„¸ì§€</h6>
 			<a class="dropdown-item d-flex align-items-center" href="#">
 				<div class="dropdown-list-image mr-3">
 					<img class="rounded-circle" src="img/undraw_profile_1.svg"
@@ -98,8 +98,8 @@
 					<div class="status-indicator bg-success"></div>
 				</div>
 				<div class="font-weight-bold">
-					<div class="text-truncate">¾÷¹«</div>
-					<div class="small text-gray-500">»ç¿ø</div>
+					<div class="text-truncate">ì—…ë¬´</div>
+					<div class="small text-gray-500">ì‚¬ì›</div>
 				</div>
 			</a> <a class="dropdown-item d-flex align-items-center" href="#">
 				<div class="dropdown-list-image mr-3">
@@ -108,8 +108,8 @@
 					<div class="status-indicator"></div>
 				</div>
 				<div>
-					<div class="text-truncate">¾÷¹«1</div>
-					<div class="small text-gray-500">ºÎÀå</div>
+					<div class="text-truncate">ì—…ë¬´1</div>
+					<div class="small text-gray-500">ë¶€ìž¥</div>
 				</div>
 			</a> <a class="dropdown-item d-flex align-items-center" href="#">
 				<div class="dropdown-list-image mr-3">
@@ -118,8 +118,8 @@
 					<div class="status-indicator bg-warning"></div>
 				</div>
 				<div>
-					<div class="text-truncate">¾÷¹«2</div>
-					<div class="small text-gray-500">ÆÀÀå</div>
+					<div class="text-truncate">ì—…ë¬´2</div>
+					<div class="small text-gray-500">íŒ€ìž¥</div>
 				</div>
 			</a> <a class="dropdown-item d-flex align-items-center" href="#">
 				<div class="dropdown-list-image mr-3">
@@ -128,10 +128,10 @@
 					<div class="status-indicator bg-success"></div>
 				</div>
 				<div>
-					<div class="text-truncate">¾÷¹«3</div>
-					<div class="small text-gray-500">´ë¸®</div>
+					<div class="text-truncate">ì—…ë¬´3</div>
+					<div class="small text-gray-500">ëŒ€ë¦¬</div>
 				</div>
-			</a> <a class="dropdown-item text-center small text-gray-500" href="#">´õ º¸±â</a>
+			</a> <a class="dropdown-item text-center small text-gray-500" href="#">ë” ë³´ê¸°</a>
 		</div></li>
 
 	<div class="topbar-divider d-none d-sm-block"></div>
@@ -141,23 +141,23 @@
 		class="nav-link dropdown-toggle" href="#" id="userDropdown"
 		role="button" data-toggle="dropdown" aria-haspopup="true"
 		aria-expanded="false"> <span
-			class="mr-2 d-none d-lg-inline text-gray-600 small">»ç¿ø</span> <img
+			class="mr-2 d-none d-lg-inline text-gray-600 small">ì‚¬ì›</span> <img
 			class="img-profile rounded-circle" src="img/undraw_profile.svg">
 	</a> <!-- Dropdown - User Information -->
 		<div
 			class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 			aria-labelledby="userDropdown">
 			<a class="dropdown-item" href="#"> <i
-				class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> ÇÁ·ÎÇÊ
+				class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> í”„ë¡œí•„
 			</a> <a class="dropdown-item" href="#"> <i
-				class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> ¼³Á¤
+				class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> ì„¤ì •
 			</a> <a class="dropdown-item" href="#"> <i
-				class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> È°µ¿ ±â·Ï
+				class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> í™œë™ ê¸°ë¡
 			</a>
 			<div class="dropdown-divider"></div>
 			<a class="dropdown-item" href="#" data-toggle="modal"
 				data-target="#logoutModal"> <i
-				class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> ·Î±×¾Æ¿ô
+				class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> ë¡œê·¸ì•„ì›ƒ
 			</a>
 		</div></li>
 

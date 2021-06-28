@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="main.do">
@@ -17,7 +16,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="main.do">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>¸ÞÀÎ</span></a>
+                    <span>ë©”ì¸</span></a>
             </li>
 
             <!-- Divider -->
@@ -27,17 +26,17 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>±âÁØÁ¤º¸°ü¸®</span>
+                    <span>ê¸°ì¤€ì •ë³´ê´€ë¦¬</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="commList.do">°øÅëÄÚµå°ü¸®</a>
-                        <a class="collapse-item" href="matForm.do">ÀÚÀçÁ¤º¸°ü¸®</a>
-                        <a class="collapse-item" href="cards.html">Á¦Ç° BOM°ü¸®</a>
-                        <a class="collapse-item" href="cards.html">°øÁ¤°ü¸®</a>
-                        <a class="collapse-item" href="cards.html">»ç¿ø°ü¸®</a>
-                        <a class="collapse-item" href="cards.html">ºÒ·®ÄÚµå °ü¸® </a>
-                        <a class="collapse-item" href="cards.html">Á¦Ç° Ç°Áú Ç¥ÁØ¼­ °ü¸®</a>
+                        <a class="collapse-item" href="commList.do">ê³µí†µì½”ë“œê´€ë¦¬</a>
+                        <a class="collapse-item" href="matForm.do">ìžìž¬ì •ë³´ê´€ë¦¬</a>
+                        <a class="collapse-item" href="cards.html">ì œí’ˆ BOMê´€ë¦¬</a>
+                        <a class="collapse-item" href="cards.html">ê³µì •ê´€ë¦¬</a>
+                        <a class="collapse-item" href="cards.html">ì‚¬ì›ê´€ë¦¬</a>
+                        <a class="collapse-item" href="cards.html">ë¶ˆëŸ‰ì½”ë“œ ê´€ë¦¬ </a>
+                        <a class="collapse-item" href="cards.html">ì œí’ˆ í’ˆì§ˆ í‘œì¤€ì„œ ê´€ë¦¬</a>
                     </div>
                 </div>
             </li>
@@ -46,14 +45,14 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>¿µ¾÷°ü¸®</span>
+                    <span>ì˜ì—…ê´€ë¦¬</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="utilities-color.html">ÁÖ¹®°ü¸® ÂüÁ¶Á¶È¸</a>
-                        <a class="collapse-item" href="utilities-border.html">¹Ì»ý»ê ÀÇ·ÚÁ¶È¸</a>
-                        <a class="collapse-item" href="utilities-animation.html">Ãâ°í °ü¸®</a>
-                        <a class="collapse-item" href="utilities-other.html">Á¦Ç° Àç°í Á¶È¸</a>
+                        <a class="collapse-item" href="utilities-color.html">ì£¼ë¬¸ê´€ë¦¬ ì°¸ì¡°ì¡°íšŒ</a>
+                        <a class="collapse-item" href="utilities-border.html">ë¯¸ìƒì‚° ì˜ë¢°ì¡°íšŒ</a>
+                        <a class="collapse-item" href="utilities-animation.html">ì¶œê³  ê´€ë¦¬</a>
+                        <a class="collapse-item" href="utilities-other.html">ì œí’ˆ ìž¬ê³  ì¡°íšŒ</a>
                     </div>
                 </div>
             </li>
@@ -62,15 +61,15 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>ÀÚÀç°ü¸®</span>
+                    <span>ìžìž¬ê´€ë¦¬</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="inorderForm.do">¹ßÁÖ°ü¸® ÂüÁ¶</a>
-                        <a class="collapse-item" href="matInForm.do">ÀÚÀçÀÔ°í °ü¸®</a>
-                        <a class="collapse-item" href="matStockForm.do">ÀÚÀçÀç°í °ü¸®</a>
-                        <a class="collapse-item" href="matSaveStockList.do">¾ÈÀüÀç°í Á¶È¸</a>
-                        <a class="collapse-item" href="matOutForm.do">ÀÚÀçÃâ°í °ü¸®</a>
+                        <a class="collapse-item" href="inorderForm.do">ë°œì£¼ê´€ë¦¬ ì°¸ì¡°</a>
+                        <a class="collapse-item" href="matInForm.do">ìžìž¬ìž…ê³  ê´€ë¦¬</a>
+                        <a class="collapse-item" href="matStockForm.do">ìžìž¬ìž¬ê³  ê´€ë¦¬</a>
+                        <a class="collapse-item" href="matSaveStockList.do">ì•ˆì „ìž¬ê³  ì¡°íšŒ</a>
+                        <a class="collapse-item" href="matOutForm.do">ìžìž¬ì¶œê³  ê´€ë¦¬</a>
                     </div>
                 </div>
             </li>
@@ -80,21 +79,21 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true" aria-controls="collapsePages2">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>»ý»ê°ü¸®</span>
+                    <span>ìƒì‚°ê´€ë¦¬</span>
                 </a>
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="prodPlanManage.do">»ý»ê°èÈ¹ °ü¸®</a>
-                        <a class="collapse-item" href="prodPlanView.do">»ý»ê°èÈ¹ Á¶È¸</a>
-                        <a class="collapse-item" href="prodOrderManage.do">»ý»êÁö½Ã °ü¸®</a>
-                        <a class="collapse-item" href="prodOrderView.do">»ý»êÁö½Ã Á¶È¸</a>
-                        <a class="collapse-item" href="prodProcess.do">°øÁ¤ÀÌµ¿Ç¥ ¹ßÇà</a>
-                        <a class="collapse-item" href="prodPerformance.do">»ý»ê°øÁ¤ ½ÇÀû°ü¸®</a>
-                        <a class="collapse-item" href="checkPerformance.do">°Ë»ç°øÁ¤ ½ÇÀû°ü¸®</a>
-                        <a class="collapse-item" href="packingPerformance.do">Æ÷Àå°øÁ¤ ½ÇÀû°ü¸®</a>
-                        <a class="collapse-item" href="prodMonitoring.do">»ý»ê ¸ð´ÏÅÍ¸µ</a>
-                        <a class="collapse-item" href="prodPerformanceView.do">ÀÛ¾÷½ÇÀû Á¶È¸</a>
-                        <a class="collapse-item" href="defectListView.do">ºÒ·®³»¿ª Á¶È¸</a>
+                        <a class="collapse-item" href="prodPlanManage.do">ìƒì‚°ê³„íš ê´€ë¦¬</a>
+                        <a class="collapse-item" href="prodPlanView.do">ìƒì‚°ê³„íš ì¡°íšŒ</a>
+                        <a class="collapse-item" href="prodOrderManage.do">ìƒì‚°ì§€ì‹œ ê´€ë¦¬</a>
+                        <a class="collapse-item" href="prodOrderView.do">ìƒì‚°ì§€ì‹œ ì¡°íšŒ</a>
+                        <a class="collapse-item" href="prodProcess.do">ê³µì •ì´ë™í‘œ ë°œí–‰</a>
+                        <a class="collapse-item" href="prodPerformance.do">ìƒì‚°ê³µì • ì‹¤ì ê´€ë¦¬</a>
+                        <a class="collapse-item" href="checkPerformance.do">ê²€ì‚¬ê³µì • ì‹¤ì ê´€ë¦¬</a>
+                        <a class="collapse-item" href="packingPerformance.do">í¬ìž¥ê³µì • ì‹¤ì ê´€ë¦¬</a>
+                        <a class="collapse-item" href="prodMonitoring.do">ìƒì‚° ëª¨ë‹ˆí„°ë§</a>
+                        <a class="collapse-item" href="prodPerformanceView.do">ìž‘ì—…ì‹¤ì  ì¡°íšŒ</a>
+                        <a class="collapse-item" href="defectListView.do">ë¶ˆëŸ‰ë‚´ì—­ ì¡°íšŒ</a>
                     </div>
                 </div>
             </li>
@@ -103,15 +102,15 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3" aria-expanded="true" aria-controls="collapsePages3">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>¼³ºñ°ü¸®</span>
+                    <span>ì„¤ë¹„ê´€ë¦¬</span>
                 </a>
                 <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="login.html">¼³ºñ °ü¸®</a>
-                        <a class="collapse-item" href="register.html">¼³ºñ Á¶È¸</a>
-                        <a class="collapse-item" href="forgot-password.html">¼³ºñ ¼ö¸®³»¿ª °ü¸®</a>
-                        <a class="collapse-item" href="404.html">¼³ºñ Á¡°Ë³»¿ª °ü¸®</a>
-                        <a class="collapse-item" href="blank.html">¼³ºñ»ý»êÀÌ·Â Á¶È¸</a>
+                        <a class="collapse-item" href="login.html">ì„¤ë¹„ ê´€ë¦¬</a>
+                        <a class="collapse-item" href="register.html">ì„¤ë¹„ ì¡°íšŒ</a>
+                        <a class="collapse-item" href="forgot-password.html">ì„¤ë¹„ ìˆ˜ë¦¬ë‚´ì—­ ê´€ë¦¬</a>
+                        <a class="collapse-item" href="404.html">ì„¤ë¹„ ì ê²€ë‚´ì—­ ê´€ë¦¬</a>
+                        <a class="collapse-item" href="blank.html">ì„¤ë¹„ìƒì‚°ì´ë ¥ ì¡°íšŒ</a>
                     </div>
                 </div>
             </li>
