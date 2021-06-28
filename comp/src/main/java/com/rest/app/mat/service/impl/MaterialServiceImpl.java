@@ -23,5 +23,12 @@ public class MaterialServiceImpl implements MaterialService{
 	public MaterialVO getMatInfo(MaterialVO vo) {
 		return mapper.getMatInfo(vo);
 	}
+	
+	public String udtMat(MaterialVO vo) {
+		return null;
+	};
 
+	public void saveMat(MaterialVO vo) {
+		
+	}
 }

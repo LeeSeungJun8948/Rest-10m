@@ -15,116 +15,64 @@
 </head>
 <body>
 
-	<div id="matList" class="col-4"></div>
-	<div id="matInfo" class="col-8">
-		<div class="col-sm-6" >
-			<table class="table table-bordered">
-				<tbody>
-					<tr>
-						<th scope="row"> 자재코드 </th>
-						<td> <input name="materialCode" type="text"> </td>
-						<th> 자재명 </th>
-						<td> <input name="materialName" type="text"> </td>
-					</tr>
-					
-					<tr>
-						<th scope="row"> 입고업체 </th>
-						<td> <input name="companyCode" type="text"> </td>
-						<th> 업체명 </th>
-						<td> <input name="companyName" type="text"> </td>
-						<th> 관리단위 </th>
-						<td> <input name="unitNo" type="text"> </td>
-					</tr>
-					<tr>
-						<th scope="row"> 안전재고 </th>
-						<td> <input name="saveStock" type="text"></td>
-						<th> MIN재고 </th>
-						<td> <input name="minStock" type="text"> </td>
-						<th> MAX재고 </th>
-						<td> <input name="maxStock" type="text"> </td>
-						<th> 1M소요량 </th>
-						<td> <input name="monthStock" type="text"> </td>
-					</tr>
-				</tbody>
-			</table>
+	<button class="btn btn-outline-dark" id="btnInsert" type="button"> 자재 추가 </button>
+	<button class="btn btn-outline-dark" id="btnSave" type="button"> 저장 </button>
+	<button class="btn btn-outline-dark" id="btnDel" type="button"> 삭제 </button>
+		
+	<div class="row">				
+		<div id="matList" class="col-4">
 		</div>
-		<form>
-			
-		</form>
-	</div>
-
-	<script type="text/javascript">
-	
-	
-		var listData;
 		
-		var selectedMaterialCode;
-
-		$.ajax({
-			type : "get",
-			url : "ajax/matList.do",
-			dataType : "json",
-			async : false,
-			success : function(data) {
-				listData = data;
-			},
-			error : function() {
-			}
-		});
-
-		const listGrid = new tui.Grid({
-			el : document.getElementById('matList'),
-			data : listData,
-			scrollX : false,
-			scrollY : false,
-			columns : [ {
-				header : '자재코드',
-				name : 'materialCode',
-				width : 80
-			}, {
-				header : '자재명',
-				name : 'materialName'
-			}, {
-				header : '구분',
-				name : 'matNm',
-				width : 80
-			} ]
-		});
-		
-		$(matList).on('click','tr',function(){
-			alert($(this).children().eq(0).children().eq(0).html());
+		<div class="col-8 input-group input-group-sm">
+			<form id="frm" class="form-inline" role="form" action="matUpdate.do" method="post">
 			
-			$.ajax({
+				<div class="input-group-prepend" >
+					<span class="input-group-text" id="inputGroup-sizing-sm">자재코드</span>
+					<input id="materialCode" name="materialCode" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group-prepend" >
+					<span class="input-group-text" id="inputGroup-sizing-sm">자재명</span>
+					<input id="materialName" name="materialName" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-sm">자재구분</span>
+					<input id="matNm" name="matNm" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div><br>
 				
-				type : "get",
-				url : "ajax/matInfo.do",
-				data : {
-					'materialCode' : $(this).children().eq(0).children().eq(0).html()
-				},
-				dataType : "json",
-				async : false,
-				success : function(data) {
-					alert('성공' + data.materialName);
-					
-					
-				},
-				error : function(request, status, error) {
-					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-				}
-			});
-			
-		
-			
-			
-		});
-		
-		
-
-		/**
-	
-		 */
-	</script>
-
+				
+				<div class="input-group-prepend" >
+					<span class="input-group-text" id="inputGroup-sizing-sm">입고업체</span>
+					<input id="companyCode" name="companyCode" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group-prepend" >
+					<span class="input-group-text" id="inputGroup-sizing-sm">업체명</span>
+					<input id="companyName" name="companyName" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-sm">관리단위</span>
+					<input id="unitNo" name="unitNo" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div> <br>
+				
+					<div class="input-group-prepend" >
+					<span class="input-group-text" id="inputGroup-sizing-sm">안전재고</span>
+					<input id="saveStock" name="saveStock" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group-prepend" >
+					<span class="input-group-text" id="inputGroup-sizing-sm">MIN재고</span>
+					<input id="minStock" name="minStock" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-sm">MAX재고</span>
+					<input id="maxStock" name="maxStock" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+					<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-sm">1M소요량</span>
+					<input id="monthStock" name="monthStock" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+			</form>
+		</div>
+	</div>
+<script type="text/javascript" src="js/app/mat/matForm.js"></script>
 
 </body>
 </html>

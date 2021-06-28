@@ -8,5 +8,6 @@ public interface MaterialMapper {
 	
 	public List<MaterialVO> getMatList();
 	public MaterialVO getMatInfo(MaterialVO vo);
+	public String udtMat(MaterialVO vo);
 
 }

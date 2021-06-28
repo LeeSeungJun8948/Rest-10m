@@ -29,6 +29,12 @@ public class MaterialController {
 		return dao.getMatList();
 	}
 	
+	@RequestMapping("/ajax/matSave.do")
+	@ResponseBody
+	public String ajaxMatSave(Model model) {
+		return null;
+	}
+	
 	@RequestMapping("/ajax/matInfo.do")
 	@ResponseBody
 	public MaterialVO ajaxMatInfo(Model model, MaterialVO vo) {
