@@ -86,8 +86,7 @@ $('#btnDel').on('click', function(){
 
 // 미생산 읽기 버튼
 $('#btnRead').on('click',  function(){
-	var prm = { searchDate1 : $('#planDtS').val(),
-			searchDate2 : $('#planDtE').val() };
+	var prm = ${'#frm'}.serialize();
 	grid.readData(1, prm, true);
 });
 
