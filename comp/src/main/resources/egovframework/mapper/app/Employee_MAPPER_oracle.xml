@@ -16,4 +16,4 @@
 		insert into employee
 		values(EMP_SEQ.nextval, #{id}, #{pwd}, #{dept}, #{auth}, #{phone}, #{email}, sysdate, #{employeeName}, #{companyCode}, sysdate, #{salary}, sysdate)
 	</insert>
-</mapper>
+</mapper>  

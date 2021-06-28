@@ -29,7 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
 	@Override
-	public int updateEmp(EmployeeVO vo) {
+	public int updateEmp(EmployeeVO vo)   {
 		return mapper.updateEmp(vo);
 	}
 

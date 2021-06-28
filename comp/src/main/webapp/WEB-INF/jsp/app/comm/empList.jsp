@@ -123,7 +123,7 @@
 					
 					grid.request('createData');
 				})
-				
+				   
 				//처리하기	
 				grid.on('response', function(data) {
 					grid.resetOriginData();

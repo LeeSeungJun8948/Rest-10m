@@ -105,7 +105,7 @@ public class EmployeeController {
 		data.put("data", gridData.updatedRows);
 		return data;
 	}
-	
+	   
 	@PostMapping(value = "/ajax/insertEmp.do")
 	@ResponseBody
 	public Map insertEmp(@RequestBody GridData gridData) {
