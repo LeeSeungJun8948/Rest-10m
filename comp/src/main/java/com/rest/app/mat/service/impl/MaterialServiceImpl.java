@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.rest.app.mat.service.MaterialService;
 import com.rest.app.mat.vo.MaterialVO;
 
+import lombok.extern.log4j.Log4j;
+
 @Service("MaterialService")
 public class MaterialServiceImpl implements MaterialService{
 
@@ -23,12 +25,32 @@ public class MaterialServiceImpl implements MaterialService{
 	public MaterialVO getMatInfo(MaterialVO vo) {
 		return mapper.getMatInfo(vo);
 	}
-	
-	public String udtMat(MaterialVO vo) {
-		return null;
-	};
 
-	public void saveMat(MaterialVO vo) {
-		
+	@Override
+	public int saveMat(MaterialVO vo) { // 업데이트인지 새로운 값인지 
+		if(mapper.saveMat(vo) == 0) // 입력된 matCode가 없으면 새 자재 입력
+			return istMat(vo);
+		else 
+			return udtMat(vo);
+	}
+
+	@Override
+	public int udtMat(MaterialVO vo) { // 업데이트
+		return mapper.udtMat(vo);
+	}
+
+	@Override
+	public MaterialVO newMatCode() {
+		return mapper.newMatCode();
+	}
+
+	@Override
+	public int istMat(MaterialVO vo) { // 새 자재정보 입력
+		return mapper.istMat(vo);
+	}
+
+	@Override
+	public int matDel(MaterialVO vo) {
+		return mapper.matDel(vo);
 	}
 }
