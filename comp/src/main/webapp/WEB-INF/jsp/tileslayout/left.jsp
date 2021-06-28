@@ -37,14 +37,6 @@
                         <a class="collapse-item" href="cards.html">사원관리</a>
                         <a class="collapse-item" href="cards.html">불량코드 관리 </a>
                         <a class="collapse-item" href="cards.html">제품 품질 표준서 관리</a>
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/sym/ccm/cca/SelectCcmCmmnCodeList.do">�����ڵ����</a>
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/sym/ccm/cde/SelectCcmCmmnDetailCodeList.do">�����ڵ��</a>
-                        <a class="collapse-item" href="matForm.do">������������</a>
-                        <a class="collapse-item" href="cards.html">��ǰ BOM����</a>
-                        <a class="collapse-item" href="cards.html">��������</a>
-                        <a class="collapse-item" href="cards.html">�������</a>
-                        <a class="collapse-item" href="cards.html">�ҷ��ڵ� ���� </a>
-                        <a class="collapse-item" href="cards.html">��ǰ ǰ�� ǥ�ؼ� ����</a>
                     </div>
                 </div>
             </li>
