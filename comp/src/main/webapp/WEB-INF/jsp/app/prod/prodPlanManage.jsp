@@ -3,41 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <h1 class="h3 mb-4 text-gray-700">생산계획 관리</h1>
-<<<<<<< HEAD
-<form>
-	<div class="mb-4" align="right">
-		<button type="button" class="btn btn-primary" id="btnView">조회</button>
-		<button type="reset" class="btn btn-primary" id="btnReset">초기화</button>	
-		<button type="button" class="btn btn-primary" id="btnSave">저장</button>
-		<button type="button" class="btn btn-primary" id="btnDel">삭제</button>
-=======
+
 <div class="mb-4">
 	<button type="button" class="btn btn-primary" id="btnView">조회</button>
 	<button type="button" class="btn btn-primary" id="btnReset">새자료</button>
 	<button type="button" class="btn btn-primary" id="btnSave">저장</button>
 	<button type="button" class="btn btn-primary" id="btnDel">삭제</button>
 </div>
-
-<div class="row">
-	<div class="mb-2 col-lg-6">
-		<table class="table">
-			<tbody>
-				<tr>
-					<th>계획일자</th>
-					<td><input type="date" id="planDate"></td>
-				</tr>
-				<tr>
-					<th>생산계획명</th>
-					<td><input type="text" id="planName"></td>
-				</tr>
-				<tr>
-					<th>특기사항</th>
-					<td><input type="text" id="planDetail"></td>
-				</tr>
-			</tbody>
-		</table>
->>>>>>> branch 'master' of https://github.com/LeeSeungJun8948/Rest-10m.git
-	</div>
+<form id="frm">
 	<div class="row">
 		<div class="mb-2 col-lg-6">
 			<table class="table">
@@ -68,6 +41,7 @@
 			</div>
 		</div>
 	</div>
+</form>	
 	<div class="mb-4" align="right">
 		<button type="button" class="btn btn-primary" id="btnGridAdd">추가</button>
 		<button type="button" class="btn btn-primary" id="btnGridDel">삭제</button>
@@ -76,5 +50,4 @@
 		<div id="grid">
 		</div>
 	</div>
-</form>
 <script type="text/javascript" src="js/app/prod/prodPlanManage.js"></script>
