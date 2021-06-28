@@ -22,15 +22,17 @@ public class FacilitiesController {
 		return "fac/facList.page";
 	}
 	
-	// 임시
-	@RequestMapping("/facAdmin.do")
-	public String facAdmin() {
-		return "fac/facAdmin.page";
-	}
 	
 	@RequestMapping("ajax/facList.do")
 	@ResponseBody
 	public List<FacilitiesVO> ajaxGetFac(Model model) {
 		return mapper.getFac();
 	}
+	
+	// 설비관리
+	@RequestMapping("/facAdmin.do")
+	public String facAdmin() {
+		return "fac/facAdmin.page";
+	}
+	
 }
