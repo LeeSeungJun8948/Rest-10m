@@ -3,10 +3,47 @@
 <mapper namespace="com.rest.app.mat.service.impl.MaterialMapper">
 
 	<select id="getMatList" resultType="MatVO">
-		select m.material_code, m.material_name, m.company_code, c.company_name, unit_id, unit_no, cm.code_nm as mat_nm, save_stock, min_stock, max_stock, month_stock 
-		from material m, company c, COMTCCMMNDETAILCODE cm
-		where m.mat_id = cm.code_id and m.mat_no = cm.code and  m.company_Code = c.company_Code
+		SELECT m.material_code, m.material_name, cm.code_nm as mat_nm
+		FROM material m LEFT JOIN COMTCCMMNDETAILCODE cm
+		ON m.mat_id = cm.code_id and m.mat_no = cm.code
 	</select>
 	
+	<select id="getMatInfo" resultType="MatVO" parameterType="MatVO">
+		SELECT m.material_code, m.material_name, cm.code_nm as mat_nm, m.company_code, c.company_name, unit_id, unit_no, save_stock, min_stock, max_stock, month_stock 
+		FROM material m LEFT JOIN company c 
+		ON m.company_Code = c.company_Code
+		LEFT JOIN COMTCCMMNDETAILCODE cm
+		ON m.mat_no = cm.code and m.mat_id = cm.code_id
+		WHERE m.material_code = #{materialCode}
+	</select>
+	
+	<select id="saveMat" parameterType="MatVO" resultType="int">
+		SELECT count(*) 
+		FROM material 
+		WHERE material_code = #{materialCode}
+	</select>
+	
+	<update id="udtMat" parameterType="MatVO">
+		UPDATE material 
+		SET material_name = #{materialName}, unit_no = #{unitNo}, company_code =  #{companyCode}
+		, MIN_STOCK =  #{minStock} , MAX_STOCK =  #{maxStock}, SAVE_STOCK =  #{saveStock}, MONTH_STOCK =  #{monthStock}
+		WHERE material_code = #{materialCode}
+	</update>
+	
+	<!-- 새 자재를 추가할때 code 값 불러오기 -->
+	<select id="newMatCode" resultType="MatVO">
+		SELECT max(material_code) + 1 as  material_code
+		FROM material 
+	</select>
+	
+	<insert id="istMat" parameterType="MatVO" >
+		insert into material(material_code, material_name, company_code, unit_id, unit_no, mat_id, mat_no, save_stock, min_stock, max_stock, month_stock)
+		values(#{materialCode}, #{materialName}, #{companyCode}, 'R_UNIT', #{unitNo}, 'R_MAT', #{matNm}, #{saveStock}, #{minStock}, #{maxStock},  #{monthStock})
+	</insert>
+	
+	<delete id="matDel" parameterType="MatVO">
+		DELETE FROM material
+		WHERE material_code = #{materialCode}
+	</delete>
 	
 </mapper>

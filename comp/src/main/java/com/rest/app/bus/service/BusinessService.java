@@ -3,8 +3,9 @@ package com.rest.app.bus.service;
 import java.util.List;
 
 
-import com.rest.app.bus.vo.BusinessVO;
+
+import com.rest.app.bus.vo.OrdersVO;
 
 public interface BusinessService {
-	public List<BusinessVO> getBus();
+	public List<OrdersVO> getBus();
 }
