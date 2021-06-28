@@ -1,7 +1,20 @@
+var dataSource = {
+  withCredentials: false,  
+  initialRequest: true,
+  api: {
+      readData: { url: 'ajax/orderRead.do', method: 'GET' },
+      createData: { url: '', method: 'POST' },
+      updateData: { url: '', method: 'PUT' },
+      deleteData: { url: '', method: 'DELETE' },
+      modifyData: { url: '', method: 'POST' }
+  }
+}
+
 const grid = new tui.Grid({
 	el : document.getElementById('grid'),
 	scrollX : false,
 	scrollY : false,
+	data : dataSource, 
 	rowHeaders: ['checkbox'],
 	columns : [ {
 		header : '제품코드',
@@ -18,13 +31,14 @@ const grid = new tui.Grid({
 		name : 'outDate'
 		}, {
 		header : '주문량',
-		name : 'orderCount' 
+		name : 'orderCount',
+		align : 'right' 
 		}, {
 		header : '기계획량',
-		name : 'projectPlanned'
+		name : 'orderPlanCount'
 		}, {
 		header : '미계획량',
-		name : 'projectUnplanned'
+		name : 'orderUnplanned'
 		}, {
 		header : '작업량',
 		name : 'toWork',
@@ -41,31 +55,56 @@ const grid = new tui.Grid({
 		editor: {
             type: 'datePicker',
             options: {
-              format: 'yyyy/MM/dd'
+				language: 'ko',
+            	format: 'yyyy-MM-dd'
             }
           }
 		}, {
 		header : '비고',
-		name : 'detail'
-	}, ]
+		name : 'detail',
+		editor: 'text'
+	}, ],
 });
 
-$(document).on('click', '#btnRead', function(){
-	$.ajax({
-		url : 'ajax/orderRead.do',
-		type : 'post',
-		dataType : 'json',
-		success : function(data){
-			gridData = [];
-			data.forEach( function(item,index) {
-				vo = {
-					companyCode : item.companyCode,
-					orderCount : item.orderCount,
-					productCode : item.productCode
-				}
-				gridData.push(vo);
-			});
-			grid.resetData(gridData);
-		}
-	});
+// 조회 버튼
+$('#btnView').on('click', function(){
+});
+
+// 새자료 버튼
+$('#btnReset').on('click', function(){
+	grid.clear();
+});
+
+// 저장 버튼
+$('#btnSave').on('click', function(){
+	
+});
+
+// 삭제 버튼
+$('#btnDel').on('click', function(){
+});
+
+// 미생산 읽기 버튼
+$('#btnRead').on('click',  function(){
+	var prm = { searchDate1 : $('#planDtS').val(),
+			searchDate2 : $('#planDtE').val() };
+	grid.readData(1, prm, true);
+});
+
+// 추가버튼
+$('#btnGridAdd').on('click', function(){
+	grid.appendRow();
+});
+
+// 삭제버튼
+$('#btnGridDel').on('click', function(){
+	grid.removeCheckedRows(false);
+});
+
+// 전체체크 선택
+grid.on('check', ev => {
+});
+
+// 전체체크 해제
+grid.on('uncheck', ev => {
 });
