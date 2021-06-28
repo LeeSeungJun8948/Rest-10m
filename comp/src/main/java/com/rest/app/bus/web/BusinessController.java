@@ -30,4 +30,8 @@ public class BusinessController {
 		// TODO Auto-generated method stub
 		return dao.getBus();
 	}
+	@RequestMapping("clientCompany.do")
+	public String clientCompany(Model model) {
+		return "bus/clientCompany.page";
+	}
 }

@@ -1,6 +1,6 @@
 package com.rest.app.bus.vo;
 
-import java.util.Date;
+
 
 import lombok.Data;
    
@@ -14,4 +14,5 @@ public class OrdersVO {
 	String outDate;//납기일자
 	int orderCount;//주문량
 	int orderPlanCount;//계획량
+	String dCount;//미납품량
 }

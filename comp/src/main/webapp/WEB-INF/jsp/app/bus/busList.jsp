@@ -16,8 +16,9 @@
 <body>
 	<h2>주문관리참조 조회</h2>
 	<div class="search-area">
+	<form id="dataForm">
 		<div class="form-row">
-			자료구분&nbsp;&nbsp;&nbsp;
+			<label class="orderDate">자료구분</label>
 			<div class="col-md-3 mb-4">
 				<div class="form-group border">
 
@@ -28,7 +29,7 @@
 
 				</div>
 			</div>
-			진행구분
+			<label class=orderState>진행구분</label>
 			<div class="col-md-5 mb-4">
 
 				<div class="form-group border">
@@ -45,7 +46,7 @@
 
 			</div>
 		</div>
-	
+
 		<div>
 			<label for="fromDate">해당일자</label> <input type="date" name="fromDate"
 				id="fromDate"> <label for="toDate">~</label> <input
@@ -53,50 +54,57 @@
 		</div>
 
 
-		<div class="col-2 ta-l ml-1">
-			<label class="headtxt">고객사</label> <input type="text"
-				id="searchKeywordFrom" name="searchKeywordFrom" /> 
-				<a href="javascript:void(0);" onclick="popupOpen();" class="btn btn-primary">찾아보기</a> 
-				<input type="text" id="searchKeywordFromNm" name="searchKeywordFromNm" readonly="true" />
-			<label class="ml-1 mr-1">~</label> 
-			<input type="text" id="searchKeywordTo" name="searchKeywordTo" />
-			 <a href="javascript:void(0);" onclick="popupOpen();" class="btn btn-primary">찾아보기</a> 
-			 <input type="text" id="searchKeywordToNm" name="searchKeywordToNm" readonly="true" />
-		</div>
-	
 		<div class="col-9 ta-l ml-1">
-			<label class="headtxt">제품코드</label> 
-			<input type="text" id="prductCd" name="prductCd" /> <a href="javascript:void(0);" onclick="popupOpen();" class="btn btn-primary">찾아보기</a>
-			 <input type="text" id="prductNm" name="prductNm" maxlength="20" readonly="true" />
+			<label class="headtxt">고객사</label> <input type="text"
+				id="searchKeywordFrom" name="searchKeywordFrom" />
+			<button
+				onclick="window.open('address','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');"
+				class="btn btn-primary">
+				<img src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.gif'/>">
+			</button>
+			<input type="text" id="searchKeywordFromNm"
+				name="searchKeywordFromNm" readonly="true" /> <label
+				class="ml-1 mr-1">~</label> <input type="text" id="searchKeywordTo"
+				name="searchKeywordTo" /> <button
+				onclick="window.open('address','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');"
+				class="btn btn-primary">
+				<img src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.gif'/>">
+			</button> <input
+				type="text" id="searchKeywordToNm" name="searchKeywordToNm"
+				readonly="true" />
+		</div>
+
+		<div class="col-9 ta-l ml-1">
+			<label class="headtxt">제품코드</label> <input type="text" id="prductCd"
+				name="prductCd" /> <button
+				onclick="window.open('address','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');"
+				class="btn btn-primary">
+				<img src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.gif'/>">
+			</button> <input
+				type="text" id="prductNm" name="prductNm" maxlength="20"
+				readonly="true" />
 		</div>
 
 
 		<div class="grid-option-area">
-			
+
 			<div class="col-6 ta-r mr-1">
-				<button type="button" class="btn btn-primary" id="resetBtn">새자료</button>
-				<button type="button" class="btn btn-primary" id="searchBtn">조회</button>
-				<button type="button" class="btn btn-primary" id="excelBtn">Excel</button>
-				<button type="button" class="btn btn-primary" id="printBtn">인쇄</button>
+				<button name="resetBtn" type="reset" class="btn btn-primary"
+					id="resetBtn">새자료</button>
+				<button name="searchBtn" type="submit" class="btn btn-primary"
+					id="searchBtn" onclick="getData()">조회</button>
+				<button name="excelBtn" type="button" class="btn btn-primary"
+					id="excelBtn">Excel</button>
+				<button name="printBtn" type="button" class="btn btn-primary"
+					id="printBtn">인쇄</button>
 			</div>
 		</div>
+		</form>
 	</div>
-	
+
 	<div id="grid"></div>
 	<script type="text/javascript">
 		var gridData;
-
-		$.ajax({
-			type : "get",
-			url : "ajax/busList.do",
-			dataType : "json",
-			async : false,
-			success : function(data) {
-				gridData = data;
-			},
-			error : function() {
-			}
-		});
 
 		const grid = new tui.Grid({
 			el : document.getElementById('grid'),
@@ -104,14 +112,26 @@
 			scrollX : false,
 			scrollY : false,
 			columns : [ {
+				header : '진행구분',
+				name : 'orderState'
+			}, {
+				header : '업체명',
+				name : 'companyName'
+			}, {
 				header : '주문번호',
 				name : 'orderNo'
 			}, {
 				header : '제품코드',
 				name : 'productCode'
 			}, {
-				header : '진행구분',
-				name : 'orderState'
+				header : '제품명',
+				name : 'productName'
+			}, {
+				header : '규격',
+				name : 'unitId'
+			}, {
+				header : '단위',
+				name : 'stdId'
 			}, {
 				header : '접수일자',
 				name : 'inDate'
@@ -122,10 +142,40 @@
 				header : '주문량',
 				name : 'orderCount'
 			}, {
-				header : '계획량',
-				name : 'orderPlanCount'
+				header : '지시량',
+				name : 'oprojectCount'
+			}, {
+				header : '미납품량',
+				name : 'dCount'
+			}, {
+				header : '비   고',
+				name : 'remark'
 			} ]
 		});
+
+		function data() {
+			$.ajax({
+				type : "get",
+				url : "ajax/busList.do",
+				dataType : "json",
+				async : false,
+				success : function(data) {
+					getData(data);
+				},
+				error : function() {
+				}
+			});
+		}
+		
+		$(document).ready(function(){
+		    //resetBtn 을 클릭했을때의 함수
+		    $( "#resetBtn").click(function () {
+		        $( "#dataForm" ).each( function () {
+		            this.reset();
+		        });
+		    });
+		});
+
 	</script>
 </body>
 </html>
