@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.rest.app.mat.service.MaterialService;
 import com.rest.app.mat.vo.MaterialVO;
 
-
+class GridData{
+	
+}
 @Controller
 public class MaterialController {
 	
@@ -19,15 +21,42 @@ public class MaterialController {
 	MaterialService dao;
 
 	@RequestMapping("/matForm.do")
-	public String matForm(Model model) {
+	public String matForm(Model model) { // 자재 정보 관리 page 
 		return "mat/matForm.page";
 	}
 	
 	@RequestMapping("/ajax/matList.do")
 	@ResponseBody
-	public List<MaterialVO> ajaxMatForm(Model model) {
+	public List<MaterialVO> ajaxMatForm(Model model) { // 자재 요약 리스트 출력
 		return dao.getMatList();
 	}
+	
+	
+	@RequestMapping("/ajax/matInfo.do")
+	@ResponseBody
+	public MaterialVO ajaxMatInfo(Model model, MaterialVO vo) { // 자재 리스트에서 클릭시 자재 상세 정보 출력
+		System.out.println(vo.getMaterialCode());
+		return dao.getMatInfo(vo);
+	}
+	
+	@RequestMapping("/ajax/matSave.do")
+	@ResponseBody
+	public int ajaxMatSave(Model model, MaterialVO vo) { // 자재 입력&수정
+		return dao.saveMat(vo);
+	}
+	
+	@RequestMapping("/ajax/newMatCode.do")
+	@ResponseBody
+	public MaterialVO ajaxNewMatCode(Model model, MaterialVO vo) { // 새 자재 입력폼에서  새로 들어갈 자재코드 불러오기
+		return dao.newMatCode();
+	}
+	
+	@RequestMapping("/ajax/matDel.do")
+	@ResponseBody
+	public int ajaxMatDel(Model model, MaterialVO vo) { // 자재 입력&수정
+		return dao.matDel(vo);
+	}
+	
 	
 	@RequestMapping("inorderForm.do")
 	public String inorderForm(Model model) {
