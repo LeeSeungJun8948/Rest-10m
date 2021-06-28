@@ -10,7 +10,10 @@
 		where id = #{id}
 	</delete>
 	<update id="updateEmp" parameterType="com.rest.app.comm.vo.EmployeeVO">
-		update employee set phone = #{phone} where id=#{id} 
+		update employee set phone = #{phone}, auth = #{auth}, salary = #{salary} where id=#{id} 
 	</update>
-	
+	<insert id ="insertEmp" parameterType="com.rest.app.comm.vo.EmployeeVO">
+		insert into employee
+		values(EMP_SEQ.nextval, #{id}, #{pwd}, #{dept}, #{auth}, #{phone}, #{email}, sysdate, #{employeeName}, #{companyCode}, sysdate, #{salary}, sysdate)
+	</insert>
 </mapper>

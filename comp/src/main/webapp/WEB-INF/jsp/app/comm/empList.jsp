@@ -18,32 +18,20 @@
 <body>
 		<h1 class="h3 mb-4 text-gray-700">생산계획 관리</h1>
 		<div class="mb-4">
-			<button type="button" class="btn btn-primary">조회</button>
-			<button type="button" class="btn btn-primary">추가</button>
+			<button type="button" class="btn btn-primary" id="btnRowInsert">행추가</button>
+			<button type="button" class="btn btn-primary" id="btnInsert">추가</button>
 			<button type="button" class="btn btn-primary" id="btnUpdate">저장</button>
 			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
 		</div>
 		<div id="grid">
 			<script type="text/javascript">
 
-				var gridData;
-				
-				$.ajax({
-					type : "get",
-					url : "ajax/empList.do",
-					dataType : "json",
-					async : false,
-					success : function(data) {
-						gridData = data;
-					},
-					error : function() {
-					}
-				});
 				const dataSource = {
 						api : {
 							readData : {url: 'ajax/empList.do', method:'GET' },
-							deleteData : { url: 'ajax/deleteEmp.do', method: 'DELETE' },
-							updateData : { url: 'ajax/updateEmp.do', method: 'PUT' }
+							deleteData : { url: 'ajax/deleteEmp.do', method: 'POST' },
+							updateData : { url: 'ajax/updateEmp.do', method: 'PUT' },
+							createData : { url: 'ajax/insertEmp.do', method: 'POST'}
 						},
 						contentType: 'application/json'
 				};
@@ -57,20 +45,24 @@
 					scrollY : false,
 					columns : [
 					{
+						header : '사원번호',
+						name : 'empCode',
+						editor:'text'
+					},
+					{
 						header :'아이디',
-						name : 'id'
+						name : 'id',
+						editor : 'text'
 					}, 
 					{
 						header :'사원명',
-						name : 'employeeName'
-					}, 
-					{
-						header : '사번',
-						name : 'empCode'
+						name : 'employeeName',
+						editor : 'text'
 					}, 
 					{
 						header : '비밀번호',
-						name : 'pwd'	
+						name : 'pwd',
+						editor : 'text'
 					}, 
 					{
 						header : '직책',
@@ -117,11 +109,19 @@
 					  });
 				})
 //					grid.request('updateData')
-				
-				
 				//delete 버튼에 function 추가
-				$("#btnDelete").on("click",function(){
-					grid.request('deleteData')
+				$("#btnDelete").on("click",function() {
+						grid.removeCheckedRows(false);
+						grid.request('deleteData');
+				})
+				
+				$("#btnRowInsert").on("click", function(){
+					grid.appendRow();
+				})
+				
+				$("#btnInsert").on("click", function(){
+					
+					grid.request('createData');
 				})
 				
 				//처리하기	
