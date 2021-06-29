@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 	<h1 class="h3 mb-4 mt-4 text-gray-700">자재정보관리</h1>
-	<div class="mb-4">
-		<button class="btn btn-primary" id="btnInsert" type="button"> 새 자재 </button>
+	<div class="mb-4" align="right">
+		<button class="btn btn-primary" id="btnNew" type="button"> 새 자재 </button>
 		<button class="btn btn-primary" id="btnSave" type="button"> 저장 </button>
 		<button class="btn btn-primary" id="btnDel" type="button"> 삭제 </button>
 	</div>
