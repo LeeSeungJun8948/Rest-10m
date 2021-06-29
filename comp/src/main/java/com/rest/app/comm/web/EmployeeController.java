@@ -54,6 +54,8 @@ public class EmployeeController {
 		return "comm/empList.page";
 	}
 	
+	
+	
 	public int updateEmp(EmployeeVO vo) {
 		return dao.updateEmp(vo);
 	}
@@ -116,4 +118,20 @@ public class EmployeeController {
 		return data;
 	}
 	
+	
+	@PutMapping(value = "/ajax/modifyEmp.do")
+	@ResponseBody
+	public Map modifyEmp(@RequestBody GridData gridData) {
+		Map<String,Object> data = new HashMap();
+		for(int i =0; i<gridData.createdRows.size(); i++) {
+			dao.insertEmp(gridData.createdRows.get(i));
+		}
+		for(int i =0; i<gridData.updatedRows.size(); i++) {
+			dao.updateEmp(gridData.updatedRows.get(i));	
+		}
+		data.put("result", true);
+		data.put("data", gridData.updatedRows);
+		data.put("data", gridData.createdRows);
+		return data;
+	}
 }
