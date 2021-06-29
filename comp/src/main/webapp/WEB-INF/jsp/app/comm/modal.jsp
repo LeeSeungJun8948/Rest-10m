@@ -13,7 +13,8 @@
 
 <!-- Modal -->
     <form action="getInfoProduct.do" method="post" id="frm">
-    </form>
+    	<input type="hidden" id="prdCode" name="prdCode">
+
   		<div class="modal-dialog" role="document">
     		<div class="modal-content">
       			<div class="modal-header">
@@ -49,14 +50,21 @@
 					}
 					]
 				});
-				grid.on('click')
+				grid.on('click', function(ev) {
+				    var values = grid.getRow(ev.rowKey);
+				    var prdCode = values.productCode; // 1
+				    $('prdCode').val(prdCode);
+				    console.log(prdCode);
+				});
 
-				</script>
+				</script>   	
+				
 			</div>
       			</div>
       			<div class="modal-footer">
 		        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		        	<button type="button"  onclick="fnSearch()" class="btn btn-primary" >검색</button>
+		        	<input type="submit" class="btn btn-primary" >
       			</div>
     	</div>
 	</div>
+</form>

@@ -40,8 +40,8 @@
 					<span style="color: red">*</span>
 				</th>
 				<td width="380px">
-					<input type="text" maxlength="20" tabindex="1" value="${info.productCode }" >
-					<a href="modal.do" rel="modal:open" class="btn btn-info btn-lg"> 검색</a>
+					<input type="text" maxlength="20" tabindex="1"  id="prdCode">
+					<a href="modal.do" rel="modal:open" class="btn btn-info btn-lg">검색</a>
 				</td>
 				<th scope="row">제품명</th>
 				<td width="380px">${info.productName }</td>
