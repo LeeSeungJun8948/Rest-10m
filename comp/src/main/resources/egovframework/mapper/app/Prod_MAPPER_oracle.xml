@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rest.app.prod.service.impl.ProdMapper">
-	<select id="getUnplannedOrders" resultType="com.rest.app.bus.vo.OrdersVO">
-		SELECT o.order_no, o.product_code, o.out_date, o.order_count, o.order_plancount, p.product_name
+	<select id="getUnplanOrders" resultType="com.rest.app.bus.vo.OrdersVO">
+		SELECT o.order_no, o.product_code, o.out_date, o.order_count, o.plan_count, p.product_name,
+			o.order_count - o.plan_count unplan_count 
 		FROM orders o, product p
-		WHERE (o.order_state='미계획' OR o.order_state='생산계획')
+		WHERE (o.order_state='미계획' OR o.order_state='일부계획')
+		AND o.product_code = p.product_code
 		AND o.out_date BETWEEN TO_DATE(#{planDtS}, 'YYYY-MM-DD') 
                    AND TO_DATE(#{planDtE}, 'YYYY-MM-DD')
 	</select>
+	<insert id="insertPlan" parameterType="com.rest.app.prod.vo.ProdPlanVO">
+		INSERT INTO wproject VALUES(
+		wproject_seq.NEXTVAL, #{projectDate}, #{projectName}, '일부계획', #{comments} 
+		)
+	</insert>
+	<insert id="insertDetailPlan" parameterType="com.rest.app.prod.vo.ProdDetailPlanVO">
+		INSERT INTO detailplan VALUES(
+		dp_seq.NEXTVAL, #{wprojectCode}, #{orderNo}, #{workDate}, #{orderCount}, 
+		#{planCount} + #{workCount}, #{orderCount} - #{planCount} + #{workCount}, #{detail} 
+		)
+	</insert>
 </mapper>

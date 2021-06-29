@@ -3,6 +3,14 @@
 <mapper namespace="com.rest.app.comm.service.impl.EmployeeMapper">
 	<select id="getEmp" resultType="com.rest.app.comm.vo.EmployeeVO">
 		select * from employee
+		<where>
+				<if test="searchCondition == 'id'">AND
+					id LIKE '%' || #{searchKeyword} || '%'
+				</if>
+				<if test="searchCondition == 'employeeName'">AND
+					employee_Name LIKE '%' || #{searchKeyword} || '%'
+				</if>
+		</where>
 	</select>
 	
 	<delete id="deleteEmp" parameterType="com.rest.app.comm.vo.EmployeeVO">
@@ -16,4 +24,5 @@
 		insert into employee
 		values(EMP_SEQ.nextval, #{id}, #{pwd}, #{dept}, #{auth}, #{phone}, #{email}, sysdate, #{employeeName}, #{companyCode}, sysdate, #{salary}, sysdate)
 	</insert>
+
 </mapper>  

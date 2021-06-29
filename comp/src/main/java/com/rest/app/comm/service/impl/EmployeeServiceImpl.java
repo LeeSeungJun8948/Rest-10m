@@ -1,6 +1,7 @@
 package com.rest.app.comm.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	
 	@Override
-	public List<EmployeeVO> getEmp() {
-		return mapper.getEmp();
+	public List<EmployeeVO> getEmp(EmployeeVO vo) {
+		return mapper.getEmp(vo);
 	}
 
 	
@@ -38,4 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public int insertEmp(EmployeeVO vo) {
 		return mapper.insertEmp(vo);
 	}
+
+
+
 }

@@ -19,8 +19,6 @@
 		
 		<!-- 자재vo -->
 		<typeAlias alias="MatVO"		type="com.rest.app.mat.vo.MaterialVO" />
-		<!-- 발주vo -->
-		<typeAlias alias="InorderVO"		type="com.rest.app.mat.vo.InorderVO" />
 	</typeAliases>
     
 </configuration>
