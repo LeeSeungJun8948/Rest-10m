@@ -72,6 +72,7 @@ public class MaterialController {
 		Map<String,Object> datas = new HashMap<>();
 		Map<String,Object> data = new HashMap<>();
 		
+		
 		data.put("result", true);
 		datas.put("contents", dao.getInorderList(vo));
 		data.put("data", datas);
@@ -79,7 +80,7 @@ public class MaterialController {
 		return data;
 	}
 	
-	@RequestMapping("/ajax/inorderList.do")
+	@RequestMapping(value = {"/ajax/matInList.do"})
 	@ResponseBody
 	public Map<String, Object> ajaxInoutList(InorderVO vo) {
 		
