@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+.tui-grid-summary-area .tui-grid-cell {
+    text-align: right;
+}
+</style>
 
 <h1 class="h3 mb-4 text-gray-700">발주 조회</h1>
 
 <div class="mb-4" align="right">
-	<button type="button" class="btn btn-primary" id="btnShow">조회</button>
+	<button type="button" class="btn btn-primary" id="btnRead">조회</button>
 </div>
 
 <div class="row">
@@ -37,9 +42,9 @@
 					<tr>
 						<th>정렬구분</th>
 						<td> 
-							<span class="mr-1"> 일자 <input type="radio" name="sort" value="inorderDate"></span>
-							<span class="mr-1"> 업체 <input type="radio" name="sort" value="companyCode"></span>
-							<span class="mr-1"> 자재 <input type="radio" name="sort" value="materialCode"></span>
+							<span class="mr-1"> 일자 <input type="radio" name="sort" value="inorder_date" checked></span>
+							<span class="mr-1"> 업체 <input type="radio" name="sort" value="company_code"></span>
+							<span class="mr-1"> 자재 <input type="radio" name="sort" value="material_code"></span>
 						</td>
 					</tr>
 				</tbody>

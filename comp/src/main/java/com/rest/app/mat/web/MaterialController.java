@@ -1,6 +1,8 @@
 package com.rest.app.mat.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -65,8 +67,30 @@ public class MaterialController {
 	
 	@RequestMapping("/ajax/inorderList.do")
 	@ResponseBody
-	public List<InorderVO> ajaxInorderList(Model model, InorderVO vo) { // 발주 리스트
-		return dao.getInorderList(vo);
+	public Map<String, Object> ajaxInorderList(InorderVO vo) {
+		
+		Map<String,Object> datas = new HashMap<>();
+		Map<String,Object> data = new HashMap<>();
+		
+		data.put("result", true);
+		datas.put("contents", dao.getInorderList(vo));
+		data.put("data", datas);
+		
+		return data;
+	}
+	
+	@RequestMapping("/ajax/inorderList.do")
+	@ResponseBody
+	public Map<String, Object> ajaxInoutList(InorderVO vo) {
+		
+		Map<String,Object> datas = new HashMap<>();
+		Map<String,Object> data = new HashMap<>();
+		
+		data.put("result", true);
+		datas.put("contents", dao.getInorderList(vo));
+		data.put("data", datas);
+		
+		return data;
 	}
 	
 	@RequestMapping("matInForm.do")
