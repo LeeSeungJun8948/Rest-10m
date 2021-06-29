@@ -1,6 +1,7 @@
 package com.rest.app.prod.web;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,66 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.prod.service.ProdService;
+import com.rest.app.prod.vo.ProdDetailPlanVO;
+import com.rest.app.prod.vo.ProdPlanVO;
+
+class GridData {
+	List<ProdPlanVO> createdRows;
+	List<ProdPlanVO> updatedRows;
+	List<ProdPlanVO> deletedRows;
+
+	List<ProdDetailPlanVO> createdDetailRows;
+	List<ProdDetailPlanVO> updatedDetailRows;
+	List<ProdDetailPlanVO> deletedDetailRows;
+	
+	public List<ProdPlanVO> getCreatedRows() {
+		return createdRows;
+	}
+
+	public void setCreatedRows(List<ProdPlanVO> createdRows) {
+		this.createdRows = createdRows;
+	}
+
+	public List<ProdPlanVO> getDeletedRows() {
+		return deletedRows;
+	}
+
+	public void setDeletedRows(List<ProdPlanVO> deletedRows) {
+		this.deletedRows = deletedRows;
+	}
+
+	public List<ProdPlanVO> getUpdatedRows() {
+		return updatedRows;
+	}
+
+	public void setUpdatedRows(List<ProdPlanVO> updatedRows) {
+		this.updatedRows = updatedRows;
+	}
+	
+	public List<ProdDetailPlanVO> getCreatedDetailRows() {
+		return createdDetailRows;
+	}
+
+	public void setCreatedDetailRows(List<ProdDetailPlanVO> createdDetailRows) {
+		this.createdDetailRows = createdDetailRows;
+	}
+
+	public List<ProdDetailPlanVO> getDeletedDetailRows() {
+		return deletedDetailRows;
+	}
+
+	public void setDeletedDetailRows(List<ProdDetailPlanVO> deletedDetailRows) {
+		this.deletedDetailRows = deletedDetailRows;
+	}
+
+	public List<ProdDetailPlanVO> getUpdatedDetailRows() {
+		return updatedDetailRows;
+	}
+
+	public void setUpdatedDetailRows(List<ProdDetailPlanVO> updatedDetailRows) {
+		this.updatedDetailRows = updatedDetailRows;
+	}
+}
 
 @Controller
 public class ProdController {
@@ -22,15 +83,34 @@ public class ProdController {
 		return "prod/prodPlanManage.page";
 	}
 
-	@RequestMapping("ajax/orderRead.do")
+	@RequestMapping("unplanOrderRead.do")
 	@ResponseBody
-	public Map<String, Object> ajaxGetOrderRead(@RequestBody Map<String, Object> param) {
+	public Map<String, Object> unplanOrderRead(@RequestBody Map<String, Object> param) {
 		Map<String, Object> datas = new HashMap<String, Object>();
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("result", true);
-		datas.put("contents", svc.getUnplannedOrders(param));
+		datas.put("contents", svc.getUnplanOrders(param));
 		data.put("data", datas);
-		System.out.println(param.get("planDtS"));
+		return data;
+	}
+
+	@RequestMapping("planSave.do")
+	@ResponseBody
+	public String planSave(ProdPlanVO vo) {
+		svc.insertPlan(vo);
+		return "redirect:prodPlanManage.do";
+	}
+
+	@RequestMapping("gridSave.do")
+	@ResponseBody
+	public Map<String, Object> gridSave(@RequestBody GridData gridData) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		List<ProdDetailPlanVO> list = gridData.createdDetailRows;
+		list.forEach(vo -> {
+			svc.insertDetailPlan(vo);
+		});
+		data.put("result", true);
+		data.put("data", gridData.createdRows);
 		return data;
 	}
 

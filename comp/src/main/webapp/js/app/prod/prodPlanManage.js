@@ -2,11 +2,9 @@ var dataSource = {
   withCredentials: false,  
   initialRequest: true,
   api: {
-      readData: { url: 'ajax/orderRead.do', method: 'POST' },
-      createData: { url: 'ajax/planSave.do', method: 'POST' },
-      updateData: { url: '', method: 'PUT' },
-      deleteData: { url: '', method: 'DELETE' },
-      modifyData: { url: '', method: 'POST' }
+      readData: { url: 'unplanOrderRead.do', method: 'POST' },
+      modifyData: { url: 'gridSave.do', method: 'POST' },
+      deleteData: { url: '', method: 'DELETE' }
   },
 	contentType: 'application/json'
 }
@@ -39,10 +37,10 @@ const grid = new tui.Grid({
 		name : 'orderPlanCount'
 		}, {
 		header : '미계획량',
-		name : 'orderUnplanned'
+		name : 'orderUnplanCount',
 		}, {
 		header : '작업량',
-		name : 'toWork',
+		name : 'workCount',
 		editor: 'text'
 		}, {
 		header : '일생산량',
@@ -78,17 +76,26 @@ $('#btnReset').on('click', function(){
 
 // 저장 버튼
 $('#btnSave').on('click', function(){
-	var param = grid.getData();
-	
+	$.ajax({
+		type: 'post',
+		url: 'planSave.do',
+		data: $('#inputFrm').serialize(),
+		dataType: 'json',
+		success: function(data){
+		}
+	})
+	grid.request('modifyData');
+	alert("저장되었습니다.");
 });
 
 // 삭제 버튼
 $('#btnDel').on('click', function(){
 });
 
+
 // 미생산 읽기 버튼
 $('#btnRead').on('click',  function(){
-	var param = $('#frm').serializeObject();
+	var param = $('#dateFrm').serializeObject();
 	grid.readData(1, param, true);
 });
 

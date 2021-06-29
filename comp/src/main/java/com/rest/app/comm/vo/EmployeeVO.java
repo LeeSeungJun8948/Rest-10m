@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 @Data
-public class EmployeeVO {
+public class EmployeeVO extends ComDefaultVO{
 	int empCode;
 	String id;
 	String pwd;
