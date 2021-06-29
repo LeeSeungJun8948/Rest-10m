@@ -12,5 +12,6 @@ public class OrdersVO {
 	String outDate;//납기일자
 	int orderCount;//주문량
 	int planCount;//계획량
+	int unplanCount;//미계획량
 	String productName;//제품명
 }
