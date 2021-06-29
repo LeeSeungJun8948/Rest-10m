@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rest.app.comm.service.impl.BomMapper">
+	
+	<!-- 제품코드,제품명,제품규격 List(모달창) -->
+	<select id="getProduct" resultType="com.rest.app.comm.vo.BomVO">
+		SELECT product_code, product_name, unit_no
+ 		  FROM product
+	</select>
+	
+	<!-- 제품단건조회 -->
+	<select id="getInfoProduct" resultType="com.rest.app.comm.vo.BomVO">
+		select p.product_code, p.product_name, p.unit_no, c.company_name
+  		  from product p
+  	 	  join (select c.company_code, c.company_name, o.product_code
+          		  from company c
+          		  join orders o
+            		on (c.company_code = o.company_code)
+         		 where c.company_code=1) c
+    		on (p.product_code = c.product_code)
+ 		 where p.product_code = #{productCode}
+	</select>
+	
+	<!-- BomList -->
+	<select id="getInfoBom" resultType="com.rest.app.comm.vo.BomVO">
+		select p.process_name, a.*
+  		  from process p
+  		  join ( select b.*,m.material_name
+          		   from bom b
+           	 	   join material m
+             		 on (b.material_code = m.material_code)) a
+    		on (p.process_code=a.process_code)
+    	 where a.product_code=#{productCode}
+	</select>
+</mapper>
