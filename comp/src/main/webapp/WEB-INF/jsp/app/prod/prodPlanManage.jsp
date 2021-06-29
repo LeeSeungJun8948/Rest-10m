@@ -46,6 +46,8 @@
 	<button type="button" class="btn btn-primary" id="btnGridDel">삭제</button>
 </div>
 <div class="col-lg-10">
-	<div id="grid"></div>
+	<form id="gridFrm" name="gridFrm">
+		<div id="grid"></div>
+	</form>
 </div>
 <script type="text/javascript" src="js/app/prod/prodPlanManage.js"></script>

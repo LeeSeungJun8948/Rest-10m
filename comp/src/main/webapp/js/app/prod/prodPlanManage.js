@@ -3,7 +3,7 @@ var dataSource = {
   initialRequest: true,
   api: {
       readData: { url: 'ajax/orderRead.do', method: 'POST' },
-      createData: { url: '', method: 'POST' },
+      createData: { url: 'ajax/planSave.do', method: 'POST' },
       updateData: { url: '', method: 'PUT' },
       deleteData: { url: '', method: 'DELETE' },
       modifyData: { url: '', method: 'POST' }
@@ -78,6 +78,7 @@ $('#btnReset').on('click', function(){
 
 // 저장 버튼
 $('#btnSave').on('click', function(){
+	var param = grid.getData();
 	
 });
 
