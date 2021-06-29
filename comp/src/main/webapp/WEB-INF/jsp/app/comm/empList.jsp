@@ -100,10 +100,6 @@
 				
 				//update 버튼에 function 추가
 				$("#btnUpdate").on("click",function(){
-					const { rowKey, columnName } = grid.getFocusedCell();
-					  if (rowKey && columnName) {
-					    grid.finishEditing(rowKey, columnName);
-					  }
 					  grid.request('updateData', {
 					    checkedOnly: true
 					  });
