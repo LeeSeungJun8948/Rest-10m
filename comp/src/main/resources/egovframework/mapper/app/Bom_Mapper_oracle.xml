@@ -19,7 +19,7 @@
      		on (p.product_code = a.product_code)
   		 where p.product_code = #{productCode}
 	</select>
-	 
+	  
 	<!-- BomList -->
 	<select id="getInfoBom" resultType="com.rest.app.comm.vo.BomVO">
 		select p.process_name, a.*
