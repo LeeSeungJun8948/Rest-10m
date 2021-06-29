@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+   crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
 .findbtn{
@@ -57,8 +60,57 @@
 			</tr>
 		</table>
 	</div>
-	
+	<div style="margin-top: 40px">
+		<h3>제품 소요량 관리</h3>
+	</div>
+		<div id="bomgrid" >
+		       <script type="text/javascript">
+         			const dataSource = {
+						api : {
+							readData : {url: 'ajax/getInfoProduct.do', method:'GET' },
+						},
+						contentType: 'application/json'
+				}; 
+				const grid = new tui.Grid({
+					el : document.getElementById('bomgrid'),
+					data : dataSource,
+					scrollX : false,
+					scrollY : false,
+					columns : [
+					{
+						header : '자재코드',
+						name : 'materialCode',
+					},
+					{
+						header :'자재명',
+						name : 'materialName',
+					}, 
+					{
+						header :'사용공정',
+						name : 'processName',
+					}
+					]
+				});
+		</script>
+	</div>   
 	 
+	
+	<div>
+		<table>
+			<tr>
+				<th>자재코드</th>
+				<th>자재명</th>
+				<th>사용공정</th>
+			</tr>
+			<c:forEach items="${binfo }" var="bl">
+				<tr>
+					<td>${bl.materialCode }</td>
+					<td>${bl.materialName }</td>
+					<td>${bl.processCode }</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div> 
 
 </body>
 </html>

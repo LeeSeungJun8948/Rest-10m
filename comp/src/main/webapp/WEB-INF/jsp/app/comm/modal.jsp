@@ -15,24 +15,25 @@
     <form action="getInfoProduct.do" method="post" id="frm">
     	<input type="hidden" id="productCode" name="productCode"> 
     </form>
-  		<div class="modal-dialog" role="document">
-    		<div class="modal-content">
+  		<div class="modal-dialog" role="document" style="z-index:100">
+    		<div class="modal-content" >
       			<div class="modal-header">
         			<h5 class="modal-title">제품검색</h5>
       			</div>
-      			<div class="modal-body">
+      			<div class="modal-body" >
         			<!-- 필요한것 집어넣기 BODY 부분 -->
-        	<div id="grid">
+        	<div id="grid" >
 		       <script type="text/javascript">
-        			const dataSource = {
+        			const dataSourc = {
 						api : {
 							readData : {url: 'ajax/bomList.do', method:'GET' },
+							
 						},
 						contentType: 'application/json'
 				};
-				const grid = new tui.Grid({
+				const matGrid = new tui.Grid({
 					el : document.getElementById('grid'),
-					data : dataSource,
+					data : dataSourc,
 					scrollX : false,
 					scrollY : false,
 					columns : [
@@ -50,8 +51,8 @@
 					}
 					]
 				});
-				grid.on('click',function(ev){
-					var values = grid.getRow(ev.rowKey);
+				matGrid.on('click',function(ev){
+					var values = matGrid.getRow(ev.rowKey);
 					var prdCode= values.productCode;
 					$('#productCode').val(prdCode);
 					console.log(prdCode);
@@ -63,15 +64,19 @@
       			</div>
       			<div class="modal-footer">
 		        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		        	<button type="button"  onclick="fnSearch()" class="btn btn-primary" >검색</button>
+		        	<button id=btnSearch type="button"  onclick="fnSearch()" class="btn btn-primary" >검색</button>
       			</div>
     	</div>
 	</div>
 	<script>
  	function fnSearch(){
-				
+ 		
 				$("#frm").submit();
-			}	
-	
- 
-   </script>  
+			}
+ // bom 자재리스트 버튼
+ 	$('#btnSearch').on('click',  function(){
+ 		var prm = $('#frm').serializeObject();
+ 		grid.readData(1, prm, true);
+ 	});
+   </script> 
+   
