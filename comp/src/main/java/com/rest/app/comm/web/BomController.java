@@ -46,25 +46,21 @@ public class BomController {
 		data.put("data", datas);
 		return data;
 	}
+	//모달 
 	@RequestMapping("modal.do")
 	public String modal() {
 		return "app/comm/modal";
 	}
-	//제품 단건조회
+	//제품 단건조회 , 소요자재조회
 	@RequestMapping("getInfoProduct.do")
 	public ModelAndView getInfoProduct(Model model, BomVO vo) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/comm/bomList.page");
 		mv.addObject("info", dao.getInfoProduct(vo));
+		mv.addObject("binfo", dao.getInfoBom(vo));
 		return mv;  
 	}
 	
-	@RequestMapping("getInfoBom.do")
-	public ModelAndView getInfoBom(Model model, BomVO vo) {
-		ModelAndView bomMv = new ModelAndView();
-		bomMv.setViewName("/comm/bomList.page");
-		bomMv.addObject("bomInfo", dao.getInfoProduct(vo));
-		return bomMv;
-	}  
+
 }  
 

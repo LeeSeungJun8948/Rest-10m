@@ -13,6 +13,7 @@
 
 <!-- Modal -->
     <form action="getInfoProduct.do" method="post" id="frm">
+    	<input type="hidden" id="productCode" name="productCode"> 
     </form>
   		<div class="modal-dialog" role="document">
     		<div class="modal-content">
@@ -49,7 +50,13 @@
 					}
 					]
 				});
-				grid.on('click')
+				grid.on('click',function(ev){
+					var values = grid.getRow(ev.rowKey);
+					var prdCode= values.productCode;
+					$('#productCode').val(prdCode);
+					console.log(prdCode);
+				
+				});
 
 				</script>
 			</div>
@@ -60,3 +67,11 @@
       			</div>
     	</div>
 	</div>
+	<script>
+ 	function fnSearch(){
+				
+				$("#frm").submit();
+			}	
+	
+ 
+   </script>  

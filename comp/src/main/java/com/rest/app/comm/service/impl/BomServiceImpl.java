@@ -26,11 +26,13 @@ public class BomServiceImpl implements BomService {
 		return mapper.getInfoProduct(vo);
 	}
 
-
 	@Override
-	public BomVO getInfoBom(BomVO vo) {
-		// TODO Auto-generated method stub
+	public List<BomVO> getInfoBom(BomVO vo) {
+		// TODO Bom 조회
 		return mapper.getInfoBom(vo);
 	}
+
+
+	
 	
 }

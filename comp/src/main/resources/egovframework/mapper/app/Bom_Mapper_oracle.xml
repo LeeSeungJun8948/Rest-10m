@@ -10,15 +10,14 @@
 	
 	<!-- 제품단건조회 -->
 	<select id="getInfoProduct" resultType="com.rest.app.comm.vo.BomVO">
-		select p.product_code, p.product_name, p.unit_no, c.company_name
-  		  from product p
-  	 	  join (select c.company_code, c.company_name, o.product_code
-          		  from company c
-          		  join orders o
-            		on (c.company_code = o.company_code)
-         		 where c.company_code=1) c
-    		on (p.product_code = c.product_code)
- 		 where p.product_code = #{productCode}
+		select p.product_code, p.product_name, p.unit_no, a.company_name
+    	  from product p
+    	  join ( select c.company_code, c.company_name, o.product_code
+             	   from company c
+             	   join orders o
+               		 on (c.company_code = o.company_code)) a
+     		on (p.product_code = a.product_code)
+  		 where p.product_code = #{productCode}
 	</select>
 	 
 	<!-- BomList -->

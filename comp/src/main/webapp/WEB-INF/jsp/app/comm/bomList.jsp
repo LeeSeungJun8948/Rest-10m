@@ -53,26 +53,12 @@
 				<td>${info.companyCode }</td>
 				<th>고객사명</th>
 				<td>${info.companyName }</td>
-				<td><button type="button" onclick="bomSearch()" value="${info.productCode}" name="item">제품소요관리</button></td>
+				
 			</tr>
 		</table>
 	</div>
-	<div>
-		${bomInfo.companyCode }
-			
-	</div>
-
- <script>
- 	function fnSearch(){
-		$("input[name=itemSel]").each(function(){
-			if($(this).is(":checked")==true){
-				$("#productCode").val($(this).val());
-				$("#frm").submit();
-			}	
-		});
- 	}
- 
-   </script>    	
+	
+	 
 
 </body>
 </html>
