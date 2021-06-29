@@ -2,12 +2,13 @@ var dataSource = {
   withCredentials: false,  
   initialRequest: true,
   api: {
-      readData: { url: 'ajax/orderRead.do', method: 'GET' },
+      readData: { url: 'ajax/orderRead.do', method: 'POST' },
       createData: { url: '', method: 'POST' },
       updateData: { url: '', method: 'PUT' },
       deleteData: { url: '', method: 'DELETE' },
       modifyData: { url: '', method: 'POST' }
-  }
+  },
+	contentType: 'application/json'
 }
 
 const grid = new tui.Grid({
@@ -86,8 +87,8 @@ $('#btnDel').on('click', function(){
 
 // 미생산 읽기 버튼
 $('#btnRead').on('click',  function(){
-	var prm = $('#frm').serialize();
-	grid.readData(1, prm, true);
+	var param = $('#frm').serializeObject();
+	grid.readData(1, param, true);
 });
 
 // 추가버튼
@@ -107,3 +108,4 @@ grid.on('check', ev => {
 // 전체체크 해제
 grid.on('uncheck', ev => {
 });
+
