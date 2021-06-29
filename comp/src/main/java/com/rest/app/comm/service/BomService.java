@@ -12,7 +12,7 @@ public interface BomService {
 	//제품코드,제품명,규격 리스트
 	public List<BomVO> getProduct(BomVO vo);
 	//Bom 리스트
-	public List<BomVO> getInfoBom(@RequestParam Map<String, Object> bparam);
+	public List<BomVO> getInfoBom(BomVO vo);
 	//제품 단건조회
 	BomVO getInfoProduct(BomVO vo);
 	

@@ -29,9 +29,9 @@ public class BomServiceImpl implements BomService {
 	}
 
 	@Override
-	public List<BomVO> getInfoBom(@RequestParam Map<String, Object> bparam) {
+	public List<BomVO> getInfoBom(BomVO vo) {
 		// TODO Bom 조회
-		return mapper.getInfoBom(bparam);
+		return mapper.getInfoBom(vo);
 	}
 
 

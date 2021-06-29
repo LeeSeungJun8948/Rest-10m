@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,22 +55,22 @@ public class BomController {
 	}
 	//제품 단건조회 , 소요자재조회
 	@RequestMapping("getInfoProduct.do")
-	public ModelAndView getInfoProduct(Model model, BomVO vo,@RequestParam Map<String, Object> param) {
+	public ModelAndView getInfoProduct(Model model, BomVO vo) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/comm/bomList.page");
 		mv.addObject("info", dao.getInfoProduct(vo));
-		mv.addObject("binfo", dao.getInfoBom(param));
+		mv.addObject("binfo", dao.getInfoBom(vo));
 		return mv;  
 	}
 	
 	//ajax  소요자재조회
 	@RequestMapping("/ajax/getInfoProduct.do")
 	@ResponseBody
-	public Map<String, Object> ajaxgetInfoProduct(@RequestParam Map<String, Object> bparam) {
+	public Map<String, Object> ajaxgetInfoProduct(BomVO vo) {
 		Map<String,Object> boms = new HashMap();
 		Map<String,Object> bom = new HashMap();
 		bom.put("result", true);
-		boms.put("contents", dao.getInfoBom(bparam));
+		boms.put("contents", dao.getInfoBom(vo));
 		bom.put("bom", boms);
 		return bom;
 	}  
