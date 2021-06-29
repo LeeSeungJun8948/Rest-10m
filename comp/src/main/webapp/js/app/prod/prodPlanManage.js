@@ -3,7 +3,7 @@ var dataSource = {
   initialRequest: true,
   api: {
       readData: { url: 'unplanOrderRead.do', method: 'POST' },
-      modifyData: { url: 'planSave.do', method: 'POST' }
+      modifyData: { url: 'gridSave.do', method: 'POST' }
       deleteData: { url: '', method: 'DELETE' },
   },
 	contentType: 'application/json'
@@ -77,7 +77,13 @@ $('#btnReset').on('click', function(){
 // 저장 버튼
 $('#btnSave').on('click', function(){
 	var param = $('#inputFrm').serializeObject();
-	
+	$.ajax({
+		url: 'planSave.do',
+		data: param,
+		success: function(data){
+			console.log('성공')
+		}
+	})
 	
 	/*grid.request('modifyData');*/
 });
