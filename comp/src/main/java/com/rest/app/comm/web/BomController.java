@@ -2,10 +2,14 @@ package com.rest.app.comm.web;
 
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rest.app.comm.service.BomService;
@@ -32,18 +36,20 @@ public class BomController {
 		return "comm/bomList.page";
 	}
 	
-//	@RequestMapping("/ajax/bomList.do")
-//	public Map<String, Object> ajaxgetProduct(){
-//		Map<String,Object> datas = new HashMap();
-//		Map<String,Object> data = new HashMap();
-//		data.put("result", true);
-//		datas.put("contents", dao.getProduct());
-//		data.put("data", datas);
-//		
-//		return data;
-//	}
-//	
-	
+	@RequestMapping("/ajax/bomList.do")
+	@ResponseBody
+	public Map<String, Object> ajaxGetBomList() {
+		Map<String,Object> datas = new HashMap();
+		Map<String,Object> data = new HashMap();
+		data.put("result", true);
+		datas.put("contents", dao.getProduct());
+		data.put("data", datas);
+		return data;
+	}
+	@RequestMapping("modal.do")
+	public String modal() {
+		return "app/comm/modal";
+	}
 	//제품 단건조회
 	@RequestMapping("getInfoProduct.do")
 	public ModelAndView getInfoProduct(Model model, BomVO vo) {

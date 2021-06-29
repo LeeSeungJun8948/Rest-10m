@@ -5,9 +5,7 @@
 		SELECT o.order_no, o.product_code, o.out_date, o.order_count, o.order_plancount, p.product_name
 		FROM orders o, product p
 		WHERE (o.order_state='미계획' OR o.order_state='생산계획')
-		<if test="searchDate1 != '' and searchDate2 != ''">
 		AND o.out_date BETWEEN TO_DATE(#{searchDate1}, 'YYYY-MM-DD') 
                    AND TO_DATE(#{searchDate2}, 'YYYY-MM-DD')
-        </if>
 	</select>
 </mapper>
