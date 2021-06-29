@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.rest.app.mat.service.MaterialService;
 import com.rest.app.mat.vo.InorderVO;
+import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
 
 import lombok.extern.log4j.Log4j;
@@ -58,5 +59,10 @@ public class MaterialServiceImpl implements MaterialService{
 	@Override
 	public List<InorderVO> getInorderList(InorderVO vo) { // 발주 리스트
 		return mapper.getInorderList(vo);
+	}
+
+	@Override
+	public List<InoutVO> getMatList(InoutVO vo) { // 입출고 리스트
+		return mapper.getMatList(vo);
 	}
 }

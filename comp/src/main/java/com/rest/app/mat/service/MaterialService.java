@@ -3,6 +3,7 @@ package com.rest.app.mat.service;
 import java.util.List;
 
 import com.rest.app.mat.vo.InorderVO;
+import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
 
 public interface MaterialService {
@@ -23,5 +24,7 @@ public interface MaterialService {
 	
 	
 	public List<InorderVO> getInorderList(InorderVO vo); // 발주 리스트
+	
+	public List<InoutVO> getMatList(InoutVO vo); // 입출고 리스트
 	
 }
