@@ -9,38 +9,40 @@
 	<button type="button" class="btn btn-primary" id="btnSave">저장</button>
 	<button type="button" class="btn btn-primary" id="btnDel">삭제</button>
 </div>
-<form id="frm" name="frm">
 	<div class="row">
 		<div class="mb-2 col-lg-6">
-			<table class="table">
-				<tbody>
-					<tr>
-						<th>계획일자</th>
-						<td><input type="date" id="planDate" name="planDate"></td>
-					</tr>
-					<tr>
-						<th>생산계획명</th>
-						<td><input type="text" id="planName" name="planName"></td>
-					</tr>
-					<tr>
-						<th>특기사항</th>
-						<td><input type="text" id="planDetail" name="planDetail"></td>
-					</tr>
-				</tbody>
-			</table>
+			<form id="inputFrm" name="inputFrm">
+				<table class="table">
+					<tbody>
+						<tr>
+							<th>계획일자</th>
+							<td><input type="date" id="planDate" name="planDate"></td>
+						</tr>
+						<tr>
+							<th>생산계획명</th>
+							<td><input type="text" id="planName" name="planName"></td>
+						</tr>
+						<tr>
+							<th>특기사항</th>
+							<td><input type="text" id="planDetail" name="planDetail"></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
 		</div>
 		<div class="mb-4 col-lg-6">
 			<div>
 				<h5>미생산 검색</h5>
 			</div>
 			<div>
-				<span>납기일자 </span><input type="date" id="planDtS" name="planDtS">
-				<span> ~ </span><input type="date" id="planDtE" name="planDtE">&nbsp;
-				<button type="button" class="btn btn-primary" id="btnRead">미생산 읽기</button>
+				<form id="dateFrm" name="dateFrm">
+					<span>납기일자 </span><input type="date" id="planDtS" name="planDtS">
+					<span> ~ </span><input type="date" id="planDtE" name="planDtE">&nbsp;
+					<button type="button" class="btn btn-primary" id="btnRead">미생산 읽기</button>
+				</form>
 			</div>
 		</div>
 	</div>
-</form>
 <div class="mb-4" align="right">
 	<button type="button" class="btn btn-primary" id="btnGridAdd">추가</button>
 	<button type="button" class="btn btn-primary" id="btnGridDel">삭제</button>

@@ -13,5 +13,6 @@ public class OrdersVO {
 	int orderCount;//주문량
 	int orderPlanCount;//계획량
 	String dCount;//미납품량
-	String productName; 
+	String productName;//제품명
+	int orderUnplanCount;//미계획량
 }
