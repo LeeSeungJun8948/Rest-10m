@@ -30,6 +30,7 @@ function showInorderList(){
 	});
 	
 	
+	
 	// listGrid 생성
 	const listGrid = new tui.Grid({
 		el : document.getElementById('inorderList'),
