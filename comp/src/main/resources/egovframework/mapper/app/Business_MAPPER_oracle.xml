@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rest.app.bus.service.impl.BusinessMapper">
+	<select id="getBus" resultType="com.rest.app.bus.vo.OrdersVO"
+		parameterType="com.rest.app.bus.vo.OrdersVO">
+		select orders.order_state,
+		company.company_name,
+		orders.order_no,
+		product.product_code,
+		product.product_name,
+		product.std_id,
+		product.unit_id,
+		orders.in_date,
+		orders.out_date,
+		orders.order_count,
+		oproject.oproject_count,
+		finproduct.kg,
+		(orders.order_count - finproduct.kg)as "dCount"
+		from orders
+		join company on orders.company_code=company.company_code
+		join product on orders.product_code=product.product_code
+		join wproject on orders.order_no=wproject.order_no
+		join oproject on wproject.wproject_code=oproject.WPROJECT_CODE
+		join export on orders.order_no=export.order_no
+		join finproduct on export.lot_no=finproduct.lot_no
+		<where>
+			<if test="inDate != null and inDate != ''">
+				and orders.in_date BETWEEN TO_DATE(#{inDate},
+				'YYYY-MM-DD') AND TO_DATE(#{inDate}, 'YYYY-MM-DD'))
+			</if>
+			<if test="companyCode !=null and companyCode !=''">
+				and company.company_code=#{companyCode}
+			</if>
+		</where>
+	</select>
+</mapper>

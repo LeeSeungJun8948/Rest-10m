@@ -43,7 +43,7 @@
 		<div id="content-wrapper" class="d-flex flex-column">
 		
 			<div id="content">
-				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
 					<tiles:insertAttribute name="header" />
 				</nav>
 				<div class="container-fluid">
@@ -63,7 +63,6 @@
 	<!-- End of Page Wrapper -->
 
 
-<<<<<<< HEAD
 	<!-- Core plugin JavaScript-->
 	<script src="${pageContext.request.contextPath}/vendor/jquery-easing/jquery.easing.min.js"></script>
 

@@ -21,7 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return mapper.getEmp();
 	}
 
-
+	
 	@Override
 	public int deleteEmp(EmployeeVO vo) {
 		return mapper.deleteEmp(vo);
@@ -29,8 +29,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
 	@Override
-	public int updateEmp(EmployeeVO vo) {
+	public int updateEmp(EmployeeVO vo)   {
 		return mapper.updateEmp(vo);
 	}
 
+
+	@Override
+	public int insertEmp(EmployeeVO vo) {
+		return mapper.insertEmp(vo);
+	}
 }

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.rest.app.bus.service.impl.BusinessMapper">
-	<select id="getBus" resultType="com.rest.app.bus.vo.BusinessVO">
-		select code_id from COMTCCMMNCODE
-	</select>
-</mapper>

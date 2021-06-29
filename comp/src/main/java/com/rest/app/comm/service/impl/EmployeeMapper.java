@@ -8,5 +8,5 @@ public interface EmployeeMapper {
 	public List<EmployeeVO> getEmp();
 	public int deleteEmp(EmployeeVO vo);
 	public int updateEmp(EmployeeVO vo);
-	
-}
+	public int insertEmp(EmployeeVO vo);
+}  

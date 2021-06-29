@@ -1,14 +1,15 @@
 package com.rest.app.prod.web;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.prod.service.ProdService;
 
 @Controller
@@ -23,8 +24,18 @@ public class ProdController {
 
 	@RequestMapping("ajax/orderRead.do")
 	@ResponseBody
-	public List<OrdersVO> orderRead(Model model) {
-		return svc.getUnplannedOrders();
+	public Map<String, Object> ajaxGetOrderRead(@RequestParam Map<String, Object> param){
+		 Map<String,Object> datas = new HashMap<String, Object>();
+	      Map<String,Object> data = new HashMap<String, Object>();
+	      data.put("result", true);
+	      datas.put("contents", svc.getUnplannedOrders(param));
+	      data.put("data", datas);
+		return data;
+
+	//public List<OrdersVO> orderRead(Model model, @RequestParam Map<String, Object> param) {
+		
+		
+		//return svc.getUnplannedOrders(param);
 	}
 	
 	@RequestMapping("prodPlanView.do")
