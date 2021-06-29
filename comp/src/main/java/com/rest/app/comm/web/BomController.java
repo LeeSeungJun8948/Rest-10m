@@ -50,7 +50,7 @@ public class BomController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/comm/bomList.page");
 		mv.addObject("info", dao.getInfoProduct(vo));
-		return mv;
+		return mv;  
 	}
 	
 	@RequestMapping("getInfoBom.do")

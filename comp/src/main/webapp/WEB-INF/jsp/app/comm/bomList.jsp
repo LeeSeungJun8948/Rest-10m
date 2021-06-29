@@ -105,9 +105,8 @@
 			}	
 		});
  	}
-	
- 	
- </script>    	
+ 
+   </script>    	
 
 </body>
 </html>

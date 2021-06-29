@@ -18,8 +18,8 @@ public class BomServiceImpl implements BomService {
 	public List<BomVO> getProduct() {
 		// TODO 모달창 제품명,제품코드,규격 리스트
 		return mapper.getProduct();
-	}
-
+	}   
+  
 	@Override
 	public BomVO getInfoProduct(BomVO vo) {
 		// TODO 제품 단건 조회
