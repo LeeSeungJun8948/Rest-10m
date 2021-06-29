@@ -67,7 +67,13 @@ public class ProdController {
 
 	@RequestMapping("planSave.do")
 	@ResponseBody
-	public Map<String, Object> planSave(@RequestBody GridData gridData) {
+	public Map<String, Object> planSave(){
+		return null;
+	}
+	
+	@RequestMapping("gridSave.do")
+	@ResponseBody
+	public Map<String, Object> gridSave(@RequestBody GridData gridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
 		List<ProdPlanVO> list = gridData.createdRows;
 		

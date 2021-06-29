@@ -10,8 +10,4 @@
 		AND o.out_date BETWEEN TO_DATE(#{planDtS}, 'YYYY-MM-DD') 
                    AND TO_DATE(#{planDtE}, 'YYYY-MM-DD')
 	</select>
-	
-	<insert id=""></insert>
-	<update id=""></update>
-	<delete id=""></delete>
 </mapper>
