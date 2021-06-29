@@ -3,8 +3,8 @@ var dataSource = {
   initialRequest: true,
   api: {
       readData: { url: 'unplanOrderRead.do', method: 'POST' },
-      modifyData: { url: 'planSave.do', method: 'POST' }
-      deleteData: { url: '', method: 'DELETE' },
+      modifyData: { url: 'planSave.do', method: 'POST' },
+      deleteData: { url: '', method: 'DELETE' }
   },
 	contentType: 'application/json'
 }
