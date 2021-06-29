@@ -25,7 +25,6 @@
 		</div>
 		<div id="grid">
 			<script type="text/javascript">
-
 				const dataSource = {
 						api : {
 							readData : {url: 'ajax/empList.do', method:'GET' },
@@ -124,6 +123,7 @@
 				grid.on('response', function(data) {
 					grid.resetOriginData();
 				}) 			
+			
 			</script>
 		</div>
 </body>
