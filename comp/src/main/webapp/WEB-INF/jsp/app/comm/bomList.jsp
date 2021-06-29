@@ -45,6 +45,7 @@
 				<td width="380px">
 					<input type="text" maxlength="20" tabindex="1"  id="prdCode">
 					<a href="modal.do" rel="modal:open" class="btn btn-info btn-lg">검색</a>
+					<button type="button" class="btn btn-primary" id="btnSearch">값조회</button>
 				</td>
 				<th scope="row">제품명</th>
 				<td width="380px">${info.productName }</td>
@@ -91,6 +92,7 @@
 					}
 					]
 				});
+
 		</script>
 	</div>   
 	 
