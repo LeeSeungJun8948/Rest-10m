@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.prod.service.ProdService;
+import com.rest.app.prod.vo.ProdDetailPlanVO;
 import com.rest.app.prod.vo.ProdPlanVO;
 
 class GridData {
-	List<ProdPlanVO> deletedRows;
-	List<ProdPlanVO> updatedRows;
 	List<ProdPlanVO> createdRows;
+	List<ProdPlanVO> updatedRows;
+	List<ProdPlanVO> deletedRows;
 
+	List<ProdDetailPlanVO> createdDetailRows;
+	List<ProdDetailPlanVO> updatedDetailRows;
+	List<ProdDetailPlanVO> deletedDetailRows;
+	
 	public List<ProdPlanVO> getCreatedRows() {
 		return createdRows;
 	}
@@ -41,6 +46,30 @@ class GridData {
 
 	public void setUpdatedRows(List<ProdPlanVO> updatedRows) {
 		this.updatedRows = updatedRows;
+	}
+	
+	public List<ProdDetailPlanVO> getCreatedDetailRows() {
+		return createdDetailRows;
+	}
+
+	public void setCreatedDetailRows(List<ProdDetailPlanVO> createdDetailRows) {
+		this.createdDetailRows = createdDetailRows;
+	}
+
+	public List<ProdDetailPlanVO> getDeletedDetailRows() {
+		return deletedDetailRows;
+	}
+
+	public void setDeletedDetailRows(List<ProdDetailPlanVO> deletedDetailRows) {
+		this.deletedDetailRows = deletedDetailRows;
+	}
+
+	public List<ProdDetailPlanVO> getUpdatedDetailRows() {
+		return updatedDetailRows;
+	}
+
+	public void setUpdatedDetailRows(List<ProdDetailPlanVO> updatedDetailRows) {
+		this.updatedDetailRows = updatedDetailRows;
 	}
 }
 
@@ -67,19 +96,21 @@ public class ProdController {
 
 	@RequestMapping("planSave.do")
 	@ResponseBody
-	public Map<String, Object> planSave(){
-		return null;
+	public String planSave(ProdPlanVO vo) {
+		svc.insertPlan(vo);
+		return "redirect:prodPlanManage.do";
 	}
-	
+
 	@RequestMapping("gridSave.do")
 	@ResponseBody
 	public Map<String, Object> gridSave(@RequestBody GridData gridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
-		List<ProdPlanVO> list = gridData.createdRows;
-		
-//		svc.insertPlan(gridData.createdRows.get(0));
-//		data.put("result", true);
-//		data.put("data", gridData.createdRows);
+		List<ProdDetailPlanVO> list = gridData.createdDetailRows;
+		list.forEach(vo -> {
+			svc.insertDetailPlan(vo);
+		});
+		data.put("result", true);
+		data.put("data", gridData.createdRows);
 		return data;
 	}
 

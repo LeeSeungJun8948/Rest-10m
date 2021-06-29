@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.prod.service.ProdService;
+import com.rest.app.prod.vo.ProdDetailPlanVO;
 import com.rest.app.prod.vo.ProdPlanVO;
 
 @Service("prodService")
@@ -33,5 +34,20 @@ public class ProdServiceImpl implements ProdService {
 	@Override
 	public int deletePlan(ProdPlanVO vo) {
 		return mapper.deletePlan(vo);
+	}
+
+	@Override
+	public int insertDetailPlan(ProdDetailPlanVO vo) {
+		return mapper.insertDetailPlan(vo);
+	}
+
+	@Override
+	public int updateDetailPlan(ProdDetailPlanVO vo) {
+		return mapper.updateDetailPlan(vo);
+	}
+
+	@Override
+	public int deleteDetailPlan(ProdDetailPlanVO vo) {
+		return mapper.deleteDetailPlan(vo);
 	}
 }

@@ -3,8 +3,8 @@ var dataSource = {
   initialRequest: true,
   api: {
       readData: { url: 'unplanOrderRead.do', method: 'POST' },
-      modifyData: { url: 'gridSave.do', method: 'POST' }
-      deleteData: { url: '', method: 'DELETE' },
+      modifyData: { url: 'gridSave.do', method: 'POST' },
+      deleteData: { url: '', method: 'DELETE' }
   },
 	contentType: 'application/json'
 }
@@ -40,7 +40,7 @@ const grid = new tui.Grid({
 		name : 'orderUnplanCount',
 		}, {
 		header : '작업량',
-		name : 'toWork',
+		name : 'workCount',
 		editor: 'text'
 		}, {
 		header : '일생산량',
@@ -76,16 +76,16 @@ $('#btnReset').on('click', function(){
 
 // 저장 버튼
 $('#btnSave').on('click', function(){
-	var param = $('#inputFrm').serializeObject();
 	$.ajax({
+		type: 'post',
 		url: 'planSave.do',
-		data: param,
+		data: $('#inputFrm').serialize(),
+		dataType: 'json',
 		success: function(data){
-			console.log('성공')
 		}
 	})
-	
-	/*grid.request('modifyData');*/
+	grid.request('modifyData');
+	alert("저장되었습니다.");
 });
 
 // 삭제 버튼
