@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.mat.service.MaterialService;
+import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.MaterialVO;
 
 class GridData{
@@ -57,12 +58,16 @@ public class MaterialController {
 		return dao.matDel(vo);
 	}
 	
-	
 	@RequestMapping("inorderForm.do")
 	public String inorderForm(Model model) {
 		return "mat/inorderForm.page";
 	}
 	
+	@RequestMapping("/ajax/inorderList.do")
+	@ResponseBody
+	public List<InorderVO> ajaxInorderList(Model model, InorderVO vo) { // 발주 리스트
+		return dao.getInorderList(vo);
+	}
 	
 	@RequestMapping("matInForm.do")
 	public String matInForm(Model model) {
