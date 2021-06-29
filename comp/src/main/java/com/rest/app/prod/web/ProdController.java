@@ -31,11 +31,6 @@ public class ProdController {
 	      datas.put("contents", svc.getUnplannedOrders(param));
 	      data.put("data", datas);
 		return data;
-
-	//public List<OrdersVO> orderRead(Model model, @RequestParam Map<String, Object> param) {
-		
-		
-		//return svc.getUnplannedOrders(param);
 	}
 	
 	@RequestMapping("prodPlanView.do")
