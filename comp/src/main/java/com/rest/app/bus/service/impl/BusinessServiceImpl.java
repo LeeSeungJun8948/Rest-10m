@@ -20,4 +20,10 @@ public class BusinessServiceImpl implements BusinessService {
 		return mapper.getBus();
 	}
 
+	@Override
+	public List<OrdersVO> getUnproduced() {
+		// TODO Auto-generated method stub
+		return mapper.getUnproduced();
+	}
+
 }
