@@ -42,6 +42,7 @@
 				</tbody>
 			</table>
 			
+			
 		</div>
 		<div class="mb-4 col-lg-6">
 			<div>
