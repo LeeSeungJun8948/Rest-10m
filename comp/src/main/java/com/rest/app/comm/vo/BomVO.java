@@ -10,8 +10,8 @@ public class BomVO {
 	String unitNo;
 	String companyName;
 	int companyCode;
-	int process_code;
-	String process_name;
+	int processCode;
+	String processName;
 	int materialCode;
 	String materialName;
 }

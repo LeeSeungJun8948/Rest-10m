@@ -18,10 +18,18 @@
 <body>
 		<h1 class="h3 mb-4 text-gray-700">생산계획 관리</h1>
 		<div class="mb-4">
+		<form id="searchCheck" name="searchCheck">
+		<select name="searchCondition" id="searchCondition" title="검색조건2-검색어구분" style="width:80px;height:26px">
+                                    <option value="id">ID</option>
+                                    <option value="employeeName" selected="">이름</option>
+        </select>
+        <input id="searchKeyword" name="searchKeyword" type="text" title="검색어" class="form-control" style="width:200px;margin-left:10px">                      		
 			<button type="button" class="btn btn-primary" id="btnRowInsert">행추가</button>
 			<button type="button" class="btn btn-primary" id="btnInsert">추가저장</button>
 			<button type="button" class="btn btn-primary" id="btnUpdate">저장</button>
 			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
+			<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
+		</form>
 		</div>
 		<div id="grid">
 			<script type="text/javascript">
@@ -108,6 +116,22 @@
 					}
 					]
 				});
+				
+				$.fn.serializeObject = function() {
+					var o = {};
+					var a = this.serializeArray();
+					$.each(a, function() {
+						if (o[this.name]) {
+							if (!o[this.name].push) {
+								o[this.name] = [o[this.name]];
+							}
+							o[this.name].push(this.value || '');
+						} else {
+							o[this.name] = this.value || '';
+						}
+					});
+					return o;
+				};
 
 				
 				$("#btnUpdate").on("click",function(){
@@ -131,7 +155,10 @@
 						    checkedOnly: true
 						  });
 				})
-				   
+				$("#btnSearch").on("click",function() {
+					var param = $('#searchCheck').serializeObject();
+					grid.readData(1, param, true);
+				})  
 				//처리하기	
 				grid.on('response', function(data) {
 					grid.resetOriginData();
