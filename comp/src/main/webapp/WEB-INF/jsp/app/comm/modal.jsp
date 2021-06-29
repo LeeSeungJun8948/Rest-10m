@@ -59,7 +59,8 @@
 				
 				});
 
-				</script>
+				</script>   	
+				
 			</div>
       			</div>
       			<div class="modal-footer">

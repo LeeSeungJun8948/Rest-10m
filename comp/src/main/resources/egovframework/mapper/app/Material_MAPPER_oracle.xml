@@ -46,4 +46,32 @@
 		WHERE material_code = #{materialCode}
 	</delete>
 	
+	<!-- 발주 -->
+	<select id="getInorderList" resultType="InorderVO"  parameterType="InorderVO">
+	
+		SELECT inorder_code, inorder_date, material_code, 
+			f_findMatName(material_code) as material_name,
+			f_findCompName(company_code) as company_name,
+			(select max(io_date) from inout where inorder_code = inorder_code) as in_date,
+			inorder_count,
+			nvl((select sum(io_volume) from inout where inorder_code = inorder_code),0) as in_count,
+			inorder_count - nvl((select sum(io_volume) from inout where inorder_code = inorder_code),0) as yet_count,
+			comments
+			
+		FROM inorder 
+		
+		<where>
+			inorder_date &gt;= startDate AND inorder_date &lt;= endDate
+			<if test="#{companyCode} != null and #{companyCode} != '' and  #{companyCode} != 0">
+				AND company_code = #{companyCode}
+			</if>			
+			<if test="#{materialCode} != null and #{materialCode} != '' and  #{materialCode} != 0">
+				AND material_code = #{materialCode}
+			</if>
+		</where>	
+		
+		ORDER BY #{orderBy} desc;
+		
+	</select>
+	
 </mapper>
