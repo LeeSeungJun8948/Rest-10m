@@ -6,8 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.prod.service.ProdService;
@@ -24,20 +24,16 @@ public class ProdController {
 
 	@RequestMapping("ajax/orderRead.do")
 	@ResponseBody
-	public Map<String, Object> ajaxGetOrderRead(@RequestParam Map<String, Object> param){
-		 Map<String,Object> datas = new HashMap<String, Object>();
-	      Map<String,Object> data = new HashMap<String, Object>();
-	      data.put("result", true);
-	      datas.put("contents", svc.getUnplannedOrders(param));
-	      data.put("data", datas);
+	public Map<String, Object> ajaxGetOrderRead(@RequestBody Map<String, Object> param) {
+		Map<String, Object> datas = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", svc.getUnplannedOrders(param));
+		data.put("data", datas);
+		System.out.println(param.get("planDtS"));
 		return data;
-
-	//public List<OrdersVO> orderRead(Model model, @RequestParam Map<String, Object> param) {
-		
-		
-		//return svc.getUnplannedOrders(param);
 	}
-	
+
 	@RequestMapping("prodPlanView.do")
 	public String prodPlanView(Model model) {
 		return "prod/prodPlanView.page";

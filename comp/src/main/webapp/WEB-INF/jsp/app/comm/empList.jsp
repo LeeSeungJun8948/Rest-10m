@@ -25,7 +25,6 @@
 		</div>
 		<div id="grid">
 			<script type="text/javascript">
-
 				const dataSource = {
 						api : {
 							readData : {url: 'ajax/empList.do', method:'GET' },
@@ -100,10 +99,6 @@
 				
 				//update 버튼에 function 추가
 				$("#btnUpdate").on("click",function(){
-					const { rowKey, columnName } = grid.getFocusedCell();
-					  if (rowKey && columnName) {
-					    grid.finishEditing(rowKey, columnName);
-					  }
 					  grid.request('updateData', {
 					    checkedOnly: true
 					  });
@@ -128,6 +123,7 @@
 				grid.on('response', function(data) {
 					grid.resetOriginData();
 				}) 			
+			
 			</script>
 		</div>
 </body>
