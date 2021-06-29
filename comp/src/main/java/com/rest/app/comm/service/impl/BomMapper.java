@@ -13,4 +13,5 @@ public interface BomMapper {
 	BomVO getInfoBom(BomVO vo);
 	//제품 단건조회
 	BomVO getInfoProduct(BomVO vo);
-}
+	
+}  

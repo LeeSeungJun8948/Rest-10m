@@ -59,6 +59,6 @@ public class BomController {
 		bomMv.setViewName("/comm/bomList.page");
 		bomMv.addObject("bomInfo", dao.getInfoProduct(vo));
 		return bomMv;
-	}
-}
+	}  
+}  
 
