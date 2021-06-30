@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rest.app.bus.vo.OrdersVO;
-import com.rest.app.prod.vo.ProdDetailPlanVO;
+import com.rest.app.prod.vo.DetailPlanVO;
 import com.rest.app.prod.vo.ProdPlanVO;
 
 public interface ProdService {
@@ -12,7 +12,7 @@ public interface ProdService {
 	public int insertPlan(ProdPlanVO vo); 
 	public int updatePlan(ProdPlanVO vo);
 	public int deletePlan(ProdPlanVO vo);
-	public int insertDetailPlan(ProdDetailPlanVO vo); 
-	public int updateDetailPlan(ProdDetailPlanVO vo);
-	public int deleteDetailPlan(ProdDetailPlanVO vo);
+	public int insertDetailPlan(DetailPlanVO vo); 
+	public int updateDetailPlan(DetailPlanVO vo);
+	public int deleteDetailPlan(DetailPlanVO vo);
 }

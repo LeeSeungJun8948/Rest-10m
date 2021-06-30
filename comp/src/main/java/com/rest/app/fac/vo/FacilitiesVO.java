@@ -1,5 +1,7 @@
 package com.rest.app.fac.vo;
 
+
+
 import lombok.Data;
 
 @Data
@@ -18,6 +20,4 @@ public class FacilitiesVO {
 	String purchaseDate;
 	String img;
 	String processCode;
-	
-	
 }
