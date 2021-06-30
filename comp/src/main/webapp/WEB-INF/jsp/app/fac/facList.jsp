@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <title></title>
 </head>
-<body>
+<body> 
 	<div>
 		<h2>설비조회</h2>
 	</div>
@@ -85,7 +85,7 @@
 				header : '공정코드',
 				name : 'processCode'
 			} ]
-		});
+		}); 
 	</script>
 </body>
 </html>

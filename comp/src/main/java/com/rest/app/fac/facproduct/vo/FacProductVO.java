@@ -7,5 +7,5 @@ public class FacProductVO {
 	String facCode;
 	String facilitiesName;
 	String productCode;
-	String productName;
+	String productName; 
 }

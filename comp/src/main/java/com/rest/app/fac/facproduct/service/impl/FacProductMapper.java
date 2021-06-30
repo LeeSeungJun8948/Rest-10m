@@ -7,3 +7,4 @@ import com.rest.app.fac.facproduct.vo.FacProductVO;
 public interface FacProductMapper {
 	public List<FacProductVO> getFP();
 }
+ 

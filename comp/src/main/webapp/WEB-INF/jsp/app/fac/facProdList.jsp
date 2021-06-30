@@ -21,7 +21,7 @@
 			},
 			error : function() {
 			}
-		});
+		}); 
 	
 		const grid = new tui.Grid({
 			el : document.getElementById('grid'),

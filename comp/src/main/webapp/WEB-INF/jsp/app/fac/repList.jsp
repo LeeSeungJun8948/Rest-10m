@@ -11,7 +11,7 @@
 			<input type="submit" class="btn btn-primary" value="저장">
 			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
 		</div>
-		<div class="row">
+		<div class="row">  
 			<div class="mb-4 col-lg-8">
 				<table class="table">
 					<tbody>

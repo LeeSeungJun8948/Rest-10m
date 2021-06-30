@@ -15,12 +15,12 @@ import com.rest.app.fac.facproduct.vo.FacProductVO;
 public class FacProductController {
 	@Autowired
 	FacProductMapper mapper;
-	
+	    
 	@RequestMapping("/facProdList.do")
 	public String getFP() {
 		return "fac/facProdList.page";
 	}
-	
+	 
 	@RequestMapping("ajax/facProd.do")
 	@ResponseBody
 	public List<FacProductVO> ajaxGet(Model model) {
