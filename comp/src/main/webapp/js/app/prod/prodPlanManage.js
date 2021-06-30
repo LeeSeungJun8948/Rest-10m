@@ -1,12 +1,9 @@
 var dataSource = {
-  withCredentials: false,  
-  initialRequest: true,
-  api: {
-      readData: { url: 'unplanOrderRead.do', method: 'POST' },
-      modifyData: { url: 'gridSave.do', method: 'POST' },
-      deleteData: { url: '', method: 'DELETE' }
-  },
-	contentType: 'application/json'
+	contentType: 'application/json',
+	api: {
+		readData: { url: 'unplanOrderRead.do', method: 'POST' },
+		modifyData: { url: 'gridSave.do', method: 'PUT' },
+  }
 }
 
 const grid = new tui.Grid({
@@ -23,7 +20,7 @@ const grid = new tui.Grid({
 		header : '제품명',
 		name : 'productName'
 		}, {
-		header : '주문관리번호',
+		header : '주문번호',
 		name : 'orderNo'
 		}, {
 		header : '납기일자',
@@ -62,7 +59,8 @@ const grid = new tui.Grid({
 		header : '비고',
 		name : 'detail',
 		editor: 'text'
-	}, ],
+		}
+	]
 });
 
 // 조회 버튼
@@ -81,17 +79,18 @@ $('#btnSave').on('click', function(){
 		url: 'planSave.do',
 		data: $('#inputFrm').serialize(),
 		dataType: 'json',
+		async: false,
 		success: function(data){
+		alert("저장되었습니다.");
 		}
-	})
+	});
 	grid.request('modifyData');
-	alert("저장되었습니다.");
 });
 
 // 삭제 버튼
 $('#btnDel').on('click', function(){
+	
 });
-
 
 // 미생산 읽기 버튼
 $('#btnRead').on('click',  function(){

@@ -5,20 +5,42 @@
 		SELECT o.order_no, o.product_code, o.out_date, o.order_count, o.plan_count, p.product_name,
 			o.order_count - o.plan_count unplan_count 
 		FROM orders o, product p
-		WHERE (o.order_state='미계획' OR o.order_state='일부계획')
+		WHERE o.order_count != o.plan_count
 		AND o.product_code = p.product_code
 		AND o.out_date BETWEEN TO_DATE(#{planDtS}, 'YYYY-MM-DD') 
                    AND TO_DATE(#{planDtE}, 'YYYY-MM-DD')
 	</select>
+	
 	<insert id="insertPlan" parameterType="com.rest.app.prod.vo.ProdPlanVO">
-		INSERT INTO wproject VALUES(
-		wproject_seq.NEXTVAL, #{projectDate}, #{projectName}, '일부계획', #{comments} 
+		INSERT INTO prodplan VALUES(
+		pplan_seq.NEXTVAL, #{planDate}, #{planName}, '진행중', #{comments} 
 		)
 	</insert>
-	<insert id="insertDetailPlan" parameterType="com.rest.app.prod.vo.ProdDetailPlanVO">
+	<update id="updatePlan" parameterType="com.rest.app.prod.vo.ProdPlanVO">
+		UPDATE prodplan SET plan_date = #{planDate}, plan_name = #{planName}, comments = #{comments}
+	</update>
+	
+	<insert id="insertDetailPlan" parameterType="com.rest.app.prod.vo.DetailPlanVO">
 		INSERT INTO detailplan VALUES(
-		dp_seq.NEXTVAL, #{wprojectCode}, #{orderNo}, #{workDate}, #{orderCount}, 
-		#{planCount} + #{workCount}, #{orderCount} - #{planCount} + #{workCount}, #{detail} 
+		dplan_seq.NEXTVAL, 
+		<choose>
+			<when test="planCode != null and planCode != ''">
+				#{planCode},
+			</when>
+			<otherwise>
+				pplan_seq.CURRVAL,
+			</otherwise>
+		</choose>
+		#{orderNo}, #{workDate}, #{orderCount}, #{planCount} + #{workCount}, #{detail} 
 		)
 	</insert>
+	
+	<update id="updateDetailPlan" parameterType="com.rest.app.prod.vo.DetailPlanVO">
+		UPDATE detailplan SET work_date = #{workDate}, plan_count = #{planCount} + #{workCount},
+		detail = #{detail}
+	</update>
+	
+	<delete id="deleteDetailPlan">
+		DELETE detailplan WHERE idx = #{idx}
+	</delete>
 </mapper>
