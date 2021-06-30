@@ -34,12 +34,12 @@
 				(SELECT NVL(MAX(plan_code),0) FROM prodplan),
 			</otherwise>
 		</choose>
-		#{orderNo}, #{workDate}, #{orderCount}, #{planCount} + #{workCount}, #{detail} 
+		#{orderNo}, #{workDate}, #{planCount} + #{workCount}, #{comments} 
 		)
 	</insert>
 	<update id="updateDetailPlan" parameterType="com.rest.app.prod.vo.DetailPlanVO">
 		UPDATE detailplan SET work_date = #{workDate}, plan_count = #{planCount} + #{workCount},
-		detail = #{detail}
+		comments = #{comments}
 	</update>
 	<delete id="deleteDetailPlan">
 		DELETE FROM detailplan WHERE idx = #{idx}

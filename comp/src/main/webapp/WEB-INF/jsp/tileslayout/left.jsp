@@ -87,9 +87,7 @@
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="prodPlanManage.do">생산계획 관리</a>
-                        <a class="collapse-item" href="prodPlanView.do">생산계획 조회</a>
                         <a class="collapse-item" href="prodOrderManage.do">생산지시 관리</a>
-                        <a class="collapse-item" href="prodOrderView.do">생산지시 조회</a>
                         <a class="collapse-item" href="prodProcess.do">공정이동표 발행</a>
                         <a class="collapse-item" href="prodPerformance.do">생산공정 실적관리</a>
                         <a class="collapse-item" href="checkPerformance.do">검사공정 실적관리</a>

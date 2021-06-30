@@ -34,13 +34,13 @@
 		</div>
 		<div class="mb-4 col-lg-6">
 			<div>
-				<h5>미생산 검색</h5>
+				<h5>미완료주문 검색</h5>
 			</div>
 			<div>
 				<form id="dateFrm" name="dateFrm">
 					<span>납기일자 </span><input type="date" id="planDtS" name="planDtS">
 					<span> ~ </span><input type="date" id="planDtE" name="planDtE">&nbsp;
-					<button type="button" class="btn btn-primary" id="btnRead">미생산 읽기</button>
+					<button type="button" class="btn btn-primary" id="btnRead">불러오기</button>
 				</form>
 			</div>
 		</div>

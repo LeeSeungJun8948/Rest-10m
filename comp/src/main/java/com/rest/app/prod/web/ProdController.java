@@ -51,11 +51,13 @@ public class ProdController {
 	@Autowired
 	ProdService svc;
 
+	// 생산계획관리 페이지
 	@RequestMapping("prodPlanManage.do")
 	public String prodPlanManage(Model model) {
 		return "prod/prodPlanManage.page";
 	}
 
+	// 미완료주문 읽기
 	@RequestMapping("unplanOrderRead.do")
 	@ResponseBody
 	public Map<String, Object> unplanOrderRead(@RequestBody Map<String, Object> param) {
@@ -67,6 +69,7 @@ public class ProdController {
 		return data;
 	}
 
+	// 계획저장
 	@RequestMapping("savePlan.do")
 	@ResponseBody
 	public void savePlan(ProdPlanVO vo) {
@@ -77,12 +80,14 @@ public class ProdController {
 		}
 	}
 
+	// 계획삭제
 	@RequestMapping("deletePlan.do")
 	@ResponseBody
 	public void planDelete(@RequestParam String planCode) {
 		svc.deletePlan(planCode);
 	}
 	
+	// 세부계획 CUD
 	@RequestMapping("gridSave.do")
 	@ResponseBody
 	public String gridSave(@RequestBody GridData gridData) {
@@ -101,19 +106,10 @@ public class ProdController {
 		return "redirect:prodPlanManage.do";
 	}
 
-	@RequestMapping("prodPlanView.do")
-	public String prodPlanView(Model model) {
-		return "prod/prodPlanView.page";
-	}
-
+	// 생산지시관리 페이지
 	@RequestMapping("prodOrderManage.do")
 	public String prodOrderManage(Model model) {
 		return "prod/prodOrderManage.page";
-	}
-
-	@RequestMapping("prodOrderView.do")
-	public String prodOrderView(Model model) {
-		return "prod/prodOrderView.page";
 	}
 
 	@RequestMapping("prodProcess.do")
