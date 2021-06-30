@@ -23,15 +23,13 @@
 				<div class="col-md-5 mb-4">
 
 					<div class="form-group border">
-						<input type="radio" id="upPlan" name="orderState" value="unPlan"
+						<input type="radio" id="upPlan" name="orderState" value="unPlan" 
 							checked><span style="margin: 3px 30px;">미계획</span> <input
-							type="radio" id="proPlan" name="orderState" value="proPlan"
-							checked> <span style="margin: 3px 30px;">생산계획</span> <input
+							type="radio" id="working" name="orderState" value="working" 
+							checked> <span style="margin: 3px 30px;">진행중</span> <input
 							type="radio" id="planComplete" name="orderState"
-							value="planComplete" checked> <span
-							style="margin: 3px 30px;">계획완료</span> <input type="radio"
-							id="proComplete" name="orderState" value="proComplete" checked>
-						<span style="margin: 3px 30px;">생산완료</span>
+							value="planComplete"  checked> <span
+							style="margin: 3px 30px;">계획완료</span> 
 					</div>
 
 				</div>
@@ -82,9 +80,9 @@
 			<div class="grid-option-area">
 
 				<div class="col-6 ta-r mr-1">
-					<button name="resetBtn" type="reset" class="btn btn-primary"
+					<button name="resetBtn" type="button" class="btn btn-primary"
 						id="resetBtn">새자료</button>
-					<button name="searchBtn" type="submit" class="btn btn-primary"
+					<button name="searchBtn" type="button" class="btn btn-primary"
 						id="searchBtn">조회</button>
 					<button name="excelBtn" type="button" class="btn btn-primary"
 						id="excelBtn">Excel</button>
@@ -100,10 +98,8 @@
 	
 		
 	var dataSource = {
-			  withCredentials: false,  
-			  initialRequest: true,
 				api : {
-					readData : {url: 'ajax/busList.do', method:'POST' },
+					readData : {url: 'ajax/busList.do', method:'POST' }
 				},
 				contentType: 'application/json'
 				
@@ -120,7 +116,7 @@
 				name : 'orderState'
 			}, {
 				header : '업체명',
-				name : 'companyName'
+				name : 'compName'
 			}, {
 				header : '주문번호',
 				name : 'orderNo'
@@ -146,9 +142,6 @@
 				header : '주문량',
 				name : 'orderCount'
 			}, {
-				header : '지시량',
-				name : 'oprojectCount'
-			}, {
 				header : '출고량',
 				name : 'kg'
 			},{
@@ -172,11 +165,6 @@
 		                    return (summary.sum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 		                }
 		            },
-		            oprojectCount:{
-		                template(summary) {
-		                    return (summary.sum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-		                }
-		            },
 		            kg:{
 		                template(summary) {
 		                    return (summary.sum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -195,6 +183,22 @@
 
 		});
 
+		$.fn.serializeObject = function() {
+			var o = {};
+			var a = this.serializeArray();
+			$.each(a, function() {
+				if (o[this.name]) {
+					if (!o[this.name].push) {
+						o[this.name] = [o[this.name]];
+					}
+					o[this.name].push(this.value || '');
+				} else {
+					o[this.name] = this.value || '';
+				}
+			});
+			return o;
+		};
+		
 		
 		//조회버튼
 		$('#searchBtn').on('click',function(){
@@ -202,6 +206,9 @@
 				   console.log(param)
 				   grid.readData(1, param, true);
 				});
+		$('#resetBtn').on('click', function(){
+			grid.clear();
+		});
 
 	</script>
 	</div>

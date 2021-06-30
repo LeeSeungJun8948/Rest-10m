@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script src="${pageContext.request.contextPath}/js/json.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/json.min.js"></script> 
 <script src="${pageContext.request.contextPath}/vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/sb-admin-2.min.js"></script>

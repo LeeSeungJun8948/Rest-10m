@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rest.app.bus.service.impl.BusinessMapper">
-	<select id="getBus" resultType="com.rest.app.bus.vo.OrdersVO"
-		parameterType="com.rest.app.bus.vo.OrdersVO">
-		select orders.order_state,
+	<select id="getBus"
+		resultType="com.rest.app.bus.vo.OrdersSearchVO">
+		select
 		F_FINDCOMPNAME(company_code)AS comp_name,
-		orders.order_no,
-		product.product_code,
-		product.product_name,
-		product.std_id,
-		product.unit_id,
-		orders.in_date,
-		orders.out_date,
-		orders.order_count,
-		finproduct.kg,
-		(orders.order_count - finproduct.kg)as "dCount"
-		from orders
-		JOIN product
-		ON orders.product_code=product.product_code
-		JOIN detailplan
-		on orders.order_no=detailplan.ORDER_NO
-		JOIN PRODPLAN
-		ON detailplan.PLAN_CODE=PRODPLAN.PLAN_CODE
-		JOIN export
-		ON orders.order_no=export.order_no
-		JOIN finproduct
-		ON export.lot_no =finproduct.lot_no
+		o.order_no,
+		p.product_code,
+		p.product_name,
+		p.std_id,
+		p.unit_id,
+		o.in_date,
+		o.out_date,
+		o.order_count,
+		fp.kg,
+		(o.order_count - fp.kg) as dCount,
+		CASE WHEN o.plan_count = 0 THEN '미계획'
+		WHEN o.order_count > o.plan_count THEN '진행중'
+		ELSE '완료'
+		END AS order_state
+		from orders o
+		JOIN product p
+		ON
+		o.product_code=p.product_code
+		JOIN export e
+		ON o.order_no=e.order_no
+		JOIN finproduct fp
+		ON e.lot_no =fp.lot_no
 		<where>
-		orders.order_state=#{orderState}
-				and orders.in_date BETWEEN TO_DATE(#{fromDate},
-				'YYYY-MM-DD') AND TO_DATE(#{toDate}, 'YYYY-MM-DD'))
+			
+			o.in_date BETWEEN TO_DATE(#{fromDate},
+			'YYYY-MM-DD') AND TO_DATE(#{toDate}, 'YYYY-MM-DD')
 			<if test="companyCode !=null and companyCode !=''">
-				and orders.company_code=#{companyCode}
+				and o.company_code=#{companyCode}
 			</if>
 			<if test="productCode !=null and productCode !=''">
-				and orders.product_code=#{productCode}
+				and o.product_code=#{productCode}
 			</if>
-			
-
 		</where>
 	</select>
 
