@@ -16,8 +16,7 @@
 
 <!-- Modal -->
   <form action="" method="post" >
-  		<div id="myModal" class="modal-dialog modal-center modal-lg" role="document" style="z-index:1;">
-    		<div class="modal-content" >
+  	    		<div class="modal-content" >
       			<div class="modal-header">
         			<h5 class="modal-title">
         			<strong>사원등록</strong>
@@ -35,7 +34,7 @@
 	<div class="row">
 		<div>
 		</div>
-			<table class="table table-bordered">
+			<table class="table table-bordered" >
 				<tbody>					
 			      <tr>
 			        <td>아이디</td>
@@ -47,12 +46,11 @@
 			      </tr>
 				</tbody>
 			</table>
-	</div>
+		</div>
       			</div>
       			<div class="modal-footer">
 		        	<input type="submit" class="btn btn-primary">
 		        	<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
       			</div>
     	</div>
-	</div>
 	</form>
