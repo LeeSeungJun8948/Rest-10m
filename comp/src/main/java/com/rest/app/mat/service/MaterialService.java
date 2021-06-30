@@ -25,6 +25,8 @@ public interface MaterialService {
 	
 	public List<InorderVO> getInorderList(InorderVO vo); // 발주 리스트
 	
-	public List<InoutVO> getMatList(InoutVO vo); // 입출고 리스트
+	public List<InoutVO> getMatInoutList(InoutVO vo); // 입출고 리스트
+	
+	public InoutVO getNewIoCode(); // 새 입출고 코드 불러오기
 	
 }

@@ -66,10 +66,11 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="inorderForm.do">발주관리 참조</a>
-                        <a class="collapse-item" href="matInForm.do">자재입고 관리</a>
-                        <a class="collapse-item" href="matStockForm.do">자재재고 관리</a>
+                        <a class="collapse-item" href="matInForm.do">자재입고 조회/관리</a>
+                        <a class="collapse-item" href="matLotStockForm.do">자재LOT재고 조회/관리</a>
+                        <a class="collapse-item" href="matStockForm.do">자재재고 조회/관리</a>
                         <a class="collapse-item" href="matSaveStockList.do">안전재고 조회</a>
-                        <a class="collapse-item" href="matOutForm.do">자재출고 관리</a>
+                        <a class="collapse-item" href="matOutForm.do">자재출고 조회/관리</a>
                     </div>
                 </div>
             </li>

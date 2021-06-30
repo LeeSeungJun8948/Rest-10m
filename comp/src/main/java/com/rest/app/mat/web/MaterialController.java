@@ -4,19 +4,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.mat.service.MaterialService;
 import com.rest.app.mat.vo.InorderVO;
+import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
 
-class GridData{
-	
-}
+import lombok.Data;
+
 @Controller
 public class MaterialController {
 	
@@ -38,7 +43,6 @@ public class MaterialController {
 	@RequestMapping("/ajax/matInfo.do")
 	@ResponseBody
 	public MaterialVO ajaxMatInfo(Model model, MaterialVO vo) { // 자재 리스트에서 클릭시 자재 상세 정보 출력
-		System.out.println(vo.getMaterialCode());
 		return dao.getMatInfo(vo);
 	}
 	
@@ -80,19 +84,58 @@ public class MaterialController {
 		return data;
 	}
 	
-	@RequestMapping(value = {"/ajax/matInList.do"})
+	//~~~~~~~~~~~~~~
+	@RequestMapping(value = {"/ajax/matInList.do", "/ajax/matOutList.do"}, method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> ajaxInoutList(InorderVO vo) {
+	public Map<String, Object> ajaxInoutList(InoutVO vo, HttpServletRequest request) {
+		
+		String url = request.getServletPath();
+		System.out.println("요청 url: " + url + "------------------------------------");
+		if(url.equals("/ajax/matInList.do")) {
+			vo.setIoType("01");
+		}else if(url.equals("/ajax/matOutList.do")) {
+			vo.setIoType("02");
+		}
 		
 		Map<String,Object> datas = new HashMap<>();
 		Map<String,Object> data = new HashMap<>();
 		
 		data.put("result", true);
-		datas.put("contents", dao.getInorderList(vo));
+		datas.put("contents", dao.getMatInoutList(vo));
 		data.put("data", datas);
 		
 		return data;
 	}
+	
+	@RequestMapping("/ajax/getMatInfoForInout.do")
+	@ResponseBody
+	public MaterialVO ajaxGetMatInfoForInout(Model model, InoutVO vo) { // 자재 리스트에서 클릭시 자재 상세 정보 출력
+		return null;
+	}
+	
+	@RequestMapping("/ajax/getNewIoCode.do")
+	@ResponseBody
+	public InoutVO getNewIoCode(InoutVO vo) { // 입출력 행 추가시 불러올 새 입출고 코드
+		return dao.getNewIoCode();
+	}
+	
+	
+//	@PutMapping(value = "/ajax/matInoutModify.do")
+//	@ResponseBody
+//	public Map<String, Object> modifyEmp(@RequestBody GridData gridData) {
+//		Map<String,Object> data = new HashMap<String, Object>();
+//		for(int i = 0; i < gridData.createdRows.size(); i++) {
+//			dao.insertEmp(gridData.createdRows.get(i));
+//		}
+//		for(int i = 0; i< gridData.updatedRows.size(); i++) {
+//			dao.updateEmp(gridData.updatedRows.get(i));	
+//		}
+//		data.put("result", true);
+//		data.put("data", gridData.updatedRows);
+//		data.put("data", gridData.createdRows);
+//		return data;
+//	}
+
 	
 	@RequestMapping("matInForm.do")
 	public String matInForm(Model model) {
@@ -115,4 +158,11 @@ public class MaterialController {
 		return "mat/matOutForm.page";
 	}
 	
+}
+
+@Data
+class GridData {
+	List<InoutVO> deletedRows;
+	List<InoutVO> updatedRows;
+	List<InoutVO> createdRows;
 }
