@@ -41,8 +41,8 @@ public class BomController {
 	@RequestMapping("/ajax/bomList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetBomList(BomVO vo) {
-		Map<String,Object> datas = new HashMap();
-		Map<String,Object> data = new HashMap();
+		Map<String,Object> datas = new HashMap<String, Object>();
+		Map<String,Object> data = new HashMap<String, Object>();
 		data.put("result", true);
 		datas.put("contents", dao.getProduct(vo));
 		data.put("data", datas);
@@ -67,12 +67,12 @@ public class BomController {
 	@RequestMapping("/ajax/getInfoProduct.do")
 	@ResponseBody
 	public Map<String, Object> ajaxgetInfoProduct(BomVO vo) {
-		Map<String,Object> boms = new HashMap();
-		Map<String,Object> bom = new HashMap();
-		bom.put("result", true);
-		boms.put("contents", dao.getInfoBom(vo));
-		bom.put("bom", boms);
-		return bom;
+		Map<String,Object> datas = new HashMap<String, Object>();
+		Map<String,Object> data = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", dao.getInfoBom(vo));
+		data.put("data", datas);
+		return data;
 	}  
 }	
 
