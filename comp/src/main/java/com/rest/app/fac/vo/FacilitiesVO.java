@@ -1,5 +1,7 @@
 package com.rest.app.fac.vo;
 
+
+
 import lombok.Data;
 
 @Data
@@ -7,7 +9,7 @@ public class FacilitiesVO {
 	String facCode;
 	String facilitiesName;
 	String model;
-	String size;
+	String facSize;
 	String productionCompany;
 	String purpose;
 	String volume;

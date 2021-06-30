@@ -1,75 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-
-<body>
-	<div>
-		<h2>설비 수리내역 관리</h2>
-	</div>
-	<div class="grid-option-area mr-1">
-		<button type="button" class="btn btn-search" id="searchBtn">조회</button>
-		<button type="button" class="btn btn-save" id="addBtn">저장</button>
-		<button type="button" class="btn btn-remove" id="removeBtn">삭제</button>
-	</div>
-	<form autocomplete="off" id="dataForm" name="dataForm" method="post"
-		onSubmit="return false;">
-		<div class="view-modify-board">
-			<table class="table table-bbs table-write" summary="">
-				<tbody>
-					<tr>
-						<th>수리일자</th>
-						<td colspan="8"><input id="repairNum" name="repairNum"
-							type="hidden">
-							<div
-								class="tui-datepicker-input tui-datetime-input tui-has-focus"
-								style="width: 140px;">
-								<input type="text" id="repairDate" name="repairDate"
-									aria-label="Date-Time" data-origin=""> <span
-									class="tui-ico-date"></span>
-							</div>
-					</tr>
-					<tr>
-						<th>비고</th>
-						<td colspan="4"><input id="mRemark" name="mRemark"
-							type="text" title="특기사항" class="form-control"
-							style="width: 570px;"></td>
-					</tr>
-					<tr>
-						<th>수리코드</th>
-						<td><input></td>
-					</tr>
-					<tr>
-						<th>수리내역</th>
-						<td><input></td>
-					</tr>
-					<tr>
-						<th>설비코드</th>
-						<td><input></td>
-					</tr>
-					<tr>
-						<th>업체코드</th>
-						<td><input></td>
-					</tr>
-					<tr>
-						<th>수리금액</th>
-						<td><input></td>
-					</tr>
-				</tbody>
-			</table>
+	<h1 class="h3 mb-4 text-gray-700">설비 수리내역 관리</h1>
+	<form>
+		<div class="mb-4">
+			<button type="button" class="btn btn-primary">저장</button>
+			<button type="button" class="btn btn-primary">삭제</button>
+			<button type="button" class="btn btn-primary">조회</button>
+		</div>
+		<div class="row">
+			<div class="mb-4 col-lg-8">
+				<table class="table">
+					<tbody>
+						<tr>
+							<th>수리코드</th>
+							<td><input type="text"></td>
+							<th>설비코드</th>
+							<td><input type="text"></td>
+							<th>수리일자</th>
+							<td><input type="date"></td>
+						</tr>
+						<tr>
+							<th>수리내역</th>
+							<td><input type="text"></td>
+							<th>업체코드</th>
+							<td><input type="text"></td>
+							<th>수리금액</th>
+							<td><input type="text"></td>
+						</tr>
+						<tr>
+							<th>비고</th>
+							<td><input type="text"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</form>
-	<div id="grid">
+	<div id="grid"></div>
 		<script type="text/javascript">
 			var gridData;
 
@@ -114,6 +85,3 @@
 				} ]
 			});
 		</script>
-	</div>
-</body>
-</html>

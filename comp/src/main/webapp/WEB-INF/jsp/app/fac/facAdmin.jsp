@@ -1,109 +1,136 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>설비 관리</title>
-</head>
-<body>
-	<div>
-		<h2>설비관리</h2>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<h1 class="h3 mb-4 text-gray-700">설비관리</h1>
+<form action="insertFac.do" method="post" >
+	<div class="mb-4">
+		<input type="submit" class="btn btn-primary" value="저장">
+		<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
 	</div>
-	<div>
-		<div>
-			<button type="button" class="btn btn-load" id="loadBtn">조회</button>
-			<button type="button" class="btn btn-save" id="saveBtn">저장</button>
-			<button type="button" class="btn btn-del" id="delBtn">삭제</button>
+	<div class="row">
+		<div class="mb-4 col-lg-8">
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>설비명</th>
+						<td><input type="text" id="facilitiesName" name="facilitiesName"></td>
+						<th>모델</th>
+						<td><input type="text" id="model" name="model"></td>
+					</tr>
+					<tr>
+						<th>설비규격</th>
+						<td><input type="text" id="facSize" name="facSize"></td>
+						<th>제작업체</th>
+						<td><input type="text" id="productionCompany" name="productionCompany"></td>
+						<th>용도</th>
+						<td><input type="text" id="purpose" name="purpose"></td>
+					</tr>
+					<tr>
+						<th>용량/규격</th>
+						<td><input type="text" id="volume" name="volume"></td>
+						<th>제작일자</th>
+						<td><input type="date" id="productionDate" name="productionDate"></td>
+						<th>사원번호</th>
+						<td><input type="text" id="empNo" name="empNo"></td>
+					</tr>
+					<tr>
+						<th>구매금액</th>
+						<td><input type="text" id="price" name="price"></td>
+						<th>정기점검주기</th>
+						<td><input type="text" id="facInspection" name="facInspection"></td>
+						<th>구매일자</th>
+						<td><input type="date" id="purchaseDate" name="purchaseDate"></td>
+					</tr>
+					<tr>
+						<th>이미지</th>
+						<td><input type="text" id="img" name="img"></td>
+						<th>공정코드</th>
+						<td><input type="text" id="processCode" name="processCode"></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
-	<form id="dataForm" name="dataForm" autocomplete="off">
-		<div class="grid-option-area">
-			<div class="flex row">
-				<div class="col-10f">
-					<table class="table table-bbs table-write" summary="내용.....">
-						<colgroup>
-							<col style="width: 90px">
-							<col style="width: 200px">
-							<col style="width: 90px">
-							<col style="width: 200px">
-							<col style="width: 90px">
-							<col style="width: 230px">
-						</colgroup>
-						<tbody>
-							<tr style="height: 37px !important;">
-								<th>설비코드</th>
-								<td data-input="search" data-fn-name="fnEqpDtaSearchView">
-									<input class="form-control w140" type="text" id="machCode"
-									name="machCode" data-origin="" maxlength="20" /></td>
-								<th>설 비 명</th>
-								<td><input class="form-control w140" type="text"
-									id="machNm" name="machNm" maxlength="20" /></td>
-								<th>모 델 명</th>
-								<td><input class="form-control w140" type="text"
-									id="machModel" name="machModel" maxlength="20" /></td>
-							</tr>
-							<tr>
-								<th>설비규격</th>
-								<td colspan="3"><input class="form-control w140"
-									type="text" id="machSize" name="machSize" maxlength="20" /></td>
-								<th>제작업체</th>
-								<td><input class="form-control w140" type="text"
-									id="machNm" name="machNm" maxlength="20" /></td>
-								<th>용 도</th>
-								<td><input class="form-control w140" type="text" id="usest"
-									name="usest" maxlength="20" /></td>
-							</tr>
-							<tr>
-								<th>용량/규격</th>
-								<td><input class="form-control w140" type="text" id="capa"
-									name="capa" maxlength="20" /></td>
-								<th>작 업 자</th>
-								<td><input class="form-control ta-l" type="text"
-									id="worker" name="worker" maxlength="20" style="width: 80px;" />
-									<button>검색</button>
-									</td>
-							</tr>
-							<tr>
-								<th>용 도</th>
-								<td><input class="form-control w140" type="text" id="usest"
-									name="usest" maxlength="20" /></td>
-								<th>용량/규격</th>
-								<td><input class="form-control w140" type="text" id="capa"
-									name="capa" maxlength="20" /></td>
-								<th>제작일자</th>
-								<td>
-									<div
-										class="tui-datepicker-input tui-datetime-input tui-has-focus"
-										style="width: 150px;">
-										<input type="text" id="medate" name="medate"
-											aria-label="Date-Time"> <span class="tui-ico-date"></span>
-									</div>
-									<div id="medate-wrapper" style="margin-top: -1px;"></div>
-								</td>
-							</tr>
-							<tr>
-								<th>구매금액</th>
-								<td><input class="form-control right w140" placeHolder="0"
-									data-input="comma_number" type="text" id="mepc" name="mepc"
-									maxlength="9" /> <input type="hidden" id="eqpImgFile"
-									name="eqpImgFile" /></td>
-								<th>구매일자</th>
-								<td>
-									<div
-										class="tui-datepicker-input tui-datetime-input tui-has-focus"
-										style="width: 160px;">
-										<input type="text" id="indate" name="indate"
-											aria-label="Date-Time"> <span class="tui-ico-date"></span>
-									</div>
-									<div id="indate-wrapper" style="margin-top: -1px;"></div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</form>
-</body>
-</html>
+</form>
+<div id="grid"></div>
+<script type="text/javascript">
+	
+	/* var gridData;
+	
+	$.ajax({
+		type : "get",
+		url : "ajax/facList.do",
+		dataType : "json",
+		async : false,
+		success : function(data) {
+			gridData = data;
+		},
+		error : function() {
+		}
+	}); */
+	
+	const dataSource = {
+			api : { 
+				readData : {url: 'ajax/facList.do', method:'GET'},
+				deleteData : {url: 'ajax/deleteFac.do', method: 'POST'}
+			},
+			contentType: 'application/json'
+	}
+	
+	const grid = new tui.Grid({
+		el : document.getElementById('grid'),
+		data : dataSource,
+		// data : gridData,
+		rowHeaders: ['checkbox'],
+		scrollX : false,
+		scrollY : false,
+		columns : [ {
+			header : '설비코드',
+			name : 'facCode'
+		}, {
+			header : '설비명',
+			name : 'facilitiesName'
+		}, {
+			header : '모델',
+			name : 'model'
+		}, {
+			header : '규격',
+			name : 'facSize'
+		}, {
+			header : '제작업체',
+			name : 'productionCompany'
+		}, {
+			header : '용도',
+			name : 'purpose'
+		}, {
+			header : '용량/규격',
+			name : 'volume'
+		}, {
+			header : '제작일자',
+			name : 'productionDate'
+		}, {
+			header : '사원번호',
+			name : 'empNo'
+		}, {
+			header : '구매금액',
+			name : 'price'
+		}, {
+			header : '정기점검주기',
+			name : 'facInspection'
+		}, {
+			header : '구매일자',
+			name : 'purchaseDate'
+		}, {
+			header : '이미지',
+			name : 'img'
+		}, {
+			header : '공정코드',
+			name : 'processCode'
+		} ]
+	});
+	
+	$("#btnDelete").on("click",function() {
+		grid.removeCheckedRows(false);
+		grid.request('deleteData');
+})
+</script>
