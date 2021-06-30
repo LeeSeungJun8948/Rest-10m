@@ -3,6 +3,7 @@ var dataSource = {
 	api: {
 		readData: { url: 'unplanOrderRead.do', method: 'POST' },
 		modifyData: { url: 'gridSave.do', method: 'PUT' },
+		deleteData : { url: 'deleteDetailPlan.do', method: 'POST' }
   }
 }
 
@@ -68,28 +69,40 @@ $('#btnView').on('click', function(){
 });
 
 // 새자료 버튼
-$('#btnReset').on('click', function(){
-	grid.clear();
-});
+$(document).ready(function() {  
+    $("#btnReset").click(function() {  
+         $("form").each(function() {  
+            this.reset();  
+			grid.clear();
+         });  
+    });  
+});  
 
-// 저장 버튼
+// 계획저장 버튼
 $('#btnSave').on('click', function(){
 	$.ajax({
 		type: 'post',
-		url: 'planSave.do',
+		url: 'savePlan.do',
 		data: $('#inputFrm').serialize(),
 		dataType: 'json',
-		async: false,
 		success: function(data){
-		alert("저장되었습니다.");
 		}
 	});
 	grid.request('modifyData');
+	toastr.success("저장되었습니다.");
 });
 
-// 삭제 버튼
+// 계획삭제 버튼
 $('#btnDel').on('click', function(){
-	
+	$.ajax({
+		type: 'post',
+		url: 'deletePlan.do',
+		data: $('#planCode').val(),
+		dataType: 'json',
+		success: function(data){
+			toastr.success("삭제되었습니다.");
+		}
+	});
 });
 
 // 미생산 읽기 버튼
@@ -98,14 +111,15 @@ $('#btnRead').on('click',  function(){
 	grid.readData(1, param, true);
 });
 
-// 추가버튼
+// 행추가버튼
 $('#btnGridAdd').on('click', function(){
 	grid.appendRow();
 });
 
-// 삭제버튼
+// 행삭제버튼
 $('#btnGridDel').on('click', function(){
 	grid.removeCheckedRows(false);
+	grid.request('deleteData');
 });
 
 // 전체체크 선택

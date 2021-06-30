@@ -32,8 +32,8 @@ public class ProdServiceImpl implements ProdService {
 	}
 
 	@Override
-	public int deletePlan(ProdPlanVO vo) {
-		return mapper.deletePlan(vo);
+	public int deletePlan(String planCode) {
+		return mapper.deletePlan(planCode);
 	}
 
 	@Override

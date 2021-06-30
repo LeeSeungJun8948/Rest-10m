@@ -12,8 +12,8 @@
 	<div class="row">
 		<div class="mb-2 col-lg-6">
 			<form id="inputFrm" name="inputFrm">
-				<input type="hidden" value="${'idx' }" id="idx" name="idx">
-				<input type="hidden" value="${'planCode' }" id="planCode" name="planCode">
+				<input type="hidden" id="idx" name="idx">
+				<input type="hidden" id="planCode" name="planCode" value="planCode">
 				<table class="table">
 					<tbody>
 						<tr>

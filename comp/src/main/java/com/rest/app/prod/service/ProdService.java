@@ -11,7 +11,7 @@ public interface ProdService {
 	public List<OrdersVO> getUnplanOrders(Map<String, Object> param);
 	public int insertPlan(ProdPlanVO vo); 
 	public int updatePlan(ProdPlanVO vo);
-	public int deletePlan(ProdPlanVO vo);
+	public int deletePlan(String planCode);
 	public int insertDetailPlan(DetailPlanVO vo); 
 	public int updateDetailPlan(DetailPlanVO vo);
 	public int deleteDetailPlan(DetailPlanVO vo);

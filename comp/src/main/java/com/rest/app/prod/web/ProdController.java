@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.prod.service.ProdService;
@@ -66,16 +67,22 @@ public class ProdController {
 		return data;
 	}
 
-	@RequestMapping("planSave.do")
+	@RequestMapping("savePlan.do")
 	@ResponseBody
-	public void planSave(ProdPlanVO vo) {
-		if (vo.getPlanCode() == null) {
+	public void savePlan(ProdPlanVO vo) {
+		if (vo.getPlanCode().equals("planCode")) {
 			svc.insertPlan(vo);
 		} else {
 			svc.updatePlan(vo);
 		}
 	}
 
+	@RequestMapping("deletePlan.do")
+	@ResponseBody
+	public void planDelete(@RequestParam String planCode) {
+		svc.deletePlan(planCode);
+	}
+	
 	@RequestMapping("gridSave.do")
 	@ResponseBody
 	public String gridSave(@RequestBody GridData gridData) {
@@ -92,19 +99,6 @@ public class ProdController {
 			svc.deleteDetailPlan(vo);
 		});
 		return "redirect:prodPlanManage.do";
-	}
-
-	@RequestMapping("deletePlan.do")
-	@ResponseBody
-	public Map<String, Object> insertDetailPlan(@RequestBody GridData gridData) {
-		Map<String, Object> data = new HashMap<String, Object>();
-		List<DetailPlanVO> list = gridData.createdRows;
-		list.forEach(vo -> {
-			svc.insertDetailPlan(vo);
-		});
-		data.put("result", true);
-		data.put("data", gridData.createdRows);
-		return data;
 	}
 
 	@RequestMapping("prodPlanView.do")
