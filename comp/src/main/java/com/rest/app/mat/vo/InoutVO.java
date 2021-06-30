@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 @Data
-public class InorderVO {
+public class InoutVO {
 	
-	Integer inorderCode;
+	String ioCode;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd")
@@ -21,24 +21,25 @@ public class InorderVO {
 	Date endDate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	Date inorderDate;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	Date inDate;
+	Date ioDate;
+	
+	String companyCode;
+	String companyName;
 	
 	String materialCode;
 	String materialName;
 	String materialType;
 	
-	String companyCode;
-	String companyName;
+	String inorderCode;
 	
-	Integer inorderCount;
-	Integer inCount;
-	Integer yetCount;
+	String unitNo;
 	
-	String comments;
-	String sort;
-
+	String lotNo;
 	
+	Integer ioVolume;
+	Integer unitPrice;
+	Integer price;
+	Integer stock;
+	
+	String ioType; // 01 : 입고, 02 : 출고, 03 : 정산입고, 04 : 정산출고  
 }

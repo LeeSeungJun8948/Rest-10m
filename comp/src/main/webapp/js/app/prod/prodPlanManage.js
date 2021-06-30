@@ -34,10 +34,10 @@ const grid = new tui.Grid({
 		align : 'right' 
 		}, {
 		header : '기계획량',
-		name : 'orderPlanCount'
+		name : 'planCount'
 		}, {
 		header : '미계획량',
-		name : 'orderUnplanCount',
+		name : 'unplanCount',
 		}, {
 		header : '작업량',
 		name : 'workCount',
