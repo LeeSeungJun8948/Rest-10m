@@ -31,23 +31,15 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-<<<<<<< HEAD
+
                         <a class="collapse-item" href="commList.do">°øÅëÄÚµå°ü¸®</a>
                         <a class="collapse-item" href="matForm.do">ÀÚÀçÁ¤º¸°ü¸®</a>
-                        <a class="collapse-item" href="cards.html">Á¦Ç° BOM°ü¸®</a>
+                        <a class="collapse-item" href="bomList.do">Á¦Ç° BOM°ü¸®</a>
                         <a class="collapse-item" href="cards.html">°øÁ¤°ü¸®</a>
-                        <a class="collapse-item" href="cards.html">»ç¿ø°ü¸®</a>
+                        <a class="collapse-item" href="empList.do">»ç¿ø°ü¸®</a>
                         <a class="collapse-item" href="cards.html">ºÒ·®ÄÚµå °ü¸® </a>
                         <a class="collapse-item" href="cards.html">Á¦Ç° Ç°Áú Ç¥ÁØ¼­ °ü¸®</a>
-=======
-                        <a class="collapse-item" href="commList.do">ê³µí†µì½”ë“œê´€ë¦¬</a>
-                        <a class="collapse-item" href="matForm.do">ìžìž¬ì •ë³´ê´€ë¦¬</a>
-                        <a class="collapse-item" href="bomList.do">ì œí’ˆ BOMê´€ë¦¬</a>
-                        <a class="collapse-item" href="cards.html">ê³µì •ê´€ë¦¬</a>
-                        <a class="collapse-item" href="empList.do">ì‚¬ì›ê´€ë¦¬</a>
-                        <a class="collapse-item" href="cards.html">ë¶ˆëŸ‰ì½”ë“œ ê´€ë¦¬ </a>
-                        <a class="collapse-item" href="cards.html">ì œí’ˆ í’ˆì§ˆ í‘œì¤€ì„œ ê´€ë¦¬</a>
->>>>>>> branch 'master' of https://github.com/LeeSeungJun8948/Rest-10m.git
+
                     </div>
                 </div>
             </li>
