@@ -3,22 +3,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title></title>
 </head>
-
-<body>
+<body> 
 	<div>
-	<h2>설비조회</h2>
+		<h2>설비조회</h2>
 	</div>
-	<div id="grid">
+	<div id="grid"></div>
 	<script type="text/javascript">
-		var gridData;
+		/* var gridData;
 
 		$.ajax({
 			type : "get",
@@ -30,11 +28,18 @@ integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 			},
 			error : function() {
 			}
-		});
-	
+		}); */
+		const dataSource = {
+				api : { 
+					readData : {url: 'ajax/facList.do', method:'GET'},
+				},
+				contentType: 'application/json'
+		}
+
 		const grid = new tui.Grid({
 			el : document.getElementById('grid'),
-			data : gridData,
+			// data : gridData,
+			data : dataSource,
 			scrollX : false,
 			scrollY : false,
 			columns : [ {
@@ -79,11 +84,8 @@ integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 			}, {
 				header : '공정코드',
 				name : 'processCode'
-			}
-			]
-		});
-		
+			} ]
+		}); 
 	</script>
-</div>
 </body>
 </html>

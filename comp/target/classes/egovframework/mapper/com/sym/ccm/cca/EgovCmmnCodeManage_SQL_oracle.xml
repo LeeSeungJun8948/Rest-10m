@@ -14,6 +14,7 @@
 			     ,  A.USE_AT
 			  FROM  COMTCCMMNCODE   A
 			     ,  COMTCCMMNCLCODE B
+			 WHERE  A.CL_CODE = B.CL_CODE
 	</select>
 	
 	<select id="selectCmmnCodeList" parameterType="egovframework.com.sym.ccm.cca.service.CmmnCodeVO" resultType="egovframework.com.sym.ccm.cca.service.CmmnCodeVO">
@@ -30,6 +31,7 @@
 			     ,  A.USE_AT
 			  FROM  COMTCCMMNCODE   A
 			     ,  COMTCCMMNCLCODE B
+			 WHERE  A.CL_CODE = B.CL_CODE
 			 ]]>
 		
 			<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isEquals(searchCondition,'1')">	<![CDATA[	AND
@@ -37,6 +39,9 @@
 			</if>
 			<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isEquals(searchCondition,'2')">	<![CDATA[	AND
 				A.CODE_ID_NM LIKE '%' || #{searchKeyword} || '%']]>
+			</if>
+			<if test="searchCondition == 'clCode'">	<![CDATA[	AND
+				A.CL_CODE LIKE '%' || #{searchKeyword} || '%']]>
 			</if>
 			<if test="searchCondition == 'clCode'">	<![CDATA[AND
 				A.USE_AT = 'Y']]>
