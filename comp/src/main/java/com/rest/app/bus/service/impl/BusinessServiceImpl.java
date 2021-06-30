@@ -1,6 +1,7 @@
 package com.rest.app.bus.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,9 @@ public class BusinessServiceImpl implements BusinessService {
 	BusinessMapper mapper;
 	
 	@Override
-	public List<OrdersVO> getBus() {
+	public List<OrdersVO> getBus(Map<String, Object> param) {
 		// TODO Auto-generated method stub
-		return mapper.getBus();
+		return mapper.getBus(param);
 	}
 
 	@Override

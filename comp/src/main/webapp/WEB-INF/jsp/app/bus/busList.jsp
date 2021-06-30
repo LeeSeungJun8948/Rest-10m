@@ -99,7 +99,9 @@
 	<script type="text/javascript">
 	
 		
-		const dataSource = {
+	var dataSource = {
+			  withCredentials: false,  
+			  initialRequest: true,
 				api : {
 					readData : {url: 'ajax/busList.do', method:'POST' },
 				},
@@ -193,16 +195,13 @@
 
 		});
 
-		document.getElementById('fromDate').valueAsDate = new Date();
-		document.getElementById('toDate').valueAsDate = new Date();
-	   	
 		
 		//조회버튼
 		$('#searchBtn').on('click',function(){
-			
-			
-		});
-		
+				   var param = $('#dataForm').serializeObject();
+				   console.log(param)
+				   grid.readData(1, param, true);
+				});
 
 	</script>
 	</div>

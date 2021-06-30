@@ -13,7 +13,6 @@
 		orders.in_date,
 		orders.out_date,
 		orders.order_count,
-		oproject.oproject_count,
 		finproduct.kg,
 		(orders.order_count - finproduct.kg)as "dCount"
 		from orders
@@ -21,23 +20,23 @@
 		ON orders.product_code=product.product_code
 		JOIN detailplan
 		on orders.order_no=detailplan.ORDER_NO
-		JOIN wproject
-		ON detailplan.wproject_code=wproject.wproject_code
-		JOIN oproject
-		ON wproject.wproject_code=oproject.WPROJECT_CODE
+		JOIN PRODPLAN
+		ON detailplan.PLAN_CODE=PRODPLAN.PLAN_CODE
 		JOIN export
 		ON orders.order_no=export.order_no
 		JOIN finproduct
 		ON export.lot_no =finproduct.lot_no
 		<where>
-			<if test="inDate != null and inDate != ''">
-				and orders.in_date BETWEEN TO_DATE(#{inDate},
-				'YYYY-MM-DD') AND TO_DATE(#{inDate}, 'YYYY-MM-DD'))
-			</if>
+		orders.order_state=#{orderState}
+				and orders.in_date BETWEEN TO_DATE(#{fromDate},
+				'YYYY-MM-DD') AND TO_DATE(#{toDate}, 'YYYY-MM-DD'))
 			<if test="companyCode !=null and companyCode !=''">
 				and orders.company_code=#{companyCode}
 			</if>
-			orders.order_state=#{orderState}
+			<if test="productCode !=null and productCode !=''">
+				and orders.product_code=#{productCode}
+			</if>
+			
 
 		</where>
 	</select>
