@@ -46,7 +46,9 @@
 					<span style="color: red">*</span>
 				</th>
 				<td width="450px">
+				<form id="searchCheck" name="searchCheck">
 					<input type="text" maxlength="20" tabindex="1"  name="productCode" value="${info.productCode }">
+				</form>	
 					<a id="search" href="modal.do" rel="modal:open" class="btn btn-primary" >검색</a>
 				</td>
 				<th scope="row">제품명</th>
@@ -113,7 +115,6 @@
 				
 				
 				$("#btnMaterial").on("click",function() {
-					var valueByName = $('input[name=productCode]').val();
 					var param = $('#searchCheck').serializeObject();
 					grid.readData(1, param, true);
 				})  

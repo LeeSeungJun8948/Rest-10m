@@ -67,8 +67,8 @@ public class BomController {
 	@RequestMapping("/ajax/getInfoProduct.do")
 	@ResponseBody
 	public Map<String, Object> ajaxgetInfoProduct(BomVO vo) {
-		Map<String,Object> datas = new HashMap();
-		Map<String,Object> data = new HashMap();
+		Map<String,Object> datas = new HashMap<String, Object>();
+		Map<String,Object> data = new HashMap<String, Object>();
 		data.put("result", true);
 		datas.put("contents", dao.getInfoBom(vo));
 		data.put("data", datas);
