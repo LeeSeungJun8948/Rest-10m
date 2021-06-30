@@ -11,7 +11,7 @@
    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
    crossorigin="anonymous"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
-<script>
+<script>   
 
 </script>
 </head>
