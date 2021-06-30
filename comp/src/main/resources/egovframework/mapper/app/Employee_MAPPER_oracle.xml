@@ -15,7 +15,7 @@
 	
 	<delete id="deleteEmp" parameterType="com.rest.app.comm.vo.EmployeeVO">
 		delete from employee
-		where id = #{id}
+		where emp_code = #{empCode}
 	</delete>
 	<update id="updateEmp" parameterType="com.rest.app.comm.vo.EmployeeVO">
 		update employee set phone = #{phone}, auth = #{auth}, salary = #{salary} where id=#{id} 

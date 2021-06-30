@@ -60,6 +60,13 @@ public class EmployeeController {
 		return dao.updateEmp(vo);
 	}
 	
+	
+	//모달 
+	@RequestMapping("empModal.do")
+	public String modal() {
+		return "app/comm/empModal";
+	}
+	
 	@RequestMapping("/ajax/empList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetEmp(EmployeeVO vo) {
