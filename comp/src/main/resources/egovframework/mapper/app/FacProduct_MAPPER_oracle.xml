@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.rest.app.fac.facproduct.service.impl.FacProductMapper">
+	<select id="getFP"
+		resultType="com.rest.app.fac.facproduct.vo.FacProductVO">
+		SELECT f.fac_code, f.facilities_name, d.product_code, d.product_name
+		FROM facilities f, process p, pc, product d
+		WHERE f.process_code=p.process_code
+		AND p.process_code=pc.process_code
+		AND pc.product_code=d.product_code
+	</select>
+</mapper>
