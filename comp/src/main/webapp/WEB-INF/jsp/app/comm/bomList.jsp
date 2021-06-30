@@ -30,6 +30,12 @@
    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
    crossorigin="anonymous"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+<style type="text/css">
+	.search{
+		cursor: pointer;
+		width:50px;
+		height: 30px;
+</style>
 </head>
 <body>
 	<div>
@@ -42,21 +48,21 @@
 				제품코드
 					<span style="color: red">*</span>
 				</th>
-				<td width="380px">
-					<input type="text" maxlength="20" tabindex="1"  id="prdCode">
-					<a href="modal.do" rel="modal:open" class="btn btn-info btn-lg">검색</a>
+				<td width="450px">
+					<input type="text" maxlength="20" tabindex="1"  name="productCode" value="${info.productCode }">
+					<a id="search" href="modal.do" rel="modal:open" class="btn btn-primary" >검색</a>
 				</td>
 				<th scope="row">제품명</th>
-				<td width="380px">${info.productName }</td>
+				<td width="450px">${info.productName }</td>
 				<th scope="row">규격</th>
-				<td width="380px">${info.unitNo }</td>
+				<td width="450px">${info.unitNo }</td>
 			</tr>
 			<tr>
 				<th>고객코드</th>
 				<td>${info.companyCode }</td>
 				<th>고객사명</th>
 				<td>${info.companyName }</td>
-				
+				<td><button type="button" class="btn btn-primary" id="btnMaterial">자재소요관리</button></td>
 			</tr>
 		</table>
 	</div>
@@ -67,7 +73,7 @@
 		       <script type="text/javascript">
          			const dataSource = {
 						api : {
-							readData : {url: 'ajax/getInfoProduct.do', method:'get'},
+							readData : {url: 'ajax/getInfoProduct.do', method:'get'}
 						},
 						contentType: 'application/json'
 				}; 
@@ -91,6 +97,28 @@
 					}
 					]
 				});
+				$.fn.serializeObject = function() {
+					var o = {};
+					var a = this.serializeArray();
+					$.each(a, function() {
+						if (o[this.name]) {
+							if (!o[this.name].push) {
+								o[this.name] = [o[this.name]];
+							}
+							o[this.name].push(this.value || '');
+						} else {
+							o[this.name] = this.value || '';
+						}
+					});
+					return o;
+				};
+				
+				
+				$("#btnMaterial").on("click",function() {
+					var valueByName = $('input[name=productCode]').val();
+					var param = $('#searchCheck').serializeObject();
+					grid.readData(1, param, true);
+				})  
 		</script>
 	</div>   
 	 
@@ -102,7 +130,7 @@
 				<th>자재명</th>
 				<th>사용공정</th>
 			</tr>
-			<c:forEach items="${binfo }" var="bl">
+			<c:forEach items="${binfo}" var="bl">
 				<tr>
 					<td>${bl.materialCode }</td>
 					<td>${bl.materialName }</td>
@@ -110,7 +138,14 @@
 				</tr>
 			</c:forEach>
 		</table>
-	</div> 
-
+	</div>
+<!--  
+<script>
+	function getProductCode(){
+		var valueByName = $('input[name=productCode]').val();
+		console.log(valueByName)
+		$("#frm1").submit();
+	}
+</script>-->	 
 </body>
 </html>

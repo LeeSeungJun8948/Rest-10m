@@ -15,7 +15,8 @@
     	  join ( select c.company_code, c.company_name, o.product_code
              	   from company c
              	   join orders o
-               		 on (c.company_code = o.company_code)) a
+               		 on (c.company_code = o.company_code)
+               	  where	 o.order_state='미계획') a
      		on (p.product_code = a.product_code)
   		 where p.product_code = #{productCode}
 	</select>
