@@ -1,12 +1,8 @@
 var dataSource = {
-  withCredentials: false,  
-  initialRequest: true,
-  api: {
-      readData: { url: 'ajax/orderRead.do', method: 'GET' },
-      createData: { url: '', method: 'POST' },
-      updateData: { url: '', method: 'PUT' },
-      deleteData: { url: '', method: 'DELETE' },
-      modifyData: { url: '', method: 'POST' }
+	contentType: 'application/json',
+	api: {
+		readData: { url: 'unplanOrderRead.do', method: 'POST' },
+		modifyData: { url: 'gridSave.do', method: 'PUT' },
   }
 }
 
@@ -24,7 +20,7 @@ const grid = new tui.Grid({
 		header : '제품명',
 		name : 'productName'
 		}, {
-		header : '주문관리번호',
+		header : '주문번호',
 		name : 'orderNo'
 		}, {
 		header : '납기일자',
@@ -35,13 +31,13 @@ const grid = new tui.Grid({
 		align : 'right' 
 		}, {
 		header : '기계획량',
-		name : 'orderPlanCount'
+		name : 'planCount'
 		}, {
 		header : '미계획량',
-		name : 'orderUnplanned'
+		name : 'unplanCount',
 		}, {
 		header : '작업량',
-		name : 'toWork',
+		name : 'workCount',
 		editor: 'text'
 		}, {
 		header : '일생산량',
@@ -63,7 +59,8 @@ const grid = new tui.Grid({
 		header : '비고',
 		name : 'detail',
 		editor: 'text'
-	}, ],
+		}
+	]
 });
 
 // 조회 버튼
@@ -77,17 +74,28 @@ $('#btnReset').on('click', function(){
 
 // 저장 버튼
 $('#btnSave').on('click', function(){
-	
+	$.ajax({
+		type: 'post',
+		url: 'planSave.do',
+		data: $('#inputFrm').serialize(),
+		dataType: 'json',
+		async: false,
+		success: function(data){
+		alert("저장되었습니다.");
+		}
+	});
+	grid.request('modifyData');
 });
 
 // 삭제 버튼
 $('#btnDel').on('click', function(){
+	
 });
 
 // 미생산 읽기 버튼
 $('#btnRead').on('click',  function(){
-	var prm = ${'#frm'}.serialize();
-	grid.readData(1, prm, true);
+	var param = $('#dateFrm').serializeObject();
+	grid.readData(1, param, true);
 });
 
 // 추가버튼
@@ -107,3 +115,4 @@ grid.on('check', ev => {
 // 전체체크 해제
 grid.on('uncheck', ev => {
 });
+

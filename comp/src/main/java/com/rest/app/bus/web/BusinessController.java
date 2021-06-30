@@ -18,7 +18,7 @@ public class BusinessController {
 	@Autowired
 	BusinessService dao;
 
-	@RequestMapping("busList.do")
+	@RequestMapping("busList.do")//주문관리참조조회
 	public String business(Model model) {
 		model.addAttribute("bus", dao.getBus());
 		return "bus/busList.page";
@@ -30,8 +30,13 @@ public class BusinessController {
 		// TODO Auto-generated method stub
 		return dao.getBus();
 	}
-	@RequestMapping("clientCompany.do")
-	public String clientCompany(Model model) {
-		return "bus/clientCompany.page";
+//	@RequestMapping("clientCompany.do")//고객사팝업창
+//	public String clientCompany(Model model) {
+//		return "bus/clientCompany.page";
+//	}
+	
+	@RequestMapping("unproduced.do")//미생산 의뢰조회
+	public String unProduced(Model model) {
+		return "bus/unproduced.page";
 	}
 }

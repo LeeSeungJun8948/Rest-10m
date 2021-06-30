@@ -54,17 +54,19 @@ public class EmployeeController {
 		return "comm/empList.page";
 	}
 	
+	
+	
 	public int updateEmp(EmployeeVO vo) {
 		return dao.updateEmp(vo);
 	}
 	
 	@RequestMapping("/ajax/empList.do")
 	@ResponseBody
-	public Map<String, Object> ajaxGetEmp() {
-		Map<String,Object> datas = new HashMap();
-		Map<String,Object> data = new HashMap();
+	public Map<String, Object> ajaxGetEmp(EmployeeVO vo) {
+		Map<String,Object> datas = new HashMap<String, Object>();
+		Map<String,Object> data = new HashMap<String, Object>();
 		data.put("result", true);
-		datas.put("contents", dao.getEmp());
+		datas.put("contents", dao.getEmp(vo));
 		data.put("data", datas);
 /*		 "result": true,
 	  		"data": {
@@ -84,9 +86,10 @@ public class EmployeeController {
 	@PostMapping(value = "/ajax/deleteEmp.do")
 	@ResponseBody
 	public Map deleteEmp(@RequestBody GridData gridData) {
-
 		Map<String,Object> data = new HashMap();
-		dao.deleteEmp(gridData.deletedRows.get(0));
+		for(int i =0; i<gridData.deletedRows.size(); i++) {
+			dao.deleteEmp(gridData.deletedRows.get(i));
+		}
 		data.put("result", true);
 		data.put("data", gridData.deletedRows);
 		return data;
@@ -96,7 +99,7 @@ public class EmployeeController {
 	@ResponseBody
 	public Map updateEmp(@RequestBody GridData gridData) {
 
-		Map<String,Object> data = new HashMap();
+		Map<String,Object> data = new HashMap<String, Object>();
 		for(int i =0; i<gridData.updatedRows.size(); i++) {
 			dao.updateEmp(gridData.updatedRows.get(i));	
 		}
@@ -108,11 +111,29 @@ public class EmployeeController {
 	@PostMapping(value = "/ajax/insertEmp.do")
 	@ResponseBody
 	public Map insertEmp(@RequestBody GridData gridData) {
-		Map<String,Object> data = new HashMap();
+		Map<String,Object> data = new HashMap<String, Object>();
 		dao.insertEmp(gridData.createdRows.get(0));
 		data.put("result", true);
 		data.put("data", gridData.createdRows);
 		return data;
 	}
 	
+	
+	@PutMapping(value = "/ajax/modifyEmp.do")
+	@ResponseBody
+	public Map modifyEmp(@RequestBody GridData gridData) {
+		Map<String,Object> data = new HashMap<String, Object>();
+		for(int i =0; i<gridData.createdRows.size(); i++) {
+			dao.insertEmp(gridData.createdRows.get(i));
+		}
+		for(int i =0; i<gridData.updatedRows.size(); i++) {
+			dao.updateEmp(gridData.updatedRows.get(i));	
+		}
+		data.put("result", true);
+		data.put("data", gridData.updatedRows);
+		data.put("data", gridData.createdRows);
+		return data;
+	}
+	
+
 }

@@ -4,15 +4,9 @@ import lombok.Data;
 
 @Data
 public class ProdPlanVO {
-	String wprojectCode;
-	String workDate;
-	int orderNo;
-	String projectDate;
-	String projectName;
-	int projectUnplanned;
-	int orderCount;
-	int projectPlanned;
-	String projectState;
+	String planCode;
+	String planDate;
+	String planName;
+	String planState;
 	String comments;
-	String detail;
 }

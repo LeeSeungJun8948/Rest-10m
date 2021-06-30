@@ -1,6 +1,8 @@
 package com.rest.app.mat.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.mat.service.MaterialService;
+import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.MaterialVO;
 
 class GridData{
@@ -57,12 +60,39 @@ public class MaterialController {
 		return dao.matDel(vo);
 	}
 	
-	
 	@RequestMapping("inorderForm.do")
 	public String inorderForm(Model model) {
 		return "mat/inorderForm.page";
 	}
 	
+	@RequestMapping("/ajax/inorderList.do")
+	@ResponseBody
+	public Map<String, Object> ajaxInorderList(InorderVO vo) {
+		
+		Map<String,Object> datas = new HashMap<>();
+		Map<String,Object> data = new HashMap<>();
+		
+		
+		data.put("result", true);
+		datas.put("contents", dao.getInorderList(vo));
+		data.put("data", datas);
+		
+		return data;
+	}
+	
+	@RequestMapping(value = {"/ajax/matInList.do"})
+	@ResponseBody
+	public Map<String, Object> ajaxInoutList(InorderVO vo) {
+		
+		Map<String,Object> datas = new HashMap<>();
+		Map<String,Object> data = new HashMap<>();
+		
+		data.put("result", true);
+		datas.put("contents", dao.getInorderList(vo));
+		data.put("data", datas);
+		
+		return data;
+	}
 	
 	@RequestMapping("matInForm.do")
 	public String matInForm(Model model) {
