@@ -32,9 +32,9 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="commList.do">공통코드관리</a>
                         <a class="collapse-item" href="matForm.do">자재정보관리</a>
-                        <a class="collapse-item" href="cards.html">제품 BOM관리</a>
+                        <a class="collapse-item" href="bomList.do">제품 BOM관리</a>
                         <a class="collapse-item" href="cards.html">공정관리</a>
-                        <a class="collapse-item" href="cards.html">사원관리</a>
+                        <a class="collapse-item" href="empList.do">사원관리</a>
                         <a class="collapse-item" href="cards.html">불량코드 관리 </a>
                         <a class="collapse-item" href="cards.html">제품 품질 표준서 관리</a>
                     </div>
