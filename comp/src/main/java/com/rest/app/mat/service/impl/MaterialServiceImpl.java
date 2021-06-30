@@ -78,7 +78,9 @@ public class MaterialServiceImpl implements MaterialService{
 
 	@Override
 	public int istInout(InoutVO vo) { // 입출고 인설트
-		return mapper.istInout(vo);
+		int temp = mapper.istInout(vo);
+		mapper.udtStock(vo);
+		return temp;
 	}
 
 	@Override

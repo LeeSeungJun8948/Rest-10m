@@ -141,15 +141,31 @@
 	
 	<!-- 입출고 인설트 -->
 	<insert id="istInout" parameterType="InoutVO">
-		INSERT INTO inout(io_code, io_date, io_volumn, unit_price, material_code, lot_no, inorder_code, inout_id, inout_no) 
+		INSERT INTO inout(io_code, io_date, io_volume, unit_price, material_code, lot_no, inorder_code, inout_id, inout_no) 
 		VALUES(#{ioCode}, #{ioDate}, #{ioVolume}, #{unitPrice}, #{materialCode}, #{lotNo}, #{inorderCode}, 'R_INOUT', #{ioType})
 	</insert>
 	
 	<!-- 입출고 업데이트 -->
 	<update id="udtInout" parameterType="InoutVO">
 		UPDATE inout 
-		SET io_date = #{ioDate} AND inorder_code = #{inorderCode} AND io_volumn = #{ioVolumn} AND unit_price = #{unitPrice} 
+		SET io_date = #{ioDate}, inorder_code = #{inorderCode}, io_volume = #{ioVolume}, unit_price = #{unitPrice}
 		WHERE io_code = #{ioCode}
+	</update>
+	
+	<!-- 
+		이거 삭제할예정 트리거로 할거임.
+	 -->
+	<update id="udtStock" parameterType="InoutVO">
+		UPDATE stock
+		SET stock = stock 
+			<if test='ioType.equals("01") or ioType.equals("03") or ioType.equals("05")' >
+				 + 
+			</if> 
+			<if test='ioType.equals("02") or ioType.equals("04")' >
+				 - 
+			</if> 
+			#{ioVolume} 
+		WHERE material_code = #{materialCode}
 	</update>
 	
 </mapper>

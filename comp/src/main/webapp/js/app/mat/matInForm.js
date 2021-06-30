@@ -7,7 +7,7 @@ $( document ).ready(function() {
 const dataSource = {
 	api : {
 		readData : {url: 'ajax/matInList.do' , method:'GET' },
-		modifyData : { url: 'ajax/matInoutModify.do', method: 'PUT'}
+		modifyData : { url: 'ajax/matInModify.do', method: 'PUT'}
 	},
 	contentType: 'application/json'
 };

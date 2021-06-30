@@ -35,5 +35,7 @@ public interface MaterialMapper {
 	
 	public int udtInout(InoutVO vo); // 입출고 업데이트
 	
+	public int udtStock(InoutVO vo); // 입출고시 자재재고 갱신.. 삭제 가능성 있음
+	
 
 }

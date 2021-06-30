@@ -90,7 +90,6 @@ public class MaterialController {
 	public Map<String, Object> ajaxInoutList(InoutVO vo, HttpServletRequest request) {
 		
 		String url = request.getServletPath();
-		System.out.println("요청 url: " + url + "------------------------------------");
 		if(url.equals("/ajax/matInList.do")) {
 			vo.setIoType("01");
 		}else if(url.equals("/ajax/matOutList.do")) {
@@ -120,23 +119,40 @@ public class MaterialController {
 	}
 	
 	
-//	@PutMapping(value = "/ajax/matInoutModify.do")
-//	@ResponseBody
-//	public Map<String, Object> modifyEmp(@RequestBody GridData gridData) {
-//		Map<String,Object> data = new HashMap<String, Object>();
-//		for(int i = 0; i < gridData.createdRows.size(); i++) {
-//			dao.insertEmp(gridData.createdRows.get(i));
-//		}
-//		for(int i = 0; i< gridData.updatedRows.size(); i++) {
-//			dao.updateEmp(gridData.updatedRows.get(i));	
-//		}
-//		data.put("result", true);
-//		data.put("data", gridData.updatedRows);
-//		data.put("data", gridData.createdRows);
-//		return data;
-//	}
+	@PutMapping(value = {"/ajax/matInModify.do", "/ajax/matOutModify.do"})
+	@ResponseBody
+	public Map<String, Object> modifyEmp(HttpServletRequest request, @RequestBody GridData gridData) {
+		Map<String,Object> data = new HashMap<String, Object>();
+		
+		String url = request.getServletPath();
+		
+		for(int i = 0; i < gridData.createdRows.size(); i++) {
+			
+			if(url.equals("/ajax/matInModify.do")) {
+				gridData.createdRows.get(i).setIoType("01");
+			}else if(url.equals("/ajax/matOutModify.do")) {
+				gridData.createdRows.get(i).setIoType("02");
+			}
+			dao.istInout(gridData.createdRows.get(i));
+		}
+		
+		for(int i = 0; i < gridData.updatedRows.size(); i++) {
+			
+			if(url.equals("/ajax/matInModify.do")) {
+				gridData.updatedRows.get(i).setIoType("01");
+			}else if(url.equals("/ajax/matOutModify.do")) {
+				gridData.updatedRows.get(i).setIoType("02");
+			}
+			
+			dao.udtInout(gridData.updatedRows.get(i));	
+		}
+		
+		data.put("result", true);
+		data.put("data", gridData.updatedRows);
+		data.put("data", gridData.createdRows);
+		return data;
+	}
 
-	
 	@RequestMapping("matInForm.do")
 	public String matInForm(Model model) {
 		return "mat/matInForm.page";
