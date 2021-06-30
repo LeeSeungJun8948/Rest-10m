@@ -12,16 +12,17 @@
 	<div class="row">
 		<div class="mb-2 col-lg-6">
 			<form id="inputFrm" name="inputFrm">
-				<input type="hidden" value="${'wprojectCode' }" id="wprojectCode" name="wprojectCode">
+				<input type="hidden" value="${'idx' }" id="idx" name="idx">
+				<input type="hidden" value="${'planCode' }" id="planCode" name="planCode">
 				<table class="table">
 					<tbody>
 						<tr>
 							<th>계획일자</th>
-							<td><input type="date" id="projectDate" name="projectDate"></td>
+							<td><input type="date" id="planDate" name="planDate"></td>
 						</tr>
 						<tr>
 							<th>생산계획명</th>
-							<td><input type="text" id="projectName" name="projectName"></td>
+							<td><input type="text" id="planName" name="planName"></td>
 						</tr>
 						<tr>
 							<th>특기사항</th>
