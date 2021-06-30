@@ -68,20 +68,11 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-<<<<<<< HEAD
-                        <a class="collapse-item" href="inorderForm.do">ë°œì£¼ê´€ë¦¬ ì°¸ì¡°</a>
-                        <a class="collapse-item" href="matInForm.do">ìžìž¬ìž…ê³  ì¡°íšŒ/ê´€ë¦¬</a>
-                        <a class="collapse-item" href="matLotStockForm.do">ìžìž¬LOTìž¬ê³  ì¡°íšŒ/ê´€ë¦¬</a>
-                        <a class="collapse-item" href="matStockForm.do">ìžìž¬ìž¬ê³  ì¡°íšŒ/ê´€ë¦¬</a>
-                        <a class="collapse-item" href="matSaveStockList.do">ì•ˆì „ìž¬ê³  ì¡°íšŒ</a>
-                        <a class="collapse-item" href="matOutForm.do">ìžìž¬ì¶œê³  ì¡°íšŒ/ê´€ë¦¬</a>
-=======
                         <a class="collapse-item" href="inorderForm.do">¹ßÁÖ°ü¸® ÂüÁ¶</a>
                         <a class="collapse-item" href="matInForm.do">ÀÚÀçÀÔ°í °ü¸®</a>
                         <a class="collapse-item" href="matStockForm.do">ÀÚÀçÀç°í °ü¸®</a>
                         <a class="collapse-item" href="matSaveStockList.do">¾ÈÀüÀç°í Á¶È¸</a>
                         <a class="collapse-item" href="matOutForm.do">ÀÚÀçÃâ°í °ü¸®</a>
->>>>>>> branch 'master' of https://github.com/LeeSeungJun8948/Rest-10m.git
                     </div>
                 </div>
             </li>

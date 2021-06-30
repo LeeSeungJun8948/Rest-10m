@@ -49,6 +49,7 @@ const grid = new tui.Grid({
 			editor:'text',
 			onAfterChange(ev) {
 				setMatInfo(ev);
+				console.log('불러오기끝');
         		makeLot(ev);
       		}
 		},
@@ -108,10 +109,12 @@ const grid = new tui.Grid({
 			header : '자재재고',
 			name : 'stock',
 			width : 120,
-			align: 'right',
-			formatter({value}) {
+			align: 'right'
+			
+			,formatter({value}) {
       			return format(value);
     		}
+ 			
 		}
 	],
 	summary : {
@@ -148,11 +151,12 @@ function format(value){
 function makeLot(ev){
 	var rowKey = ev.rowKey;
 	
-	var ioDate = grid.getValue(rowKey, 'ioDate').replace('-','').replace('-','').substr(2);
+	var ioDate = grid.getValue(rowKey, 'ioDate');
 	var ioCode =  grid.getValue(rowKey, 'ioCode');
 	var materialCode = grid.getValue(rowKey, 'materialCode'); // 값 들어왔나 확인용 
 	
 	if(checkNull(ioDate) && checkNull(materialCode)){
+		ioDate = ioDate.replace('-','').replace('-','').substr(2);
 		var newLot = 'MAT-' + ioDate + '-' + ioCode;
 		grid.setValue(rowKey, 'lotNo', newLot, false);
 	}
@@ -176,17 +180,19 @@ function setMatInfo(ev){
 	if(checkNull(inorderCode)){
 		$.ajax({
 			type : "get",
+			data: {"inorderCode" : inorderCode},
 			url : "ajax/getMatInfoForInout.do",
 			dataType : "json",
 			async : false,
 			success : function(data) {
+				console.log(data);
 				grid.setValue(rowKey, 'materialCode', data.materialCode, false);
 				grid.setValue(rowKey, 'materialName', data.materialName, false);
 				grid.setValue(rowKey, 'unitNo', data.unitNo, false);
 				grid.setValue(rowKey, 'stock', data.stock, false);
 			},
-			error : function() {
-				alert("ajax 오류");
+			error:function(request, status, error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});		
 	}
@@ -216,7 +222,6 @@ $("#btnGridAdd").on("click", function(){
 				newIoCode = data.ioCode;
 			},
 			error : function() {
-				alert("ajax 오류");
 			}
 		});		
 	}

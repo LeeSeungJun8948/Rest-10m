@@ -24,5 +24,6 @@
 		<!-- 입출고vo -->
 		<typeAlias alias="InoutVO"		type="com.rest.app.mat.vo.InoutVO" />
 	</typeAliases>
+	
     
 </configuration>

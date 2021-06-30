@@ -110,7 +110,7 @@ public class MaterialController {
 	@RequestMapping("/ajax/getMatInfoForInout.do")
 	@ResponseBody
 	public InoutVO ajaxGetMatInfoForInout(Model model, InoutVO vo) { // 자재 리스트에서 클릭시 자재 상세 정보 출력
-		return null;
+		return dao.getMatInfoForInout(vo);
 	}
 	
 	@RequestMapping("/ajax/getNewIoCode.do")

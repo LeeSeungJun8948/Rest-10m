@@ -131,6 +131,14 @@
 		SELECT max(io_code) + 1  as io_code FROM inout
 	</select>
 	
+	<!-- 발주번호 입력시 자재정보 불러오기 -->
+	<select id="getMatInfoForInout" resultType="InoutVO" parameterType="InoutVO" >
+		SELECT material_code, F_FINDMATNAME(material_code) AS material_name, unit_no, 
+		(SELECT stock FROM stock where material_code = material.material_code) AS stock 
+		FROM material 
+		WHERE material_code = (SELECT material_code FROM inorder WHERE inorder_code = #{inorderCode})
+	</select>
+	
 	<!-- 입출고 인설트 -->
 	<insert id="istInout" parameterType="InoutVO">
 		INSERT INTO inout(io_code, io_date, io_volumn, unit_price, material_code, lot_no, inorder_code, inout_id, inout_no) 
