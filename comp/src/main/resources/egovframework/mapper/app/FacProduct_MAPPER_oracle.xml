@@ -4,11 +4,10 @@
 	namespace="com.rest.app.fac.facproduct.service.impl.FacProductMapper">
 	<select id="getFP"
 		resultType="com.rest.app.fac.facproduct.vo.FacProductVO">
-		select fac.fac_code, fac.facilities_name,
-		bom.product_code, prod.product_name
-		from facilities fac, process pro, bom, product prod
-		where fac.process_code=pro.process_code
-		and pro.process_code=bom.process_code
-		and bom.product_code=prod.product_code
+		SELECT f.fac_code, f.facilities_name, d.product_code, d.product_name
+		FROM facilities f, process p, pc, product d
+		WHERE f.process_code=p.process_code
+		AND p.process_code=pc.process_code
+		AND pc.product_code=d.product_code
 	</select>
 </mapper>

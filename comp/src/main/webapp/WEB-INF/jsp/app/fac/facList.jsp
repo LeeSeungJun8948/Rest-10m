@@ -8,7 +8,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title></title>
 </head>
 <body>
 	<div>
