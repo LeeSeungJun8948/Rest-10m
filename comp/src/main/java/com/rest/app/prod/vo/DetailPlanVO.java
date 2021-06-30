@@ -3,9 +3,9 @@ package com.rest.app.prod.vo;
 import lombok.Data;
 
 @Data
-public class ProdDetailPlanVO {
+public class DetailPlanVO {
 	int idx;
-	String wprojectCode;
+	String planCode;
 	int orderNo;
 	String workDate;
 	int orderCount;
