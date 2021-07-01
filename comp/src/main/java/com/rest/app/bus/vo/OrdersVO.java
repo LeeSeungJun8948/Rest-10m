@@ -20,4 +20,8 @@ public class OrdersVO {
 	int unplanCount;//미계획량
 	int kg;
 	int notCount;
+	int dayCount;//현재고
+	int productCount;
+	int exportCount;
+	
 }

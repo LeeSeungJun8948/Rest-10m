@@ -170,7 +170,7 @@
 		                    return (summary.sum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 		                }
 		            },
-		            dCount:{
+		            notCount:{
 		                template(summary) {
 		                    return (summary.sum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 		                }

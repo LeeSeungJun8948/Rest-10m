@@ -46,17 +46,17 @@ public class BusinessController {
 //		return "bus/clientCompany.page";
 //	}
 	
-	@RequestMapping("exportForm.do")//출고관리
-	public String unProduced(Model model) {
+	@RequestMapping("exportForm.do")//출고관리페이지
+	public String exportForm(Model model) {
 		return "bus/exportForm.page";
 	}
-	@RequestMapping("/ajax/exportForm.do")
+	@RequestMapping("readUnExport.do")//미출고 조회
 	@ResponseBody
-	public Map<String, Object> exportForm(@RequestBody Map<String, Object> param) {
+	public Map<String, Object> readUnExport(@RequestBody Map<String, Object> param) {
 		Map<String, Object> datas = new HashMap<String, Object>();
 		Map<String, Object> data = new HashMap<String, Object>();
+		datas.put("contents", dao.getUnExport(param));
 		data.put("result", true);
-		datas.put("contents", dao.getBus(param));
 		data.put("data", datas);
 		return data;
 	}
