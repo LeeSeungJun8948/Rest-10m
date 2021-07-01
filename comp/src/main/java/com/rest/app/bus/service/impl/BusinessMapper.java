@@ -8,5 +8,5 @@ import com.rest.app.bus.vo.OrdersVO;
 public interface BusinessMapper {
 	public List<OrdersVO> getBus(Map<String, Object> param);
 
-	public List<OrdersVO> getUnproduced();
+	public List<OrdersVO> getExportForm();
 }

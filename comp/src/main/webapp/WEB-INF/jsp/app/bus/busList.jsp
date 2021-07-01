@@ -146,7 +146,7 @@
 				name : 'kg'
 			},{
 				header : '미납품량',
-				name : 'dCount'
+				name : 'notCount'
 			}, {
 				header : '비   고',
 				name : 'remark'

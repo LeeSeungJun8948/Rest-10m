@@ -24,7 +24,7 @@ public class BusinessServiceImpl implements BusinessService {
 	@Override
 	public List<OrdersVO> getExportForm() {
 		// TODO Auto-generated method stub
-		return mapper.getUnproduced();
+		return mapper.getExportForm();
 	}
 
 }
