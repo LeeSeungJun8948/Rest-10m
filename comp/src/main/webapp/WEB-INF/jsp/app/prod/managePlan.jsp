@@ -12,8 +12,6 @@
 	<div class="row">
 		<div class="mb-2 col-lg-6">
 			<form id="inputFrm" name="inputFrm">
-				<input type="hidden" id="idx" name="idx">
-				<input type="hidden" id="planCode" name="planCode" value="planCode">
 				<table class="table">
 					<tbody>
 						<tr>
@@ -54,4 +52,4 @@
 		<div id="grid"></div>
 	</form>
 </div>
-<script type="text/javascript" src="js/app/prod/prodPlanManage.js"></script>
+<script type="text/javascript" src="js/app/prod/managePlan.js"></script>

@@ -1,8 +1,8 @@
 var dataSource = {
 	contentType: 'application/json',
 	api: {
-		readData: { url: 'unplanOrderRead.do', method: 'POST' },
-		modifyData: { url: 'gridSave.do', method: 'PUT' },
+		readData: { url: 'readUnplanOrders.do', method: 'POST' },
+		modifyData: { url: 'saveGrid.do', method: 'PUT' },
 		deleteData : { url: 'deleteDetailPlan.do', method: 'POST' }
   }
 }
@@ -45,7 +45,7 @@ const grid = new tui.Grid({
 		name : 'dayCount'
 		}, {
 		header : '생산일수',
-		name : 'workingDay'
+		name : 'workDay'
 		}, {
 		header : '작업일자',
 		name : 'workDate',
@@ -58,7 +58,7 @@ const grid = new tui.Grid({
           }
 		}, {
 		header : '비고',
-		name : 'detail',
+		name : 'comments',
 		editor: 'text'
 		}
 	]

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.prod.service.ProdService;
 import com.rest.app.prod.vo.DetailPlanVO;
-import com.rest.app.prod.vo.ProdPlanVO;
+import com.rest.app.prod.vo.PlanVO;
 
 class GridData {
 	List<DetailPlanVO> createdRows;
@@ -52,19 +52,19 @@ public class ProdController {
 	ProdService svc;
 
 	// 생산계획관리 페이지
-	@RequestMapping("prodPlanManage.do")
-	public String prodPlanManage(Model model) {
-		return "prod/prodPlanManage.page";
+	@RequestMapping("managePlan.do")
+	public String managePlan(Model model) {
+		return "prod/managePlan.page";
 	}
 
 	// 미완료주문 읽기
-	@RequestMapping("unplanOrderRead.do")
+	@RequestMapping("readUnplanOrders.do")
 	@ResponseBody
-	public Map<String, Object> unplanOrderRead(@RequestBody Map<String, Object> param) {
+	public Map<String, Object> readUnplanOrders(@RequestBody Map<String, Object> param) {
 		Map<String, Object> datas = new HashMap<String, Object>();
 		Map<String, Object> data = new HashMap<String, Object>();
-		data.put("result", true);
 		datas.put("contents", svc.getUnplanOrders(param));
+		data.put("result", true);
 		data.put("data", datas);
 		return data;
 	}
@@ -72,7 +72,7 @@ public class ProdController {
 	// 계획저장
 	@RequestMapping("savePlan.do")
 	@ResponseBody
-	public void savePlan(ProdPlanVO vo) {
+	public void savePlan(PlanVO vo) {
 		if (vo.getPlanCode().equals("planCode")) {
 			svc.insertPlan(vo);
 		} else {
@@ -83,14 +83,14 @@ public class ProdController {
 	// 계획삭제
 	@RequestMapping("deletePlan.do")
 	@ResponseBody
-	public void planDelete(@RequestParam String planCode) {
+	public void deletePlan(@RequestParam String planCode) {
 		svc.deletePlan(planCode);
 	}
 	
 	// 세부계획 CUD
-	@RequestMapping("gridSave.do")
+	@RequestMapping("saveGrid.do")
 	@ResponseBody
-	public String gridSave(@RequestBody GridData gridData) {
+	public String saveGrid(@RequestBody GridData gridData) {
 		List<DetailPlanVO> cList = gridData.createdRows;
 		List<DetailPlanVO> uList = gridData.updatedRows;
 		List<DetailPlanVO> dList = gridData.deletedRows;
@@ -103,47 +103,6 @@ public class ProdController {
 		dList.forEach(vo -> {
 			svc.deleteDetailPlan(vo);
 		});
-		return "redirect:prodPlanManage.do";
-	}
-
-	// 생산지시관리 페이지
-	@RequestMapping("prodOrderManage.do")
-	public String prodOrderManage(Model model) {
-		return "prod/prodOrderManage.page";
-	}
-
-	@RequestMapping("prodProcess.do")
-	public String prodProcess(Model model) {
-		return "prod/prodProcess.page";
-	}
-
-	@RequestMapping("prodPerformance.do")
-	public String prodPerformance(Model model) {
-		return "prod/prodPerformance.page";
-	}
-
-	@RequestMapping("checkPerformance.do")
-	public String checkPerformance(Model model) {
-		return "prod/checkPerformance.page";
-	}
-
-	@RequestMapping("packingPerformance.do")
-	public String packingPerformance(Model model) {
-		return "prod/packingPerformance.page";
-	}
-
-	@RequestMapping("prodMonitoring.do")
-	public String prodMonitoring(Model model) {
-		return "prod/prodMonitoring.page";
-	}
-
-	@RequestMapping("prodPerformanceView.do")
-	public String prodPerformanceView(Model model) {
-		return "prod/prodPerformanceView.page";
-	}
-
-	@RequestMapping("defectListView.do")
-	public String defectListView(Model model) {
-		return "prod/defectListView.page";
+		return "redirect:managePlan.do";
 	}
 }
