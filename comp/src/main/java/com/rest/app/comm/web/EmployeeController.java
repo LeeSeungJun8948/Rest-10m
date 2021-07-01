@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -131,6 +133,7 @@ public class EmployeeController {
 	public Map modifyEmp(@RequestBody GridData gridData) {
 		Map<String,Object> data = new HashMap<String, Object>();
 		for(int i =0; i<gridData.createdRows.size(); i++) {
+			
 			dao.insertEmp(gridData.createdRows.get(i));
 		}
 		for(int i =0; i<gridData.updatedRows.size(); i++) {
