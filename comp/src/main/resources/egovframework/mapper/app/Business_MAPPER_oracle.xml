@@ -7,44 +7,51 @@
 		F_FINDCOMPNAME(company_code)AS comp_name,
 		o.order_no,
 		p.product_code,
-		p.product_name,
+		p.product_name, 
 		p.std_id,
 		p.unit_id,
 		o.in_date,
 		o.out_date,
 		o.order_count,
-		fp.kg,
-		(o.order_count - fp.kg) as dCount,
-		CASE WHEN o.plan_count = 0 THEN '미계획'
-		WHEN o.order_count > o.plan_count THEN '진행중'
+		o.export_count,
+		(o.order_count - o.export_count) as dCount,
+		CASE
+		WHEN o.plan_count = 0 THEN '미계획'
+		WHEN o.order_count > o.plan_count THEN
+		'진행중'
 		ELSE '완료'
 		END AS order_state
-		from orders o
-		JOIN product p
-		ON
-		o.product_code=p.product_code
-		JOIN export e
-		ON o.order_no=e.order_no
-		JOIN finproduct fp
-		ON e.lot_no =fp.lot_no
-		<where>
-			
-			o.in_date BETWEEN TO_DATE(#{fromDate},
-			'YYYY-MM-DD') AND TO_DATE(#{toDate}, 'YYYY-MM-DD')
+		FROM orders o, detailexport e, product p
+		WHERE o.in_date BETWEEN TO_DATE(#{fromDate},'YYYY-MM-DD') 
+			AND	TO_DATE(#{toDate}, 'YYYY-MM-DD')
+			AND	o.product_code=p.product_code
+			AND o.order_no=e.order_no
 			<if test="companyCode !=null and companyCode !=''">
 				and o.company_code=#{companyCode}
 			</if>
 			<if test="productCode !=null and productCode !=''">
 				and o.product_code=#{productCode}
 			</if>
-		</where>
+			<if test="orderState == 'unPlan'">
+				and o.plan_count = 0
+			</if>
+			<if test="orderState == 'working'">
+				and o.order_count > o.plan_count AND o.plan_count > 0
+			</if>
+			<if test="orderState == 'planComplete'">
+				and o.order_count = o.plan_count
+			</if>
 	</select>
 
-	<select id="getUnproduced"
+	<select id="getExportForm"
 		resultType="com.rest.app.bus.vo.OrdersVO"
 		parameterType="com.rest.app.bus.vo.OrdersVO">
-
-
-
+		SELECT o.product_code, o.order_no, o.order_count,
+		(SELECT SUM(KG) FROM FINPRODUCT WHERE PRODUCT_CODE = o.product_code),
+		o.export_count, p.product_name, p.std_id, p.unit_id
+		FROM orders o
+		INNER JOIN product p ON o.product_code = p.product_code
+		INNER JOIN finproduct f ON o.product_code = f.product_code
+		WHERE f.state='포장완료';
 	</select>
 </mapper>

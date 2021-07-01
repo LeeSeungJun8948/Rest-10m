@@ -26,9 +26,9 @@
 						<input type="radio" id="upPlan" name="orderState" value="unPlan" 
 							checked><span style="margin: 3px 30px;">미계획</span> <input
 							type="radio" id="working" name="orderState" value="working" 
-							checked> <span style="margin: 3px 30px;">진행중</span> <input
+							> <span style="margin: 3px 30px;">진행중</span> <input
 							type="radio" id="planComplete" name="orderState"
-							value="planComplete"  checked> <span
+							value="planComplete" > <span
 							style="margin: 3px 30px;">계획완료</span> 
 					</div>
 
