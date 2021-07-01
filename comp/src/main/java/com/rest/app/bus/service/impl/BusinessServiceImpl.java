@@ -22,9 +22,9 @@ public class BusinessServiceImpl implements BusinessService {
 	}
 
 	@Override
-	public List<OrdersVO> getExportForm() {
+	public List<OrdersVO> getUnExport(Map<String, Object> param) {
 		// TODO Auto-generated method stub
-		return mapper.getExportForm();
+		return mapper.getUnExport(param);
+		
 	}
-
 }

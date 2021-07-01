@@ -1,7 +1,7 @@
 var dataSource = {
 	contentType: 'application/json',
 	api: {
-		readData: { url: 'unplanOrderRead.do', method: 'POST' },
+		readData: { url: 'readUnExport.do', method: 'POST' },
 		modifyData: { url: 'gridSave.do', method: 'PUT' },
 	}
 }
@@ -30,13 +30,13 @@ const grid = new tui.Grid({
 		align : 'right' 
 		}, {
 		header : '기출고량',
-		name : 'planCount'
+		name : 'outCount'
 		}, {
 		header : '미출고량',
-		name : 'unplanCount',
+		name : 'unExport',
 		}, {
 		header : '출고량',
-		name : 'workCount',
+		name : 'exportCount',
 		editor: 'text'
 		}, {
 		header : '현재고',
@@ -45,20 +45,34 @@ const grid = new tui.Grid({
 		header : '소재LOT.no',
 		name : 'workingDay'
 		}, {
-		header : '단가',
-		name : 'workDate',
-		
-		}, {
 		header : '금액',
-		name : 'workDate',
+		name : 'price',
 		
 		},{
 		header : '비고',
-		name : 'detail',
+		name : 'comments',
 		editor: 'text'
 		}
 	]
 });
+
+
+		$.fn.serializeObject = function() {
+			var o = {};
+			var a = this.serializeArray();
+			$.each(a, function() {
+				if (o[this.name]) {
+					if (!o[this.name].push) {
+						o[this.name] = [o[this.name]];
+					}
+					o[this.name].push(this.value || '');
+				} else {
+					o[this.name] = this.value || '';
+				}
+			});
+			return o;
+		};
+		
 
 // 조회 버튼
 $('#btnView').on('click', function(){
@@ -72,16 +86,15 @@ $('#btnReset').on('click', function(){
 // 저장 버튼
 $('#btnSave').on('click', function(){
 	$.ajax({
-		type: 'post',
-		url: 'planSave.do',
+		type: 'POST',
+		url: 'saveExport.do',
 		data: $('#inputFrm').serialize(),
 		dataType: 'json',
-		async: false,
 		success: function(data){
-		alert("저장되었습니다.");
 		}
 	});
 	grid.request('modifyData');
+	toastr.success("저장되었습니다.");
 });
 
 // 삭제 버튼
@@ -91,7 +104,8 @@ $('#btnDel').on('click', function(){
 
 // 미생산 읽기 버튼
 $('#btnRead').on('click',  function(){
-	var param = $('#dateFrm').serializeObject();
+	var param = $('#dateForm').serializeObject();
+	console.log(param)
 	grid.readData(1, param, true);
 });
 
