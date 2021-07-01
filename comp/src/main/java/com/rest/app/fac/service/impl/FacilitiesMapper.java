@@ -8,4 +8,5 @@ public interface FacilitiesMapper {
 	public List<FacilitiesVO> getFac();
 	public int insertFac(FacilitiesVO vo);
 	public int deleteFac(FacilitiesVO vo);
+	public List<FacilitiesVO> getFacProcess();
 }

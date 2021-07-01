@@ -32,4 +32,10 @@
 		parameterType="com.rest.app.fac.vo.FacilitiesVO">
 		delete from facilities where fac_code=#{facCode}
 	</delete>
+	<select id="getFacProcess" resultType="com.rest.app.fac.vo.FacilitiesVO">
+		select f.fac_code, f.facilities_name, f.process_code, p.process_name
+		from facilities f, process p
+		where f.process_code=p.process_code
+		order by fac_code
+	</select>
 </mapper>
