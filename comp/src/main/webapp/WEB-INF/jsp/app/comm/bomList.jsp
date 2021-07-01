@@ -46,7 +46,7 @@
 				<th width="100px" scope="row">
 				제품코드
 					<span style="color: red">*</span>
-				</th>
+				</th>  
 				<td width="450px">
 				<form id="searchCheck" name="searchCheck">
 					<input type="text" maxlength="20" tabindex="1"  name="productCode" value="${info.productCode }">
