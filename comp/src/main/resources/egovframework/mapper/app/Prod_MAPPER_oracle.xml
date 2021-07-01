@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rest.app.prod.service.impl.ProdMapper">
 	<select id="getUnplanOrders" resultType="com.rest.app.bus.vo.OrdersVO">
-		SELECT *, o.order_count - o.plan_count unplan_count
+		SELECT o.*, o.order_count - o.plan_count unplan_count
 		FROM orders o, product p
 		WHERE o.order_count != o.plan_count
 		AND o.product_code = p.product_code

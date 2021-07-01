@@ -12,6 +12,7 @@
 	<div class="row">
 		<div class="mb-2 col-lg-6">
 			<form id="inputFrm" name="inputFrm">
+				<input type="hidden" id="planCode" name="planCode" value="">
 				<table class="table">
 					<tbody>
 						<tr>

@@ -61,6 +61,9 @@ const grid = new tui.Grid({
 		name : 'comments',
 		editor: 'text'
 		}
+		header : '제품LOT',
+		name : 'lotNo',
+		}
 	]
 });
 
@@ -69,7 +72,7 @@ const grid = new tui.Grid({
 $('#btnView').on('click', function(){
 });
 
-// 새자료 버튼
+// 초기화 버튼
 $(document).ready(function() {  
     $("#btnReset").click(function() {  
          $("form").each(function() {  
@@ -82,7 +85,7 @@ $(document).ready(function() {
 // 계획저장 버튼
 $('#btnSave').on('click', function(){
 	$.ajax({
-		type: 'post',
+		type: 'POST',
 		url: 'savePlan.do',
 		data: $('#inputFrm').serialize(),
 		dataType: 'json',

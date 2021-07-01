@@ -7,6 +7,5 @@ public class PlanVO {
 	String planCode;
 	String planName;
 	String planDate;
-	String planState;
 	String comments;
 }
