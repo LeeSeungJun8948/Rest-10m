@@ -51,6 +51,12 @@
 <div class="col-lg-12">
 	<div id="grid"/>
 </div>
+<br><br>
+<div class="mb-4" align="right">
+	<button type="button" class="btn btn-primary" id="btnInputAdd">추가</button>
+	<button type="button" class="btn btn-primary" id="btnInputDel">삭제</button>
+</div>
+<br>
 <div class="col-lg-12">
 	<div id="gridLot"/>
 </div>
