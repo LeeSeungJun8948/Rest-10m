@@ -34,6 +34,30 @@ public class BomServiceImpl implements BomService {
 		return mapper.getInfoBom(vo);
 	}
 
+	@Override
+	public int insertBom(BomVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.insertBom(vo);
+	}
+
+	@Override
+	public BomVO getMatName(BomVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.getMatName(vo);
+	}
+
+	@Override
+	public BomVO getProName(BomVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.getProName(vo);
+	}
+
+	@Override
+	public int updateBom(BomVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.updateBom(vo);
+	}
+
 
 	
 	

@@ -12,4 +12,11 @@
 		from	repair
 		order by repair_code
 	</select>
+	<insert id="insertRep" parameterType="com.rest.app.fac.repair.vo.RepairVO">
+		insert into repair 
+		values(repair_seq.nextval, #{facCode}, #{repairDate}, #{repairComment}, #{companyCode}, #{cost}, #{etc})
+	</insert>
+	<delete id="deleteRep" parameterType="com.rest.app.fac.repair.vo.RepairVO">
+		delete from repair where repair_code=#{repairCode}
+	</delete>
 </mapper>

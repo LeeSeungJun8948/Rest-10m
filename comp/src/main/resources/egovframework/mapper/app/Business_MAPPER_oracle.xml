@@ -13,8 +13,8 @@
 		o.in_date,
 		o.out_date,
 		o.order_count,
-		o.export_count,
-		(o.order_count - o.export_count) as dCount,
+		o.out_count,
+		(o.order_count - o.out_count) as dCount,
 		CASE
 		WHEN o.plan_count = 0 THEN '미계획'
 		WHEN o.order_count > o.plan_count THEN
