@@ -106,7 +106,7 @@
 					},
 					{
 						header :'자재명',
-						name : 'materialName'
+						name : 'materialName',
 					},
 					{
 						header :'사용량(KG)',
