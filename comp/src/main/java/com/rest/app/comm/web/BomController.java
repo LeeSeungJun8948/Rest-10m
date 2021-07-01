@@ -46,6 +46,9 @@ public class BomController {
 	public String getProduct(Model model, BomVO vo) {
 		return "comm/bomList.page";
 	}
+
+	
+	
 	//제품코드,제품명,규격 리스트 ajax
 	@RequestMapping("/ajax/bomList.do")
 	@ResponseBody
@@ -62,6 +65,8 @@ public class BomController {
 	public String modal() {
 		return "app/comm/modal";
 	}
+	
+	
 	//제품 단건조회 , 소요자재조회
 	@RequestMapping("getInfoProduct.do")
 	public ModelAndView getInfoProduct(Model model, BomVO vo) {

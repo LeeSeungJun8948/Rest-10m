@@ -6,8 +6,15 @@
 	<select id="getProduct" resultType="com.rest.app.comm.vo.BomVO">
 		SELECT product_code, product_name, unit_no
  		  FROM product
+ 		  		<where>
+				<if test="searchCondition == 'productCode'">AND
+					product_code LIKE '%' || #{searchKeyword} || '%'
+				</if>
+				<if test="searchCondition == 'productName'">AND
+					product_name LIKE '%' || #{searchKeyword} || '%'
+				</if>
+		</where>
 	</select>
-	
 	<!-- 제품단건조회 -->
 	<select id="getInfoProduct" resultType="com.rest.app.comm.vo.BomVO">
 		select DISTINCT p.product_code, p.product_name, p.unit_no, a.company_name
@@ -55,4 +62,5 @@
    		   set material_Code = #{materialCode}, process_code= #{processCode} , kg = #{kg}, etc=#{etc}
  		 where product_code = #{productCode}
 	</select>
+
 </mapper>

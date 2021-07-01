@@ -5,13 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /><link rel="stylesheet"
+<link rel="stylesheet"
    href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"
    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
    crossorigin="anonymous"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+<script>   
+  
+</script>
 </head>
 <body>
 		<h1 class="h3 mb-4 text-gray-700">생산계획 관리</h1>
@@ -22,10 +24,11 @@
                                     <option value="employeeName" selected="">이름</option>
         </select>
         <input id="searchKeyword" name="searchKeyword" type="text" title="검색어" class="form-control" style="width:200px;margin-left:10px">                      		
-			<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
-			<a id="search" href="empModal.do" rel="modal:open" class="btn btn-primary">등록</a>
+			<button type="button" class="btn btn-primary" id="btnRowInsert">행추가</button>
+			<button type="button" class="btn btn-primary" id="btnInsert">추가저장</button>
 			<button type="button" class="btn btn-primary" id="btnUpdate">저장</button>
 			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
+			<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
 		</form>
 		</div>
 		<div id="grid">
@@ -36,6 +39,7 @@
 							deleteData : { url: 'ajax/deleteEmp.do', method: 'POST' },
 							updateData : { url: 'ajax/updateEmp.do', method: 'PUT' },
 							createData : { url: 'ajax/insertEmp.do', method: 'POST'},
+							modifyData : { url: 'ajax/modifyEmp.do', method: 'PUT'}
 						},
 						contentType: 'application/json'
 				};
@@ -48,11 +52,11 @@
 					scrollX : false,
 					scrollY : false,
 					columns : [
-/* 					{
+					{
 						header : '사원번호',
 						name : 'empCode',
 						editor:'text'
-					},  */
+					},
 					{
 						header :'아이디',
 						name : 'id',
@@ -141,6 +145,16 @@
 						grid.request('deleteData');
 				})
 				
+				$("#btnRowInsert").on("click", function(){
+					grid.appendRow();
+				})
+				
+				$("#btnInsert").on("click", function(){
+					//grid.request('createData');
+					 grid.request('modifyData', {
+						    checkedOnly: true
+						  });
+				})
 				$("#btnSearch").on("click",function() {
 					var param = $('#searchCheck').serializeObject();
 					grid.readData(1, param, true);
