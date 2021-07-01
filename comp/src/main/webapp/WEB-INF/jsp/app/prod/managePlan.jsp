@@ -12,7 +12,7 @@
 	<div class="row">
 		<div class="mb-2 col-lg-6">
 			<form id="inputFrm" name="inputFrm">
-				<input type="hidden" id="planCode" name="planCode" value="">
+				<input type="hidden" id="planCode" name="planCode" value="planCode">
 				<table class="table">
 					<tbody>
 						<tr>
@@ -48,9 +48,10 @@
 	<button type="button" class="btn btn-primary" id="btnGridAdd">추가</button>
 	<button type="button" class="btn btn-primary" id="btnGridDel">삭제</button>
 </div>
-<div class="col-lg-10">
-	<form id="gridFrm" name="gridFrm">
-		<div id="grid"></div>
-	</form>
+<div class="col-lg-12">
+	<div id="grid"/>
+</div>
+<div class="col-lg-12">
+	<div id="gridLot"/>
 </div>
 <script type="text/javascript" src="js/app/prod/managePlan.js"></script>

@@ -50,4 +50,9 @@ public class ProdServiceImpl implements ProdService {
 	public int deleteDetailPlan(DetailPlanVO vo) {
 		return mapper.deleteDetailPlan(vo);
 	}
+
+	@Override
+	public String findLotNo() {
+		return mapper.findLotNo();
+	}
 }

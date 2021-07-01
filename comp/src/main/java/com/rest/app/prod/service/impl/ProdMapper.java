@@ -15,4 +15,5 @@ public interface ProdMapper {
 	public int insertDetailPlan(DetailPlanVO vo); 
 	public int updateDetailPlan(DetailPlanVO vo);
 	public int deleteDetailPlan(DetailPlanVO vo);
+	public String findLotNo();
 }

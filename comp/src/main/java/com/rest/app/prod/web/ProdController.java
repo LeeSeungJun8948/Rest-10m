@@ -61,8 +61,8 @@ public class ProdController {
 	@RequestMapping("readUnplanOrders.do")
 	@ResponseBody
 	public Map<String, Object> readUnplanOrders(@RequestBody Map<String, Object> param) {
-		Map<String, Object> datas = new HashMap<String, Object>();
 		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
 		datas.put("contents", svc.getUnplanOrders(param));
 		data.put("result", true);
 		data.put("data", datas);
@@ -86,7 +86,7 @@ public class ProdController {
 	public void deletePlan(@RequestParam String planCode) {
 		svc.deletePlan(planCode);
 	}
-	
+
 	// 세부계획 CUD
 	@RequestMapping("saveGrid.do")
 	@ResponseBody
@@ -98,10 +98,16 @@ public class ProdController {
 			svc.insertDetailPlan(vo);
 		});
 		uList.forEach(vo -> {
-			svc.updateDetailPlan(vo);
+			if (vo.getLotNo() == null) {
+				svc.insertDetailPlan(vo);
+			} else {
+				svc.updateDetailPlan(vo);
+			}
 		});
 		dList.forEach(vo -> {
-			svc.deleteDetailPlan(vo);
+			if (vo.getLotNo() != null) {
+				svc.deleteDetailPlan(vo);
+			}
 		});
 		return "redirect:managePlan.do";
 	}
