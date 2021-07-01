@@ -85,6 +85,7 @@ const grid = new tui.Grid({
             	}
 			}
 			/** 이거 안됨 ㅅㅂ
+			
 			,
 			relations: {
 				targetNames: ['materialCode'],
