@@ -41,5 +41,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 
+	@Override
+	public int maxEmpCode() {
+		// TODO Auto-generated method stub
+		return mapper.maxEmpCode();
+	}
+
+
 
 }

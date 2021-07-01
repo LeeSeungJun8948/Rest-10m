@@ -1,4 +1,4 @@
-package com.rest.app.comm.web;
+	package com.rest.app.comm.web;
 
 
 import java.util.HashMap;
@@ -51,21 +51,23 @@ public class EmployeeController {
 	
 	@Autowired
 	EmployeeService dao;
+	
 	@RequestMapping("empList.do")
 	public String empList(Model model) {
 		return "comm/empList.page";
 	}
 	
 	
-	
-	public int updateEmp(EmployeeVO vo) {
-		return dao.updateEmp(vo);
+	@RequestMapping("insertEmp.do")
+	public String insertEmp(EmployeeVO vo) {
+		dao.insertEmp(vo);
+		return "redirect:empList.do";
 	}
-	
 	
 	//모달 
 	@RequestMapping("empModal.do")
-	public String modal() {
+	public String modal(Model model) {
+		model.addAttribute("max", dao.maxEmpCode());
 		return "app/comm/empModal";
 	}
 	
@@ -117,15 +119,14 @@ public class EmployeeController {
 		return data;
 	}
 	   
-	@PostMapping(value = "/ajax/insertEmp.do")
-	@ResponseBody
-	public Map insertEmp(@RequestBody GridData gridData) {
-		Map<String,Object> data = new HashMap<String, Object>();
-		dao.insertEmp(gridData.createdRows.get(0));
-		data.put("result", true);
-		data.put("data", gridData.createdRows);
-		return data;
-	}
+	/*
+	 * @PostMapping(value = "/ajax/insertEmp.do")
+	 * 
+	 * @ResponseBody public Map insertEmp(@RequestBody GridData gridData) {
+	 * Map<String,Object> data = new HashMap<String, Object>();
+	 * dao.insertEmp(gridData.createdRows.get(0)); data.put("result", true);
+	 * data.put("data", gridData.createdRows); return data; }
+	 */
 	
 	
 	@PutMapping(value = "/ajax/modifyEmp.do")

@@ -34,7 +34,13 @@ public class BomController {
 	@Autowired
 	BomService dao;
 	
-
+	@RequestMapping("/commList.do")
+	public String commList() {
+		return "/sym/ccm/cde/SelectCcmCmmnDetailCodeList.do";
+	}
+	
+	
+	
 	@RequestMapping("/main.do")
 	public String main(Model model) {
 		return "comm/main.page";

@@ -31,8 +31,7 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-
-                        <a class="collapse-item" href="commList.do">傍烹内靛包府</a>
+                        <a class="collapse-item" href="#">傍烹内靛包府</a>
                         <a class="collapse-item" href="matForm.do">磊犁沥焊包府</a>
                         <a class="collapse-item" href="bomList.do">力前 BOM包府</a>
                         <a class="collapse-item" href="cards.html">傍沥包府</a>

@@ -58,7 +58,7 @@
 </style>
 
 <!-- Modal -->
-  <form action="" method="post" >
+  <form action="insertEmp.do" method="post" >
   	    		<div class="modal-content" >
       			<div class="modal-header">
         			<h5 class="modal-title">
@@ -69,9 +69,9 @@
 	<div>
 		<h5>
 			<strong>사원번호 &nbsp;&nbsp;:&nbsp;&nbsp;</strong>
-			<input type="text" id="empCode" name="empCode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="text" id="empCode" name="empCode" value="${max+1 }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<strong>사원이름&nbsp;&nbsp;:&nbsp;&nbsp;</strong>
-			<input type="text" id="employeeName" name="employeeName">
+			<input type="text" id="employeeName" name="employeeName" >
 		</h5>
 	</div>
 	<div class="row">
@@ -84,16 +84,35 @@
 			        <td><input type="text" id="id" name="id"></td>
 			        <td>비밀번호</td>
 			        <td><input type="text" id="pwd" name="pwd"></td>
-			        <td>부서명</td>
+			        <td>부서코드</td>
 			        <td><input type="text" id="dept" name="dept"></td>
 			      </tr>
+			      <tr>
+			        <td>직급</td>
+			        <td><input type="text" id="auth" name="auth"></td>
+			        <td>전화번호</td>
+			        <td><input type="text" id="phone" name="phone"></td>
+			        <td>이메일</td>
+			        <td><input type="text" id="email" name="email"></td>
+			      </tr>
+			      <tr>
+			        <td>입사일</td>
+			        <td><input type="date" id="hireDate" name="hireDate"></td>
+			        <td>업체코드</td>
+			        <td><input type="text" id="companyCode" name="companyCode"></td>
+			        <td>생년월일</td>
+			        <td><input type="date" id="birthDay" name="birthDay"></td>
+			      </tr>
+			      <tr>
+			        <td>연봉</td>
+			        <td><input type="text" id="salary" name="salary"></td>
+			      </tr> 
 				</tbody>
 			</table>
 		</div>
       			</div>
       			<div class="modal-footer">
 		        	<input type="submit" class="btn btn-primary">
-		        	<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
       			</div>
     	</div>
 	</form>
