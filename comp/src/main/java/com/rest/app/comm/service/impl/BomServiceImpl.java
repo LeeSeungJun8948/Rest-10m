@@ -24,7 +24,7 @@ public class BomServiceImpl implements BomService {
   
 	@Override
 	public BomVO getInfoProduct(BomVO vo) {
-		// TODO 제품 단건 조회
+		// TODO 제품상세내역 조회
 		return mapper.getInfoProduct(vo);
 	}
 
@@ -34,11 +34,6 @@ public class BomServiceImpl implements BomService {
 		return mapper.getInfoBom(vo);
 	}
 
-	@Override
-	public int insertBom(BomVO vo) {
-		// TODO Auto-generated method stub
-		return mapper.insertBom(vo);
-	}
 
 	@Override
 	public BomVO getMatName(BomVO vo) {
@@ -51,14 +46,36 @@ public class BomServiceImpl implements BomService {
 		// TODO Auto-generated method stub
 		return mapper.getProName(vo);
 	}
+	
+	@Override
+	public int insertBom(BomVO vo) {
+		// TODO Bom insert
+		return mapper.insertBom(vo);
+	}
 
 	@Override
 	public int updateBom(BomVO vo) {
-		// TODO Auto-generated method stub
+		// TODO Bom update
 		return mapper.updateBom(vo);
 	}
 
+	@Override
+	public int deleteBom(BomVO vo) {
+		// TODO Bom delete 		
+		return mapper.deleteBom(vo);
+	}
+	
+	@Override
+	public BomVO getNewProductCode() {
+		// TODO Auto-generated method stub
+		return mapper.getNewProductCode();
+	}
 
+	@Override
+	public List<BomVO> getCompanyList(BomVO vo) {
+		// TODO 제품에 대한 고객코드/고객사명 List
+		return mapper.getCompanyList(vo);
+	}
 	
 	
 }

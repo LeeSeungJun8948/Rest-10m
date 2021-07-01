@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -36,8 +37,12 @@
 			<h1>제품BOM관리</h1>
 		</div>
 		<div class="col-4" align="right">
+			<form action="deleteBom.do" id="deletefrm" name="deletefrm" method="post">
+				<input id="productCode2" name="productCode2" type="hidden" value="productCode">
+			</form>
 			<button type="button" class="btn btn-primary" onclick="location.href='bomList.do' ">초기화</button>
 			<button type="button" class="btn btn-primary" id="btnInsert">저장</button>
+			<button type="button" class="btn btn-primary" id="delBom">Bom삭제</button>
 		</div>
 	</div>
 	<div>
@@ -49,7 +54,7 @@
 				</th>  
 				<td width="450px">
 				<form id="searchCheck" name="searchCheck">
-					<input type="text" maxlength="20" tabindex="1"  name="productCode" value="${info.productCode }">
+					<input type="text" maxlength="20" tabindex="1" id='pdc' name="productCode" value="${info.productCode }">
 				</form>	
 					<a id="search" href="modal.do" rel="modal:open" class="btn btn-primary" >검색</a>
 				</td>
@@ -60,9 +65,20 @@
 			</tr>
 			<tr>
 				<th>고객코드</th>
-				<td>${info.companyCode }</td>
+				<td>
+				<c:forEach items="${companyList}" var="cc" varStatus="i">
+				${cc.companyCode }
+				<c:if test="${fn:length(companyList) != i.count}">,</c:if>
+				</c:forEach>
+				</td>
+				
 				<th>고객사명</th>
-				<td>${info.companyName }</td>
+				<td>
+				<c:forEach items="${companyList}" var="cn" varStatus="l">
+				${cn.companyName }
+				<c:if test="${fn:length(companyList) != l.count}">,</c:if>
+				</c:forEach>
+				</td>
 				<td><button type="button" class="btn btn-primary" id="btnMaterial">자재소요관리</button></td>
 			</tr>
 		</table>
@@ -84,6 +100,7 @@
 							readData : {url: 'ajax/getInfoProduct.do', method:'get'},
 							createData : { url: 'ajax/insertBom.do', method: 'POST'},
 							updateData : { url: 'ajax/updateBom.do', method: 'PUT' },
+							deleteData : { url: 'ajax/deleteBom.do', method: 'POST' },
 							modifyData : { url: 'ajax/modifyBom.do', method: 'PUT'}
 						},
 						contentType: 'application/json'
@@ -96,12 +113,16 @@
 					scrollY : false,
 					columns : [
 					{
+						header : '제품코드',
+						name : 'productCode',
+						
+					},
+					{
 						header : '자재코드',
 						name : 'materialCode',
 						editor:'text',
 							onAfterChange(ev){
 							setMatCode(ev);
-							
 						}
 					},
 					{
@@ -157,18 +178,36 @@
 					var param = $('#searchCheck').serializeObject();
 					grid.readData(1, param, true);
 				})  
+				
 				$("#btnRowInsert").on("click", function(){
-					grid.appendRow();
-				})
+					var newProductCode;
+					newProductCode = $("#pdc").val();
+					<!--
+					$.ajax({
+						type:"get",
+						url:"ajax/getNewProductCode.do",
+						datatype:"json",
+						async: false,
+						success : function(data){
+							newProductCode = data.productCode;
+						}
+					});
+					-->
+					newRowData ={'productCode': newProductCode };
+					grid.appendRow(newRowData,{
+						at : grid.getRowCount(),
+						focus :true
+					});
+				});
 				$("#btnDelete").on("click",function() {
 						grid.removeCheckedRows(false);
 						grid.request('deleteData');
 				})
 				$("#btnInsert").on("click", function(){
 					//grid.request('createData');
-						var param = $('#searchCheck').serializeObject();
-						grid.readData(1, param, true);
-					 grid.request('modifyData', {
+						 	var param = $('#searchCheck').serializeObject();
+					 		grid.readData(1, param, true);
+					 		grid.request('modifyData', {
 						    checkedOnly: true
 						  });
 				})
@@ -215,7 +254,17 @@
 				function checkNull(value){
 					return value != null && value != '' && value != '[object HTMLInputElement]';
 				}
+				
+				
 		</script>
+		<script>
+		$(document).ready(function(){
+			$("#delBom").click(function(){
+			
+				document.deletefrm.submit();
+			});
+		});
 		
+		</script>
 </body>
 </html>

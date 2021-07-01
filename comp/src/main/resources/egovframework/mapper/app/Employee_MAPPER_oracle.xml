@@ -15,14 +15,20 @@
 	
 	<delete id="deleteEmp" parameterType="com.rest.app.comm.vo.EmployeeVO">
 		delete from employee
-		where emp_code = #{empCode}
+		where id = #{id}
 	</delete>
+	
 	<update id="updateEmp" parameterType="com.rest.app.comm.vo.EmployeeVO">
 		update employee set phone = #{phone}, auth = #{auth}, salary = #{salary} where id=#{id} 
 	</update>
+	
 	<insert id ="insertEmp" parameterType="com.rest.app.comm.vo.EmployeeVO">
 		insert into employee
-		values(EMP_SEQ.nextval, #{id}, #{pwd}, #{dept}, #{auth}, #{phone}, #{email}, sysdate, #{employeeName}, #{companyCode}, sysdate, #{salary}, sysdate)
+		values(#{empCode}, #{id}, #{pwd}, #{dept}, #{auth}, #{phone}, #{email}, #{hireDate}, #{employeeName}, #{companyCode}, sysdate, #{salary}, #{birthDay})
 	</insert>
+	
+	<select id="maxEmpCode" resultType = "int">
+		select MAX(emp_code) from employee
+	</select>
 
 </mapper>  
