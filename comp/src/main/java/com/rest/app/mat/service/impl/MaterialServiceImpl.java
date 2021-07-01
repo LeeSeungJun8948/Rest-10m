@@ -72,8 +72,8 @@ public class MaterialServiceImpl implements MaterialService{
 	}
 
 	@Override
-	public InoutVO getMatInfoForInout(InoutVO vo) { // 발주번호 입력시 자재정보 불러오기
-		return mapper.getMatInfoForInout(vo);
+	public InoutVO getMatInfoForIn(InoutVO vo) { // 발주번호 입력시 자재정보 불러오기
+		return mapper.getMatInfoForIn(vo);
 	}
 
 	@Override
@@ -85,4 +85,11 @@ public class MaterialServiceImpl implements MaterialService{
 	public int udtInout(InoutVO vo) { // 입출고 업데이트
 		return mapper.udtInout(vo);
 	}
+
+	@Override
+	public int delInout(InoutVO vo) {
+		return mapper.delInout(vo);
+	}
+	
+	
 }

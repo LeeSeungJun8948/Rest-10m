@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.prod.service.ProdService;
 import com.rest.app.prod.vo.DetailPlanVO;
+import com.rest.app.prod.vo.InputMatVO;
 import com.rest.app.prod.vo.PlanVO;
 
 @Service("prodService")
@@ -49,5 +50,35 @@ public class ProdServiceImpl implements ProdService {
 	@Override
 	public int deleteDetailPlan(DetailPlanVO vo) {
 		return mapper.deleteDetailPlan(vo);
+	}
+
+	@Override
+	public int insertInputMat(InputMatVO vo) {
+		return mapper.insertInputMat(vo);
+	}
+
+	@Override
+	public int updateInputMat(InputMatVO vo) {
+		return mapper.updateInputMat(vo);
+	}
+
+	@Override
+	public int deleteInputMat(InputMatVO vo) {
+		return mapper.deleteInputMat(vo);
+	}
+
+	@Override
+	public String findProductName(String productCode) {
+		return mapper.findProductName(productCode);
+	}
+
+	@Override
+	public List<InputMatVO> getInputMatList() {
+		return mapper.getInputMatList();
+	}
+
+	@Override
+	public List<InputMatVO> getMatLotList(String productCode) {
+		return mapper.getMatLotList(productCode);
 	}
 }

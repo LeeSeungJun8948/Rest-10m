@@ -84,13 +84,11 @@ public class MaterialController {
 		return data;
 	}
 	
-	//~~~~~~~~~~~~~~
 	@RequestMapping(value = {"/ajax/matInList.do", "/ajax/matOutList.do"}, method=RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> ajaxInoutList(InoutVO vo, HttpServletRequest request) {
 		
 		String url = request.getServletPath();
-		System.out.println("요청 url: " + url + "------------------------------------");
 		if(url.equals("/ajax/matInList.do")) {
 			vo.setIoType("01");
 		}else if(url.equals("/ajax/matOutList.do")) {
@@ -107,10 +105,10 @@ public class MaterialController {
 		return data;
 	}
 	
-	@RequestMapping("/ajax/getMatInfoForInout.do")
+	@RequestMapping("/ajax/getMatInfoForIn.do")
 	@ResponseBody
-	public InoutVO ajaxGetMatInfoForInout(Model model, InoutVO vo) { // 자재 리스트에서 클릭시 자재 상세 정보 출력
-		return dao.getMatInfoForInout(vo);
+	public InoutVO ajaxGetMatInfoForIn(Model model, InoutVO vo) { // 자재 리스트에서 클릭시 자재 상세 정보 출력
+		return dao.getMatInfoForIn(vo);
 	}
 	
 	@RequestMapping("/ajax/getNewIoCode.do")
@@ -120,23 +118,53 @@ public class MaterialController {
 	}
 	
 	
-//	@PutMapping(value = "/ajax/matInoutModify.do")
-//	@ResponseBody
-//	public Map<String, Object> modifyEmp(@RequestBody GridData gridData) {
-//		Map<String,Object> data = new HashMap<String, Object>();
-//		for(int i = 0; i < gridData.createdRows.size(); i++) {
-//			dao.insertEmp(gridData.createdRows.get(i));
-//		}
-//		for(int i = 0; i< gridData.updatedRows.size(); i++) {
-//			dao.updateEmp(gridData.updatedRows.get(i));	
-//		}
-//		data.put("result", true);
-//		data.put("data", gridData.updatedRows);
-//		data.put("data", gridData.createdRows);
-//		return data;
-//	}
+	@PutMapping(value = {"/ajax/matInModify.do", "/ajax/matOutModify.do"})
+	@ResponseBody
+	public Map<String, Object> modifyEmp(HttpServletRequest request, @RequestBody GridData gridData) {
+		Map<String,Object> data = new HashMap<String, Object>();
+		
+		String url = request.getServletPath();
+		
+		for(int i = 0; i < gridData.createdRows.size(); i++) {
+			
+			if(url.equals("/ajax/matInModify.do")) {
+				gridData.createdRows.get(i).setIoType("01");
+			}else if(url.equals("/ajax/matOutModify.do")) {
+				gridData.createdRows.get(i).setIoType("02");
+			}
+			dao.istInout(gridData.createdRows.get(i));
+		}
+		
+		for(int i = 0; i < gridData.updatedRows.size(); i++) {
+			
+			if(url.equals("/ajax/matInModify.do")) {
+				gridData.updatedRows.get(i).setIoType("01");
+			}else if(url.equals("/ajax/matOutModify.do")) {
+				gridData.updatedRows.get(i).setIoType("02");
+			}
+			
+			dao.udtInout(gridData.updatedRows.get(i));	
+		}
+		
+		
+		for(int i = 0; i < gridData.deletedRows.size(); i++) {
+			
+			if(url.equals("/ajax/matInModify.do")) {
+				gridData.deletedRows.get(i).setIoType("01");
+			}else if(url.equals("/ajax/matOutModify.do")) {
+				gridData.deletedRows.get(i).setIoType("02");
+			}
+			
+			dao.delInout(gridData.deletedRows.get(i));
+		}
+		
+		data.put("result", true);
+		data.put("data", gridData.updatedRows);
+		data.put("data", gridData.createdRows);
+		data.put("data", gridData.deletedRows);
+		return data;
+	}
 
-	
 	@RequestMapping("matInForm.do")
 	public String matInForm(Model model) {
 		return "mat/matInForm.page";
@@ -161,7 +189,7 @@ public class MaterialController {
 }
 
 @Data
-class GridData {
+class GridData {	
 	List<InoutVO> deletedRows;
 	List<InoutVO> updatedRows;
 	List<InoutVO> createdRows;

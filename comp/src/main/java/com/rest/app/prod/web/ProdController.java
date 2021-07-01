@@ -9,17 +9,44 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.prod.service.ProdService;
 import com.rest.app.prod.vo.DetailPlanVO;
+import com.rest.app.prod.vo.InputMatVO;
 import com.rest.app.prod.vo.PlanVO;
 
 class GridData {
 	List<DetailPlanVO> createdRows;
 	List<DetailPlanVO> updatedRows;
 	List<DetailPlanVO> deletedRows;
+	List<InputMatVO> createdInputRows;
+	List<InputMatVO> updatedInputRows;
+	List<InputMatVO> deletedInputRows;
+
+	public List<InputMatVO> getCreatedInputRows() {
+		return createdInputRows;
+	}
+
+	public void setCreatedInputRows(List<InputMatVO> createdInputRows) {
+		this.createdInputRows = createdInputRows;
+	}
+
+	public List<InputMatVO> getUpdatedInputRows() {
+		return updatedInputRows;
+	}
+
+	public void setUpdatedInputRows(List<InputMatVO> updatedInputRows) {
+		this.updatedInputRows = updatedInputRows;
+	}
+
+	public List<InputMatVO> getDeletedInputRows() {
+		return deletedInputRows;
+	}
+
+	public void setDeletedInputRows(List<InputMatVO> deletedInputRows) {
+		this.deletedInputRows = deletedInputRows;
+	}
 
 	public List<DetailPlanVO> getCreatedRows() {
 		return createdRows;
@@ -61,8 +88,8 @@ public class ProdController {
 	@RequestMapping("readUnplanOrders.do")
 	@ResponseBody
 	public Map<String, Object> readUnplanOrders(@RequestBody Map<String, Object> param) {
-		Map<String, Object> datas = new HashMap<String, Object>();
 		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
 		datas.put("contents", svc.getUnplanOrders(param));
 		data.put("result", true);
 		data.put("data", datas);
@@ -83,10 +110,10 @@ public class ProdController {
 	// 계획삭제
 	@RequestMapping("deletePlan.do")
 	@ResponseBody
-	public void deletePlan(@RequestParam String planCode) {
+	public void deletePlan(String planCode) {
 		svc.deletePlan(planCode);
 	}
-	
+
 	// 세부계획 CUD
 	@RequestMapping("saveGrid.do")
 	@ResponseBody
@@ -98,11 +125,72 @@ public class ProdController {
 			svc.insertDetailPlan(vo);
 		});
 		uList.forEach(vo -> {
-			svc.updateDetailPlan(vo);
+			if (vo.getLotNo() == null) {
+				svc.insertDetailPlan(vo);
+			} else {
+				svc.updateDetailPlan(vo);
+			}
 		});
 		dList.forEach(vo -> {
-			svc.deleteDetailPlan(vo);
+			if (vo.getLotNo() != null) {
+				svc.deleteDetailPlan(vo);
+			}
 		});
 		return "redirect:managePlan.do";
+	}
+
+	// 투입자재 CUD
+	@RequestMapping("saveInput.do")
+	@ResponseBody
+	public String saveInput(@RequestBody GridData gridData) {
+		List<InputMatVO> cList = gridData.createdInputRows;
+		List<InputMatVO> uList = gridData.updatedInputRows;
+		List<InputMatVO> dList = gridData.deletedInputRows;
+		cList.forEach(vo -> {
+			svc.insertInputMat(vo);
+		});
+		uList.forEach(vo -> {
+			if (vo.getInputIdx() == 0) {
+				svc.insertInputMat(vo);
+			} else {
+				svc.updateInputMat(vo);
+			}
+		});
+		dList.forEach(vo -> {
+			if (vo.getInputIdx() != 0) {
+				svc.deleteInputMat(vo);
+			}
+		});
+		return "redirect:managePlan.do";
+	}
+
+	// 제품명찾기
+	@RequestMapping("findProductName.do")
+	@ResponseBody
+	public String findProductName(String productCode) {
+		return svc.findProductName(productCode);
+	}
+
+	// 투입자재테이블 조회
+	@RequestMapping("getInputMatList.do")
+	public Map<String, Object> getInputMatList() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		datas.put("contents", svc.getInputMatList());
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
+	}
+
+	// 자재LOT별 재고량리스트 가져오기
+	@RequestMapping("getMatLotList.do")
+	@ResponseBody
+	public Map<String, Object> getMatLotList(String productCode) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		datas.put("contents", svc.getMatLotList(productCode));
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.prod.vo.DetailPlanVO;
+import com.rest.app.prod.vo.InputMatVO;
 import com.rest.app.prod.vo.PlanVO;
 
 public interface ProdMapper {
@@ -15,4 +16,10 @@ public interface ProdMapper {
 	public int insertDetailPlan(DetailPlanVO vo); 
 	public int updateDetailPlan(DetailPlanVO vo);
 	public int deleteDetailPlan(DetailPlanVO vo);
+	public int insertInputMat(InputMatVO vo); 
+	public int updateInputMat(InputMatVO vo);
+	public int deleteInputMat(InputMatVO vo);
+	public String findProductName(String productCode);
+	public List<InputMatVO> getInputMatList();
+	public List<InputMatVO> getMatLotList(String productCode);
 }
