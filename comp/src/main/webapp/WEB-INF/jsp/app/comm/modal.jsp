@@ -61,11 +61,14 @@
 		</div>
 		<div class="modal-body">
 			<!-- 필요한것 집어넣기 BODY 부분 -->
-			<div id="grid"></div>
+			<div id=matGrid></div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button id=btnSearch type="button" onclick="fnSearch()" class="btn btn-primary">검색</button>
+				<button id=btnSearch type="button" onclick="fnSearch()"
+					class="btn btn-primary">검색</button>
+			
 			</div>
+
 			<script type="text/javascript">
 				const dataSourc = {
 					api : {
@@ -78,11 +81,11 @@
 					contentType : 'application/json'
 				};
 				const matGrid = new tui.Grid({
-					el : document.getElementById('grid'),
+					el : document.getElementById('matGrid'),
 					data : dataSourc,
 					scrollX : false,
 					scrollY : false,
-					rowHeaders: ['rowNum'],
+					rowHeaders : [ 'rowNum' ],
 					columns : [ {
 						header : '제품코드',
 						name : 'productCode',
@@ -124,6 +127,7 @@
 					matGrid.readData(1, param, true);
 				})
 			</script>
+
 		</div>
 	</div>
 </div>
@@ -134,6 +138,6 @@
 	// bom 자재리스트 버튼
 	$('#btnSearch').on('click', function() {
 		var prm = $('#frm').serializeObject();
-		matGrid.readData(1, prm, true);
+		grid.readData(1, prm, true);
 	})
 </script>
