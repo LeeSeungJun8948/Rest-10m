@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.prod.service.ProdService;
 import com.rest.app.prod.vo.DetailPlanVO;
-import com.rest.app.prod.vo.ProdPlanVO;
+import com.rest.app.prod.vo.PlanVO;
 
 @Service("prodService")
 public class ProdServiceImpl implements ProdService {
@@ -22,18 +22,18 @@ public class ProdServiceImpl implements ProdService {
 	}
 
 	@Override
-	public int insertPlan(ProdPlanVO vo) {
+	public int insertPlan(PlanVO vo) {
 		return mapper.insertPlan(vo);
 	}
 
 	@Override
-	public int updatePlan(ProdPlanVO vo) {
+	public int updatePlan(PlanVO vo) {
 		return mapper.updatePlan(vo);
 	}
 
 	@Override
-	public int deletePlan(ProdPlanVO vo) {
-		return mapper.deletePlan(vo);
+	public int deletePlan(String planCode) {
+		return mapper.deletePlan(planCode);
 	}
 
 	@Override
@@ -49,5 +49,10 @@ public class ProdServiceImpl implements ProdService {
 	@Override
 	public int deleteDetailPlan(DetailPlanVO vo) {
 		return mapper.deleteDetailPlan(vo);
+	}
+
+	@Override
+	public String findLotNo() {
+		return mapper.findLotNo();
 	}
 }

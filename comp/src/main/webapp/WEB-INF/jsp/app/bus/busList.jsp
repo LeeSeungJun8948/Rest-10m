@@ -23,36 +23,32 @@
 				<div class="col-md-5 mb-4">
 
 					<div class="form-group border">
-						<input type="radio" id="upPlan" name="orderState" value="unPlan"
+						<input type="radio" id="upPlan" name="orderState" value="unPlan" 
 							checked><span style="margin: 3px 30px;">미계획</span> <input
-							type="radio" id="proPlan" name="orderState" value="proPlan"
-							checked> <span style="margin: 3px 30px;">생산계획</span> <input
+							type="radio" id="working" name="orderState" value="working" 
+							> <span style="margin: 3px 30px;">진행중</span> <input
 							type="radio" id="planComplete" name="orderState"
-							value="planComplete" checked> <span
-							style="margin: 3px 30px;">계획완료</span> <input type="radio"
-							id="proComplete" name="orderState" value="proComplete" checked>
-						<span style="margin: 3px 30px;">생산완료</span>
+							value="planComplete" > <span
+							style="margin: 3px 30px;">계획완료</span> 
 					</div>
 
 				</div>
 			</div>
 
 			<div>
-				<label for="fromDate">접수일자</label> <input type="date"
-					name="fromDate" id="fromDate"> <label for="toDate">~</label>
-				<input type="date" name="toDate" id="toDate">
+				<label for="inDate">접수일자</label> <input type="date"
+					name="fromDate" id="fromDate" value=${orders.inDate }> ~
+				<input type="date" name="toDate" id="toDate" value=${inDate }>
 			</div>
 
 
 			<div class="col-9 ta-l ml-1">
 				<label class="headtxt">고객사</label> <input type="text"
 					id="searchKeywordFrom" name="searchKeywordFrom" />
-				<button
-					onclick="window.open('address','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');"
-					class="btn btn-primary">
+				<a href="modal.do" rel="modal:open"class="btn btn-primary">
 					<img
 						src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.gif'/>">
-				</button>
+				</a>
 				<input type="text" id="searchKeywordFromNm"
 					name="searchKeywordFromNm" readonly="true" /> <label
 					class="ml-1 mr-1">~</label> <input type="text" id="searchKeywordTo"
@@ -84,10 +80,10 @@
 			<div class="grid-option-area">
 
 				<div class="col-6 ta-r mr-1">
-					<button name="resetBtn" type="reset" class="btn btn-primary"
+					<button name="resetBtn" type="button" class="btn btn-primary"
 						id="resetBtn">새자료</button>
-					<button name="searchBtn" type="submit" class="btn btn-primary"
-						id="searchBtn" onclick="getData()">조회</button>
+					<button name="searchBtn" type="button" class="btn btn-primary"
+						id="searchBtn">조회</button>
 					<button name="excelBtn" type="button" class="btn btn-primary"
 						id="excelBtn">Excel</button>
 					<button name="printBtn" type="button" class="btn btn-primary"
@@ -97,15 +93,22 @@
 		</form>
 	</div>
 
-	<div id="grid"></div>
+	<div id="grid">
 	<script type="text/javascript">
-		var gridData;
+	
 		
+	var dataSource = {
+				api : {
+					readData : {url: 'ajax/busList.do', method:'POST' }
+				},
+				contentType: 'application/json'
+				
+		};
 	
 		
 		const grid = new tui.Grid({
 			el : document.getElementById('grid'),
-			data : gridData,
+			data : dataSource,
 			scrollX : false,
 			scrollY : false,
 			columns : [ {
@@ -113,7 +116,7 @@
 				name : 'orderState'
 			}, {
 				header : '업체명',
-				name : 'companyName'
+				name : 'compName'
 			}, {
 				header : '주문번호',
 				name : 'orderNo'
@@ -139,36 +142,75 @@
 				header : '주문량',
 				name : 'orderCount'
 			}, {
-				header : '지시량',
-				name : 'oprojectCount'
-			}, {
+				header : '출고량',
+				name : 'kg'
+			},{
 				header : '미납품량',
-				name : 'dCount'
+				name : 'notCount'
 			}, {
 				header : '비   고',
 				name : 'remark'
-			} ,
-			]
+			} 
+			], summary:{
+		        height:40,
+		        position:'bottom',
+		        columnContent:{
+		        	companyName:{
+		                template(summary) {
+		                    return '합계';
+		                } 
+		            },
+		            orderCount:{
+		                template(summary) {
+		                    return (summary.sum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		                }
+		            },
+		            kg:{
+		                template(summary) {
+		                    return (summary.sum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		                }
+		            },
+		            dCount:{
+		                template(summary) {
+		                    return (summary.sum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		                }
+		            }
+		        }
+		    },
+		    columnOptions: {
+		        resizable : true
+		    }
+
 		});
 
-		const dataSource = {
-				api : {
-					readData : {url: 'ajax/busList.do', method:'GET' },
-				},
-				contentType: 'application/json'
-				
+		$.fn.serializeObject = function() {
+			var o = {};
+			var a = this.serializeArray();
+			$.each(a, function() {
+				if (o[this.name]) {
+					if (!o[this.name].push) {
+						o[this.name] = [o[this.name]];
+					}
+					o[this.name].push(this.value || '');
+				} else {
+					o[this.name] = this.value || '';
+				}
+			});
+			return o;
 		};
 		
 		
-		$(document).ready(function(){
-		    //resetBtn 을 클릭했을때의 함수
-		    $( "#resetBtn").click(function () {
-		        $( "#dataForm" ).each( function () {
-		            this.reset();
-		        });
-		    });
+		//조회버튼
+		$('#searchBtn').on('click',function(){
+				   var param = $('#dataForm').serializeObject();
+				   console.log(param)
+				   grid.readData(1, param, true);
+				});
+		$('#resetBtn').on('click', function(){
+			grid.clear();
 		});
 
 	</script>
+	</div>
 </body>
 </html>

@@ -7,7 +7,7 @@ $( document ).ready(function() {
 const dataSource = {
 	api : {
 		readData : {url: 'ajax/matInList.do' , method:'GET' },
-		modifyData : { url: 'ajax/matInoutModify.do', method: 'PUT'}
+		modifyData : { url: 'ajax/matInModify.do', method: 'PUT'}
 	},
 	contentType: 'application/json'
 };
@@ -103,8 +103,8 @@ const grid = new tui.Grid({
 		}, {
 			header : 'LOT_NO',
 			name : 'lotNo',
-			width : 120,
-			align: 'right'
+			width : 140,
+			align: 'center'
 		}, {
 			header : '자재재고',
 			name : 'stock',
@@ -181,7 +181,7 @@ function setMatInfo(ev){
 		$.ajax({
 			type : "get",
 			data: {"inorderCode" : inorderCode},
-			url : "ajax/getMatInfoForInout.do",
+			url : "ajax/getMatInfoForIn.do",
 			dataType : "json",
 			async : false,
 			success : function(data) {
@@ -233,9 +233,8 @@ $("#btnGridAdd").on("click", function(){
 	});
 });
 
-$("#btnGridDel").on("click", function(){
-	
-	
+$("#btnGridDel").on("click", function(ev){
+	grid.removeCheckedRows(true);
 });
 
 
