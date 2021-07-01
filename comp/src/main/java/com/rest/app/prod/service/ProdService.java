@@ -19,4 +19,7 @@ public interface ProdService {
 	public int insertInputMat(InputMatVO vo); 
 	public int updateInputMat(InputMatVO vo);
 	public int deleteInputMat(InputMatVO vo);
+	public String findProductName(String productCode);
+	public List<InputMatVO> getInputMatList();
+	public List<InputMatVO> getMatLotList(String productCode);
 }

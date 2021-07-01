@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.prod.service.ProdService;
@@ -111,7 +110,7 @@ public class ProdController {
 	// 계획삭제
 	@RequestMapping("deletePlan.do")
 	@ResponseBody
-	public void deletePlan(@RequestParam String planCode) {
+	public void deletePlan(String planCode) {
 		svc.deletePlan(planCode);
 	}
 
@@ -139,7 +138,7 @@ public class ProdController {
 		});
 		return "redirect:managePlan.do";
 	}
-	
+
 	// 투입자재 CUD
 	@RequestMapping("saveInput.do")
 	@ResponseBody
@@ -163,5 +162,35 @@ public class ProdController {
 			}
 		});
 		return "redirect:managePlan.do";
+	}
+
+	// 제품명찾기
+	@RequestMapping("findProductName.do")
+	@ResponseBody
+	public String findProductName(String productCode) {
+		return svc.findProductName(productCode);
+	}
+
+	// 투입자재테이블 조회
+	@RequestMapping("getInputMatList.do")
+	public Map<String, Object> getInputMatList() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		datas.put("contents", svc.getInputMatList());
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
+	}
+
+	// 자재LOT별 재고량리스트 가져오기
+	@RequestMapping("getMatLotList.do")
+	@ResponseBody
+	public Map<String, Object> getMatLotList(String productCode) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		datas.put("contents", svc.getMatLotList(productCode));
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
 	}
 }

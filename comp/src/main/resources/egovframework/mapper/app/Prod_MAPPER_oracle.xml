@@ -66,4 +66,16 @@
 	<delete id="deleteInputMat">
 		DELETE FROM inputMat WHERE input_idx = #{inputIdx}
 	</delete>
+	
+	<select id="findProductName" parameterType="String" resultType="String">
+		SELECT product_name FROM product WHERE product_code = #{productCode} 
+	</select>
+	
+	
+	<select id="getInputMatList" resultType="com.rest.app.prod.vo.InputMatVO">
+		SELECT * FROM inputmat WHERE product_lot = #{productLot}
+	</select>
+	<select id="getMatLotList" resultType="com.rest.app.prod.vo.InputMatVO">
+		SELECT * FROM stock
+	</select>
 </mapper>

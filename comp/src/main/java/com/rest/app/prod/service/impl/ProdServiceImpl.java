@@ -66,4 +66,19 @@ public class ProdServiceImpl implements ProdService {
 	public int deleteInputMat(InputMatVO vo) {
 		return mapper.deleteInputMat(vo);
 	}
+
+	@Override
+	public String findProductName(String productCode) {
+		return mapper.findProductName(productCode);
+	}
+
+	@Override
+	public List<InputMatVO> getInputMatList() {
+		return mapper.getInputMatList();
+	}
+
+	@Override
+	public List<InputMatVO> getMatLotList(String productCode) {
+		return mapper.getMatLotList(productCode);
+	}
 }
