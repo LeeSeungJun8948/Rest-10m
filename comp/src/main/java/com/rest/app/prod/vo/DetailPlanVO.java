@@ -4,13 +4,14 @@ import lombok.Data;
 
 @Data
 public class DetailPlanVO {
-	int idx;
+	String lotNo;
 	String planCode;
 	int orderNo;
+	int productCode;
 	String workDate;
 	int orderCount;
 	int planCount;
 	int unplanCount;
 	int workCount;
-	String detail;
+	String comments;
 }

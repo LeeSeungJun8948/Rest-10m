@@ -3,9 +3,9 @@ package com.rest.app.comm.vo;
 import lombok.Data;
 
 @Data
-public class BomVO {
+public class BomVO extends ComDefaultVO{
 	
-	int productCode;
+	Integer productCode;
 	String productName;
 	String unitNo;
 	String companyName;
@@ -14,4 +14,6 @@ public class BomVO {
 	String processName;
 	int materialCode;
 	String materialName;
+	String kg;
+	String etc;
 }

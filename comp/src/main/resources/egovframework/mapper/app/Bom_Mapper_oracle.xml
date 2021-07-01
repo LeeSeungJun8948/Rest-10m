@@ -6,11 +6,18 @@
 	<select id="getProduct" resultType="com.rest.app.comm.vo.BomVO">
 		SELECT product_code, product_name, unit_no
  		  FROM product
+ 		  		<where>
+				<if test="searchCondition == 'productCode'">AND
+					product_code LIKE '%' || #{searchKeyword} || '%'
+				</if>
+				<if test="searchCondition == 'productName'">AND
+					product_name LIKE '%' || #{searchKeyword} || '%'
+				</if>
+		</where>
 	</select>
-	
 	<!-- 제품단건조회 -->
 	<select id="getInfoProduct" resultType="com.rest.app.comm.vo.BomVO">
-		select p.product_code, p.product_name, p.unit_no, a.company_name
+		select DISTINCT p.product_code, p.product_name, p.unit_no, a.company_name
     	  from product p
     	  join ( select c.company_code, c.company_name, o.product_code
              	   from company c
@@ -19,7 +26,18 @@
      		on (p.product_code = a.product_code)
   		 where p.product_code = #{productCode}
 	</select>
-	  
+	<!-- 자재코드 입력시 자재명 출력 -->
+	<select id="getMatName" resultType="com.rest.app.comm.vo.BomVO">
+		select material_name
+  		  from material
+ 		 where material_code = #{materialCode}
+ 	<!-- 공정코드 입력시 공정명 출력 -->
+ 	</select>
+ 	<select id="getProName" resultType="com.rest.app.comm.vo.BomVO">
+ 		select process_name
+		  from process
+		 where process_code=#{processCode}
+ 	</select>
 	<!-- BomList -->
 	<select id="getInfoBom" resultType="com.rest.app.comm.vo.BomVO">
 		select p.process_name, a.*
@@ -31,4 +49,18 @@
     		on (p.process_code=a.process_code)
     	 where a.product_code=#{productCode}
 	</select>
+	
+	<!--Bom Insert -->
+	<select id="insertBom" parameterType="com.rest.app.comm.vo.BomVO">
+		insert into bom
+		values (#{productCode},#{materialCode},#{processCode},#{kg},#{etc})
+	</select>
+	
+	<!-- Bom Update -->
+	<select id="updateBom" parameterType="com.rest.app.comm.vo.BomVO">
+		update bom
+   		   set material_Code = #{materialCode}, process_code= #{processCode} , kg = #{kg}, etc=#{etc}
+ 		 where product_code = #{productCode}
+	</select>
+
 </mapper>

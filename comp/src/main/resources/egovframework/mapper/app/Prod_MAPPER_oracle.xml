@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rest.app.prod.service.impl.ProdMapper">
 	<select id="getUnplanOrders" resultType="com.rest.app.bus.vo.OrdersVO">
-		SELECT o.order_no, o.product_code, o.out_date, o.order_count, o.plan_count, p.product_name,
-			o.order_count - o.plan_count unplan_count 
+		SELECT o.*, o.order_count - o.plan_count unplan_count
 		FROM orders o, product p
 		WHERE o.order_count != o.plan_count
 		AND o.product_code = p.product_code
@@ -11,36 +10,37 @@
                    AND TO_DATE(#{planDtE}, 'YYYY-MM-DD')
 	</select>
 	
-	<insert id="insertPlan" parameterType="com.rest.app.prod.vo.ProdPlanVO">
-		INSERT INTO prodplan VALUES(
-		pplan_seq.NEXTVAL, #{planDate}, #{planName}, '진행중', #{comments} 
+	<insert id="insertPlan" parameterType="com.rest.app.prod.vo.PlanVO">
+		INSERT INTO plan VALUES(
+		(SELECT NVL(MAX(plan_code),0) FROM plan) + 1, #{planName}, #{planDate}, #{comments} 
 		)
 	</insert>
-	<update id="updatePlan" parameterType="com.rest.app.prod.vo.ProdPlanVO">
-		UPDATE prodplan SET plan_date = #{planDate}, plan_name = #{planName}, comments = #{comments}
+	<update id="updatePlan" parameterType="com.rest.app.prod.vo.PlanVO">
+		UPDATE plan SET plan_date = #{planDate}, plan_name = #{planName}, comments = #{comments}
 	</update>
+	<delete id="deletePlan">
+		DELETE FROM plan WHERE plan_code = #{planCode}
+	</delete>
 	
 	<insert id="insertDetailPlan" parameterType="com.rest.app.prod.vo.DetailPlanVO">
 		INSERT INTO detailplan VALUES(
-		dplan_seq.NEXTVAL, 
+		#{lotNo},
 		<choose>
 			<when test="planCode != null and planCode != ''">
 				#{planCode},
 			</when>
 			<otherwise>
-				pplan_seq.CURRVAL,
+				(SELECT NVL(MAX(plan_code),0) FROM prodplan),
 			</otherwise>
 		</choose>
-		#{orderNo}, #{workDate}, #{orderCount}, #{planCount} + #{workCount}, #{detail} 
+		#{orderNo}, #{productCode}, #{workDate}, #{comments}, #{workCount} 
 		)
 	</insert>
-	
 	<update id="updateDetailPlan" parameterType="com.rest.app.prod.vo.DetailPlanVO">
-		UPDATE detailplan SET work_date = #{workDate}, plan_count = #{planCount} + #{workCount},
-		detail = #{detail}
+		UPDATE detailplan SET work_date = #{workDate}, work_count = #{workCount},
+		comments = #{comments}
 	</update>
-	
 	<delete id="deleteDetailPlan">
-		DELETE detailplan WHERE idx = #{idx}
+		DELETE FROM detailplan WHERE lot_no = #{lot_no}
 	</delete>
 </mapper>

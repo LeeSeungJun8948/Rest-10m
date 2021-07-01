@@ -3,20 +3,30 @@ package com.rest.app.comm.web;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rest.app.comm.service.BomService;
 import com.rest.app.comm.vo.BomVO;
 
+import lombok.Data;
+
+@Data
+class BomGridData{
+	List<BomVO> deletedRows;
+	List<BomVO> updatedRows;
+	List<BomVO> createdRows;
+}
 
 @Controller
 public class BomController {
@@ -34,9 +44,11 @@ public class BomController {
 	//제품코드,제품명,규격 리스트 (모달)
 	@RequestMapping("bomList.do")
 	public String getProduct(Model model, BomVO vo) {
-		model.addAttribute("productList", dao.getProduct(vo));
 		return "comm/bomList.page";
 	}
+
+	
+	
 	//제품코드,제품명,규격 리스트 ajax
 	@RequestMapping("/ajax/bomList.do")
 	@ResponseBody
@@ -53,6 +65,8 @@ public class BomController {
 	public String modal() {
 		return "app/comm/modal";
 	}
+	
+	
 	//제품 단건조회 , 소요자재조회
 	@RequestMapping("getInfoProduct.do")
 	public ModelAndView getInfoProduct(Model model, BomVO vo) {
@@ -73,6 +87,60 @@ public class BomController {
 		datas.put("contents", dao.getInfoBom(vo));
 		data.put("data", datas);
 		return data;
-	}  
+	}
+	
+	//자재명 불러오기
+	@RequestMapping("/ajax/getMatName.do")
+	@ResponseBody
+	public BomVO ajaxgetMatNameT(Model model, BomVO vo) {
+		return dao.getMatName(vo);
+	}
+	//공정명 불러오기
+	@RequestMapping("/ajax/getProName.do")
+	@ResponseBody
+	public BomVO ajaxgetProName(Model model,BomVO vo) {
+		return dao.getProName(vo);
+	}
+	
+	@PostMapping(value="/ajax/insertBom.do")
+	@ResponseBody
+	public Map<String, Object> insertBom(@RequestBody BomGridData bomGridData) {
+		Map<String,Object> data = new HashMap<String,Object>();
+		dao.insertBom(bomGridData.createdRows.get(0));
+		data.put("result", true);
+		data.put("data", bomGridData.createdRows);
+		return data;
+	}
+	@PutMapping(value="/ajax/updateBom.do")
+	@ResponseBody
+	public Map<String, Object> updateBom(@RequestBody BomGridData bomGridData) {
+	
+		Map<String,Object> data = new HashMap<String, Object>();
+		for(int i =0; i<bomGridData.updatedRows.size(); i++) {
+			dao.updateBom(bomGridData.updatedRows.get(i));	
+		}
+		data.put("result", true);
+		data.put("data",bomGridData.updatedRows);
+		return data;
+	}
+	
+	@PutMapping(value= "/ajax/modifyBom.do")
+	@ResponseBody
+	public Map<String, Object> modifyBom(@RequestBody BomGridData bomGridData) {
+		Map<String,Object> data = new HashMap<String,Object>();
+		
+		for(int i=0; i<bomGridData.createdRows.size(); i++){
+			dao.insertBom(bomGridData.createdRows.get(i));
+		}
+		for(int i=0; i<bomGridData.updatedRows.size(); i++){
+			dao.updateBom(bomGridData.updatedRows.get(i));
+		}
+		data.put("result", true);
+		data.put("data",bomGridData.createdRows);
+		data.put("data",bomGridData.updatedRows);
+		return data;
+	}
 }	
+
+
 
