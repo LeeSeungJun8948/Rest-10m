@@ -41,5 +41,6 @@ public class InoutVO {
 	Integer price;
 	Integer stock;
 	
-	String ioType; // 01 : 입고, 02 : 출고, 03 : 정산입고, 04 : 정산출고  
+	String ioType; // 01 : 입고, 02 : 출고, 03 : 정산입고, 04 : 정산출고
+	String sort;
 }

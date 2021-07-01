@@ -62,7 +62,27 @@ public class MaterialServiceImpl implements MaterialService{
 	}
 
 	@Override
-	public List<InoutVO> getMatList(InoutVO vo) { // 입출고 리스트
-		return mapper.getMatList(vo);
+	public List<InoutVO> getMatInoutList(InoutVO vo) { // 입출고 리스트
+		return mapper.getMatInoutList(vo);
+	}
+
+	@Override
+	public InoutVO getNewIoCode() { // 입출고 행 추가시 새 입출고코드 불러오기
+		return mapper.getNewIoCode();
+	}
+
+	@Override
+	public InoutVO getMatInfoForInout(InoutVO vo) { // 발주번호 입력시 자재정보 불러오기
+		return mapper.getMatInfoForInout(vo);
+	}
+
+	@Override
+	public int istInout(InoutVO vo) { // 입출고 인설트
+		return mapper.istInout(vo);
+	}
+
+	@Override
+	public int udtInout(InoutVO vo) { // 입출고 업데이트
+		return mapper.udtInout(vo);
 	}
 }
