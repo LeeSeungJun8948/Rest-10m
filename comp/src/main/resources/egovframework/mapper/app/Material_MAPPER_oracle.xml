@@ -100,7 +100,8 @@
 		        inorder_code, io_volume, unit_price, io_volume * unit_price as price, lot_no,
 		        (SELECT stock FROM stock WHERE material_code = inout.material_code) as stock,
         		(SELECT f_findCompName(company_code) FROM inorder WHERE inorder_code = inout.inorder_code) as company_name,
-     		  	(SELECT company_code FROM inorder WHERE inorder_code = inout.inorder_code) as company_code
+     		  	(SELECT company_code FROM inorder WHERE inorder_code = inout.inorder_code) as company_code,
+     		  	(SELECT process_name FROM process WHERE process_code = inout.process_code) as process_name
 		FROM inout
 		
 		<where>
@@ -116,6 +117,10 @@
 			<if test="materialCode != null and materialCode != ''">
 				AND material_code = #{materialCode}
 			</if>	
+			
+			<if test="processCode != null and processCode != ''">
+				AND process_code = #{processCode}
+			</if>
 		</where>
 		
 		<if test="sort != null and sort != ''">
@@ -132,7 +137,7 @@
 	</select>
 	
 	<!-- 발주번호 입력시 자재정보 불러오기 -->
-	<select id="getMatInfoForInout" resultType="InoutVO" parameterType="InoutVO" >
+	<select id="getMatInfoForIn" resultType="InoutVO" parameterType="InoutVO" >
 		SELECT material_code, F_FINDMATNAME(material_code) AS material_name, unit_no, 
 		(SELECT stock FROM stock where material_code = material.material_code) AS stock 
 		FROM material 
@@ -141,15 +146,22 @@
 	
 	<!-- 입출고 인설트 -->
 	<insert id="istInout" parameterType="InoutVO">
-		INSERT INTO inout(io_code, io_date, io_volumn, unit_price, material_code, lot_no, inorder_code, inout_id, inout_no) 
-		VALUES(#{ioCode}, #{ioDate}, #{ioVolume}, #{unitPrice}, #{materialCode}, #{lotNo}, #{inorderCode}, 'R_INOUT', #{ioType})
+		INSERT INTO inout(io_code, io_date, io_volume, unit_price, material_code, lot_no, inorder_code, inout_id, inout_no, process_code) 
+		VALUES(#{ioCode}, #{ioDate}, #{ioVolume}, #{unitPrice}, #{materialCode}, #{lotNo}, #{inorderCode}, 'R_INOUT', #{ioType}, #{processCode})
 	</insert>
 	
 	<!-- 입출고 업데이트 -->
 	<update id="udtInout" parameterType="InoutVO">
 		UPDATE inout 
-		SET io_date = #{ioDate} AND inorder_code = #{inorderCode} AND io_volumn = #{ioVolumn} AND unit_price = #{unitPrice} 
+		SET io_date = #{ioDate}, inorder_code = #{inorderCode}, material_code = #{materialCode}, io_volume = #{ioVolume}, unit_price = #{unitPrice}
+					,lot_no = #{lotNo}, process_code = #{processCode}
 		WHERE io_code = #{ioCode}
 	</update>
+	
+	<!-- 입출고 삭제 -->
+	<delete id="delInout" parameterType="InoutVO">
+		DELETE FROM inout WHERE io_code = ${ioCode}
+	</delete>
+	
 	
 </mapper>
