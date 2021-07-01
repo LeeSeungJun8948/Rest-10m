@@ -6,11 +6,11 @@ var dataSource = {
   }
 }
 
-var dataSourceLot = {
+var dataSourceInput = {
 	contentType: 'application/json',
 	api: {
 		readData: { url: '', method: 'POST' },
-		modifyData: { url: '', method: 'PUT' },
+		modifyData: { url: 'saveInput.do', method: 'PUT' },
   }
 }
 
@@ -65,7 +65,7 @@ const grid = new tui.Grid({
           }
 		}, {
 		header : '제품LOT',
-		name : 'lotNo',
+		name : 'productLot',
 		}, {
 		header : '비고',
 		name : 'comments',
@@ -78,34 +78,35 @@ const grid = new tui.Grid({
 	]
 });
 
-const gridLot = new tui.Grid({
-	el : document.getElementById('gridLot'),
+const gridInput = new tui.Grid({
+	el : document.getElementById('gridInput'),
 	scrollX : false,
 	scrollY : true,
-	/*data : dataSourceLot,*/ 
-	rowHeaders: ['checkbox'],
+	/*data : dataSourceInput,*/ 
 	columns : [ {
-		header : '제품코드',
-		name : 'productCode',
-		editor: 'text'
-		}, { 
-		header : '제품명',
-		name : 'productName'
+		header : '자재코드',
+		name : 'materialCode'
 		}, {
-		header : '업체명',
-		name : 'lotNo',
-		}, {
-		header : '제품 LOT',
-		name : 'lotNo',
+		header : '자재명',
+		name : 'materialName'
 		}, {
 		header : '자재 LOT',
-		name : 'stockLot'
+		name : 'materialLot'
 		}, {
 		header : '수량',
-		name : 'kg'
+		name : 'inputCount'
+		editor: 'text'
 		}, {
 		header : '비고',
 		name : 'comments'	
+		}, {
+		header : '제품LOT',
+		name : 'productLot',
+		hidden : true
+		}, {
+		header : '순번',
+		name : 'inputIdx',
+		hidden : true
 		}  ]
 });
 
@@ -119,6 +120,7 @@ $(document).ready(function() {
          $("form").each(function() {  
             this.reset();  
 			grid.clear();
+			gridInput.clear();
          });  
     });  
 });  
@@ -134,6 +136,7 @@ $('#btnSave').on('click', function(){
 		}
 	});
 	grid.request('modifyData');
+	gridInput.request('modifyData');
 	toastr.success("저장되었습니다.");
 });
 

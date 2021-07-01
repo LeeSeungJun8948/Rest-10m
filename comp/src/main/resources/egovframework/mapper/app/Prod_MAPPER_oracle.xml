@@ -10,6 +10,7 @@
                    AND TO_DATE(#{planDtE}, 'YYYY-MM-DD')
 	</select>
 	
+	<!-- 생산계획 -->
 	<insert id="insertPlan" parameterType="com.rest.app.prod.vo.PlanVO">
 		INSERT INTO plan VALUES(
 		(SELECT NVL(MAX(plan_code),0) FROM plan) + 1, #{planName}, #{planDate}, #{comments} 
@@ -23,12 +24,13 @@
 		DELETE FROM plan WHERE plan_code = #{planCode}
 	</delete>
 	
+	<!-- 세부계획 -->
 	<select id="selectDetailplan">
 	
 	</select>	
 	<insert id="insertDetailPlan" parameterType="com.rest.app.prod.vo.DetailPlanVO">
 		INSERT INTO detailplan VALUES(
-		(SELECT NVL(MAX(lot_no),0) FROM detailplan) + 1,
+		(SELECT NVL(MAX(productLot),0) FROM detailplan) + 1,
 		<choose>
 			<when test="planCode != null and planCode != ''">
 				#{planCode},
@@ -37,19 +39,31 @@
 				(SELECT NVL(MAX(plan_code),0) FROM plan) + 1,
 			</otherwise>
 		</choose>
-		#{orderNo}, #{productCode}, #{workDate}, #{comments}, #{workCount} 
+		#{orderNo}, #{productCode}, #{workDate}, #{workCount}, #{comments} 
 		)
 	</insert>
 	<update id="updateDetailPlan" parameterType="com.rest.app.prod.vo.DetailPlanVO">
 		UPDATE detailplan SET work_date = #{workDate}, work_count = #{workCount},
 		comments = #{comments} 
-		WHERE lot_no = #{lotNo}
+		WHERE product_lot = #{productLot}
 	</update>
 	<delete id="deleteDetailPlan">
-		DELETE FROM detailplan WHERE lot_no = #{lot_no}
+		DELETE FROM detailplan WHERE product_lot = #{productLot}
 	</delete>
-	
-	<select id="findLotNo" parameterType="String" resultType="String">
-		SELECT lot_no FROM detailplan
-	</select>
+
+	<!-- 투입자재 -->
+	<insert id="insertInputMat" parameterType="com.rest.app.prod.vo.InputMatVO">
+		INSERT INTO inputMat VALUES(
+		(SELECT NVL(MAX(inputIdx),0) FROM inputMat) + 1,
+		#{productLot}, #{materialLot}, #{inputCount}, #{comments} 
+		)
+	</insert>
+	<update id="updateInputMat" parameterType="com.rest.app.prod.vo.InputMatVO">
+		UPDATE inputMat SET lot_no = #{productLot}, material_lot = #{materialLot},
+		input_count = #{inputCount}, comments = #{comments} 
+		WHERE input_idx = #{inputIdx}
+	</update>
+	<delete id="deleteInputMat">
+		DELETE FROM inputMat WHERE input_idx = #{inputIdx}
+	</delete>
 </mapper>

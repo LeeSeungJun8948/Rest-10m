@@ -14,12 +14,40 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.prod.service.ProdService;
 import com.rest.app.prod.vo.DetailPlanVO;
+import com.rest.app.prod.vo.InputMatVO;
 import com.rest.app.prod.vo.PlanVO;
 
 class GridData {
 	List<DetailPlanVO> createdRows;
 	List<DetailPlanVO> updatedRows;
 	List<DetailPlanVO> deletedRows;
+	List<InputMatVO> createdInputRows;
+	List<InputMatVO> updatedInputRows;
+	List<InputMatVO> deletedInputRows;
+
+	public List<InputMatVO> getCreatedInputRows() {
+		return createdInputRows;
+	}
+
+	public void setCreatedInputRows(List<InputMatVO> createdInputRows) {
+		this.createdInputRows = createdInputRows;
+	}
+
+	public List<InputMatVO> getUpdatedInputRows() {
+		return updatedInputRows;
+	}
+
+	public void setUpdatedInputRows(List<InputMatVO> updatedInputRows) {
+		this.updatedInputRows = updatedInputRows;
+	}
+
+	public List<InputMatVO> getDeletedInputRows() {
+		return deletedInputRows;
+	}
+
+	public void setDeletedInputRows(List<InputMatVO> deletedInputRows) {
+		this.deletedInputRows = deletedInputRows;
+	}
 
 	public List<DetailPlanVO> getCreatedRows() {
 		return createdRows;
@@ -107,6 +135,31 @@ public class ProdController {
 		dList.forEach(vo -> {
 			if (vo.getLotNo() != null) {
 				svc.deleteDetailPlan(vo);
+			}
+		});
+		return "redirect:managePlan.do";
+	}
+	
+	// 투입자재 CUD
+	@RequestMapping("saveInput.do")
+	@ResponseBody
+	public String saveInput(@RequestBody GridData gridData) {
+		List<InputMatVO> cList = gridData.createdInputRows;
+		List<InputMatVO> uList = gridData.updatedInputRows;
+		List<InputMatVO> dList = gridData.deletedInputRows;
+		cList.forEach(vo -> {
+			svc.insertInputMat(vo);
+		});
+		uList.forEach(vo -> {
+			if (vo.getInputIdx() == 0) {
+				svc.insertInputMat(vo);
+			} else {
+				svc.updateInputMat(vo);
+			}
+		});
+		dList.forEach(vo -> {
+			if (vo.getInputIdx() != 0) {
+				svc.deleteInputMat(vo);
 			}
 		});
 		return "redirect:managePlan.do";
