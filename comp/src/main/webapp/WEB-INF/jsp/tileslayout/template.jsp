@@ -41,8 +41,6 @@
 					<tiles:insertAttribute name="body" />
 				</div>
 			</div>
-		</div>
-		<div>
 			<footer class="sticky-footer bg-white">
 				<tiles:insertAttribute name="footer" />
 			</footer>
