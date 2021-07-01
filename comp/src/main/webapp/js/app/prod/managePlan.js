@@ -82,7 +82,7 @@ const gridLot = new tui.Grid({
 	el : document.getElementById('gridLot'),
 	scrollX : false,
 	scrollY : true,
-	data : dataSourceLot, 
+	/*data : dataSourceLot,*/ 
 	rowHeaders: ['checkbox'],
 	columns : [ {
 		header : '제품코드',
@@ -92,54 +92,21 @@ const gridLot = new tui.Grid({
 		header : '제품명',
 		name : 'productName'
 		}, {
-		header : '주문번호',
-		name : 'orderNo'
-		}, {
-		header : '납기일자',
-		name : 'outDate'
-		}, {
-		header : '주문량',
-		name : 'orderCount',
-		align : 'right' 
-		}, {
-		header : '기계획량',
-		name : 'planCount'
-		}, {
-		header : '미계획량',
-		name : 'unplanCount',
-		}, {
-		header : '작업량',
-		name : 'workCount',
-		editor: 'text',
-		}, {
-		header : '일생산량',
-		name : 'dayCount'
-		}, {
-		header : '생산일수',
-		name : 'workDay'
-		}, {
-		header : '작업일자',
-		name : 'workDate',
-		editor: {
-            type: 'datePicker',
-            options: {
-				language: 'ko',
-            	format: 'yyyy-MM-dd'
-            }
-          }
-		}, {
-		header : '제품LOT',
+		header : '업체명',
 		name : 'lotNo',
 		}, {
-		header : '비고',
-		name : 'comments',
-		editor: 'text'
+		header : '제품 LOT',
+		name : 'lotNo',
 		}, {
-		header : '생산계획번호',
-		name : 'planCode',
-		hidden : true
-		}
-	]
+		header : '자재 LOT',
+		name : 'stockLot'
+		}, {
+		header : '수량',
+		name : 'kg'
+		}, {
+		header : '비고',
+		name : 'comments'	
+		}  ]
 });
 
 // 조회 버튼
