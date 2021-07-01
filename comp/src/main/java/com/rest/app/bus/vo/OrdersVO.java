@@ -23,5 +23,5 @@ public class OrdersVO {
 	int dayCount;//현재고
 	int productCount;
 	int exportCount;
-	int unExport;
+	
 }
