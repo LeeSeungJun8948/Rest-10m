@@ -67,13 +67,14 @@ public class BomController {
 	}
 	
 	
-	//제품 단건조회 , 소요자재조회
+	//제품 조회 , 소요자재조회
 	@RequestMapping("getInfoProduct.do")
 	public ModelAndView getInfoProduct(Model model, BomVO vo) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/comm/bomList.page");
-		mv.addObject("info", dao.getInfoProduct(vo));
-		mv.addObject("binfo", dao.getInfoBom(vo));
+		mv.addObject("info", dao.getInfoProduct(vo));  //제품 단건조회
+		mv.addObject("companyList", dao.getCompanyList(vo)); //제품에 대한 고객사명 리스트
+		mv.addObject("binfo", dao.getInfoBom(vo));  //소요자재 조회
 		return mv;  
 	}
 	
@@ -102,6 +103,7 @@ public class BomController {
 		return dao.getProName(vo);
 	}
 	
+	//소요자재 추가
 	@PostMapping(value="/ajax/insertBom.do")
 	@ResponseBody
 	public Map<String, Object> insertBom(@RequestBody BomGridData bomGridData) {
@@ -111,6 +113,8 @@ public class BomController {
 		data.put("data", bomGridData.createdRows);
 		return data;
 	}
+	
+	//소요자재 수정
 	@PutMapping(value="/ajax/updateBom.do")
 	@ResponseBody
 	public Map<String, Object> updateBom(@RequestBody BomGridData bomGridData) {
@@ -129,6 +133,8 @@ public class BomController {
 	public Map<String, Object> modifyBom(@RequestBody BomGridData bomGridData) {
 		Map<String,Object> data = new HashMap<String,Object>();
 		
+		System.out.println(bomGridData.createdRows.size()+"++++++++++++++++");
+		System.out.println(bomGridData.updatedRows.size());
 		for(int i=0; i<bomGridData.createdRows.size(); i++){
 			dao.insertBom(bomGridData.createdRows.get(i));
 		}
@@ -140,6 +146,33 @@ public class BomController {
 		data.put("data",bomGridData.updatedRows);
 		return data;
 	}
+	
+	//입출력 행 추가시 불러올 제품코드
+	@RequestMapping("/ajax/getNewProductCode.do")
+	@ResponseBody
+	public BomVO getNewProductCode(BomVO vo) {
+		return dao.getNewProductCode();
+	}
+	
+	//소요자재 삭제
+	@PostMapping(value="ajax/deleteBom.do")
+	@ResponseBody
+	public Map deleteBom(@RequestBody BomGridData bomGirdData) {
+		Map<String,Object> data = new HashMap();
+		for(int i =0; i<bomGirdData.deletedRows.size(); i++) {
+			dao.deleteBom(bomGirdData.deletedRows.get(i));
+		}
+		data.put("result", true);
+		data.put("data", bomGirdData.deletedRows);
+		return data;
+	}
+	
+	//Bom 삭제
+	@RequestMapping("deleteBom.do")
+	public String deleteBom(BomVO vo) {
+		dao.deleteBom(vo);
+		return "comm/bomList.page";
+	} 
 }	
 
 
