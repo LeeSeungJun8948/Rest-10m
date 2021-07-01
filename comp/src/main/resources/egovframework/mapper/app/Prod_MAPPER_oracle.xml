@@ -17,20 +17,24 @@
 	</insert>
 	<update id="updatePlan" parameterType="com.rest.app.prod.vo.PlanVO">
 		UPDATE plan SET plan_date = #{planDate}, plan_name = #{planName}, comments = #{comments}
+		WHERE plan_code = #{planCode}
 	</update>
 	<delete id="deletePlan">
 		DELETE FROM plan WHERE plan_code = #{planCode}
 	</delete>
 	
+	<select id="selectDetailplan">
+	
+	</select>	
 	<insert id="insertDetailPlan" parameterType="com.rest.app.prod.vo.DetailPlanVO">
 		INSERT INTO detailplan VALUES(
-		#{lotNo},
+		(SELECT NVL(MAX(lot_no),0) FROM detailplan) + 1,
 		<choose>
 			<when test="planCode != null and planCode != ''">
 				#{planCode},
 			</when>
 			<otherwise>
-				(SELECT NVL(MAX(plan_code),0) FROM prodplan),
+				(SELECT NVL(MAX(plan_code),0) FROM plan) + 1,
 			</otherwise>
 		</choose>
 		#{orderNo}, #{productCode}, #{workDate}, #{comments}, #{workCount} 
@@ -38,9 +42,14 @@
 	</insert>
 	<update id="updateDetailPlan" parameterType="com.rest.app.prod.vo.DetailPlanVO">
 		UPDATE detailplan SET work_date = #{workDate}, work_count = #{workCount},
-		comments = #{comments}
+		comments = #{comments} 
+		WHERE lot_no = #{lotNo}
 	</update>
 	<delete id="deleteDetailPlan">
 		DELETE FROM detailplan WHERE lot_no = #{lot_no}
 	</delete>
+	
+	<select id="findLotNo" parameterType="String" resultType="String">
+		SELECT lot_no FROM detailplan
+	</select>
 </mapper>

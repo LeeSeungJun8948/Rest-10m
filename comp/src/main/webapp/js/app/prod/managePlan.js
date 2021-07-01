@@ -3,14 +3,21 @@ var dataSource = {
 	api: {
 		readData: { url: 'readUnplanOrders.do', method: 'POST' },
 		modifyData: { url: 'saveGrid.do', method: 'PUT' },
-		deleteData : { url: 'deleteDetailPlan.do', method: 'POST' }
+  }
+}
+
+var dataSourceLot = {
+	contentType: 'application/json',
+	api: {
+		readData: { url: '', method: 'POST' },
+		modifyData: { url: '', method: 'PUT' },
   }
 }
 
 const grid = new tui.Grid({
 	el : document.getElementById('grid'),
 	scrollX : false,
-	scrollY : false,
+	scrollY : true,
 	data : dataSource, 
 	rowHeaders: ['checkbox'],
 	columns : [ {
@@ -39,7 +46,7 @@ const grid = new tui.Grid({
 		}, {
 		header : '작업량',
 		name : 'workCount',
-		editor: 'text'
+		editor: 'text',
 		}, {
 		header : '일생산량',
 		name : 'dayCount'
@@ -57,16 +64,83 @@ const grid = new tui.Grid({
             }
           }
 		}, {
+		header : '제품LOT',
+		name : 'lotNo',
+		}, {
 		header : '비고',
 		name : 'comments',
 		editor: 'text'
-		}
-		header : '제품LOT',
-		name : 'lotNo',
+		}, {
+		header : '생산계획번호',
+		name : 'planCode',
+		hidden : true
 		}
 	]
 });
 
+const gridLot = new tui.Grid({
+	el : document.getElementById('gridLot'),
+	scrollX : false,
+	scrollY : true,
+	data : dataSourceLot, 
+	rowHeaders: ['checkbox'],
+	columns : [ {
+		header : '제품코드',
+		name : 'productCode',
+		editor: 'text'
+		}, { 
+		header : '제품명',
+		name : 'productName'
+		}, {
+		header : '주문번호',
+		name : 'orderNo'
+		}, {
+		header : '납기일자',
+		name : 'outDate'
+		}, {
+		header : '주문량',
+		name : 'orderCount',
+		align : 'right' 
+		}, {
+		header : '기계획량',
+		name : 'planCount'
+		}, {
+		header : '미계획량',
+		name : 'unplanCount',
+		}, {
+		header : '작업량',
+		name : 'workCount',
+		editor: 'text',
+		}, {
+		header : '일생산량',
+		name : 'dayCount'
+		}, {
+		header : '생산일수',
+		name : 'workDay'
+		}, {
+		header : '작업일자',
+		name : 'workDate',
+		editor: {
+            type: 'datePicker',
+            options: {
+				language: 'ko',
+            	format: 'yyyy-MM-dd'
+            }
+          }
+		}, {
+		header : '제품LOT',
+		name : 'lotNo',
+		}, {
+		header : '비고',
+		name : 'comments',
+		editor: 'text'
+		}, {
+		header : '생산계획번호',
+		name : 'planCode',
+		hidden : true
+		}
+	]
+});
 
 // 조회 버튼
 $('#btnView').on('click', function(){
@@ -123,7 +197,6 @@ $('#btnGridAdd').on('click', function(){
 // 행삭제버튼
 $('#btnGridDel').on('click', function(){
 	grid.removeCheckedRows(false);
-	grid.request('deleteData');
 });
 
 // 전체체크 선택
@@ -133,4 +206,3 @@ grid.on('check', ev => {
 // 전체체크 해제
 grid.on('uncheck', ev => {
 });
-
