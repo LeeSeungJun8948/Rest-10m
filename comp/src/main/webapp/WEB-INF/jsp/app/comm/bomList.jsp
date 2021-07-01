@@ -16,7 +16,8 @@
 	border-radius: .25em;
 	border: 0;
 	background-size: 60%;
-}
+}	
+	
 </style>	
 <title>Insert title here</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
@@ -27,16 +28,17 @@
    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
    crossorigin="anonymous"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
-<style type="text/css">
-	.search{
-		cursor: pointer;
-		width:50px;
-		height: 30px;
-</style>
+
 </head>
 <body>
-	<div>
-		<h1>제품BOM관리</h1>
+	<div class="flex row">
+		<div class="col-8">
+			<h1>제품BOM관리</h1>
+		</div>
+		<div class="col-4" align="right">
+			<button type="button" class="btn btn-primary" onclick="location.href='bomList.do' ">초기화</button>
+			<button type="button" class="btn btn-primary" id="btnInsert">저장</button>
+		</div>
 	</div>
 	<div>
 		<table>
@@ -65,35 +67,72 @@
 			</tr>
 		</table>
 	</div>
-	<div style="margin-top: 40px">
+	<div class="flex row" style="margin-top: 40px">
+	<div  class="col-8">
 		<h3>제품 소요량 관리</h3>
 	</div>
-		<div id="bomgrid" >
+	<div class="col-4" align="right">
+		<button type="button" class="btn btn-primary" id="btnRowInsert">행추가</button>
+		<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
+	</div>
+	</div>
+		<div id="bomgrid" style="z-index:10" class="bgird">
+	</div>
 		       <script type="text/javascript">
          			const dataSource = {
 						api : {
-							readData : {url: 'ajax/getInfoProduct.do', method:'get'}
+							readData : {url: 'ajax/getInfoProduct.do', method:'get'},
+							createData : { url: 'ajax/insertBom.do', method: 'POST'},
+							updateData : { url: 'ajax/updateBom.do', method: 'PUT' },
+							modifyData : { url: 'ajax/modifyBom.do', method: 'PUT'}
 						},
 						contentType: 'application/json'
 				}; 
 				const grid = new tui.Grid({
 					el : document.getElementById('bomgrid'),
 					data : dataSource,
+					rowHeaders: ['checkbox'],
 					scrollX : false,
 					scrollY : false,
 					columns : [
 					{
 						header : '자재코드',
 						name : 'materialCode',
+						editor:'text',
+							onAfterChange(ev){
+							setMatCode(ev);
+							
+						}
 					},
 					{
 						header :'자재명',
-						name : 'materialName',
-					}, 
+						name : 'materialName'
+					},
 					{
-						header :'사용공정',
+						header :'사용량(KG)',
+						name : 'kg',
+						editor:'text'
+					},
+					{
+						header :'공정코드',
+						name : 'processCode',
+						editor:'text',
+						onAfterChange(ev){
+						setProCode(ev);
+						}
+					},
+					
+					{
+						header :'공정명',
 						name : 'processName',
+						
+					},
+					{
+						header :'비고',
+						name : 'etc',
+						editor:'text'
 					}
+					
 					]
 				});
 		
@@ -118,25 +157,65 @@
 					var param = $('#searchCheck').serializeObject();
 					grid.readData(1, param, true);
 				})  
+				$("#btnRowInsert").on("click", function(){
+					grid.appendRow();
+				})
+				$("#btnDelete").on("click",function() {
+						grid.removeCheckedRows(false);
+						grid.request('deleteData');
+				})
+				$("#btnInsert").on("click", function(){
+					//grid.request('createData');
+						var param = $('#searchCheck').serializeObject();
+						grid.readData(1, param, true);
+					 grid.request('modifyData', {
+						    checkedOnly: true
+						  });
+				})
+				function setMatCode(ev){
+					var rowKey = ev.rowKey;
+					var materialCode = grid.getValue(rowKey,'materialCode');
+					if(checkNull(materialCode)){
+						$.ajax({
+							type:"get",
+							data: {"materialCode" : materialCode},
+							url: "ajax/getMatName.do",
+							datatype:"json",
+							async: false,
+							success : function(data){
+								grid.setValue(rowKey,'materialName',data.materialName,false);
+							},
+							error:function(request, status, error){
+								alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							}
+						});
+					}
+				}
+				function setProCode(ev){
+					var rowKey = ev.rowKey;
+					var processCode = grid.getValue(rowKey,'processCode');
+					if(checkNull(processCode)){
+						$.ajax({
+							type:"get",
+							data: {"processCode" : processCode},
+							url: "ajax/getProName.do",
+							datatype:"json",
+							async: false,
+							success : function(data){
+								grid.setValue(rowKey,'processName',data.processName,false);
+							},
+							error:function(request, status, error){
+								alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							}
+						});
+					}
+				}
+				
+			
+				function checkNull(value){
+					return value != null && value != '' && value != '[object HTMLInputElement]';
+				}
 		</script>
-	</div>   
-	 
-	
-	<div>
-		<table>
-			<tr>
-				<th>자재코드</th>
-				<th>자재명</th>
-				<th>사용공정</th>
-			</tr>
-			<c:forEach items="${binfo}" var="bl">
-				<tr>
-					<td>${bl.materialCode }</td>
-					<td>${bl.materialName }</td>
-					<td>${bl.processCode }</td>
-				</tr>
-			</c:forEach>
-		</table>
-	</div>
+		
 </body>
 </html>

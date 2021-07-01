@@ -14,4 +14,6 @@ public class BomVO {
 	String processName;
 	int materialCode;
 	String materialName;
+	String kg;
+	String etc;
 }
