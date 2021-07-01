@@ -84,7 +84,6 @@ public class MaterialController {
 		return data;
 	}
 	
-	//~~~~~~~~~~~~~~
 	@RequestMapping(value = {"/ajax/matInList.do", "/ajax/matOutList.do"}, method=RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> ajaxInoutList(InoutVO vo, HttpServletRequest request) {
@@ -106,10 +105,10 @@ public class MaterialController {
 		return data;
 	}
 	
-	@RequestMapping("/ajax/getMatInfoForInout.do")
+	@RequestMapping("/ajax/getMatInfoForIn.do")
 	@ResponseBody
-	public InoutVO ajaxGetMatInfoForInout(Model model, InoutVO vo) { // 자재 리스트에서 클릭시 자재 상세 정보 출력
-		return dao.getMatInfoForInout(vo);
+	public InoutVO ajaxGetMatInfoForIn(Model model, InoutVO vo) { // 자재 리스트에서 클릭시 자재 상세 정보 출력
+		return dao.getMatInfoForIn(vo);
 	}
 	
 	@RequestMapping("/ajax/getNewIoCode.do")
@@ -147,9 +146,22 @@ public class MaterialController {
 			dao.udtInout(gridData.updatedRows.get(i));	
 		}
 		
+		
+		for(int i = 0; i < gridData.deletedRows.size(); i++) {
+			
+			if(url.equals("/ajax/matInModify.do")) {
+				gridData.deletedRows.get(i).setIoType("01");
+			}else if(url.equals("/ajax/matOutModify.do")) {
+				gridData.deletedRows.get(i).setIoType("02");
+			}
+			
+			dao.delInout(gridData.deletedRows.get(i));
+		}
+		
 		data.put("result", true);
 		data.put("data", gridData.updatedRows);
 		data.put("data", gridData.createdRows);
+		data.put("data", gridData.deletedRows);
 		return data;
 	}
 
@@ -177,7 +189,7 @@ public class MaterialController {
 }
 
 @Data
-class GridData {
+class GridData {	
 	List<InoutVO> deletedRows;
 	List<InoutVO> updatedRows;
 	List<InoutVO> createdRows;

@@ -29,13 +29,12 @@ public interface MaterialMapper {
 	
 	public InoutVO getNewIoCode(); // 새 입출고 코드 불러오기
 	
-	public InoutVO getMatInfoForInout(InoutVO vo); // 발주번호 입력시 자재정보 불러오기 
+	public InoutVO getMatInfoForIn(InoutVO vo); // 발주번호 입력시 자재정보 불러오기 
 	
 	public int istInout(InoutVO vo); // 입출고 인설트
 	
 	public int udtInout(InoutVO vo); // 입출고 업데이트
 	
-	public int udtStock(InoutVO vo); // 입출고시 자재재고 갱신.. 삭제 가능성 있음
-	
+	public int delInout(InoutVO vo); // 입출고 삭제
 
 }
