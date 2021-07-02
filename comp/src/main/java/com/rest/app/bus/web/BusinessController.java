@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.rest.app.bus.service.BusinessService;
 import com.rest.app.bus.vo.CompanyVO;
@@ -44,10 +45,6 @@ public class BusinessController {
 		return data;
 	}
 
-//	@RequestMapping("clientCompany.do")//고객사팝업창
-//	public String clientCompany(Model model) {
-//		return "bus/clientCompany.page";
-//	}
 
 	@RequestMapping("exportForm.do") // 출고관리페이지
 	public String exportForm(Model model) {
@@ -56,9 +53,14 @@ public class BusinessController {
 
 	@RequestMapping("readUnExport.do") // 미출고 조회
 	@ResponseBody
-	public OrdersVO ajaxReadUnExport(Model model, OrdersVO vo) {// 자재 리스트에서 클릭시 자재 상세 정보 출력
-		vo = dao.getUnExport(vo);
-		return vo;
+	public Map<String, Object> readUnExport(@RequestBody  Map<String, Object> param) {
+		System.out.println(param+"=========");
+		Map<String, Object> datas = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", dao.getUnExport(param));
+		data.put("data", datas);
+		return data;
 	}
 
 	// 고객사리스트 ajax
@@ -73,15 +75,10 @@ public class BusinessController {
 		return data;
 	}
 
-	// 모달
+	// 고객사모달
 	@RequestMapping("compModal.do")
 	public String compmodal() {
 		return "app/bus/compModal";
 	}
 
-	// 모달
-	@RequestMapping("productModal.do")
-	public String promodal() {
-		return "app/bus/productModal";
-	}
 }

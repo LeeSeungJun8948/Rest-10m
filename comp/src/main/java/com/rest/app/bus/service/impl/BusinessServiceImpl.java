@@ -25,8 +25,8 @@ public class BusinessServiceImpl implements BusinessService {
 	}
 
 	@Override
-	public OrdersVO getUnExport(OrdersVO vo) {
-		return mapper.getUnExport(vo);
+	public List<OrdersVO> getUnExport(Map<String, Object> param) {
+		return mapper.getUnExport(param);
 	}
 
 	@Override

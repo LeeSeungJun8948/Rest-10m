@@ -73,7 +73,7 @@
 			<div class="col-9 ta-l ml-1">
 				<label class="headtxt">제품코드</label> <input type="text" id="prductCd"
 					name="prductCd" />
-				<a href="productModal.do" rel="modal:open"class="btn btn-primary">
+				<a href="modal.do" rel="modal:open"class="btn btn-primary">
 					<img
 						src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
 				</a>
