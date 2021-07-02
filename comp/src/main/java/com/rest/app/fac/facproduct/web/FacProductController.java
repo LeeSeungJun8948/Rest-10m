@@ -1,10 +1,10 @@
 package com.rest.app.fac.facproduct.web;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,10 +20,16 @@ public class FacProductController {
 	public String getFP() {
 		return "fac/facProdList.page";
 	}
-	 
+	
 	@RequestMapping("ajax/facProd.do")
 	@ResponseBody
-	public List<FacProductVO> ajaxGet(Model model) {
-		return mapper.getFP();
+	public Map<String, Object> ajaxGetFacProd(FacProductVO vo) {
+		Map<String,Object> datas = new HashMap<String, Object>();
+		Map<String,Object> data = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", mapper.getFP());
+		data.put("data", datas);
+		return data;
 	}
+
 }
