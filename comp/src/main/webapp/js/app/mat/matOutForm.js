@@ -282,12 +282,6 @@ function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
 
-$(function(){
-    $("#btnMatCodeModal").click(function(){
-        $('div.modal').modal({
-			remote : 'matCodeModal.jsp'
-        });
-    })
-})
-
-
+$("#myModal").on("show.bs.modal", function(e) {
+    $(this).load("matCodeModal.do");
+});
