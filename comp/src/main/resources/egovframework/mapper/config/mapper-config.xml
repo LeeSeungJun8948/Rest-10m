@@ -23,6 +23,9 @@
 		<typeAlias alias="InorderVO"		type="com.rest.app.mat.vo.InorderVO" />
 		<!-- 입출고vo -->
 		<typeAlias alias="InoutVO"		type="com.rest.app.mat.vo.InoutVO" />
+		<!-- 라디오리스트vo -->
+		<typeAlias alias="RadioVO"		type="com.rest.app.mat.vo.RadioListVO" />
+		
 	</typeAliases>
 	
     

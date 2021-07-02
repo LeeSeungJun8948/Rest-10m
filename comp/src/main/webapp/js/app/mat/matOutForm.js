@@ -6,14 +6,14 @@ $( document ).ready(function() {
 
 const dataSource = {
 	api : {
-		readData : {url: 'ajax/matInList.do' , method:'GET' },
-		modifyData : { url: 'ajax/matInModify.do', method: 'PUT'}
+		readData : {url: 'ajax/matOutList.do' , method:'GET' },
+		modifyData : { url: 'ajax/matOutModify.do', method: 'PUT'}
 	},
 	contentType: 'application/json'
 };
 	
 const grid = new tui.Grid({
-	el : document.getElementById('matInList'),
+	el : document.getElementById('matOutList'),
 	data : dataSource,
 	scrollX : false,
 	scrollY : true,
@@ -21,13 +21,13 @@ const grid = new tui.Grid({
 	rowHeaders: ['checkbox'],
 	columns : [ 
 		{
-			header : '입고번호',
+			header : '출고번호',
 			name : 'ioCode',
 			width : 80,
 			align: 'center'
 		},
 		{
-			header : '입고일자',
+			header : '출고일자',
 			name : 'ioDate',
 			width : 120,
 			align: 'center',
@@ -35,33 +35,23 @@ const grid = new tui.Grid({
 				type: 'datePicker',
 				options: {
 				language: 'ko',
-				format: 'YYYY-MM-dd'
+				format: 'yyyy-MM-dd'
 				}
-			},
-			onAfterChange(ev) {
-        		makeLot(ev);
-      		}
-		}, {
-			header : '발주번호',
-			name : 'inorderCode',
-			width : 80,
-			align: 'center',
-			editor:'text',
-			onAfterChange(ev) {
-				setMatInfo(ev);
-				console.log('불러오기끝');
-        		makeLot(ev);
-      		}
+			}
 		},
 		{
 			header : '자재코드',
 			name : 'materialCode',
 			width : 80,
-			align: 'center'
+			align: 'center',
+			editor:'text',
+			onAfterChange(ev) {
+        		setMatInfo(ev);
+      		}
 		}, {
 			header : '자재명',
 			name : 'materialName',
-			width : 120,
+			width : 150,
 			align: 'center'
 		}, {
 			header : '단위',
@@ -69,49 +59,54 @@ const grid = new tui.Grid({
 			width : 70,
 			align: 'center'
 		}, {
-			header : '입고량',
+			header : '출고량',
 			name : 'ioVolume',
 			width : 120,
 			align: 'right',
 			editor:'text',
 			formatter({value}) {
       			return format(value);
-    		},
-			onAfterChange(ev) {
-        		calPrice(ev);
-      		}
-		}, {
-			header : '단가',
-			name : 'unitPrice',
-			width : 120,
-			align: 'right',
-			editor:'text',
-			formatter({value}) {
-      			return format(value);
-    		},
-			onAfterChange(ev) {
-        		calPrice(ev);
-      		},
-		}, {
-			header : '총액',
-			name : 'price',
-			width : 120,
-			align: 'right',
-			formatter({value}) {
-      			return format(value);
     		}
 		}, {
-			header : 'LOT_NO',
+			header : '자재LOT_NO',
 			name : 'lotNo',
-			width : 140,
-			align: 'center'
+			width : 150,
+			align: 'center',
+			editor:'text'
+		}, {
+			header : '출고공정',
+			name : 'processName',
+			width : 120,
+			align: 'center',	
+			editor: {
+				type: 'radio',
+				options: {
+					listItems: []
+            	}
+			}
+			/** 이거 안됨 ㅅㅂ
+			
+			,
+			relations: {
+				targetNames: ['materialCode'],
+				listItems({ value }){
+					console.log('여기가 문제냐?');
+					if(checkNull(value)){
+						console.log('여기는 if안');
+						let items;
+						items = makeProcessList(value);
+						return items;	
+					}
+					console.log('아니면 여기?');
+				}
+			}
+			 */
 		}, {
 			header : '자재재고',
 			name : 'stock',
 			width : 120,
-			align: 'right'
-			
-			,formatter({value}) {
+			align: 'right',
+			formatter({value}) {
       			return format(value);
     		}
  			
@@ -122,18 +117,12 @@ const grid = new tui.Grid({
 		height: 40,
 	   	position: 'bottom',
 	   	columnContent: {
-        	inorderCode: {
+        	ioCode: {
                 template(summary) {
         			return '합 계';
                 } 
             },	
 			ioVolume: {
-                template(summary) {
-        			var summaryResult = (summary.sum);
-        			return format(summaryResult);
-                } 
-            },
-			price: {
                 template(summary) {
         			var summaryResult = (summary.sum);
         			return format(summaryResult);
@@ -148,45 +137,20 @@ function format(value){
 	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
-function makeLot(ev){
-	var rowKey = ev.rowKey;
-	
-	var ioDate = grid.getValue(rowKey, 'ioDate');
-	var ioCode =  grid.getValue(rowKey, 'ioCode');
-	var materialCode = grid.getValue(rowKey, 'materialCode'); // 값 들어왔나 확인용 
-	
-	if(checkNull(ioDate) && checkNull(materialCode)){
-		ioDate = ioDate.replace('-','').replace('-','').substr(2);
-		var newLot = 'MAT-' + ioDate + '-' + ioCode;
-		grid.setValue(rowKey, 'lotNo', newLot, false);
-	}
-}
-
-function calPrice(ev){
-	var rowKey = ev.rowKey;
-	
-	var ioVolume = grid.getValue(rowKey, 'ioVolume')
-	var unitPrice =  grid.getValue(rowKey, 'unitPrice')
-	var price = ioVolume * unitPrice;
-	
-	grid.setValue(rowKey, 'price', price, false);
-}
-
 function setMatInfo(ev){
 	
 	var rowKey = ev.rowKey;
-	var inorderCode =  grid.getValue(rowKey, 'inorderCode');
+	var materialCode =  grid.getValue(rowKey, 'materialCode');
 	
-	if(checkNull(inorderCode)){
+	if(checkNull(materialCode)){
 		$.ajax({
 			type : "get",
-			data: {"inorderCode" : inorderCode},
-			url : "ajax/getMatInfoForIn.do",
+			data: {"materialCode" : materialCode},
+			url : "ajax/getMatInfoForOut.do",
 			dataType : "json",
 			async : false,
 			success : function(data) {
 				console.log(data);
-				grid.setValue(rowKey, 'materialCode', data.materialCode, false);
 				grid.setValue(rowKey, 'materialName', data.materialName, false);
 				grid.setValue(rowKey, 'unitNo', data.unitNo, false);
 				grid.setValue(rowKey, 'stock', data.stock, false);
@@ -194,9 +158,38 @@ function setMatInfo(ev){
 			error:function(request, status, error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
-		});		
+		});
+		
 	}
 	
+}
+
+function makeProcessList(materialCode){
+	
+	let processList = [];
+	
+	console.log('여기까지뜸');
+	
+	$.ajax({
+		type : "get",
+		data: {"materialCode" : materialCode},
+		url : "ajax/getProcessList.do",
+		dataType : "json",
+		async : false,
+		success : function(datas) {
+			
+			for(let data of datas){
+				processList.push({text: data.processName, value: data.processCode});
+				
+			}
+			console.log(processList);
+		},
+		error:function(request, status, error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});	
+	
+	return processList;
 }
 
 $('#btnRead').on('click',  function(){
@@ -232,6 +225,7 @@ $("#btnGridAdd").on("click", function(){
 		focus : true
 	});
 });
+
 
 $("#btnGridDel").on("click", function(ev){
 	grid.removeCheckedRows(true);

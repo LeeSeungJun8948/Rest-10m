@@ -10,5 +10,5 @@ public interface EmployeeService {
 	public int deleteEmp(EmployeeVO vo);
 	public int updateEmp(EmployeeVO vo);
 	public int insertEmp(EmployeeVO vo); 
-
+	public int maxEmpCode();
 }

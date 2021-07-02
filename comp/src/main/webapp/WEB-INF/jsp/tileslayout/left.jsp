@@ -31,8 +31,7 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-
-                        <a class="collapse-item" href="commList.do">공통코드관리</a>
+                        <a class="collapse-item" href="#">공통코드관리</a>
                         <a class="collapse-item" href="matForm.do">자재정보관리</a>
                         <a class="collapse-item" href="bomList.do">제품 BOM관리</a>
                         <a class="collapse-item" href="cards.html">공정관리</a>
@@ -52,9 +51,8 @@
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="utilities-color.html">주문관리 참조조회</a>
-                        <a class="collapse-item" href="utilities-border.html">미생산 의뢰조회</a>
-                        <a class="collapse-item" href="utilities-animation.html">출고 관리</a>
+                        <a class="collapse-item" href="busList.do">주문관리 참조조회</a>
+                        <a class="collapse-item" href="exportForm.do">출고 관리</a>
                         <a class="collapse-item" href="utilities-other.html">제품 재고 조회</a>
                     </div>
                 </div>

@@ -14,7 +14,7 @@
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 </head>
 <body>
-		<h1 class="h3 mb-4 text-gray-700">생산계획 관리</h1>
+		<h1 class="h3 mb-4 text-gray-700"></h1>
 		<div class="mb-4">
 		<form id="searchCheck" name="searchCheck">
 		<select name="searchCondition" id="searchCondition" title="검색조건2-검색어구분" style="width:80px;height:26px">

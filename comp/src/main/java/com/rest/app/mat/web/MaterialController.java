@@ -19,6 +19,7 @@ import com.rest.app.mat.service.MaterialService;
 import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
+import com.rest.app.mat.vo.RadioListVO;
 
 import lombok.Data;
 
@@ -75,7 +76,6 @@ public class MaterialController {
 		
 		Map<String,Object> datas = new HashMap<>();
 		Map<String,Object> data = new HashMap<>();
-		
 		
 		data.put("result", true);
 		datas.put("contents", dao.getInorderList(vo));
@@ -164,7 +164,19 @@ public class MaterialController {
 		data.put("data", gridData.deletedRows);
 		return data;
 	}
-
+	
+	@RequestMapping("/ajax/getMatInfoForOut.do")
+	@ResponseBody
+	public InoutVO ajaxGetMatInfoForOut(Model model, InoutVO vo) { 
+		return dao.getMatInfoForOut(vo);
+	}
+	
+	@RequestMapping("/ajax/getProcessList.do")
+	@ResponseBody
+	public List<RadioListVO> ajaxGetProcessList(InoutVO vo) {
+		return dao.getProcessList(vo);
+	} 
+	
 	@RequestMapping("matInForm.do")
 	public String matInForm(Model model) {
 		return "mat/matInForm.page";

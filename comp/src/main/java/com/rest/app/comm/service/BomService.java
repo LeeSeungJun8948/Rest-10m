@@ -15,16 +15,26 @@ public interface BomService {
 	public List<BomVO> getInfoBom(BomVO vo);
 	
 	//제품 단건조회
-	BomVO getInfoProduct(BomVO vo);
+	public BomVO getInfoProduct(BomVO vo);
+	
+	//제품에 대한 고객사코드 고객사명 list
+	public List<BomVO> getCompanyList(BomVO vo);
+	
 	//Bom insert
 	public int insertBom(BomVO vo);
 	
 	//Bom update
 	public int updateBom(BomVO vo);
 	
+	//Bom delete
+	public int deleteBom(BomVO vo);
+	
 	//자재번호 입력시 자재명 출력
 	public BomVO getMatName(BomVO vo);
 	
 	//공정코드 입력시 공정명 출력
 	public BomVO getProName(BomVO vo);
+	
+	//입출력행 추가시 제품코드 출력
+	public BomVO getNewProductCode();
 }

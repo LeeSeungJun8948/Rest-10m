@@ -5,6 +5,7 @@ import java.util.List;
 import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
+import com.rest.app.mat.vo.RadioListVO;
 
 public interface MaterialService {
 	
@@ -37,4 +38,8 @@ public interface MaterialService {
 	public int udtInout(InoutVO vo); // 입출고 업데이트
 	
 	public int delInout(InoutVO vo); // 입출고 삭제
+	
+	public InoutVO getMatInfoForOut(InoutVO vo); // 출고관리시 자재코드 입력시 자재정보 불러오기
+	
+	public List<RadioListVO> getProcessList(InoutVO vo); // 자재당 공정 리스트 출력
 }
