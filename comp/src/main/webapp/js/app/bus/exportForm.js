@@ -5,11 +5,12 @@ var dataSource = {
 		modifyData: { url: 'gridSave.do', method: 'PUT' },
 	}
 }
+
 const grid = new tui.Grid({
 	el : document.getElementById('grid'),
-	scrollX : false,
-	scrollY : false,
-	data : dataSource, 
+	data : dataSource,
+			scrollX : false,
+			scrollY : false,
 	rowHeaders: ['checkbox'],
 	columns : [ {
 		header : '제품코드',
@@ -20,13 +21,13 @@ const grid = new tui.Grid({
 		name : 'productName'
 		}, {
 		header : '규격',
-		name : 'orderNo'
+		name : 'stdId'
 		}, {
 		header : '단위',
-		name : 'outDate'
+		name : 'unitId'
 		}, {
 		header : '주문번호',
-		name : 'orderCount',
+		name : 'orderNo',
 		align : 'right' 
 		}, {
 		header : '기출고량',
@@ -43,7 +44,7 @@ const grid = new tui.Grid({
 		name : 'dayCount'
 		}, {
 		header : '소재LOT.no',
-		name : 'workingDay'
+		name : 'productLot'
 		}, {
 		header : '금액',
 		name : 'price',

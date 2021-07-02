@@ -2,6 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+   crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<link rel="stylesheet"
+   href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+
+
 <h1 class="h3 mb-4 text-gray-700">출고관리</h1>
 <div class="mb-4" align="right">
 	<button type="button" class="btn btn-primary" id="btnView">조회</button>
@@ -24,9 +34,12 @@
 					</tr>
 					<tr>
 						<th>고객사</th>
-						<td><input type="text" id="compCode" name="compCode"></td>
+						<td><input type="text" id="compCode" name="compCode">${companyCode }</td>
+						<td><a id="search" href="compModal.do" rel="modal:open" class="btn btn-primary"> <img
+							src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
+						</a></td>
 						<th>고객사명</th>
-						<td><input type="text" id="compName" name="compName"></td>
+						<td><input type="text" id="compName" name="compName">${companyName }</td>
 					</tr>
 					<tr>
 						<th>특기사항</th>
@@ -42,8 +55,8 @@
 		</div>
 		<div>
 			<form id="dateForm" name="dateForm">
-				<span>납기일자 </span><input type="date" id="planDtS" name="planDtS"value=${outDate }>
-				<span> ~ </span><input type="date" id="planDtE" name="planDtE"value=${outDate }>&nbsp;
+				<span>납기일자 </span><input type="date" id="planDtS" name="planDtS">
+				<span> ~ </span><input type="date" id="planDtE" name="planDtE">&nbsp;
 				<button type="button" class="btn btn-primary" id="btnRead">미출고
 					읽기</button>
 			</form>
@@ -54,9 +67,7 @@
 	<button type="button" class="btn btn-primary" id="btnGridAdd">추가</button>
 	<button type="button" class="btn btn-primary" id="btnGridDel">삭제</button>
 </div>
-<div class="col-lg-10">
-
+<div class="col-lg-12">
 	<div id="grid" />
-
 </div>
 <script type="text/javascript" src="js/app/bus/exportForm.js"></script>
