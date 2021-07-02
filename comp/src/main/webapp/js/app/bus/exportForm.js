@@ -5,11 +5,12 @@ var dataSource = {
 		modifyData: { url: 'gridSave.do', method: 'PUT' },
 	}
 }
+
 const grid = new tui.Grid({
 	el : document.getElementById('grid'),
-	scrollX : false,
-	scrollY : false,
-	data : dataSource, 
+	data : dataSource,
+			scrollX : false,
+			scrollY : false,
 	rowHeaders: ['checkbox'],
 	columns : [ {
 		header : '제품코드',
@@ -20,13 +21,13 @@ const grid = new tui.Grid({
 		name : 'productName'
 		}, {
 		header : '규격',
-		name : 'orderNo'
+		name : 'stdId'
 		}, {
 		header : '단위',
-		name : 'outDate'
+		name : 'unitId'
 		}, {
 		header : '주문번호',
-		name : 'orderCount',
+		name : 'orderNo',
 		align : 'right' 
 		}, {
 		header : '기출고량',
@@ -42,8 +43,8 @@ const grid = new tui.Grid({
 		header : '현재고',
 		name : 'dayCount'
 		}, {
-		header : '소재LOT.no',
-		name : 'workingDay'
+		header : '제품LOT.no',
+		name : 'productLot'
 		}, {
 		header : '금액',
 		name : 'price',
@@ -102,10 +103,9 @@ $('#btnDel').on('click', function(){
 	
 });
 
-// 미생산 읽기 버튼
+// 미출고 읽기 버튼
 $('#btnRead').on('click',  function(){
 	var param = $('#dateForm').serializeObject();
-	console.log(param)
 	grid.readData(1, param, true);
 });
 

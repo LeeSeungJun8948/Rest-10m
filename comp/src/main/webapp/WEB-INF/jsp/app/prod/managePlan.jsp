@@ -11,7 +11,7 @@
 </div>
 <div class="row">
 	<div class="mb-2 col-lg-6">
-		<form id="inputFrm" name="inputFrm">
+		<form id="inputFrm" name="inputFrm" action="savePlan.do">
 			<input type="hidden" id="planCode" name="planCode" value="planCode">
 			<table class="table">
 				<tbody>
@@ -58,13 +58,13 @@
 			<tbody>
 				<tr>
 					<th>제품코드</th>
-					<td><input type="text" id="productCode" name="productCode" readonly="true" ></td>
+					<td><input type="text" id="productCode" name="productCode" readonly="true"></td>
 					<th>제품명</th>
-					<td><input type="text" id="productName" name="productName" readonly="true" ></td>
-					<th>계획량</th>
-					<td><input type="text" id="planCount" name="planCount" readonly="true" ></td>
+					<td><input type="text" id="productName" name="productName" readonly="true"></td>
+					<th>작업량</th>
+					<td><input type="text" id="workCount" name="workCount" readonly="true"></td>
 					<th>소요량</th>
-					<td><input type="text" id="totalCount" name="totalCount" readonly="true" ></td>
+					<td><input type="text" id="totalCount" name="totalCount" readonly="true"></td>
 				</tr>
 			</tbody>
 		</table>

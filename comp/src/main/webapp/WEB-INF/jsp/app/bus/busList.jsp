@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+   crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"
@@ -45,19 +52,18 @@
 			<div class="col-9 ta-l ml-1">
 				<label class="headtxt">고객사</label> <input type="text"
 					id="searchKeywordFrom" name="searchKeywordFrom" />
-				<a href="modal.do" rel="modal:open"class="btn btn-primary">
-					<img
-						src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.gif'/>">
+				<a href="compModal.do" rel="modal:open"class="btn btn-primary">
+					<img src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
 				</a>
 				<input type="text" id="searchKeywordFromNm"
 					name="searchKeywordFromNm" readonly="true" /> <label
 					class="ml-1 mr-1">~</label> <input type="text" id="searchKeywordTo"
 					name="searchKeywordTo" />
-				<button
-					onclick="window.open('address','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');"
-					class="btn btn-primary">
+				<a href="compModal.do" rel="modal:open"class="btn btn-primary">
 					<img
-						src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.gif'/>">
+						src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
+				</a>
+					
 				</button>
 				<input type="text" id="searchKeywordToNm" name="searchKeywordToNm"
 					readonly="true" />
@@ -66,12 +72,11 @@
 			<div class="col-9 ta-l ml-1">
 				<label class="headtxt">제품코드</label> <input type="text" id="prductCd"
 					name="prductCd" />
-				<button
-					onclick="window.open('address','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');"
-					class="btn btn-primary">
+				<a href="modal.do" rel="modal:open"class="btn btn-primary">
 					<img
-						src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.gif'/>">
-				</button>
+						src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
+				</a>
+					
 				<input type="text" id="prductNm" name="prductNm" maxlength="20"
 					readonly="true" />
 			</div>
@@ -111,6 +116,7 @@
 			data : dataSource,
 			scrollX : false,
 			scrollY : false,
+			rowHeaders: ['checkbox'],
 			columns : [ {
 				header : '진행구분',
 				name : 'orderState'
@@ -143,7 +149,7 @@
 				name : 'orderCount'
 			}, {
 				header : '출고량',
-				name : 'kg'
+				name : 'outCount'
 			},{
 				header : '미납품량',
 				name : 'notCount'

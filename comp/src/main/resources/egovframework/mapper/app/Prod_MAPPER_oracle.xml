@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rest.app.prod.service.impl.ProdMapper">
 	<select id="getUnplanOrders" resultType="com.rest.app.bus.vo.OrdersVO">
-		SELECT o.*, o.order_count - o.plan_count unplan_count
+		SELECT o.*, o.order_count - o.plan_count unplan_count, p.product_name
 		FROM orders o, product p
 		WHERE o.order_count != o.plan_count
 		AND o.product_code = p.product_code
@@ -72,10 +72,19 @@
 	</select>
 	
 	
-	<select id="getInputMatList" resultType="com.rest.app.prod.vo.InputMatVO">
-		SELECT * FROM inputmat WHERE product_lot = #{productLot}
-	</select>
-	<select id="getMatLotList" resultType="com.rest.app.prod.vo.InputMatVO">
-		SELECT * FROM stock
+	<select id="readInputMat" resultType="com.rest.app.prod.vo.InputMatVO">
+		<choose>
+			<when test="productLot != null and productLot != ''">
+				SELECT * FROM inputMat WHERE product_lot = #{productLot}
+			</when>
+			<otherwise>
+			SELECT m.material_code, m.material_name,
+     			 i.lot_no material_lot, F_MAT_COUNT(i.lot_no) material_count
+   			FROM material m, inout i
+  	 		WHERE m.material_code = i.material_code
+  		  	AND m.material_code = #{productCode}
+  		  	AND F_MAT_COUNT(i.lot_no) != 0
+  			</otherwise>
+  		</choose>
 	</select>
 </mapper>

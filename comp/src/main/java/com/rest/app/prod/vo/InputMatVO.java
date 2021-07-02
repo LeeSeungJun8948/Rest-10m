@@ -10,5 +10,6 @@ public class InputMatVO {
 	String materialName;
 	String materialLot;
 	int materialCount;
+	int inputCount;
 	String comments;
 }

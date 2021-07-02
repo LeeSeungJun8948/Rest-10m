@@ -20,6 +20,5 @@ public interface ProdMapper {
 	public int updateInputMat(InputMatVO vo);
 	public int deleteInputMat(InputMatVO vo);
 	public String findProductName(String productCode);
-	public List<InputMatVO> getInputMatList();
-	public List<InputMatVO> getMatLotList(String productCode);
+	public List<InputMatVO> readInputMat(Map<String, Object> param);
 }

@@ -47,7 +47,39 @@ const grid = new tui.Grid({
 			editor:'text',
 			onAfterChange(ev) {
         		setMatInfo(ev);
-      		}
+      		},
+			relations: [
+				{
+				targetNames: ['processCode'],
+				listItems({ value }){
+					
+					let items = [];
+					
+					if(checkNull(value)){
+						items = makeProcessList(value);
+					}
+					return items;	
+				},
+				disabled({ value }) {
+                	return !value;
+              	}
+			}
+			
+			/**
+			,{
+				targetNames: ['lotNo'],
+				listItems({ value }){
+					
+					let items = [];
+					
+					if(checkNull(value)){
+						items = makeLotList(value);
+					}
+					return items;	
+				}
+			}
+			 */
+			]
 		}, {
 			header : '자재명',
 			name : 'materialName',
@@ -75,32 +107,17 @@ const grid = new tui.Grid({
 			editor:'text'
 		}, {
 			header : '출고공정',
-			name : 'processName',
+			name : 'processCode',
 			width : 120,
 			align: 'center',	
+			formatter: 'listItemText',
 			editor: {
-				type: 'radio',
+				type: 'select',
 				options: {
 					listItems: []
             	}
 			}
-			/** 이거 안됨 ㅅㅂ
-			
-			,
-			relations: {
-				targetNames: ['materialCode'],
-				listItems({ value }){
-					console.log('여기가 문제냐?');
-					if(checkNull(value)){
-						console.log('여기는 if안');
-						let items;
-						items = makeProcessList(value);
-						return items;	
-					}
-					console.log('아니면 여기?');
-				}
-			}
-			 */
+ 			
 		}, {
 			header : '자재재고',
 			name : 'stock',
@@ -111,6 +128,7 @@ const grid = new tui.Grid({
     		}
  			
 		}
+
 	],
 	summary : {
 		
@@ -150,7 +168,6 @@ function setMatInfo(ev){
 			dataType : "json",
 			async : false,
 			success : function(data) {
-				console.log(data);
 				grid.setValue(rowKey, 'materialName', data.materialName, false);
 				grid.setValue(rowKey, 'unitNo', data.unitNo, false);
 				grid.setValue(rowKey, 'stock', data.stock, false);
@@ -168,8 +185,6 @@ function makeProcessList(materialCode){
 	
 	let processList = [];
 	
-	console.log('여기까지뜸');
-	
 	$.ajax({
 		type : "get",
 		data: {"materialCode" : materialCode},
@@ -177,12 +192,9 @@ function makeProcessList(materialCode){
 		dataType : "json",
 		async : false,
 		success : function(datas) {
-			
 			for(let data of datas){
 				processList.push({text: data.processName, value: data.processCode});
-				
 			}
-			console.log(processList);
 		},
 		error:function(request, status, error){
 			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -192,10 +204,40 @@ function makeProcessList(materialCode){
 	return processList;
 }
 
+/**
+function makeLotList(materialCode){
+	
+	let lotList = [];
+	
+	$.ajax({
+		type : "get",
+		data: {"materialCode" : materialCode},
+		url : "ajax/getLotList.do",
+		dataType : "json",
+		async : false,
+		success : function(datas) {
+			
+			for(let data of datas){
+				processList.push({text: data.lotNo, value: data.lotNo});
+				
+			}
+			console.log(lotList);
+		},
+		error:function(request, status, error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});	
+	
+	return lotList;
+	
+}
+ */
+
 $('#btnRead').on('click',  function(){
 	var param = $('#searchFrm').serializeObject();
 	console.log(param)
 	grid.readData(1, param, true);
+	
 });
 
 
@@ -239,3 +281,7 @@ $("#btnSave").on("click", function(){
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
+
+$("#myModal").on("show.bs.modal", function(e) {
+    $(this).load("matCodeModal.do");
+});

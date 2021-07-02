@@ -73,12 +73,7 @@ public class ProdServiceImpl implements ProdService {
 	}
 
 	@Override
-	public List<InputMatVO> getInputMatList() {
-		return mapper.getInputMatList();
-	}
-
-	@Override
-	public List<InputMatVO> getMatLotList(String productCode) {
-		return mapper.getMatLotList(productCode);
+	public List<InputMatVO> readInputMat(Map<String, Object> param) {
+		return mapper.readInputMat(param);
 	}
 }
