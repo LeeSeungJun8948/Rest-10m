@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ModalConroller {
 
 	@RequestMapping("/matCodeModal.do")
-	@ResponseBody
 	public String matCodeModal() {
-		return "modal/matCodeModal";
+		return "modal/matCodeModal.part";
 	}
 }
