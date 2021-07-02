@@ -68,7 +68,6 @@
 
 <div id="tabs">
 <script>
-
 	</script>
 	<ul>
 		<li><a href="#tabs-1">설비 관리 목록</a></li>

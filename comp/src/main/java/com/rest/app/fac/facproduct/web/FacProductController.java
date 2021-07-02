@@ -27,7 +27,7 @@ public class FacProductController {
 		Map<String,Object> datas = new HashMap<String, Object>();
 		Map<String,Object> data = new HashMap<String, Object>();
 		data.put("result", true);
-		datas.put("contents", mapper.getFP(vo));
+		datas.put("contents", mapper.getFP());
 		data.put("data", datas);
 		return data;
 	}
