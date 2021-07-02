@@ -15,8 +15,13 @@
 				</if>
 		</where>
 	</select>
-	<!-- 제품단건조회 -->
+	<!-- 제품단건조회(고객사코드/고객사명 제외) -->
 	<select id="getInfoProduct" resultType="com.rest.app.comm.vo.BomVO">
+		 select product_code, product_name, unit_no
+ 		   from product
+ 		  where product_code =#{productCode}
+		
+		<!--  
 		select DISTINCT p.product_code, p.product_name, p.unit_no, a.company_name
     	  from product p
     	  join ( select c.company_code, c.company_name, o.product_code
@@ -25,6 +30,18 @@
                		 on (c.company_code = o.company_code)) a
      		on (p.product_code = a.product_code)
   		 where p.product_code = #{productCode}
+  		 -->
+	</select>
+	<!-- 제품에 대한 고객사 코드/고객사명 list -->
+	<select id="getCompanyList" resultType="com.rest.app.comm.vo.BomVO">
+		select Distinct c.company_code, c.company_name 
+  		  from company c
+  		  join (select p.product_code, o.company_code
+          		  from product p
+           		   join orders o
+             		 on (p.product_code = o.product_code)) a
+    		on c.company_code = a.company_code       
+ 		 where a.product_code = #{productCode}
 	</select>
 	<!-- 자재코드 입력시 자재명 출력 -->
 	<select id="getMatName" resultType="com.rest.app.comm.vo.BomVO">
@@ -51,16 +68,26 @@
 	</select>
 	
 	<!--Bom Insert -->
-	<select id="insertBom" parameterType="com.rest.app.comm.vo.BomVO">
+	<insert id="insertBom" parameterType="com.rest.app.comm.vo.BomVO">
 		insert into bom
 		values (#{productCode},#{materialCode},#{processCode},#{kg},#{etc})
-	</select>
+	</insert>
 	
 	<!-- Bom Update -->
-	<select id="updateBom" parameterType="com.rest.app.comm.vo.BomVO">
+	<update id="updateBom" parameterType="com.rest.app.comm.vo.BomVO">
 		update bom
    		   set material_Code = #{materialCode}, process_code= #{processCode} , kg = #{kg}, etc=#{etc}
  		 where product_code = #{productCode}
+	</update>
+	<!-- Bom delete -->
+	<delete id="deleteBom" parameterType="com.rest.app.comm.vo.BomVO">
+		delete from bom
+		 where product_code=#{productCode}
+	</delete>
+	<!--  -->
+	<select id="getNewProductCode" resultType="com.rest.app.comm.vo.BomVO">
+		select product_code
+		  from product
 	</select>
 
 </mapper>

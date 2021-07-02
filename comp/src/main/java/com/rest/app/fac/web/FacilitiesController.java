@@ -36,7 +36,8 @@ class GridData {
 public class FacilitiesController {
 	@Autowired
 	FacilitiesMapper mapper;
-
+	
+	// 설비 조회
 	@RequestMapping("/facList.do")
 	public String getFac(Model model) {
 		return "fac/facList.page";
@@ -48,6 +49,7 @@ public class FacilitiesController {
 //		return mapper.getFac();
 //	}
 	
+	// 설비 관리 목록
 	@RequestMapping("ajax/facList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetFac() {
@@ -55,6 +57,18 @@ public class FacilitiesController {
 		Map<String,Object> data = new HashMap();
 		data.put("result", true);
 		datas.put("contents", mapper.getFac());
+		data.put("data", datas);
+		return data;
+	}
+	
+	// 탭2 설비 공정 목록
+	@RequestMapping("ajax/facProcessList.do")
+	@ResponseBody
+	public Map<String, Object> ajaxGetFacProcess() {
+		Map<String,Object> datas = new HashMap();
+		Map<String,Object> data = new HashMap();
+		data.put("result", true);
+		datas.put("contents", mapper.getFacProcess());
 		data.put("data", datas);
 		return data;
 	}
@@ -67,21 +81,21 @@ public class FacilitiesController {
 
 	// 저장
 	@RequestMapping(value = "/insertFac.do")
-	public String insertFac(HttpServletRequest request) {
-		FacilitiesVO vo = new FacilitiesVO();
-		vo.setFacilitiesName(request.getParameter("facilitiesName"));
-		vo.setModel(request.getParameter("model"));
-		vo.setFacSize(request.getParameter("facSize"));
-		vo.setProductionCompany(request.getParameter("productionCompany"));
-		vo.setPurpose(request.getParameter("purpose"));
-		vo.setVolume(request.getParameter("volume"));
-		vo.setProductionDate(request.getParameter("productionDate"));
-		vo.setEmpNo(request.getParameter("empNo"));
-		vo.setPrice(request.getParameter("price"));
-		vo.setFacInspection(request.getParameter("facInspection"));
-		vo.setPurchaseDate(request.getParameter("purchaseDate"));
-		vo.setImg(request.getParameter("img"));
-		vo.setProcessCode(request.getParameter("processCode"));
+	public String insertFac(HttpServletRequest request, FacilitiesVO vo) {
+//		FacilitiesVO vo = new FacilitiesVO();
+//		vo.setFacilitiesName(request.getParameter("facilitiesName"));
+//		vo.setModel(request.getParameter("model"));
+//		vo.setFacSize(request.getParameter("facSize"));
+//		vo.setProductionCompany(request.getParameter("productionCompany"));
+//		vo.setPurpose(request.getParameter("purpose"));
+//		vo.setVolume(request.getParameter("volume"));
+//		vo.setProductionDate(request.getParameter("productionDate"));
+//		vo.setEmpNo(request.getParameter("empNo"));
+//		vo.setPrice(request.getParameter("price"));
+//		vo.setFacInspection(request.getParameter("facInspection"));
+//		vo.setPurchaseDate(request.getParameter("purchaseDate"));
+//		vo.setImg(request.getParameter("img"));
+//		vo.setProcessCode(request.getParameter("processCode"));
 		mapper.insertFac(vo);
 		return "redirect:facAdmin.do";
 	}
@@ -91,7 +105,9 @@ public class FacilitiesController {
 	@ResponseBody
 	public Map deleteFac(@RequestBody GridData gridDate) {
 		Map<String,Object> data = new HashMap();
-		mapper.deleteFac(gridDate.deletedRows.get(0));
+		for(int i=0; i<gridDate.deletedRows.size(); i++) {
+			mapper.deleteFac(gridDate.deletedRows.get(i));
+		}
 		data.put("result", true);
 		data.put("data", gridDate.deletedRows);
 		return data;

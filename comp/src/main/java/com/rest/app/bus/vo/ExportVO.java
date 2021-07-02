@@ -2,8 +2,9 @@ package com.rest.app.bus.vo;
 
 public class ExportVO {
 	
-	String lotNo;//lot
-	int orderNo;//주문번호
-	String outDate;//출고일자
+	String exportCode;//출고번호
+	String exportDate;//출고일자
+	int companyCode;//업체코드
+	String comments;//특기사항
 
 }

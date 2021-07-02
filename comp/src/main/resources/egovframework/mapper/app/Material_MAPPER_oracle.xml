@@ -2,14 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rest.app.mat.service.impl.MaterialMapper">
 
-<!-- 
-
-
-	참고를 위함이면 이거보다 inorderForm.jsp, matInForm.jsp 를 보기를 권장함
-
-
-
- -->
 	<select id="getMatList" resultType="MatVO">
 		SELECT m.material_code, m.material_name, cm.code_nm as mat_nm
 		FROM material m LEFT JOIN COMTCCMMNDETAILCODE cm
@@ -68,11 +60,10 @@
 			
 		FROM inorder
 		
-		
 		<where>
-			<![CDATA[ 
-			( trunc(inorder_date) >= trunc(#{startDate}) AND trunc(inorder_date) <= trunc(#{endDate}) )
-			]]> 
+
+			trunc(io_date) BETWEEN #{startDate} AND #{endDate} 
+			
 			<if test="companyCode != null and companyCode != ''">
 				AND company_code = #{companyCode}
 			</if>	
@@ -95,21 +86,27 @@
 	<!-- 입출고/정산입출고 한방에 -->
 	<select id="getMatInoutList" resultType="InoutVO"  parameterType="InoutVO">
 	
-		SELECT io_code, io_date, material_code, F_FINDMATNAME(material_code) as material_name , 
+		SELECT io_code, 
+				io_date, 
+				material_code, 
+				F_FINDMATNAME(material_code) as material_name, 
 		        (SELECT unit_no FROM material WHERE material_code = inout.material_code) as unit_no,
-		        inorder_code, io_volume, unit_price, io_volume * unit_price as price, lot_no,
+		        inorder_code, 
+		        io_volume, 
+		        unit_price, 
+		        io_volume * unit_price as price, 
+		        lot_no,
 		        (SELECT stock FROM stock WHERE material_code = inout.material_code) as stock,
         		(SELECT f_findCompName(company_code) FROM inorder WHERE inorder_code = inout.inorder_code) as company_name,
      		  	(SELECT company_code FROM inorder WHERE inorder_code = inout.inorder_code) as company_code,
+     		  	process_code,
      		  	(SELECT process_name FROM process WHERE process_code = inout.process_code) as process_name
 		FROM inout
 		
 		<where>
-			inout_no = #{ioType} and
-			<![CDATA[ 
-				( trunc(io_date) >= trunc(#{startDate}) AND trunc(io_date) <= trunc(#{endDate}) )
-			]]> 
-			
+			inout_no = #{ioType}  
+			AND trunc(io_date) BETWEEN #{startDate} AND #{endDate} 
+
 			<if test="companyCode != null and companyCode != ''">
 				AND (SELECT company_code FROM inorder WHERE inorder_code = inout.inorder_code) = #{companyCode}
 			</if>	
@@ -163,5 +160,33 @@
 		DELETE FROM inout WHERE io_code = ${ioCode}
 	</delete>
 	
+	<!-- 출고관리, 자재코드 입력시 자재정보 불러오기 -->
+	<select id="getMatInfoForOut" resultType="InoutVO" parameterType="InoutVO" >
+		SELECT F_FINDMATNAME(material_code) AS material_name, 
+				unit_no,
+				(SELECT stock FROM stock where material_code = material.material_code) AS stock
+		FROM material 
+		WHERE material_code = #{materialCode}
+	</select>
+	
+	<!-- 출고관리, 자재코드 입력시 사용공정 리스트 출력 -->
+	<select id="getProcessList" parameterType="SelectListVO" resultType="SelectListVO">
+		SELECT process_code, 		      
+				(SELECT process_name FROM process WHERE process_code = bom.process_code) AS process_name
+		FROM bom 
+		WHERE material_code = #{materialCode}
+	</select>
+	
+	<!-- 자재별 로트번호 & 재고(0이상) -->
+	<select id="getLotList" parameterType="SelectListVO" resultType="SelectListVO">
+		SELECT lot_no, 
+        		(SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (01,03,05) and lot_no = i.lot_no) 
+          		- (SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (02,04) and lot_no = i.lot_no) as lot_stock
+		FROM inout i 
+		WHERE material_code = #{materialCode} 
+      			AND (SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (01,03,05) and lot_no = i.lot_no) 
+            		- (SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (02,04) and lot_no = i.lot_no) > 0
+		GROUP BY lot_no;
+	</select>
 	
 </mapper>

@@ -9,6 +9,7 @@ import com.rest.app.mat.service.MaterialService;
 import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
+import com.rest.app.mat.vo.SelectListVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -90,6 +91,17 @@ public class MaterialServiceImpl implements MaterialService{
 	public int delInout(InoutVO vo) {
 		return mapper.delInout(vo);
 	}
+
+	@Override
+	public List<SelectListVO> getProcessList(SelectListVO vo) {
+		return mapper.getProcessList(vo);
+	}
+
+	@Override
+	public InoutVO getMatInfoForOut(InoutVO vo) {
+		return mapper.getMatInfoForOut(vo);
+	}
+	
 	
 	
 }
