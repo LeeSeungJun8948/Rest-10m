@@ -53,8 +53,7 @@
 				<label class="headtxt">고객사</label> <input type="text"
 					id="searchKeywordFrom" name="searchKeywordFrom" />
 				<a href="compModal.do" rel="modal:open"class="btn btn-primary">
-					<img
-						src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
+					<img src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
 				</a>
 				<input type="text" id="searchKeywordFromNm"
 					name="searchKeywordFromNm" readonly="true" /> <label

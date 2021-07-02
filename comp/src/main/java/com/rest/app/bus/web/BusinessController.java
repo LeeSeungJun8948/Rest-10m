@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.rest.app.bus.service.BusinessService;
 import com.rest.app.bus.vo.CompanyVO;
 import com.rest.app.bus.vo.OrdersVO;
-import com.rest.app.comm.vo.BomVO;
-import com.rest.app.mat.vo.MaterialVO;
 
 @Controller
 public class BusinessController {
@@ -33,13 +31,14 @@ public class BusinessController {
 //		// TODO Auto-generated method stub
 //		return dao.getBus();
 //	}
+	
 	@RequestMapping("/ajax/busList.do")
 	@ResponseBody
 	public Map<String, Object> busList(@RequestBody Map<String, Object> param) {
 		Map<String, Object> datas = new HashMap<String, Object>();
 		Map<String, Object> data = new HashMap<String, Object>();
-		data.put("result", true);
 		datas.put("contents", dao.getBus(param));
+		data.put("result", true);
 		data.put("data", datas);
 		return data;
 	}
@@ -49,16 +48,22 @@ public class BusinessController {
 //		return "bus/clientCompany.page";
 //	}
 
-	@RequestMapping("exportForm.do") // 출고관리페이지
+	// 출고관리페이지
+	@RequestMapping("exportForm.do") 
 	public String exportForm(Model model) {
 		return "bus/exportForm.page";
 	}
 
-	@RequestMapping("/ajax/readUnExport.do") // 미출고 조회
+	// 미출고 조회
+	@RequestMapping("readUnExport.do") 
 	@ResponseBody
-	public OrdersVO ajaxReadUnExport(Model model, OrdersVO vo) {// 자재 리스트에서 클릭시 자재 상세 정보 출력
-		vo = dao.getUnExport(vo);
-		return vo;
+	public Map<String, Object> readUnExport(@RequestBody OrdersVO param) {// 자재 리스트에서 클릭시 자재 상세 정보 출력
+		Map<String, Object> datas = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", dao.getUnExport(param));
+		data.put("data", datas);
+		return data;
 	}
 
 	// 고객사리스트 ajax

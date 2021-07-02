@@ -106,7 +106,6 @@ $('#btnDel').on('click', function(){
 // 미생산 읽기 버튼
 $('#btnRead').on('click',  function(){
 	var param = $('#dateForm').serializeObject();
-	console.log(param)
 	grid.readData(1, param, true);
 });
 

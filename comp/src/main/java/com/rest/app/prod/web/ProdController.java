@@ -31,6 +31,7 @@ public class ProdController {
 	@RequestMapping("readUnplanOrders.do")
 	@ResponseBody
 	public Map<String, Object> readUnplanOrders(@RequestBody Map<String, Object> param) {
+		System.out.println(param);
 		Map<String, Object> data = new HashMap<String, Object>();
 		Map<String, Object> datas = new HashMap<String, Object>();
 		datas.put("contents", svc.getUnplanOrders(param));
@@ -123,7 +124,6 @@ public class ProdController {
 	public Map<String, Object> getInputMat(@RequestBody Map<String, Object> param) {
 		Map<String, Object> data = new HashMap<String, Object>();
 		Map<String, Object> datas = new HashMap<String, Object>();
-		System.out.println(param);
 		datas.put("contents", svc.readInputMat(param));
 		data.put("result", true);
 		data.put("data", datas);
