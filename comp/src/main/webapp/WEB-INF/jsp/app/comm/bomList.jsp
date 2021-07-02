@@ -84,19 +84,18 @@
 		</table>
 	</div>
 	<div class="flex row" style="margin-top: 40px">
-	<div  class="col-8">
-		<h3>제품 소요량 관리</h3>
+		<div  class="col-8">
+			<h3>제품 소요량 관리</h3>
+		</div>
+		<div class="col-4" align="right">
+			<button type="button" class="btn btn-primary" id="btnRowInsert">행추가</button>
+			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
+		</div>
 	</div>
-	<div class="col-4" align="right">
-		<button type="button" class="btn btn-primary" id="btnRowInsert">행추가</button>
-		<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
-	</div>
-	</div>
-		<div id="bomgrid" style="z-index:10" class="bgird">
-	</div>
-		       <script type="text/javascript">
-         			const dataSource = {
-						api : {
+	<div id="bomgrid" style="z-index:10" class="bgird"></div>
+		<script type="text/javascript">
+        	const dataSource = {
+				api : {
 							readData : {url: 'ajax/getInfoProduct.do', method:'get'},
 							createData : { url: 'ajax/insertBom.do', method: 'POST'},
 							updateData : { url: 'ajax/updateBom.do', method: 'PUT' },
@@ -105,7 +104,7 @@
 						},
 						contentType: 'application/json'
 				}; 
-				const grid = new tui.Grid({
+			const grid = new tui.Grid({
 					el : document.getElementById('bomgrid'),
 					data : dataSource,
 					rowHeaders: ['checkbox'],
@@ -115,6 +114,13 @@
 					{
 						header : '제품코드',
 						name : 'productCode',
+						hidden : true
+						
+					},
+					{
+						header : 'Bom넘버',
+						name : 'bomNo',
+						hidden : true
 						
 					},
 					{
@@ -127,7 +133,7 @@
 					},
 					{
 						header :'자재명',
-						name : 'materialName',
+						name : 'materialName'
 					},
 					{
 						header :'사용량(KG)',
@@ -145,7 +151,7 @@
 					
 					{
 						header :'공정명',
-						name : 'processName',
+						name : 'processName'
 						
 					},
 					{
@@ -209,8 +215,11 @@
 					 		grid.readData(1, param, true);
 					 		grid.request('modifyData', {
 						    checkedOnly: true
+
 						  });
 				})
+					
+				
 				function setMatCode(ev){
 					var rowKey = ev.rowKey;
 					var materialCode = grid.getValue(rowKey,'materialCode');

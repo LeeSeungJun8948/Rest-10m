@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rest.app.comm.service.impl.ProcessMapper">
+	<!--공정 리스트 -->
+	<select id="getProcessList" resultType="com.rest.app.comm.vo.ProcessVO">
+		select *
+		  from process
+		 order by process_code
+	</select>
+	
+	<!--insert process -->
+	<insert id="insertProcess" parameterType="com.rest.app.comm.vo.ProcessVO">
+		insert into process
+		values (#{processCode},#{processName},'R_UNIT',#{unitNo},#{proComment},#{outStats})
+	</insert>
+	
+	<update id="updateProcess" parameterType="com.rest.app.comm.vo.ProcessVO">
+		update process
+		   set process_code=#{processCode}, process_name=#{processName},
+		   	   unit_no=#{unitNo},pro_comment=#{proComment}, out_stats=#{outStats}
+		 where process_code=#{processCode}
+	</update>
+	
+	<delete id="deleteProcess" parameterType="com.rest.app.comm.vo.ProcessVO">
+		delete 
+		  from process
+		 where process_code = #{processCode}
+	</delete>
+</mapper>

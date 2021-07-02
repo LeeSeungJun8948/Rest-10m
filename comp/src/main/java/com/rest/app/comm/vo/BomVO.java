@@ -14,6 +14,7 @@ public class BomVO extends ComDefaultVO{
 	String processName;
 	int materialCode;
 	String materialName;
+	int bomNo;
 	String kg;
 	String etc;
 }

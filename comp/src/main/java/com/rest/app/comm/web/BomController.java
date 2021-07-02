@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rest.app.comm.service.BomService;
+import com.rest.app.comm.service.ProcessService;
 import com.rest.app.comm.vo.BomVO;
+import com.rest.app.comm.vo.ProcessVO;
 
 import lombok.Data;
 
@@ -27,12 +29,22 @@ class BomGridData{
 	List<BomVO> updatedRows;
 	List<BomVO> createdRows;
 }
+@Data
+class ProGridData{
+	List<ProcessVO> deletedRows;
+	List<ProcessVO> updatedRows;
+	List<ProcessVO> createdRows;
+}
+
 
 @Controller
 public class BomController {
 
 	@Autowired
 	BomService dao;
+	
+	@Autowired
+	ProcessService pdao;
 	
 	@RequestMapping("/commList.do")
 	public String commList() {
@@ -71,6 +83,12 @@ public class BomController {
 	public String modal() {
 		return "app/comm/modal";
 	}
+	
+	//공정모달 
+		@RequestMapping("proModal.do")
+		public String proModal() {
+			return "app/comm/proModal";
+		}
 	
 	
 	//제품 조회 , 소요자재조회
@@ -179,6 +197,81 @@ public class BomController {
 		dao.deleteBom(vo);
 		return "comm/bomList.page";
 	} 
+	
+	//공정리스트
+	@RequestMapping("processList.do")
+	public String processList(Model model,ProcessVO vo) {
+		return "comm/processList.page";
+	}
+	
+	//공정리스트 ajax
+	@RequestMapping("/ajax/processList.do")
+	@ResponseBody
+	public Map<String, Object> ajaxGetprocessList(ProcessVO vo) {
+		Map<String,Object> datas = new HashMap<String, Object>();
+		Map<String,Object> data = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", pdao.getProcessList(vo));
+		data.put("data", datas);
+		return data;
+		}
+	
+	//공정 추가
+	@PostMapping(value="/ajax/insertProcess.do")
+	@ResponseBody
+	public Map<String, Object> insertProcess(@RequestBody ProGridData ProGridData) {
+		Map<String,Object> data = new HashMap<String,Object>();
+		pdao.insertProcess(ProGridData.createdRows.get(0));
+		data.put("result", true);
+		data.put("data", ProGridData.createdRows);
+		return data;
+		}
+	//공정 수정
+	@PutMapping(value="/ajax/updateProcess.do")
+	@ResponseBody
+	public Map<String, Object> updateProcess(@RequestBody ProGridData ProGridData) {
+		
+		Map<String,Object> data = new HashMap<String, Object>();
+		for(int i =0; i<ProGridData.updatedRows.size(); i++) {
+			pdao.updateProcess(ProGridData.updatedRows.get(i));	
+		}
+		data.put("result", true);
+		data.put("data",ProGridData.updatedRows);
+		return data;
+	}
+		
+	@PutMapping(value= "/ajax/modifyProcess.do")
+	@ResponseBody
+	public Map<String, Object> modifyProcess(@RequestBody ProGridData ProGridData) {
+		Map<String,Object> data = new HashMap<String,Object>();
+			
+		System.out.println(ProGridData.updatedRows.size());
+		for(int i=0; i<ProGridData.createdRows.size(); i++){
+			pdao.insertProcess(ProGridData.createdRows.get(i));
+		}
+		for(int i=0; i<ProGridData.updatedRows.size(); i++){
+			pdao.updateProcess(ProGridData.updatedRows.get(i));
+		}
+		data.put("result", true);
+		data.put("data",ProGridData.createdRows);
+		data.put("data",ProGridData.updatedRows);
+		return data;
+	}
+	
+	
+	
+	//공정삭제
+	@PostMapping(value="ajax/deleteProcess.do")
+	@ResponseBody
+	public Map deleteProcess(@RequestBody ProGridData ProGridData) {
+		Map<String,Object> data = new HashMap();
+		for(int i =0; i<ProGridData.deletedRows.size(); i++) {
+			pdao.deleteProcess(ProGridData.deletedRows.get(i));
+		}
+		data.put("result", true);
+		data.put("data", ProGridData.deletedRows);
+		return data;
+	}
 }	
 
 

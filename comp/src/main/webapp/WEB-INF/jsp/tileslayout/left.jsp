@@ -34,7 +34,7 @@
                         <a class="collapse-item" href="#">傍烹内靛包府</a>
                         <a class="collapse-item" href="matForm.do">磊犁沥焊包府</a>
                         <a class="collapse-item" href="bomList.do">力前 BOM包府</a>
-                        <a class="collapse-item" href="cards.html">傍沥包府</a>
+                        <a class="collapse-item" href="processList.do">傍沥包府</a>
                         <a class="collapse-item" href="empList.do">荤盔包府</a>
                         <a class="collapse-item" href="cards.html">阂樊内靛 包府 </a>
                         <a class="collapse-item" href="cards.html">力前 前龙 钎霖辑 包府</a>
