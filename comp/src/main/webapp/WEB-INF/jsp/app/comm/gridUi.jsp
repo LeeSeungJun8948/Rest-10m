@@ -163,6 +163,10 @@
 				grid.on('response', function(data) {
 					grid.resetOriginData();
 				}) 			
+			/* 	grid.on('click', ev->
+					ev.rowKey
+					ev.columnName
+				) */
 			
 			</script>
 		</div>
