@@ -1,49 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rest.app.bus.service.impl.BusinessMapper">
-	<select id="getBus"
-		resultType="com.rest.app.bus.vo.OrdersVO">
+	<select id="getBus" resultType="com.rest.app.bus.vo.OrdersVO">
 		select
 		F_FINDCOMPNAME(company_code)AS comp_name,
 		o.*, p.*,
 		(o.order_count - o.out_count) as not_count,
 		CASE
-		WHEN o.plan_count = 0 THEN '미계획'
+		WHEN o.plan_count = 0
+		THEN '미계획'
 		WHEN o.order_count > o.plan_count THEN
 		'진행중'
 		ELSE '완료'
-		END AS order_state
+		END AS
+		order_state
 		FROM orders o, product p
-		WHERE o.in_date BETWEEN TO_DATE(#{fromDate},'YYYY-MM-DD') 
-			AND	TO_DATE(#{toDate}, 'YYYY-MM-DD')
-			AND	o.product_code=p.product_code
-			<if test="companyCode !=null and companyCode !=''">
-				and o.company_code=#{companyCode}
-			</if>
-			<if test="productCode !=null and productCode !=''">
-				and o.product_code=#{productCode}
-			</if>
-			<if test="orderState == 'unPlan'">
-				and o.plan_count = 0
-			</if>
-			<if test="orderState == 'working'">
-				and o.order_count > o.plan_count AND o.plan_count > 0
-			</if>
-			<if test="orderState == 'planComplete'">
-				and o.order_count = o.plan_count
-			</if>
+		WHERE o.in_date BETWEEN
+		TO_DATE(#{fromDate},'YYYY-MM-DD')
+		AND TO_DATE(#{toDate}, 'YYYY-MM-DD')
+		AND o.product_code=p.product_code
+		<if test="companyCode !=null and companyCode !=''">
+			and o.company_code=#{companyCode}
+		</if>
+		<if test="productCode !=null and productCode !=''">
+			and o.product_code=#{productCode}
+		</if>
+		<if test="orderState == 'unPlan'">
+			and o.plan_count = 0
+		</if>
+		<if test="orderState == 'working'">
+			and o.order_count > o.plan_count AND o.plan_count > 0
+		</if>
+		<if test="orderState == 'planComplete'">
+			and o.order_count = o.plan_count
+		</if>
 	</select>
 
-	<select id="getUnExport" 
-		resultType="com.rest.app.bus.vo.OrdersVO" parameterType="com.rest.app.bus.vo.OrdersVO" >
-		SELECT o.*, p.*,(o.order_count-o.out_count) as un_export,d.export_count,
-		(SELECT SUM(product_count) FROM storage WHERE PRODUCT_CODE = o.product_code)as dayCount
+	<select id="getUnExport"
+		resultType="com.rest.app.bus.vo.OrdersVO" parameterType="com.rest.app.bus.vo.OrdersVO">
+
+		SELECT
+		p.product_code,p.product_name,p.std_id,p.unit_id,o.order_no,o.order_count,o.out_count,(o.order_count-o.out_count)
+		as un_export,d.export_count,
+		(SELECT SUM(product_count) FROM storage
+		WHERE PRODUCT_CODE = o.product_code)as dayCount
 		FROM orders o
-		INNER JOIN product p ON o.product_code = p.product_code
-		INNER JOIN storage s ON o.product_code = s.product_code
-		INNER JOIN detailexport d on o.order_no = d.order_no
+		INNER JOIN
+		product p ON o.product_code = p.product_code
+		INNER JOIN storage s ON
+		o.product_code = s.product_code
+		INNER JOIN detailexport d on o.order_no
+		= d.order_no
 		WHERE o.order_count!=d.export_count
-		AND o.out_date BETWEEN TO_DATE(#{planDtS}, 'YYYY-MM-DD') 
-                   AND TO_DATE(#{planDtE}, 'YYYY-MM-DD')
+		AND o.product_code =
+		p.product_code
+		AND o.out_date BETWEEN TO_DATE(#{planDtS}, 'YYYY-MM-DD')
+		AND TO_DATE(#{planDtE}, 'YYYY-MM-DD')
+	</select>
+	<select id="getCompany"
+		resultType="com.rest.app.bus.vo.CompanyVO">
+		select company_code,company_name,company_num,phone
+		from company
+		<where>
+			<if test="searchCondition == 'companyCode'">AND
+				product_code LIKE '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="searchCondition == 'companyName'">AND
+				product_name LIKE '%' || #{searchKeyword} || '%'
+			</if>
+		</where>
+
+	</select>
+	<!-- 제품코드,제품명,제품규격 List(모달창) -->
+	<select id="getProduct" resultType="com.rest.app.comm.vo.BomVO">
+
+		SELECT product_code, product_name, unit_id
+		FROM product
+		<where>
+			<if test="searchCondition == 'productCode'">AND
+				product_code LIKE '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="searchCondition == 'productName'">AND
+				product_name LIKE '%' || #{searchKeyword} || '%'
+			</if>
+		</where>
 	</select>
 </mapper>

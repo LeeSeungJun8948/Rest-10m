@@ -99,6 +99,7 @@
 		        (SELECT stock FROM stock WHERE material_code = inout.material_code) as stock,
         		(SELECT f_findCompName(company_code) FROM inorder WHERE inorder_code = inout.inorder_code) as company_name,
      		  	(SELECT company_code FROM inorder WHERE inorder_code = inout.inorder_code) as company_code,
+     		  	process_code,
      		  	(SELECT process_name FROM process WHERE process_code = inout.process_code) as process_name
 		FROM inout
 		
@@ -169,11 +170,23 @@
 	</select>
 	
 	<!-- 출고관리, 자재코드 입력시 사용공정 리스트 출력 -->
-	<select id="getProcessList" parameterType="InoutVO" resultType="RadioVO">
-		SELECT process_code, 
-		      (SELECT process_name FROM process WHERE process_code = bom.process_code) AS process_name
+	<select id="getProcessList" parameterType="SelectListVO" resultType="SelectListVO">
+		SELECT process_code, 		      
+				(SELECT process_name FROM process WHERE process_code = bom.process_code) AS process_name
 		FROM bom 
 		WHERE material_code = #{materialCode}
+	</select>
+	
+	<!-- 자재별 로트번호 & 재고(0이상) -->
+	<select id="getLotList" parameterType="SelectListVO" resultType="SelectListVO">
+		SELECT lot_no, 
+        		(SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (01,03,05) and lot_no = i.lot_no) 
+          		- (SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (02,04) and lot_no = i.lot_no) as lot_stock
+		FROM inout i 
+		WHERE material_code = #{materialCode} 
+      			AND (SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (01,03,05) and lot_no = i.lot_no) 
+            		- (SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (02,04) and lot_no = i.lot_no) > 0
+		GROUP BY lot_no;
 	</select>
 	
 </mapper>

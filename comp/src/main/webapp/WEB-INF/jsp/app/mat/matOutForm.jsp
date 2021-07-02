@@ -27,8 +27,11 @@
 					<tr>
 						<th>출고자재</th>
 						<td>
-							<input  class="w-5" type="text" id="materialCode" name="materialCode"> 
-							<input  type="text" id="materialName" name="materialName">
+							<input class="w-5" type="text" id="materialCode" name="materialCode">
+							<button id="btnMatCodeModal" type="button" class="btn btn-toggle">
+									<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+							</button>									
+							<input type="text" id="materialName" name="materialName">
 						</td>
 					</tr>
 					<tr>
@@ -62,4 +65,5 @@
 		<div id="matOutList"></div>
 	</form>
 </div>
+
 <script type="text/javascript" src="js/app/mat/matOutForm.js"></script>
