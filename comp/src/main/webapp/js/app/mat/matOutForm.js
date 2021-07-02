@@ -194,7 +194,6 @@ function makeProcessList(materialCode){
 		success : function(datas) {
 			for(let data of datas){
 				processList.push({text: data.processName, value: data.processCode});
-				
 			}
 		},
 		error:function(request, status, error){
@@ -282,3 +281,7 @@ $("#btnSave").on("click", function(){
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
+
+$("#myModal").on("show.bs.modal", function(e) {
+    $(this).load("matCodeModal.do");
+});
