@@ -43,7 +43,7 @@ const grid = new tui.Grid({
 		header : '현재고',
 		name : 'dayCount'
 		}, {
-		header : '소재LOT.no',
+		header : '제품LOT.no',
 		name : 'productLot'
 		}, {
 		header : '금액',
@@ -103,7 +103,7 @@ $('#btnDel').on('click', function(){
 	
 });
 
-// 미생산 읽기 버튼
+// 미출고 읽기 버튼
 $('#btnRead').on('click',  function(){
 	var param = $('#dateForm').serializeObject();
 	grid.readData(1, param, true);

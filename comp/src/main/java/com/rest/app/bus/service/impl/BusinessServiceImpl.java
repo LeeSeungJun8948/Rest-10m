@@ -10,6 +10,7 @@ import com.rest.app.bus.service.BusinessService;
 import com.rest.app.bus.vo.CompanyVO;
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.comm.vo.BomVO;
+import com.rest.app.mat.vo.MaterialVO;
 
 @Service("businessService")
 public class BusinessServiceImpl implements BusinessService {
@@ -24,7 +25,7 @@ public class BusinessServiceImpl implements BusinessService {
 	}
 
 	@Override
-	public List<OrdersVO> getUnExport(OrdersVO param) {
+	public List<OrdersVO> getUnExport(Map<String, Object> param) {
 		return mapper.getUnExport(param);
 	}
 

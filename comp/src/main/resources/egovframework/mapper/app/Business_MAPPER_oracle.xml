@@ -39,8 +39,8 @@
 	<select id="getUnExport"
 		resultType="com.rest.app.bus.vo.OrdersVO">
 		SELECT DISTINCT
-		p.*, 
-		o.*,
+		p.product_code, p.product_name, p.std_id, p.unit_id,
+		o.order_no, o.out_count,
 		(o.order_count - o.out_count) as un_export,
 		(SELECT SUM(product_count) FROM storage
 		WHERE product_code = o.product_code AND product_state='포장완료') as dayCount
@@ -65,18 +65,5 @@
 		</where>
 
 	</select>
-	<!-- 제품코드,제품명,제품규격 List(모달창) -->
-	<select id="getProduct" resultType="com.rest.app.comm.vo.BomVO">
 
-		SELECT product_code, product_name, unit_id
-		FROM product
-		<where>
-			<if test="searchCondition == 'productCode'">AND
-				product_code LIKE '%' || #{searchKeyword} || '%'
-			</if>
-			<if test="searchCondition == 'productName'">AND
-				product_name LIKE '%' || #{searchKeyword} || '%'
-			</if>
-		</where>
-	</select>
 </mapper>

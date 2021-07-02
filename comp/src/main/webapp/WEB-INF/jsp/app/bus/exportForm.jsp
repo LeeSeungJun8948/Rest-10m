@@ -30,7 +30,7 @@
 						<th>출고일자</th>
 						<td><input type="date" id="exportDate" name="exportDate"></td>
 						<th>출고번호</th>
-						<td><input type="date" id="Lot" name="Lot"></td>
+						<td><input type="date" id="lot" name="lot"></td>
 					</tr>
 					<tr>
 						<th>고객사</th>
