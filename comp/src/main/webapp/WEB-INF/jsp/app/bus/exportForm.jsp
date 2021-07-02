@@ -28,9 +28,9 @@
 				<tbody>
 					<tr>
 						<th>출고일자</th>
-						<td><input type="date" id="outDate" name="outDate"></td>
+						<td><input type="date" id="exportDate" name="exportDate"></td>
 						<th>출고번호</th>
-						<td><input type="date" id="Lot" name="Lot"></td>
+						<td><input type="date" id="lot" name="lot"></td>
 					</tr>
 					<tr>
 						<th>고객사</th>
@@ -55,8 +55,8 @@
 		</div>
 		<div>
 			<form id="dateForm" name="dateForm">
-				<span>납기일자 </span><input type="date" id="planDtS" name="planDtS">
-				<span> ~ </span><input type="date" id="planDtE" name="planDtE">&nbsp;
+				<span>납기일자 </span><input type="date" id="inDate" name="inDate">
+				<span> ~ </span><input type="date" id="outDate" name="outDate">&nbsp;
 				<button type="button" class="btn btn-primary" id="btnRead">미출고
 					읽기</button>
 			</form>

@@ -54,7 +54,7 @@ public class BusinessController {
 		return "bus/exportForm.page";
 	}
 
-	@RequestMapping("/ajax/readUnExport.do") // 미출고 조회
+	@RequestMapping("readUnExport.do") // 미출고 조회
 	@ResponseBody
 	public OrdersVO ajaxReadUnExport(Model model, OrdersVO vo) {// 자재 리스트에서 클릭시 자재 상세 정보 출력
 		vo = dao.getUnExport(vo);
