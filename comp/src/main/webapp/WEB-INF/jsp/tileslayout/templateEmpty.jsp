@@ -24,5 +24,4 @@
 <script src="${pageContext.request.contextPath}/js/toastr.js"></script>
 
 	<tiles:insertAttribute name="body" />     
-
 </html>

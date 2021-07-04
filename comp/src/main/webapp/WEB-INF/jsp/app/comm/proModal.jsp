@@ -17,7 +17,6 @@
 	background-color: rgba(0, 0, 0, 0.75);
 	text-align: center
 }
-
 .modal {
 	display: none;
 	vertical-align: middle;
@@ -66,7 +65,7 @@
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				<button id=btnSearch type="button" onclick="fnSearch()"
 					class="btn btn-primary">검색</button>
-			
+
 			</div>
 
 			<script type="text/javascript">
@@ -76,7 +75,6 @@
 							url : 'ajax/bomList.do',
 							method : 'GET'
 						},
-
 					},
 					contentType : 'application/json'
 				};
@@ -97,15 +95,12 @@
 						name : 'unitNo',
 					} ]
 				});
-
 				matGrid.on('click', function(ev) {
 					var values = matGrid.getRow(ev.rowKey);
 					var prdCode = values.productCode;
 					$('#productCode').val(prdCode);
 					console.log(prdCode);
-
 				});
-
 				$.fn.serializeObject = function() {
 					var o = {};
 					var a = this.serializeArray();
@@ -121,7 +116,6 @@
 					});
 					return o;
 				};
-
 				$("#btnCheck").on("click", function() {
 					var param = $('#productSearchForm').serializeObject();
 					matGrid.readData(1, param, true);

@@ -31,7 +31,6 @@ public class ProdController {
 	@RequestMapping("readUnplanOrders.do")
 	@ResponseBody
 	public Map<String, Object> readUnplanOrders(@RequestBody Map<String, Object> param) {
-		System.out.println(param);
 		Map<String, Object> data = new HashMap<String, Object>();
 		Map<String, Object> datas = new HashMap<String, Object>();
 		datas.put("contents", svc.getUnplanOrders(param));

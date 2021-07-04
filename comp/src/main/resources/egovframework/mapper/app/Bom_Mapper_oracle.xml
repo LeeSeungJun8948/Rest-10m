@@ -82,14 +82,12 @@
 	<!-- Bom delete -->
 	<delete id="deleteBom" parameterType="com.rest.app.comm.vo.BomVO">
 		delete from bom
-		 where bom_no=#{bomNo}
+		where bom_no=#{bomNo}
 	</delete>
 	<!--  -->
 	<select id="getNewProductCode" resultType="com.rest.app.comm.vo.BomVO">
 		select product_code
 		  from product
 	</select>
-
-
 
 </mapper>

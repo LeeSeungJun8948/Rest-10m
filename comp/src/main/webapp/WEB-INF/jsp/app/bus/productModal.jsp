@@ -43,17 +43,16 @@
 
 <!-- Modal -->
 <form action="getInfoProduct.do" method="post" id="frm">
-	<input type="hidden" id="companyCode" name="companyCode">
+	<input type="hidden" id="productCode" name="productCode">
 </form>
 <div class="modal-dialog" role="document" style="z-index: 100">
 	<div class="modal-content">
 		<div class="modal-header">
 			<form id="productSearchForm" name="productSearchForm">
-				<select name="searchCondition" id="searchCondition"
-					title="검색조건2-검색어구분" style="width: 80px; height: 26px">
-					<option value="companyCode">업체코드</option>
-					<option value="companyName" selected="selected">업체명</option>
-				</select> 
+				<select name="searchCondition" id="searchCondition" title="검색조건2-검색어구분" style="width: 80px; height: 26px">
+					<option value="productCode">제품코드</option>
+					<option value="productName" selected="selected">제품명</option>
+				</select>
 				<input id="searchKeyword" name="searchKeyword" type="text" title="검색어" class="form-control" style="width: 200px; margin-left: 10px">
 				<button type="button" class="btn btn-primary" id="btnCheck">조회</button>
 			</form>
@@ -63,7 +62,8 @@
 			<div id=matGrid></div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button id=btnSearch type="button" onclick="fnSearch()"	class="btn btn-primary">검색</button>
+				<button id=btnSearch type="button" onclick="fnSearch()"
+					class="btn btn-primary">검색</button>
 			</div>
 
 			<script type="text/javascript">
@@ -84,18 +84,15 @@
 					scrollY : false,
 					rowHeaders : [ 'rowNum' ],
 					columns : [ {
-						header : '업체코드',
+						header : '제품코드',
 						name : 'companyCode',
 					}, {
-						header : '업체명',
+						header : '제품명',
 						name : 'companyName',
 					}, {
-						header : '사업자등록변호',
+						header : '규격',
 						name : 'unitId',
-					} ,{
-						header : '전화번호',
-						name : 'unitId',
-					}]
+					} ]
 				});
 
 				matGrid.on('click', function(ev) {

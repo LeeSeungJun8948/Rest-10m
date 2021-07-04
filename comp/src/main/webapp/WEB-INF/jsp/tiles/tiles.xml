@@ -3,10 +3,7 @@
   "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
   "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
- 
-
 <tiles-definitions>
-
     <definition name="base" template="/WEB-INF/jsp/tileslayout/template.jsp">
         <put-attribute name="left"   value="/WEB-INF/jsp/tileslayout/left.jsp" />
         <put-attribute name="header" value="/WEB-INF/jsp/tileslayout/header.jsp" />
@@ -24,23 +21,23 @@
     <definition name="*/*/*.page" extends="base">
         <put-attribute name="body" value="/WEB-INF/jsp/app/{1}/{2}/{3}.jsp" />
     </definition>
- 	 
- 	 
- 	 
-    <definition name="baseEmpty" template="/WEB-INF/jsp/tileslayout/templateEmpty.jsp">
+        
+     <definition name="*/*/*/*/*/*.tiles" extends="base">
+		 <put-attribute name="body" value="/WEB-INF/jsp/{1}/{2}/{3}/{4}/{5}/{6}.jsp" />
+ 	</definition>  
+ 	
+ 	<definition name="baseEmpty" template="/WEB-INF/jsp/tileslayout/templateEmpty.jsp">
     </definition>
-    
+
     <definition name="*.part" extends="baseEmpty">
         <put-attribute name="body" value="/WEB-INF/jsp/app/{1}.jsp" />
     </definition>
- 
+
      <definition name="*/*.part" extends="baseEmpty">
          <put-attribute name="body" value="/WEB-INF/jsp/app/{1}/{2}.jsp" />
      </definition>
-    
+
     <definition name="*/*/*.part" extends="baseEmpty">
         <put-attribute name="body" value="/WEB-INF/jsp/app/{1}/{2}/{3}.jsp" />
     </definition> 
-
-
 </tiles-definitions>

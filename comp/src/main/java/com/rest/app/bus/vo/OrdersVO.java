@@ -1,12 +1,10 @@
 package com.rest.app.bus.vo;
 
-import java.util.Date;
-
 import lombok.Data;
    
 @Data
 public class OrdersVO {
-	String compName;
+	String compName;//업체명
 	int orderNo;//주문번호
 	int productCode;//제품코드
 	String productName;//제품명
@@ -26,5 +24,4 @@ public class OrdersVO {
 	String productLot;//제품Lot
 	int outCount;//출고량
 	int unExport;//미출고량
-	
 }

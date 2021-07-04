@@ -13,7 +13,7 @@ public class ProcessServiceImpl implements ProcessService {
 
 	@Autowired
 	ProcessMapper mapper;
-	
+
 	@Override
 	public List<ProcessVO> getProcessList(ProcessVO vo) {
 		// TODO Auto-generated method stub

@@ -54,7 +54,7 @@ const dataSourc = {
 					var param = $('#productSearchForm').serializeObject();
 					matGrid.readData(1, param, true);
 				})
-				
+
 					function fnSearch() {
 		$("#frm").submit();
 	}

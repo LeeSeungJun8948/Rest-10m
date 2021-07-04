@@ -7,20 +7,20 @@
 		  from process
 		 order by process_code
 	</select>
-	
+
 	<!--insert process -->
 	<insert id="insertProcess" parameterType="com.rest.app.comm.vo.ProcessVO">
 		insert into process
 		values (#{processCode},#{processName},'R_UNIT',#{unitNo},#{proComment},#{outStats})
 	</insert>
-	
+
 	<update id="updateProcess" parameterType="com.rest.app.comm.vo.ProcessVO">
 		update process
 		   set process_code=#{processCode}, process_name=#{processName},
 		   	   unit_no=#{unitNo},pro_comment=#{proComment}, out_stats=#{outStats}
 		 where process_code=#{processCode}
 	</update>
-	
+
 	<delete id="deleteProcess" parameterType="com.rest.app.comm.vo.ProcessVO">
 		delete 
 		  from process

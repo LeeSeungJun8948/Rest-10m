@@ -19,7 +19,7 @@ $.fn.serializeObject = function() {
 $("#btnRowInsert").on("click", function(){
 		grid.appendRow();
 	});
-	
+
 $("#btnInsert").on("click", function(){
 		//grid.request('createData');
 		grid.request('modifyData', {
@@ -30,4 +30,4 @@ $("#btnInsert").on("click", function(){
 $("#btnDelete").on("click",function() {
 	grid.removeCheckedRows(false);
 	grid.request('deleteData');
-	})
+})
