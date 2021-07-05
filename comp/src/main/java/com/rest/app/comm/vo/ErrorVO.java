@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ErrorVO {
-	int ErrorCode;
-	String ErrorName;
-	String ErrorComment;
+	int errorCode;
+	String errorName;
+	String errorComment;
 }
