@@ -101,6 +101,11 @@ public class MaterialServiceImpl implements MaterialService{
 	public InoutVO getMatInfoForOut(InoutVO vo) {
 		return mapper.getMatInfoForOut(vo);
 	}
+
+	@Override
+	public List<MaterialVO> getMatListModal(MaterialVO vo) {
+		return mapper.getMatListModal(vo);
+	}
 	
 	
 	

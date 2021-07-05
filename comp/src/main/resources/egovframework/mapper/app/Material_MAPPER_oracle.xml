@@ -104,8 +104,12 @@
 		FROM inout
 		
 		<where>
-			inout_no = #{ioType}  
-			AND trunc(io_date) BETWEEN #{startDate} AND #{endDate} 
+		
+			trunc(io_date) BETWEEN #{startDate} AND #{endDate}
+			
+			<if test="ioType != null and ioType != ''">
+				AND inout_no = #{ioType}  
+			</if> 
 
 			<if test="companyCode != null and companyCode != ''">
 				AND (SELECT company_code FROM inorder WHERE inorder_code = inout.inorder_code) = #{companyCode}
@@ -114,6 +118,10 @@
 			<if test="materialCode != null and materialCode != ''">
 				AND material_code = #{materialCode}
 			</if>	
+			
+			<if test="matNo != null and matNo != ''">
+				AND mat_no = #{matNo}			
+			</if>			
 			
 			<if test="processCode != null and processCode != ''">
 				AND process_code = #{processCode}
@@ -177,7 +185,7 @@
 		WHERE material_code = #{materialCode}
 	</select>
 	
-	<!-- 자재별 로트번호 & 재고(0이상) -->
+	<!-- 자재별 로트번호 & 재고(0이상) // 출고시 자재lot 선택 리스트 용-->
 	<select id="getLotList" parameterType="SelectListVO" resultType="SelectListVO">
 		SELECT lot_no, 
         		(SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (01,03,05) and lot_no = i.lot_no) 
@@ -187,6 +195,43 @@
       			AND (SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (01,03,05) and lot_no = i.lot_no) 
             		- (SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (02,04) and lot_no = i.lot_no) > 0
 		GROUP BY lot_no;
+	</select>
+	
+	<!-- 자재로트별 재고 -->
+	<select id="getMatStock" resultType="InoutVO" parameterType="InoutVO">
+		SELECT io.lot_no, 
+	        io.material_code, 
+	        m.material_name, 
+	        m.unit_no,
+	        io.unit_price,
+	        f_mat_count(io.lot_no) AS stock
+		FROM inout io join material m
+		ON (io.material_code = m.material_code) AND f_mat_count(io.lot_no) > 0
+	</select>
+	
+	
+	
+	<!-- 모달 -->
+	<select id="getMatListModal" resultType="MatVO" parameterType="MatVO">
+		SELECT material_code, 
+				material_name, 
+				(SELECT code_nm FROM COMTCCMMNDETAILCODE WHERE code_id = material.mat_id and code = material.mat_no) as matNm
+		FROM material
+		
+		<where>
+			<if test="keyword != null and keyword !=''">
+				<if test='!searchCondition.equals("mat_no")'>
+					${searchCondition} like '%'||#{keyword}||'%'
+				</if>
+				<if test='searchCondition.equals("mat_no")'>
+					${searchCondition} in (SELECT code 
+											FROM COMTCCMMNDETAILCODE 
+											WHERE code_id = 'R_MAT' 
+												AND upper(code_nm) like '%' || upper(#{keyword}) || '%' )
+				</if>
+			</if>
+		</where>
+		
 	</select>
 	
 </mapper>

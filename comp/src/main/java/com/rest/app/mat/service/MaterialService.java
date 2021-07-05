@@ -42,4 +42,7 @@ public interface MaterialService {
 	public InoutVO getMatInfoForOut(InoutVO vo); // 출고관리시 자재코드 입력시 자재정보 불러오기
 	
 	public List<SelectListVO> getProcessList(SelectListVO vo); // 자재당 공정 리스트 출력
+	
+	// 모달
+	public List<MaterialVO> getMatListModal(MaterialVO vo); // 자재검색 모달 자재리스트
 }

@@ -1,65 +1,79 @@
-const dataSourc = {
-					api : {
-						readData : {
-							url : 'ajax/bomList.do',
-							method : 'GET'
-						},
+(function($) {
 
-					},
-					contentType : 'application/json'
-				};
-				const matGrid = new tui.Grid({	
-					el : document.getElementById('matGrid'),
-					data : dataSourc,
-					scrollX : false,
-					scrollY : false,
-					rowHeaders : [ 'rowNum' ],
-					columns : [ {
-						header : '제품코드',
-						name : 'productCode',
-					}, {
-						header : '제품명',
-						name : 'productName',
-					}, {
-						header : '규격',
-						name : 'unitNo',
-					} ]
-				});
 
-				matGrid.on('click', function(ev) {
-					var values = matGrid.getRow(ev.rowKey);
-					var prdCode = values.productCode;
-					$('#productCode').val(prdCode);
-					console.log(prdCode);
+$("#matCodeModal").on('shown.bs.modal', function () {
+	var matListModalData = {
+				api : {
+					readData : {
+						url : 'ajax/matListModal.do',
+						method : 'GET'
+					}
+				},
+				contentType : 'application/json'
+		};
+		var matListModalGrid = new tui.Grid({	
+				el : document.getElementById('modalMatListGrid'),
+				data : matListModalData,
+				scrollX : false,	
+				scrollY : true,
+				bodyHeight: 360,
+				columns : [ {
+					header : '자재코드',
+					name : 'materialCode',
+					align: 'center'
+				}, {
+					header : '자재명',
+					name : 'materialName',
+					align: 'center'
+				}, {
+					header : '구분',
+					name : 'matNm',
+					align: 'center'
+				} ]
+		});
+		
+		$("#btnReadModal").on("click", function() {
+			var param = $('#frmMatCodeSrcModal').serializeObject();
+			console.log(param);
+			matListModalGrid.readData(1, param, true);
+		});
 
-				});
+});
 
-				$.fn.serializeObject = function() {
-					var o = {};
-					var a = this.serializeArray();
-					$.each(a, function() {
-						if (o[this.name]) {
-							if (!o[this.name].push) {
-								o[this.name] = [ o[this.name] ];
-							}
-							o[this.name].push(this.value || '');
-						} else {
-							o[this.name] = this.value || '';
-						}
-					});
-					return o;
-				};
+	
+})(jQuery);
 
-				$("#btnCheck").on("click", function() {
-					var param = $('#productSearchForm').serializeObject();
-					matGrid.readData(1, param, true);
-				})
+	/**
+matGrid.on('click', function(ev) {
+	var values = matGrid.getRow(ev.rowKey);
+	var prdCode = values.productCode;
+	$('#productCode').val(prdCode);
+	console.log(prdCode);
+});
+	
+$.fn.serializeObject = function() {
+	var o = {};
+	var a = this.serializeArray();
+	$.each(a, function() {
+		if (o[this.name]) {
+			if (!o[this.name].push) {
+				o[this.name] = [ o[this.name] ];
+			}
+			o[this.name].push(this.value || '');
+		} else {
+			o[this.name] = this.value || '';
+		}
+	});
+	return o;
+};
 
-					function fnSearch() {
-		$("#frm").submit();
-	}
-	// bom 자재리스트 버튼
-	$('#btnSearch').on('click', function() {
-		var prm = $('#frm').serializeObject();
-		grid.readData(1, prm, true);
-	})
+
+$('#btnSelectModal').on('click', function() {
+	var prm = $('#frm').serializeObject();
+	grid.readData(1, prm, true);
+})
+				
+function fnSearch() {
+	$("#frm").submit();
+}
+ */

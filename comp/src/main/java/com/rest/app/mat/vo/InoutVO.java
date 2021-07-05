@@ -33,6 +33,7 @@ public class InoutVO {
 	String inorderCode;
 	
 	String unitNo;
+	String matNo;
 	
 	String lotNo;
 	
@@ -40,7 +41,7 @@ public class InoutVO {
 	Integer unitPrice;
 	Integer price;
 	Integer stock;
-	Integer lotStock;
+	Integer lotStock; // 어디서 쓰더라
 	
 	String ioType; // 01 : 입고, 02 : 출고, 03 : 정산입고, 04 : 정산출고
 	String sort;
