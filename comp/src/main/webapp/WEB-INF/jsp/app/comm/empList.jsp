@@ -1,30 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>  
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </head>
 <body>
-		<h1 class="h3 mb-4 text-gray-700"></h1>
-		<div class="mb-4">
+	<h1 class="h3 mb-4 text-gray-700"></h1>
+	<div class="mb-4">
 		<form id="searchCheck" name="searchCheck">
-		<select name="searchCondition" id="searchCondition" title="검색조건2-검색어구분" style="width:80px;height:26px">
-                                    <option value="id">ID</option>
-                                    <option value="employeeName" selected="">이름</option>
-        </select>
-        <input id="searchKeyword" name="searchKeyword" type="text" title="검색어" class="form-control" style="width:200px;margin-left:10px">                      		
+			<select name="searchCondition" id="searchCondition"
+				title="검색조건2-검색어구분" style="width: 80px; height: 26px">
+				<option value="id">ID</option>
+				<option value="employeeName" selected="">이름</option>
+			</select> <input id="searchKeyword" name="searchKeyword" type="text"
+				title="검색어" class="form-control"
+				style="width: 200px; margin-left: 10px">
 			<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
-			<a id="search" href="empModal.do" rel="modal:open" class="btn btn-primary">등록</a>
+			<a id="search" href="empModal.do" rel="modal:open"
+				class="btn btn-primary">등록</a>
 			<button type="button" class="btn btn-primary" id="btnUpdate">저장</button>
 			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
 		</form>
-		</div>
-		<div id="grid">
-			<script type="text/javascript">
+	</div>
+	<div id="grid">
+		<script type="text/javascript">
 				const dataSource = {
 						api : {
 							readData : {url: 'ajax/empList.do', method:'GET' },
@@ -107,7 +112,13 @@
 					}
 					]
 				});
-				
+/* 				tui.Grid.applyTheme('default', {
+					row:{
+						hover: {
+							background: '#0c4e91'
+						}
+					}
+				}); */
 				$.fn.serializeObject = function() {
 					var o = {};
 					var a = this.serializeArray();
@@ -144,8 +155,8 @@
 				grid.on('response', function(data) {
 					grid.resetOriginData();
 				}) 			
-			
+
 			</script>
-		</div>
+	</div>
 </body>
 </html>
