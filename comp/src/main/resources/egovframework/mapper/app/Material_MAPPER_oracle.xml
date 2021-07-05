@@ -209,8 +209,6 @@
 		ON (io.material_code = m.material_code) AND f_mat_count(io.lot_no) > 0
 	</select>
 	
-	
-	
 	<!-- 모달 -->
 	<select id="getMatListModal" resultType="MatVO" parameterType="MatVO">
 		SELECT material_code, 

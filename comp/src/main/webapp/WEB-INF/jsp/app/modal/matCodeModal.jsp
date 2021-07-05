@@ -17,7 +17,7 @@
 						<select class="custom-select" name="searchCondition">
 							<option value="material_code" selected>자재코드</option>
 							<option value="material_name">자재명</option>
-							<option value="(SELECT code FROM COMTCCMMNDETAILCODE WHERE upper(code_nm)" >자재구분</option>
+							<option value="mat_no" >자재구분</option>
 						</select>
 					</div>
 					<div class="col-md-6 ml-auto">
