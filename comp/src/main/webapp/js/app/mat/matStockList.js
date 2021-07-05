@@ -1,9 +1,8 @@
-
-
 $( document ).ready(function() {	
 	document.getElementById('startDate').valueAsDate = new Date();
 	document.getElementById('endDate').valueAsDate = new Date();
 });
+
 
 const dataSource = {
 	api : {
@@ -22,13 +21,13 @@ const grid = new tui.Grid({
 	rowHeaders: ['checkbox'],
 	columns : [ 
 		{
-			header : '출고번호',
+			header : '정산번호',
 			name : 'ioCode',
 			width : 80,
 			align: 'center'
 		},
 		{
-			header : '출고일자',
+			header : '정산일자',
 			name : 'ioDate',
 			width : 120,
 			align: 'center',
@@ -238,50 +237,13 @@ $('#btnRead').on('click',  function(){
 	var param = $('#searchFrm').serializeObject();
 	console.log(param)
 	grid.readData(1, param, true);
-});
-
-
-var newIoCode;
 	
-$("#btnGridAdd").on("click", function(){
-	
-	if(checkNull(newIoCode)){
-		newIoCode = newIoCode * 1 + 1;
-	}else{
-		$.ajax({
-			type : "get",
-			url : "ajax/getNewIoCode.do",
-			dataType : "json",
-			async : false,
-			success : function(data) {
-				newIoCode = data.ioCode;
-			},
-			error : function() {
-			}
-		});		
-	}
-
-	newRowData = {'ioCode' : newIoCode};
-	grid.appendRow(newRowData,{
-		at : grid.getRowCount(),
-		focus : true
-	});
-});
-
-
-$("#btnGridDel").on("click", function(ev){
-	grid.removeCheckedRows(true);
-});
-
-
-$("#btnSave").on("click", function(){
-	grid.request('modifyData');
 });
 
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
 
-$("#btnMatCodeModal").on("click", function(e) {
-    $('.modal-content').load("matCodeModal.do");
+$("#myModal").on("show.bs.modal", function(e) {
+    $(this).load("matCodeModal.do");
 });

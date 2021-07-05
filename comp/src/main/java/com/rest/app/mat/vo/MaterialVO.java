@@ -18,5 +18,8 @@ public class MaterialVO {
 	private Integer minStock;
 	private Integer maxStock;
 	private Integer monthStock;
+	
+	private String keyword;
+	private String searchCondition;
 
 }
