@@ -36,8 +36,9 @@
 			<table class="table">
 				<tbody>
 					<tr>
-						<th>출고일자</th>
-						<td><input type="date" id="exportDate" name="exportDate"></td>
+						<th>정산일자</th>
+						<td><input type="date" name="fromDate" id="fromDate" value=${exportDate }> ~
+				<input type="date" name="toDate" id="toDate" value=${exportDate }></td>
 					</tr>
 					<tr>
 						<td>제품코드</td>
@@ -144,8 +145,8 @@
 		
 		
 		//조회버튼
-		$('#searchBtn').on('click',function(){
-				   var param = $('#dataForm').serializeObject();
+		$('#btnView').on('click',function(){
+				   var param = $('#inputFrm').serializeObject();
 				   console.log(param)
 				   grid.readData(1, param, true);
 				});
