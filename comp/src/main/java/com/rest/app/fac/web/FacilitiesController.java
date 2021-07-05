@@ -1,12 +1,17 @@
 package com.rest.app.fac.web;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,12 +19,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.rest.app.fac.service.impl.FacilitiesMapper;
 import com.rest.app.fac.vo.FacilitiesVO;
+
+import egovframework.com.cmm.EgovWebUtil;
+import egovframework.com.cmm.service.EgovProperties;
+import egovframework.com.cmm.util.EgovResourceCloseHelper;
 
 class GridData {
 	
@@ -47,12 +56,18 @@ public class FacilitiesController {
 		return "fac/facList.page";
 	}
 
+//	@RequestMapping("ajax/facList.do")
+//	@ResponseBody
+//	public List<FacilitiesVO> ajaxGetFac(Model model) {
+//		return mapper.getFac();
+//	}
+	
 	// 설비 관리 목록
 	@RequestMapping("ajax/facList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetFac() {
-		Map<String,Object> datas = new HashMap();
-		Map<String,Object> data = new HashMap();
+		Map<String,Object> datas = new HashMap<String,Object>();
+		Map<String,Object> data = new HashMap<String,Object>();
 		data.put("result", true);
 		datas.put("contents", mapper.getFac());
 		data.put("data", datas);
@@ -63,8 +78,8 @@ public class FacilitiesController {
 	@RequestMapping("ajax/facProcessList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetFacProcess() {
-		Map<String,Object> datas = new HashMap();
-		Map<String,Object> data = new HashMap();
+		Map<String,Object> datas = new HashMap<String,Object>();
+		Map<String,Object> data = new HashMap<String,Object>();
 		data.put("result", true);
 		datas.put("contents", mapper.getFacProcess());
 		data.put("data", datas);
@@ -97,11 +112,12 @@ public class FacilitiesController {
 		MultipartFile uploadFile = vo.getUploadFile();
 		String fileName = null;
 		if(uploadFile !=null && !uploadFile.isEmpty() && uploadFile.getSize()>0) {
-		fileName = uploadFile.getOriginalFilename();
-		uploadFile.transferTo(new File(fileName));
+			fileName = uploadFile.getOriginalFilename();
+			String storePathString = EgovProperties.getProperty("Globals.fileStorePath");
+			uploadFile.transferTo(new File(storePathString, fileName));
+			//첨부파일명 VO에 지정
+			vo.setImg(fileName);
 		}
-		//첨부파일명 VO에 지정
-		vo.setImg(fileName);
 		
 		mapper.insertFac(vo);
 		return "redirect:facAdmin.do";
@@ -110,8 +126,8 @@ public class FacilitiesController {
 	// 삭제
 	@PostMapping(value="ajax/deleteFac.do")
 	@ResponseBody
-	public Map deleteFac(@RequestBody GridData gridDate) {
-		Map<String,Object> data = new HashMap();
+	public Map<String,Object> deleteFac(@RequestBody GridData gridDate) {
+		Map<String,Object> data = new HashMap<String,Object>();
 		for(int i=0; i<gridDate.deletedRows.size(); i++) {
 			mapper.deleteFac(gridDate.deletedRows.get(i));
 		}
@@ -130,7 +146,59 @@ public class FacilitiesController {
 	// 수정
 	@RequestMapping("/ajax/updateFac.do")
 	@ResponseBody
-	public int ajaxUpdateFac(Model model, FacilitiesVO vo) {
+	public int ajaxUpdateFac(Model model, FacilitiesVO vo) throws IllegalStateException, IOException {
+		MultipartFile uploadFile = vo.getUploadFile();
+		String fileName = null;
+		if(uploadFile !=null && !uploadFile.isEmpty() && uploadFile.getSize()>0) {
+			fileName = uploadFile.getOriginalFilename();
+			String storePathString = EgovProperties.getProperty("Globals.fileStorePath");
+			uploadFile.transferTo(new File(storePathString, fileName));
+			//첨부파일명 VO에 지정
+			vo.setImg(fileName);
+		}
+		
 		return mapper.updateFac(vo);
 	}
+	
+	@RequestMapping(value = "/filedown.do")
+	public void getDown(HttpServletResponse response, @RequestParam String fileName) throws Exception{
+		String serverSubPath  = "c:/upload";
+		String downFileName = serverSubPath + "/" + fileName;
+
+		File file = new File(EgovWebUtil.filePathBlackList(downFileName));
+
+		if (!file.exists()) {
+			throw new FileNotFoundException(downFileName);
+		}
+
+		if (!file.isFile()) {
+			throw new FileNotFoundException(downFileName);
+		}
+
+		byte[] b = new byte[8192];
+
+		String original = fileName.replaceAll("\r", "").replaceAll("\n", "");
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + original + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setHeader("Pragma", "no-cache");
+		response.setHeader("Expires", "0");
+
+		BufferedInputStream fin = null;
+		BufferedOutputStream outs = null;
+
+		try {
+			fin = new BufferedInputStream(new FileInputStream(file));
+			outs = new BufferedOutputStream(response.getOutputStream());
+
+			int read = 0;
+
+			while ((read = fin.read(b)) != -1) {
+				outs.write(b, 0, read);
+			}
+		} finally {
+			EgovResourceCloseHelper.close(outs, fin);
+		}
+	}
+	
 }

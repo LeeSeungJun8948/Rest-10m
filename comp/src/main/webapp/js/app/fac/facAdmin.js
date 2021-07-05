@@ -116,7 +116,10 @@ $( function() {
 	grid.on('click', (ev) => {
 		//console.log(grid.getRow(ev.rowKey).facCode);
 		var key = grid.getRow(ev.rowKey).facCode;
-		console.log(key);
+		// console.log(key);
+		var image = grid.getRow(ev.rowKey).img;
+		console.log(image);
+		
 		$.ajax({
 				
 				type : "get",
@@ -139,13 +142,19 @@ $( function() {
 					$('#price').val(data.price);
 					$('#facInspection').val(data.facInspection);
 					$('#purchaseDate').val(data.purchaseDate);
-					$('#image').val(data.img);
+					if(image != null){
+					$("#image").attr("src", "filedown.do?fileName="+image);
+					}
+					else{ 
+					$("#image").attr("src", "filedown.do?fileName=noimg.png");
+					}
 					$('#processCode').val(data.processCode);
 				},
+
 				error : function() {
 				}
 			});
-	});
+		});
             
 	// 탭2 grid 설비 공정 목록
 	const dataSource2 = {
@@ -190,13 +199,20 @@ $( function() {
 	
 	// 수정버튼
 	$("#btnUdate").on("click", function() {
-	
+		event.preventDefault();
+    
+    	var form = $('#frm')[0]
+   		var data = new FormData(form);
 	$.ajax({
 				
-			type : "get",
+			type : "POST",
+			enctype: 'multipart/form-data',
 			url : "ajax/updateFac.do",
-			data : $('#frm').serialize(),
+			data : data,
 			dataType : "json",
+			processData: false,
+     	   	contentType: false,
+       		cache: false,
 			async : false,
 			success : function(data) {
 				if(data == 1)
@@ -208,3 +224,4 @@ $( function() {
 			}
 		});	
 	});
+	
