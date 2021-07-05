@@ -43,7 +43,7 @@ const grid = new tui.Grid({
 		header : '현재고',
 		name : 'dayCount'
 		}, {
-		header : '소재LOT.no',
+		header : '제품LOT',
 		name : 'productLot'
 		}, {
 		header : '금액',
@@ -57,22 +57,21 @@ const grid = new tui.Grid({
 	]
 });
 
-
-		$.fn.serializeObject = function() {
-			var o = {};
-			var a = this.serializeArray();
-			$.each(a, function() {
-				if (o[this.name]) {
-					if (!o[this.name].push) {
-						o[this.name] = [o[this.name]];
-					}
-					o[this.name].push(this.value || '');
-				} else {
-					o[this.name] = this.value || '';
-				}
-			});
-			return o;
-		};
+$.fn.serializeObject = function() {
+	var o = {};
+	var a = this.serializeArray();
+	$.each(a, function() {
+		if (o[this.name]) {
+			if (!o[this.name].push) {
+				o[this.name] = [o[this.name]];
+			}
+			o[this.name].push(this.value || '');
+		} else {
+			o[this.name] = this.value || '';
+		}
+	});
+	return o;
+};
 		
 
 // 조회 버튼
@@ -103,10 +102,9 @@ $('#btnDel').on('click', function(){
 	
 });
 
-// 미생산 읽기 버튼
+// 미출고 읽기 버튼
 $('#btnRead').on('click',  function(){
 	var param = $('#dateForm').serializeObject();
-	console.log(param)
 	grid.readData(1, param, true);
 });
 

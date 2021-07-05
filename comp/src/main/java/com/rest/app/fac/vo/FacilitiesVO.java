@@ -20,6 +20,5 @@ public class FacilitiesVO {
 	String purchaseDate;
 	String img;
 	String processCode;
-	
 	String processName;
 }

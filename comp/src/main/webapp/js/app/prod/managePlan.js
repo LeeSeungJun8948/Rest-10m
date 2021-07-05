@@ -9,7 +9,7 @@ var dataSource = {
 var dataSourceInput = {
 	contentType: 'application/json',
 	api: {
-		readData: { url: 'getInputMatList.do', method: 'POST' },
+		readData: { url: 'getInputMat.do', method: 'POST', },
 		modifyData: { url: 'saveInput.do', method: 'PUT' },
   }
 }
@@ -26,10 +26,14 @@ const grid = new tui.Grid({
 		editor: 'text',
 		onAfterChange(ev) {
         	findProductName(ev);
+			valueInput(ev);
       		}
 		}, { 
 		header: '제품명',
 		name: 'productName',
+		onAfterChange(ev) {
+        	valueInput(ev);
+      		}
 		}, {
 		header: '주문번호',
 		name: 'orderNo'
@@ -50,6 +54,9 @@ const grid = new tui.Grid({
 		header: '작업량',
 		name: 'workCount',
 		editor: 'text',
+		onAfterChange(ev) {
+        	valueInput(ev);
+      		}
 		}, {
 		header: '일생산량',
 		name: 'dayCount'
@@ -85,7 +92,8 @@ const gridInput = new tui.Grid({
 	el: document.getElementById('gridInput'),
 	scrollX: false,
 	scrollY: true,
-	data : dataSourceInput, 
+	data: dataSourceInput,
+	async: false,
 	columns: [ {
 		header: '자재코드',
 		name: 'materialCode'
@@ -101,10 +109,14 @@ const gridInput = new tui.Grid({
 		}, {
 		header: '투입량',
 		name: 'inputCount',
-		editor: 'text'
+		editor: 'text',
+		onAfterChange(ev) {
+        	countSum();
+      		}
 		}, {
 		header: '비고',
-		name: 'comments'	
+		name: 'comments',
+		editor: 'text'	
 		}, {
 		header: '제품LOT',
 		name: 'productLot',
@@ -133,16 +145,9 @@ $(document).ready(function() {
 
 // 계획저장 버튼
 $('#btnSave').on('click', function(){
-	$.ajax({
-		type: 'POST',
-		url: 'savePlan.do',
-		data: $('#inputFrm').serialize(),
-		dataType: 'json',
-		success: function(data){
-		}
-	});
 	grid.request('modifyData');
 	gridInput.request('modifyData');
+	$('#inputFrm').submit();
 	toastr.success("저장되었습니다.");
 });
 
@@ -192,7 +197,7 @@ function findProductName(ev){
 		$.ajax({
 			type: 'POST',
 			url: 'findProductName.do',
-			data: {"productCode": productCode},
+			data: {'productCode': productCode},
 			success: function(data) {
 				grid.setValue(rowKey, 'productName', data, false);
 			}
@@ -205,22 +210,37 @@ grid.on('dblclick', (ev) => {
 	var rowKey = ev.rowKey;
 	var productLot = grid.getValue(rowKey, 'productLot');
 	var productCode = grid.getValue(rowKey, 'productCode');
-	if (productLot) {
-		gridInput.readData(1, {'productLot': productLot}, true);
-	} else {
-		$.ajax({
-			type: 'POST',
-			url: 'getMatLotList.do',
-			data: {'productCode': productCode},
-			success: function(data) {
-				gridInput.setValue(rowKey, 'materialCode', data.materialCode, false);
-				gridInput.setValue(rowKey, 'materialName', data.materialName, false);
-				gridInput.setValue(rowKey, 'materialLot', data.materialLot, false);
-				gridInput.setValue(rowKey, 'materialCount', data.materialCount, false);
-			}
-		})
-	}
+	var productName = grid.getValue(rowKey, 'productName');
+	var workCount = grid.getValue(rowKey, 'workCount');	
+	var param = {'productCode': productCode, 'productLot': productLot};
+	gridInput.readData(1, param, true);
+	$('#workCount').val(workCount);
+	$('#productCode').val(productCode);
+	$('#productName').val(productName);
 });
+
+// 제품코드, 작업량 입력시 폼에 입력
+function valueInput(ev) {
+	var rowKey = ev.rowKey;
+	var productCode = grid.getValue(rowKey, 'productCode');
+	var productName = grid.getValue(rowKey, 'productName');
+	var workCount = grid.getValue(rowKey, 'workCount');	
+	$('#workCount').val(workCount);
+	$('#productCode').val(productCode);
+	$('#productName').val(productName);
+}
+
+// 투입량 합계
+function countSum(){
+	var inputCount = gridInput.getColumnValues('inputCount');
+	var sum = 0;
+	for(count of inputCount){
+		if (checkNull(count)){
+			sum += parseInt(count);
+		}
+	}
+	$('#totalCount').val(sum);
+}
 
 // NULL값 체크, NULL이면 false
 function checkNull(value){

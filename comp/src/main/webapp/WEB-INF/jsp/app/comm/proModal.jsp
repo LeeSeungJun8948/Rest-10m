@@ -17,7 +17,6 @@
 	background-color: rgba(0, 0, 0, 0.75);
 	text-align: center
 }
-
 .modal {
 	display: none;
 	vertical-align: middle;
@@ -43,18 +42,19 @@
 
 <!-- Modal -->
 <form action="getInfoProduct.do" method="post" id="frm">
-	<input type="hidden" id="companyCode" name="companyCode">
+	<input type="hidden" id="productCode" name="productCode">
 </form>
-<div class="modal-dialog" role="document" style="z-index: 100">
+<div class="modal-dialog" role="document" style="z-index: 100" id=pro>
 	<div class="modal-content">
 		<div class="modal-header">
 			<form id="productSearchForm" name="productSearchForm">
 				<select name="searchCondition" id="searchCondition"
 					title="검색조건2-검색어구분" style="width: 80px; height: 26px">
-					<option value="companyCode">업체코드</option>
-					<option value="companyName" selected="selected">업체명</option>
-				</select> 
-				<input id="searchKeyword" name="searchKeyword" type="text" title="검색어" class="form-control" style="width: 200px; margin-left: 10px">
+					<option value="productCode">제품코드</option>
+					<option value="productName" selected="selected">제품명</option>
+				</select> <input id="searchKeyword" name="searchKeyword" type="text"
+					title="검색어" class="form-control"
+					style="width: 200px; margin-left: 10px">
 				<button type="button" class="btn btn-primary" id="btnCheck">조회</button>
 			</form>
 		</div>
@@ -63,49 +63,44 @@
 			<div id=matGrid></div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button id=btnSearch type="button" onclick="fnSearch()"	class="btn btn-primary">검색</button>
+				<button id=btnSearch type="button" onclick="fnSearch()"
+					class="btn btn-primary">검색</button>
+
 			</div>
 
 			<script type="text/javascript">
-				const dataSourc = {
+				const pdataSource = {
 					api : {
 						readData : {
-							url : 'ajax/exportForm.do',
+							url : 'ajax/bomList.do',
 							method : 'GET'
 						},
-
 					},
 					contentType : 'application/json'
 				};
 				const matGrid = new tui.Grid({
 					el : document.getElementById('matGrid'),
-					data : dataSourc,
+					data : pdataSource,
 					scrollX : false,
 					scrollY : false,
 					rowHeaders : [ 'rowNum' ],
 					columns : [ {
-						header : '업체코드',
-						name : 'companyCode',
+						header : '제품코드',
+						name : 'productCode',
 					}, {
-						header : '업체명',
-						name : 'companyName',
+						header : '제품명',
+						name : 'productName',
 					}, {
-						header : '사업자등록변호',
-						name : 'unitId',
-					} ,{
-						header : '전화번호',
-						name : 'unitId',
-					}]
+						header : '규격',
+						name : 'unitNo',
+					} ]
 				});
-
 				matGrid.on('click', function(ev) {
 					var values = matGrid.getRow(ev.rowKey);
-					var compCode = values.companyCode;
-					$('#companyCode').val(compCode);
-					console.log(compCode);
-
+					var prdCode = values.productCode;
+					$('#productCode').val(prdCode);
+					console.log(prdCode);
 				});
-
 				$.fn.serializeObject = function() {
 					var o = {};
 					var a = this.serializeArray();
@@ -121,7 +116,6 @@
 					});
 					return o;
 				};
-
 				$("#btnCheck").on("click", function() {
 					var param = $('#productSearchForm').serializeObject();
 					matGrid.readData(1, param, true);

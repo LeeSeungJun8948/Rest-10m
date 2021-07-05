@@ -70,7 +70,7 @@
 	<!--Bom Insert -->
 	<insert id="insertBom" parameterType="com.rest.app.comm.vo.BomVO">
 		insert into bom
-		values (#{productCode},#{materialCode},#{processCode},#{kg},#{etc})
+		values (#{productCode},#{materialCode},#{processCode},#{kg},#{etc},bom_seq.nextval)
 	</insert>
 	
 	<!-- Bom Update -->
@@ -82,7 +82,7 @@
 	<!-- Bom delete -->
 	<delete id="deleteBom" parameterType="com.rest.app.comm.vo.BomVO">
 		delete from bom
-		 where product_code=#{productCode}
+		where bom_no=#{bomNo}
 	</delete>
 	<!--  -->
 	<select id="getNewProductCode" resultType="com.rest.app.comm.vo.BomVO">

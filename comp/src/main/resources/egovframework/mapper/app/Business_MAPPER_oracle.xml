@@ -2,21 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rest.app.bus.service.impl.BusinessMapper">
 	<select id="getBus" resultType="com.rest.app.bus.vo.OrdersVO">
-		select
+		SELECT
 		F_FINDCOMPNAME(company_code)AS comp_name,
 		o.*, p.*,
 		(o.order_count - o.out_count) as not_count,
 		CASE
-		WHEN o.plan_count = 0
-		THEN '미계획'
-		WHEN o.order_count > o.plan_count THEN
-		'진행중'
+		WHEN o.plan_count = 0 THEN '미계획'
+		WHEN o.order_count > o.plan_count THEN '진행중'
 		ELSE '완료'
-		END AS
-		order_state
+		END AS order_state
 		FROM orders o, product p
-		WHERE o.in_date BETWEEN
-		TO_DATE(#{fromDate},'YYYY-MM-DD')
+		WHERE o.in_date BETWEEN	TO_DATE(#{fromDate},'YYYY-MM-DD')
 		AND TO_DATE(#{toDate}, 'YYYY-MM-DD')
 		AND o.product_code=p.product_code
 		<if test="companyCode !=null and companyCode !=''">
@@ -37,26 +33,18 @@
 	</select>
 
 	<select id="getUnExport"
-		resultType="com.rest.app.bus.vo.OrdersVO" parameterType="com.rest.app.bus.vo.OrdersVO">
-
-		SELECT
-		p.product_code,p.product_name,p.std_id,p.unit_id,o.order_no,o.order_count,o.out_count,(o.order_count-o.out_count)
-		as un_export,d.export_count,
-		(SELECT SUM(product_count) FROM storage
-		WHERE PRODUCT_CODE = o.product_code)as dayCount
-		FROM orders o
-		INNER JOIN
-		product p ON o.product_code = p.product_code
-		INNER JOIN storage s ON
-		o.product_code = s.product_code
-		INNER JOIN detailexport d on o.order_no
-		= d.order_no
-		WHERE o.order_count!=d.export_count
-		AND o.product_code =
-		p.product_code
-		AND o.out_date BETWEEN TO_DATE(#{planDtS}, 'YYYY-MM-DD')
-		AND TO_DATE(#{planDtE}, 'YYYY-MM-DD')
+		resultType="com.rest.app.bus.vo.OrdersVO">
+		SELECT DISTINCT
+		p.*, o.*, (o.order_count - o.out_count) as un_export,
+		(SELECT SUM(product_count) FROM storage	WHERE product_code = o.product_code AND product_state='포장완료') as dayCount
+		FROM orders o, storage s, product p
+		WHERE o.order_count != o.out_count
+		AND o.product_code = p.product_code
+		AND o.product_code = s.product_code
+		AND o.out_date BETWEEN TO_DATE(#{inDate}, 'YYYY-MM-DD')
+		AND TO_DATE(#{outDate}, 'YYYY-MM-DD')
 	</select>
+	
 	<select id="getCompany"
 		resultType="com.rest.app.bus.vo.CompanyVO">
 		select company_code,company_name,company_num,phone

@@ -8,16 +8,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-   crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<link rel="stylesheet"
-	href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 </head>
 <body>
@@ -30,70 +25,59 @@
 				<div class="col-md-5 mb-4">
 
 					<div class="form-group border">
-						<input type="radio" id="upPlan" name="orderState" value="unPlan" 
-							checked><span style="margin: 3px 30px;">미계획</span> <input
-							type="radio" id="working" name="orderState" value="working" 
-							> <span style="margin: 3px 30px;">진행중</span> <input
-							type="radio" id="planComplete" name="orderState"
-							value="planComplete" > <span
-							style="margin: 3px 30px;">계획완료</span> 
+						<input type="radio" id="upPlan" name="orderState" value="unPlan" checked>
+						<span style="margin: 3px 30px;">미계획</span>
+						<input type="radio" id="working" name="orderState" value="working"> 
+						<span style="margin: 3px 30px;">진행중</span> 
+						<input type="radio" id="planComplete" name="orderState"	value="planComplete" >
+						<span style="margin: 3px 30px;">계획완료</span> 
 					</div>
-
+					
 				</div>
 			</div>
 
 			<div>
-				<label for="inDate">접수일자</label> <input type="date"
-					name="fromDate" id="fromDate" value=${orders.inDate }> ~
+				<label for="inDate">접수일자</label> 
+				<input type="date" name="fromDate" id="fromDate" value=${orders.inDate }> ~
 				<input type="date" name="toDate" id="toDate" value=${inDate }>
 			</div>
 
 
 			<div class="col-9 ta-l ml-1">
-				<label class="headtxt">고객사</label> <input type="text"
-					id="searchKeywordFrom" name="searchKeywordFrom" />
+				<label class="headtxt">고객사</label> 
+				<input type="text" id="searchKeywordFrom" name="searchKeywordFrom" />
 				<a href="compModal.do" rel="modal:open"class="btn btn-primary">
-					<img
-						src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
+					<img src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
 				</a>
-				<input type="text" id="searchKeywordFromNm"
-					name="searchKeywordFromNm" readonly="true" /> <label
-					class="ml-1 mr-1">~</label> <input type="text" id="searchKeywordTo"
-					name="searchKeywordTo" />
+				<input type="text" id="searchKeywordFromNm"	name="searchKeywordFromNm" readonly="true" /> 
+				<label class="ml-1 mr-1">~</label> 
+				<input type="text" id="searchKeywordTo"	name="searchKeywordTo" />
 				<a href="compModal.do" rel="modal:open"class="btn btn-primary">
-					<img
-						src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
+					<img src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
 				</a>
 					
 				</button>
-				<input type="text" id="searchKeywordToNm" name="searchKeywordToNm"
-					readonly="true" />
+				<input type="text" id="searchKeywordToNm" name="searchKeywordToNm" readonly="true" />
 			</div>
 
 			<div class="col-9 ta-l ml-1">
-				<label class="headtxt">제품코드</label> <input type="text" id="prductCd"
-					name="prductCd" />
+				<label class="headtxt">제품코드</label> 
+				<input type="text" id="prductCd" name="prductCd" />
 				<a href="productModal.do" rel="modal:open"class="btn btn-primary">
-					<img
-						src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
+					<img src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
 				</a>
 					
-				<input type="text" id="prductNm" name="prductNm" maxlength="20"
-					readonly="true" />
+				<input type="text" id="prductNm" name="prductNm" maxlength="20"	readonly="true" />
 			</div>
 
 
 			<div class="grid-option-area">
 
 				<div class="col-6 ta-r mr-1">
-					<button name="resetBtn" type="button" class="btn btn-primary"
-						id="resetBtn">새자료</button>
-					<button name="searchBtn" type="button" class="btn btn-primary"
-						id="searchBtn">조회</button>
-					<button name="excelBtn" type="button" class="btn btn-primary"
-						id="excelBtn">Excel</button>
-					<button name="printBtn" type="button" class="btn btn-primary"
-						id="printBtn">인쇄</button>
+					<button name="resetBtn" type="button" class="btn btn-primary" id="resetBtn">새자료</button>
+					<button name="searchBtn" type="button" class="btn btn-primary" id="searchBtn">조회</button>
+					<button name="excelBtn" type="button" class="btn btn-primary" id="excelBtn">Excel</button>
+					<button name="printBtn" type="button" class="btn btn-primary" id="printBtn">인쇄</button>
 				</div>
 			</div>
 		</form>

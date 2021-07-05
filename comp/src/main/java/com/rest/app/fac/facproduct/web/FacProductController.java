@@ -31,5 +31,4 @@ public class FacProductController {
 		data.put("data", datas);
 		return data;
 	}
-
 }

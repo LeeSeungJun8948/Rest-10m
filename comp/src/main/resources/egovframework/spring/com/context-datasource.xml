@@ -18,39 +18,15 @@
 	<!-- DataSource -->
 	<alias name="dataSource" alias="egov.dataSource" />
 	
-
-	<!-- MySQL -->
-	<beans profile="mysql">
-		<bean id="dataSource"
-			class="org.apache.commons.dbcp2.BasicDataSource"
-			destroy-method="close">
-			<property name="driverClassName"
-				value="${Globals.mysql.DriverClassName}" />
-			<property name="url" value="${Globals.mysql.Url}" />
-			<property name="username" value="${Globals.mysql.UserName}" />
-			<!-- 암호화(Crypto) 관련 서비스 https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:rte2:fdl:crypto_simplify_v3_8 
-				참조 -->
-			<property name="password"
-				value="#{egovEnvCryptoService.getPassword()}" />
-		</bean>
-	</beans>
-
 	<!-- oracle -->
 	<beans profile="oracle">
-		<bean id="dataSource"
-			class="org.apache.commons.dbcp2.BasicDataSource"
-			destroy-method="close">
-			<property name="driverClassName"
-				value="${Globals.oracle.DriverClassName}" />
+		<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+			<property name="driverClassName" value="${Globals.oracle.DriverClassName}" />
 			<property name="url" value="${Globals.oracle.Url}" />
 			<property name="username" value="${Globals.oracle.UserName}" />
-			<property name="password"
-				value="${Globals.oracle.Password}" />
+			<property name="password" value="${Globals.oracle.Password}" />
 		</bean>
-		
-
 	</beans>
-
 
 	<!-- altibase -->
 	<beans profile="altibase">

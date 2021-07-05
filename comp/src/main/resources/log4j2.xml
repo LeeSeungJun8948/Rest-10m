@@ -6,20 +6,27 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="java.sql" level="DEBUG" additivity="false">
+    	<logger name="jdbc.sqlonly" additivity="false">
+			<level value="INFO" />
+			<appender-ref ref="console" />
+		</logger>
+        <Logger name="java.sql" level="INFO" additivity="false">
             <AppenderRef ref="console" />
         </Logger>
-        
-        <Logger name="egovframework" level="INFO" additivity="false">
-            <AppenderRef ref="console" />
-        </Logger>
-        
-		  <!-- log SQL with timing information, post execution -->
 	    <Logger name="jdbc.sqltiming" level="INFO" additivity="false">
 	        <AppenderRef ref="console" />
 	    </Logger>
 	    
-	    <Logger name="org.springframework" level="INFO" additivity="false">
+        <Logger name="egovframework" level="ERROR" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+	    <Logger name="org.springframework" level="ERROR" additivity="false">
+	        <AppenderRef ref="console" />
+	    </Logger>
+	    	    <Logger name="org.apache" level="ERROR" additivity="false">
+	        <AppenderRef ref="console" />
+	    </Logger>
+		<Logger name="org.mybatis" level="ERROR" additivity="false">
 	        <AppenderRef ref="console" />
 	    </Logger>
 

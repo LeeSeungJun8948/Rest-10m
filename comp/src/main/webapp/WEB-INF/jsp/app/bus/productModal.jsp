@@ -49,13 +49,11 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<form id="productSearchForm" name="productSearchForm">
-				<select name="searchCondition" id="searchCondition"
-					title="검색조건2-검색어구분" style="width: 80px; height: 26px">
+				<select name="searchCondition" id="searchCondition" title="검색조건2-검색어구분" style="width: 80px; height: 26px">
 					<option value="productCode">제품코드</option>
 					<option value="productName" selected="selected">제품명</option>
-				</select> <input id="searchKeyword" name="searchKeyword" type="text"
-					title="검색어" class="form-control"
-					style="width: 200px; margin-left: 10px">
+				</select>
+				<input id="searchKeyword" name="searchKeyword" type="text" title="검색어" class="form-control" style="width: 200px; margin-left: 10px">
 				<button type="button" class="btn btn-primary" id="btnCheck">조회</button>
 			</form>
 		</div>
@@ -66,7 +64,6 @@
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				<button id=btnSearch type="button" onclick="fnSearch()"
 					class="btn btn-primary">검색</button>
-			
 			</div>
 
 			<script type="text/javascript">

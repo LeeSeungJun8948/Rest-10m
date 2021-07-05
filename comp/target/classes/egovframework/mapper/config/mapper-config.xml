@@ -16,6 +16,17 @@
 		<typeAlias alias="FileVO"			type="egovframework.com.cmm.service.FileVO" />
 		<typeAlias alias="ComDefaultCodeVO" type="egovframework.com.cmm.ComDefaultCodeVO" />
 		<typeAlias alias="comDefaultVO"		type="egovframework.com.cmm.ComDefaultVO" />
+		
+		<!-- 자재vo -->
+		<typeAlias alias="MatVO"		type="com.rest.app.mat.vo.MaterialVO" />
+		<!-- 발주vo -->
+		<typeAlias alias="InorderVO"		type="com.rest.app.mat.vo.InorderVO" />
+		<!-- 입출고vo -->
+		<typeAlias alias="InoutVO"		type="com.rest.app.mat.vo.InoutVO" />
+		<!-- 라디오리스트vo -->
+		<typeAlias alias="SelectListVO"		type="com.rest.app.mat.vo.SelectListVO" />
+		
 	</typeAliases>
+	
     
 </configuration>

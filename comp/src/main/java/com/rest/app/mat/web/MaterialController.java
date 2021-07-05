@@ -176,7 +176,7 @@ public class MaterialController {
 	@ResponseBody
 	public List<SelectListVO> ajaxGetProcessList(SelectListVO vo) {
 		return dao.getProcessList(vo);
-	}
+	} 
 	
 	@RequestMapping("matInForm.do")
 	public String matInForm(Model model) {

@@ -84,187 +84,185 @@
 		</table>
 	</div>
 	<div class="flex row" style="margin-top: 40px">
-	<div  class="col-8">
-		<h3>제품 소요량 관리</h3>
-	</div>
-	<div class="col-4" align="right">
-		<button type="button" class="btn btn-primary" id="btnRowInsert">행추가</button>
-		<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
-	</div>
+		<div class="col-8">
+			<h3>제품 소요량 관리</h3>
+		</div>
+		<div class="col-4" align="right">
+			<button type="button" class="btn btn-primary" id="btnRowInsert">행추가</button>
+			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
+		</div>
 	</div>
 		<div id="bomgrid" style="z-index:10" class="bgird">
 	</div>
-		       <script type="text/javascript">
-         			const dataSource = {
-						api : {
-							readData : {url: 'ajax/getInfoProduct.do', method:'get'},
-							createData : { url: 'ajax/insertBom.do', method: 'POST'},
-							updateData : { url: 'ajax/updateBom.do', method: 'PUT' },
-							deleteData : { url: 'ajax/deleteBom.do', method: 'POST' },
-							modifyData : { url: 'ajax/modifyBom.do', method: 'PUT'}
-						},
-						contentType: 'application/json'
-				}; 
-				const grid = new tui.Grid({
-					el : document.getElementById('bomgrid'),
-					data : dataSource,
-					rowHeaders: ['checkbox'],
-					scrollX : false,
-					scrollY : false,
-					columns : [
-					{
-						header : '제품코드',
-						name : 'productCode',
-						
-					},
-					{
-						header : '자재코드',
-						name : 'materialCode',
-						editor:'text',
-							onAfterChange(ev){
-							setMatCode(ev);
-						}
-					},
-					{
-						header :'자재명',
-						name : 'materialName',
-					},
-					{
-						header :'사용량(KG)',
-						name : 'kg',
-						editor:'text'
-					},
-					{
-						header :'공정코드',
-						name : 'processCode',
-						editor:'text',
+	<div id="bomgrid" style="z-index:10" class="bgird"></div>
+	<script type="text/javascript">
+    	const dataSource = {
+			api : {
+				readData : {url: 'ajax/getInfoProduct.do', method:'get'},
+				createData : { url: 'ajax/insertBom.do', method: 'POST'},
+				updateData : { url: 'ajax/updateBom.do', method: 'PUT' },
+				deleteData : { url: 'ajax/deleteBom.do', method: 'POST' },
+				modifyData : { url: 'ajax/modifyBom.do', method: 'PUT'}
+				},
+			contentType: 'application/json'
+			}; 
+			const grid = new tui.Grid({
+				el : document.getElementById('bomgrid'),
+				data : dataSource,
+				rowHeaders: ['checkbox'],
+				scrollX : false,
+				scrollY : false,
+				columns : [
+				{
+					header : '제품코드',
+					name : 'productCode',
+					hidden : true
+				},
+				{
+					header : '자재코드',
+					name : 'materialCode',
+					editor:'text',
 						onAfterChange(ev){
-						setProCode(ev);
-						}
-					},
-					
-					{
-						header :'공정명',
-						name : 'processName',
-						
-					},
-					{
-						header :'비고',
-						name : 'etc',
-						editor:'text'
+						setMatCode(ev);
 					}
-					
-					]
-				});
+				},
+				{
+					header :'자재명',
+					name : 'materialName'
+				},
+				{
+					header :'사용량(KG)',
+					name : 'kg',
+					editor:'text'
+				},
+				{
+					header :'공정코드',
+					name : 'processCode',
+					editor:'text',
+					onAfterChange(ev){
+					setProCode(ev);
+					}
+				},
+				{
+					header :'공정명',
+					name : 'processName'
+				},
+				{
+					header :'비고',
+					name : 'etc',
+					editor:'text'
+				}
+				]
+			});
 		
-				$.fn.serializeObject = function() {
-					var o = {};
-					var a = this.serializeArray();
-					$.each(a, function() {
-						if (o[this.name]) {
-							if (!o[this.name].push) {
-								o[this.name] = [o[this.name]];
-							}
-							o[this.name].push(this.value || '');
-						} else {
-							o[this.name] = this.value || '';
+			$.fn.serializeObject = function() {
+				var o = {};
+				var a = this.serializeArray();
+				$.each(a, function() {
+					if (o[this.name]) {
+						if (!o[this.name].push) {
+							o[this.name] = [o[this.name]];
 						}
-					});
-					return o;
-				};
-				
-				
-				$("#btnMaterial").on("click",function() {
-					var param = $('#searchCheck').serializeObject();
-					grid.readData(1, param, true);
-				})  
-				
-				$("#btnRowInsert").on("click", function(){
-					var newProductCode;
-					newProductCode = $("#pdc").val();
-					<!--
+						o[this.name].push(this.value || '');
+					} else {
+						o[this.name] = this.value || '';
+					}
+				});
+				return o;
+			};
+			
+			
+			$("#btnMaterial").on("click",function() {
+				var param = $('#searchCheck').serializeObject();
+				grid.readData(1, param, true);
+			})  
+			
+			$("#btnRowInsert").on("click", function(){
+				var newProductCode;
+				newProductCode = $("#pdc").val();
+				<!--
+				$.ajax({
+					type:"get",
+					url:"ajax/getNewProductCode.do",
+					datatype:"json",
+					async: false,
+					success : function(data){
+						newProductCode = data.productCode;
+					}
+				});
+				-->
+				newRowData ={'productCode': newProductCode };
+				grid.appendRow(newRowData,{
+					at : grid.getRowCount(),
+					focus :true
+				});
+			});
+			$("#btnDelete").on("click",function() {
+					grid.removeCheckedRows(false);
+					grid.request('deleteData');
+			})
+			$("#btnInsert").on("click", function(){
+				//grid.request('createData');
+					 	var param = $('#searchCheck').serializeObject();
+				 		grid.readData(1, param, true);
+				 		grid.request('modifyData', {
+					    checkedOnly: true
+					  });
+			})
+			function setMatCode(ev){
+				var rowKey = ev.rowKey;
+				var materialCode = grid.getValue(rowKey,'materialCode');
+				if(checkNull(materialCode)){
 					$.ajax({
 						type:"get",
-						url:"ajax/getNewProductCode.do",
+						data: {"materialCode" : materialCode},
+						url: "ajax/getMatName.do",
 						datatype:"json",
 						async: false,
 						success : function(data){
-							newProductCode = data.productCode;
+							grid.setValue(rowKey,'materialName',data.materialName,false);
+						},
+						error:function(request, status, error){
+							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 						}
 					});
-					-->
-					newRowData ={'productCode': newProductCode };
-					grid.appendRow(newRowData,{
-						at : grid.getRowCount(),
-						focus :true
+				}
+			}
+			function setProCode(ev){
+				var rowKey = ev.rowKey;
+				var processCode = grid.getValue(rowKey,'processCode');
+				if(checkNull(processCode)){
+					$.ajax({
+						type:"get",
+						data: {"processCode" : processCode},
+						url: "ajax/getProName.do",
+						datatype:"json",
+						async: false,
+						success : function(data){
+							grid.setValue(rowKey,'processName',data.processName,false);
+						},
+						error:function(request, status, error){
+							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}
 					});
-				});
-				$("#btnDelete").on("click",function() {
-						grid.removeCheckedRows(false);
-						grid.request('deleteData');
-				})
-				$("#btnInsert").on("click", function(){
-					//grid.request('createData');
-						 	var param = $('#searchCheck').serializeObject();
-					 		grid.readData(1, param, true);
-					 		grid.request('modifyData', {
-						    checkedOnly: true
-						  });
-				})
-				function setMatCode(ev){
-					var rowKey = ev.rowKey;
-					var materialCode = grid.getValue(rowKey,'materialCode');
-					if(checkNull(materialCode)){
-						$.ajax({
-							type:"get",
-							data: {"materialCode" : materialCode},
-							url: "ajax/getMatName.do",
-							datatype:"json",
-							async: false,
-							success : function(data){
-								grid.setValue(rowKey,'materialName',data.materialName,false);
-							},
-							error:function(request, status, error){
-								alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-							}
-						});
-					}
 				}
-				function setProCode(ev){
-					var rowKey = ev.rowKey;
-					var processCode = grid.getValue(rowKey,'processCode');
-					if(checkNull(processCode)){
-						$.ajax({
-							type:"get",
-							data: {"processCode" : processCode},
-							url: "ajax/getProName.do",
-							datatype:"json",
-							async: false,
-							success : function(data){
-								grid.setValue(rowKey,'processName',data.processName,false);
-							},
-							error:function(request, status, error){
-								alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-							}
-						});
-					}
-				}
-				
+			}
 			
-				function checkNull(value){
-					return value != null && value != '' && value != '[object HTMLInputElement]';
-				}
-				
-				
-		</script>
-		<script>
-		$(document).ready(function(){
-			$("#delBom").click(function(){
-			
-				document.deletefrm.submit();
-			});
-		});
 		
-		</script>
+			function checkNull(value){
+				return value != null && value != '' && value != '[object HTMLInputElement]';
+			}
+			
+			
+	</script>
+	<script>
+	$(document).ready(function(){
+		$("#delBom").click(function(){
+		
+			document.deletefrm.submit();
+		});
+	});
+	
+	</script>
 </body>
 </html>
