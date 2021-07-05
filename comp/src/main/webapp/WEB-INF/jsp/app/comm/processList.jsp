@@ -98,19 +98,20 @@
 					}
 				]
 				});
-				grid.on('click', (ev) => {
-				if(ev.columnName === 'outCompName'){
-					var href="proModal.do";
-					$('.modal').remove();
-					this.blur();
-					$.get(this.href, function(html){
-						$(html).appendTo('body').modal();
-						
-						alert();
-						});
-					}
-				});
+			
+			   grid.on('click', (ev) => {
+		            if(ev.columnName == 'outCompName'){
+		               var href="proModal.do";
+		               window.event.preventDefault();
+		               $('.modal').remove();
+		               this.blur();
+		               console.log(href);
+		               $.get(href, function(html){
+		                  var modalOpen = $(html).appendTo('body').modal();
+		                  });
+		               }
+		            });
 		</script>
-<script type="text/javascript" src="js/app/comm/process.js"></script>
 </body>
+<script type="text/javascript" src="js/app/comm/process.js"></script>
 </html>
