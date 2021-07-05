@@ -6,11 +6,10 @@
     text-align: right;
 }
 </style>
-<h1 class="h3 mb-4 text-gray-700">자재 재고 조정 관리</h1>
+<h1 class="h3 mb-4 text-gray-700">자재 재고 조정 조회</h1>
 <div class="mb-4" align="right">
 	<button type="button" class="btn btn-primary" id="btnRead">조회</button>
-	<button type="button" class="btn btn-primary" id="btnSave">저장</button>
-
+	<button type="button" class="btn btn-primary" id="btnWrite" data-remote="false" data-toggle="modal" data-target="#myModal">작성</button>
 </div>
 <form id="searchFrm" name="searchFrm">
 	<div class="row">
@@ -26,20 +25,23 @@
 							</button>									
 							<input type="text" id="materialName" name="materialName">
 						</td>
-					</tr>
-					<tr>
-						<th>출고공정</th>
+						<th>자재구분</th>
 						<td>
-							<input  class="w-5" type="text" id="processCode" name="processCode"> 
-							<input  type="text" id="processName" name="processName">
+							<select  class="w-5" id="matNo" name="matNo">
+							</select> 
 						</td>
 					</tr>
 					<tr>
-						<th>정렬구분</th>
-						<td> 
-							<span class="mr-1"> 일자 <input type="radio" name="sort" value="io_date" checked></span>
-							<span class="mr-1"> 공정 <input type="radio" name="sort" value="process_code"></span>
-							<span class="mr-1"> 자재 <input type="radio" name="sort" value="material_code"></span>
+						<td>
+						전체 <input type="radio" name="ioType" value="" checked>
+						정산입고 <input type="radio" name="ioType" value="03">
+						정산출고 <input type="radio" name="ioType" value="04">
+		
+						</td>
+						<td>
+							작업일자 
+							<input type="date" id="startDate" name="startDate">
+							~ <input type="date" id="endDate" name="endDate">
 						</td>
 					</tr>
 				</tbody>
@@ -49,16 +51,12 @@
 		</div>
 	</div>
 </form>
-<div class="mb-4" align="right">
-	<button type="button" class="btn btn-info" id="btnGridAdd">추가</button>
-	<button type="button" class="btn btn-info" id="btnGridDel">삭제</button>
-</div>
 <div class="col-lg-12">
 	<form id="gridFrm" name="gridFrm">
-		<div id="matOutList"></div>
+		<div id="matStockList"></div>
 	</form>
 </div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 </div>
-<script type="text/javascript" src="js/app/mat/matOutForm.js"></script>
+<script type="text/javascript" src="js/app/mat/matStockList.js"></script>

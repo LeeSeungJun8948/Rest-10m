@@ -33,6 +33,7 @@ $( document ).ready(function() {
 			scrollX : false,
 			scrollY : true,
 			bodyHeight: 360,
+			selectionUnit: 'row',
 			columns : [ {
 				header : '자재코드',
 				name : 'materialCode',

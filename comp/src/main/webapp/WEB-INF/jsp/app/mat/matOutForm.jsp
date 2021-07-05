@@ -28,8 +28,8 @@
 						<th>출고자재</th>
 						<td>
 							<input class="w-5" type="text" id="materialCode" name="materialCode">
-							<button type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#myModal">
-								<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+							<button id="btnMatCodeModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#matCodeModal">
+									<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
 							</button>									
 							<input type="text" id="materialName" name="materialName">
 						</td>
@@ -65,6 +65,12 @@
 		<div id="matOutList"></div>
 	</form>
 </div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="matCodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		</div>
+	</div>
 </div>
+
 <script type="text/javascript" src="js/app/mat/matOutForm.js"></script>
