@@ -7,6 +7,9 @@
 	z-index: 100;
 	}
 </style>
+	<form action="getCompName.do" method="post" id="frm">
+		<input type="hidden" id="companyName" name="companyName">
+	</form>
 	<div class="modal-content">
 		<div class="modal-header">
 			<form id="productSearchForm" name="productSearchForm">
@@ -34,35 +37,44 @@
 				const pdataSource = {
 					api : {
 						readData : {
-							url : 'ajax/bomList.do',
+							url : 'ajax/getCompList.do',
 							method : 'GET'
 						},
 					},
 					contentType : 'application/json'
 				};
-				const matGrid = new tui.Grid({
+				const compGrid = new tui.Grid({
 					el : document.getElementById('matGrid'),
 					data : pdataSource,
 					scrollX : false,
 					scrollY : false,
 					rowHeaders : [ 'rowNum' ],
-					columns : [ {
-						header : '제품코드',
-						name : 'productCode',
-					}, {
-						header : '제품명',
-						name : 'productName',
-					}, {
-						header : '규격',
-						name : 'unitNo',
-					} ]
+					columns : [ 
+					{
+						header : '회사코드',
+						name : 'companyCode',
+					}, 
+					{
+						header : '회사명',
+						name : 'companyName',
+					}, 
+					{
+						header : '회사번호',
+						name : 'companyNum',
+					},
+					{
+						header : '담당자번호',
+						name : 'compNo',
+					}
+					]
 				});
-				matGrid.on('click', function(ev) {
-					var values = matGrid.getRow(ev.rowKey);
-					var prdCode = values.productCode;
-					$('#productCode').val(prdCode);
-					console.log(prdCode);
+				compGrid.on('click', function(ev) {
+					var values = compGrid.getRow(ev.rowKey);
+					var compName = values.companyName;
+					$('#companyName').val(compName);
+					console.log(compName);
 				});
+				
 				$.fn.serializeObject = function() {
 					var o = {};
 					var a = this.serializeArray();
@@ -78,13 +90,16 @@
 					});
 					return o;
 				};
+				
+				function fnSearch() {
+					$("#frm").submit();
+				}
+				
 				$("#btnCheck").on("click", function() {
 					var param = $('#productSearchForm').serializeObject();
 					matGrid.readData(1, param, true);
 				})
-				function fnSearch() {
-					$("#frm").submit();
-				}
+				
 				// bom 자재리스트 버튼
 				$('#btnSearch').on('click', function() {
 					var prm = $('#frm').serializeObject();

@@ -48,19 +48,19 @@
 	<div>
 		<table>
 			<tr>
-				<th width="100px" scope="row">
+				<th width="150px" scope="row">
 				제품코드
 					<span style="color: red">*</span>
 				</th>  
 				<td width="450px">
-				<form id="searchCheck" name="searchCheck" >
-					<input type="text" maxlength="20" tabindex="1" id='pdc' name="productCode" value="${info.productCode }">
-				</form>
 				
+				<form id="searchCheck" name="searchCheck" >
+					<input type="text" size="5"  tabindex="1" id='pdc' name="productCode" value="${info.productCode }">
+				</form>
 					<a id="search" href="modal.do" rel="modal:open" class="btn btn-primary" >
 						<img src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
 					</a>
-				
+			
 				</td>
 				<th scope="row">제품명</th>
 				<td width="450px">${info.productName }</td>

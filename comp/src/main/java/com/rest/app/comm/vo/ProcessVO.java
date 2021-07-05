@@ -11,4 +11,10 @@ public class ProcessVO {
 	String proComment;
 	String outStats;
 	String outCompName;
+	
+	int companyCode;
+	String companyName;
+	int companyNum;
+	String phone;
+	String compNo;
 }

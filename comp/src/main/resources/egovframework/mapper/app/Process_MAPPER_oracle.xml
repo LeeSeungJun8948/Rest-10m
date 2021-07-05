@@ -20,10 +20,24 @@
 		   	   unit_no=#{unitNo},pro_comment=#{proComment}, out_stats=#{outStats}
 		 where process_code=#{processCode}
 	</update>
-
+	
+	<!--delete process -->
 	<delete id="deleteProcess" parameterType="com.rest.app.comm.vo.ProcessVO">
 		delete 
 		  from process
 		 where process_code = #{processCode}
 	</delete>
+		
+	<!-- 외주업체명 List -->
+	<select id="getCompList" resultType="com.rest.app.comm.vo.ProcessVO">
+		select *
+		  from company
+		 where comp_no = 02
+	</select>
+	<!-- 외주업체 단건조회 -->
+	<select id="getCompName" resultType="com.rest.app.comm.vo.ProcessVO">
+		select *
+		  from company
+		 where company_name =#{companyName}
+	</select>
 </mapper>

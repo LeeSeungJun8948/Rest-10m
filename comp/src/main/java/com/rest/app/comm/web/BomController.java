@@ -264,4 +264,26 @@ public class BomController {
 		data.put("data", ProGridData.deletedRows);
 		return data;
 	}
+	// 회사명조회
+	@RequestMapping("getCompName.do")
+	public ModelAndView getCompName(Model model, ProcessVO vo) {
+		ModelAndView comMv = new ModelAndView();
+		comMv.setViewName("/comm/processList.page");
+		comMv.addObject("cName", pdao.getCompName(vo)); // 화사명
+		
+		return comMv;
+	}
+	
+	
+	// 회사리스트
+	@RequestMapping("/ajax/getCompList.do")
+	@ResponseBody
+	public Map<String, Object> ajaxgetCompList(ProcessVO vo) {
+		Map<String, Object> datas = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", pdao.getCompList(vo));
+		data.put("data", datas);
+		return data;
+	}
 }

@@ -38,4 +38,16 @@ public class ProcessServiceImpl implements ProcessService {
 		return mapper.deleteProcess(vo);
 	}
 
+	@Override
+	public List<ProcessVO> getCompList(ProcessVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.getCompList(vo);
+	}
+
+	@Override
+	public ProcessVO getCompName(ProcessVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.getCompName(vo);
+	}
+
 }

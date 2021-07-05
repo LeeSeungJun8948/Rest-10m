@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div>
-		<h1>공정관리</h1>
+		<h1>공정관리 ${cName.companyName }</h1>
 	</div>
 	<div align="right" style="margin-bottom: 5px">
 			<button type="button" class="btn btn-primary" id="btnRowInsert">행추가</button>
@@ -100,12 +100,12 @@
 				});
 			
 			   grid.on('click', (ev) => {
+				
 		            if(ev.columnName == 'outCompName'){
 		               var href="proModal.do";
 		               window.event.preventDefault();
 		               $('.modal').remove();
 		               this.blur();
-		               console.log(href);
 		               $.get(href, function(html){
 		                  var modalOpen = $(html).appendTo('body').modal();
 		                  });
