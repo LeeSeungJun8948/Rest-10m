@@ -7,7 +7,7 @@
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 
 	<h1 class="h3 mb-4 text-gray-700">설비 수리내역 관리</h1>
-	<form action="insertRep.do" method="post">
+	<form action="insertRep.do" method="post" id="frm">
 		<div class="mb-4">
 			<input type="submit" class="btn btn-primary" value="저장">
 			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
@@ -17,6 +17,9 @@
 				<table class="table">
 					<tbody>
 						<tr>
+							<th>수리코드</th>
+							<td><input type="text" id="repairCode" name="repairCode"
+							style="background-color: #e2e2e2;" readonly></td>
 							<th>설비코드</th>
 							<td><input type="text" id="facCode" name="facCode"></td>
 							<th>수리일자</th>

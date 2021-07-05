@@ -9,3 +9,4 @@ public interface RepairMapper {
 	public int insertRep(RepairVO vo);
 	public int deleteRep(RepairVO vo);
 }
+ 
