@@ -5,6 +5,7 @@
 	href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+
 	<h1 class="h3 mb-4 text-gray-700">설비 수리내역 관리</h1>
 	<form action="insertRep.do" method="post">
 		<div class="mb-4">

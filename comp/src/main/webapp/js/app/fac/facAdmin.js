@@ -59,11 +59,10 @@ $( function() {
 		},
 		contentType : 'application/json'
 	}
-
+	
 	const grid = new tui.Grid({
 		el : document.getElementById('grid'),
 		data : dataSource,
-		// data : gridData,
 		rowHeaders : [ 'checkbox' ],
 		scrollX : false,
 		scrollY : false,
@@ -104,12 +103,51 @@ $( function() {
 			header : '구매일자',
 			name : 'purchaseDate'
 		}, {
+			header : '이미지',
+			name : 'img'
+		}, {
 			header : '공정코드',
 			name : 'processCode'
 		} ]
+		
 	});
-	
-	
+		
+	// grid에서 선택한 자재 정보 가져오기
+	grid.on('click', (ev) => {
+		//console.log(grid.getRow(ev.rowKey).facCode);
+		var key = grid.getRow(ev.rowKey).facCode;
+		console.log(key);
+		
+		$.ajax({
+				
+				type : "get",
+				url : "ajax/facInfo.do",
+				data : {
+					'facCode' : key
+				},
+				dataType : "json",
+				async : false,
+				success : function(data) {
+					$('#facCode').val(data.facCode);
+					$('#facilitiesName').val(data.facilitiesName);
+					$('#model').val(data.model)
+					$('#facSize').val(data.facSize);
+					$('#productionCompany').val(data.productionCompany);
+					$('#purpose').val(data.purpose)
+					$('#volume').val(data.volume);
+					$('#productionDate').val(data.productionDate);
+					$('#empNo').val(data.empNo);
+					$('#price').val(data.price);
+					$('#facInspection').val(data.facInspection);
+					$('#purchaseDate').val(data.purchaseDate);
+					$('#image').val(data.img);
+					$('#processCode').val(data.processCode);
+				},
+				error : function() {
+				}
+			});
+	});
+            
 	// 탭2 grid 설비 공정 목록
 	const dataSource2 = {
 		api : {
@@ -141,12 +179,33 @@ $( function() {
 		}]
 	});
 
-	
+		
+
+
 	// 삭제버튼
 	$("#btnDelete").on("click", function() {
 		grid.removeCheckedRows(false);
 		grid.request('deleteData');
-	})	
+	});
 
 	
+	// 수정버튼
+	$("#btnUdate").on("click", function() {
 	
+	$.ajax({
+				
+			type : "get",
+			url : "ajax/updateFac.do",
+			data : $('#frm').serialize(),
+			dataType : "json",
+			async : false,
+			success : function(data) {
+				if(data == 1)
+					alert('수정 완료');
+				else
+					alert('수정 실패');
+			},
+			error : function(request, status, error) {
+			}
+		});	
+	});

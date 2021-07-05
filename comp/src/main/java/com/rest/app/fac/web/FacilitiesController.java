@@ -1,5 +1,7 @@
 package com.rest.app.fac.web;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.rest.app.fac.service.impl.FacilitiesMapper;
 import com.rest.app.fac.vo.FacilitiesVO;
@@ -43,12 +47,6 @@ public class FacilitiesController {
 		return "fac/facList.page";
 	}
 
-//	@RequestMapping("ajax/facList.do")
-//	@ResponseBody
-//	public List<FacilitiesVO> ajaxGetFac(Model model) {
-//		return mapper.getFac();
-//	}
-	
 	// 설비 관리 목록
 	@RequestMapping("ajax/facList.do")
 	@ResponseBody
@@ -81,7 +79,7 @@ public class FacilitiesController {
 
 	// 저장
 	@RequestMapping(value = "/insertFac.do")
-	public String insertFac(HttpServletRequest request, FacilitiesVO vo) {
+	public String insertFac(HttpServletRequest request, FacilitiesVO vo) throws IllegalStateException, IOException {
 //		FacilitiesVO vo = new FacilitiesVO();
 //		vo.setFacilitiesName(request.getParameter("facilitiesName"));
 //		vo.setModel(request.getParameter("model"));
@@ -96,6 +94,15 @@ public class FacilitiesController {
 //		vo.setPurchaseDate(request.getParameter("purchaseDate"));
 //		vo.setImg(request.getParameter("img"));
 //		vo.setProcessCode(request.getParameter("processCode"));
+		MultipartFile uploadFile = vo.getUploadFile();
+		String fileName = null;
+		if(uploadFile !=null && !uploadFile.isEmpty() && uploadFile.getSize()>0) {
+		fileName = uploadFile.getOriginalFilename();
+		uploadFile.transferTo(new File(fileName));
+		}
+		//첨부파일명 VO에 지정
+		vo.setImg(fileName);
+		
 		mapper.insertFac(vo);
 		return "redirect:facAdmin.do";
 	}
@@ -111,5 +118,19 @@ public class FacilitiesController {
 		data.put("result", true);
 		data.put("data", gridDate.deletedRows);
 		return data;
+	}
+	
+	// grid list 불러오기
+	@RequestMapping("/ajax/facInfo.do")
+	@ResponseBody
+	public FacilitiesVO ajaxFacInfo(Model model, FacilitiesVO vo) {
+		return mapper.getFacInfo(vo);
+	}
+	
+	// 수정
+	@RequestMapping("/ajax/updateFac.do")
+	@ResponseBody
+	public int ajaxUpdateFac(Model model, FacilitiesVO vo) {
+		return mapper.updateFac(vo);
 	}
 }

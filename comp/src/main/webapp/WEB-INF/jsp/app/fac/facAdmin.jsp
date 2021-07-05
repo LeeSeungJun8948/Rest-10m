@@ -2,18 +2,26 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <h1 class="h3 mb-4 text-gray-700">설비관리</h1>
-<form action="insertFac.do" method="post">
+<form action="insertFac.do" method="post" id="frm" encType="multipart/form-data">
 	<div class="mb-4">
+		<button class="btn btn-primary" id="btnNew" type="reset"> 초기화 </button>
 		<input type="submit" class="btn btn-primary" value="저장">
+		<button class="btn btn-primary" id="btnUdate" type="button"> 수정 </button>
 	</div>
 	<div class="flax row">
 		<div class="mb-4 col-10f">
 			<table class="table">
 				<tbody>
+					<tr>
+						<th>설비코드</th>
+						<td><input type="text" id="facCode" name="facCode" 
+						style="background-color: #e2e2e2;" readonly></td> 
+					</tr>
 					<tr>
 						<th>설비명</th>
 						<td><input type="text" id="facilitiesName"
@@ -35,7 +43,7 @@
 					<tr>
 						<th>제작일자</th>
 						<td><input type="date" id="productionDate"
-							name="productionDate"></td>
+							name="productionDate">
 						<th>사원번호</th>
 						<td><input type="text" id="empNo" name="empNo"></td>
 						<th>구매금액</th>
@@ -54,7 +62,7 @@
 			</table>
 		</div>
 		<div class="col-3">
-			<input type="file" id="img" name="img" accept="image/*" required
+			<input type="file" id="img" name="uploadFile" accept="image/*" required
 				multiple style="display: none" onchange="setThumbnail(event);">
 			<button type="button" class="btn btn-primary" id="btnImg">이미지
 				업로드</button>
@@ -67,8 +75,6 @@
 </form>
 
 <div id="tabs">
-<script>
-	</script>
 	<ul>
 		<li><a href="#tabs-1">설비 관리 목록</a></li>
 		<li><a href="#tabs-2">설비 공정 목록</a></li>
