@@ -42,8 +42,8 @@ public class RepairController {
 	@RequestMapping("ajax/repList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetRep() {
-		Map<String, Object> datas = new HashMap();
-		Map<String, Object> data = new HashMap();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("result", true);
 		datas.put("contents", mapper.getRep());
 		data.put("data", datas);
@@ -67,9 +67,11 @@ public class RepairController {
 	// 삭제
 	@PostMapping(value="ajax/deleteRep.do")
 	@ResponseBody
-	public Map deleteRep(@RequestBody GridData gridData) {
-		Map<String, Object> data = new HashMap();
-		mapper.deleteRep(gridData.deletedRows.get(0));
+	public Map<String, Object> deleteRep(@RequestBody GridData gridData) {
+		Map<String,Object> data = new HashMap<String,Object>();
+		for(int i=0; i<gridData.deletedRows.size(); i++) {
+			mapper.deleteRep(gridData.deletedRows.get(i));
+		}
 		data.put("result", true);
 		data.put("data", gridData.deletedRows);
 		return data;
