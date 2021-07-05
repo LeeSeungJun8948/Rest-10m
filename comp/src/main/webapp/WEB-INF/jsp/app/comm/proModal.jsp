@@ -21,7 +21,7 @@
 			</form>
 		</div>
 		<div class="modal-body">
-			<!-- 필요한것 집어넣기 BODY 부분 -->
+			<!-- 필요한것 집어넣기 BODY 부분 -->   
 			<div id=matGrid></div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
