@@ -28,8 +28,7 @@
 			<div id=matGrid></div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button id=btnSearch type="button" onclick="fnSearch()"
-					class="btn btn-primary">검색</button>
+				<a href="#" rel="modal:close" ><button class="btn btn-primary">검색</button></a>
 
 			</div>
 
@@ -68,12 +67,6 @@
 					}
 					]
 				});
-				compGrid.on('click', function(ev) {
-					var values = compGrid.getRow(ev.rowKey);
-					var compName = values.companyName;
-					$('#companyName').val(compName);
-					console.log(compName);
-				});
 				
 				$.fn.serializeObject = function() {
 					var o = {};
@@ -105,6 +98,16 @@
 					var prm = $('#frm').serializeObject();
 					grid.readData(1, prm, true);
 				})
+				
+				
+				compGrid.on('click', (ev) => { 
+				
+				var compName = compGrid.getRow(ev.rowKey).companyName;
+				console.log(compName);
+				grid.setValue(rowKeyG, 'outCompName', compName, false);
+
+			});
+            
 			</script>
 		</div>
 	</div>		

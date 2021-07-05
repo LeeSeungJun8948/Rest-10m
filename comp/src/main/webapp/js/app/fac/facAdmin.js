@@ -117,7 +117,6 @@ $( function() {
 		//console.log(grid.getRow(ev.rowKey).facCode);
 		var key = grid.getRow(ev.rowKey).facCode;
 		console.log(key);
-		
 		$.ajax({
 				
 				type : "get",

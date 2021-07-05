@@ -88,7 +88,7 @@
 					},
 					{
 						header : '외주업체명',
-						name : 'outCompName',
+						name : 'outCompName'
 						
 					},
 					{
@@ -99,9 +99,11 @@
 				]
 				});
 			
-			   grid.on('click', (ev) => {
-				
-		            if(ev.columnName == 'outCompName'){
+			   var rowKeyG;			
+			   
+				   grid.on('click', (ev) => {
+					   rowKeyG = ev.rowKey;
+					   if(ev.columnName == 'outCompName'){
 		               var href="proModal.do";
 		               window.event.preventDefault();
 		               $('.modal').remove();

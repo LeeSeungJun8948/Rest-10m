@@ -11,7 +11,7 @@
 	<!--insert process -->
 	<insert id="insertProcess" parameterType="com.rest.app.comm.vo.ProcessVO">
 		insert into process
-		values (#{processCode},#{processName},'R_UNIT',#{unitNo},#{proComment},#{outStats})
+		values (#{processCode},#{processName},'R_UNIT',#{unitNo},#{proComment},#{outStats},#{outCompName})
 	</insert>
 
 	<update id="updateProcess" parameterType="com.rest.app.comm.vo.ProcessVO">
