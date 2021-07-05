@@ -38,4 +38,35 @@
 		where f.process_code=p.process_code
 		order by fac_code
 	</select>
+	<select id="getFacInfo" resultType="com.rest.app.fac.vo.FacilitiesVO" parameterType="com.rest.app.fac.vo.FacilitiesVO">
+		select 
+			fac_code,
+			FACILITIES_NAME,
+			MODEL,
+			FAC_SIZE,
+			PRODUCTION_COMPANY,
+			PURPOSE,
+			VOLUME,
+			PRODUCTION_DATE,
+			EMP_NO,
+			PRICE,
+			FAC_INSPECTION,
+			PURCHASE_DATE,
+			IMG,
+			PROCESS_CODE
+		from facilities
+		where fac_code = #{facCode}
+	</select>
+	<update id="updateFac" parameterType="com.rest.app.fac.vo.FacilitiesVO">
+		update 
+			facilities
+		set 
+			FACILITIES_NAME=#{facilitiesName}, MODEL=#{model}, FAC_SIZE=#{facSize},
+			PRODUCTION_COMPANY=#{productionCompany}, PURPOSE=#{purpose},
+			VOLUME=#{volume}, PRODUCTION_DATE=#{productionDate}, EMP_NO=#{empNo},
+			PRICE=#{price}, FAC_INSPECTION=#{facInspection}, PURCHASE_DATE=#{purchaseDate},
+			IMG=#{img}, PROCESS_CODE=#{processCode}
+		where
+			fac_code=#{facCode}
+	</update>
 </mapper>
