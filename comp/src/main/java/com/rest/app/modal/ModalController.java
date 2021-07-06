@@ -90,6 +90,12 @@ public class ModalController {
 		return "app/modal/compModal";
 	}
 	
+	// 업체구분에서 전체/주문업체를 위한 구분
+	@RequestMapping("/compModalForProd.do")
+	public String compModalForProd() {
+		return "app/modal/compModalForProd";
+	}
+	
 	// 업체목록 모달 그리드 데이터 리턴
 	@RequestMapping("/ajax/compListModal.do")
 	@ResponseBody
