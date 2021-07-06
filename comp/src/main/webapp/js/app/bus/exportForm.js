@@ -38,7 +38,10 @@ const grid = new tui.Grid({
 		}, {
 		header : '출고량',
 		name : 'exportCount',
-		editor: 'text'
+		editor: 'text',
+		onAfterChange(ev) {
+        	valueInput(ev);
+      		}
 		}, {
 		header : '현재고',
 		name : 'dayCount'
@@ -76,6 +79,9 @@ $.fn.serializeObject = function() {
 
 // 조회 버튼
 $('#btnView').on('click', function(){
+	   var param = $('#inputFrm').serializeObject();
+				   console.log(param)
+				   grid.readData(1, param, true);
 });
 
 // 새자료 버튼
@@ -99,7 +105,15 @@ $('#btnSave').on('click', function(){
 
 // 삭제 버튼
 $('#btnDel').on('click', function(){
-	
+	$.ajax({
+		type: 'POST',
+		url: 'deleteExport.do',
+		data: $('#exportCode').val(),
+		dataType: 'json',
+		success: function(data){
+			toastr.success("삭제되었습니다.");
+		}
+	});
 });
 
 // 미출고 읽기 버튼

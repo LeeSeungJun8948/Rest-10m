@@ -103,10 +103,23 @@ public class MaterialServiceImpl implements MaterialService{
 	}
 
 	@Override
-	public List<MaterialVO> getMatListModal(MaterialVO vo) {
+	public List<SelectListVO> getMatListModal(SelectListVO vo) {
 		return mapper.getMatListModal(vo);
 	}
-	
-	
+
+	@Override
+	public List<SelectListVO> getProcListModal(SelectListVO vo) {
+		return mapper.getProcListModal(vo);
+	}
+
+	@Override
+	public List<SelectListVO> getMatLotListModal(SelectListVO vo) {
+		return mapper.getMatLotListModal(vo);
+	}
+
+	@Override
+	public List<SelectListVO> getCompListModal(SelectListVO vo) {
+		return mapper.getCompListModal(vo);
+	}
 	
 }

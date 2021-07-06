@@ -15,10 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.rest.app.bus.service.BusinessService;
 import com.rest.app.bus.vo.CompanyVO;
 import com.rest.app.bus.vo.DetailExportVO;
+import com.rest.app.bus.vo.ExportVO;
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.comm.vo.BomVO;
 import com.rest.app.mat.vo.MaterialVO;
 import com.rest.app.prod.vo.DetailPlanVO;
+import com.rest.app.prod.vo.PlanVO;
 
 
 class GridData {
@@ -85,7 +87,17 @@ public class BusinessController {
 	public String exportForm(Model model) {
 		return "bus/exportForm.page";
 	}
-	
+	@RequestMapping("/readExport.do") // 미출고 조회
+	@ResponseBody
+	public Map<String, Object> readExport(@RequestBody  Map<String, Object> param) {
+		System.out.println(param+"=========");
+		Map<String, Object> datas = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", dao.getExport(param));
+		data.put("data", datas);
+		return data;
+	}
 	
 
 	@RequestMapping("/readUnExport.do") // 미출고 조회
@@ -99,17 +111,32 @@ public class BusinessController {
 		data.put("data", datas);
 		return data;
 	}
+	// 계획저장
+		@RequestMapping("saveExport.do")
+		@ResponseBody
+		public void saveExport(ExportVO vo) {
+			if (vo.getExportCode().equals("ExportCode")) {
+				dao.insertExport(vo);
+			} else {
+				dao.updateExport(vo);
+			}
+		}
 
+		// 계획삭제
+		@RequestMapping("deleteExport.do")
+		@ResponseBody
+		public void deleteExport(String exportCode) {
+			dao.deleteExport(exportCode);
+		}
 	
 
-	// 고객사모달
-	@RequestMapping("compModal.do")
-	public String compmodal() {
-		return "app/bus/compModal";
-	}
+	
+	// 일 출고List모달
+		@RequestMapping("ExportModal.do")
+		public String Exportmodal() {
+			return "app/bus/exportModal";
+		}
 
-	
-	
 	
 	
 	@RequestMapping("productInventory.do") // 제품재고관리페이지

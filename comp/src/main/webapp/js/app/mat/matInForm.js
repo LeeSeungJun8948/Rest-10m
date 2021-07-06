@@ -242,6 +242,20 @@ $("#btnSave").on("click", function(){
 	grid.request('modifyData');
 });
 
+// 모달
+$("#btnMatModal").on("click", function(e) {
+    $('#matContent').load("matModal.do");
+});
+
+$("#btnCompModal").on("click", function(e) {
+    $('#compContent').load("compModal2.do");
+});
+
+
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
+
+
+
+
