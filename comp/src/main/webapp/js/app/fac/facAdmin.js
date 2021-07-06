@@ -30,21 +30,6 @@ $( function() {
 		reader.readAsDataURL(event.target.files[0]);
 	}
 
-	/* var gridData;
-	
-	$.ajax({
-		type : "get",
-		url : "ajax/facList.do",
-		dataType : "json",
-		async : false,
-		success : function(data) {
-			gridData = data;
-		},
-		error : function() {
-		}  
-	}); */
-	
-	
 	// 탭1 gird 설비 관리 목록
 	const dataSource = {
 		api : {
@@ -118,7 +103,7 @@ $( function() {
 		var key = grid.getRow(ev.rowKey).facCode;
 		// console.log(key);
 		var image = grid.getRow(ev.rowKey).img;
-		console.log(image);
+		// console.log(image);
 		
 		$.ajax({
 				

@@ -21,6 +21,7 @@ function test() {
 			<input type="submit" class="btn btn-primary" value="저장">
 			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
 			<button type="button" class="btn btn-primary" id="btnUpdate">수정</button>
+			<button type="reset" class="btn btn-primary">새입력</button>
 		</div>
 		<div class="row">  
 			<div class="mb-4 col-lg-8">
