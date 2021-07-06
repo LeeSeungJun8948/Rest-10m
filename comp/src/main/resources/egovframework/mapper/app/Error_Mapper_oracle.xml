@@ -6,11 +6,69 @@
 	<select id="getErrorList" resultType="com.rest.app.comm.vo.ErrorVO">
 		select *
 		  from error
+		 order by error_code 
 	</select>
+	
+	<!-- 불량코드,불량명 입력 -->
+	<insert id="insertError" parameterType="com.rest.app.comm.vo.ErrorVO">
+		insert into error
+		values (error_seq.nextval, #{errorName}, #{errorComment})
+	</insert>
+	
+	<!-- 불량코드,불량명 수정 -->
+	<update id="updateError" parameterType="com.rest.app.comm.vo.ErrorVO">
+		update error
+   		   set  error_name =#{errorName}, error_comment=#{errorComment}
+ 		 where  error_code = #{errorCode}
+	</update>
+	
+	<!-- 불량코드,명 삭제 -->
+	<delete id="deleteError" parameterType="com.rest.app.comm.vo.ErrorVO">
+		delete from error
+		where error_code = #{errorCode}
+	</delete>
 	
 	<!--제품불량내역 리스트-->
 	<select id="getAllErrorList" resultType="com.rest.app.comm.vo.ErrorListVO">
 		select *
 		  from errorlist
+		    <where>
+		  	<if test="searchCondition == 'errorCode'">AND
+		  		error_code LIKE '%' || #{searchKeyword} || '%'
+		  	</if>
+		  	<if test="searchCondition == 'errorDate'">AND
+		  		(to_char(error_date,'yyyy-mm-dd') LIKE '%' || #{searchKeyword} || '%' 
+		  	  or to_char(error_date,'yy-mm-dd') LIKE '%' || #{searchKeyword} || '%'
+		  	  or to_char(error_date,'yymmdd') LIKE '%' || #{searchKeyword} || '%'
+		  	  )
+		  	</if>
+		  		<if test="searchCondition == 'lotNo'">AND
+		  		lot_no LIKE '%' || #{searchKeyword} || '%'
+		  	</if>
+		  </where>
+		  
 	</select> 
+	
+	<!-- 불량내역 리스트 입력 -->
+	<insert id="insertErrorList" parameterType="com.rest.app.comm.vo.ErrorListVO">
+		insert into errorlist
+		values (
+				errorList_seq.nextval,#{errorDate},#{errorlistComment},
+				#{instructionNo},#{lotNo},#{errorCode}
+				)
+	</insert>
+	
+	<!-- 불량내역 리스트 수정 -->
+	<update id="updateErrorList" parameterType="com.rest.app.comm.vo.ErrorListVO">
+		update errorlist
+		   set error_date =#{errorDate}, errorlist_comment=#{errorlistComment}, 
+		   	   instruction_no=#{instructionNo}, lot_no=#{lotNo}, error_code=#{errorCode}
+		 where errorlist_code = #{errorlistCode}
+	</update>
+	
+	<!-- 불량내역 리스트 삭제 -->
+	<delete id="deleteErrorList" parameterType="com.rest.app.comm.vo.ErrorListVO">
+		delete from errorlist
+		where errorlist_code = #{errorlistCode}
+	</delete>
 </mapper>
