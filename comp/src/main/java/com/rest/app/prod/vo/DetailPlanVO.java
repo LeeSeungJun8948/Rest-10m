@@ -4,8 +4,10 @@ import lombok.Data;
 
 @Data
 public class DetailPlanVO {
-	String lotNo;
+	String productLot;
 	String planCode;
+	String productName;
+	String outDate;
 	int orderNo;
 	int productCode;
 	String workDate;

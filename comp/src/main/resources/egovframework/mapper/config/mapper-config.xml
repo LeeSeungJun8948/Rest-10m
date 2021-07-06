@@ -26,6 +26,12 @@
 		<!-- 라디오리스트vo -->
 		<typeAlias alias="SelectListVO"		type="com.rest.app.mat.vo.SelectListVO" />
 		
+		<!-- 생산  -->
+		<typeAlias alias="OrdersVO"		type="com.rest.app.bus.vo.OrdersVO" />
+		<typeAlias alias="PlanVO"		type="com.rest.app.prod.vo.PlanVO" />
+		<typeAlias alias="DetailPlanVO"		type="com.rest.app.prod.vo.DetailPlanVO" />
+		<typeAlias alias="InputMatVO"		type="com.rest.app.prod.vo.InputMatVO" />
+		<typeAlias alias="WorkProcessPlanVO"		type="com.rest.app.prod.vo.WorkProcessPlanVO" />
 	</typeAliases>
 	
     

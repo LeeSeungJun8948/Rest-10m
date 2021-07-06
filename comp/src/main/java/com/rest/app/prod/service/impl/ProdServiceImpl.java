@@ -76,4 +76,14 @@ public class ProdServiceImpl implements ProdService {
 	public List<InputMatVO> readInputMat(Map<String, Object> param) {
 		return mapper.readInputMat(param);
 	}
+
+	@Override
+	public PlanVO selectPlanCode() {
+		return mapper.selectPlanCode();
+	}
+
+	@Override
+	public List<DetailPlanVO> getDetailPlan(Map<String, Object> param) {
+		return mapper.getDetailPlan(param);
+	}
 }

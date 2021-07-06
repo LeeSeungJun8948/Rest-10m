@@ -75,7 +75,7 @@ const grid = new tui.Grid({
           }
 		}, {
 		header: '제품LOT',
-		name: 'productLot',
+		name: 'productLot'
 		}, {
 		header: '비고',
 		name: 'comments',
@@ -93,7 +93,6 @@ const gridInput = new tui.Grid({
 	scrollX: false,
 	scrollY: true,
 	data: dataSourceInput,
-	async: false,
 	columns: [ {
 		header: '자재코드',
 		name: 'materialCode'
@@ -117,15 +116,8 @@ const gridInput = new tui.Grid({
 		header: '비고',
 		name: 'comments',
 		editor: 'text'	
-		}, {
-		header: '제품LOT',
-		name: 'productLot',
-		hidden: true
-		}, {
-		header: '순번',
-		name: 'inputIdx',
-		hidden: true
-		}  ]
+		}
+	]
 });
 
 // 조회 버튼
@@ -135,19 +127,38 @@ $('#btnView').on('click', function(){
 // 초기화 버튼
 $(document).ready(function() {  
     $("#btnReset").click(function() {  
-         $("form").each(function() {  
-            this.reset();  
+        $("form").each(function() {  
+            this.reset();
 			grid.clear();
 			gridInput.clear();
-         });  
+        });  
+		$('#planCode').val('planCode');
     });  
 });  
 
 // 계획저장 버튼
 $('#btnSave').on('click', function(){
+	$.ajax({
+		type: 'POST',
+		url: 'savePlan.do',
+		data: $('#inputFrm').serialize(),
+		dataType: 'json',
+		async: false,
+		success: function(data){
+			var planCode = data.data.contents.planCode;
+			$('#planCode').val(planCode);
+			grid.setColumnValues('planCode', planCode);
+		}
+	});
 	grid.request('modifyData');
+	grid.on('successResponse', function(ev){
+		var text = JSON.parse(ev.xhr.responseText);
+		if(text.check == 'save') {
+			grid.readData(1, {planCode: $('#planCode').val()}, true);
+		}
+	});
 	gridInput.request('modifyData');
-	$('#inputFrm').submit();
+	gridInput.clear();
 	toastr.success("저장되었습니다.");
 });
 
@@ -212,8 +223,14 @@ grid.on('dblclick', (ev) => {
 	var productCode = grid.getValue(rowKey, 'productCode');
 	var productName = grid.getValue(rowKey, 'productName');
 	var workCount = grid.getValue(rowKey, 'workCount');	
-	var param = {'productCode': productCode, 'productLot': productLot};
-	gridInput.readData(1, param, true);
+	if (productLot != null) {
+		gridInput.setColumnValues('productLot', productLot);
+		var param = {'productCode': productCode, 'productLot': productLot};
+		gridInput.readData(1, param, true);
+	} else {
+		var param = {'productCode': productCode};
+		gridInput.readData(1, param, true);
+	}
 	$('#workCount').val(workCount);
 	$('#productCode').val(productCode);
 	$('#productName').val(productName);

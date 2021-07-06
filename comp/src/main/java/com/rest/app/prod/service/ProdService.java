@@ -9,16 +9,18 @@ import com.rest.app.prod.vo.InputMatVO;
 import com.rest.app.prod.vo.PlanVO;
 
 public interface ProdService {
-	public List<OrdersVO> getUnplanOrders(Map<String, Object> param);
-	public int insertPlan(PlanVO vo); 
-	public int updatePlan(PlanVO vo);
-	public int deletePlan(String planCode);
-	public int insertDetailPlan(DetailPlanVO vo); 
-	public int updateDetailPlan(DetailPlanVO vo);
-	public int deleteDetailPlan(DetailPlanVO vo);
-	public int insertInputMat(InputMatVO vo); 
-	public int updateInputMat(InputMatVO vo);
-	public int deleteInputMat(InputMatVO vo);
-	public String findProductName(String productCode);
-	public List<InputMatVO> readInputMat(Map<String, Object> param); 
+	List<OrdersVO> getUnplanOrders(Map<String, Object> param);
+	List<DetailPlanVO> getDetailPlan(Map<String, Object> param);
+	int insertPlan(PlanVO vo); 
+	int updatePlan(PlanVO vo);
+	int deletePlan(String planCode);
+	int insertDetailPlan(DetailPlanVO vo); 
+	int updateDetailPlan(DetailPlanVO vo);
+	int deleteDetailPlan(DetailPlanVO vo);
+	int insertInputMat(InputMatVO vo); 
+	int updateInputMat(InputMatVO vo);
+	int deleteInputMat(InputMatVO vo);
+	String findProductName(String productCode);
+	List<InputMatVO> readInputMat(Map<String, Object> param); 
+	PlanVO selectPlanCode();
 }

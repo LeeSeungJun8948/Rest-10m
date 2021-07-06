@@ -11,7 +11,7 @@
 </div>
 <div class="row">
 	<div class="mb-2 col-lg-6">
-		<form id="inputFrm" name="inputFrm" action="savePlan.do">
+		<form id="inputFrm" name="inputFrm">
 			<input type="hidden" id="planCode" name="planCode" value="planCode">
 			<table class="table">
 				<tbody>
@@ -53,22 +53,24 @@
 </div>
 <br><br><br><br>
 <div>
-	<div class="table">
-		<table class="table">
-			<tbody>
-				<tr>
-					<th>제품코드</th>
-					<td><input type="text" id="productCode" name="productCode" readonly="true"></td>
-					<th>제품명</th>
-					<td><input type="text" id="productName" name="productName" readonly="true"></td>
-					<th>작업량</th>
-					<td><input type="text" id="workCount" name="workCount" readonly="true"></td>
-					<th>소요량</th>
-					<td><input type="text" id="totalCount" name="totalCount" readonly="true"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+	<form>
+		<div class="table">
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>제품코드</th>
+						<td><input type="text" id="productCode" name="productCode" readonly="true"></td>
+						<th>제품명</th>
+						<td><input type="text" id="productName" name="productName" readonly="true"></td>
+						<th>작업량</th>
+						<td><input type="text" id="workCount" name="workCount" readonly="true"></td>
+						<th>소요량</th>
+						<td><input type="text" id="totalCount" name="totalCount" readonly="true"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</form>
 </div>
 	<div>
 		<div id="gridInput"/>
