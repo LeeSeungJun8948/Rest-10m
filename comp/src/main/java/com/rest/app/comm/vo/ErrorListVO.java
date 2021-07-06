@@ -3,11 +3,11 @@ package com.rest.app.comm.vo;
 import java.util.Date;
 
 public class ErrorListVO {
-	int ErrorListCode;
-	Date ErrorDate;
-	String ErrorListComment;
-	String InstructionNo;
-	String LotNo;
-	int ErrorCode;
+	int errorListCode;
+	int errorCode;
+	Date errorDate;
+	String instructionNo;
+	String lotNo;
+	String errorListComment;
 	
 }
