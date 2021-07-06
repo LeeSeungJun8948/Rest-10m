@@ -124,9 +124,7 @@ const gridInput = new tui.Grid({
 		header: '주문번호',
 		name: 'orderNo',
 		hidden: true
-		}
-		
-	]
+		} ]
 });
 
 // 조회 버튼
@@ -168,7 +166,6 @@ $('#btnSave').on('click', function(){
 		}
 	});
 	gridInput.request('modifyData');
-	gridInput.clear();
 	toastr.success("저장되었습니다.");
 });
 
@@ -229,19 +226,17 @@ function findProductName(ev){
 // 더블클릭해서 투입자재 설정
 grid.on('dblclick', (ev) => {
 	var rowKey = ev.rowKey;
-	var orderNo = grid.getValue(rowKey, 'orderNo');
 	var planCode = grid.getValue(rowKey, 'planCode');
 	var productCode = grid.getValue(rowKey, 'productCode');
 	var productName = grid.getValue(rowKey, 'productName');
 	var workCount = grid.getValue(rowKey, 'workCount');
-	gridInput.setColumnValues('orderNo', orderNo);	
 	$('#workCount').val(workCount);
 	$('#productCode').val(productCode);
 	$('#productName').val(productName);
 	if (planCode != null) {
-		gridInput.setColumnValues('planCode', planCode);
 		var param = {'productCode': productCode, 'planCode': planCode};
 		gridInput.readData(1, param, true);
+		gridInput.setColumnValues('planCode', planCode);
 	} else {
 		var param = {'productCode': productCode};
 		gridInput.readData(1, param, true);
@@ -253,7 +248,9 @@ function valueInput(ev) {
 	var rowKey = ev.rowKey;
 	var productCode = grid.getValue(rowKey, 'productCode');
 	var productName = grid.getValue(rowKey, 'productName');
-	var workCount = grid.getValue(rowKey, 'workCount');	
+	var workCount = grid.getValue(rowKey, 'workCount');
+	var orderNo = grid.getValue(rowKey, 'orderNo');
+	gridInput.setColumnValues('orderNo', orderNo);	
 	$('#workCount').val(workCount);
 	$('#productCode').val(productCode);
 	$('#productName').val(productName);
