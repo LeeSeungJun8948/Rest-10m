@@ -62,8 +62,8 @@
 			</table>
 		</div>
 		<div class="col-3">
-			<input type="file" id="img" name="uploadFile" accept="image/*" required
-				multiple style="display: none" onchange="setThumbnail(event);">
+			<input type="file" id="img" name="uploadFile" accept="image/*" 
+			style="display: none" onchange="setThumbnail(event);">
 			<button type="button" class="btn btn-primary" id="btnImg">이미지
 				업로드</button>
 			<h3>이미지 미리보기</h3>
