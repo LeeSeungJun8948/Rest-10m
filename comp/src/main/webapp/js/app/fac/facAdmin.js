@@ -23,28 +23,13 @@ $( function() {
 		var reader = new FileReader();
 
 		reader.onload = function(event) {
-			var img = document.createElement("img");
+			var img = document.getElementById('image');
 			img.setAttribute("src", event.target.result);
 			document.querySelector("div#imagePreview").appendChild(img);
 		};
 		reader.readAsDataURL(event.target.files[0]);
 	}
 
-	/* var gridData;
-	
-	$.ajax({
-		type : "get",
-		url : "ajax/facList.do",
-		dataType : "json",
-		async : false,
-		success : function(data) {
-			gridData = data;
-		},
-		error : function() {
-		}  
-	}); */
-	
-	
 	// 탭1 gird 설비 관리 목록
 	const dataSource = {
 		api : {
@@ -118,7 +103,7 @@ $( function() {
 		var key = grid.getRow(ev.rowKey).facCode;
 		// console.log(key);
 		var image = grid.getRow(ev.rowKey).img;
-		console.log(image);
+		// console.log(image);
 		
 		$.ajax({
 				
@@ -215,8 +200,11 @@ $( function() {
        		cache: false,
 			async : false,
 			success : function(data) {
-				if(data == 1)
+				if(data == 1){
 					alert('수정 완료');
+					grid.readData(1, null, true);
+				}
+					
 				else
 					alert('수정 실패');
 			},
@@ -224,4 +212,10 @@ $( function() {
 			}
 		});	
 	});
+	
+	$('#btnNew').on('click',function(){
+		var img = document.getElementById('image');
+		img.setAttribute("src", '');
+		$('input').val('');
+	})
 	

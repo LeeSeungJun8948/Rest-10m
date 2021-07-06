@@ -19,4 +19,22 @@
 	<delete id="deleteRep" parameterType="com.rest.app.fac.repair.vo.RepairVO">
 		delete from repair where repair_code=#{repairCode}
 	</delete>
+	<select id="getRepInfo" resultType="com.rest.app.fac.repair.vo.RepairVO" parameterType="com.rest.app.fac.repair.vo.RepairVO">
+		select
+				REPAIR_CODE,
+				FAC_CODE,
+				REPAIR_DATE,
+				REPAIR_COMMENT,
+				COMPANY_CODE,
+				COST,
+				ETC
+		from	repair
+		where	REPAIR_CODE = #{repairCode}
+	</select>
+	<update id="updateRep" parameterType="com.rest.app.fac.repair.vo.RepairVO">
+		update	repair
+		set FAC_CODE=#{facCode}, REPAIR_DATE=#{repairDate}, REPAIR_COMMENT=#{repairComment},
+			COMPANY_CODE=#{companyCode}, COST=#{cost}, ETC=#{etc}
+		where repair_code=#{repairCode}
+	</update>
 </mapper>

@@ -8,5 +8,7 @@ public interface RepairMapper {
 	public List<RepairVO> getRep();
 	public int insertRep(RepairVO vo);
 	public int deleteRep(RepairVO vo);
+	public RepairVO getRepInfo(RepairVO vo);
+	public int updateRep(RepairVO vo);
 }
  

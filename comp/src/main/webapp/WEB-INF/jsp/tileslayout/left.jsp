@@ -36,7 +36,7 @@
                         <a class="collapse-item" href="bomList.do">제품 BOM관리</a>
                         <a class="collapse-item" href="processList.do">공정관리</a>
                         <a class="collapse-item" href="empList.do">사원관리</a>
-                        <a class="collapse-item" href="cards.html">불량코드 관리 </a>
+                        <a class="collapse-item" href="errorList.do">불량코드 관리 </a>
                         <a class="collapse-item" href="cards.html">제품 품질 표준서 관리</a>
 
                     </div>
@@ -66,11 +66,11 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="inorderForm.do">발주관리 참조</a>
+                        <a class="collapse-item" href="inorderForm.do">발주 조회</a>
                         <a class="collapse-item" href="matInForm.do">자재입고 관리</a>
-                        <a class="collapse-item" href="matStockForm.do">자재재고조정 관리</a>
-                        <a class="collapse-item" href="matStockList.do">자재재고 조회</a>
                         <a class="collapse-item" href="matOutForm.do">자재출고 관리</a>
+                        <a class="collapse-item" href="matStockList.do">자재재고 조회</a>
+                        <a class="collapse-item" href="matStockForm.do">자재재고조정 관리</a>
                     </div>
                 </div>
             </li>

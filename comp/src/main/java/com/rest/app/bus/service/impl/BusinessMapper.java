@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rest.app.bus.vo.CompanyVO;
+import com.rest.app.bus.vo.ExportVO;
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.comm.vo.BomVO;
 
@@ -21,4 +22,10 @@ public interface BusinessMapper {
 	public List<BomVO> getProduct(BomVO vo);//제품모달
 	
 	public List<OrdersVO> getProInventory(Map<String, Object> param);
+
+	public int insertExport(ExportVO vo);
+	
+	public int updateExport(ExportVO vo);
+	
+	public int deleteExport(String exportCode);
 }

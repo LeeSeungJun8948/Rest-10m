@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+
+<!-- 
 <link href="${pageContext.request.contextPath}/css/sb-admin-2.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <link href="https://uicdn.toast.com/grid/latest/tui-grid.css" rel="stylesheet" />
@@ -22,6 +24,6 @@
 <script src="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="${pageContext.request.contextPath}/js/toastr.js"></script>
-
+ -->
 	<tiles:insertAttribute name="body" />     
 </html>

@@ -41,7 +41,7 @@
 				<input type="date" name="toDate" id="toDate" value=${exportDate }></td>
 					</tr>
 					<tr>
-						<td>제품코드</td>
+						<th>제품코드</th>
 						<td><input type="text" id="prductCd" name="prductCd" /> <a
 							href="modal.do" rel="modal:open" class="btn btn-primary"> <img
 								src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">

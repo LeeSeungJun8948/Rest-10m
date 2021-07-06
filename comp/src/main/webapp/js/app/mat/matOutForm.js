@@ -104,8 +104,7 @@ const grid = new tui.Grid({
 			header : '자재LOT_NO',
 			name : 'lotNo',
 			width : 150,
-			align: 'center',
-			editor:'text'
+			align: 'center'
 		}, {
 			header : '출고공정',
 			name : 'processCode',
@@ -127,7 +126,12 @@ const grid = new tui.Grid({
 			formatter({value}) {
       			return format(value);
     		}
- 			
+		}, {
+			header : '비고',
+			name : 'comments',
+			width : 160,
+			align: 'center',
+			editor: 'text'
 		}
 
 	],
@@ -156,12 +160,15 @@ function format(value){
 	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
+var rowKey;
+var materialCode;
 function setMatInfo(ev){
 	
-	var rowKey = ev.rowKey;
-	var materialCode =  grid.getValue(rowKey, 'materialCode');
+	rowKey = ev.rowKey;
+	materialCode =  grid.getValue(rowKey, 'materialCode');
 	
 	if(checkNull(materialCode)){
+		
 		$.ajax({
 			type : "get",
 			data: {"materialCode" : materialCode},
@@ -178,6 +185,12 @@ function setMatInfo(ev){
 			}
 		});
 		
+		rowKey = ev.rowKey;
+		grid.setValue(rowKey, 'processCode', null, false);
+		grid.setValue(rowKey, 'lotNo', null, false);
+		$('#matLotModal').modal('show');
+		$('#matLotContent').load("matLotModal.do");
+	
 	}
 	
 }
@@ -205,41 +218,15 @@ function makeProcessList(materialCode){
 	return processList;
 }
 
-/**
-function makeLotList(materialCode){
+(function($) {
 	
-	let lotList = [];
-	
-	$.ajax({
-		type : "get",
-		data: {"materialCode" : materialCode},
-		url : "ajax/getLotList.do",
-		dataType : "json",
-		async : false,
-		success : function(datas) {
-			
-			for(let data of datas){
-				processList.push({text: data.lotNo, value: data.lotNo});
-				
-			}
-			console.log(lotList);
-		},
-		error:function(request, status, error){
-			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	});	
-	
-	return lotList;
-	
-}
- */
-
 $('#btnRead').on('click',  function(){
 	var param = $('#searchFrm').serializeObject();
 	console.log(param)
 	grid.readData(1, param, true);
 });
 
+})(jQuery);
 
 var newIoCode;
 	
@@ -282,6 +269,25 @@ function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
 
-$("#btnMatCodeModal").on("click", function(e) {
-    $('.modal-content').load("matCodeModal.do");
+// 자재검색 모달 열기
+$("#btnMatModal").on("click", function(e) {
+    $('#matContent').load("matModal.do");
 });
+
+// 공정검색 모달 열기
+$('#btnProcModal').on('click',function(e){
+	$('#procContent').load("procModal.do");
+});
+
+// lot검색 모달 열기(그리드에서)
+grid.on('dblclick', function(ev){
+	if(ev.columnName == 'lotNo'){
+		rowKey = ev.rowKey;
+		materialCode = grid.getValue(rowKey, 'materialCode');
+		$('#matLotModal').modal('show');
+		$('#matLotContent').load("matLotModal.do");
+	}
+})
+
+
+

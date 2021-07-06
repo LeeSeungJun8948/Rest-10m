@@ -31,3 +31,8 @@ $("#btnDelete").on("click",function() {
 	grid.removeCheckedRows(false);
 	grid.request('deleteData');
 })
+
+$('#btnSearch').on('click', function() {
+		var prm = $('#frm').serializeObject();
+		grid.readData(1, prm, true);
+	})

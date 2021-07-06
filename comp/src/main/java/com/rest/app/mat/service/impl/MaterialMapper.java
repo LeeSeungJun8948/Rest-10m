@@ -44,5 +44,11 @@ public interface MaterialMapper {
 	
 	
 	// 모달
-	public List<MaterialVO> getMatListModal(MaterialVO vo); // 자재검색 모달 자재리스트
+	public List<SelectListVO> getMatListModal(SelectListVO vo); // 자재검색 모달 자재리스트
+	
+	public List<SelectListVO> getProcListModal(SelectListVO vo); // 공정검색 모달 공정리스트
+	
+	public List<SelectListVO> getMatLotListModal(SelectListVO vo); // 자재별 재고0이상 로트리스트
+	
+	public List<SelectListVO> getCompListModal(SelectListVO vo); // 업체검색 모달 업체리스트
 }

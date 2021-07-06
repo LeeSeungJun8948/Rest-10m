@@ -65,7 +65,11 @@
 			PRODUCTION_COMPANY=#{productionCompany}, PURPOSE=#{purpose},
 			VOLUME=#{volume}, PRODUCTION_DATE=#{productionDate}, EMP_NO=#{empNo},
 			PRICE=#{price}, FAC_INSPECTION=#{facInspection}, PURCHASE_DATE=#{purchaseDate},
-			IMG=#{img}, PROCESS_CODE=#{processCode}
+			PROCESS_CODE=#{processCode}
+			
+			<if test="img!=null and img!=''">
+				,IMG=#{img}
+			</if> 
 		where
 			fac_code=#{facCode}
 	</update>
