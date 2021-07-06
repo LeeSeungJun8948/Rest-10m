@@ -5,12 +5,23 @@
 	href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
-
+<script>
+function test() {
+	var check=document.frm.facCode.value;
+	if(!check) {
+		alert("설비코드 필수입력");
+		document.frm.facCode.focus();
+		return false;
+	} else return true;
+}
+</script>
 	<h1 class="h3 mb-4 text-gray-700">설비 수리내역 관리</h1>
-	<form action="insertRep.do" method="post" id="frm">
+	<form action="insertRep.do" method="post" id="frm" name="frm" onsubmit="return test()">
 		<div class="mb-4">
 			<input type="submit" class="btn btn-primary" value="저장">
 			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
+			<button type="button" class="btn btn-primary" id="btnUpdate">수정</button>
+			<button type="reset" class="btn btn-primary">새입력</button>
 		</div>
 		<div class="row">  
 			<div class="mb-4 col-lg-8">
@@ -83,8 +94,59 @@
 				} ]
 			});
 			
+		//삭제버튼	
 			$("#btnDelete").on("click",function() {
 				grid.removeCheckedRows(false);
 				grid.request('deleteData');
 		})
+		
+		// input 데이터 불러오기
+		grid.on('click', function(ev) {
+			var key=grid.getRow(ev.rowKey).repairCode;
+			console.log(key);
+			$.ajax({
+				type : "get",
+				url : "ajax/repInfo.do",
+				data : {
+					'repairCode' : key
+				},
+				dataType : "json",
+				async : false,
+				success : function(data) {
+					$('#repairCode').val(data.repairCode);
+					$('#facCode').val(data.facCode);
+					$('#repairDate').val(data.repairDate);
+					$('#repairComment').val(data.repairComment);
+					$('#companyCode').val(data.companyCode);
+					$('#cost').val(data.cost);
+					$('#etc').val(data.etc);
+						
+				},
+				error : function(){
+					
+				}
+				
+			});
+		});
+		
+		// 수정
+		$('#btnUpdate').on('click',function(){
+			
+			$.ajax({
+				
+				type : "get",
+				url : "ajax/updateRep.do",
+				data : $('#frm').serialize(),
+				dataType : "json",
+				async : false,
+				success : function(data) {
+					if(data == 1)
+						alert('수정 완료');
+					else
+						alert('수정 실패');
+				},
+				error : function(request, status, error) {
+				}
+			});
+		});
 		</script>
