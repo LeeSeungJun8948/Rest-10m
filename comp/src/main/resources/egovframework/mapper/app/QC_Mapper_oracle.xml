@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rest.app.comm.service.impl.QualityControlMapper">
+	<select id="getProduct" resultType="com.rest.app.comm.vo.QualityControlVO">
+		select p.* , e.employee_name
+ 		  from product p
+  		  join employee e
+    		on (p.emp_code = e.emp_code)
+    	 where product_code = #{productCode}
+	</select>
+	
+	<!-- 제품코드,제품명,제품규격 List(모달창) -->
+	<select id="getProductList" resultType="com.rest.app.comm.vo.QualityControlVO">
+		SELECT product_code, product_name, unit_no
+ 		  FROM product
+	</select>
+	
+	<!-- 제품에대한 고객사코드/고객사명 list -->
+	<select id="getCompany" resultType="com.rest.app.comm.vo.QualityControlVO">
+		select Distinct c.company_code, c.company_name 
+  		  from company c
+  		  join (select p.product_code, o.company_code
+          		  from product p
+           		   join orders o
+             		 on (p.product_code = o.product_code)) a
+    		on c.company_code = a.company_code       
+ 		 where a.product_code = #{productCode}
+	</select>
+	
+</mapper>
