@@ -11,8 +11,8 @@
 
 <form action="insertFac.do" method="post" id="frm" encType="multipart/form-data">
 	<div class="mb-4">
-		<button class="btn btn-primary" id="btnNew" type="reset"> 새입력 </button>
-		<input type="submit" class="btn btn-primary" value="저장">
+		<button class="btn btn-primary" id="btnNew" type="button"> 새입력 </button>
+		<button type="submit" class="btn btn-primary"> 저장 </button>
 		<button class="btn btn-primary" id="btnUdate" type="button"> 수정 </button>
 	</div>
 	<div class="flax row">
