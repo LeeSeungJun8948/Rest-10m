@@ -4,18 +4,24 @@
 	<select id="getBus" resultType="com.rest.app.bus.vo.OrdersVO">
 		select
 		F_FINDCOMPNAME(company_code)AS comp_name,
-		o.*, p.*,
-		(o.order_count - o.out_count) as not_count,
+		TO_CHAR(o.in_date,'YYYY-MM-DD')as in_date,
+		TO_CHAR(o.out_date,'YYYY-MM-DD')as out_date,
+		o.order_no, p.product_code,p.product_name,
+		p.std_id,p.unit_id,o.order_count,o.out_count,
+		(o.order_count -
+		o.out_count) as not_count,
 		CASE
 		WHEN o.plan_count = 0
 		THEN '미계획'
-		WHEN o.order_count > o.plan_count THEN
+		WHEN
+		o.order_count > o.plan_count THEN
 		'진행중'
 		ELSE '완료'
 		END AS
 		order_state
-		FROM orders o, product p
-		WHERE o.in_date BETWEEN
+		FROM
+		orders o, product p
+		WHERE in_date BETWEEN
 		TO_DATE(#{fromDate},'YYYY-MM-DD')
 		AND TO_DATE(#{toDate}, 'YYYY-MM-DD')
 		AND o.product_code=p.product_code
@@ -97,15 +103,19 @@
 
 
 	<select id="getProInventory"
-		resultType="com.rest.app.bus.vo.OrdersVO" parameterType="com.rest.app.bus.vo.OrdersVO">
+		resultType="com.rest.app.bus.vo.OrdersVO"
+		parameterType="com.rest.app.bus.vo.OrdersVO">
 
 		select p.product_code,p.product_name,p.std_id,p.unit_id,
 		s.product_lot,s.product_count,s.product_state,d.export_code,
 		e.export_date
 		from DETAILEXPORT d
-		inner join product p on p.product_code=d.product_code
-		inner join storage s on s.product_code=d.product_code
-		inner join export e on e.export_code=d.export_code
+		inner join product p on
+		p.product_code=d.product_code
+		inner join storage s on
+		s.product_code=d.product_code
+		inner join export e on
+		e.export_code=d.export_code
 		WHERE e.export_date BETWEEN
 		TO_DATE(#{fromDate},'YYYY-MM-DD')
 		AND

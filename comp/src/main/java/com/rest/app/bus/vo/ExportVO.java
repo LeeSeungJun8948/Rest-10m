@@ -1,5 +1,8 @@
 package com.rest.app.bus.vo;
 
+import lombok.Data;
+
+@Data
 public class ExportVO {
 	
 	String exportCode;//출고번호
