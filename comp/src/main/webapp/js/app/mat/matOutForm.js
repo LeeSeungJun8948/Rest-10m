@@ -282,6 +282,19 @@ function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
 
-$("#btnMatCodeModal").on("click", function(e) {
-    $('.modal-content').load("matCodeModal.do");
+$("#btnMatModal").on("click", function(e) {
+	console.log('ㅎㅇ');
+    $('.modal-content').load("matModal.do");
 });
+
+$('#btnProcModal').on('click',function(e){
+	$('.modal-content').load("procModal.do");
+})
+
+$('#materialCode').val().onchange = function(){
+	$('#myModal').modal('hide');
+}
+		
+$('#materialName').val().onchange = function(){
+	$('#myModal').modal('hide');
+}

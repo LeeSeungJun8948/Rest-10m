@@ -18,9 +18,9 @@ public class ModalController {
 	@Autowired
 	MaterialService dao;
 	
-	@RequestMapping("/matCodeModal.do")
-	public String matCodeModal() {
-		return "modal/matCodeModal.part";
+	@RequestMapping("/matModal.do")
+	public String matModal() {
+		return "modal/matModal.part";
 	}
 	
 	@RequestMapping("/ajax/matListModal.do")
@@ -37,4 +37,10 @@ public class ModalController {
 		
 		return data;
 	}
+	
+	@RequestMapping("/procModal.do")
+	public String procModal() {
+		return "modal/procModal.part";
+	}
+	
 }

@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 		<div class="modal-header">
-			<h5 class="modal-title">자재검색</h5>
-			<button type="button" class="close" data-dismiss="modal"
+			<h5 class="modal-title">공정검색</h5>
+			<button id="btnCloseTop" type="button" class="close" data-dismiss="modal"
 				aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
@@ -15,9 +15,9 @@
 				<div class="row">
 					<div class="col-md-4">
 						<select class="custom-select" name="searchCondition">
-							<option value="material_code" selected>자재코드</option>
-							<option value="material_name">자재명</option>
-							<option value="mat_no" >자재구분</option>
+							<option value="process_code" selected>공정코드</option>
+							<option value="process_name">공정명</option>
+							<option value="product_name">제품명</option>
 						</select>
 					</div>
 					<div class="col-md-6 ml-auto">
@@ -28,15 +28,15 @@
 			</form>
 
 			<div class="col-md-10">
-				<div id="modalMatListGrid"></div>
+				<div id="modalProcListGrid"></div>
 			</div>
 
 			<div class="modal-footer">
-				<button class="btn btn-secondary">닫기</button>
-				<button class="btn btn-success">선택</button>
+				<button id="btnCloseBottom" class="btn btn-default" data-dismiss="modal">닫기</button>
+				<button id="btnSelect" class="btn btn-success">선택</button>
 			</div>
 
 		</div>
 		
-		<script type="text/javascript" src="js/app/mat/matModal.js"></script>
+		<script type="text/javascript" src="js/app/modal/procModal.js"></script>
 	
