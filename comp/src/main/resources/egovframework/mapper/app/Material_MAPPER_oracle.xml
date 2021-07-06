@@ -62,7 +62,7 @@
 		
 		<where>
 
-			trunc(io_date) BETWEEN #{startDate} AND #{endDate} 
+			trunc(inorder_date) BETWEEN #{startDate} AND #{endDate} 
 			
 			<if test="companyCode != null and companyCode != ''">
 				AND company_code = #{companyCode}
@@ -96,12 +96,13 @@
 		        unit_price, 
 		        io_volume * unit_price as price, 
 		        lot_no,
-		        (SELECT stock FROM stock WHERE material_code = inout.material_code) as stock,
+		        F_FIND_MAT_STOCK(inout.material_code) as stock,
         		(SELECT f_findCompName(company_code) FROM inorder WHERE inorder_code = inout.inorder_code) as company_name,
      		  	(SELECT company_code FROM inorder WHERE inorder_code = inout.inorder_code) as company_code,
      		  	process_code,
-     		  	(SELECT process_name FROM process WHERE process_code = inout.process_code) as process_name
-		FROM inout
+     		  	(SELECT process_name FROM process WHERE process_code = inout.process_code) as process_name,
+     		  	comments
+		FROM inout 
 		
 		<where>
 		
@@ -144,22 +145,22 @@
 	<!-- 발주번호 입력시 자재정보 불러오기 -->
 	<select id="getMatInfoForIn" resultType="InoutVO" parameterType="InoutVO" >
 		SELECT material_code, F_FINDMATNAME(material_code) AS material_name, unit_no, 
-		(SELECT stock FROM stock where material_code = material.material_code) AS stock 
+				F_FIND_MAT_STOCK(material.material_code) as stock
 		FROM material 
 		WHERE material_code = (SELECT material_code FROM inorder WHERE inorder_code = #{inorderCode})
 	</select>
 	
 	<!-- 입출고 인설트 -->
 	<insert id="istInout" parameterType="InoutVO">
-		INSERT INTO inout(io_code, io_date, io_volume, unit_price, material_code, lot_no, inorder_code, inout_id, inout_no, process_code) 
-		VALUES(#{ioCode}, #{ioDate}, #{ioVolume}, #{unitPrice}, #{materialCode}, #{lotNo}, #{inorderCode}, 'R_INOUT', #{ioType}, #{processCode})
+		INSERT INTO inout(io_code, io_date, io_volume, unit_price, material_code, lot_no, inorder_code, inout_id, inout_no, process_code, comments) 
+		VALUES(#{ioCode}, #{ioDate}, #{ioVolume}, #{unitPrice}, #{materialCode}, #{lotNo}, #{inorderCode}, 'R_INOUT', #{ioType}, #{processCode}, #{comments})
 	</insert>
 	
 	<!-- 입출고 업데이트 -->
 	<update id="udtInout" parameterType="InoutVO">
 		UPDATE inout 
 		SET io_date = #{ioDate}, inorder_code = #{inorderCode}, material_code = #{materialCode}, io_volume = #{ioVolume}, unit_price = #{unitPrice}
-					,lot_no = #{lotNo}, process_code = #{processCode}
+					,lot_no = #{lotNo}, process_code = #{processCode}, comments = #{comments}
 		WHERE io_code = #{ioCode}
 	</update>
 	
@@ -172,7 +173,7 @@
 	<select id="getMatInfoForOut" resultType="InoutVO" parameterType="InoutVO" >
 		SELECT F_FINDMATNAME(material_code) AS material_name, 
 				unit_no,
-				(SELECT stock FROM stock where material_code = material.material_code) AS stock
+				F_FIND_MAT_STOCK(material_code) as stock
 		FROM material 
 		WHERE material_code = #{materialCode}
 	</select>
@@ -183,18 +184,6 @@
 				(SELECT process_name FROM process WHERE process_code = bom.process_code) AS process_name
 		FROM bom 
 		WHERE material_code = #{materialCode}
-	</select>
-	
-	<!-- 자재별 로트번호 & 재고(0이상) // 출고시 자재lot 선택 리스트 용-->
-	<select id="getLotList" parameterType="SelectListVO" resultType="SelectListVO">
-		SELECT lot_no, 
-        		(SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (01,03,05) and lot_no = i.lot_no) 
-          		- (SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (02,04) and lot_no = i.lot_no) as lot_stock
-		FROM inout i 
-		WHERE material_code = #{materialCode} 
-      			AND (SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (01,03,05) and lot_no = i.lot_no) 
-            		- (SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (02,04) and lot_no = i.lot_no) > 0
-		GROUP BY lot_no;
 	</select>
 	
 	<!-- 자재로트별 재고 -->
@@ -210,7 +199,8 @@
 	</select>
 	
 	<!-- 모달 -->
-	<select id="getMatListModal" resultType="MatVO" parameterType="MatVO">
+	<!-- 자재 리스트 모달 -->
+	<select id="getMatListModal" resultType="SelectListVO" parameterType="SelectListVO">
 		SELECT material_code, 
 				material_name, 
 				(SELECT code_nm FROM COMTCCMMNDETAILCODE WHERE code_id = material.mat_id and code = material.mat_no) as matNm
@@ -232,4 +222,46 @@
 		
 	</select>
 	
+	<!-- 공정리스트 모달 -->
+	<select id="getProcListModal" resultType="SelectListVO" parameterType="SelectListVO">
+		SELECT process_code, 
+				process_name 
+		FROM process
+		
+		<where>
+			<if test="keyword != null and keyword !=''">
+				${searchCondition} like '%'||#{keyword}||'%'
+			</if>
+		</where>
+		
+	</select>
+	
+	<!-- 재고 0 이상 자재별 로트 리스트 모달 -->
+	<select id="getMatLotListModal" parameterType="SelectListVO" resultType="SelectListVO">
+		SELECT lot_no, 
+        		(SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (01,03,05) and lot_no = i.lot_no) 
+          		- (SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (02,04) and lot_no = i.lot_no) as lot_stock, 
+          		MIN(io_date) as ioDate
+		FROM inout i 
+		WHERE material_code = #{materialCode} 
+      			AND (SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (01,03,05) and lot_no = i.lot_no) 
+            		- (SELECT NVL(SUM(IO_VOLUME),0) FROM INOUT WHERE INOUT_NO IN (02,04) and lot_no = i.lot_no) > 0
+		GROUP BY lot_no
+		ORDER BY MIN(io_date)
+	</select>
+	
+	<!-- 업체 목록 모달 -->
+	<select id="getCompListModal" parameterType="SelectListVO" resultType="SelectListVO">
+		SELECT company_code, company_name, 
+      			(select code_nm from COMTCCMMNDETAILCODE where code_id = comp_id and code = comp_no) as codeNm
+		FROM company
+		<where>
+			<if test="keyword != null and keyword !=''">
+				${searchCondition} like '%'||#{keyword}||'%'
+			</if>
+			<if test="compNo != null and compNo != ''">
+				and comp_no = #{compNo}
+			</if>
+		</where>
+	</select>
 </mapper>

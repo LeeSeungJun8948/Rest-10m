@@ -62,7 +62,13 @@ public class FacilitiesController {
 //		return mapper.getFac();
 //	}
 	
-	// 설비 관리 목록
+	// 설비관리
+	@RequestMapping("/facAdmin.do")
+	public String facAdmin() {
+		return "fac/facAdmin.page";
+	}
+	
+	// 탭1 설비 관리 목록
 	@RequestMapping("ajax/facList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetFac() {
@@ -86,29 +92,10 @@ public class FacilitiesController {
 		return data;
 	}
 
-	// 설비관리
-	@RequestMapping("/facAdmin.do")
-	public String facAdmin() {
-		return "fac/facAdmin.page";
-	}
 
 	// 저장
 	@RequestMapping(value = "/insertFac.do")
 	public String insertFac(HttpServletRequest request, FacilitiesVO vo) throws IllegalStateException, IOException {
-//		FacilitiesVO vo = new FacilitiesVO();
-//		vo.setFacilitiesName(request.getParameter("facilitiesName"));
-//		vo.setModel(request.getParameter("model"));
-//		vo.setFacSize(request.getParameter("facSize"));
-//		vo.setProductionCompany(request.getParameter("productionCompany"));
-//		vo.setPurpose(request.getParameter("purpose"));
-//		vo.setVolume(request.getParameter("volume"));
-//		vo.setProductionDate(request.getParameter("productionDate"));
-//		vo.setEmpNo(request.getParameter("empNo"));
-//		vo.setPrice(request.getParameter("price"));
-//		vo.setFacInspection(request.getParameter("facInspection"));
-//		vo.setPurchaseDate(request.getParameter("purchaseDate"));
-//		vo.setImg(request.getParameter("img"));
-//		vo.setProcessCode(request.getParameter("processCode"));
 		MultipartFile uploadFile = vo.getUploadFile();
 		String fileName = null;
 		if(uploadFile !=null && !uploadFile.isEmpty() && uploadFile.getSize()>0) {

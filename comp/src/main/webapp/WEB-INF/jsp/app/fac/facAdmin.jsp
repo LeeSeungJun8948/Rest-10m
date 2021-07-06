@@ -6,10 +6,12 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <h1 class="h3 mb-4 text-gray-700">설비관리</h1>
+
 <form action="insertFac.do" method="post" id="frm" encType="multipart/form-data">
 	<div class="mb-4">
-		<button class="btn btn-primary" id="btnNew" type="reset"> 초기화 </button>
+		<button class="btn btn-primary" id="btnNew" type="reset"> 새입력 </button>
 		<input type="submit" class="btn btn-primary" value="저장">
 		<button class="btn btn-primary" id="btnUdate" type="button"> 수정 </button>
 	</div>
@@ -62,8 +64,8 @@
 			</table>
 		</div>
 		<div class="col-3">
-			<input type="file" id="img" name="uploadFile" accept="image/*" required
-				multiple style="display: none" onchange="setThumbnail(event);">
+			<input type="file" id="img" name="uploadFile" accept="image/*" 
+			style="display: none" onchange="setThumbnail(event);">
 			<button type="button" class="btn btn-primary" id="btnImg">이미지
 				업로드</button>
 			<h3>이미지 미리보기</h3>

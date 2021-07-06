@@ -20,15 +20,19 @@ public class FacilitiesVO {
 	String productionCompany;
 	String purpose;
 	String volume;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	Date productionDate;
+	
 	String empNo;
 	String price;
 	String facInspection;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	Date purchaseDate;
+	
 	String processCode;
 	
 	String img;
