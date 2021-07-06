@@ -34,7 +34,8 @@
 	
 	<!-- 세부계획 -->
 	<select id="getDetailPlan" resultType="DetailPlanVO">
-		SELECT d.product_lot, d.plan_code, d.order_no, d.product_code, d.comments, d.work_count,
+		SELECT DISTINCT 
+			d.product_lot, d.plan_code, d.order_no, d.product_code, d.comments, d.work_count,
 			TO_CHAR(d.work_date, 'YYYY-MM-DD') work_date,
 			TO_CHAR(o.out_date, 'YYYY-MM-DD') out_date,
 			o.order_count, o.plan_count,
@@ -45,7 +46,7 @@
 		AND d.order_no = o.order_no
 	</select>	
 	<insert id="insertDetailPlan" parameterType="DetailPlanVO">
-		<selectKey resultType="string" keyProperty="productLot" order="BEFORE">
+		<selectKey keyProperty="productLot" resultType="string" order="BEFORE">
         	SELECT NVL(MAX(product_lot),0)+1 FROM detailplan
     	</selectKey>    
 		INSERT INTO detailplan VALUES(
@@ -63,13 +64,11 @@
 
 	<!-- 투입자재 -->
 	<insert id="insertInputMat" parameterType="InputMatVO">
-		<selectKey keyProperty="inputIdx,productLot" resultType="InputMatVO" order="BEFORE">
-        	SELECT (SELECT NVL(MAX(input_idx),0)+1 FROM inputmat) input_idx,
-        	(SELECT NVL(MAX(product_lot),0) FROM detailplan) product_lot
-        	FROM dual
+		<selectKey keyProperty="inputIdx" resultType="int" order="BEFORE">
+        	SELECT NVL(MAX(input_idx),0)+1 FROM inputmat
     	</selectKey> 
 		INSERT INTO inputMat VALUES(
-		#{inputIdx}, #{productLot}, #{materialLot}, #{inputCount}, #{comments} 
+		#{inputIdx}, #{planCode}, #{orderNo}, #{materialLot}, #{inputCount}, #{comments} 
 		)
 	</insert>
 	<update id="updateInputMat" parameterType="InputMatVO">
@@ -87,8 +86,9 @@
 	
 	<select id="readInputMat" resultType="InputMatVO">
 		<if test="productLot == null">
-			SELECT m.material_code, m.material_name,
-	   			 i.lot_no material_lot, F_MAT_COUNT(i.lot_no) material_count
+			SELECT DISTINCT 
+				m.material_code, m.material_name,
+	   			i.lot_no material_lot, F_MAT_COUNT(i.lot_no) material_count
 			FROM material m, inout i, bom b
 	 		WHERE m.material_code = i.material_code
 	 		AND b.material_code = m.material_code
@@ -96,9 +96,9 @@
 		  	AND F_MAT_COUNT(i.lot_no) != 0
 	  	</if>
 	  	<if test="productLot != null">
-			SELECT i.*, m.material_name, F_MAT_COUNT(i.lot_no)
+			SELECT i.*, m.material_code, m.material_name, F_MAT_COUNT(i.lot_no)
 			FROM inputmat i, material m
-			WHERE productLot = #{productLot}
+			WHERE i.product_lot = #{productLot}
 	  	</if>
 	</select>
 </mapper>

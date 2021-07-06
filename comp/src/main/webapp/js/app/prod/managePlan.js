@@ -116,7 +116,16 @@ const gridInput = new tui.Grid({
 		header: '비고',
 		name: 'comments',
 		editor: 'text'	
+		}, {
+		header: '생산계획번호',
+		name: 'planCode',
+		hidden: true
+		}, {
+		header: '주문번호',
+		name: 'orderNo',
+		hidden: true
 		}
+		
 	]
 });
 
@@ -148,6 +157,7 @@ $('#btnSave').on('click', function(){
 			var planCode = data.data.contents.planCode;
 			$('#planCode').val(planCode);
 			grid.setColumnValues('planCode', planCode);
+			gridInput.setColumnValues('planCode', planCode);
 		}
 	});
 	grid.request('modifyData');
@@ -219,21 +229,23 @@ function findProductName(ev){
 // 더블클릭해서 투입자재 설정
 grid.on('dblclick', (ev) => {
 	var rowKey = ev.rowKey;
-	var productLot = grid.getValue(rowKey, 'productLot');
+	var orderNo = grid.getValue(rowKey, 'orderNo');
+	var planCode = grid.getValue(rowKey, 'planCode');
 	var productCode = grid.getValue(rowKey, 'productCode');
 	var productName = grid.getValue(rowKey, 'productName');
-	var workCount = grid.getValue(rowKey, 'workCount');	
-	if (productLot != null) {
-		gridInput.setColumnValues('productLot', productLot);
-		var param = {'productCode': productCode, 'productLot': productLot};
+	var workCount = grid.getValue(rowKey, 'workCount');
+	gridInput.setColumnValues('orderNo', orderNo);	
+	$('#workCount').val(workCount);
+	$('#productCode').val(productCode);
+	$('#productName').val(productName);
+	if (planCode != null) {
+		gridInput.setColumnValues('planCode', planCode);
+		var param = {'productCode': productCode, 'planCode': planCode};
 		gridInput.readData(1, param, true);
 	} else {
 		var param = {'productCode': productCode};
 		gridInput.readData(1, param, true);
 	}
-	$('#workCount').val(workCount);
-	$('#productCode').val(productCode);
-	$('#productName').val(productName);
 });
 
 // 제품코드, 작업량 입력시 폼에 입력
