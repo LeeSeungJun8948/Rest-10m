@@ -43,6 +43,8 @@ public class InoutVO {
 	Integer stock;
 	Integer lotStock; // 어디서 쓰더라
 	
+	String comments;
+	
 	String ioType; // 01 : 입고, 02 : 출고, 03 : 정산입고, 04 : 정산출고
 	String sort;
 	

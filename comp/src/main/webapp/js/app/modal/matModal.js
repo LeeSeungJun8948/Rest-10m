@@ -1,6 +1,5 @@
 (function($) {
-
-	$("#myModal").on('shown.bs.modal', function () {
+	$("#matModal").on('shown.bs.modal', function () {
 		
 		if(!checkNull($('#modalMatListGrid').html())){
 			var matListModalData = {
@@ -59,18 +58,10 @@
 			function select(){
 				$('#materialCode').val(materialCode);
 				$('#materialName').val(materialName);
-				$('#myModal').modal('hide');
+				$('#matModal').modal('hide');
+				$('#modalContent').remove();
 			}
-			
-			/**
-			function hideModal() {
-			  $("#matCodeModal").removeClass("in");
-			  $(".modal-backdrop").remove();
-			  $('body').removeClass('modal-open');
-			  $('body').css('padding-right', '');
-			  $("#matCodeModal").hide();
-			}
-			 */
+			 
 		}
 	
 	});

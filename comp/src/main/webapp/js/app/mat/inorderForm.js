@@ -1,6 +1,4 @@
 
-$('[readonly]').css('background-color','#EAEAEA');
-
 
 $( document ).ready(function() {	
 	document.getElementById('startDate').valueAsDate = new Date();
@@ -120,9 +118,20 @@ $( document ).ready(function() {
 		return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	}
 
-
 $('#btnRead').on('click',  function(){
 	var param = $('#frm').serializeObject();
 	console.log(param);
 	grid.readData(1, param, true);
+});
+
+function checkNull(value){
+	return value != null && value != '' && value != '[object HTMLInputElement]';
+}
+
+$("#btnMatModal").on("click", function(e) {
+    $('#matContent').load("matModal.do");
+});
+
+$("#btnCompModal").on("click", function(e) {
+    $('#compContent').load("compModal2.do");
 });

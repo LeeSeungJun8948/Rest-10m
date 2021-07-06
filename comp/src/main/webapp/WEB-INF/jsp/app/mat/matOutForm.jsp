@@ -7,31 +7,30 @@
 }
 </style>
 <div class="row">
-	<div class="col-lg-8">
+	<div class="col-md-8">
 		<h1 class="h3 mb-4 text-gray-700">자재 출고 관리</h1>
 	</div>
-	<div class="col-lg-4 mb-4" align="right" role="form">
+	<div class="col-md-4 mb-4" align="right" role="form">
 		<button type="button" class="btn btn-primary" id="btnRead">조회</button>
 		<button type="button" class="btn btn-primary" id="btnSave">저장</button>
 	</div>
 </div>
 
-
 <form id="searchFrm" name="searchFrm">
 	<div class="row">
-		<div class="mb-2 col-lg-6">
+		<div class="mb-2 col-md-6">
 			<table class="table">
 				<tbody>
 					<tr>
 						<th>출고일자*</th>
 						<td>
 							<div class="row">
-								<div class="col-lg-5">
+								<div class="col-md-5">
 									<input type="date" class="form-control" id="startDate" name="startDate">
 								</div>
 								~ 
-								<div class="col-lg-5">
-								<input type="date" class="form-control" id="endDate" name="endDate">
+								<div class="col-md-5">
+									<input type="date" class="form-control" id="endDate" name="endDate">
 								</div>
 							</div>
 						</td>
@@ -40,13 +39,13 @@
 						<th>출고자재</th>
 						<td>
 							<div class="row">
-								<div class="col-lg-4">
+								<div class="col-md-4">
 									<input readonly class="form-control" type="text" id="materialCode" name="materialCode">
 								</div>
-								<button id="btnMatModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#myModal">
+								<button id="btnMatModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#matModal">
 										<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
 								</button>	
-								<div class="col-lg-6">					
+								<div class="col-md-6">					
 									<input readonly class="form-control" type="text" id="materialName" name="materialName">
 								</div>
 							</div>
@@ -56,13 +55,13 @@
 						<th>출고공정</th>
 						<td>
 							<div class="row">
-								<div class="col-lg-4">
+								<div class="col-md-4">
 									<input readonly class="form-control" type="text" id="processCode" name="processCode">
 								</div> 
-								<button id="btnProcModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#myModal">
+								<button id="btnProcModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#procModal">
 										<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
 								</button>	
-								<div class="col-lg-6">
+								<div class="col-md-6">
 									<input readonly class="form-control" type="text" id="processName" name="processName">
 								</div>
 							</div>
@@ -90,7 +89,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="mb-4 col-lg-6">
+		<div class="mb-4 col-md-6">
 		</div>
 	</div>
 </form>
@@ -98,15 +97,29 @@
 	<button type="button" class="btn btn-info" id="btnGridAdd">추가</button>
 	<button type="button" class="btn btn-info" id="btnGridDel">삭제</button>
 </div>
-<div class="col-lg-12">
+<div class="col-md-12">
 	<form id="gridFrm" name="gridFrm">
 		<div id="matOutList"></div>
 	</form>
 </div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="matModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content">
+		<div class="modal-content" id="matContent" align="center">
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="procModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="procContent" align="center">
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="matLotModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="matLotContent" align="center">
 		</div>
 	</div>
 </div>
