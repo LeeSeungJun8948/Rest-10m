@@ -22,9 +22,45 @@ public class ErrorServiceImpl implements ErrorService {
 	}
 
 	@Override
+	public int insertError(ErrorVO vo) {
+		// TODO 불량코드,명 입력
+		return mapper.insertError(vo);
+	}
+
+	@Override
+	public int updateError(ErrorVO vo) {
+		// TODO 불량코드,명 수정
+		return mapper.updateError(vo);
+	}
+	@Override
+	public int deleteError(ErrorVO vo) {
+		// TODO 불량코드,명 삭제
+		return mapper.deleteError(vo);
+	}
+	
+	@Override
 	public List<ErrorListVO> getAllErrorList(ErrorListVO vo) {
 		// TODO 불량내역 리스트
 		return mapper.getAllErrorList(vo);
+	}
+	
+	@Override
+	public int insertErrorList(ErrorListVO vo) {
+		// TODO 불량내역 리스트 입력
+		return mapper.insertErrorList(vo);
+	}
+
+	@Override
+	public int updateErrorList(ErrorListVO vo) {
+		// TODO 불량내역 리스트 수정
+		return mapper.updateErrorList(vo);
+		
+	}
+
+	@Override
+	public int deleteErrorList(ErrorListVO vo) {
+		// TODO 불량내역 리스트 삭제
+		return mapper.deleteErrorList(vo);
 	}
 
 }
