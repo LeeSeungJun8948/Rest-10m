@@ -47,6 +47,7 @@ public class ErrorController {
 		return data;
 	}
 	
+	
 	@RequestMapping("/ajax/errorAllList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGeterrorAllList(ErrorListVO vo) {
