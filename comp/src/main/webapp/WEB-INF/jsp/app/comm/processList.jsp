@@ -106,6 +106,7 @@
 					   if(ev.columnName == 'outCompName'){
 		               var href="proModal.do";
 		               window.event.preventDefault();
+		              $('.jquery-modal').remove();
 		               $('.modal').remove();
 		               this.blur();
 		               $.get(href, function(html){

@@ -53,12 +53,11 @@
 					<span style="color: red">*</span>
 				</th>  
 				<td width="450px">
-				
-				<form id="searchCheck" name="searchCheck" style="float:left" >
-					<input type="text" size="20"  tabindex="1" id='pdc' name="productCode" value="${info.productCode }" style="margin-top: 4px">
+				<form  id="searchCheck" name="searchCheck" style="float:left" >
+					<input class="form-control" type="text" size="20"  tabindex="1" id='pdc' name="productCode" value="${info.productCode }" style="margin-top: 4px">
 				</form>
-					<a id="search" href="modal.do" rel="modal:open" class="btn btn-primary" style="margin-left: 10px">
-						<img src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
+					<a id="search" href="modal.do" rel="modal:open" style="margin-left: 10px">
+						<img src="<c:url value='/images/app/all/btn_search.png'/>">
 					</a>
 			
 				</td>

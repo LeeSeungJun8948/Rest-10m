@@ -5,6 +5,6 @@ import java.util.List;
 import com.rest.app.fac.facproduct.vo.FacProductVO;
 
 public interface FacProductMapper {
-	public List<FacProductVO> getFP();
+	public List<FacProductVO> getFP(FacProductVO vo);
 }
  

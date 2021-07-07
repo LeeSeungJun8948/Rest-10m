@@ -1,7 +1,6 @@
 
 (function($) {
 	$("#compModal").on('shown.bs.modal', function () {
-		
 		if(!checkNull($('#compGrid').html())){
 			var compData = {
 				api : {

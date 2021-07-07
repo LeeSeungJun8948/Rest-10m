@@ -17,7 +17,7 @@
 	<update id="updateProcess" parameterType="com.rest.app.comm.vo.ProcessVO">
 		update process
 		   set process_code=#{processCode}, process_name=#{processName},
-		   	   unit_no=#{unitNo},pro_comment=#{proComment}, out_stats=#{outStats}
+		   	   unit_no=#{unitNo},pro_comment=#{proComment}, out_stats=#{outStats}, out_comp_name=#{outCompName}
 		 where process_code=#{processCode}
 	</update>
 	

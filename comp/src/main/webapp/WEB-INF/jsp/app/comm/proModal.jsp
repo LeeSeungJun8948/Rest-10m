@@ -27,13 +27,13 @@
 			<!-- 필요한것 집어넣기 BODY 부분 -->   
 			<div id=matGrid></div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<a href="#" rel="modal:close" ><button class="btn btn-primary">닫기</button></a>
 				<a href="#" rel="modal:close" ><button class="btn btn-primary">검색</button></a>
 
 			</div>
 
 			<script type="text/javascript">
-				const pdataSource = {
+				var pdataSource = {
 					api : {
 						readData : {
 							url : 'ajax/getCompList.do',
@@ -42,7 +42,7 @@
 					},
 					contentType : 'application/json'
 				};
-				const compGrid = new tui.Grid({
+				var compGrid = new tui.Grid({
 					el : document.getElementById('matGrid'),
 					data : pdataSource,
 					scrollX : false,
@@ -93,7 +93,6 @@
 					matGrid.readData(1, param, true);
 				})
 				
-				// bom 자재리스트 버튼
 				$('#btnSearch').on('click', function() {
 					var prm = $('#frm').serializeObject();
 					grid.readData(1, prm, true);
@@ -101,12 +100,12 @@
 				
 				
 				compGrid.on('click', (ev) => { 
-				
 				var compName = compGrid.getRow(ev.rowKey).companyName;
 				console.log(compName);
 				grid.setValue(rowKeyG, 'outCompName', compName, false);
+				});
+				
 
-			});
             
 			</script>
 		</div>
