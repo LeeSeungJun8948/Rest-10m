@@ -12,10 +12,15 @@ public class QualityControlVO {
 	String unitId;
 	String unitNo;
 	String useAt;
+	String pImg;
+	String qcImg;
+	
 	
 	int empCode;
 	String employeeName;
 	
 	String companyCode;
+	String compCode;
 	String companyName;
+	String compName;
 }
