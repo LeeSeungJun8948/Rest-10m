@@ -32,7 +32,7 @@ function showMatList(){
 		data : listData,
 		scrollX : false,
 		scrollY : true,
-		bodyHeight: 360,
+		bodyHeight: 450,
 		selectionUnit: 'row',
 		columns : [ {
 			header : '자재코드',
@@ -159,6 +159,16 @@ $('#btnDel').on('click',function(){
 	} // end if
 	
 });
-	
+
+
+// 모달
+$("#btnCompModal").on("click", function(e) {
+    $('#compContent').load("compModal2.do");
+});
+
+
+function checkNull(value){
+	return value != null && value != '' && value != '[object HTMLInputElement]';
+}
 	
 	

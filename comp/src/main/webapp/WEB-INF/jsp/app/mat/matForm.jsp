@@ -14,10 +14,9 @@
 </div>	
 	<div class="row">				
 		<div id="matList" class="col-4">
-		
 		</div>
 		
-		<div class="col-8 input-group input-group-sm">
+		<div class="col-8 input-group input-group-sm align-self-start mt-4">
 			<form id="frm" class="form-inline" role="form">
 				<div class="row">
 					<div class="input-group-prepend col-lg-3">
@@ -26,11 +25,11 @@
 					</div>
 					<div class="input-group-prepend col-lg-6" >
 						<span class="input-group-text" >자재명</span>
-						<input readonly id="materialName" name="materialName" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+						<input id="materialName" name="materialName" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 					</div>
 					<div class="input-group-prepend col-lg-3">
 						<span class="input-group-text" >자재구분</span>
-						<input readonly id="matNm" name="matNm" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+						<input id="matNm" name="matNm" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 					</div>
 					
 					<div class="col-12 mb-3"></div>
@@ -38,6 +37,9 @@
 					<div class="input-group-prepend col-lg-3" >
 						<span class="input-group-text" >입고업체</span>
 						<input id="companyCode" name="companyCode" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+						<button id="btnCompModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#compModal">
+							<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+						</button>	
 					</div>
 					<div class="input-group-prepend col-lg-6" >
 						<span class="input-group-text" >업체명</span>
@@ -45,7 +47,7 @@
 					</div>
 					<div class="input-group-prepend col-lg-3">
 						<span class="input-group-text" >관리단위</span>
-						<input readonly id="unitNo" name="unitNo" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+						<input id="unitNo" name="unitNo" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 					</div>
 					
 					<div class="col-12 mb-3"></div>
@@ -70,4 +72,18 @@
 			</form>
 		</div>
 	</div>
+	
+<div class="modal fade" id="matModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="matContent" align="center">
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="compModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="compContent" align="center">
+		</div>
+	</div>
+</div>
 <script type="text/javascript" src="js/app/mat/matForm.js"></script>

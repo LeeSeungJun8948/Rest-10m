@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.prod.service.ProdService;
@@ -62,10 +63,11 @@ public class ProdController {
 
 	// 계획삭제
 	@RequestMapping("deletePlan.do")
-	@ResponseBody
-	public String deletePlan(String planCode) {
+	public String deletePlan(@RequestParam String planCode) {
 		svc.deletePlan(planCode);
-		return "managePlan.do";
+		svc.deleteAllDetailPlan(planCode);
+		svc.deleteAllInputMat(planCode);
+		return "prod/managePlan.page";
 	}
 
 	// 세부계획 CUD
@@ -92,7 +94,7 @@ public class ProdController {
 		});
 		dList.forEach(vo -> {
 			if (vo.getProductLot() != null) {
-				svc.deleteDetailPlan(vo);
+				svc.deleteDetailPlan(vo.getProductLot());
 			}
 		});
 		data.put("result", true);
@@ -108,12 +110,14 @@ public class ProdController {
 		List<InputMatVO> uList = gridData.updatedRows;
 
 		uList.forEach(vo -> {
-			if (vo.getInputCount() != 0) {
-				if (vo.getInputIdx() == 0) {
-					svc.insertInputMat(vo);
-				} else {
+			if (vo.getInputIdx() != 0) {
+				if (vo.getInputCount() != 0) {
 					svc.updateInputMat(vo);
+				} else {
+					svc.deleteInputMat(vo.getInputIdx());
 				}
+			} else if (vo.getInputCount() != 0) {
+				svc.insertInputMat(vo);
 			}
 		});
 		data.put("result", true);
