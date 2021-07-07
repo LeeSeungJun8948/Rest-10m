@@ -35,7 +35,7 @@ public class QualityControlServiceMapper implements QualityControlService {
 	@Override
 	public List<QualityControlVO> getCodeList(QualityControlVO vo) {
 		// TODO Auto-generated method stub
-		return null;
+		return mapper.getCodeList(vo);
 	}
 
 

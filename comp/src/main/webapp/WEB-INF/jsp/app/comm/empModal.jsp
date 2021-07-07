@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- Remember to include jQuery :) -->
+
 <style type="text/css">
 .blocker {
 	position: fixed;
