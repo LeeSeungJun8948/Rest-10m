@@ -68,11 +68,15 @@ public class ProdController {
 
 	// 계획삭제
 	@RequestMapping("deletePlan.do")
-	public String deletePlan(@RequestParam String planCode) {
+	@ResponseBody
+	public Map<String, Object> deletePlan(@RequestParam String planCode) {
+		Map<String, Object> data = new HashMap<String, Object>();
 		svc.deletePlan(planCode);
 		svc.deleteAllDetailPlan(planCode);
 		svc.deleteAllInputMat(planCode);
-		return "prod/managePlan.page";
+		data.put("result", true);
+		data.put("check", "save");
+		return data;
 	}
 
 	// 세부계획 CUD

@@ -80,7 +80,8 @@
         	SELECT NVL(MAX(input_idx),0)+1 FROM inputmat
     	</selectKey> 
 		INSERT INTO inputMat VALUES(
-		#{inputIdx}, #{productLot}, #{materialLot}, #{inputCount}, #{comments}, #{planCode}
+		#{inputIdx}, #{productLot}, #{materialLot}, #{inputCount}, #{comments}, #{planCode},
+		(SELECT MAX(io_code)+1 FROM inout)
 		)
 	</insert>
 	<update id="updateInputMat" parameterType="InputMatVO">

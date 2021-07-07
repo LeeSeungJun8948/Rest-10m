@@ -168,8 +168,8 @@
 	
 	<!-- 입출고 인설트 -->
 	<insert id="istInout" parameterType="InoutVO">
-		INSERT INTO inout(io_code, io_date, io_volume, unit_price, material_code, lot_no, inorder_code, inout_id, inout_no, process_code, comments) 
-		VALUES(#{ioCode}, #{ioDate}, #{ioVolume}, #{unitPrice}, #{materialCode}, #{lotNo}, #{inorderCode}, 'R_INOUT', #{ioType}, #{processCode}, #{comments})
+		INSERT INTO inout(io_code, io_date, io_volume, unit_price, material_code, lot_no, inorder_code, inout_no, process_code, comments) 
+		VALUES(#{ioCode}, #{ioDate}, #{ioVolume}, #{unitPrice}, #{materialCode}, #{lotNo}, #{inorderCode}, #{ioType}, #{processCode}, #{comments})
 	</insert>
 	
 	<!-- 입출고 업데이트 -->
@@ -203,7 +203,8 @@
 	</select>
 	
 	<!-- 자재로트별 재고 -->
-	<select id="getMatStock" resultType="InoutVO" parameterType="InoutVO">
+	<!--  이거 왜 만든거지?? 기억안남.. 
+	<select id="whatthe" resultType="InoutVO" parameterType="InoutVO">
 		SELECT io.lot_no, 
 	        io.material_code, 
 	        m.material_name, 
@@ -213,7 +214,38 @@
 		FROM inout io join material m
 		ON (io.material_code = m.material_code) AND f_mat_count(io.lot_no) > 0
 	</select>
+	-->
 	
+	<!--  자재 로트별 재고  -->
+	<select id="getMatLotStock" resultType="InoutVO" parameterType="InoutVO">
+	
+		SELECT  io.lot_no,
+		        MAX(io.material_code) as material_code,
+		        F_FIND_MAT_NAME(max(io.material_code)) as material_name,
+		        F_MAT_COUNT(io.lot_no) AS lot_stock,
+		        MAX(m.unit_no) as unit_no,
+		        (SELECT max(io_date) FROM inout WHERE lot_no = io.lot_no and inout_no in ('03', '04')) as io_date,
+		        (SELECT max(unit_price) FROM inout WHERE lot_no = io.lot_no) as unit_price
+		FROM inout io join material m 
+		ON (io.material_code = m.material_code) 
+		GROUP BY io.lot_no
+
+		HAVING TRUNC( (SELECT MAX(io_date) 
+						FROM inout 
+						WHERE lot_no = io.lot_no and inout_no in ('03', '04'))
+					) NOT BETWEEN #{startDate} AND #{endDate} 
+				OR
+				
+				(SELECT MAX(io_date) 
+				 FROM inout 
+				 WHERE lot_no = io.lot_no 
+						AND inout_no in ('03', '04')
+				) IS NULL 
+				
+		<if test="materialCode != null and materialCode!=''">
+			AND MAX(io.material_code) = #{material_code}
+		</if>
+	</select>
 	<!-- 모달 -->
 	<!-- 자재 리스트 모달 -->
 	<select id="getMatListModal" resultType="SelectListVO" parameterType="SelectListVO">
@@ -280,5 +312,40 @@
 			</if>
 		</where>
 		ORDER BY company_code
+	</select>
+	
+	<select id="getInorderListModal" parameterType="InorderVO" resultType="InorderVO">
+		SELECT inorder_code, 
+	        inorder_date, 
+	        f_find_comp_name(company_code) as company_name,
+	        f_find_mat_name(material_code) as material_name,
+	        inorder_count,
+	        nvl((select sum(io_volume) from inout where inorder_code = inorder.inorder_code),0) as in_count,
+	        inorder_count - nvl((select sum(io_volume) from inout where inorder_code = inorder.inorder_code),0) as yet_count
+		FROM inorder
+		<where>
+			inorder_count - nvl((select sum(io_volume) from inout where inorder_code = inorder.inorder_code),0) > 0 
+			<if test="keyword != null and keyword !=''">
+			
+				<if test='searchCondition.equals("inorder_code")'>
+					AND ${searchCondition} like '%'||#{keyword}||'%' 
+				</if>
+				
+				<if test='searchCondition.equals("material_code")'>
+					AND material_code IN (SELECT material_code
+											FROM material 
+											WHERE UPPER(material_name) LIKE '%'|| UPPER(#{keyword}) || '%' )  
+				</if>
+				
+				<if test='searchCondition.equals("company_code")'>
+					AND company_code IN (SELECT company_code
+											FROM company 
+											WHERE UPPER(company_name) LIKE '%'|| UPPER(#{keyword}) || '%' ) 
+				</if>
+				
+			</if>
+		</where>
+		
+		ORDER BY inorder_date
 	</select>
 </mapper>

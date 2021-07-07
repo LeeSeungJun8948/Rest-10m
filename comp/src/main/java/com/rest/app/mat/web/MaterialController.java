@@ -178,7 +178,36 @@ public class MaterialController {
 	@ResponseBody
 	public List<SelectListVO> ajaxGetProcessList(SelectListVO vo) {
 		return dao.getProcessList(vo);
-	} 
+	}
+	
+	@RequestMapping("/ajax/matLotStock.do")
+	@ResponseBody
+	public Map<String, Object> ajaxMatLotStock(InoutVO vo) {
+		
+		Map<String,Object> datas = new HashMap<>();
+		Map<String,Object> data = new HashMap<>();
+		
+		data.put("result", true);
+		datas.put("contents", dao.getMatLotStock(vo));
+		data.put("data", datas);
+		
+		return data;
+	}
+	
+	// 널값 넘겨주는 더미용
+	@RequestMapping("/ajax/matAdjust.do")
+	@ResponseBody
+	public Map<String, Object> ajaxMatAdjust() {
+		
+		Map<String,Object> datas = new HashMap<>();
+		Map<String,Object> data = new HashMap<>();
+		
+		data.put("result", true);
+		datas.put("contents", null);
+		data.put("data", datas);
+		
+		return data;
+	}
 	
 	@RequestMapping("matInForm.do")
 	public String matInForm(Model model) {

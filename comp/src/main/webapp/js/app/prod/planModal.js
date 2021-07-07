@@ -40,6 +40,4 @@ gridModal.on('dblclick', (ev) => {
 	$('#planName').val(obj.planName);
 	$('#comments').val(obj.comments);
 	grid.readData(1, {planCode: obj.planCode}, true);
-	$('.jquery-modal').remove();
-	$('.modal').remove();
 });

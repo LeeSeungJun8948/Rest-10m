@@ -46,14 +46,12 @@ const grid = new tui.Grid({
 			name : 'inorderCode',
 			width : 80,
 			align: 'center',
-			editor:'text',
+			className: 'white',
 			onAfterChange(ev) {
 				setMatInfo(ev);
-				console.log('불러오기끝');
         		makeLot(ev);
       		}
-		},
-		{
+		}, {
 			header : '자재코드',
 			name : 'materialCode',
 			width : 80,
@@ -226,7 +224,7 @@ $("#btnGridAdd").on("click", function(){
 		});		
 	}
 
-	newRowData = {'ioCode' : newIoCode};
+	newRowData = {'ioCode' : newIoCode, 'ioDate' : getFormatDate(new Date())};
 	grid.appendRow(newRowData,{
 		at : grid.getRowCount(),
 		focus : true
@@ -242,20 +240,53 @@ $("#btnSave").on("click", function(){
 	grid.request('modifyData');
 });
 
-// 모달
-$("#btnMatModal").on("click", function(e) {
-    $('#matContent').load("matModal.do");
-});
-
-$("#btnCompModal").on("click", function(e) {
-    $('#compContent').load("compModal.do");
-});
-
 
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
 
+function getFormatDate(date){
+    var year = date.getFullYear();              //yyyy
+    var month = (1 + date.getMonth());          //M
+    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+    var day = date.getDate();                   //d
+    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+    return  year + '-' + month + '-' + day;
+}
 
 
+// 모달
+// 자재 돋보기
+$("#btnMatModal").on("click", function(e) {
+    $('#matContent').load("matModal.do");
+});
+
+// 자재코드 입력창
+$('#materialCode').on('click', function(){
+	$('#matModal').modal('show');
+	$('#matContent').load("matModal.do");
+});
+
+// 업체 돋보기
+$("#btnCompModal").on("click", function(e) {
+    $('#compContent').load("compModal.do");
+});
+
+// 업체코드 입력창
+$('#companyCode').on('click',function(){
+	$('#compModal').modal('show');
+	$('#compContent').load("compModal.do");
+	
+});
+
+var rowKey;
+// 발주번호 입력창 그리드
+grid.on('dblclick', function(ev){
+	if(ev.columnName == 'inorderCode'){
+		rowKey = ev.rowKey;
+		inorderCode = grid.getValue(rowKey, 'inorderCode');
+		$('#inorderModal').modal('show');
+		$('#inorderContent').load("inorderModal.do");
+	}
+})
 

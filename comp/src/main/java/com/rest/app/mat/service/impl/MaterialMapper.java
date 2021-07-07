@@ -46,6 +46,7 @@ public interface MaterialMapper {
 	
 	public List<SelectListVO> getProcessList(SelectListVO vo); // 자재당 공정 리스트 출력
 	
+	public List<InoutVO> getMatLotStock(InoutVO vo); // 자재 lot별 재고 (재고조정용)
 	
 	// 모달
 	public List<SelectListVO> getMatListModal(SelectListVO vo); // 자재검색 모달 자재리스트
@@ -55,4 +56,8 @@ public interface MaterialMapper {
 	public List<SelectListVO> getMatLotListModal(SelectListVO vo); // 자재별 재고0이상 로트리스트
 	
 	public List<SelectListVO> getCompListModal(SelectListVO vo); // 업체검색 모달 업체리스트
+	
+	public List<InorderVO> getInorderListModal(InorderVO vo); // 발주검색 모달 미입고량 0 이상 발주리스트
+	
+
 }
