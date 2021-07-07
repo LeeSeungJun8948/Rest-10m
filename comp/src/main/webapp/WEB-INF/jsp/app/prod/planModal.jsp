@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+	
 <div class="modal-header">
 	<h4>생산계획 조회</h4> 
 </div>
@@ -32,4 +32,4 @@
 </div>
 
 <link href="${pageContext.request.contextPath}/css/app/prod/planModal.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="js/app/prod/planModal.js" ></script>
+<script type="text/javascript" src="js/app/prod/planModal.js"></script>

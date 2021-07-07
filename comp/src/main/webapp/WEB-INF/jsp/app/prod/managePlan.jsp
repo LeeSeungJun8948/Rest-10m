@@ -2,11 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+
 <h1 class="h3 mb-4 text-gray-700">생산계획 관리</h1>
 <div class="mb-4" align="right">
 	<a class="btn btn-primary" id="btnView" href="planModal.do" rel="modal:open">조회</a>
 	<button type="reset" class="btn btn-primary" id="btnReset">초기화</button>
-	<button type="button" class="btn btn-primary" id="btnSave">저장</button>
+	<button type="button" class="btn btn-primary" id="btnSave" onclick="formCheck()">저장</button>
 	<button type="button" class="btn btn-primary" id="btnDel">삭제</button>
 </div>
 <div class="row">
@@ -17,11 +20,11 @@
 				<tbody>
 					<tr>
 						<th>계획일자<span style="color: red">*</span></th>
-						<td><input type="date" id="planDate" name="planDate"></td>
+						<td><input type="date" id="planDate" name="planDate" required></td>
 					</tr>
 					<tr>
 						<th>생산계획명<span style="color: red">*</span></th>
-						<td><input type="text" id="planName" name="planName"></td>
+						<td><input type="text" id="planName" name="planName" required></td>
 					</tr>
 					<tr>
 						<th>특기사항</th>
@@ -75,5 +78,5 @@
 <div>
 	<div id="gridInput"/>
 </div>
-	
+
 <script type="text/javascript" src="js/app/prod/managePlan.js"></script>

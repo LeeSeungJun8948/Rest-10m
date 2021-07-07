@@ -24,6 +24,9 @@ const grid = new tui.Grid({
 		header: '제품코드',
 		name: 'productCode',
 		editor: 'text',
+		validation: {
+            required: true
+          },
 		onAfterChange(ev) {
         	findProductName(ev);
 			valueInput(ev);
@@ -54,6 +57,10 @@ const grid = new tui.Grid({
 		header: '작업량',
 		name: 'workCount',
 		editor: 'text',
+		validation: {
+			dataType: 'number',
+            required: true
+          },
 		onAfterChange(ev) {
         	valueInput(ev);
       		}
@@ -72,6 +79,9 @@ const grid = new tui.Grid({
 				language: 'ko',
             	format: 'yyyy-MM-dd'
             }
+          },
+		validation: {
+            required: true
           }
 		}, {
 		header: '제품LOT',
@@ -109,6 +119,10 @@ const gridInput = new tui.Grid({
 		header: '투입량',
 		name: 'inputCount',
 		editor: 'text',
+		validation: {
+			dataType: 'number',
+            required: true
+          },
 		onAfterChange(ev) {
         	countSum();
       		}
@@ -131,24 +145,14 @@ const gridInput = new tui.Grid({
 		} ]
 });
 
-// 조회 버튼
-$('#btnView').on('click', function(){
+// 초기화 버튼
+$("#btnReset").click(function() {
+	resetPage();
 });
 
-// 초기화 버튼
-$(document).ready(function() {  
-    $("#btnReset").click(function() {  
-        $("form").each(function() {  
-            this.reset();
-			grid.clear();
-			gridInput.clear();
-        });  
-		$('#planCode').val('planCode');
-    });  
-});  
 
 // 계획저장 버튼
-$('#btnSave').on('click', function(){
+$('#btnSave').on('click', function() {
 	$.ajax({
 		type: 'POST',
 		url: 'savePlan.do',
@@ -182,12 +186,13 @@ $('#btnDel').on('click', function(){
 		dataType: 'json',
 		success: function(data){
 			toastr.success("삭제되었습니다.");
+			resetPage();
 		}
 	});
 });
 
 // 미생산 읽기 버튼
-$('#btnRead').on('click',  function(){
+$('#btnRead').on('click', function(){
 	var param = $('#dateFrm').serializeObject();
 	grid.readData(1, param, true);
 });
@@ -273,7 +278,27 @@ function countSum(){
 	$('#totalCount').val(sum);
 }
 
+// 초기화
+function resetPage() {  
+	$("form").each(function() {  
+        this.reset();
+		grid.clear();
+		gridInput.clear();
+    });  
+	$('#planCode').val('planCode');
+}
+
+// 폼체크
+function formCheck() {
+	if (checkNull($('#planDate').val()) || checkNull($('#planName').val())) {
+		toastr.warning('값을 입력해주십시오.');
+		return false;
+	} else {
+		return true;
+	}
+}
+
 // NULL값 체크, NULL이면 false
-function checkNull(value){
+function checkNull(value) {
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
