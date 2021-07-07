@@ -113,7 +113,7 @@ const dataSource = {
 	}
 
 	$("#btnCompModal").on("click", function(e) {
-	    $('#compContent').load("compModal2.do");
+	    $('#compContent').load("compModal.do");
 	});
 	
 
