@@ -2,6 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<style>
+	#companyCode{
+		background-color: #FFFFFF;
+	}
+	#companyName{
+		background-color: #EAEAEA;	
+	}
+</style>
 <div class="row">
 	<div class="col-md-8">
 		<h1 class="h3 mb-4 mt-4 text-gray-700">자재정보관리</h1>
@@ -29,14 +37,18 @@
 					</div>
 					<div class="input-group-prepend col-lg-3">
 						<span class="input-group-text" >자재구분</span>
-						<input id="matNm" name="matNm" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+						<select name="matNo" id="matNo" class="form-control">
+							<c:forEach var="mat" items="${mats}">
+								<option value="${mat.matNo}">${mat.matNm }</option>
+							</c:forEach>
+						</select>
 					</div>
 					
 					<div class="col-12 mb-3"></div>
 					
 					<div class="input-group-prepend col-lg-3" >
 						<span class="input-group-text" >입고업체</span>
-						<input id="companyCode" name="companyCode" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+						<input readonly id="companyCode" name="companyCode" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 						<button id="btnCompModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#compModal">
 							<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
 						</button>	
@@ -47,7 +59,11 @@
 					</div>
 					<div class="input-group-prepend col-lg-3">
 						<span class="input-group-text" >관리단위</span>
-						<input id="unitNo" name="unitNo" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+						<select name="unitNo" id="unitNo"  class="form-control">
+							<c:forEach var="unit" items="${units}">
+								<option value="${unit.unitNo}">${unit.unitNm }</option>
+							</c:forEach>
+						</select>
 					</div>
 					
 					<div class="col-12 mb-3"></div>

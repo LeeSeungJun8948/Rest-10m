@@ -121,5 +121,15 @@ public class MaterialServiceImpl implements MaterialService{
 	public List<SelectListVO> getCompListModal(SelectListVO vo) {
 		return mapper.getCompListModal(vo);
 	}
+
+	@Override
+	public List<MaterialVO> getMatNo() {
+		return mapper.getMatNo();
+	}
+
+	@Override
+	public List<MaterialVO> getUnitNo() {
+		return mapper.getUnitNo();
+	}
 	
 }

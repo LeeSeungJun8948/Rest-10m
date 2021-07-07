@@ -30,7 +30,9 @@ public class MaterialController {
 	MaterialService dao;
 
 	@RequestMapping("/matForm.do")
-	public String matForm(Model model) { // 자재 정보 관리 page 
+	public String matForm(Model model) { // 자재 정보 관리 page
+		model.addAttribute("mats",dao.getMatNo());
+		model.addAttribute("units",dao.getUnitNo());
 		return "mat/matForm.page";
 	}
 	

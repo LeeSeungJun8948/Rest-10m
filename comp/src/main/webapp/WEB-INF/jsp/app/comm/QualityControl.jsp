@@ -1,35 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://code.jquery.com/jquery-3.6.0.js"
-   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-   crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet"
-   href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
-	th{
+.table {
+	border-bottom: 1px;
+}
+
+th {
 	width: 120px;
-	}
-	td{
+}
+
+td {
 	width: 300px;
-	}
+}
 </style>
 </head>
 <body>
 	<div>
 		<h3>제품 품질 표준서 관리</h3>
 	</div>
+
 	<div>
-		<table>
+		<table class="table">
 			<tr>
 				<th scope="row">제품코드 <span style="color: red">*</span>
 				</th>
@@ -45,37 +62,141 @@
 				</a>
 				</td>
 				<th scope="row">제품명</th>
-				<td ><input type="text" value="${proInfo.productName }"></td>
+				<td><input type="text" value="${proInfo.productName }"></td>
 				<th scope="row">규격</th>
 				<td><input type="text" value="${proInfo.stdId }"></td>
 				<th>Q.C담당자</th>
 				<td><input type="text" value="${proInfo.employeeName }"></td>
 			</tr>
 			<tr>
-				<th >고객코드</th>
-				<td><input type="text" size="20" 
-					<c:forEach items="${company}" var="compCode" >
-						company_code="${compCode.companyCode }"
-					</c:forEach>
-					></td>
-					
-				
-				
-
-				<th >고객사명</th>
-				<td><c:forEach items="${company}" var="compName" varStatus="l">
-				${compName.companyName }
-				<c:if test="${fn:length(company) != l.count}">,</c:if>
-					</c:forEach></td>
-				<th >관리단위</th>
+				<th>고객코드</th>
+				<td><input type="text" value="${company.compCode}"></td>
+				<th>고객명</th>
+				<td><input type="text" value="${company.compName}"></td>
+				<th>관리단위</th>
 				<td><input type="text" value="${proInfo.unitNo }"></td>
 				<th>사용여부</th>
-				<td><input type="checkbox" name="checkYn" id="checkYn" style="width: 20px; height: 20px" 
-					<c:if test="${proInfo.useAt eq 'Y'}">checked="checked"</c:if> 
-					value="${proInfo.useAt }" ></td>
+				<td><input type="checkbox" name="checkYn" id="checkYn"
+					style="width: 20px; height: 20px"
+					<c:if test="${proInfo.useAt eq 'Y'}">checked="checked"</c:if>
+					value="${proInfo.useAt }"></td>
 			</tr>
+
 		</table>
 	</div>
-	
+	<div>
+		<h3>이미지 첨부</h3>
+	</div>
+	<div class="row">
+		<div class="col-6">
+			<input type="file" id="pimg" name="uploadFile" accept="image/*"
+				style="display: none" onchange="setTumbnail(event);">
+			<button type="button" class="btn btn-primary" id="btnPimg">이미지업로드</button>
+			<h4>이미지 미리보기</h4>
+			<div id="pImgPreview">
+				<img id="pimg" />
+			</div>
+		</div>
+		<div class="col-6">품질표준서 들어가는 곳</div>
+	</div>
+	<div class="row">
+		<div class="col-6">제품</div>
+		<div class="col-6" align="right">
+			<button type="button" class="btn btn-primary" id="RowInsert">+</button>
+			<button type="button" class="btn btn-primary" id="btnInsert">저장</button>
+			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
+		</div>
+	</div>
+		<div id="proGrid"></div>
+		<script type="text/javascript">
+			const pdataSource = {
+				api : {
+					readData : {url : 'ajax/getProductList.do', method : 'GET'}
+			
+
+				},
+				contentType : 'application/json'
+			};
+			const progrid = new tui.Grid({
+				el : document.getElementById('proGrid'),
+				data : pdataSource,
+				rowHeaders: ['checkbox'],
+				scrollX : false,
+				scrollY : false,
+				columns : [ 
+					{
+						header : '제품코드',
+						name : 'productCode',
+						editor : 'text'
+
+					}, 
+					{
+						header : '제품명',
+						name : 'productName',
+						editor : 'text'
+					}, 
+					{
+						header : '규격',
+						name :  'stdId'
+						
+					},
+					{
+						header : '규격코드',
+						name :  'stdNo'
+						
+					},
+					{
+						header : '단위코드',
+						name :  'unitId'
+						
+					},
+					{
+						header : '관리단위',
+						name :  'unitNo',
+						
+					},
+					{
+						header : '사원코드',
+						name :  'empCode',
+						editor : 'text'
+					},
+					{
+						header : '사용여부',
+						name :  'useAt',
+						formatter:'listItemText',
+						editor:{
+							type:'select',
+							options:{
+								listItems:[
+									{text:'사용',value:'Y'},
+									{text:'미사용', value:'N'}
+								]
+							}
+						}
+					},
+
+					]
+			    });
+			$("#RowInsert").on("click", function(){
+				progrid.appendRow();
+			});
+			progrid.on('click', (ev) => {
+			
+				if(ev.columnName == 'stdNo'){
+				var href="product.do";
+				window.event.preventDefault();
+				$('.jquery-modal').remove();
+				$('.modal').remove();
+				this.blur();
+				$.get(href, function(html){
+					var modalOpen = $(html).appendTo('body').modal();
+				       });
+					}
+				 });
+			
+			
+			</script>
+
 </body>
+<script type="text/javascript" src="js/app/comm/product.js"></script>
 </html>
