@@ -103,7 +103,7 @@
 				   grid.on('click', (ev) => {
 					   rowKeyG = ev.rowKey;
 					   if(ev.columnName == 'outCompName'){
-		               var href="proModal.do";
+		              	 var href="proModal.do";
 		               window.event.preventDefault();
 		              $('.jquery-modal').remove();
 		               $('.modal').remove();

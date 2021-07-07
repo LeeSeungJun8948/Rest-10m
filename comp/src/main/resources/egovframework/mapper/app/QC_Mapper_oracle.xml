@@ -38,8 +38,8 @@
 	
 	<!-- 규격/단위 리스트 -->
 	<select id="getCodeList" resultType="com.rest.app.comm.vo.QualityControlVO">
-	select *
+		select code_id,code
   	  from COMTCCMMNDETAILCODE
- 	 where code_id = 'R_UNIT'
+ 	 where code_id ='R_STD'
 	</select>
 </mapper>

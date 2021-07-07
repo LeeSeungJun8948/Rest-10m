@@ -97,7 +97,7 @@ td {
 			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
 		</div>
 	</div>
-<!--
+
 		<div id="proGrid"></div>
 		<script type="text/javascript">
 			const pdataSource = {
@@ -172,9 +172,26 @@ td {
 				progrid.appendRow();
 			});
 			
+			var stdRowkey;
+			var snoRowkey;
+			progrid.on('click', (ev) => {
+				stdRowkey= ev.rowKey;
+				snoRowkey= ev.rowKey;
+				if(ev.columnName =='stdId'){
+					var href="productModal.do";
+				window.event.preventDefault();
+				$('.jquery-modal').remove();
+				$('.modal').remove();
+				this.blur();
+					$.get(href, function(html){
+						var modalOpen = $(html).appendTo('body').modal();
+						     });
+					}	   
+				});
+			
+		
 			</script>
-  -->
+  
 </body>
-<script type="text/javascript" src="js/app/modal/qcModal.js"></script>
-<script type="text/javascript" src="js/app/comm/product.js"></script>
+
 </html>

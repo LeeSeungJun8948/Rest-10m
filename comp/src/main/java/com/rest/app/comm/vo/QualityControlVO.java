@@ -14,7 +14,8 @@ public class QualityControlVO {
 	String useAt;
 	String pImg;
 	String qcImg;
-	
+	String codeId;
+	String code;
 	
 	int empCode;
 	String employeeName;
