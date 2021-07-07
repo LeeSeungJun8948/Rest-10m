@@ -31,12 +31,13 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">공통코드관리</a>
-                        <a class="collapse-item" href="matForm.do">자재정보관리</a>
-                        <a class="collapse-item" href="bomList.do">제품 BOM관리</a>
-                        <a class="collapse-item" href="processList.do">공정관리</a>
-                        <a class="collapse-item" href="empList.do">사원관리</a>
-                        <a class="collapse-item" href="errorList.do">불량코드 관리 </a>
+                        <a class="collapse-item" href="/comp/sym/ccm/cca/SelectCcmCmmnCodeList.do">공통코드관리-마스터</a>
+                        <a class="collapse-item" href="/comp/sym/ccm/cde/SelectCcmCmmnDetailCodeList.do">공통코드관리-상세</a>
+                        <a class="collapse-item" href="/comp/matForm.do">자재정보관리</a>
+                        <a class="collapse-item" href="/comp/bomList.do">제품 BOM관리</a>
+                        <a class="collapse-item" href="/comp/processList.do">공정관리</a>
+                        <a class="collapse-item" href="/comp/empList.do">사원관리</a>
+                        <a class="collapse-item" href="/comp/errorList.do">불량코드 관리 </a>
                         <a class="collapse-item" href="cards.html">제품 품질 표준서 관리</a>
 
                     </div>
@@ -51,9 +52,9 @@
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="busList.do">주문관리 참조조회</a>
-                        <a class="collapse-item" href="exportForm.do">출고 관리</a>
-                        <a class="collapse-item" href="productInventory.do">제품 재고 조회</a>
+                        <a class="collapse-item" href="/comp/busList.do">주문관리 참조조회</a>
+                        <a class="collapse-item" href="/comp/exportForm.do">출고 관리</a>
+                        <a class="collapse-item" href="/comp/productInventory.do">제품 재고 조회</a>
                     </div>
                 </div>
             </li>
@@ -66,11 +67,11 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="inorderForm.do">발주 조회</a>
-                        <a class="collapse-item" href="matInForm.do">자재입고 관리</a>
-                        <a class="collapse-item" href="matOutForm.do">자재출고 관리</a>
-                        <a class="collapse-item" href="matStockList.do">자재재고 조회</a>
-                        <a class="collapse-item" href="matStockForm.do">자재재고조정 관리</a>
+                        <a class="collapse-item" href="/comp/inorderForm.do">발주 조회</a>
+                        <a class="collapse-item" href="/comp/matInForm.do">자재입고 관리</a>
+                        <a class="collapse-item" href="/comp/matOutForm.do">자재출고 관리</a>
+                        <a class="collapse-item" href="/comp/matStockList.do">자재재고 조회</a>
+                        <a class="collapse-item" href="/comp/matStockForm.do">자재재고조정 관리</a>
                     </div>
                 </div>
             </li>
@@ -84,7 +85,7 @@
                 </a>
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="managePlan.do">생산계획 관리</a>
+                        <a class="collapse-item" href="/comp/managePlan.do">생산계획 관리</a>
                     </div>
                 </div>
             </li>
@@ -97,11 +98,11 @@
                 </a>
                 <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="facAdmin.do">설비 관리</a>
-                        <a class="collapse-item" href="facList.do">설비 조회</a>
-                        <a class="collapse-item" href="repList.do">설비 수리내역 관리</a>
+                        <a class="collapse-item" href="/comp/facAdmin.do">설비 관리</a>
+                        <a class="collapse-item" href="/comp/facList.do">설비 조회</a>
+                        <a class="collapse-item" href="/comp/repList.do">설비 수리내역 관리</a>
                         <a class="collapse-item" href="404.html">설비 점검내역 관리</a>
-                        <a class="collapse-item" href="facProdList.do">설비생산이력 조회</a>
+                        <a class="collapse-item" href="/comp/facProdList.do">설비생산이력 조회</a>
                     </div>
                 </div>
             </li>

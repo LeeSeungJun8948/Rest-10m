@@ -13,5 +13,8 @@ public interface QualityControlService {
 	public QualityControlVO getProduct(QualityControlVO vo);
 	
 	//제품에 대한 회사 조회
-	public List<QualityControlVO> getCompany(QualityControlVO vo);
+	public QualityControlVO getCompany(QualityControlVO vo);
+	
+	//제품에 이미지 추가
+
 }

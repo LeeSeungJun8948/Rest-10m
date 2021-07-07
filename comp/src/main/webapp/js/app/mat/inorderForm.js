@@ -128,10 +128,26 @@ function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
 
+// 모달 오픈
+// 자재 돋보기
 $("#btnMatModal").on("click", function(e) {
     $('#matContent').load("matModal.do");
 });
 
-$("#btnCompModal").on("click", function(e) {
-    $('#compContent').load("compModal2.do");
+// 자재코드 입력창
+$('#materialCode').on('click', function(){
+	$('#matModal').modal('show');
+	$('#matContent').load("matModal.do");
 });
+
+// 업체 돋보기
+$("#btnCompModal").on("click", function(e) {
+    $('#compContent').load("compModal.do");
+});
+
+// 업체코드 입력창
+$('#companyCode').on('click', function(){
+	$('#compModal').modal('show');
+	$('#compContent').load("compModal.do");
+});
+

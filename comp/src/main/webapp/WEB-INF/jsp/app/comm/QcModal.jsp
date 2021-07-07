@@ -61,10 +61,7 @@
 			<script type="text/javascript">
 				const dataSource = {
 					api : {
-						readData : {
-							url : 'ajax/getProductList.do',
-							method : 'GET'
-						},
+						readData : {url : 'ajax/getProductList.do',method : 'GET'}
 
 					},
 					contentType : 'application/json'

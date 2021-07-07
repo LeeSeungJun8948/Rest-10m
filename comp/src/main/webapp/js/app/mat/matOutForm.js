@@ -104,7 +104,10 @@ const grid = new tui.Grid({
 			header : '자재LOT_NO',
 			name : 'lotNo',
 			width : 150,
-			align: 'center'
+			align: 'center',
+			area: {
+				background : 'white'
+			}
 		}, {
 			header : '출고공정',
 			name : 'processCode',
@@ -269,13 +272,26 @@ function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
 
-// 자재검색 모달 열기
+// 모달
+// 자재 돋보기
 $("#btnMatModal").on("click", function(e) {
     $('#matContent').load("matModal.do");
 });
 
-// 공정검색 모달 열기
+// 자재코드 입력창
+$('#materialCode').on('click', function(){
+	$('#matModal').modal('show');
+	$('#matContent').load("matModal.do");
+});
+
+// 공정 돋보기
 $('#btnProcModal').on('click',function(e){
+	$('#procContent').load("procModal.do");
+});
+
+// 공정코드 입력창
+$('#processCode').on('click', function(){
+	$('#procModal').modal('show');
 	$('#procContent').load("procModal.do");
 });
 

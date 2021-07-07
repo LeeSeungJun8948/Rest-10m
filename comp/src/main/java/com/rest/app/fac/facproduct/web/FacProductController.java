@@ -21,13 +21,13 @@ public class FacProductController {
 		return "fac/facProdList.page";
 	}
 	
-	@RequestMapping("ajax/facProd.do")
+	@RequestMapping("/ajax/facProd.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetFacProd(FacProductVO vo) {
 		Map<String,Object> datas = new HashMap<String, Object>();
 		Map<String,Object> data = new HashMap<String, Object>();
 		data.put("result", true);
-		datas.put("contents", mapper.getFP());
+		datas.put("contents", mapper.getFP(vo));
 		data.put("data", datas);
 		return data;
 	}
