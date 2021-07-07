@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
