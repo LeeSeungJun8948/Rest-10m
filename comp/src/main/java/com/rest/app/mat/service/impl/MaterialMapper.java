@@ -13,6 +13,10 @@ public interface MaterialMapper {
 	
 	public MaterialVO getMatInfo(MaterialVO vo); // 자재 리스트에서 클릭시 자재 상세 정보 출력
 	
+	public List<MaterialVO> getMatNo();
+	
+	public List<MaterialVO> getUnitNo();
+	
 	public int saveMat(MaterialVO vo); // 자재 상세 폼에서 값 입력시 matCode로 검색해 update인지 insert인지 파악
 	
 	public int udtMat(MaterialVO vo); // 자재 정보 업데이트

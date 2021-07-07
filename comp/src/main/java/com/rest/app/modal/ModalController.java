@@ -85,7 +85,7 @@ public class ModalController {
 	}
 	
 	// 업체검색 모달 페이지 리턴
-	@RequestMapping("/compModal2.do")
+	@RequestMapping("/compModal.do")
 	public String compModal() {
 		return "app/modal/compModal";
 	}

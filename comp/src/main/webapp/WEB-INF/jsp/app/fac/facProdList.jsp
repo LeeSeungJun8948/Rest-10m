@@ -64,9 +64,10 @@
 		$("#btnSearch").on("click",function() {
 			var param = $('#searchCheck').serializeObject();
 			grid.readData(1, param, true);
-		})
-		grid.on('response', function(data) {
+		});
+		
+		/* grid.on('response', function(data) {
 			grid.resetOriginData();
-		}) 			
+		})*/ 			
 			
 	</script>

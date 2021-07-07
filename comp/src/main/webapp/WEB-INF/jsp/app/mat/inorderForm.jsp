@@ -5,6 +5,9 @@
 .tui-grid-summary-area .tui-grid-cell {
     text-align: right;
 }
+#companyCode, #materialCode{
+	background-color: #FFFFFF;
+}
 </style>
 
 <div class="row">

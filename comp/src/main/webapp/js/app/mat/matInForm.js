@@ -248,7 +248,7 @@ $("#btnMatModal").on("click", function(e) {
 });
 
 $("#btnCompModal").on("click", function(e) {
-    $('#compContent').load("compModal2.do");
+    $('#compContent').load("compModal.do");
 });
 
 

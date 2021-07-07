@@ -23,7 +23,6 @@
 			  FROM  (
 			SELECT ROWNUM RNUM, ALL_LIST.*
 			  FROM  (
-			/* 구현 Sql */
 			SELECT  B.CL_CODE_NM
 			     ,  A.CODE_ID
 			     ,  A.CODE_ID_NM
@@ -31,7 +30,7 @@
 			  FROM  COMTCCMMNCODE   A
 			     ,  COMTCCMMNCLCODE B
 			 ]]>
-		
+			<where>
 			<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isEquals(searchCondition,'1')">	<![CDATA[	AND
 				A.CODE_ID LIKE '%' || #{searchKeyword} || '%']]>
 			</if>
@@ -41,8 +40,7 @@
 			<if test="searchCondition == 'clCode'">	<![CDATA[AND
 				A.USE_AT = 'Y']]>
 			</if>
-		
-			/* 구현 Sql */
+			</where>
 				<![CDATA[
 				    ) ALL_LIST
 				    )

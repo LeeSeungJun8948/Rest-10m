@@ -9,8 +9,6 @@ function gridClear(){
 	
 function showMatList(){
 	var listData; // list그리드에 넣을 데이터
-	
-	$('[readonly]').css('background-color','#EAEAEA');
 
 	// listData 가져오기
 	$.ajax({
@@ -32,19 +30,21 @@ function showMatList(){
 		data : listData,
 		scrollX : false,
 		scrollY : true,
-		bodyHeight: 360,
+		bodyHeight: 450,
 		selectionUnit: 'row',
 		columns : [ {
 			header : '자재코드',
 			name : 'materialCode',
-			width : 80
+			width : 80,
+			align: 'center'
 		}, {
 			header : '자재명',
 			name : 'materialName'
 		}, {
 			header : '구분',
 			name : 'matNm',
-			width : 80
+			width : 80,
+			align: 'center'
 		} ]
 	});
 }
@@ -64,10 +64,12 @@ $(matList).on('click','tr',function(){
 		success : function(data) {
 			$('#materialCode').val(data.materialCode);
 			$('#materialName').val(data.materialName);
-			$('#matNm').val(data.matNm)
+//			$('#matNo').val(data.matNo)
+			$('#matNo').val(data.matNo).prop("selected",true);
 			$('#companyCode').val(data.companyCode);
 			$('#companyName').val(data.companyName);
-			$('#unitNo').val(data.unitNo)
+//			$('#unitNo').val(data.unitNo);
+			$('#unitNo').val(data.unitNo).prop("selected",true);
 			$('#saveStock').val(data.saveStock);
 			$('#minStock').val(data.minStock);
 			$('#maxStock').val(data.maxStock);
@@ -159,6 +161,24 @@ $('#btnDel').on('click',function(){
 	} // end if
 	
 });
+
+
+// 모달
+$("#btnCompModal").on("click", function(e) {
+    $('#compContent').load("compModal.do");
+});
+
+$(document).on('show.bs.modal','#btnCompModal', function (){});
+
+$('#companyCode').on('click',function(){
+	$('#compModal').modal('show');
+	$('#compContent').load("compModal.do");
 	
+})
+
+
+function checkNull(value){
+	return value != null && value != '' && value != '[object HTMLInputElement]';
+}
 	
 	

@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rest.app.prod.service.impl.ProdMapper">
 	<select id="getUnplanOrders" resultType="OrdersVO">
-		SELECT o.order_no, o.product_code, TO_CHAR(o.out_date, 'YYYY-MM-DD') out_date,
+		SELECT DISTINCT 
+			o.order_no, o.product_code, TO_CHAR(o.out_date, 'YYYY-MM-DD') out_date,
 			o.order_count, o.plan_count,
 			o.order_count - o.plan_count unplan_count, p.product_name
 		FROM orders o, product p
@@ -36,14 +37,14 @@
 	<select id="getDetailPlan" resultType="DetailPlanVO">
 		SELECT DISTINCT 
 			d.product_lot, d.plan_code, d.order_no, d.product_code, d.comments, d.work_count,
-			TO_CHAR(d.work_date, 'YYYY-MM-DD') work_date,
-			TO_CHAR(o.out_date, 'YYYY-MM-DD') out_date,
-			o.order_count, o.plan_count,
-			o.order_count - o.plan_count unplan_count, p.product_name
-		FROM detailplan d, orders o, product p 
+			TO_CHAR(d.work_date, 'YYYY-MM-DD') work_date, p.product_name,
+			(SELECT order_count FROM orders WHERE order_no = d.order_no) order_count, 
+      		(SELECT plan_count FROM orders WHERE order_no = d.order_no) plan_count,
+			(SELECT order_count - plan_count FROM orders WHERE order_no = d.order_no) unplan_count, 
+      		(SELECT TO_CHAR(out_date, 'YYYY-MM-DD') FROM orders WHERE order_no = d.order_no) out_date
+		FROM detailplan d, product p 
 		WHERE plan_code = #{planCode}
 		AND d.product_code = p.product_code
-		AND d.order_no = o.order_no
 	</select>	
 	<insert id="insertDetailPlan" parameterType="DetailPlanVO">
 		<selectKey keyProperty="productLot" resultType="string" order="BEFORE">
@@ -61,6 +62,9 @@
 	<delete id="deleteDetailPlan">
 		DELETE FROM detailplan WHERE product_lot = #{productLot}
 	</delete>
+	<delete id="deleteAllDetailPlan">
+		DELETE FROM detailplan WHERE plan_code = #{planCode}
+	</delete>
 
 	<!-- 투입자재 -->
 	<insert id="insertInputMat" parameterType="InputMatVO">
@@ -68,16 +72,19 @@
         	SELECT NVL(MAX(input_idx),0)+1 FROM inputmat
     	</selectKey> 
 		INSERT INTO inputMat VALUES(
-		#{inputIdx}, #{planCode}, #{orderNo}, #{materialLot}, #{inputCount}, #{comments} 
+		#{inputIdx}, #{productLot}, #{materialLot}, #{inputCount}, #{comments}, #{planCode}
 		)
 	</insert>
 	<update id="updateInputMat" parameterType="InputMatVO">
-		UPDATE inputMat SET lot_no = #{productLot}, material_lot = #{materialLot},
+		UPDATE inputMat SET
 		input_count = #{inputCount}, comments = #{comments} 
 		WHERE input_idx = #{inputIdx}
 	</update>
 	<delete id="deleteInputMat">
 		DELETE FROM inputMat WHERE input_idx = #{inputIdx}
+	</delete>
+	<delete id="deleteAllInputMat">
+		DELETE FROM inputMat WHERE plan_code = #{planCode}
 	</delete>
 	
 	<select id="findProductName" parameterType="String" resultType="String">
@@ -85,20 +92,19 @@
 	</select>
 	
 	<select id="readInputMat" resultType="InputMatVO">
-		<if test="productLot == null">
 			SELECT DISTINCT 
-				m.material_code, m.material_name,
-	   			i.lot_no material_lot, F_MAT_COUNT(i.lot_no) material_count
+				m.material_code, m.material_name, #{productLot} product_lot, #{planCode} plan_code,
+	   			i.lot_no material_lot, F_MAT_COUNT(i.lot_no) material_count,
+	   			NVL((SELECT input_count FROM inputmat WHERE material_lot = i.lot_no 
+	   				AND product_lot=#{productLot}),0) input_count,
+          		(SELECT comments FROM inputmat WHERE material_lot = i.lot_no
+          			AND product_lot=#{productLot}) comments,
+          		(SELECT input_idx FROM inputmat WHERE material_lot = i.lot_no
+          			AND product_lot=#{productLot}) input_idx
 			FROM material m, inout i, bom b
 	 		WHERE m.material_code = i.material_code
 	 		AND b.material_code = m.material_code
 		  	AND b.product_code = #{productCode}
 		  	AND F_MAT_COUNT(i.lot_no) != 0
-	  	</if>
-	  	<if test="productLot != null">
-			SELECT i.*, m.material_code, m.material_name, F_MAT_COUNT(i.lot_no)
-			FROM inputmat i, material m
-			WHERE i.product_lot = #{productLot}
-	  	</if>
 	</select>
 </mapper>

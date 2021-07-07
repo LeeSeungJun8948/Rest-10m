@@ -6,15 +6,31 @@
 		SELECT m.material_code, m.material_name, cm.code_nm as mat_nm
 		FROM material m LEFT JOIN COMTCCMMNDETAILCODE cm
 		ON m.mat_id = cm.code_id and m.mat_no = cm.code
+		ORDER BY m.material_code
 	</select>
 	
 	<select id="getMatInfo" resultType="MatVO" parameterType="MatVO">
-		SELECT m.material_code, m.material_name, cm.code_nm as mat_nm, m.company_code, c.company_name, unit_id, unit_no, save_stock, min_stock, max_stock, month_stock 
+		SELECT m.material_code, m.material_name, mat_no, cm.code_nm as mat_nm, m.company_code, c.company_name, unit_id, unit_no, save_stock, min_stock, max_stock, month_stock 
 		FROM material m LEFT JOIN company c 
 		ON m.company_Code = c.company_Code
 		LEFT JOIN COMTCCMMNDETAILCODE cm
 		ON m.mat_no = cm.code and m.mat_id = cm.code_id
 		WHERE m.material_code = #{materialCode}
+	</select>
+	
+	<!-- 자재 구분, 단위 들고오기 -->
+	<select id="getMatNo" resultType="MatVO">
+		SELECT code as mat_no, 
+      			code_nm as mat_nm 
+		FROM COMTCCMMNDETAILCODE 
+		WHERE code_id = 'R_MAT'
+	</select>
+	
+	<select id="getUnitNo" resultType="MatVO">
+		SELECT code as unit_no, 
+        		code_nm as unit_nm 
+		FROM COMTCCMMNDETAILCODE 
+		WHERE code_id = 'R_UNIT'
 	</select>
 	
 	<select id="saveMat" parameterType="MatVO" resultType="int">
@@ -25,7 +41,7 @@
 	
 	<update id="udtMat" parameterType="MatVO">
 		UPDATE material 
-		SET material_name = #{materialName}, unit_no = #{unitNo}, company_code =  #{companyCode}
+		SET material_name = #{materialName}, mat_no = #{matNo}, unit_no = #{unitNo}, company_code =  #{companyCode}
 		, MIN_STOCK =  #{minStock} , MAX_STOCK =  #{maxStock}, SAVE_STOCK =  #{saveStock}, MONTH_STOCK =  #{monthStock}
 		WHERE material_code = #{materialCode}
 	</update>
@@ -38,7 +54,7 @@
 	
 	<insert id="istMat" parameterType="MatVO" >
 		insert into material(material_code, material_name, company_code, unit_id, unit_no, mat_id, mat_no, save_stock, min_stock, max_stock, month_stock)
-		values(#{materialCode}, #{materialName}, #{companyCode}, 'R_UNIT', #{unitNo}, 'R_MAT', #{matNm}, #{saveStock}, #{minStock}, #{maxStock},  #{monthStock})
+		values(#{materialCode}, #{materialName}, #{companyCode}, 'R_UNIT', #{unitNo}, 'R_MAT', #{matNo}, #{saveStock}, #{minStock}, #{maxStock},  #{monthStock})
 	</insert>
 	
 	<delete id="matDel" parameterType="MatVO">
@@ -209,17 +225,17 @@
 		<where>
 			<if test="keyword != null and keyword !=''">
 				<if test='!searchCondition.equals("mat_no")'>
-					${searchCondition} like '%'||#{keyword}||'%'
+					${searchCondition} like '%'||#{keyword}||'%' 
 				</if>
 				<if test='searchCondition.equals("mat_no")'>
 					${searchCondition} in (SELECT code 
 											FROM COMTCCMMNDETAILCODE 
 											WHERE code_id = 'R_MAT' 
-												AND upper(code_nm) like '%' || upper(#{keyword}) || '%' )
+												AND upper(code_nm) like '%' || upper(#{keyword}) || '%' ) 
 				</if>
 			</if>
 		</where>
-		
+		ORDER BY material_code
 	</select>
 	
 	<!-- 공정리스트 모달 -->
@@ -230,10 +246,10 @@
 		
 		<where>
 			<if test="keyword != null and keyword !=''">
-				${searchCondition} like '%'||#{keyword}||'%'
+				${searchCondition} like '%'||#{keyword}||'%' 
 			</if>
 		</where>
-		
+		ORDER BY process_code 
 	</select>
 	
 	<!-- 재고 0 이상 자재별 로트 리스트 모달 -->
@@ -263,5 +279,6 @@
 				and comp_no = #{compNo}
 			</if>
 		</where>
+		ORDER BY company_code
 	</select>
 </mapper>
