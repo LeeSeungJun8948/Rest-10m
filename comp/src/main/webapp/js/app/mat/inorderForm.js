@@ -145,7 +145,7 @@ $("#btnCompModal").on("click", function(e) {
     $('#compContent').load("compModal.do");
 });
 
-// 업체코드 입력창
+// 업체 코드 입력창
 $('#companyCode').on('click', function(){
 	$('#compModal').modal('show');
 	$('#compContent').load("compModal.do");

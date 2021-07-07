@@ -1,5 +1,3 @@
-
-
 $( document ).ready(function() {	
 	document.getElementById('startDate').valueAsDate = new Date();
 	document.getElementById('endDate').valueAsDate = new Date();
@@ -45,12 +43,11 @@ const grid = new tui.Grid({
 			name : 'materialCode',
 			width : 80,
 			align: 'center',
-			editor:'text',
+			className: 'white',
 			onAfterChange(ev) {
         		setMatInfo(ev);
       		},
-			relations: [
-				{
+			relations: [ {
 				targetNames: ['processCode'],
 				listItems({ value }){
 					
@@ -64,23 +61,7 @@ const grid = new tui.Grid({
 				disabled({ value }) {
                 	return !value;
               	}
-			}
-			
-			/**
-			,{
-				targetNames: ['lotNo'],
-				listItems({ value }){
-					
-					let items = [];
-					
-					if(checkNull(value)){
-						items = makeLotList(value);
-					}
-					return items;	
-				}
-			}
-			 */
-			]
+			} ]
 		}, {
 			header : '자재명',
 			name : 'materialName',
@@ -105,14 +86,13 @@ const grid = new tui.Grid({
 			name : 'lotNo',
 			width : 150,
 			align: 'center',
-			area: {
-				background : 'white'
-			}
+			className: 'white'
 		}, {
 			header : '출고공정',
 			name : 'processCode',
 			width : 120,
 			align: 'center',	
+			className: 'white',
 			formatter: 'listItemText',
 			editor: {
 				type: 'select',
@@ -165,6 +145,7 @@ function format(value){
 
 var rowKey;
 var materialCode;
+
 function setMatInfo(ev){
 	
 	rowKey = ev.rowKey;
@@ -251,7 +232,7 @@ $("#btnGridAdd").on("click", function(){
 		});		
 	}
 
-	newRowData = {'ioCode' : newIoCode};
+	newRowData = {'ioCode' : newIoCode, 'ioDate' : getFormatDate(new Date())};
 	grid.appendRow(newRowData,{
 		at : grid.getRowCount(),
 		focus : true
@@ -295,6 +276,17 @@ $('#processCode').on('click', function(){
 	$('#procContent').load("procModal.do");
 });
 
+var forGrid = false;
+
+grid.on('dblclick', function(ev){
+	if(ev.columnName == 'materialCode'){
+		rowKey = ev.rowKey;
+		forGrid = true;
+		$('#matModal').modal('show');
+		$('#matContent').load("matModal.do");
+	}
+})
+
 // lot검색 모달 열기(그리드에서)
 grid.on('dblclick', function(ev){
 	if(ev.columnName == 'lotNo'){
@@ -305,5 +297,12 @@ grid.on('dblclick', function(ev){
 	}
 })
 
-
+function getFormatDate(date){
+    var year = date.getFullYear();              //yyyy
+    var month = (1 + date.getMonth());          //M
+    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+    var day = date.getDate();                   //d
+    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+    return  year + '-' + month + '-' + day;
+}
 

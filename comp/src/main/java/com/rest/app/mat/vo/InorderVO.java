@@ -39,6 +39,9 @@ public class InorderVO {
 	
 	String comments;
 	String sort;
-
+	
+	// 모달창용
+	String keyword;
+	String searchCondition;
 	
 }
