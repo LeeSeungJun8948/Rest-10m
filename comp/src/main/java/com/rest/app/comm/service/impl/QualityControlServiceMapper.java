@@ -27,9 +27,17 @@ public class QualityControlServiceMapper implements QualityControlService {
 	}
 
 	@Override
-	public List<QualityControlVO> getCompany(QualityControlVO vo) {
-		// TODO 제품에 대한 회사 조회
+	public QualityControlVO getCompany(QualityControlVO vo) {
+		// TODO Auto-generated method stub
 		return mapper.getCompany(vo);
 	}
+
+	@Override
+	public List<QualityControlVO> getCodeList(QualityControlVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.getCodeList(vo);
+	}
+
+
 
 }

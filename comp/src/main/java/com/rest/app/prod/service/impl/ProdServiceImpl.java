@@ -96,4 +96,9 @@ public class ProdServiceImpl implements ProdService {
 	public int deleteDetailPlan(String productLot) {
 		return mapper.deleteDetailPlan(productLot);
 	}
+
+	@Override
+	public List<PlanVO> searchPlan(Map<String, Object> param) {
+		return mapper.searchPlan(param);
+	}
 }

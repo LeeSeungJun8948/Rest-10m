@@ -6,7 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <style type="text/css">
 .findbtn{
 	vertical-align: middle;
@@ -21,15 +22,6 @@
 	
 </style>	
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-   crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<link rel="stylesheet"
-   href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
-<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
-
 </head>
 <body>
 	<div class="flex row">
