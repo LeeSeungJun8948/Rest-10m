@@ -49,6 +49,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<form id="productSearchForm" name="productSearchForm">
+				<div class="row">
 				<select name="searchCondition" id="searchCondition"
 					title="검색조건2-검색어구분" style="width: 80px; height: 26px">
 					<option value="productCode">제품코드</option>
@@ -57,6 +58,7 @@
 					title="검색어" class="form-control"
 					style="width: 200px; margin-left: 10px">
 				<button type="button" class="btn btn-primary" id="btnCheck">조회</button>
+				</div>
 			</form>
 		</div>
 		<div class="modal-body">
