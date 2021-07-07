@@ -213,6 +213,7 @@ $("#btnSave").on("click", function(){
 	adjustGrid.request('modifyData');
 });
 
+
 // 모달
 // 자재 돋보기
 $("#btnMatModal").on("click", function(e) {
