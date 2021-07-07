@@ -5,6 +5,9 @@
 .tui-grid-summary-area .tui-grid-cell {
     text-align: right;
 }
+#processCode, #materialCode{
+	background-color: #FFFFFF;
+}
 </style>
 <div class="row">
 	<div class="col-md-8">
