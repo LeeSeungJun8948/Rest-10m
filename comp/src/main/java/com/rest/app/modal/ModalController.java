@@ -138,14 +138,12 @@ public class ModalController {
 	//규격,단위 리스트 모달
 	@RequestMapping("/productModal.do")
 	public String productModal() {
-
-	return "app/modal/productModal";
+		return "app/modal/productModal";
 	}
 	
 	//qc모달
 	@RequestMapping("qcModal.do")
 	public String QcModal() {
-		
 		return "app/modal/qcModal";
 	}
 	
