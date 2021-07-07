@@ -32,12 +32,11 @@
 		<div class="col-md-11 m-3">
 			<div id="modalMatListGrid"></div>
 		</div>
-	
-		<div class="modal-footer">
-			<button id="btnCloseBottom" class="btn btn-default" data-dismiss="modal">닫기</button>
-			<button id="btnSelect" class="btn btn-success">선택</button>
-		</div>
-	
+	</div>
+		
+	<div class="modal-footer">
+		<button id="btnCloseBottom" class="btn btn-default" data-dismiss="modal">닫기</button>
+		<button id="btnSelect" class="btn btn-success">선택</button>
 	</div>
 	
 	<script type="text/javascript" src="js/app/modal/matModal.js"></script>

@@ -76,11 +76,11 @@
 									<label class="form-check-label" for="io_date">일자</label>
 								</div>
 								<div class="col-md-2">
-									<input class="form-check-input" type="radio" name="sort" value="process_code" id="process_code" checked>
+									<input class="form-check-input" type="radio" name="sort" value="process_code" id="process_code">
 									<label class="form-check-label" for="process_code">공정</label>
 								</div>
 								<div class="col-md-2">
-									<input class="form-check-input" type="radio" name="sort" value="material_code" id="material_code" checked>
+									<input class="form-check-input" type="radio" name="sort" value="material_code" id="material_code">
 									<label class="form-check-label" for="material_code">자재</label>
 								</div>
 							</div>
