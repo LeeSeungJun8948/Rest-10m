@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class InputMatVO {
 	int inputIdx;
-	int orderNo;
-	String planCode;
+	int planCode;
+	String productLot;
 	int materialCode;
 	String materialName;
 	String materialLot;

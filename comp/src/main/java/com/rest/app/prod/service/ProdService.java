@@ -16,10 +16,12 @@ public interface ProdService {
 	int deletePlan(String planCode);
 	int insertDetailPlan(DetailPlanVO vo); 
 	int updateDetailPlan(DetailPlanVO vo);
-	int deleteDetailPlan(DetailPlanVO vo);
+	int deleteDetailPlan(String productLot);
+	int deleteAllDetailPlan(String planCode);
 	int insertInputMat(InputMatVO vo); 
 	int updateInputMat(InputMatVO vo);
-	int deleteInputMat(InputMatVO vo);
+	int deleteInputMat(int idx);
+	int deleteAllInputMat(String planCode);
 	String findProductName(String productCode);
 	List<InputMatVO> readInputMat(Map<String, Object> param); 
 	PlanVO selectPlanCode();

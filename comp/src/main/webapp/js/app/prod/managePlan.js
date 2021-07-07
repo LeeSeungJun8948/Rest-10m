@@ -117,12 +117,16 @@ const gridInput = new tui.Grid({
 		name: 'comments',
 		editor: 'text'	
 		}, {
+		header: '제품LOT',
+		name: 'productLot',
+		hidden: true
+		}, {
 		header: '생산계획번호',
 		name: 'planCode',
 		hidden: true
 		}, {
-		header: '주문번호',
-		name: 'orderNo',
+		header: '순번',
+		name: 'inputIdx',
 		hidden: true
 		} ]
 });
@@ -155,7 +159,6 @@ $('#btnSave').on('click', function(){
 			var planCode = data.data.contents.planCode;
 			$('#planCode').val(planCode);
 			grid.setColumnValues('planCode', planCode);
-			gridInput.setColumnValues('planCode', planCode);
 		}
 	});
 	grid.request('modifyData');
@@ -166,6 +169,7 @@ $('#btnSave').on('click', function(){
 		}
 	});
 	gridInput.request('modifyData');
+	gridInput.clear();
 	toastr.success("저장되었습니다.");
 });
 
@@ -174,7 +178,7 @@ $('#btnDel').on('click', function(){
 	$.ajax({
 		type: 'POST',
 		url: 'deletePlan.do',
-		data: $('#planCode').val(),
+		data: {planCode: $('#planCode').val()},
 		dataType: 'json',
 		success: function(data){
 			toastr.success("삭제되었습니다.");
@@ -226,19 +230,16 @@ function findProductName(ev){
 // 더블클릭해서 투입자재 설정
 grid.on('dblclick', (ev) => {
 	var rowKey = ev.rowKey;
-	var planCode = grid.getValue(rowKey, 'planCode');
 	var productCode = grid.getValue(rowKey, 'productCode');
 	var productName = grid.getValue(rowKey, 'productName');
 	var workCount = grid.getValue(rowKey, 'workCount');
-	$('#workCount').val(workCount);
-	$('#productCode').val(productCode);
-	$('#productName').val(productName);
-	if (planCode != null) {
-		var param = {'productCode': productCode, 'planCode': planCode};
-		gridInput.readData(1, param, true);
-		gridInput.setColumnValues('planCode', planCode);
-	} else {
-		var param = {'productCode': productCode};
+	var productLot = grid.getValue(rowKey, 'productLot');
+	var planCode = grid.getValue(rowKey, 'planCode');
+	if (productLot != null) {
+		$('#workCount').val(workCount);
+		$('#productCode').val(productCode);
+		$('#productName').val(productName);
+		var param = {'productCode': productCode, 'productLot': productLot, 'planCode': planCode};
 		gridInput.readData(1, param, true);
 	}
 });
@@ -249,11 +250,15 @@ function valueInput(ev) {
 	var productCode = grid.getValue(rowKey, 'productCode');
 	var productName = grid.getValue(rowKey, 'productName');
 	var workCount = grid.getValue(rowKey, 'workCount');
-	var orderNo = grid.getValue(rowKey, 'orderNo');
-	gridInput.setColumnValues('orderNo', orderNo);	
-	$('#workCount').val(workCount);
-	$('#productCode').val(productCode);
-	$('#productName').val(productName);
+	var productLot = grid.getValue(rowKey, 'productLot');
+	var planCode = grid.getValue(rowKey, 'planCode');
+	if (productLot != null) {
+		$('#workCount').val(workCount);
+		$('#productCode').val(productCode);
+		$('#productName').val(productName);
+		gridInput.setColumnValues('productLot', productLot);
+		gridInput.setColumnValues('planCode', planCode);
+	}
 }
 
 // 투입량 합계

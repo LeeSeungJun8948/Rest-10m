@@ -48,8 +48,8 @@ public class ProdServiceImpl implements ProdService {
 	}
 
 	@Override
-	public int deleteDetailPlan(DetailPlanVO vo) {
-		return mapper.deleteDetailPlan(vo);
+	public int deleteAllDetailPlan(String planCode) {
+		return mapper.deleteAllDetailPlan(planCode);
 	}
 
 	@Override
@@ -63,10 +63,15 @@ public class ProdServiceImpl implements ProdService {
 	}
 
 	@Override
-	public int deleteInputMat(InputMatVO vo) {
-		return mapper.deleteInputMat(vo);
+	public int deleteInputMat(int idx) {
+		return mapper.deleteInputMat(idx);
 	}
 
+	@Override
+	public int deleteAllInputMat(String planCode) {
+		return mapper.deleteAllInputMat(planCode);
+	}
+	
 	@Override
 	public String findProductName(String productCode) {
 		return mapper.findProductName(productCode);
@@ -85,5 +90,10 @@ public class ProdServiceImpl implements ProdService {
 	@Override
 	public List<DetailPlanVO> getDetailPlan(Map<String, Object> param) {
 		return mapper.getDetailPlan(param);
+	}
+
+	@Override
+	public int deleteDetailPlan(String productLot) {
+		return mapper.deleteDetailPlan(productLot);
 	}
 }
