@@ -2,18 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
 .table {
@@ -28,7 +23,6 @@ td {
 	width: 300px;
 }
 </style>
-</head>
 <body>
 	<div>
 		<h3>제품 품질 표준서 관리</h3>
@@ -45,10 +39,9 @@ td {
 						<input type="text" size="20" tabindex="1" id='pdc'
 							name="productCode" value="${proInfo.productCode }"
 							style="margin-top: 4px">
-					</form> <a id="search" href="QcModal.do" rel="modal:open"
-					class="btn btn-primary" style="margin-left: 10px"> <img
-						src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
-				</a>
+					</form> <a id="search" href="QcModal.do" rel="modal:open" style="margin-left: 10px">
+						<img src="<c:url value='/images/app/all/btn_search.png'/>">
+					</a>
 				</td>
 				<th scope="row">제품명</th>
 				<td><input type="text" value="${proInfo.productName }"></td>
@@ -100,12 +93,12 @@ td {
 		<script type="text/javascript">
 			const pdataSource = {
 				api : {
-					readData : {url : 'ajax/getProductList.do', method : 'GET'}
-			
-
+					readData : {url : 'ajax/getProductList.do', method : 'GET'},
 				},
 				contentType : 'application/json'
 			};
+			
+			
 			const progrid = new tui.Grid({
 				el : document.getElementById('proGrid'),
 				data : pdataSource,
@@ -156,7 +149,7 @@ td {
 						editor:{
 							type:'select',
 							options:{
-								listItems:[
+								listItems:[ 
 									{text:'사용',value:'Y'},
 									{text:'미사용', value:'N'}
 								]
@@ -187,5 +180,3 @@ td {
 			</script>
 
 </body>
-<script type="text/javascript" src="js/app/comm/product.js"></script>
-</html>

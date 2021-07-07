@@ -13,13 +13,13 @@
 					rowHeaders : [ 'rowNum' ],
 					columns : [ {
 						header : '제품코드',
-						name : 'productCode',
+						name : 'productCode'
 					}, {
 						header : '제품명',
-						name : 'productName',
+						name : 'productName'
 					}, {
 						header : '규격',
-						name : 'unitNo',
+						name : 'unitNo'
 					} ]
 				});
 				

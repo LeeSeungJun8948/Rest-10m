@@ -1,15 +1,3 @@
-$( function() {
-    $( "#tabs" ).tabs({ activate: function( event, ui ) {
-		console.log()
-		var tabId = $(ui.newPanel).attr("id");
-		if(tabId == 'tabs-1'){
-			grid.refreshLayout();
-		} else if(tabId == 'tabs-2'){		
-			grid2.refreshLayout();
-		}
-	}});
- 		 } );
-
 
 //input file 업로드를 버튼으로 업로드 하게 바꾸는 기능
 	const imgBtn = document.querySelector('#btnImg');
