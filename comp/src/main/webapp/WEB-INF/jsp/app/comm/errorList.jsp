@@ -146,7 +146,7 @@
 			})
 			//불량내역 행추가
 			$("#errorRowInsert").on("click", function(){
-				girdList.appendRow();
+				progrid.appendRow();
 			});
 			//불량내역 추가
 			$("#btnInsertErrorList").on("click", function(){

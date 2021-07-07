@@ -85,6 +85,7 @@
 				});
 
 				QcMatGrid.on('click', function(ev) {
+					
 					var values = QcMatGrid.getRow(ev.rowKey);
 					var prdCode = values.productCode;
 					$('#productCode').val(prdCode);

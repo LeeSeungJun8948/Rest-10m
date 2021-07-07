@@ -48,10 +48,7 @@ $.fn.serializeObject = function() {
 					return o;
 			};
 
-//행추가
-$("#btnRowInsert").on("click", function(){
-		grid.appendRow();
-	});
+
 
 $("#btnInsert").on("click", function(){
 		//grid.request('createData');
@@ -69,3 +66,16 @@ $('#btnSearch').on('click', function() {
 		var prm = $('#frm').serializeObject();
 		grid.readData(1, prm, true);
 	})
+	
+progrid.on('click', (ev) => {
+		
+		var href="productModal.do";
+		window.event.preventDefault();
+		$('.jquery-modal').remove();
+		$('.modal').remove();
+		this.blur();
+		$.get(href, function(html){
+			var modalOpen = $(html).appendTo('body').modal();
+		       });
+		   
+		 });

@@ -101,8 +101,8 @@ td {
 	</div>
 	<div class="row">
 		<div class="col-6">제품</div>
-		<div class="col-6">
-			<button type="button" class="btn btn-primary" id="btnRowInsert">+</button>
+		<div class="col-6" align="right">
+			<button type="button" class="btn btn-primary" id="RowInsert">+</button>
 			<button type="button" class="btn btn-primary" id="btnInsert">저장</button>
 			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
 		</div>
@@ -137,23 +137,23 @@ td {
 					}, 
 					{
 						header : '규격',
-						name :  'stdId',
-						editor : 'text'
+						name :  'stdId'
+						
 					},
 					{
 						header : '규격코드',
-						name :  'stdNo',
-						editor : 'text'
+						name :  'stdNo'
+						
 					},
 					{
 						header : '단위코드',
-						name :  'unitId',
-						editor : 'text'
+						name :  'unitId'
+						
 					},
 					{
 						header : '관리단위',
 						name :  'unitNo',
-						editor : 'text'
+						
 					},
 					{
 						header : '사원코드',
@@ -177,6 +177,24 @@ td {
 
 					]
 			    });
+			$("#RowInsert").on("click", function(){
+				progrid.appendRow();
+			});
+			progrid.on('click', (ev) => {
+			
+				if(ev.columnName == 'stdNo'){
+				var href="product.do";
+				window.event.preventDefault();
+				$('.jquery-modal').remove();
+				$('.modal').remove();
+				this.blur();
+				$.get(href, function(html){
+					var modalOpen = $(html).appendTo('body').modal();
+				       });
+					}
+				 });
+			
+			
 			</script>
 
 </body>

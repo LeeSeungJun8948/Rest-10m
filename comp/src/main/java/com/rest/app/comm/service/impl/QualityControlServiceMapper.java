@@ -32,6 +32,12 @@ public class QualityControlServiceMapper implements QualityControlService {
 		return mapper.getCompany(vo);
 	}
 
+	@Override
+	public List<QualityControlVO> getCodeList(QualityControlVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 }

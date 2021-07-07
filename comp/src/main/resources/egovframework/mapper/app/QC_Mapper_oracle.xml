@@ -36,11 +36,10 @@
 	 WHERE product_code = #{product_code}  
 	</update>
 	
-	<!--product insert  -->
-	<insert id="insertProduct" parameterType="com.rest.app.comm.vo.QualityControlVO">
-		INSERT INTO product
-		values (#{})
-	</insert>	
-	
-	
+	<!-- 규격/단위 리스트 -->
+	<select id="getCodeList" resultType="com.rest.app.comm.vo.QualityControlVO">
+	select *
+  	  from COMTCCMMNDETAILCODE
+ 	 where code_id = 'R_UNIT' or code_id ='R_STD' 
+	</select>
 </mapper>

@@ -15,6 +15,6 @@ public interface QualityControlService {
 	//제품에 대한 회사 조회
 	public QualityControlVO getCompany(QualityControlVO vo);
 	
-	//제품에 이미지 추가
-
+	//규격 단위 리스트
+	public List<QualityControlVO> getCodeList(QualityControlVO vo);
 }
