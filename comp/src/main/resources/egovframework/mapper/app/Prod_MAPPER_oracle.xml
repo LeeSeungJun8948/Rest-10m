@@ -10,7 +10,8 @@
 		WHERE o.order_count != o.plan_count
 		AND o.product_code = p.product_code
 		AND o.out_date BETWEEN TO_DATE(#{planDtS}, 'YYYY-MM-DD') 
-                   AND TO_DATE(#{planDtE}, 'YYYY-MM-DD')
+        	AND TO_DATE(#{planDtE}, 'YYYY-MM-DD')
+        ORDER BY o.order_no
 	</select>
 	
 	<!-- 생산계획 -->
@@ -32,6 +33,12 @@
 	<select id="selectPlanCode" resultType="PlanVO">
 		SELECT NVL(MAX(plan_code),0) plan_code FROM plan 
 	</select>
+	<select id="searchPlan" resultType="PlanVO">
+		SELECT plan_code, plan_name, TO_CHAR(plan_date, 'YYYY-MM-DD') plan_date, comments FROM plan 
+		WHERE plan_date BETWEEN TO_DATE(#{searchDtS}, 'YYYY-MM-DD') 
+        	AND TO_DATE(#{searchDtE}, 'YYYY-MM-DD')
+        ORDER BY plan_code
+	</select>
 	
 	<!-- 세부계획 -->
 	<select id="getDetailPlan" resultType="DetailPlanVO">
@@ -45,6 +52,7 @@
 		FROM detailplan d, product p 
 		WHERE plan_code = #{planCode}
 		AND d.product_code = p.product_code
+		ORDER BY d.product_lot
 	</select>	
 	<insert id="insertDetailPlan" parameterType="DetailPlanVO">
 		<selectKey keyProperty="productLot" resultType="string" order="BEFORE">
@@ -106,5 +114,6 @@
 	 		AND b.material_code = m.material_code
 		  	AND b.product_code = #{productCode}
 		  	AND F_MAT_COUNT(i.lot_no) != 0
+		  	ORDER BY m.material_code, i.lot_no
 	</select>
 </mapper>

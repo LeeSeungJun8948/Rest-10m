@@ -5,10 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 </head>
 <body>
 	<div>
@@ -69,7 +67,8 @@
 				{
 					header : '아이디',
 					name : 'id',
-					editor : 'text'
+/* 					className : 'empId' */
+					editor:'text'
 				}, {
 					header : '사원명',
 					name : 'employeeName',
@@ -123,13 +122,6 @@
 					}
 				} ]
 			});
-			/* 				tui.Grid.applyTheme('default', {
-			 row:{
-			 hover: {
-			 background: '#0c4e91'
-			 }
-			 }
-			 }); */
 			$.fn.serializeObject = function() {
 				var o = {};
 				var a = this.serializeArray();
@@ -145,7 +137,8 @@
 				});
 				return o;
 			};
-
+		
+			
 			$("#btnUpdate").on("click", function() {
 				grid.request('updateData', {
 					checkedOnly : true

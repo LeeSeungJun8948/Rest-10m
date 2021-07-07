@@ -11,20 +11,35 @@
 	
 	<!-- 제품코드,제품명,제품규격 List(모달창) -->
 	<select id="getProductList" resultType="com.rest.app.comm.vo.QualityControlVO">
-		SELECT product_code, product_name, unit_no
+		SELECT *
  		  FROM product
 	</select>
 	
 	<!-- 제품에대한 고객사코드/고객사명 list -->
 	<select id="getCompany" resultType="com.rest.app.comm.vo.QualityControlVO">
-		select Distinct c.company_code, c.company_name 
-  		  from company c
-  		  join (select p.product_code, o.company_code
-          		  from product p
-           		   join orders o
-             		 on (p.product_code = o.product_code)) a
-    		on c.company_code = a.company_code       
- 		 where a.product_code = #{productCode}
+	SELECT  Distinct a.product_code
+       	   ,LISTAGG(c.company_code, ',') WITHIN GROUP(ORDER BY c.company_code) OVER(PARTITION BY a.product_code) as comp_code
+       	   ,LISTAGG(c.company_name, ',') WITHIN GROUP(ORDER BY c.company_code) OVER(PARTITION BY a.product_code) as comp_name
+  	  FROM company c
+  	  JOIN (SELECT Distinct p.product_code, o.company_code
+          	  FROM product p
+              JOIN orders o
+                ON (p.product_code = o.product_code)) a
+        ON c.company_code = a.company_code       
+ 	 WHERE a.product_code = #{productCode}
 	</select>
 	
+	<!-- 이미지 저장 -->
+	<update id="updateProduct" parameterType="com.rest.app.comm.vo.QualityControlVO">
+	UPDATE product
+	   SET product_name = p_img=#{pImg}, qc_img=#{qcImg}
+	 WHERE product_code = #{product_code}  
+	</update>
+	
+	<!-- 규격/단위 리스트 -->
+	<select id="getCodeList" resultType="com.rest.app.comm.vo.QualityControlVO">
+	select *
+  	  from COMTCCMMNDETAILCODE
+ 	 where code_id = 'R_UNIT'
+	</select>
 </mapper>
