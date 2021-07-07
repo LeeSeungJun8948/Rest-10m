@@ -28,6 +28,11 @@ public class ProdController {
 		return "prod/managePlan.page";
 	}
 
+	@RequestMapping("planModal.do")
+	public String planModal() {
+		return "app/prod/planModal";
+	}
+	
 	// 미완료주문 읽기
 	@RequestMapping("readUnplanOrders.do")
 	@ResponseBody
@@ -139,6 +144,18 @@ public class ProdController {
 		Map<String, Object> data = new HashMap<String, Object>();
 		Map<String, Object> datas = new HashMap<String, Object>();
 		datas.put("contents", svc.readInputMat(param));
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
+	}
+	
+	// 모달 생산계획검색
+	@RequestMapping("searchPlan.do")
+	@ResponseBody
+	public Map<String, Object> searchPlan(@RequestBody Map<String, Object> param) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		datas.put("contents", svc.searchPlan(param));
 		data.put("result", true);
 		data.put("data", datas);
 		return data;

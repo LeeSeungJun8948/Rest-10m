@@ -10,6 +10,7 @@ import com.rest.app.prod.vo.PlanVO;
 
 public interface ProdService {
 	List<OrdersVO> getUnplanOrders(Map<String, Object> param);
+	List<PlanVO> searchPlan(Map<String, Object> param);
 	List<DetailPlanVO> getDetailPlan(Map<String, Object> param);
 	int insertPlan(PlanVO vo); 
 	int updatePlan(PlanVO vo);

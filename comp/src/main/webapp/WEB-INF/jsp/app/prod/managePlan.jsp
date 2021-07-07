@@ -4,7 +4,7 @@
 
 <h1 class="h3 mb-4 text-gray-700">생산계획 관리</h1>
 <div class="mb-4" align="right">
-	<button type="button" class="btn btn-primary" id="btnView">조회</button>
+	<a class="btn btn-primary" id="btnView" href="planModal.do" rel="modal:open">조회</a>
 	<button type="reset" class="btn btn-primary" id="btnReset">초기화</button>
 	<button type="button" class="btn btn-primary" id="btnSave">저장</button>
 	<button type="button" class="btn btn-primary" id="btnDel">삭제</button>
@@ -16,11 +16,11 @@
 			<table class="table">
 				<tbody>
 					<tr>
-						<th>계획일자</th>
+						<th>계획일자<span style="color: red">*</span></th>
 						<td><input type="date" id="planDate" name="planDate"></td>
 					</tr>
 					<tr>
-						<th>생산계획명</th>
+						<th>생산계획명<span style="color: red">*</span></th>
 						<td><input type="text" id="planName" name="planName"></td>
 					</tr>
 					<tr>
@@ -38,7 +38,7 @@
 		<div>
 			<form id="dateFrm" name="dateFrm">
 				<span>납기일자 </span><input type="date" id="planDtS" name="planDtS">
-				<span> ~ </span><input type="date" id="planDtE" name="planDtE">&nbsp;
+				<span>&nbsp;~&nbsp;</span><input type="date" id="planDtE" name="planDtE">&nbsp;
 				<button type="button" class="btn btn-primary" id="btnRead">불러오기</button>
 			</form>
 		</div>
@@ -72,7 +72,8 @@
 		</div>
 	</form>
 </div>
-	<div>
-		<div id="gridInput"/>
-	</div>
+<div>
+	<div id="gridInput"/>
+</div>
+	
 <script type="text/javascript" src="js/app/prod/managePlan.js"></script>
