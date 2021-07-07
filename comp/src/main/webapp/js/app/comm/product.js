@@ -55,15 +55,5 @@ $('#btnSearch').on('click', function() {
 		grid.readData(1, prm, true);
 	})
 	
-progrid.on('click', (ev) => {
-		
-		var href="productModal.do";
-		window.event.preventDefault();
-		$('.jquery-modal').remove();
-		$('.modal').remove();
-		this.blur();
-		$.get(href, function(html){
-			var modalOpen = $(html).appendTo('body').modal();
-		       });
-		   
-		 });
+	
+			

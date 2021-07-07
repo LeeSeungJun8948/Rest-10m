@@ -1,39 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<div class="modal-dialog" role="document" style="z-index: 100">
+
+
+<div class="modal" >
+<style>
+.blocker, .modal {
+	z-index: 100;
+	}
+</style>
 	<div class="modal-content">
 		<div class="modal-header">
 		</div>
 		<div class="modal-body">
 			<!-- 필요한것 집어넣기 BODY 부분 -->
-			<div id=CodeGird></div>
+			<div id=CodeListGird></div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button id=btnSearch type="button" onclick="fnSearch()"
-					class="btn btn-primary">검색</button>
+				<a href="#" rel="modal:close" ><button class="btn btn-primary">검색</button></a>
 			</div>
 
 			<script type="text/javascript">
-				const cdataSource = {
+				var cdataSource = {
 					api : {
 						readData : {url : 'ajax/getCodeList.do',method : 'GET'}
 
 					},
 					contentType : 'application/json'
 				};
-				const CodeGrid = new tui.Grid({
-					el : document.getElementById('CodeGird'),
+				var CodeGrid = new tui.Grid({
+					el : document.getElementById('CodeListGird'),
 					data : cdataSource,
+					rowHeaders: ['checkbox'],
 					scrollX : false,
 					scrollY : false,
-					rowHeaders : [ 'rowNum' ],
+					
 					columns : [ {
 						header : '규격코드',
 						name : 'codeId'
@@ -44,29 +44,19 @@
 					]
 				});
 
-				QcMatGrid.on('click', function(ev) {
-					
-					var values = QcMatGrid.getRow(ev.rowKey);
-					var prdCode = values.productCode;
-					$('#productCode').val(prdCode);
-					console.log(prdCode);
-
-				});
-
+			
 				
-				function fnSearch() {
-				$("#frm").submit();
-				}
-				// bom 자재리스트 버튼
-				$('#btnSearch').on('click', function() {
-					var prm = $('#frm').serializeObject();
-					grid.readData(1, prm, true);
-				})
+				CodeGrid.on('click',(ev) =>{
+					var sId = CodeGrid.getRow(ev.rowKey).codeId;
+					var sNo = CodeGrid.getRow(ev.rowKey).code;
+					
+					progrid.setValue(stdRowkey,'stdId',sId,false);
+					progrid.setValue(stdRowkey,'stdNo',sNo,false);
+				});
+					
 			</script>
-
+		
 		</div>
 	</div>
 </div>
 
-</body>
-</html>
