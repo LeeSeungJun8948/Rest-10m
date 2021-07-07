@@ -51,13 +51,44 @@
 		</div>
 		<div class="modal-body">
 			<!-- 필요한것 집어넣기 BODY 부분 -->
-			<div id=QcMatGrid></div>
+			<div id=qclGrid></div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				<button id=btnSearch type="button" onclick="fnSearch()"
 					class="btn btn-primary">검색</button>
 			</div>
+			<script type="text/javascript">
+			const qcdataSource = {
+					api : {
+						readData : {url : 'ajax/getProductList.do',method : 'GET'},
+
+					},
+					contentType : 'application/json'
+				};
+				const qcGrid = new tui.Grid({
+					el : document.getElementById('qclGrid'),
+					data : qcdataSource,
+					scrollX : false,
+					scrollY : false,
+					rowHeaders : [ 'rowNum' ],
+					columns : [ {
+						header : '제품코드',
+						name : 'productCode',
+					}, {
+						header : '제품명',
+						name : 'productName',
+					}, {
+						header : '규격',
+						name : 'unitNo',
+					} ]
+				});
+
+				
+			
+				
+			</script>
+			
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="js/app/comm/qcModal.js"></script>
+<script type="text/javascript" src="js/app/modal/qcModal.js"></script>

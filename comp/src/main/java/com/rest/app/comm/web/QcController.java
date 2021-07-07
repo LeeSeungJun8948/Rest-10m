@@ -31,12 +31,7 @@ public class QcController {
 	@Autowired
 	QualityControlService dao;
 	
-	//qc모달
-	@RequestMapping("QcModal.do")
-	public String modal() {
-		
-		return "app/comm/QcModal";
-	}
+	
 	
 	//모달창 제품 리스트 조회
 	@RequestMapping("/ajax/getProductList.do")

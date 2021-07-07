@@ -7,13 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
 .table {
@@ -45,7 +46,7 @@ td {
 						<input type="text" size="20" tabindex="1" id='pdc'
 							name="productCode" value="${proInfo.productCode }"
 							style="margin-top: 4px">
-					</form> <a id="search" href="QcModal.do" rel="modal:open"
+					</form> <a id="search" href="qcModal.do" rel="modal:open"
 					class="btn btn-primary" style="margin-left: 10px"> <img
 						src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
 				</a>
@@ -96,6 +97,7 @@ td {
 			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
 		</div>
 	</div>
+<!--
 		<div id="proGrid"></div>
 		<script type="text/javascript">
 			const pdataSource = {
@@ -169,23 +171,10 @@ td {
 			$("#RowInsert").on("click", function(){
 				progrid.appendRow();
 			});
-			progrid.on('click', (ev) => {
-			
-				if(ev.columnName == 'stdNo'){
-				var href="product.do";
-				window.event.preventDefault();
-				$('.jquery-modal').remove();
-				$('.modal').remove();
-				this.blur();
-				$.get(href, function(html){
-					var modalOpen = $(html).appendTo('body').modal();
-				       });
-					}
-				 });
-			
 			
 			</script>
-
+  -->
 </body>
+<script type="text/javascript" src="js/app/modal/qcModal.js"></script>
 <script type="text/javascript" src="js/app/comm/product.js"></script>
 </html>
