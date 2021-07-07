@@ -118,6 +118,12 @@ public class ModalController {
 			
 	return "app/modal/productModal";
 	}
+	
+	//qc모달
+	@RequestMapping("qcModal.do")
+	public String QcModal() {
 		
+		return "app/modal/qcModal";
+		}
 	
 }
