@@ -69,7 +69,8 @@
 				{
 					header : '아이디',
 					name : 'id',
-					editor : 'text'
+/* 					className : 'empId' */
+					editor:'text'
 				}, {
 					header : '사원명',
 					name : 'employeeName',
@@ -123,13 +124,6 @@
 					}
 				} ]
 			});
-			/* 				tui.Grid.applyTheme('default', {
-			 row:{
-			 hover: {
-			 background: '#0c4e91'
-			 }
-			 }
-			 }); */
 			$.fn.serializeObject = function() {
 				var o = {};
 				var a = this.serializeArray();
@@ -145,7 +139,8 @@
 				});
 				return o;
 			};
-
+		
+			
 			$("#btnUpdate").on("click", function() {
 				grid.request('updateData', {
 					checkedOnly : true
