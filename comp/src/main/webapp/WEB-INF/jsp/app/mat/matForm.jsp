@@ -3,12 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
-	#companyCode{
-		background-color: #FFFFFF;
-	}
-	#companyName{
-		background-color: #EAEAEA;	
-	}
+#companyCode, .white{
+	background-color: #FFFFFF;
+}
+#companyName{
+	background-color: #EAEAEA;	
+}
 </style>
 <div class="row">
 	<div class="col-md-8">

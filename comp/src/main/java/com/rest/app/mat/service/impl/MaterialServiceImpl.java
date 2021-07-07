@@ -102,6 +102,7 @@ public class MaterialServiceImpl implements MaterialService{
 		return mapper.getMatInfoForOut(vo);
 	}
 
+	// 모달
 	@Override
 	public List<SelectListVO> getMatListModal(SelectListVO vo) {
 		return mapper.getMatListModal(vo);
@@ -131,5 +132,14 @@ public class MaterialServiceImpl implements MaterialService{
 	public List<MaterialVO> getUnitNo() {
 		return mapper.getUnitNo();
 	}
-	
+
+	@Override
+	public List<InorderVO> getInorderListModal(InorderVO vo) {
+		return mapper.getInorderListModal(vo);
+	}
+
+	@Override
+	public List<InoutVO> getMatLotStock(InoutVO vo) {
+		return mapper.getMatLotStock(vo);
+	}
 }

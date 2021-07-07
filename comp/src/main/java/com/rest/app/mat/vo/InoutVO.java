@@ -41,7 +41,7 @@ public class InoutVO {
 	Integer unitPrice;
 	Integer price;
 	Integer stock;
-	Integer lotStock; // 어디서 쓰더라
+	Integer lotStock; 
 	
 	String comments;
 	

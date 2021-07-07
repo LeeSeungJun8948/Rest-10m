@@ -5,6 +5,9 @@
 .tui-grid-summary-area .tui-grid-cell {
     text-align: right;
 }
+#companyCode, #materialCode{
+	background-color: #FFFFFF;
+}
 </style>
 <div class="row">
 	<div class="col-md-8">
@@ -118,4 +121,12 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="inorderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content" id="inorderContent" align="center">
+		</div>
+	</div>
+</div>
+
 <script type="text/javascript" src="js/app/mat/matInForm.js"></script>

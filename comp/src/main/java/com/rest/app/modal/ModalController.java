@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.mat.service.MaterialService;
+import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.SelectListVO;
 
 @Controller
@@ -107,6 +108,28 @@ public class ModalController {
 		System.out.println(vo.getKeyword());
 		data.put("result", true);
 		datas.put("contents", dao.getCompListModal(vo));
+		data.put("data", datas);
+		
+		return data;
+	}
+	
+	// 발주검색 모달 페이지 리턴
+	@RequestMapping("/inorderModal.do")
+	public String inorderModal() {
+		return "app/modal/inorderModal";
+	}
+	
+	// 발주목록 모달 그리드 데이터 리턴
+	@RequestMapping("/ajax/inorderListModal.do")
+	@ResponseBody
+	public Map<String, Object> ajaxInorderListModal(Model model, InorderVO vo) { // 발주목록 
+		
+		Map<String,Object> datas = new HashMap<>();
+		Map<String,Object> data = new HashMap<>();
+		
+		System.out.println(vo.getKeyword());
+		data.put("result", true);
+		datas.put("contents", dao.getInorderListModal(vo));
 		data.put("data", datas);
 		
 		return data;

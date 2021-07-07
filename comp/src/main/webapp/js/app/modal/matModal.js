@@ -58,6 +58,12 @@
 			function select(){
 				$('#materialCode').val(materialCode);
 				$('#materialName').val(materialName);
+				
+				if(forGrid){
+					grid.setValue(rowKey, 'materialCode', materialCode, false);
+					forGrid = false;
+				}
+				
 				$('#matModal').modal('hide');
 				$('#modalContent').remove();
 			}

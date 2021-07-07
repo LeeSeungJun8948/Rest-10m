@@ -8,6 +8,10 @@
 #processCode, #materialCode{
 	background-color: #FFFFFF;
 }
+
+.white{	
+	background-color: #FFFFFF;
+}
 </style>
 <div class="row">
 	<div class="col-md-8">
