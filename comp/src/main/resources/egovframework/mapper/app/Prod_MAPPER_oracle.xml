@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rest.app.prod.service.impl.ProdMapper">
-	<select id="getUnplanOrders" resultType="com.rest.app.bus.vo.OrdersVO">
-		SELECT o.*, o.order_count - o.plan_count unplan_count, p.product_name
+	<select id="getUnplanOrders" resultType="OrdersVO">
+		SELECT o.order_no, o.product_code, TO_CHAR(o.out_date, 'YYYY-MM-DD') out_date,
+			o.order_count, o.plan_count,
+			o.order_count - o.plan_count unplan_count, p.product_name
 		FROM orders o, product p
 		WHERE o.order_count != o.plan_count
 		AND o.product_code = p.product_code
@@ -11,38 +13,47 @@
 	</select>
 	
 	<!-- 생산계획 -->
-	<insert id="insertPlan" parameterType="com.rest.app.prod.vo.PlanVO">
+	<insert id="insertPlan" parameterType="PlanVO">
+		<selectKey resultType="string" keyProperty="planCode" order="BEFORE">
+        	SELECT NVL(MAX(plan_code),0)+1 FROM plan    
+    	</selectKey>
 		INSERT INTO plan VALUES(
-		(SELECT NVL(MAX(plan_code),0) FROM plan) + 1, #{planName}, #{planDate}, #{comments} 
+		#{planCode}, #{planName}, #{planDate}, #{comments} 
 		)
 	</insert>
-	<update id="updatePlan" parameterType="com.rest.app.prod.vo.PlanVO">
+	<update id="updatePlan" parameterType="PlanVO">
 		UPDATE plan SET plan_date = #{planDate}, plan_name = #{planName}, comments = #{comments}
 		WHERE plan_code = #{planCode}
 	</update>
 	<delete id="deletePlan">
 		DELETE FROM plan WHERE plan_code = #{planCode}
 	</delete>
+	<select id="selectPlanCode" resultType="PlanVO">
+		SELECT NVL(MAX(plan_code),0) plan_code FROM plan 
+	</select>
 	
 	<!-- 세부계획 -->
-	<select id="selectDetailplan">
-	
+	<select id="getDetailPlan" resultType="DetailPlanVO">
+		SELECT DISTINCT 
+			d.product_lot, d.plan_code, d.order_no, d.product_code, d.comments, d.work_count,
+			TO_CHAR(d.work_date, 'YYYY-MM-DD') work_date,
+			TO_CHAR(o.out_date, 'YYYY-MM-DD') out_date,
+			o.order_count, o.plan_count,
+			o.order_count - o.plan_count unplan_count, p.product_name
+		FROM detailplan d, orders o, product p 
+		WHERE plan_code = #{planCode}
+		AND d.product_code = p.product_code
+		AND d.order_no = o.order_no
 	</select>	
-	<insert id="insertDetailPlan" parameterType="com.rest.app.prod.vo.DetailPlanVO">
+	<insert id="insertDetailPlan" parameterType="DetailPlanVO">
+		<selectKey keyProperty="productLot" resultType="string" order="BEFORE">
+        	SELECT NVL(MAX(product_lot),0)+1 FROM detailplan
+    	</selectKey>    
 		INSERT INTO detailplan VALUES(
-		(SELECT NVL(MAX(productLot),0) FROM detailplan) + 1,
-		<choose>
-			<when test="planCode != null and planCode != ''">
-				#{planCode},
-			</when>
-			<otherwise>
-				(SELECT NVL(MAX(plan_code),0) FROM plan) + 1,
-			</otherwise>
-		</choose>
-		#{orderNo}, #{productCode}, #{workDate}, #{workCount}, #{comments} 
+		#{productLot}, #{planCode},	#{orderNo}, #{productCode}, #{workDate}, #{comments}, #{workCount}
 		)
 	</insert>
-	<update id="updateDetailPlan" parameterType="com.rest.app.prod.vo.DetailPlanVO">
+	<update id="updateDetailPlan" parameterType="DetailPlanVO">
 		UPDATE detailplan SET work_date = #{workDate}, work_count = #{workCount},
 		comments = #{comments} 
 		WHERE product_lot = #{productLot}
@@ -52,13 +63,15 @@
 	</delete>
 
 	<!-- 투입자재 -->
-	<insert id="insertInputMat" parameterType="com.rest.app.prod.vo.InputMatVO">
+	<insert id="insertInputMat" parameterType="InputMatVO">
+		<selectKey keyProperty="inputIdx" resultType="int" order="BEFORE">
+        	SELECT NVL(MAX(input_idx),0)+1 FROM inputmat
+    	</selectKey> 
 		INSERT INTO inputMat VALUES(
-		(SELECT NVL(MAX(inputIdx),0) FROM inputMat) + 1,
-		#{productLot}, #{materialLot}, #{inputCount}, #{comments} 
+		#{inputIdx}, #{planCode}, #{orderNo}, #{materialLot}, #{inputCount}, #{comments} 
 		)
 	</insert>
-	<update id="updateInputMat" parameterType="com.rest.app.prod.vo.InputMatVO">
+	<update id="updateInputMat" parameterType="InputMatVO">
 		UPDATE inputMat SET lot_no = #{productLot}, material_lot = #{materialLot},
 		input_count = #{inputCount}, comments = #{comments} 
 		WHERE input_idx = #{inputIdx}
@@ -71,20 +84,21 @@
 		SELECT product_name FROM product WHERE product_code = #{productCode} 
 	</select>
 	
-	
-	<select id="readInputMat" resultType="com.rest.app.prod.vo.InputMatVO">
-		<choose>
-			<when test="productLot != null and productLot != ''">
-				SELECT * FROM inputMat WHERE product_lot = #{productLot}
-			</when>
-			<otherwise>
-			SELECT m.material_code, m.material_name,
-     			 i.lot_no material_lot, F_MAT_COUNT(i.lot_no) material_count
-   			FROM material m, inout i
-  	 		WHERE m.material_code = i.material_code
-  		  	AND m.material_code = #{productCode}
-  		  	AND F_MAT_COUNT(i.lot_no) != 0
-  			</otherwise>
-  		</choose>
+	<select id="readInputMat" resultType="InputMatVO">
+		<if test="productLot == null">
+			SELECT DISTINCT 
+				m.material_code, m.material_name,
+	   			i.lot_no material_lot, F_MAT_COUNT(i.lot_no) material_count
+			FROM material m, inout i, bom b
+	 		WHERE m.material_code = i.material_code
+	 		AND b.material_code = m.material_code
+		  	AND b.product_code = #{productCode}
+		  	AND F_MAT_COUNT(i.lot_no) != 0
+	  	</if>
+	  	<if test="productLot != null">
+			SELECT i.*, m.material_code, m.material_name, F_MAT_COUNT(i.lot_no)
+			FROM inputmat i, material m
+			WHERE i.product_lot = #{productLot}
+	  	</if>
 	</select>
 </mapper>

@@ -33,7 +33,11 @@ public class ProdController {
 	public Map<String, Object> readUnplanOrders(@RequestBody Map<String, Object> param) {
 		Map<String, Object> data = new HashMap<String, Object>();
 		Map<String, Object> datas = new HashMap<String, Object>();
-		datas.put("contents", svc.getUnplanOrders(param));
+		if (param.get("planCode") == null) {
+			datas.put("contents", svc.getUnplanOrders(param));
+		} else {
+			datas.put("contents", svc.getDetailPlan(param));
+		}
 		data.put("result", true);
 		data.put("data", datas);
 		return data;
@@ -42,25 +46,33 @@ public class ProdController {
 	// 계획저장
 	@RequestMapping("savePlan.do")
 	@ResponseBody
-	public void savePlan(PlanVO vo) {
+	public Map<String, Object> savePlan(PlanVO vo) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
 		if (vo.getPlanCode().equals("planCode")) {
 			svc.insertPlan(vo);
 		} else {
 			svc.updatePlan(vo);
 		}
+		datas.put("contents", vo);
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
 	}
 
 	// 계획삭제
 	@RequestMapping("deletePlan.do")
 	@ResponseBody
-	public void deletePlan(String planCode) {
+	public String deletePlan(String planCode) {
 		svc.deletePlan(planCode);
+		return "managePlan.do";
 	}
 
 	// 세부계획 CUD
 	@RequestMapping("saveGrid.do")
 	@ResponseBody
-	public void saveGrid(@RequestBody GridData gridData) {
+	public Map<String, Object> saveGrid(@RequestBody GridData gridData) {
+		Map<String, Object> data = new HashMap<String, Object>();
 		List<DetailPlanVO> cList = gridData.createdRows;
 		List<DetailPlanVO> uList = gridData.updatedRows;
 		List<DetailPlanVO> dList = gridData.deletedRows;
@@ -70,44 +82,43 @@ public class ProdController {
 			}
 		});
 		uList.forEach(vo -> {
-			if (vo.getLotNo() == null) {
-				svc.insertDetailPlan(vo);
-			} else {
-				svc.updateDetailPlan(vo);
+			if (vo.getWorkCount() != 0) {
+				if (vo.getProductLot() == null) {
+					svc.insertDetailPlan(vo);
+				} else {
+					svc.updateDetailPlan(vo);
+				}
 			}
 		});
 		dList.forEach(vo -> {
-			if (vo.getLotNo() != null) {
+			if (vo.getProductLot() != null) {
 				svc.deleteDetailPlan(vo);
 			}
 		});
+		data.put("result", true);
+		data.put("check", "save");
+		return data;
 	}
 
 	// 투입자재 CUD
 	@RequestMapping("saveInput.do")
 	@ResponseBody
-	public String saveInput(@RequestBody GridData gridData) {
-		List<InputMatVO> cList = gridData.createdInputRows;
-		List<InputMatVO> uList = gridData.updatedInputRows;
-		List<InputMatVO> dList = gridData.deletedInputRows;
-		cList.forEach(vo -> {
-			if (vo.getInputCount() != 0) {
-				svc.insertInputMat(vo);
-			}
-		});
+	public Map<String, Object> saveInput(@RequestBody InputGridData gridData) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		List<InputMatVO> uList = gridData.updatedRows;
+
 		uList.forEach(vo -> {
-			if (vo.getInputIdx() == 0) {
-				svc.insertInputMat(vo);
-			} else {
-				svc.updateInputMat(vo);
+			if (vo.getInputCount() != 0) {
+				if (vo.getInputIdx() == 0) {
+					svc.insertInputMat(vo);
+				} else {
+					svc.updateInputMat(vo);
+				}
 			}
 		});
-		dList.forEach(vo -> {
-			if (vo.getInputIdx() != 0) {
-				svc.deleteInputMat(vo);
-			}
-		});
-		return "redirect:managePlan.do";
+		data.put("result", true);
+		data.put("check", "save");
+		return data;
 	}
 
 	// 제품명찾기
@@ -134,33 +145,6 @@ class GridData {
 	List<DetailPlanVO> createdRows;
 	List<DetailPlanVO> updatedRows;
 	List<DetailPlanVO> deletedRows;
-	List<InputMatVO> createdInputRows;
-	List<InputMatVO> updatedInputRows;
-	List<InputMatVO> deletedInputRows;
-
-	public List<InputMatVO> getCreatedInputRows() {
-		return createdInputRows;
-	}
-
-	public void setCreatedInputRows(List<InputMatVO> createdInputRows) {
-		this.createdInputRows = createdInputRows;
-	}
-
-	public List<InputMatVO> getUpdatedInputRows() {
-		return updatedInputRows;
-	}
-
-	public void setUpdatedInputRows(List<InputMatVO> updatedInputRows) {
-		this.updatedInputRows = updatedInputRows;
-	}
-
-	public List<InputMatVO> getDeletedInputRows() {
-		return deletedInputRows;
-	}
-
-	public void setDeletedInputRows(List<InputMatVO> deletedInputRows) {
-		this.deletedInputRows = deletedInputRows;
-	}
 
 	public List<DetailPlanVO> getCreatedRows() {
 		return createdRows;
@@ -184,5 +168,35 @@ class GridData {
 
 	public void setUpdatedRows(List<DetailPlanVO> updatedRows) {
 		this.updatedRows = updatedRows;
+	}
+}
+
+class InputGridData {
+	List<InputMatVO> createdRows;
+	List<InputMatVO> updatedRows;
+	List<InputMatVO> deletedRows;
+
+	public List<InputMatVO> getCreatedRows() {
+		return createdRows;
+	}
+
+	public void setCreatedRows(List<InputMatVO> createdRows) {
+		this.createdRows = createdRows;
+	}
+
+	public List<InputMatVO> getUpdatedRows() {
+		return updatedRows;
+	}
+
+	public void setUpdatedRows(List<InputMatVO> updatedRows) {
+		this.updatedRows = updatedRows;
+	}
+
+	public List<InputMatVO> getDeletedRows() {
+		return deletedRows;
+	}
+
+	public void setDeletedRows(List<InputMatVO> deletedRows) {
+		this.deletedRows = deletedRows;
 	}
 }

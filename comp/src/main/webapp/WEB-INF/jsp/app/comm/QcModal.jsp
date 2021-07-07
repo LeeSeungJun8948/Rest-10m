@@ -42,24 +42,16 @@
 </style>
 
 <!-- Modal -->
-<form action="getInfoProduct.do" method="post" id="frm">
+<form action="getQcProduct.do" method="post" id="frm">
 	<input type="hidden" id="productCode" name="productCode">
 </form>
 <div class="modal-dialog" role="document" style="z-index: 100">
 	<div class="modal-content">
 		<div class="modal-header">
-			<form id="productSearchForm" name="productSearchForm">
-				<select name="searchCondition" id="searchCondition" title="검색조건2-검색어구분" style="width: 80px; height: 26px">
-					<option value="productCode">제품코드</option>
-					<option value="productName" selected="selected">제품명</option>
-				</select>
-				<input id="searchKeyword" name="searchKeyword" type="text" title="검색어" class="form-control" style="width: 200px; margin-left: 10px">
-				<button type="button" class="btn btn-primary" id="btnCheck">조회</button>
-			</form>
 		</div>
 		<div class="modal-body">
 			<!-- 필요한것 집어넣기 BODY 부분 -->
-			<div id=matGrid></div>
+			<div id=QcMatGrid></div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				<button id=btnSearch type="button" onclick="fnSearch()"
@@ -67,74 +59,54 @@
 			</div>
 
 			<script type="text/javascript">
-				const dataSourc = {
+				const dataSource = {
 					api : {
 						readData : {
-							url : 'ajax/exportForm.do',
+							url : 'ajax/getProductList.do',
 							method : 'GET'
 						},
 
 					},
 					contentType : 'application/json'
 				};
-				const matGrid = new tui.Grid({
-					el : document.getElementById('matGrid'),
-					data : dataSourc,
+				const QcMatGrid = new tui.Grid({
+					el : document.getElementById('QcMatGrid'),
+					data : dataSource,
 					scrollX : false,
 					scrollY : false,
 					rowHeaders : [ 'rowNum' ],
 					columns : [ {
 						header : '제품코드',
-						name : 'companyCode',
+						name : 'productCode',
 					}, {
 						header : '제품명',
-						name : 'companyName',
+						name : 'productName',
 					}, {
 						header : '규격',
-						name : 'unitId',
+						name : 'unitNo',
 					} ]
 				});
 
-				matGrid.on('click', function(ev) {
-					var values = matGrid.getRow(ev.rowKey);
-					var compCode = values.companyCode;
-					$('#companyCode').val(compCode);
-					console.log(compCode);
+				QcMatGrid.on('click', function(ev) {
+					var values = QcMatGrid.getRow(ev.rowKey);
+					var prdCode = values.productCode;
+					$('#productCode').val(prdCode);
+					console.log(prdCode);
 
 				});
 
-				$.fn.serializeObject = function() {
-					var o = {};
-					var a = this.serializeArray();
-					$.each(a, function() {
-						if (o[this.name]) {
-							if (!o[this.name].push) {
-								o[this.name] = [ o[this.name] ];
-							}
-							o[this.name].push(this.value || '');
-						} else {
-							o[this.name] = this.value || '';
-						}
-					});
-					return o;
-				};
-
-				$("#btnCheck").on("click", function() {
-					var param = $('#productSearchForm').serializeObject();
-					matGrid.readData(1, param, true);
+				
+				function fnSearch() {
+				$("#frm").submit();
+				}
+				// bom 자재리스트 버튼
+				$('#btnSearch').on('click', function() {
+					var prm = $('#frm').serializeObject();
+					grid.readData(1, prm, true);
 				})
 			</script>
 
 		</div>
 	</div>
 </div>
-<script>
-	function fnSearch() {
-		$("#frm").submit();
-	}
-	// bom 자재리스트 버튼
-	$('#btnSearch').on('click', function() {
-		var prm = $('#frm').serializeObject();
-		grid.readData(1, prm, true);
-	})
-</script>
+<script type="text/javascript" src="js/app/comm/process.js"></script>

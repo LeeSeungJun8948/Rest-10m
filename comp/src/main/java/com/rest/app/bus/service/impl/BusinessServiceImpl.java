@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rest.app.bus.service.BusinessService;
 import com.rest.app.bus.vo.CompanyVO;
+import com.rest.app.bus.vo.ExportVO;
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.comm.vo.BomVO;
 
@@ -23,6 +24,13 @@ public class BusinessServiceImpl implements BusinessService {
 		// TODO Auto-generated method stub
 		return mapper.getBus(param);
 	}
+	
+	@Override
+	public List<OrdersVO> getExport(Map<String, Object> param) {//출고조회
+		// TODO Auto-generated method stub
+		return mapper.getExport(param);
+	}
+
 	
 	@Override
 	public List<OrdersVO> getUnExport(Map<String, Object> param) {//미출고조회
@@ -48,5 +56,24 @@ public class BusinessServiceImpl implements BusinessService {
 		return mapper.getProInventory(param);
 	}
 
+	@Override
+	public int insertExport(ExportVO vo) {
+		return mapper.insertExport(vo);
+		
+	}
+
+	@Override
+	public int updateExport(ExportVO vo) {
+		return mapper.updateExport(vo);
+		
+	}
+
+	@Override
+	public int deleteExport(String exportCode) {
+		return  mapper.deleteExport(exportCode);
+		
+	}
+
+	
 	
 }
