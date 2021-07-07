@@ -139,28 +139,9 @@
 				]
 			});
 			
-			//불량내역 리스트 검색
-			$("#btnCheck").on("click", function() {
-				var param = $('#errorListSearchForm').serializeObject();
-				girdList.readData(1, param, true);
-			})
-			//불량내역 행추가
-			$("#errorRowInsert").on("click", function(){
-				progrid.appendRow();
-			});
-			//불량내역 추가
-			$("#btnInsertErrorList").on("click", function(){
-				//girdList.request('createData');
-				girdList.request('modifyData', {
-				checkedOnly: true
-				});
-			})
-			$("#btnDelteErrorList").on("click",function() {
-				girdList.removeCheckedRows(false);
-				girdList.request('deleteData');
-})
+		
 		</script>
 	</div>
 </body>
-	<script type="text/javascript" src="js/app/comm/process.js"></script>
+	<script type="text/javascript" src="js/app/comm/error.js"></script>
 </html>

@@ -37,12 +37,6 @@ public class QcController {
 		
 		return "app/comm/QcModal";
 	}
-	//규격,단위 리스트 모달
-	@RequestMapping("/productModal.do")
-	public String productModal() {
-		
-		return "app/modal/productModal";
-	}
 	
 	//모달창 제품 리스트 조회
 	@RequestMapping("/ajax/getProductList.do")
@@ -69,6 +63,18 @@ public class QcController {
 		mv.addObject("proInfo", dao.getProduct(vo));
 		mv.addObject("company", dao.getCompany(vo));
 		return mv;
+	}
+	
+	//규격,단위 리스트
+	@RequestMapping("/ajax/getCodeList.do")
+	@ResponseBody
+	public Map<String, Object> ajaxgetCodeList(QualityControlVO vo) {
+		Map<String, Object> datas = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", dao.getCodeList(vo));
+		data.put("data", datas);
+		return data;
 	}
 	
 	//이미지 업로드 

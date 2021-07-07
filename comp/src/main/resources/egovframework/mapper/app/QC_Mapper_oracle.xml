@@ -40,6 +40,6 @@
 	<select id="getCodeList" resultType="com.rest.app.comm.vo.QualityControlVO">
 	select *
   	  from COMTCCMMNDETAILCODE
- 	 where code_id = 'R_UNIT' or code_id ='R_STD' 
+ 	 where code_id = 'R_UNIT'
 	</select>
 </mapper>

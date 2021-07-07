@@ -13,7 +13,7 @@
 		</div>
 		<div class="modal-body">
 			<!-- 필요한것 집어넣기 BODY 부분 -->
-			<div id=QcMatGrid></div>
+			<div id=CodeGird></div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				<button id=btnSearch type="button" onclick="fnSearch()"
@@ -21,29 +21,27 @@
 			</div>
 
 			<script type="text/javascript">
-				const dataSource = {
+				const cdataSource = {
 					api : {
-						readData : {url : 'ajax/getProductList.do',method : 'GET'}
+						readData : {url : 'ajax/getCodeList.do',method : 'GET'}
 
 					},
 					contentType : 'application/json'
 				};
-				const QcMatGrid = new tui.Grid({
-					el : document.getElementById('QcMatGrid'),
-					data : dataSource,
+				const CodeGrid = new tui.Grid({
+					el : document.getElementById('CodeGird'),
+					data : cdataSource,
 					scrollX : false,
 					scrollY : false,
 					rowHeaders : [ 'rowNum' ],
 					columns : [ {
-						header : '제품코드',
-						name : 'productCode',
-					}, {
-						header : '제품명',
-						name : 'productName',
+						header : '규격코드',
+						name : 'codeId'
 					}, {
 						header : '규격',
-						name : 'unitNo',
-					} ]
+						name : 'code'
+					}
+					]
 				});
 
 				QcMatGrid.on('click', function(ev) {
