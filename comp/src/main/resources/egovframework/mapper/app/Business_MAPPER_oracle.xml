@@ -6,7 +6,8 @@
 		F_FINDCOMPNAME(company_code)AS comp_name,
 		TO_CHAR(o.in_date,'YYYY-MM-DD')as in_date,
 		TO_CHAR(o.out_date,'YYYY-MM-DD')as out_date,
-		o.order_no, p.product_code,p.product_name,
+		o.order_no,
+		p.product_code,p.product_name,
 		p.std_id,p.unit_id,o.order_count,o.out_count,
 		(o.order_count -
 		o.out_count) as not_count,
@@ -41,8 +42,7 @@
 			and o.order_count = o.plan_count
 		</if>
 	</select>
-	<select id="getExport" resultType="com.rest.app.bus.vo.OrdersVO"
-		parameterType="com.rest.app.bus.vo.OrdersVO">
+	<select id="getExport" resultType="com.rest.app.bus.vo.OrdersVO">
 		select distinct
 		p.product_code,p.product_name,p.std_id,p.unit_id,o.order_no,o.order_count,
 		o.out_count,(o.order_count - o.out_count) as un_export,
@@ -55,50 +55,31 @@
 		and o.product_code =
 		s.product_code
 		and e.export_date=#{exportDate}
-		<if test="exportCode !=null and exportCode !=''">
-			and e.export_code=#{exportCode}
-		</if>
-		<if test="companyCode !=null and companyCode !=''">
-			and o.company_code=#{companyCode}
-		</if>
-
-	</select>
-	<select id="getUnExport"
-		resultType="com.rest.app.bus.vo.OrdersVO">
-		SELECT DISTINCT
-		p.product_code, p.product_name, p.std_id,
-		p.unit_id,
-		o.order_no, o.out_count,
-		(o.order_count - o.out_count) as
-		un_export,
-		(SELECT SUM(product_count) FROM storage
-		WHERE product_code =
-		o.product_code AND product_state='포장완료') as dayCount
-		FROM orders o,
-		storage s, product p
-		WHERE o.order_count != o.out_count
-		AND
-		o.product_code = p.product_code
-		AND o.product_code = s.product_code
-		AND
-		o.out_date BETWEEN TO_DATE(#{inDate}, 'YYYY-MM-DD')
-		AND
-		TO_DATE(#{outDate}, 'YYYY-MM-DD')
-	</select>
-	<select id="getCompany"
-		resultType="com.rest.app.bus.vo.CompanyVO">
-		select company_code,company_name,company_num,phone
-		from company
-		<where>
-			<if test="searchCondition == 'companyCode'">AND
-				product_code LIKE '%' || #{searchKeyword} || '%'
+			<if test="exportCode !=null and exportCode !=''">
+				and e.export_code=#{exportCode}
 			</if>
-			<if test="searchCondition == 'companyName'">AND
-				product_name LIKE '%' || #{searchKeyword} || '%'
+			<if test="companyCode !=null and companyCode !=''">
+				and o.company_code=#{companyCode}
 			</if>
-		</where>
-
 	</select>
+	<select id="getUnExportModal"
+		resultType="com.rest.app.bus.vo.OrdersVO"
+		parameterType="com.rest.app.bus.vo.OrdersVO">
+		 select distinct
+		p.product_code,p.product_name,p.std_id,p.unit_id,o.order_no,o.order_count,
+		o.out_count,(o.order_count - o.out_count) as un_export,
+		(SELECT
+		SUM(product_count) FROM storage WHERE product_code = o.product_code
+		AND product_state='포장완료') as dayCount
+		from orders o, storage s, product
+		p,export e
+		where o.product_code = p.product_code
+		and o.product_code =
+		s.product_code
+		and e.export_date BETWEEN TO_DATE(#{fromDate}, 'YYYY-MM-DD')
+		AND
+		TO_DATE(#{toDate}, 'YYYY-MM-DD')	</select>
+
 
 
 

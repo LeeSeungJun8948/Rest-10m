@@ -31,7 +31,7 @@
 			});
 			
 			$("#btnReadModal").on("click", function() {
-				var param = $('#frmProcSrcModal').serializeObject();
+				var param = $('#frmProcModal').serializeObject();
 				console.log(param);
 				procListModalGrid.readData(1, param, true);
 			});

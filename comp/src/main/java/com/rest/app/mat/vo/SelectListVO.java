@@ -34,4 +34,6 @@ public class SelectListVO {
 	String companyName;
 	String compNo;
 
+	String productCode;
+	String productName;
 }

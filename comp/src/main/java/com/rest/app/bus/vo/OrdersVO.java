@@ -30,5 +30,5 @@ public class OrdersVO {
 	int outCount;//출고량
 	int unExport;//미출고량
 	String export;//출고,미출고 여부
-	
+	int price; //금액
 }
