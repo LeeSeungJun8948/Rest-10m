@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 </head>
+	<h1>불량코드관리</h1>
 <body>
 	<div>
 		<form id="searchCheck" name="searchCheck">
@@ -133,7 +134,7 @@
 						o[this.name].push(this.value || '');
 					} else {
 						o[this.name] = this.value || '';
-					}
+					} 
 				});
 				return o;
 			};

@@ -33,11 +33,8 @@ public class BusinessServiceImpl implements BusinessService {
 
 	
 	@Override
-	public List<OrdersVO> getUnExport(Map<String, Object> param) {//미출고조회
-		//if (.getExport().equals("export")) {
-			//return mapper.getExport(param);
-		//}else
-			return mapper.getUnExport(param);
+	public List<OrdersVO> getUnExportModal(Map<String, Object> param) {//미출고조회
+			return mapper.getUnExportModal(param);
 	}
 
 	@Override
