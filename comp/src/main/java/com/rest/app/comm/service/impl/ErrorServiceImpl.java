@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.rest.app.comm.service.ErrorService;
-import com.rest.app.comm.vo.ErrorListVO;
 import com.rest.app.comm.vo.ErrorVO;
 
 @Repository
@@ -37,30 +36,13 @@ public class ErrorServiceImpl implements ErrorService {
 		// TODO 불량코드,명 삭제
 		return mapper.deleteError(vo);
 	}
-	
-	@Override
-	public List<ErrorListVO> getAllErrorList(ErrorListVO vo) {
-		// TODO 불량내역 리스트
-		return mapper.getAllErrorList(vo);
-	}
-	
-	@Override
-	public int insertErrorList(ErrorListVO vo) {
-		// TODO 불량내역 리스트 입력
-		return mapper.insertErrorList(vo);
-	}
 
 	@Override
-	public int updateErrorList(ErrorListVO vo) {
-		// TODO 불량내역 리스트 수정
-		return mapper.updateErrorList(vo);
-		
+	public ErrorVO MaxErrorCode() {
+		// TODO Auto-generated method stub
+		return mapper.MaxErrorCode();
 	}
+	
 
-	@Override
-	public int deleteErrorList(ErrorListVO vo) {
-		// TODO 불량내역 리스트 삭제
-		return mapper.deleteErrorList(vo);
-	}
 
 }
