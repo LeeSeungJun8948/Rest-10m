@@ -6,14 +6,12 @@
       	d.product_name, a.product_lot, a.work_no, a.error_code
 		from work a, process c, product d
 		where a.process_code = c.process_code
-		and a.product_code = d.product_code
-		<where>		
+		and a.product_code = d.product_code	
 			<if test = "startDate != null and startDate != '' and endDate != null and endDate != ''">
-			trunc(work_date) BETWEEN #{startDate} AND #{endDate} 
+			AND trunc(a.work_date) BETWEEN #{startDate} AND #{endDate} 
 			</if>
 			<if test="productLot != null and productLot != ''">
 				AND product_lot = #{productLot}
 			</if>	
-		</where>
 	</select>
 </mapper>
