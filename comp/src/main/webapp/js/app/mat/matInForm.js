@@ -256,6 +256,7 @@ function getFormatDate(date){
 
 
 // 모달
+var forGrid = false;
 // 자재 돋보기
 $("#btnMatModal").on("click", function(e) {
     $('#matContent').load("matModal.do");

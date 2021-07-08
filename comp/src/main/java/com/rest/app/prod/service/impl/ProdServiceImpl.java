@@ -11,6 +11,7 @@ import com.rest.app.prod.service.ProdService;
 import com.rest.app.prod.vo.DetailPlanVO;
 import com.rest.app.prod.vo.InputMatVO;
 import com.rest.app.prod.vo.PlanVO;
+import com.rest.app.prod.vo.WorkVO;
 
 @Service("prodService")
 public class ProdServiceImpl implements ProdService {
@@ -100,5 +101,15 @@ public class ProdServiceImpl implements ProdService {
 	@Override
 	public List<PlanVO> searchPlan(Map<String, Object> param) {
 		return mapper.searchPlan(param);
+	}
+
+	@Override
+	public List<WorkVO> searchWork(Map<String, Object> param) {
+		return mapper.searchWork(param);
+	}
+
+	@Override
+	public int deleteWork(String workNo) {
+		return mapper.deleteWork(workNo);
 	}
 }

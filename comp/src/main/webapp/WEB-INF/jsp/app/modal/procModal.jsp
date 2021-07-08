@@ -12,7 +12,7 @@
 	
 	<div class="modal-body">
 	
-		<form id="frmProcSrcModal" name="frmMatCodeSrcModal">
+		<form id="frmProcModal" name="frmProcModal">
 			<div class="row">
 				<div class="col-md-4 mr-0 ml-3">
 					<select class="custom-select" name="searchCondition">
@@ -30,7 +30,7 @@
 		</form>
 	
 		<div class="col-md-11 m-3">
-			<div id="modalProcListGrid"></div>
+			<div id="procGrid"></div>
 		</div>
 	
 		<div class="modal-footer">

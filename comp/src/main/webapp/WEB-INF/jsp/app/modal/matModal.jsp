@@ -11,7 +11,7 @@
 	</div>
 	
 	<div class="modal-body">
-		<form id="frmMatCodeSrcModal" name="frmMatCodeSrcModal">
+		<form id="frmMatModal" name="frmMatModal">
 			<div class="row">
 				<div class="col-md-4 mr-0 ml-3">
 					<select class="custom-select" name="searchCondition">
@@ -30,7 +30,7 @@
 		</form>
 	
 		<div class="col-md-11 m-3">
-			<div id="modalMatListGrid"></div>
+			<div id="matGrid"></div>
 		</div>
 	</div>
 		

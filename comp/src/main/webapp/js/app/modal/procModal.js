@@ -1,9 +1,9 @@
 (function($) {
 
-	$("#procModal").on('shown.bs.modal', function () {
+	$("#procModal").on('shown.bs.modal', function () { 
 		
-		if(!checkNull($('#modalProcListGrid').html())){
-			var procListModalData = {
+		if(!checkNull($('#procGrid').html())){
+			var procData = {
 				api : {
 					readData : {
 					url : 'ajax/procListModal.do',
@@ -12,9 +12,9 @@
 				},
 				contentType : 'application/json'
 			};
-			var procListModalGrid = new tui.Grid({	
-				el : document.getElementById('modalProcListGrid'),
-				data : procListModalData,
+			var procGrid = new tui.Grid({	
+				el : document.getElementById('procGrid'),
+				data : procData,
 				scrollX : false,	
 				scrollY : true,
 				bodyHeight: 360,
@@ -31,28 +31,28 @@
 			});
 			
 			$("#btnReadModal").on("click", function() {
-				var param = $('#frmProcSrcModal').serializeObject();
+				var param = $('#frmProcModal').serializeObject();
 				console.log(param);
-				procListModalGrid.readData(1, param, true);
+				procGrid.readData(1, param, true);
 			});
 			
 			var processCode;
 			var processName;
 			
-			procListModalGrid.on('click', (ev) => { 
-				processCode = procListModalGrid.getValue(ev.rowKey, 'processCode');
-				processName = procListModalGrid.getValue(ev.rowKey, 'processName');
+			procGrid.on('click', (ev) => { 
+				processCode = procGrid.getValue(ev.rowKey, 'processCode');
+				processName = procGrid.getValue(ev.rowKey, 'processName');
 			});
 			
 			$('#btnSelect').on('click', function(){
 				select();
 			});
 			
-			procListModalGrid.on('dblclick', function(){
+			procGrid.on('dblclick', function(){
 				select();
 			});
 			
-			function select(){
+			function select(){ 
 				$('#processCode').val(processCode);
 				$('#processName').val(processName);
 				$('#procModal').modal('hide');

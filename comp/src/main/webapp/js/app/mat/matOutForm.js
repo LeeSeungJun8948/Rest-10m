@@ -100,7 +100,6 @@ const grid = new tui.Grid({
 					listItems: []
             	}
 			}
- 			
 		}, {
 			header : '자재재고',
 			name : 'stock',
@@ -138,6 +137,8 @@ const grid = new tui.Grid({
 	}
 });
 	
+adjustGrid.disableColumn('inoutNo');
+
 function format(value){
 	value = value * 1;
 	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -254,6 +255,7 @@ function checkNull(value){
 }
 
 // 모달
+var forGrid = false;
 // 자재 돋보기
 $("#btnMatModal").on("click", function(e) {
     $('#matContent').load("matModal.do");
@@ -275,8 +277,6 @@ $('#processCode').on('click', function(){
 	$('#procModal').modal('show');
 	$('#procContent').load("procModal.do");
 });
-
-var forGrid = false;
 
 grid.on('dblclick', function(ev){
 	if(ev.columnName == 'materialCode'){

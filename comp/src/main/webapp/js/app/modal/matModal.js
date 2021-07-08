@@ -1,8 +1,8 @@
 (function($) {
 	$("#matModal").on('shown.bs.modal', function () {
 		
-		if(!checkNull($('#modalMatListGrid').html())){
-			var matListModalData = {
+		if(!checkNull($('#matGrid').html())){
+			var matData = {
 				api : {
 					readData : {
 					url : 'ajax/matListModal.do',
@@ -11,9 +11,9 @@
 				},
 				contentType : 'application/json'
 			};
-			var matListModalGrid = new tui.Grid({	
-				el : document.getElementById('modalMatListGrid'),
-				data : matListModalData,
+			var matGrid = new tui.Grid({	
+				el : document.getElementById('matGrid'),
+				data : matData,
 				scrollX : false,	
 				scrollY : true,
 				bodyHeight: 360,
@@ -34,24 +34,24 @@
 			});
 			
 			$("#btnReadModal").on("click", function() {
-				var param = $('#frmMatCodeSrcModal').serializeObject();
+				var param = $('#frmMatModal').serializeObject();
 				console.log(param);
-				matListModalGrid.readData(1, param, true);
+				matGrid.readData(1, param, true);
 			});
 			
 			var materialCode;
 			var materialName;
 			
-			matListModalGrid.on('click', (ev) => { 
-				materialCode = matListModalGrid.getValue(ev.rowKey, 'materialCode');
-				materialName = matListModalGrid.getValue(ev.rowKey, 'materialName');
+			matGrid.on('click', (ev) => { 
+				materialCode = matGrid.getValue(ev.rowKey, 'materialCode');
+				materialName = matGrid.getValue(ev.rowKey, 'materialName');
 			});
 			
 			$('#btnSelect').on('click', function(){
 				select();
 			});
 			
-			matListModalGrid.on('dblclick', function(){
+			matGrid.on('dblclick', function(){
 				select();
 			});
 			

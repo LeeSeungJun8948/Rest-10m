@@ -1,0 +1,15 @@
+.modal-dialog.modal-large {
+	display: inline-block; 
+	vertical-align: middle;
+	min-width: 1600px;
+	height: 80%; 
+}
+
+.modal-content {
+	height: 100%;
+}
+
+.modal {
+	text-align: center;
+}
+
