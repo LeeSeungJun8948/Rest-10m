@@ -3,7 +3,7 @@ package com.rest.app.prod.vo;
 import lombok.Data;
 
 @Data
-public class WorkProcessPlanVO {
+public class WorkVO {
 	String workNo;  // 작업지시번호
 	int processCode; // 공정코드
 	String lotNo; // 제품LOT

@@ -7,7 +7,7 @@
 
 <h1 class="h3 mb-4 text-gray-700">생산계획 관리</h1>
 <div class="mb-4" align="right">
-	<a class="btn btn-primary" id="btnView" href="planModal.do" rel="modal:open">조회</a>
+	<a class="btn btn-primary" id="btnModal" href="planModal.do" rel="modal:open">조회</a>
 	<button type="reset" class="btn btn-primary" id="btnReset">초기화</button>
 	<button type="button" class="btn btn-primary" id="btnSave">저장</button>
 	<button type="button" class="btn btn-primary" id="btnDel">삭제</button>

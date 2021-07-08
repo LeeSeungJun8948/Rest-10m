@@ -86,6 +86,7 @@
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/comp/managePlan.do">积魂拌裙 包府</a>
+                        <a class="collapse-item" href="/comp/manageWork.do">积魂累诀 包府</a>
                     </div>
                 </div>
             </li>
