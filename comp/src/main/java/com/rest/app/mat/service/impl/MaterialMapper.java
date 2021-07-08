@@ -48,6 +48,13 @@ public interface MaterialMapper {
 	
 	public List<InoutVO> getMatLotStock(InoutVO vo); // 자재 lot별 재고 (재고조정용)
 	
+	public List<InoutVO> getMatAdjustList(InoutVO vo);
+	public int istMatAdjust(InoutVO vo);
+	public int udtMatAdjust(InoutVO vo);
+	public int delMatAdjust(InoutVO vo);
+
+	public InoutVO getInoutNo(InoutVO vo);
+	
 	// 모달
 	public List<SelectListVO> getMatListModal(SelectListVO vo); // 자재검색 모달 자재리스트
 	

@@ -124,8 +124,8 @@
 		
 			trunc(io_date) BETWEEN #{startDate} AND #{endDate}
 			
-			<if test="ioType != null and ioType != ''">
-				AND inout_no = #{ioType}  
+			<if test="inoutNo != null and inoutNo != ''">
+				AND inout_no = #{inoutNo}  
 			</if> 
 
 			<if test="companyCode != null and companyCode != ''">
@@ -169,7 +169,7 @@
 	<!-- 입출고 인설트 -->
 	<insert id="istInout" parameterType="InoutVO">
 		INSERT INTO inout(io_code, io_date, io_volume, unit_price, material_code, lot_no, inorder_code, inout_no, process_code, comments) 
-		VALUES(#{ioCode}, #{ioDate}, #{ioVolume}, #{unitPrice}, #{materialCode}, #{lotNo}, #{inorderCode}, #{ioType}, #{processCode}, #{comments})
+		VALUES(#{ioCode}, #{ioDate}, #{ioVolume}, #{unitPrice}, #{materialCode}, #{lotNo}, #{inorderCode}, #{inoutNo}, #{processCode}, #{comments})
 	</insert>
 	
 	<!-- 입출고 업데이트 -->
@@ -229,23 +229,85 @@
 		FROM inout io join material m 
 		ON (io.material_code = m.material_code) 
 		GROUP BY io.lot_no
-
-		HAVING TRUNC( (SELECT MAX(io_date) 
+		
+<!-- 
+		 TRUNC( (SELECT MAX(io_date) 
 						FROM inout 
 						WHERE lot_no = io.lot_no and inout_no in ('03', '04'))
 					) NOT BETWEEN #{startDate} AND #{endDate} 
 				OR
-				
 				(SELECT MAX(io_date) 
 				 FROM inout 
 				 WHERE lot_no = io.lot_no 
 						AND inout_no in ('03', '04')
 				) IS NULL 
-				
+ -->			
 		<if test="materialCode != null and materialCode!=''">
-			AND MAX(io.material_code) = #{material_code}
+			HAVING MAX(io.material_code) = #{materialCode} 
+		</if>
+			
+		<if test='exceptZeroStock != null and exceptZeroStock.equals("true")'>
+			<if test="materialCode != null and materialCode!=''">
+				AND 
+			</if>
+			<if test="materialCode == null or materialCode==''">
+				HAVING 
+			</if>
+			F_MAT_COUNT(io.lot_no) > 0
 		</if>
 	</select>
+	
+	<!-- 정산입출고 셀렉트  -->
+	<select id="getMatAdjustList" parameterType="InoutVO" resultType="InoutVO">
+		SELECT io_code, 
+		        lot_no,  
+		        io_date, 
+		        io_volume, 
+		        material_code,
+		        (SELECT unit_no FROM material WHERE material_code = inout.material_code) as unit_no, 
+		        f_find_mat_name(material_code) as material_name, 
+		        (select max(unit_price) from inout i where lot_no = inout.lot_no and inout_no = '01' ) as unit_price,
+		        inout_no, 
+		        comments,
+		        F_MAT_COUNT(lot_no) AS lot_stock, 
+		        (select max(unit_price) from inout i where lot_no = inout.lot_no and inout_no = '01' ) * io_volume 
+		        as stock <!-- 걍 변수이름만 사용한거지 재고가 아니라 총액임 -->
+		FROM inout
+		WHERE inout_no NOT IN ('01','02','05') 
+				AND TRUNC(io_date) BETWEEN #{startDate} AND #{endDate} 
+		<if test='inoutNo != null and inoutNo != ""'>
+			AND inout_no = #{inoutNo}
+		</if>
+		<if test='materialCode != null and materialCode != ""'>
+			AND material_code = #{materialCode}
+		</if>
+	</select>
+	
+	<!-- 정산입출고 인설트 -->
+	<insert id="istMatAdjust" parameterType="InoutVO">
+		INSERT INTO inout(io_code, io_date, material_code, io_volume, lot_no, inout_no, comments)
+		VALUES(#{ioCode}, #{ioDate}, #{materialCode}, #{ioVolume}, #{lotNo}, #{inoutNo}, #{comments})
+	</insert>
+	
+	<!-- 정산입출고 딜리트 -->
+	<insert id="delMatAdjust" parameterType="InoutVO">
+		DELETE FROM inout 
+		WHERE io_code = #{ioCode}
+	</insert>
+	
+	<select id="getInoutNo" parameterType="InoutVO" resultType="InoutVO">
+		SELECT inout_no
+		FROM inout
+		WHERE io_code = #{ioCode}
+	</select>
+	
+	<!-- 정산입출고 업데이트 -->
+	<insert id="udtMatAdjust" parameterType="InoutVO">
+		UPDATE inout
+		SET io_volume = #{ioVolume}, inout_no = #{inoutNo}, comments = #{comments}
+		WHERE io_code = #{ioCode}
+	</insert>
+	
 	<!-- 모달 -->
 	<!-- 자재 리스트 모달 -->
 	<select id="getMatListModal" resultType="SelectListVO" parameterType="SelectListVO">
