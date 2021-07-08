@@ -101,7 +101,7 @@
                         <a class="collapse-item" href="/comp/facAdmin.do">설비 관리</a>
                         <a class="collapse-item" href="/comp/facList.do">설비 조회</a>
                         <a class="collapse-item" href="/comp/repList.do">설비 수리내역 관리</a>
-                        <a class="collapse-item" href="404.html">설비 점검내역 관리</a>
+                        <a class="collapse-item" href="/comp/inspection.do">설비 점검내역 관리</a>
                         <a class="collapse-item" href="/comp/facProdList.do">설비생산이력 조회</a>
                     </div>
                 </div>

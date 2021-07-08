@@ -65,10 +65,9 @@
 			<!-- 필요한것 집어넣기 BODY 부분 -->
 			<div id=matGrid></div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<a href="#" rel="modal:close" ><button class="btn btn-primary">닫기</button></a>
 				<button id=btnSearch type="button" onclick="fnSearch()"
 					class="btn btn-primary">검색</button>
-			
 			</div>
 
 			<script type="text/javascript">
