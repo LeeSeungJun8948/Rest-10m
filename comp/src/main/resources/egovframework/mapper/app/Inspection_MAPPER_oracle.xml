@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.rest.app.fac.service.impl.InspectionMapper">
+<mapper namespace="com.rest.app.fac.inspection.service.impl.InspectionMapper">
    
-    <select id="getIns" resultType="com.rest.app.fac.inspection.vo.InspectionVO" parameterType="com.rest.app.fac.inspection.vo.InspectionVO">
-		select 
-			INSPECTION_CODE,
-			JUDGEMENT,
-			INS_COMMENT,
-			BEFORE_DATE,
-			TODAY,  
-			AFTER_DATE,
-			FAC_CODE  
-		from inspection
-		<!-- where trunc(today) between #{startDate} and #{endDate}  -->
+    <select id="getIns" resultType="com.rest.app.fac.inspection.vo.InspectionVO">
+		select * from inspection
     </select>
     
 </mapper>  

@@ -164,6 +164,8 @@ $('#btnDel').on('click',function(){
 
 
 // 모달
+var forGrid = false;
+
 $("#btnCompModal").on("click", function(e) {
     $('#compContent').load("compModal.do");
 });

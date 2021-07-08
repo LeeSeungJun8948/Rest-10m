@@ -10,18 +10,23 @@
 }
 
 .red{	
-	background-color: #FFD2D2;
+	b-ac-kgro-und-color: #FFD2D2;
+}
+
+.blackText{
+	color: #000000;
+	background-color: #F4F4F4;
 }
 </style>
 <div class="row">
 	<div class="col-md-8">
-		<h3 class="h3 mb-4 text-gray-700">자재재고조정 관리</h3>
+		<h3 class="h3 mb-4 text-gray-700">자재재고조정 전표작성</h3>
 	</div>
 </div>
 
 <form id="searchFrm" name="searchFrm">
 	<div class="row">
-		<div class="mb-2 col-md-9">
+		<div class="mb-2 col-md-5">
 			<table class="table">
 				<tbody>
 					<tr>
@@ -39,7 +44,8 @@
 								</div>
 							</div>
 						</td>
-						<th>정산일자</th>
+						<!-- 
+						<th>미정산일자</th>
 						<td>
 							<div class="row">
 								<div class="col-md-5">
@@ -51,11 +57,20 @@
 								</div>
 							</div>
 						</td>
-						
+						 -->
+						<td>
+							<div class="form-check mt-1">
+								<input class="form-check-input" type="checkbox" id="ckExceptZeroStock" name="ckExceptZeroStock" value="true">
+								<label class="form-check-label" for="ckExceptZeroStock"> 재고0 제외 </label>
+								
+								<input hidden id="exceptZeroStock" name="exceptZeroStock" type="text">
+							</div>
+						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+		<div class="col-md-2"></div>
 		<div class="col-md-3 mb-4" align="right" role="form">
 			<button type="button" class="btn btn-primary" id="btnRead">재고조회</button>
 		</div>
@@ -78,7 +93,7 @@
 <div class="modal fade" id="matModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" id="matContent" align="center">
-		</div>
+		</div> 
 	</div>
 </div>
-<script type="text/javascript" src="js/app/mat/matStockForm.js"></script>
+<script type="text/javascript" src="js/app/mat/matAdjustForm.js"></script>

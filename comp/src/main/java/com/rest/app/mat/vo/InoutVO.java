@@ -1,6 +1,7 @@
 package com.rest.app.mat.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -45,9 +46,11 @@ public class InoutVO {
 	
 	String comments;
 	
-	String ioType; // 01 : 입고, 02 : 출고, 03 : 정산입고, 04 : 정산출고
+	String inoutNo; // 01 : 입고, 02 : 출고, 03 : 정산입고, 04 : 정산출고, 05: 재입고, 06: 정산(0)
 	String sort;
 	
 	String processCode;
 	String processName;
+	
+	String exceptZeroStock;
 }
