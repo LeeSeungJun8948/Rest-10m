@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rest.app.prod.service.impl.ErrorListMapper">
+	<select id="getErrorList" resultType="com.rest.app.prod.vo.ErrorListVO">
+		select c.process_name, TO_CHAR(a.work_date, 'YYYY-MM-DD')AS work_date, a.work_count, a.error_count, d.product_code, 
+      	d.product_name, a.product_lot, a.work_no, a.error_code
+		from work a, process c, product d
+		where a.process_code = c.process_code
+		and a.product_code = d.product_code	
+			<if test = "startDate != null and startDate != '' and endDate != null and endDate != ''">
+			AND trunc(a.work_date) BETWEEN #{startDate} AND #{endDate} 
+			</if>
+			<if test="productLot != null and productLot != ''">
+				AND product_lot = #{productLot}
+			</if>	
+	</select>
+</mapper>

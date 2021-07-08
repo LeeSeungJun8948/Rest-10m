@@ -19,7 +19,11 @@
 	</delete>
 	
 	<update id="updateEmp" parameterType="com.rest.app.comm.vo.EmployeeVO">
-		update employee set phone = #{phone}, auth = #{auth}, salary = #{salary} where id=#{id} 
+		update employee set id = #{id}, employee_name = #{employeeName}, pwd = #{pwd}, 
+		phone = #{phone}, auth = #{auth}, salary = #{salary}, email = {email}
+		dept = #{dept}, hire_date = #{hireDate}, company_code = #{companyCode}, 
+		birthday = #{birthDay}
+		where emp_code=#{empCode} 
 	</update>
 	
 	<insert id ="insertEmp" parameterType="com.rest.app.comm.vo.EmployeeVO">

@@ -7,6 +7,7 @@ import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.prod.vo.DetailPlanVO;
 import com.rest.app.prod.vo.InputMatVO;
 import com.rest.app.prod.vo.PlanVO;
+import com.rest.app.prod.vo.WorkVO;
 
 public interface ProdService {
 	List<OrdersVO> getUnplanOrders(Map<String, Object> param);
@@ -26,4 +27,6 @@ public interface ProdService {
 	String findProductName(String productCode);
 	List<InputMatVO> readInputMat(Map<String, Object> param); 
 	PlanVO selectPlanCode();
+	List<WorkVO> searchWork(Map<String, Object> param);
+	int deleteWork(String workNo);
 }

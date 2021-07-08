@@ -31,5 +31,5 @@
    	<a class="btn btn-primary" href="#" rel="modal:close">닫기</a>
 </div>
 
-<link href="${pageContext.request.contextPath}/css/app/prod/planModal.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/app/prod/modal.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="js/app/prod/planModal.js"></script>
