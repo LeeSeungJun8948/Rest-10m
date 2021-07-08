@@ -14,7 +14,7 @@ public interface BusinessMapper {
 	
 	public List<OrdersVO> getExport(Map<String, Object> param);//출고읽기
 
-	public List<OrdersVO> getUnExport(Map<String, Object> param);//미출고읽기
+	public List<OrdersVO> getUnExportModal(Map<String, Object> param);//미출고읽기
 
 	public List<CompanyVO> getCompany(CompanyVO vo);//고객사 모달
 	

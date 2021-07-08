@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+
 <h1 class="h3 mb-4 text-gray-700">출고관리</h1>
 <div class="mb-4" align="right">
 	<button type="button" class="btn btn-primary" id="btnView">조회</button>
@@ -21,8 +20,8 @@
 						<td><input type="date" name="fromDate" id="fromDate"
 							value=${exportDate }> ~ <input type="date" name="toDate"
 							id="toDate" value=${exportDate }></td>
-						<th>출고번호</th>
-						<td><input type="export" id="Lot" name="Lot"></td>
+						<!-- <th>출고번호</th>
+						<td><input type="export" id="Lot" name="Lot"></td> -->
 					</tr>
 					<tr>
 						<th>고객사코드</th>
@@ -49,10 +48,11 @@
 		</div>
 		<div>
 			<form id="dateForm" name="dateForm">
-				<span>납기일자 </span><input type="date" id="inDate" name="inDate">
-				<span> ~ </span><input type="date" id="outDate" name="outDate">&nbsp;
-				<button type="button" class="btn btn-primary" id="btnRead">미출고
-					읽기</button>
+				<span>납기일자 </span><input type="date" id="fromDate" name="fromDate"value=${outDate }>
+				<span> ~ </span><input type="date" id="toDate" name="toDate"value=${outDate }>&nbsp;
+					<button id="btnunExportModal" type="button" class="btn btn-primary" 
+					data-remote="false" data-toggle="modal" data-target="#unExportModal">
+				미출고 읽기</button>
 			</form>
 		</div>
 	</div>
@@ -64,4 +64,13 @@
 <div class="col-lg-12">
 	<div id="grid" />
 </div>
+
+
+<div class="modal fade" id="unExportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="unExportContent" align="center">
+		</div>
+	</div>
+</div>
+
 <script type="text/javascript" src="js/app/bus/exportForm.js"></script>

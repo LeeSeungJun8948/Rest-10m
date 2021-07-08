@@ -1,7 +1,13 @@
+$( document ).ready(function() {	
+	document.getElementById('fromDate').valueAsDate = new Date();
+	document.getElementById('toDate').valueAsDate = new Date();
+});
+
+
 var dataSource = {
 	contentType: 'application/json',
 	api: {
-		readData: { url: 'readUnExport.do', method: 'POST' },
+		readData: { url: 'readExport.do', method: 'POST' },
 		modifyData: { url: 'gridSave.do', method: 'PUT' },
 	}
 }
@@ -117,9 +123,13 @@ $('#btnDel').on('click', function(){
 });
 
 // 미출고 읽기 버튼
-$('#btnRead').on('click',  function(){
-	var param = $('#dateForm').serializeObject();
-	grid.readData(1, param, true);
+$('#btnunExportModal').on('click',  function(){
+	  $('#unExportContent').load("unExportModal.do");
+});
+//제품코드입력창
+$('#productCode').on('click', function(){
+	$('#unExportModal').modal('show');
+	$('#unExportContent').load("unExportModal.do");
 });
 
 // 추가버튼
@@ -139,4 +149,9 @@ grid.on('check', ev => {
 // 전체체크 해제
 grid.on('uncheck', ev => {
 });
+// ???????
 
+
+function checkNull(value){
+	return value != null && value != '' && value != '[object HTMLInputElement]';
+}
