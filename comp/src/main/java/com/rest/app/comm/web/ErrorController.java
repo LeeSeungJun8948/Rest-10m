@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.comm.service.ErrorService;
-import com.rest.app.comm.vo.ErrorListVO;
 import com.rest.app.comm.vo.ErrorVO;
 
 import lombok.Data;
@@ -25,23 +24,12 @@ class ErrorGridData {
 	List<ErrorVO> updatedRows;
 	List<ErrorVO> createdRows;
 }
-@Data
-class ErrorListGridData {
-	List<ErrorListVO> deletedRows;
-	List<ErrorListVO> updatedRows;
-	List<ErrorListVO> createdRows;
-}
 
 @Controller
 public class ErrorController {
 
 	@Autowired
 	ErrorService dao;
-	
-	@RequestMapping("errorList.do")
-	public String errorList(Model model, ErrorVO vo) {
-		return "comm/errorList.page";
-	}
 	
 	//불량 코드,명 리스트 
 	@RequestMapping("/ajax/errorList.do")
@@ -55,24 +43,11 @@ public class ErrorController {
 		return data;
 	}
 	
-	//불량내역 리스트 
-	@RequestMapping("/ajax/errorAllList.do")
-	@ResponseBody
-	public Map<String, Object> ajaxGeterrorAllList(ErrorListVO vo) {
-		Map<String, Object> datas = new HashMap<String, Object>();
-		Map<String, Object> data = new HashMap<String, Object>();
-		data.put("result", true);
-		datas.put("contents", dao.getAllErrorList(vo));
-		data.put("data", datas);
-		return data;
-	}
-	
-	
 	// 불량코드,명 삭제
 	@PostMapping(value = "/ajax/deleteError.do")
 	@ResponseBody
-	public Map deleteBom(@RequestBody ErrorGridData errorGridData) {
-		Map<String, Object> data = new HashMap();
+	public Map<String, Object>deleteBom(@RequestBody ErrorGridData errorGridData) {
+		Map<String, Object> data = new HashMap<String, Object>();
 		for (int i = 0; i < errorGridData.deletedRows.size(); i++) {
 			dao.deleteError(errorGridData.deletedRows.get(i));
 		}
@@ -98,34 +73,9 @@ public class ErrorController {
 		data.put("data", errorGridData.updatedRows);
 		return data;
 	}
-		
-	//불량내역 리스트  modify
-	@PutMapping(value = "/ajax/modifyErrorList.do")
+	@RequestMapping("/ajax/getNewErrorCode.do")
 	@ResponseBody
-	public Map<String, Object> modifyErrorList(@RequestBody ErrorListGridData errorListGridData) {
-		
-		Map<String, Object> data = new HashMap<String, Object>();
-		for (int i = 0; i < errorListGridData.createdRows.size(); i++) {
-			dao.insertErrorList(errorListGridData.createdRows.get(i));
-		}
-		for (int i = 0; i < errorListGridData.updatedRows.size(); i++) {
-			dao.updateErrorList(errorListGridData.updatedRows.get(i));
-		}
-		data.put("result", true);
-		data.put("data", errorListGridData.createdRows);
-		data.put("data", errorListGridData.updatedRows);
-		return data;
-		}	
-	// 불량코드,명 삭제
-	@PostMapping(value = "/ajax/deleteErrorList.do")
-	@ResponseBody
-	public Map deleteErrorList(@RequestBody ErrorListGridData errorListGridData) {
-		Map<String, Object> data = new HashMap();
-		for (int i = 0; i < errorListGridData.deletedRows.size(); i++) {
-			dao.deleteErrorList(errorListGridData.deletedRows.get(i));
-		}
-		data.put("result", true);
-		data.put("data", errorListGridData.deletedRows);
-		return data;
-		}
+	public ErrorVO getNewErrorCode(ErrorVO vo) {
+		return dao.MaxErrorCode();
+	}
 }

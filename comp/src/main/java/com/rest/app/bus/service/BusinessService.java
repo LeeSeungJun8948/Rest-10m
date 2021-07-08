@@ -14,7 +14,7 @@ public interface BusinessService {
 	
 	public List<OrdersVO> getExport(Map<String, Object> param);//출고검색
 	
-	public List<OrdersVO> getUnExport(Map<String, Object> param);//미출고검색
+	public List<OrdersVO> getUnExportModal(Map<String, Object> param);//미출고검색
 	
 	public List<CompanyVO> getCompany(CompanyVO vo);//고객사리스트 모달창
 

@@ -70,8 +70,8 @@
                         <a class="collapse-item" href="/comp/inorderForm.do">발주 조회</a>
                         <a class="collapse-item" href="/comp/matInForm.do">자재입고 관리</a>
                         <a class="collapse-item" href="/comp/matOutForm.do">자재출고 관리</a>
-                        <a class="collapse-item" href="/comp/matStockList.do">자재재고 조회</a>
-                        <a class="collapse-item" href="/comp/matStockForm.do">자재재고조정 관리</a>
+                        <a class="collapse-item" href="/comp/matAdjustList.do">자재재고조정 전표 관리</a>
+                        <a class="collapse-item" href="/comp/matAdjustForm.do">자재재고조정 전표 작성</a>
                     </div>
                 </div>
             </li>
@@ -86,7 +86,7 @@
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/comp/managePlan.do">생산계획 관리</a>
-                        <a class="collapse-item" href="/comp/manageWork.do">생산작업 관리</a>
+                        <a class="collapse-item" href="/comp/detailErrorList.do">불량내역 조회</a>
                     </div>
                 </div>
             </li>

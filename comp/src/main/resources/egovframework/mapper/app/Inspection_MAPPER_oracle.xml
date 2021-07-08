@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.rest.app.fac.service.impl.InspectionMapper">
+<mapper namespace="com.rest.app.fac.inspection.service.impl.InspectionMapper">
    
-    <select id="getIns" resultType="com.rest.app.fac.inspection.vo.InspectionVO" parameterType="com.rest.app.fac.inspection.vo.InspectionVO">
-		select 
-			INSPECTION_CODE,
-			JUDGEMENT,
-			INS_COMMENT,
-			BEFORE_DATE,
-			TODAY,  
-			AFTER_DATE,
-			FAC_CODE  
-		from inspection
-		<!-- where trunc(today) between #{startDate} and #{endDate}  -->
+    <select id="getIns" resultType="com.rest.app.fac.inspection.vo.InspectionVO">
+		select * from inspection
+		where trunc(today) between #{startDate} and #{endDate}
     </select>
     
+    <delete id="deleteIns" parameterType="com.rest.app.fac.inspection.vo.InspectionVO">
+		delete from inspection
+		where inspection_code = #{inspectionCode}    
+    </delete>
+    
+    <select id="getInsCode" resultType="com.rest.app.fac.inspection.vo.InspectionVO">
+    	select max(inspection_code) + 1 as inspection_code from inspection
+    </select>
+    
+    <insert id="insertIns" parameterType="com.rest.app.fac.inspection.vo.InspectionVO">
+    	insert into inspection
+    	values (inspection_seq.nextval, #{judgement}, #{insComment},
+    			#{beforeDate}, #{today}, #{afterDate}, #{facCode}
+    			)
+    </insert>
+    
+    <update id="updateIns" parameterType="com.rest.app.fac.inspection.vo.InspectionVO">
+    	update inspection
+    	set INSPECTION_CODE=#{inspectionCode}, 
+    		JUDGEMENT=#{judgement}, INS_COMMENT=#{insComment},
+    		BEFORE_DATE=#{beforeDate}, TODAY=#{today}, AFTER_DATE=#{afterDate},
+    		FAC_CODE=#{facCode}
+    	where INSPECTION_CODE=#{inspectionCode}
+    </update>
 </mapper>  

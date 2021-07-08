@@ -2,6 +2,7 @@ package com.rest.app.mat.service;
 
 import java.util.List;
 
+import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
@@ -49,6 +50,11 @@ public interface MaterialService {
 	
 	public List<InoutVO> getMatLotStock(InoutVO vo); // 자재 lot별 재고 (재고조정용)
 	
+	public List<InoutVO> getMatAdjustList(InoutVO vo);
+	public int istMatAdjust(InoutVO vo);
+	public int udtMatAdjust(InoutVO vo);
+	public int delMatAdjust(InoutVO vo);
+	
 	// 모달
 	public List<SelectListVO> getMatListModal(SelectListVO vo); // 자재검색 모달 자재리스트
 	
@@ -59,5 +65,9 @@ public interface MaterialService {
 	public List<SelectListVO> getCompListModal(SelectListVO vo); // 업체검색 모달 업체리스트
 	
 	public List<InorderVO> getInorderListModal(InorderVO vo); // 발주검색 모달 미입고량 0 이상 발주리스트
+
+
+	
+	public List<SelectListVO> getProdListModal(SelectListVO vo); // 제품검색
 	
 }

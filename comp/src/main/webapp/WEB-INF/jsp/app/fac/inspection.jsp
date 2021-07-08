@@ -13,11 +13,11 @@
 						<td>
 							<div class="row">
 								<div class="col-md-5">
-									<input type="date" class="form-control" id="startDate" name="startDate">
+									<input type="date" class="form-control" id="startDate" name="startDate" >
 								</div>
 								~ 
 								<div class="col-md-5">
-									<input type="date" class="form-control" id="endDate" name="endDate">
+									<input type="date" class="form-control" id="endDate" name="endDate" >
 								</div>
 								<button type="button" class="btn btn-primary" id="btnRead">조회</button>
 							</div>
@@ -27,44 +27,11 @@
 			</table>
 		</div>
 	</div>
-<div id="grid"></div>
 </form>
-<script>
-const dataSource = {
-		api : {
-			readData : {url: 'ajax/inspectionList.do',
-						method:'GET' }
-		},
-		contentType: 'application/json'
-	};
-
-	const grid = new tui.Grid({
-		el : document.getElementById('grid'),
-		data : dataSource,
-		scrollX : false,
-		scrollY : false,
-		rowHeaders : [ 'checkbox' ],
-		columns : [ {
-			header : '정기점검코드',
-			name : 'inspectionCode'
-		}, {
-			header : '판정',
-			name : 'judgement'
-		}, {
-			header : '조치사항',
-			name : 'insComment'
-		}, {
-			header : '전점검일',
-			name : 'beforeDate'
-		}, {
-			header : '점검일',
-			name : 'today'
-		}, {
-			header : '차기점검일',
-			name : 'afterDate'
-		}, {
-			header : '설비코드',
-			name : 'facCode'
-		}]
-	});
-</script>
+<div class="mb-4" align="left">
+	<button type="button" class="btn btn-primary" id="btnSave" name="btnSave" >저장</button>
+	<button type="button" class="btn btn-info" id="btnAdd" name="btnAdd" >추가</button>
+	<button type="button" class="btn btn-info" id="btnDel" name="btnDel" >삭제</button>
+</div>
+<div id="grid"></div>
+<script type="text/javascript" src="js/app/fac/inspection.js"></script>

@@ -142,4 +142,29 @@ public class MaterialServiceImpl implements MaterialService{
 	public List<InoutVO> getMatLotStock(InoutVO vo) {
 		return mapper.getMatLotStock(vo);
 	}
+
+	@Override
+	public int istMatAdjust(InoutVO vo) {
+		return mapper.istMatAdjust(vo);
+	}
+
+	@Override
+	public int udtMatAdjust(InoutVO vo) {
+		return mapper.udtMatAdjust(vo);
+	}
+
+	@Override
+	public int delMatAdjust(InoutVO vo) {
+		return mapper.delMatAdjust(vo);
+	}
+
+	@Override
+	public List<InoutVO> getMatAdjustList(InoutVO vo) {
+		return mapper.getMatAdjustList(vo);
+	}
+
+	@Override
+	public List<SelectListVO> getProdListModal(SelectListVO vo) {
+		return mapper.getProdListModal(vo);
+	}
 }
