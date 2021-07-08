@@ -48,8 +48,10 @@
 		</div>
 		<div>
 			<form id="dateForm" name="dateForm">
-				<span>납기일자 </span><input type="date" id="fromDate" name="fromDate"value=${outDate }>
-				<span> ~ </span><input type="date" id="toDate" name="toDate"value=${outDate }>&nbsp;
+				<span>납기일자 </span>
+				<input type="date" id="fromDate" name="fromDate"value=${outDate }>
+				<span> ~ </span>
+				<input type="date" id="toDate" name="toDate"value=${outDate }>&nbsp;
 					<button id="btnunExportModal" type="button" class="btn btn-primary" 
 					data-remote="false" data-toggle="modal" data-target="#unExportModal">
 				미출고 읽기</button>

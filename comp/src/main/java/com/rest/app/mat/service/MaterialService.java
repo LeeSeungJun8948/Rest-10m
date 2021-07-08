@@ -2,6 +2,7 @@ package com.rest.app.mat.service;
 
 import java.util.List;
 
+import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
@@ -59,5 +60,7 @@ public interface MaterialService {
 	public List<SelectListVO> getCompListModal(SelectListVO vo); // 업체검색 모달 업체리스트
 	
 	public List<InorderVO> getInorderListModal(InorderVO vo); // 발주검색 모달 미입고량 0 이상 발주리스트
+
+
 	
 }
