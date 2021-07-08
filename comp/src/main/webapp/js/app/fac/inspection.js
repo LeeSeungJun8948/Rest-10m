@@ -1,4 +1,4 @@
-const dataSource = {
+/*const dataSource = {
 	api : {
 		readData : {url: 'ajax/inspectionList.do',
 					method:'GET' }
@@ -40,4 +40,4 @@ $('#btnRead').on('click',  function(){
 	var param = $('#frm').serializeObject();
 	console.log(param)
 	grid.readData(1, param, true);
-});
+});*/

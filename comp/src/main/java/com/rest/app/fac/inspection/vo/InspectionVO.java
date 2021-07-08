@@ -14,18 +14,8 @@ public class InspectionVO {
 	int inspectionCode;
 	String judgement;
 	String insComment;
-	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
 	Date beforeDate;
-	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
 	Date today;
-	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	Date afterDate;
-	
+	Date afterDate;	
 	int facCode;
 }
