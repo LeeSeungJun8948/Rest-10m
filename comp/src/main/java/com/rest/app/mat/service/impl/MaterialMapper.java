@@ -66,5 +66,6 @@ public interface MaterialMapper {
 	
 	public List<InorderVO> getInorderListModal(InorderVO vo); // 발주검색 모달 미입고량 0 이상 발주리스트
 	
+	public List<SelectListVO> getProdListModal(SelectListVO vo); // 제품검색
 
 }

@@ -137,6 +137,12 @@ const adjustGrid = new tui.Grid({
         			var summaryResult = (summary.sum);
         			return format(summaryResult);
                 } 
+            },
+			stock: {
+                template(summary) {
+        			var summaryResult = (summary.sum);
+        			return format(summaryResult);
+                } 
             }
 		}
 	}

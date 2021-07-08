@@ -376,6 +376,21 @@
 		ORDER BY company_code
 	</select>
 	
+	<!-- 제품 리스트 모달 -->
+	<select id="getProdListModal" parameterType="SelectListVO" resultType="SelectListVO">
+		SELECT product_code, 
+				product_name
+		FROM product
+		
+		<where>
+			<if test="keyword != null and keyword !=''">
+				${searchCondition} like '%'||#{keyword}||'%'
+			</if>
+		</where>
+		ORDER BY product_code
+	</select>
+	
+	<!-- 발주리스트 모달 -->
 	<select id="getInorderListModal" parameterType="InorderVO" resultType="InorderVO">
 		SELECT inorder_code, 
 	        inorder_date, 
