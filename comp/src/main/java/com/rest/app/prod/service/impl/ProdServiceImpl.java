@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rest.app.bus.vo.OrdersVO;
+import com.rest.app.comm.vo.EmployeeVO;
+import com.rest.app.comm.vo.ErrorVO;
 import com.rest.app.prod.service.ProdService;
 import com.rest.app.prod.vo.DetailPlanVO;
 import com.rest.app.prod.vo.InputMatVO;
@@ -111,5 +113,20 @@ public class ProdServiceImpl implements ProdService {
 	@Override
 	public int deleteWork(String workNo) {
 		return mapper.deleteWork(workNo);
+	}
+
+	@Override
+	public List<EmployeeVO> searchEmp(Map<String, Object> param) {
+		return mapper.searchEmp(param);
+	}
+
+	@Override
+	public List<ErrorVO> searchError(Map<String, Object> param) {
+		return mapper.searchError(param);
+	}
+
+	@Override
+	public int insertWork(WorkVO vo) {
+		return mapper.insertWork(vo);
 	}
 }

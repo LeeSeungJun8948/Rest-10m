@@ -1,5 +1,8 @@
 package com.rest.app.bus.vo;
 
+import lombok.Data;
+
+@Data
 public class DetailExportVO {
 
 	int idx;//순번

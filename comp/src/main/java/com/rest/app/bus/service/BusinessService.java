@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rest.app.bus.vo.CompanyVO;
+import com.rest.app.bus.vo.DetailExportVO;
 import com.rest.app.bus.vo.ExportVO;
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.comm.vo.BomVO;
@@ -28,6 +29,10 @@ public interface BusinessService {
 
 	public int deleteExport(String exportCode);
 
+	int insertDetailExport(DetailExportVO vo); 
+	int updateDetailExport(DetailExportVO vo);
+	int deleteDetailExport(int idx);
+	int deleteAllDetailExport(String exportCode);
 
 
 	
