@@ -8,7 +8,7 @@ var dataSource = {
 	contentType: 'application/json',
 	api: {
 		readData: { url: 'readExport.do', method: 'POST' },
-		modifyData: { url: 'gridSave.do', method: 'PUT' },
+		modifyData: { url: 'saveDetailExport.do', method: 'PUT' },
 	}
 }
 
@@ -21,7 +21,10 @@ const grid = new tui.Grid({
 	columns : [ {
 		header : '제품코드',
 		name : 'productCode',
-		editor: 'text'
+		editor: 'text',
+		onAfterChange(ev) {
+        	findProductName(ev);
+      		}
 		}, { 
 		header : '제품명',
 		name : 'productName'
@@ -66,23 +69,6 @@ const grid = new tui.Grid({
 	]
 });
 
-$.fn.serializeObject = function() {
-	var o = {};
-	var a = this.serializeArray();
-	$.each(a, function() {
-		if (o[this.name]) {
-			if (!o[this.name].push) {
-				o[this.name] = [o[this.name]];
-			}
-			o[this.name].push(this.value || '');
-		} else {
-			o[this.name] = this.value || '';
-		}
-	});
-	return o;
-};
-		
-
 // 조회 버튼
 $('#btnView').on('click', function(){
 	   var param = $('#inputFrm').serializeObject();
@@ -95,18 +81,30 @@ $('#btnReset').on('click', function(){
 	grid.clear();
 });
 
-// 저장 버튼
-$('#btnSave').on('click', function(){
-	$.ajax({
-		type: 'POST',
-		url: 'saveExport.do',
-		data: $('#inputFrm').serialize(),
-		dataType: 'json',
-		success: function(data){
-		}
-	});
-	grid.request('modifyData');
-	toastr.success("저장되었습니다.");
+// 계획저장 버튼
+$('#btnSave').on('click', function() {
+	if (formCheck()){
+		$.ajax({
+			type: 'POST',
+			url: 'saveExport.do',
+			data: $('#inputFrm').serialize(),
+			dataType: 'json',
+			async: false,
+			success: function(data){
+				var exportCode = data.data.contents.exportCode;
+				$('#exportCode').val(exportCode);
+				grid.setColumnValues('exportCode', exportCode);
+			}
+		});
+		grid.request('modifyData');
+		grid.on('successResponse', function(ev){
+			var text = JSON.parse(ev.xhr.responseText);
+			if(text.check == 'save') {
+				grid.readData(1, {exportCode: $('#exportCode').val()}, true);
+			}
+		});
+		toastr.success("저장되었습니다.");
+	}
 });
 
 // 삭제 버튼
@@ -116,7 +114,7 @@ $('#btnDel').on('click', function(){
 		url: 'deleteExport.do',
 		data: $('#exportCode').val(),
 		dataType: 'json',
-		success: function(data){
+		success: function(){
 			toastr.success("삭제되었습니다.");
 		}
 	});
@@ -124,13 +122,15 @@ $('#btnDel').on('click', function(){
 
 // 미출고 읽기 버튼
 $('#btnunExportModal').on('click',  function(){
-	  $('#unExportContent').load("unExportModal.do");
+	var param = $('#dateForm').serializeObject();
+	grid.readData(1, param, true);
 });
-//제품코드입력창
+
+/*//제품코드입력창
 $('#productCode').on('click', function(){
 	$('#unExportModal').modal('show');
 	$('#unExportContent').load("unExportModal.do");
-});
+});*/
 
 // 추가버튼
 $('#btnGridAdd').on('click', function(){
@@ -151,7 +151,50 @@ grid.on('uncheck', ev => {
 });
 // ???????
 
+// 제품명찾기
+function findProductName(ev){
+	var rowKey = ev.rowKey;
+	var productCode = grid.getValue(rowKey, 'productCode');
+	
+	if(checkNull(productCode)){
+		$.ajax({
+			type: 'POST',
+			url: 'findProductName.do',
+			data: {'productCode': productCode},
+			success: function(data) {
+				grid.setValue(rowKey, 'productName', data, false);
+			}
+		});	
+	}
+}
 
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
+
+// 폼체크
+function formCheck() {
+	if(!checkNull($('#fromDate').val()) || !checkNull($('#searchKeywordFrom').val()) 
+		|| !checkNull($('#searchKeywordFromNm').val())) {
+		toastr.warning('값을 입력해주십시오.');
+		return false;
+	} else {
+		return true;
+	}
+}
+
+/*$.fn.serializeObject = function() {
+	var o = {};
+	var a = this.serializeArray();
+	$.each(a, function() {
+		if (o[this.name]) {
+			if (!o[this.name].push) {
+				o[this.name] = [o[this.name]];
+			}
+			o[this.name].push(this.value || '');
+		} else {
+			o[this.name] = this.value || '';
+		}
+	});
+	return o;
+};*/

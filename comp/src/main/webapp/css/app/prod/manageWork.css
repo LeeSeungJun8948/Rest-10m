@@ -1,3 +1,7 @@
+.modal {
+	text-align: center;
+}
+
 .modal-dialog.modal-large {
 	display: inline-block; 
 	vertical-align: middle;
@@ -5,11 +9,10 @@
 	height: 80%; 
 }
 
-.modal-content {
+#workContent {
 	height: 100%;
 }
 
-.modal {
-	text-align: center;
+#workModal {
+	z-index: 1050;
 }
-

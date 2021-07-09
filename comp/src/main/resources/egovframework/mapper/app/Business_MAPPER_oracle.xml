@@ -54,13 +54,9 @@
 		where o.product_code = p.product_code
 		and o.product_code =
 		s.product_code
-		and e.export_date=#{exportDate}
-			<if test="exportCode !=null and exportCode !=''">
-				and e.export_code=#{exportCode}
-			</if>
-			<if test="companyCode !=null and companyCode !=''">
-				and o.company_code=#{companyCode}
-			</if>
+		and e.export_date BETWEEN TO_DATE(#{fromDate}, 'YYYY-MM-DD')
+		AND
+		TO_DATE(#{toDate}, 'YYYY-MM-DD')
 	</select>
 	<select id="getUnExportModal"
 		resultType="com.rest.app.bus.vo.OrdersVO"
@@ -80,7 +76,25 @@
 		AND
 		TO_DATE(#{toDate}, 'YYYY-MM-DD')	</select>
 
-
+	
+	<insert id="insertDetailExport" parameterType="com.rest.app.bus.vo.DetailExportVO">
+		<selectKey keyProperty="idx" resultType="int" order="BEFORE">
+        	SELECT NVL(MAX(idx),0)+1 FROM detailExport
+    	</selectKey>    
+		INSERT INTO detailExport VALUES(
+		#{idx}, #{exportCode},	#{orderNo}, null, #{productCode}, #{exportCount}, #{price}, #{comments}
+		)
+	</insert>
+	<update id="updateDetailExport" parameterType="com.rest.app.bus.vo.DetailExportVO">
+		UPDATE detailExport SET export_count = #{exportCount}, comments = #{comments}
+		WHERE product_lot = #{productLot}
+	</update>
+	<delete id="deleteDetailExport">
+		DELETE FROM detailExport WHERE idx = #{idx}
+	</delete>
+	<delete id="deleteAllDetailExport">
+		DELETE FROM detailExport WHERE export_code = #{exportCode}
+	</delete>
 
 
 	<select id="getProInventory"

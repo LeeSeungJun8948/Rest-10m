@@ -1,65 +1,68 @@
-const dataSource = {
-	api : {
-		readData : {
-		url : 'ajax/bomList.do',
-		method : 'GET'
-		},
-	},
-	contentType : 'application/json'
-};
+(function($) {
+	$("#workEmpModal").on('shown.bs.modal', function() {
 
-const matGrid = new tui.Grid({
-	el : document.getElementById('matGrid'),
-	data : dataSource,
-	scrollX : false,
-	scrollY : false,
-	rowHeaders : [ 'rowNum' ],
-	columns : [ {
-		header : '제품코드',
-		name : 'productCode',
-		}, {
-		header : '제품명',
-		name : 'productName',
-		}, {
-		header : '규격',
-		name : 'unitNo',
-		} ]
-});
+		if (!checkNull($('#empGrid').html())) {
+			var empData = {
+				api: {
+					readData: {
+						url: 'ajax/workEmpModal.do',
+						method: 'POST'
+					}
+				},
+				contentType: 'application/json'
+			};
+			var empGrid = new tui.Grid({
+				el: document.getElementById('empGrid'),
+				data: empData,
+				scrollX: false,
+				scrollY: true,
+				bodyHeight: 360,
+				columns: [{
+					header: '사원번호',
+					name: 'empCode',
+					align: 'center',
+					width: 80
+				}, {
+					header: '부서',
+					name: 'dept',
+					align: 'center'
+				}, {
+					header: '직책',
+					name: 'auth',
+					align: 'center'
+				}, {
+					header: '사원명',
+					name: 'employeeName',
+					align: 'center'
+				}]
+			});
 
-matGrid.on('click', function(ev) {
-	var values = matGrid.getRow(ev.rowKey);
-	var prdCode = values.productCode;
-	$('#productCode').val(prdCode);
-	console.log(prdCode);
-});
+			$("#btnReadModal").on("click", function() {
+				var param = $('#frmEmpModal').serializeObject();
+				empGrid.readData(1, param, true);
+			});
 
-$.fn.serializeObject = function() {
-	var o = {};
-	var a = this.serializeArray();
-	$.each(a, function() {
-		if (o[this.name]) {
-			if (!o[this.name].push) {
-				o[this.name] = [ o[this.name] ];
-				}
-			o[this.name].push(this.value || '');
-		} else {
-			o[this.name] = this.value || '';
+			var empCode;
+			var empName;
+			empGrid.on('click', (ev) => {
+				empName = empGrid.getValue(ev.rowKey, 'employeeName');
+				empCode = empGrid.getValue(ev.rowKey, 'empCode');
+			});
+
+			$('#btnSelect').on('click', function() {
+				select();
+			});
+
+			empGrid.on('dblclick', function() {
+				select();
+			});
+
+			function select() {
+				$('#empName').val(empName);
+				$('#empCode').val(empCode);
+				$('#workEmpModal').modal('hide');
+				$('#modalContent').remove();
+			}
 		}
 	});
-	return o;
-};
-
-$("#btnCheck").on("click", function() {
-	var param = $('#productSearchForm').serializeObject();
-	matGrid.readData(1, param, true);
-})
-
-function fnSearch() {
-	$("#frm").submit();
-}
-
-// bom 자재리스트 버튼
-$('#btnSearch').on('click', function() {
-	var prm = $('#frm').serializeObject();
-	grid.readData(1, prm, true);
-})
+})(jQuery);
