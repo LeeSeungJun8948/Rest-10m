@@ -1,20 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<style>
-.modal-backdrop {
-       top: 0;
-    left: 0;
-    z-index: 1040;
-    width: 100vw;
-    height: 100vh;
-    background-color: #000;
-}
 
-
-.blocker, .modal {
-	z-index: 100;
-	}
-</style>
 
 <div id="modalContent" >
 	<div class="modal-header">

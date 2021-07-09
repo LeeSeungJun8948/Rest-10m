@@ -20,7 +20,7 @@
 				수정</button>
 		</div>
 	</div>
-	
+	<div class="flex row">
 	<div class="col-9 input-group input-group-sm align-self-start mt-4">
 		<form id="frm" class="form-inline" role="form">
 			<div class="row">
@@ -53,29 +53,43 @@
 				<div class="input-group-prepend col-lg-4" >
 						<span class="input-group-text" >규격코드</span>
 						<input readonly id="stdNo" name="stdNo" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-					</div>
-				<div class="input-group-prepend col-4">
-					<span class="input-group-text" >단위</span>
-					<select name="unitNo" id="unitNo" class="form-control">
-						<c:forEach var="un" items="${unit }">
-							<option value="${ un.codeId }">${un.code }</option>
-						</c:forEach>
-					</select>
 				</div>
-				
-				<div class="col-12 mb-3"></div>
-				
 				<div class="input-group-prepend col-4">
 					<span class="input-group-text" >사용여부</span>
 					<input id="useAt" name="useAt" type="checkbox" 
 						 class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
 						 <c:if test="${use.useAt eq 'Y'} ">checked="checked"</c:if>>
 				</div>
+				
+				<div class="col-12 mb-3"></div>
+				
+				<div class="input-group-prepend col-4">
+					<span class="input-group-text" >단위</span>
+					<input readonly id="unitId" name="unitId" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+						<button id="btnUnitModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#unitModal">
+							<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+						</button>	
+				</div>
+				<div class="input-group-prepend col-lg-4" >
+						<span class="input-group-text" >관리단위</span>
+						<input readonly id="unitNo" name="unitNo" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group-prepend col-lg-4">
+					<input type="file" id="qcImg"
+							name="uploadFile" accept="image/*" style="display: none"
+							onchange="setThumbnail(event);">
+					<button type="button" class="input-group-text" id="btnQcImg">성적서첨부</button>
+				</div>
 			</div>
 		</form>
 	</div>
 	
-	
+	<div class="col-3" style="height:300px; ">
+		<div id="imagePreview"   >
+			<img id="image" style="width: 300px; height: 300px; "/>
+		</div>
+	</div>
+</div>
 
 	<div class="row">
 		<div class="col-6">제품</div>
@@ -92,8 +106,16 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content" id="productContent" align="center">
 			</div>
+		</div>
 	</div>
-</div>
+	
+	<div class="modal fade" id="unitModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" id="unitContent" align="center">
+			</div>
+		</div>
+	</div>
+	
 
 </body>
 <script type="text/javascript" src="js/app/comm/Quality.js"></script>

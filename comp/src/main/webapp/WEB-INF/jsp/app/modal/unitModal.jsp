@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<div class="modal" >
-<style>
-.blocker, .modal {
-	z-index: 100;
-	}
-</style>
-	<div class="modal-content">
+<div id="modalContent">
 		<div class="modal-header">
 		</div>
 		<div class="modal-body">
@@ -44,17 +38,7 @@
 				});
 
 			
-				
-				unitGrid.on('click',(ev) =>{
-					var uId = unitGrid.getRow(ev.rowKey).codeId;
-					var uNo = unitGrid.getRow(ev.rowKey).code;
-					
-					progrid.setValue(uiRowkey,'unitId',uId,false);
-					progrid.setValue(uiRowkey,'unitNo',uNo,false);
-				});
-					
+			
 			</script>
-		
 		</div>
 	</div>
-</div>

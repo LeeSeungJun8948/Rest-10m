@@ -73,53 +73,7 @@ const progrid = new tui.Grid({
 				]
 	});
 			
-
-$("#RowInsert").on("click", function(){
-				progrid.appendRow();
-			});
-			
-
-var stdRowkey;
-var snoRowkey;
-var uiRowkey;
-var unRowkey;
-// 규격 /규격코드 가져오기 -모달
-progrid.on('click', (ev) => {
-	stdRowkey= ev.rowKey;
-	snoRowkey= ev.rowKey;
-	uiRowkey = ev.rowKey;
-	unRowkey = ev.rowkey;
-	if(ev.columnName =='stdId' || ev.columnName =='stdNo'){
-		var href="productModal.do";
-		window.event.preventDefault();
-		$('.jquery-modal').remove();
-		$('.modal').remove();
-		this.blur();
-		$.get(href, function(html){
-			var modalOpen = $(html).appendTo('body').modal();
-			});
-		} else if(ev.columnName == 'unitId' || ev.columnName == 'unitNo'){
-			var href="unitModal.do";
-			window.event.preventDefault();
-			$('.jquery-modal').remove();
-			$('.modal').remove();
-			this.blur();
-			$.get(href, function(html){
-				var modalOpen = $(html).appendTo('body').modal();
-			});
-		}
-	});
 	
-$("#btnInsert").on("click", function(){
-		//progrid.request('createData');
-		progrid.request('modifyData', {
-		checkedOnly: true
-		});
-	});
-$("#btnDelete").on("click",function() {
-	progrid.removeCheckedRows(false);
-	progrid.request('deleteData');
-})
 
 
 //클릭시 단건 조회
@@ -140,13 +94,15 @@ progrid.on('click', (ev)=>{
 		async : false,
 		
 		success : function(data){
-			$('#productCode').val(data.productCode);
-			$('#productName').val(data.productName);
-			$('#employeeName').val(data.employeeName);
-			$('#stdId').val(data.stdId);
-			$('#unitNo').val(data.unitNo);
-			$('#useAt').val(data.useAt);
-			alert();
+			$('#productCode').val(data.data.contents.productCode);
+			$('#productName').val(data.data.contents.productName);
+			$('#employeeName').val(data.data.contents.empCode);
+			$('#stdNo').val(data.data.contents.stdNo);
+			$('#stdId').val(data.data.contents.stdId);
+			$('#unitNo').val(data.data.contents.unitNo);
+			$('#unitId').val(data.data.contents.unitId);
+			$('#useAt').val(data.data.contents.useAt);
+			console.log(data);
 		},
 		error : function(){
 			alert("실패");
@@ -167,6 +123,15 @@ progrid.on('click', (ev)=>{
 		};
 		reader.readAsDataURL(event.target.files[0]);
 	}
+
+//input file 업로드를 버튼으로 업로드 하게 바꾸는 기능
+const imgBtn = document.querySelector('#btnQcImg');
+const input = document.querySelector('#qcImg');
+
+	imgBtn.addEventListener('click', function(event) {
+		input.click();
+	});
+
 	
 //초기화 버튼
 $('#btnNew').on('click',function(){
@@ -175,6 +140,22 @@ $('#btnNew').on('click',function(){
 		$('input').val('');
 })
 
+
+$("#btnInsert").on("click", function(){
+		//progrid.request('createData');
+		progrid.request('modifyData', {
+		checkedOnly: true
+		});
+	});
+$("#btnDelete").on("click",function() {
+	progrid.removeCheckedRows(false);
+	progrid.request('deleteData');
+})
+
+
+
+
+
 // 모달
 var forGrid = false;
 
@@ -182,10 +163,11 @@ $("#btnProductModal").on("click", function(e) {
     $('#productContent').load("productModal.do");
 });
 
-$(document).on('show.bs.modal','#btnProductModal', function (){});
+$("#btnUnitModal").on("click", function(e) {
+    $('#unitContent').load("unitModal.do");
+});
 
-$('#stdId').on('click',function(){
-	$('#productModal').modal('show');
-	$('#productContent').load("productModal.do");
-	
-})
+
+
+
+
