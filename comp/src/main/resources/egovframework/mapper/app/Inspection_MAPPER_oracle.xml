@@ -3,8 +3,11 @@
 <mapper namespace="com.rest.app.fac.inspection.service.impl.InspectionMapper">
    
     <select id="getIns" resultType="com.rest.app.fac.inspection.vo.InspectionVO">
-		select * from inspection
-		where trunc(today) between #{startDate} and #{endDate}
+		select	i.inspection_code, i.judgement, i.ins_comment, i.before_date, 
+      		  	i.today, i.after_date, i.fac_code, f.facilities_name, f.fac_inspection
+		from 	inspection i, facilities f
+		where 	i.fac_code=f.fac_code
+		and 	trunc(today) between #{startDate} and #{endDate}
     </select>
     
     <delete id="deleteIns" parameterType="com.rest.app.fac.inspection.vo.InspectionVO">

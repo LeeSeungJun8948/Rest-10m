@@ -24,13 +24,14 @@ const grid = new tui.Grid({
 		header : '정기점검코드',
 		name : 'inspectionCode'
 	}, {
-		header : '판정',
-		name : 'judgement',
-		editor: 'text'
+		header : '설비명',
+		name : 'facilitiesName'
 	}, {
-		header : '조치사항',
-		name : 'insComment',
-		editor: 'text'
+		header : '설비코드',
+		name : 'facCode',
+	},  {
+		header : '설비점검주기',
+		name : 'facInspection'
 	}, {
 		header : '전점검일',
 		name : 'beforeDate'
@@ -49,8 +50,12 @@ const grid = new tui.Grid({
 		header : '차기점검일',
 		name : 'afterDate'
 	}, {
-		header : '설비코드',
-		name : 'facCode',
+		header : '판정',
+		name : 'judgement',
+		editor: 'text'
+	}, {
+		header : '조치사항',
+		name : 'insComment',
 		editor: 'text'
 	}]
 });
@@ -83,16 +88,60 @@ $("#btnDel").on("click", function() {
 	grid.removeCheckedRows(true);
 });
 
+//저장
+$("#btnSave").on("click", function(){
+	grid.request('modifyData');
+});
+
 // 행추가
+var newInsCode;
+
 $("#btnAdd").on("click", function(){
-	grid.appendRow({},{
+	if(checkNull(newInsCode)){
+		newInsCode = newInsCode * 1 + 1;
+	}else{
+		$.ajax({
+			type : "get",
+			url : "ajax/getInsCode.do",
+			dataType : "json",
+			async : false,
+			success : function(data) {
+				newInsCode = data.inspectionCode;
+			},
+			error : function() {
+			}
+		});		
+	}
+	
+	newRowData = {'inspectionCode' : newInsCode, 'today' : getFormatDate(new Date())};
+	grid.appendRow(newRowData,{
 		at : grid.getRowCount(),
 		focus : true
 	});
 });
 
-// 저장
-$("#btnSave").on("click", function(){
-	grid.request('modifyData');
-});
 
+// insCode, 날짜 추가시 자동입력
+function checkNull(value){
+	return value != null && value != '' && value != '[object HTMLInputElement]';
+}
+
+function getFormatDate(date){
+    var year = date.getFullYear();              //yyyy
+    var month = (1 + date.getMonth());          //M
+    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+    var day = date.getDate();                   //d
+    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+    return  year + '-' + month + '-' + day;
+}
+
+// 그리드 설비명 클릭
+var rowKey;
+grid.on('dblclick', function(ev){
+	if(ev.columnName == 'facilitiesName'){
+		rowKey = ev.rowKey;
+		facilitiesName = grid.getValue(rowKey, 'facilitiesName');
+		$('#facModal').modal('show');
+		$('#facContent').load(".do");
+	}
+})
