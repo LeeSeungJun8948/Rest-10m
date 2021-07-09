@@ -1,3 +1,5 @@
+$('#matNo').val('');
+$('#unitNo').val('');
 
 $( document ).ready(function() {
    	showMatList();
@@ -64,11 +66,9 @@ $(matList).on('click','tr',function(){
 		success : function(data) {
 			$('#materialCode').val(data.materialCode);
 			$('#materialName').val(data.materialName);
-//			$('#matNo').val(data.matNo)
 			$('#matNo').val(data.matNo).prop("selected",true);
 			$('#companyCode').val(data.companyCode);
 			$('#companyName').val(data.companyName);
-//			$('#unitNo').val(data.unitNo);
 			$('#unitNo').val(data.unitNo).prop("selected",true);
 			$('#saveStock').val(data.saveStock);
 			$('#minStock').val(data.minStock);
@@ -85,27 +85,42 @@ $(matList).on('click','tr',function(){
 // 입력 / 수정 form 전송
 $('#btnSave').on('click',function(){
 	
-	$.ajax({
-		
-		type : "get",
-		url : "ajax/matSave.do",
-		data : $('#frm').serialize(),
-		dataType : "json",
-		async : false,
-		success : function(data) {
-			if(data == 1)
-				alert('1건 입력 완료');
-			else
-				alert('입력 실패 : 지속될 시 관리자에게 문의');
-				
-			$("#matList").empty()
-			showMatList();
-		},
-		error : function(request, status, error) {
-		}
-	});
+	if(!checkNull($('#materialName').val())){
+		toast('자재명을 입력하세요');
+	}else if(!checkNull($('#matNo').val())){
+		toast('자재구분을 선택하세요.	');
+	}else if(!checkNull($('#unitNo').val())){
+		toast('관리단위를 선택하세요');
+	}else{
+		$.ajax({
+			type : "get",
+			url : "ajax/matSave.do",
+			data : $('#frm').serialize(),
+			dataType : "json",
+			async : false,
+			success : function(data) {
+				if(data == 1)
+					alert('1건 입력 완료');
+				else
+					alert('입력 실패 : 지속될 시 관리자에게 문의');
+					
+				$("#matList").empty()
+				showMatList();
+			},
+			error : function(request, status, error) {
+			}
+		});
+	}
 });
 	
+function toast(text){
+	toastr.options = {
+		closeButton: true,
+		showDuration: "200"
+ 	};
+	toastr.error(text);
+}
+
 // 새 자재 클릭시 matCode 불러오기
 $('#btnNew').on('click',function(){
 	
@@ -118,7 +133,8 @@ $('#btnNew').on('click',function(){
 		success : function(data) {
 			$('input').val('');
 			$('#materialCode').val(data.materialCode);
-
+			$('#matNo').val('');
+			$('#unitNo').val('');
 		},
 		error : function(request, status, error) {
 			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
