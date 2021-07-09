@@ -36,12 +36,11 @@
 		grid.readData(1, prm, true);
 	})
 	
-			qcGrid.on('click', function(ev) {
-					
-					var values = qcGrid.getRow(ev.rowKey);
-					var prdCode = values.productCode;
-					$('#productCode').val(prdCode);
-					console.log(prdCode);
+	qcGrid.on('click', function(ev) {
+		var values = qcGrid.getRow(ev.rowKey);
+		var prdCode = values.productCode;
+		$('#productCode').val(prdCode);
+		console.log(prdCode);
 
 				});
 
