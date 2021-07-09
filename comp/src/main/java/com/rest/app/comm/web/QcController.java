@@ -5,10 +5,12 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +22,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rest.app.comm.service.QualityControlService;
-import com.rest.app.comm.vo.ErrorVO;
 import com.rest.app.comm.vo.QualityControlVO;
+import com.thoughtworks.xstream.mapper.Mapper;
 
 import egovframework.com.cmm.EgovWebUtil;
+import egovframework.com.cmm.service.EgovProperties;
 import egovframework.com.cmm.util.EgovResourceCloseHelper;
-import lombok.Data;
 
 
 class qcGrid {
@@ -77,7 +80,11 @@ public class QcController {
 	}
 	
 	@RequestMapping("QualityControl.do")
-	public String QualityControl() {
+	public String QualityControl(Model model , QualityControlVO vo) {
+		model.addAttribute("use", dao.getProduct(vo));
+		model.addAttribute("empList", dao.getEmpList(vo));
+		model.addAttribute("unit", dao.getUnitList(vo));
+		model.addAttribute("std", dao.getCodeList(vo));
 		return "comm/QualityControl.page";
 	}
 	
@@ -155,6 +162,22 @@ public class QcController {
 		data.put("data", qcgrid.deletedRows);
 		return data;
 	}
+	//저장
+	@RequestMapping(value= "/updateProduct.do")
+	public String updateProduct(HttpServletRequest request, QualityControlVO vo) throws IllegalStateException, IOException {
+		MultipartFile uploadFile = vo.getUploadFile();
+		String fileName = null;
+		if(uploadFile !=null && !uploadFile.isEmpty() && uploadFile.getSize()>0) {
+			fileName = uploadFile.getOriginalFilename();
+			String storePathString = EgovProperties.getProperty("Globals.fileStorePath");
+			uploadFile.transferTo(new File(storePathString, fileName));
+			//첨부파일명 VO에 지정
+			vo.setQcImg(fileName);
+		}
+		dao.updateProdcut(vo);
+		return "redirect:QualityControl.do";
+	}
+	
 	
 	//이미지 업로드 
 	@RequestMapping(value = "/qcfiledown.do")
