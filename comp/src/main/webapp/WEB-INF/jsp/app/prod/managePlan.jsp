@@ -2,12 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-
 <h1 class="h3 mb-4 text-gray-700">생산계획 관리</h1>
 <div class="mb-4" align="right">
-	<a class="btn btn-primary" id="btnModal" href="planModal.do" rel="modal:open">조회</a>
+	<button id="btnPlanModal" type="button" class="btn btn-primary" data-remote="false" data-toggle="modal" data-target="#planModal">조회</button>
 	<button type="reset" class="btn btn-primary" id="btnReset">초기화</button>
 	<button type="button" class="btn btn-primary" id="btnSave">저장</button>
 	<button type="button" class="btn btn-primary" id="btnDel">삭제</button>
@@ -52,7 +49,7 @@
 	<button type="button" class="btn btn-primary" id="btnGridDel">삭제</button>
 </div>
 <div class="col-lg-12">
-	<div id="grid"/>
+	<div id="grid"></div>
 </div>
 <br><br><br><br>
 <div>
@@ -77,6 +74,12 @@
 </div>
 <div>
 	<div id="gridInput"/>
+</div>
+<div class="modal fade" id="planModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content" id="planContent" align="center">
+		</div>
+	</div>
 </div>
 
 <script type="text/javascript" src="js/app/prod/managePlan.js"></script>
