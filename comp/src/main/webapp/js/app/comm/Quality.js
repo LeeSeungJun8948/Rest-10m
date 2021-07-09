@@ -162,7 +162,7 @@ $("#btnProductModal").on("click", function(e) {
     $('#productContent').load("productModal.do");
 });
 
-$("#btnUnitModal").on("click", function(e) {
+$("#btnUnitModal").on("click", function(e) {	
     $('#unitContent').load("unitModal.do");
 });
 

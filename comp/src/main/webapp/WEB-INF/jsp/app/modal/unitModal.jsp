@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="stylesheet"
-	href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
-<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+
 <div id="modalContent">
 	<div class="modal-header">
 		<h1>TEST</h1>
@@ -12,6 +10,7 @@
 		<div id=unitCodeGird></div>
 		<div class="modal-footer">
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-secondary" id="deleteModal">모달나가기</button>
 			<a href="#" rel="modal:close"><button class="btn btn-primary">검색</button></a>
 		</div>
 	</div>
@@ -43,4 +42,5 @@
 		} ]
 	});
 	
-</script>
+
+	</script>
