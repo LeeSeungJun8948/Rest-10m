@@ -3,10 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<!DOCTYPE html>
-<html>
-
-<body>
 
 	<div class="flex row">
 		<div class="col-8">
@@ -115,8 +111,4 @@
 			</div>
 		</div>
 	</div>
-	
-
-</body>
 <script type="text/javascript" src="js/app/comm/Quality.js"></script>
-</html>

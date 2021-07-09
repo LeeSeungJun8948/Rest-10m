@@ -18,7 +18,7 @@ public interface BomService {
 	public BomVO getInfoProduct(BomVO vo);
 	
 	//제품에 대한 고객사코드 고객사명 list
-	public List<BomVO> getCompanyList(BomVO vo);
+	public BomVO getCompanyList(BomVO vo);
 	
 	//Bom insert
 	public int insertBom(BomVO vo);

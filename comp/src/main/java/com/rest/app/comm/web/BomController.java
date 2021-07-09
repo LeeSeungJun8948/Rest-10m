@@ -89,7 +89,7 @@ public class BomController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/comm/bomList.page");
 		mv.addObject("info", dao.getInfoProduct(vo)); // 제품 단건조회
-		mv.addObject("companyList", dao.getCompanyList(vo)); // 제품에 대한 고객사명 리스트
+		mv.addObject("compList", dao.getCompanyList(vo)); // 제품에 대한 고객사명 리스트
 		mv.addObject("binfo", dao.getInfoBom(vo)); // 소요자재 조회
 		return mv;
 	}

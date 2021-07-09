@@ -290,4 +290,3 @@ grid.on('dblclick', function(ev){
 		$('#inorderContent').load("inorderModal.do");
 	}
 })
-

@@ -59,14 +59,6 @@
 					} ]
 				});
 
-				matGrid.on('click', function(ev) {
-					var values = matGrid.getRow(ev.rowKey);
-					var prdCode = values.productCode;
-					$('#productCode').val(prdCode);
-					console.log(prdCode);
-
-				});
-
 				$.fn.serializeObject = function() {
 					var o = {};
 					var a = this.serializeArray();
@@ -107,8 +99,7 @@
 				function select()	{
 					$('#productCode').val(productCode);
 					$('#productName').val(productName);
-					$('.jquery-modal').remove();
-		            $('.modal').remove();
+		            $.modal.close();
 				}
 			</script>
 

@@ -5,18 +5,16 @@
 	<div class="modal-header mb-4">
 		<div>
 			<h5 class="modal-title">
-				<strong>작업 등록</strong>
+				<strong>작업 조회</strong>
 			</h5>
 		</div>
 		<div align="right">
-			<button type="reset" class="btn btn-primary" id="btnReset">초기화</button>
-			<button type="button" class="btn btn-primary" id="btnSave">저장</button>
-			<button id="btnCloseBottom" class="btn btn-primary" data-dismiss="modal">닫기</button>
+			<button id="btnClose" class="btn btn-primary" data-dismiss="modal">닫기</button>
 		</div>
 	</div>
 	<div class="modal-body mb-4">
-		<form id="workFrm" name="workFrm">
-			<div class="mb-4">
+		<div class="mb-4">
+			<form id="workFrm" name="workFrm">
 				<table class="table">
 					<tbody>
 						<tr>
@@ -24,14 +22,8 @@
 							<td><input type="date" id="workDate" name="workDate"></td>
 							<td>공정명</td>
 							<td><input type="text" id="processName" name="processName"></td>
-							<td>작업자</td>
-							<td>
-								<input type="text" id="empName" name="empName" readonly>
-								<button id="btnEmpSearch" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#workEmpModal">
-										<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
-								</button>
-								<input type="hidden" id="empCode" name="empCode">
-							</td>
+							<td>사원코드</td>
+							<td><input type="text" id="empCode" name="empCode"></td>
 						</tr>
 						<tr>
 							<td>작업번호</td>
@@ -65,18 +57,11 @@
 				<div class="col-lg-4">
 					<input type="text" id="endTime" name="endTime">
 				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 	<div class="modal-footer">
 	</div>
 </div>
 
-<div class="modal fade" id="workEmpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal" role="document">
-		<div class="modal-content" id="workEmpContent" align="center"/>
-	</div>
-</div>
-
-<link href="${pageContext.request.contextPath}/css/app/prod/workModal.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="js/app/prod/workModal.js"></script>
