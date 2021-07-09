@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.rest.app.bus.vo.OrdersVO;
+import com.rest.app.comm.vo.EmployeeVO;
+import com.rest.app.comm.vo.ErrorVO;
 import com.rest.app.prod.vo.DetailPlanVO;
 import com.rest.app.prod.vo.InputMatVO;
 import com.rest.app.prod.vo.PlanVO;
@@ -28,5 +30,8 @@ public interface ProdMapper {
 	List<InputMatVO> readInputMat(Map<String, Object> param);
 	PlanVO selectPlanCode();
 	List<WorkVO> searchWork(Map<String, Object> param);
+	int insertWork(WorkVO vo);
 	int deleteWork(String workNo);
+	List<EmployeeVO> searchEmp(Map<String, Object> param);
+	List<ErrorVO> searchError(Map<String, Object> param);
 }
