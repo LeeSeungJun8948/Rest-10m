@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rest.app.bus.service.BusinessService;
 import com.rest.app.bus.vo.CompanyVO;
+import com.rest.app.bus.vo.DetailExportVO;
 import com.rest.app.bus.vo.ExportVO;
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.comm.vo.BomVO;
@@ -69,6 +70,30 @@ public class BusinessServiceImpl implements BusinessService {
 	public int deleteExport(String exportCode) {
 		return  mapper.deleteExport(exportCode);
 		
+	}
+
+	@Override
+	public int insertDetailExport(DetailExportVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.insertDetailExport(vo);
+	}
+
+	@Override
+	public int updateDetailExport(DetailExportVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.updateDetailExport(vo);
+	}
+
+	@Override
+	public int deleteDetailExport(int idx) {
+		// TODO Auto-generated method stub
+		return mapper.deleteDetailExport(idx);
+	}
+
+	@Override
+	public int deleteAllDetailExport(String exportCode) {
+		// TODO Auto-generated method stub
+		return mapper.deleteAllDetailExport(exportCode);
 	}
 
 	

@@ -136,6 +136,25 @@ public class ModalController {
 		return data;
 	}
 	
+	@RequestMapping("/prodModal.do")
+	public String prodModal() {
+		return "app/modal/prodModal";
+	}
+	
+	@RequestMapping("/ajax/prodListModal.do")
+	@ResponseBody
+	public Map<String, Object> ajaxProdListModal(SelectListVO vo) {
+		
+		Map<String,Object> datas = new HashMap<>();
+		Map<String,Object> data = new HashMap<>();
+		
+		data.put("result", true);
+		datas.put("contents", dao.getProdListModal(vo));
+		data.put("data", datas);
+		
+		return data;
+	}
+	
 	//규격,단위 리스트 모달
 	@RequestMapping("/productModal.do")
 	public String productModal() {

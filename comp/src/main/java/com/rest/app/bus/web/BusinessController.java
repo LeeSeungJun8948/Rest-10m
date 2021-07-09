@@ -23,6 +23,7 @@ import com.rest.app.prod.vo.DetailPlanVO;
 import com.rest.app.prod.vo.PlanVO;
 
 
+
 class GridData {
 	List<DetailExportVO> createdRows;
 	List<DetailExportVO> updatedRows;
@@ -128,6 +129,38 @@ public class BusinessController {
 			} else {
 				dao.updateExport(vo);
 			}
+		}
+
+		// 세부계획 CUD
+		@RequestMapping("gridExport.do")
+		@ResponseBody
+		public Map<String, Object> saveGrid(@RequestBody GridData gridData) {
+			Map<String, Object> data = new HashMap<String, Object>();
+			List<DetailExportVO> cList = gridData.createdRows;
+			List<DetailExportVO> uList = gridData.updatedRows;
+			List<DetailExportVO> dList = gridData.deletedRows;
+			cList.forEach(vo -> {
+				if (vo.getExportCount() != 0) {
+					dao.insertDetailExport(vo);
+				}
+			});
+			uList.forEach(vo -> {
+				if (vo.getExportCount() != 0) {
+					if (vo.getProductLot() == null) {
+						dao.insertDetailExport(vo);
+					} else {
+						dao.updateDetailExport(vo);
+					}
+				}
+			});
+			dList.forEach(vo -> {
+				if (vo.getIdx() != 0) {
+					dao.deleteDetailExport(vo.getIdx());
+				}
+			});
+			data.put("result", true);
+			data.put("check", "save");
+			return data;
 		}
 
 		// 계획삭제

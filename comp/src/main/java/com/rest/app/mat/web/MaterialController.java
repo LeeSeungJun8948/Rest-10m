@@ -250,22 +250,8 @@ public class MaterialController {
 		
 		return data;
 	}
-	
-	@RequestMapping("/ajax/prodListModal.do")
-	@ResponseBody
-	public Map<String, Object> ajaxProdListModal(SelectListVO vo) {
-		
-		Map<String,Object> datas = new HashMap<>();
-		Map<String,Object> data = new HashMap<>();
-		
-		data.put("result", true);
-		datas.put("contents", dao.getProdListModal(vo));
-		data.put("data", datas);
-		
-		return data;
-	}
-	
-	
+
+
 	@RequestMapping("/ajax/getInoutNo.do")
 	@ResponseBody
 	public InoutVO getInoutNo(InoutVO vo) {

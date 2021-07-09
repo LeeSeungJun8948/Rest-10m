@@ -44,8 +44,28 @@
 					header: '미출고량',
 					name: 'unExport',
 					align: 'center'
-				}]
-			});
+				}], summary: {
+		height: 40,
+		position: 'bottom',
+		columnContent: {
+			productName: {
+				template(summary) {
+					return '합계';
+				}
+			},
+			unExport: {
+				template(summary) {
+					return (summary.sum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+				}
+			}
+		}
+	},
+	columnOptions: {
+		resizable: true
+	}
+
+});
+
 
 var param = $('#dateForm').serializeObject();
 				console.log(param);

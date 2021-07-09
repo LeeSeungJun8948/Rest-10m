@@ -31,4 +31,8 @@ public class OrdersVO {
 	int unExport;//미출고량
 	String export;//출고,미출고 여부
 	int price; //금액
+	String keyword;
+	String searchCondition;
+	String exportCode;//출고번호
+	
 }
