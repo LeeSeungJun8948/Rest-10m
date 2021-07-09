@@ -157,7 +157,6 @@ $("#btnDelete").on("click",function() {
 
 
 // 모달
-var forGrid = false;
 
 $("#btnProductModal").on("click", function(e) {
     $('#productContent').load("productModal.do");
