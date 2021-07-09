@@ -34,14 +34,16 @@
 	</select>
 	<!-- 제품에 대한 고객사 코드/고객사명 list -->
 	<select id="getCompanyList" resultType="com.rest.app.comm.vo.BomVO">
-		select Distinct c.company_code, c.company_name 
-  		  from company c
-  		  join (select p.product_code, o.company_code
-          		  from product p
-           		   join orders o
-             		 on (p.product_code = o.product_code)) a
-    		on c.company_code = a.company_code       
- 		 where a.product_code = #{productCode}
+	SELECT  Distinct a.product_code
+       	   ,LISTAGG(c.company_code, ',') WITHIN GROUP(ORDER BY c.company_code) OVER(PARTITION BY a.product_code) as comp_code
+       	   ,LISTAGG(c.company_name, ',') WITHIN GROUP(ORDER BY c.company_code) OVER(PARTITION BY a.product_code) as comp_name
+  	  FROM company c
+  	  JOIN (SELECT Distinct p.product_code, o.company_code
+          	  FROM product p
+              JOIN orders o
+                ON (p.product_code = o.product_code)) a
+        ON c.company_code = a.company_code       
+ 	 WHERE a.product_code = #{productCode}
 	</select>
 	<!-- 자재코드 입력시 자재명 출력 -->
 	<select id="getMatName" resultType="com.rest.app.comm.vo.BomVO">

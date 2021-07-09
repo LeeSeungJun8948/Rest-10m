@@ -33,4 +33,10 @@
     		FAC_CODE=#{facCode}
     	where INSPECTION_CODE=#{inspectionCode}
     </update>
+    
+    <select id="getFacListModal" parameterType="com.rest.app.fac.vo.FacilitiesVO" resultType="com.rest.app.fac.vo.FacilitiesVO">
+    	select facilities_name, fac_code, fac_inspection
+    	from facilities
+    	
+    </select>
 </mapper>  

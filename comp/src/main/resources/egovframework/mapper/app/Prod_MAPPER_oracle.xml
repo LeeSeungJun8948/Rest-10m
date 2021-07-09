@@ -17,7 +17,7 @@
 	<!-- 생산계획 -->
 	<insert id="insertPlan" parameterType="PlanVO">
 		<selectKey resultType="string" keyProperty="planCode" order="BEFORE">
-        	SELECT NVL(MAX(plan_code),0)+1 FROM plan    
+        	SELECT NVL(MAX(plan_code),0)+1 FROM plan
     	</selectKey>
 		INSERT INTO plan VALUES(
 		#{planCode}, #{planName}, #{planDate}, #{comments} 
@@ -55,9 +55,6 @@
 		ORDER BY d.product_lot
 	</select>	
 	<insert id="insertDetailPlan" parameterType="DetailPlanVO">
-		<selectKey keyProperty="productLot" resultType="string" order="BEFORE">
-        	SELECT NVL(MAX(product_lot),0)+1 FROM detailplan
-    	</selectKey>    
 		INSERT INTO detailplan VALUES(
 		#{productLot}, #{planCode},	#{orderNo}, #{productCode}, #{workDate}, #{comments}, #{workCount}
 		)

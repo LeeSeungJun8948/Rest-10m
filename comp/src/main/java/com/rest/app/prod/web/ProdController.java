@@ -36,6 +36,12 @@ public class ProdController {
 		return "prod/manageWork.page";
 	}
 
+	// 생산계획 - 조회 모달
+	@RequestMapping("planModal.do")
+	public String planModal() {
+		return "app/prod/planModal";
+	}
+
 	// 작업실적 - 작업자 모달
 	@RequestMapping("workEmpModal.do")
 	public String workEmpModal() {
@@ -141,12 +147,14 @@ public class ProdController {
 		List<DetailPlanVO> dList = gridData.deletedRows;
 		cList.forEach(vo -> {
 			if (vo.getWorkCount() != 0) {
+				vo.setProductLot(makeLot(vo));
 				svc.insertDetailPlan(vo);
 			}
 		});
 		uList.forEach(vo -> {
 			if (vo.getWorkCount() != 0) {
 				if (vo.getProductLot() == null) {
+					vo.setProductLot(makeLot(vo));
 					svc.insertDetailPlan(vo);
 				} else {
 					svc.updateDetailPlan(vo);
@@ -241,6 +249,12 @@ public class ProdController {
 		});
 		data.put("result", true);
 		return data;
+	}
+
+	public String makeLot(DetailPlanVO vo) {
+		String productLot = "PROD-" + vo.getWorkDate().replace("-", "").substring(2) + "-"
+				+ String.valueOf(vo.getProductCode()) + "-" + String.valueOf(vo.getOrderNo());
+		return productLot;
 	}
 }
 

@@ -4,8 +4,7 @@
 <div id="modalContent">
 	<div class="modal-header">
 		<h5 class="modal-title">사원검색</h5>
-		<button id="btnCloseTop" type="button" class="close"
-			data-dismiss="modal" aria-label="Close">
+		<button id="btnCloseTop" type="button" class="close" data-dismiss="modal" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
 	</div>
@@ -34,8 +33,8 @@
 	</div>
 		
 	<div class="modal-footer">
-		<button id="btnCloseBottom" class="btn btn-primary" data-dismiss="modal">닫기</button>
 		<button id="btnSelect" class="btn btn-success">선택</button>
+		<button id="btnCloseBottom" class="btn btn-primary" data-dismiss="modal">닫기</button>
 	</div>
 </div>
 

@@ -17,4 +17,7 @@ public class BomVO extends ComDefaultVO{
 	int bomNo;
 	String kg;
 	String etc;
+	
+	String compCode;
+	String compName;
 }
