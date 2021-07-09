@@ -1,83 +1,54 @@
 (function($) {
 	$("#ExportModal").on('shown.bs.modal', function() {
-		
-		$('#fromDateModal').val($('#fromDate'));
-		$('#toDateModal').val($('#toDate'));
+
 		if (!checkNull($('#modalUnExportListGrid').html())) {
-			var unExportListModalData = {
+			var ExportListModalData = {
 				api: {
 					readData: {
-						url: 'ajax/ExportModal.do',
+						url: 'ajax/readExportModal.do',
 						method: 'POST'
 					}
 				},
 				contentType: 'application/json'
 			};
 			var modalUnExportListGrid = new tui.Grid({
-				el: document.getElementById('modalUnExportListGrid'),
+				el: document.getElementById('modalExportListGrid'),
 				data: unExportListModalData,
 				scrollX: false,
 				scrollY: true,
 				bodyHeight: 1000,
 				columns: [{
-					header: '제품코드',
-					name: 'productCode',
+					header: '출고번호',
+					name: 'exportCode',
 					align: 'center',
 					width: 80
 				}, {
-					header: '제품명',
-					name: 'productName',
+					header: '출고일자',
+					name: 'exportDate',
 					align: 'center'
 				}, {
-					header: '규격',
-					name: 'stdId',
-					align: 'center'
-				}  , {
-					header: '단위',
-					name: 'unitId',
+					header: '업체코드',
+					name: 'companyCode',
 					align: 'center'
 				}, {
-					header: '주문번호',
-					name: 'orderNo',
+					header: '특기사항',
+					name: 'comments',
 					align: 'center'
-				},{
-					header: '미출고량',
-					name: 'unExport',
-					align: 'center'
-				}], summary: {
-		height: 40,
-		position: 'bottom',
-		columnContent: {
-			productName: {
-				template(summary) {
-					return '합계';
-				}
-			},
-			unExport: {
-				template(summary) {
-					return (summary.sum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-				}
-			}
-		}
-	},
-	columnOptions: {
-		resizable: true
-	}
-
-});
+				}]
+			});
 
 
-var param = $('#dateForm').serializeObject();
-				console.log(param);
-				modalUnExportListGrid.readData(1, param, true);
-				
+			var param = $('#dateForm').serializeObject();
+			console.log(param);
+			modalUnExportListGrid.readData(1, param, true);
+
 			$("#btnReadModal").on("click", function() {
 				var param = $('#dateForm').serializeObject();
 				console.log(param);
 				modalUnExportListGrid.readData(1, param, true);
 			});
 
-			
+
 
 		}
 

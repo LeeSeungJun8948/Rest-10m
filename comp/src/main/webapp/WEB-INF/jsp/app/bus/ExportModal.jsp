@@ -13,14 +13,8 @@
 	<div class="modal-body">
 		<form id="frmUnExport" name="frmUnExport">
 			<div class="row">
-				<div class="col-md-4 mr-0 ml-3">
-					<select class="custom-select" name="searchCondition">
-						<option value="product_code" selected>제품코드</option>
-						<option value="product_name">제품명</option>
-					</select>
-				</div>
 				<div class="col-md-5">
-					<input id="keyword" name="keyword" type="text" class="form-control">
+					<input id="keyword" name="keyword" type="date" class="form-control">
 				</div>
 				<div class="col=md-1">
 					<button type="button" class="btn btn-primary" id="btnReadModal">조회</button>
@@ -31,7 +25,7 @@
 		</form>
 	
 		<div class="col-md-11 m-3">
-			<div id="modalUnExportListGrid"></div>
+			<div id="modalExportListGrid"></div>
 		</div>
 	</div>
 		
