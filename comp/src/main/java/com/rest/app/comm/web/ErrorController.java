@@ -31,6 +31,12 @@ public class ErrorController {
 	@Autowired
 	ErrorService dao;
 	
+	@RequestMapping("error.do")
+	public String error(Model model) {
+		return "comm/error.page";
+	}
+	
+	
 	//불량 코드,명 리스트 
 	@RequestMapping("/ajax/errorList.do")
 	@ResponseBody
