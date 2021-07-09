@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.rest.app.bus.service.BusinessService;
 import com.rest.app.bus.vo.DetailExportVO;
 import com.rest.app.bus.vo.ExportVO;
+import com.rest.app.mat.vo.SelectListVO;
 
 import lombok.Data;
 
@@ -59,36 +60,34 @@ public class BusinessController {
 		return "bus/exportForm.page";
 	}
 
-	@RequestMapping("/readExport.do") // 출고 조회
-	@ResponseBody
-	public Map<String, Object> readExport(@RequestBody Map<String, Object> param) {
-		System.out.println(param + "=========");
-		Map<String, Object> datas = new HashMap<String, Object>();
-		Map<String, Object> data = new HashMap<String, Object>();
-		data.put("result", true);
-		datas.put("contents", dao.getExport(param));
-		data.put("data", datas);
-		return data;
-	}
 
-	// 미출고 검색 페이지리턴
-	@RequestMapping("/unExportModal.do")
-	public String unExportModal() {
-		return "app/bus/unExportModal";
-	}
-
-	// 미출고 검색 모달그리드
-	@RequestMapping("/ajax/unExportModal.do")
+	// 출고 모달 그리드 데이터 리턴
+		@RequestMapping("/ajax/readExportModal.do")
+		@ResponseBody
+		public Map<String, Object> ajaxReadExportModal(@RequestBody Map<String, Object> param) { // 자재 요약 리스트 출력
+			
+			Map<String,Object> datas = new HashMap<>();
+			Map<String,Object> data = new HashMap<>();
+			data.put("result", true);
+			datas.put("contents", dao.getExportModal(param));
+			data.put("data", datas);
+			
+			return data;
+		}
+	// 미출고 검색 그리드
+	@RequestMapping("readUnExport.do")
 	@ResponseBody
-	public Map<String, Object> ajaxUnExportModal(@RequestBody Map<String, Object> param) {
+	public Map<String, Object> ajaxUnExport(@RequestBody Map<String, Object> param) {
 		System.out.println("=============");
 		Map<String, Object> datas = new HashMap<>();
 		Map<String, Object> data = new HashMap<>();
-
+		if (param.get("planCode") == null) {
+			datas.put("contents", dao.getUnExport(param));
+		}else {
+			datas.put("contents", dao.getUnExport(param));
+		}
 		data.put("result", true);
-		datas.put("contents", dao.getUnExportModal(param));
 		data.put("data", datas);
-
 		return data;
 	}
 

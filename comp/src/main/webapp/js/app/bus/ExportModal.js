@@ -1,5 +1,5 @@
 (function($) {
-	$("#unExportModal").on('shown.bs.modal', function() {
+	$("#ExportModal").on('shown.bs.modal', function() {
 		
 		$('#fromDateModal').val($('#fromDate'));
 		$('#toDateModal').val($('#toDate'));
@@ -7,7 +7,7 @@
 			var unExportListModalData = {
 				api: {
 					readData: {
-						url: 'ajax/unExportModal.do',
+						url: 'ajax/ExportModal.do',
 						method: 'POST'
 					}
 				},

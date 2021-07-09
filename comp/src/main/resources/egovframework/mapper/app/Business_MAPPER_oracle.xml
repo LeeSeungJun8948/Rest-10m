@@ -42,7 +42,10 @@
 			and o.order_count = o.plan_count
 		</if>
 	</select>
-	<select id="getExport" resultType="com.rest.app.bus.vo.OrdersVO">
+	
+	<select id="getUnExport"
+		resultType="com.rest.app.bus.vo.OrdersVO"
+		parameterType="com.rest.app.bus.vo.OrdersVO">
 		select distinct
 		p.product_code,p.product_name,p.std_id,p.unit_id,o.order_no,o.order_count,
 		o.out_count,(o.order_count - o.out_count) as un_export,
@@ -51,25 +54,8 @@
 		AND product_state='포장완료') as dayCount
 		from orders o, storage s, product
 		p,export e
-		where o.product_code = p.product_code
-		and o.product_code =
-		s.product_code
-		and e.export_date BETWEEN TO_DATE(#{fromDate}, 'YYYY-MM-DD')
-		AND
-		TO_DATE(#{toDate}, 'YYYY-MM-DD')
-	</select>
-	<select id="getUnExportModal"
-		resultType="com.rest.app.bus.vo.OrdersVO"
-		parameterType="com.rest.app.bus.vo.OrdersVO">
-		 select distinct
-		p.product_code,p.product_name,p.std_id,p.unit_id,o.order_no,o.order_count,
-		o.out_count,(o.order_count - o.out_count) as un_export,
-		(SELECT
-		SUM(product_count) FROM storage WHERE product_code = o.product_code
-		AND product_state='포장완료') as dayCount
-		from orders o, storage s, product
-		p,export e
-		where o.product_code = p.product_code
+		where o.order_count != o.out_count
+		and o.product_code = p.product_code
 		and o.product_code =
 		s.product_code
 		and e.export_date BETWEEN TO_DATE(#{fromDate}, 'YYYY-MM-DD')

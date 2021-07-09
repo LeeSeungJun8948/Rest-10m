@@ -7,7 +7,7 @@ $( document ).ready(function() {
 var dataSource = {
 	contentType: 'application/json',
 	api: {
-		readData: { url: 'readExport.do', method: 'POST' },
+		readData: { url: 'readUnExport.do', method: 'POST' },
 		modifyData: { url: 'saveDetailExport.do', method: 'PUT' },
 	}
 }
@@ -55,9 +55,6 @@ const grid = new tui.Grid({
 		header : '현재고',
 		name : 'dayCount'
 		}, {
-		header : '제품LOT',
-		name : 'productLot'
-		}, {
 		header : '금액',
 		name : 'price',
 		
@@ -69,6 +66,21 @@ const grid = new tui.Grid({
 	]
 });
 
+$.fn.serializeObject = function() {
+	var o = {};
+	var a = this.serializeArray();
+	$.each(a, function() {
+		if (o[this.name]) {
+			if (!o[this.name].push) {
+				o[this.name] = [o[this.name]];
+			}
+			o[this.name].push(this.value || '');
+		} else {
+			o[this.name] = this.value || '';
+		}
+	});
+	return o;
+};
 // 조회 버튼
 $('#btnView').on('click', function(){
 	   var param = $('#inputFrm').serializeObject();
@@ -121,8 +133,9 @@ $('#btnDel').on('click', function(){
 });
 
 // 미출고 읽기 버튼
-$('#btnunExportModal').on('click',  function(){
+$('#btnRead').on('click',  function(){
 	var param = $('#dateForm').serializeObject();
+	console.log(param)
 	grid.readData(1, param, true);
 });
 
@@ -132,10 +145,7 @@ $('#productCode').on('click', function(){
 	$('#unExportContent').load("unExportModal.do");
 });*/
 
-// 추가버튼
-$('#btnGridAdd').on('click', function(){
-	grid.appendRow();
-});
+
 
 // 삭제버튼
 $('#btnGridDel').on('click', function(){
@@ -183,18 +193,3 @@ function formCheck() {
 	}
 }
 
-/*$.fn.serializeObject = function() {
-	var o = {};
-	var a = this.serializeArray();
-	$.each(a, function() {
-		if (o[this.name]) {
-			if (!o[this.name].push) {
-				o[this.name] = [o[this.name]];
-			}
-			o[this.name].push(this.value || '');
-		} else {
-			o[this.name] = this.value || '';
-		}
-	});
-	return o;
-};*/

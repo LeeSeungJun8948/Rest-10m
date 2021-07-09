@@ -13,9 +13,10 @@ import com.rest.app.comm.vo.BomVO;
 public interface BusinessMapper {
 	public List<OrdersVO> getBus(Map<String, Object> param);//주문관리조회
 	
-	public List<OrdersVO> getExport(Map<String, Object> param);//출고읽기
+	
+	public List<ExportVO> getExportModal(Map<String, Object> param);//출고검색 모달
 
-	public List<OrdersVO> getUnExportModal(Map<String, Object> param);//미출고읽기
+	public List<OrdersVO> getUnExport(Map<String, Object> param);//미출고읽기
 
 	public List<CompanyVO> getCompany(CompanyVO vo);//고객사 모달
 	

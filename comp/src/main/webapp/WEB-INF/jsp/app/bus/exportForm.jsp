@@ -50,7 +50,7 @@
 				<input type="date" id="fromDate" name="fromDate">
 				<span> ~ </span>
 				<input type="date" id="toDate" name="toDate">&nbsp;
-					<button id="btnunExportModal" name="btnunExportModal" type="button" class="btn btn-primary">미출고 읽기</button>
+					<button type="button" class="btn btn-primary" id="btnRead">불러오기</button>
 			</form>
 		</div>
 	</div>
@@ -63,9 +63,9 @@
 </div>
 
 
-<div class="modal fade" id="unExportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="ExportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content" id="unExportContent" align="center">
+		<div class="modal-content" id="ExportContent" align="center">
 		</div>
 	</div>
 </div>

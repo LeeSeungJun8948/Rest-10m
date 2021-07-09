@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-<div id="unExportContent">
+<div id="ExportContent">
 	<div class="modal-header">
-		<h5 class="modal-title">미출고 검색</h5>
+		<h5 class="modal-title">출고 검색</h5>
 		<button id="btnCloseTop" type="button" class="close"
 			data-dismiss="modal" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
