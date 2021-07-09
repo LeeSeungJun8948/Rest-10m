@@ -34,6 +34,4 @@ public interface BusinessMapper {
 	int updateDetailExport(DetailExportVO vo);
 	int deleteDetailExport(int idx);
 	int deleteAllDetailExport(String exportCode);
-
-	
 }

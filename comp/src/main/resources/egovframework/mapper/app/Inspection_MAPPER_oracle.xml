@@ -3,7 +3,34 @@
 <mapper namespace="com.rest.app.fac.inspection.service.impl.InspectionMapper">
    
     <select id="getIns" resultType="com.rest.app.fac.inspection.vo.InspectionVO">
-		select * from inspection
+		select	i.inspection_code, i.judgement, i.ins_comment, i.before_date, 
+      		  	i.today, i.after_date, i.fac_code, f.facilities_name, f.fac_inspection
+		from 	inspection i, facilities f
+		where 	i.fac_code=f.fac_code
+		and 	trunc(today) between #{startDate} and #{endDate}
     </select>
     
+    <delete id="deleteIns" parameterType="com.rest.app.fac.inspection.vo.InspectionVO">
+		delete from inspection
+		where inspection_code = #{inspectionCode}    
+    </delete>
+    
+    <select id="getInsCode" resultType="com.rest.app.fac.inspection.vo.InspectionVO">
+    	select max(inspection_code) + 1 as inspection_code from inspection
+    </select>
+    
+    <insert id="insertIns" parameterType="com.rest.app.fac.inspection.vo.InspectionVO">
+    	insert into inspection
+    	values (inspection_seq.nextval, #{judgement}, #{insComment},
+    			#{beforeDate}, #{today}, #{afterDate}, #{facCode})
+    </insert>
+    
+    <update id="updateIns" parameterType="com.rest.app.fac.inspection.vo.InspectionVO">
+    	update inspection
+    	set INSPECTION_CODE=#{inspectionCode}, 
+    		JUDGEMENT=#{judgement}, INS_COMMENT=#{insComment},
+    		BEFORE_DATE=#{beforeDate}, TODAY=#{today}, AFTER_DATE=#{afterDate},
+    		FAC_CODE=#{facCode}
+    	where INSPECTION_CODE=#{inspectionCode}
+    </update>
 </mapper>  

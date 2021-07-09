@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +10,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 </head>
+	<h1>불량코드관리</h1>
 <body>
 	<div>
 		<form id="searchCheck" name="searchCheck">
@@ -19,8 +22,10 @@
 			</select> <input id="searchKeyword" name="searchKeyword" type="text"
 				title="검색어" class="form-control"
 				style="width: 200px; margin-left: 10px">
+			<button type="button" class="btn btn-primary" id="btnSearch">
+				<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+			</button>
 			</div>	
-			<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
 			<a id="search" href="empModal.do" rel="modal:open"
 				class="btn btn-primary">등록</a>
 			<button type="button" class="btn btn-primary" id="btnUpdate">저장</button>
@@ -133,7 +138,7 @@
 						o[this.name].push(this.value || '');
 					} else {
 						o[this.name] = this.value || '';
-					}
+					} 
 				});
 				return o;
 			};

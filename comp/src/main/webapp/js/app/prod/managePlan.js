@@ -153,28 +153,30 @@ $("#btnReset").click(function() {
 
 // 계획저장 버튼
 $('#btnSave').on('click', function() {
-	$.ajax({
-		type: 'POST',
-		url: 'savePlan.do',
-		data: $('#inputFrm').serialize(),
-		dataType: 'json',
-		async: false,
-		success: function(data){
-			var planCode = data.data.contents.planCode;
-			$('#planCode').val(planCode);
-			grid.setColumnValues('planCode', planCode);
-		}
-	});
-	grid.request('modifyData');
-	grid.on('successResponse', function(ev){
-		var text = JSON.parse(ev.xhr.responseText);
-		if(text.check == 'save') {
-			grid.readData(1, {planCode: $('#planCode').val()}, true);
-		}
-	});
-	gridInput.request('modifyData');
-	gridInput.clear();
-	toastr.success("저장되었습니다.");
+	if (formCheck()){
+		$.ajax({
+			type: 'POST',
+			url: 'savePlan.do',
+			data: $('#inputFrm').serialize(),
+			dataType: 'json',
+			async: false,
+			success: function(data){
+				var planCode = data.data.contents.planCode;
+				$('#planCode').val(planCode);
+				grid.setColumnValues('planCode', planCode);
+			}
+		});
+		grid.request('modifyData');
+		grid.on('successResponse', function(ev){
+			var text = JSON.parse(ev.xhr.responseText);
+			if(text.check == 'save') {
+				grid.readData(1, {planCode: $('#planCode').val()}, true);
+			}
+		});
+		gridInput.request('modifyData');
+		gridInput.clear();
+		toastr.success("저장되었습니다.");
+	}
 });
 
 // 계획삭제 버튼
@@ -184,7 +186,7 @@ $('#btnDel').on('click', function(){
 		url: 'deletePlan.do',
 		data: {planCode: $('#planCode').val()},
 		dataType: 'json',
-		success: function(data){
+		success: function(){
 			toastr.success("삭제되었습니다.");
 			resetPage();
 		}
@@ -290,8 +292,11 @@ function resetPage() {
 
 // 폼체크
 function formCheck() {
-	if (checkNull($('#planDate').val()) || checkNull($('#planName').val())) {
+	if(!checkNull($('#planDate').val()) || !checkNull($('#planName').val())) {
 		toastr.warning('값을 입력해주십시오.');
+		return false;
+	} else if(checkNull($('#productCode').val()) && !checkNull($('#workCount').val()) && ($('#workCount').val() != $('#inputCount').val())) {
+		toastr.warning('소요량이 부족합니다.');
 		return false;
 	} else {
 		return true;

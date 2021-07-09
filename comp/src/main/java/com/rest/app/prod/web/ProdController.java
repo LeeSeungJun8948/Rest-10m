@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +15,9 @@ import com.rest.app.prod.service.ProdService;
 import com.rest.app.prod.vo.DetailPlanVO;
 import com.rest.app.prod.vo.InputMatVO;
 import com.rest.app.prod.vo.PlanVO;
+import com.rest.app.prod.vo.WorkVO;
+
+import lombok.Data;
 
 @Controller
 public class ProdController {
@@ -24,15 +26,65 @@ public class ProdController {
 
 	// 생산계획관리 페이지
 	@RequestMapping("managePlan.do")
-	public String managePlan(Model model) {
+	public String managePlan() {
 		return "prod/managePlan.page";
 	}
 
-	@RequestMapping("planModal.do")
-	public String planModal() {
-		return "app/prod/planModal";
+	// 생산계획관리 페이지
+	@RequestMapping("manageWork.do")
+	public String manageWork() {
+		return "prod/manageWork.page";
 	}
-	
+
+	// 작업실적 - 작업자 모달
+	@RequestMapping("workEmpModal.do")
+	public String workEmpModal() {
+		return "app/prod/workEmpModal";
+	}
+
+	// 작업자 검색
+	@RequestMapping("/ajax/workEmpModal.do")
+	@ResponseBody
+	public Map<String, Object> ajaxWorkEmpModal(@RequestBody Map<String, Object> param) {
+		Map<String, Object> datas = new HashMap<>();
+		Map<String, Object> data = new HashMap<>();
+		data.put("result", true);
+		datas.put("contents", svc.searchEmp(param));
+		data.put("data", datas);
+		return data;
+	}
+
+	// 작업실적 - 불량코드 모달
+	@RequestMapping("workErrorModal.do")
+	public String workErrorModal() {
+		return "app/prod/workErrorModal";
+	}
+
+	// 작업자 검색
+	@RequestMapping("/ajax/workErrorModal.do")
+	@ResponseBody
+	public Map<String, Object> ajaxWorkErrorModal(@RequestBody Map<String, Object> param) {
+		Map<String, Object> datas = new HashMap<>();
+		Map<String, Object> data = new HashMap<>();
+		data.put("result", true);
+		datas.put("contents", svc.searchError(param));
+		data.put("data", datas);
+		return data;
+	}
+
+	// 작업실적 저장
+	@RequestMapping("saveWork.do")
+	public String saveWork(WorkVO vo) {
+		svc.insertWork(vo);
+		return "prod/manageWork.page";
+	}
+
+	// 작업실적조회 페이지
+	@RequestMapping("viewWork.do")
+	public String viewWork() {
+		return "prod/viewWork.page";
+	}
+
 	// 미완료주문 읽기
 	@RequestMapping("readUnplanOrders.do")
 	@ResponseBody
@@ -152,7 +204,7 @@ public class ProdController {
 		data.put("data", datas);
 		return data;
 	}
-	
+
 	// 모달 생산계획검색
 	@RequestMapping("searchPlan.do")
 	@ResponseBody
@@ -164,64 +216,51 @@ public class ProdController {
 		data.put("data", datas);
 		return data;
 	}
+
+	// 생산작업 검색
+	@RequestMapping("searchWork.do")
+	@ResponseBody
+	public Map<String, Object> searchWork(@RequestBody Map<String, Object> param) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+
+		datas.put("contents", svc.searchWork(param));
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
+	}
+
+	// 생산작업 삭제
+	@RequestMapping("deleteWork.do")
+	@ResponseBody
+	public Map<String, Object> deleteWork(@RequestBody WorkGridData gridData) {
+		List<WorkVO> dList = gridData.deletedRows;
+		Map<String, Object> data = new HashMap<String, Object>();
+		dList.forEach(vo -> {
+			svc.deleteWork(vo.getWorkNo());
+		});
+		data.put("result", true);
+		return data;
+	}
 }
 
+@Data
 class GridData {
 	List<DetailPlanVO> createdRows;
 	List<DetailPlanVO> updatedRows;
 	List<DetailPlanVO> deletedRows;
-
-	public List<DetailPlanVO> getCreatedRows() {
-		return createdRows;
-	}
-
-	public void setCreatedRows(List<DetailPlanVO> createdRows) {
-		this.createdRows = createdRows;
-	}
-
-	public List<DetailPlanVO> getDeletedRows() {
-		return deletedRows;
-	}
-
-	public void setDeletedRows(List<DetailPlanVO> deletedRows) {
-		this.deletedRows = deletedRows;
-	}
-
-	public List<DetailPlanVO> getUpdatedRows() {
-		return updatedRows;
-	}
-
-	public void setUpdatedRows(List<DetailPlanVO> updatedRows) {
-		this.updatedRows = updatedRows;
-	}
 }
 
+@Data
 class InputGridData {
 	List<InputMatVO> createdRows;
 	List<InputMatVO> updatedRows;
 	List<InputMatVO> deletedRows;
+}
 
-	public List<InputMatVO> getCreatedRows() {
-		return createdRows;
-	}
-
-	public void setCreatedRows(List<InputMatVO> createdRows) {
-		this.createdRows = createdRows;
-	}
-
-	public List<InputMatVO> getUpdatedRows() {
-		return updatedRows;
-	}
-
-	public void setUpdatedRows(List<InputMatVO> updatedRows) {
-		this.updatedRows = updatedRows;
-	}
-
-	public List<InputMatVO> getDeletedRows() {
-		return deletedRows;
-	}
-
-	public void setDeletedRows(List<InputMatVO> deletedRows) {
-		this.deletedRows = deletedRows;
-	}
+@Data
+class WorkGridData {
+	List<WorkVO> createdRows;
+	List<WorkVO> updatedRows;
+	List<WorkVO> deletedRows;
 }

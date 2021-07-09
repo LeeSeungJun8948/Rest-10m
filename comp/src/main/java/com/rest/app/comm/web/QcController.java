@@ -5,25 +5,59 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rest.app.comm.service.QualityControlService;
-import com.rest.app.comm.vo.BomVO;
 import com.rest.app.comm.vo.QualityControlVO;
+import com.thoughtworks.xstream.mapper.Mapper;
 
 import egovframework.com.cmm.EgovWebUtil;
+import egovframework.com.cmm.service.EgovProperties;
 import egovframework.com.cmm.util.EgovResourceCloseHelper;
+
+
+class qcGrid {
+	List<QualityControlVO>  deletedRows;
+	List<QualityControlVO> updatedRows;
+	List<QualityControlVO> createdRows;
+	public List<QualityControlVO> getDeletedRows() {
+		return deletedRows;
+	}
+	public void setDeletedRows(List<QualityControlVO> deletedRows) {
+		this.deletedRows = deletedRows;
+	}
+	public List<QualityControlVO> getUpdatedRows() {
+		return updatedRows;
+	}
+	public void setUpdatedRows(List<QualityControlVO> updatedRows) {
+		this.updatedRows = updatedRows;
+	}
+	public List<QualityControlVO> getCreatedRows() {
+		return createdRows;
+	}
+	public void setCreatedRows(List<QualityControlVO> createdRows) {
+		this.createdRows = createdRows;
+	}
+
+}
 
 @Controller
 public class QcController {
@@ -46,7 +80,11 @@ public class QcController {
 	}
 	
 	@RequestMapping("QualityControl.do")
-	public String QualityControl() {
+	public String QualityControl(Model model , QualityControlVO vo) {
+		model.addAttribute("use", dao.getProduct(vo));
+		model.addAttribute("empList", dao.getEmpList(vo));
+		model.addAttribute("unit", dao.getUnitList(vo));
+		model.addAttribute("std", dao.getCodeList(vo));
 		return "comm/QualityControl.page";
 	}
 	
@@ -59,8 +97,20 @@ public class QcController {
 		mv.addObject("company", dao.getCompany(vo));
 		return mv;
 	}
+	//제품 단건 조회 ajax
+	@RequestMapping("/ajax/getProduct.do")
+	@ResponseBody
+	public Map<String, Object> ajaxgetProduct(QualityControlVO vo) {
+		Map<String, Object> datas = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", dao.getProduct(vo));
+		data.put("data", datas);
+		return data;
+	}
 	
-	//규격,단위 리스트
+	
+	//규격 리스트
 	@RequestMapping("/ajax/getCodeList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxgetCodeList(QualityControlVO vo) {
@@ -71,6 +121,63 @@ public class QcController {
 		data.put("data", datas);
 		return data;
 	}
+	//단위 리스트
+	@RequestMapping("/ajax/getUnitList.do")
+	@ResponseBody
+	public Map<String, Object> ajaxgetUnitList(QualityControlVO vo) {
+		Map<String, Object> datas = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", dao.getUnitList(vo));
+		data.put("data", datas);
+		return data;
+	}
+	//불량코드,명  modify
+	@PutMapping(value = "/ajax/modifyProduct.do")
+	@ResponseBody
+	public Map<String, Object> modifyProduct(@RequestBody qcGrid qcgrid) {
+		Map<String, Object> data = new HashMap<String, Object>();
+
+		for (int i = 0; i < qcgrid.createdRows.size(); i++) {
+			dao.insertProduct(qcgrid.createdRows.get(i));
+		}
+		for (int i = 0; i < qcgrid.updatedRows.size(); i++) {
+			dao.updateProdcut(qcgrid.updatedRows.get(i));
+		}
+		data.put("result", true);
+		data.put("data", qcgrid.createdRows);
+		data.put("data", qcgrid.updatedRows);
+		return data;
+	}
+	
+	// 제품삭제
+	@PostMapping(value = "/ajax/deleteProduct.do")
+	@ResponseBody
+	public Map deleteProduct(@RequestBody qcGrid qcgrid) {
+		Map<String, Object> data = new HashMap();
+		for (int i = 0; i < qcgrid.deletedRows.size(); i++) {
+			dao.deleteProduct(qcgrid.deletedRows.get(i));
+		}
+		data.put("result", true);
+		data.put("data", qcgrid.deletedRows);
+		return data;
+	}
+	//저장
+	@RequestMapping(value= "/updateProduct.do")
+	public String updateProduct(HttpServletRequest request, QualityControlVO vo) throws IllegalStateException, IOException {
+		MultipartFile uploadFile = vo.getUploadFile();
+		String fileName = null;
+		if(uploadFile !=null && !uploadFile.isEmpty() && uploadFile.getSize()>0) {
+			fileName = uploadFile.getOriginalFilename();
+			String storePathString = EgovProperties.getProperty("Globals.fileStorePath");
+			uploadFile.transferTo(new File(storePathString, fileName));
+			//첨부파일명 VO에 지정
+			vo.setQcImg(fileName);
+		}
+		dao.updateProdcut(vo);
+		return "redirect:QualityControl.do";
+	}
+	
 	
 	//이미지 업로드 
 	@RequestMapping(value = "/qcfiledown.do")

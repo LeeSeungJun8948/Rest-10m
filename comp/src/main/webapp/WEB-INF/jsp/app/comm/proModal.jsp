@@ -13,14 +13,16 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<form id="productSearchForm" name="productSearchForm">
+			<div class="row">
 				<select name="searchCondition" id="searchCondition"
 					title="검색조건2-검색어구분" style="width: 80px; height: 26px">
-					<option value="productCode">제품코드</option>
-					<option value="productName" selected="selected">제품명</option>
+					<option value="compCode">회사코드</option>
+					<option value="compName" selected="selected">회사명</option>
 				</select> <input id="searchKeyword" name="searchKeyword" type="text"
 					title="검색어" class="form-control"
 					style="width: 200px; margin-left: 10px">
 				<button type="button" class="btn btn-primary" id="btnCheck">조회</button>
+				</div>
 			</form>
 		</div>
 		<div class="modal-body">
@@ -90,15 +92,10 @@
 				
 				$("#btnCheck").on("click", function() {
 					var param = $('#productSearchForm').serializeObject();
-					matGrid.readData(1, param, true);
+					compGrid.readData(1, param, true);
 				})
 				
-				$('#btnSearch').on('click', function() {
-					var prm = $('#frm').serializeObject();
-					grid.readData(1, prm, true);
-				})
-				
-				
+			
 				compGrid.on('click', (ev) => { 
 				var compName = compGrid.getRow(ev.rowKey).companyName;
 				console.log(compName);

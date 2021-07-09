@@ -3,7 +3,7 @@ package com.rest.app.comm.vo;
 import lombok.Data;
 
 @Data
-public class ProcessVO {
+public class ProcessVO extends ComDefaultVO  {
 	int processCode;
 	String processName;
 	String unitId;

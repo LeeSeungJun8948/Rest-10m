@@ -6,4 +6,8 @@ import com.rest.app.fac.inspection.vo.InspectionVO;
 
 public interface InspectionMapper {
 	public List<InspectionVO> getIns(InspectionVO vo);
+	public int deleteIns(InspectionVO vo);
+	public int insertIns(InspectionVO vo);
+	public int updateIns(InspectionVO vo);
+	public InspectionVO getInsCode();
 }

@@ -37,7 +37,7 @@
                         <a class="collapse-item" href="/comp/bomList.do">力前 BOM包府</a>
                         <a class="collapse-item" href="/comp/processList.do">傍沥包府</a>
                         <a class="collapse-item" href="/comp/empList.do">荤盔包府</a>
-                        <a class="collapse-item" href="/comp/errorList.do">阂樊内靛 包府 </a>
+                        <a class="collapse-item" href="/comp/error.do">阂樊内靛 包府 </a>
                         <a class="collapse-item" href="cards.html">力前 前龙 钎霖辑 包府</a>
 
                     </div>
@@ -86,6 +86,9 @@
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/comp/managePlan.do">积魂拌裙 包府</a>
+                        <a class="collapse-item" href="/comp/manageWork.do">累诀角利 包府</a>
+                        <a class="collapse-item" href="/comp/viewWork.do">累诀角利 炼雀</a>
+                        <a class="collapse-item" href="/comp/detailErrorList.do">阂樊郴开 炼雀</a>
                     </div>
                 </div>
             </li>

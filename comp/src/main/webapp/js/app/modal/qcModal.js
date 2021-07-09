@@ -36,21 +36,20 @@
 		grid.readData(1, prm, true);
 	})
 	
-			qcGrid.on('click', function(ev) {
-					
-					var values = qcGrid.getRow(ev.rowKey);
-					var prdCode = values.productCode;
-					$('#productCode').val(prdCode);
-					console.log(prdCode);
+	qcGrid.on('click', function(ev) {
+		var values = qcGrid.getRow(ev.rowKey);
+		var prdCode = values.productCode;
+		$('#productCode').val(prdCode);
+		console.log(prdCode);
 
 				});
 
 				
 				function fnSearch() {
-				$("#frm").submit();
+				$("#profrm").submit();
 				}
 				// bom 자재리스트 버튼
 				$('#btnSearch').on('click', function() {
-					var prm = $('#frm').serializeObject();
+					var prm = $('#profrm').serializeObject();
 					grid.readData(1, prm, true);
 				})

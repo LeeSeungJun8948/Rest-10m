@@ -12,34 +12,25 @@
 <div class="row">
 	<div class="mb-2 col-lg-6">
 		<form id="inputFrm" name="inputFrm">
-		<input type="hidden" id="exportCode" name="exportCode" value="exportCode">
+		<input type="hidden" value="exportCode" id="exportCode" name="exportCode">
 			<table class="table">
 				<tbody>
 					<tr>
-						<th>주문일자*</th>
-						<td>
-							<div class="row">
-								<div class="col-md-5">
-									<input type="date" class="form-control" id="fromDate"
-										name="fromDate">
-								</div>
-								~
-								<div class="col-md-5">
-									<input type="date" class="form-control" id="toDate"
-										name="toDate">
-								</div>
-							</div>
-						</td>
+						<th>출고일자</th>
+						<td><input type="date" name="exportDate" id="exportDate"></td>
+						<!-- <th>출고번호</th>
+						<td><input type="export" id="Lot" name="Lot"></td> -->
 					</tr>
 					<tr>
+						<th>고객사코드</th>
+						<td><input type="text" id="searchKeywordFrom"
+							name="searchKeywordFrom" /> <a href="compModal.do"
+							rel="modal:open" class="btn btn-primary"> <img
+								src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
+						</a></td>
 						<th>고객사</th>
-						<td><input type="text" id="companyCode" name="companyCode" />
-							<button id="btnCompModal" type="button" class="btn btn-toggle"
-								data-remote="false" data-toggle="modal" data-target="#compModal">
-								<img alt="btn_search"
-									src="<c:url value='/images/app/all/btn_search.png'/>">
-							</button> <input type="text" id="companyName" name="companyName"
-							readonly="true" /></td>
+						<td><input type="text" id="searchKeywordFromNm"
+							name="searchKeywordFromNm" readonly="true" /></td>
 					</tr>
 					<tr>
 						<th>특기사항</th>
@@ -51,37 +42,29 @@
 	</div>
 	<div class="mb-4 col-lg-6">
 		<div>
-			<h5>검색자료관리</h5>
+			<h5>미출고주문 검색</h5>
 		</div>
 		<div>
 			<form id="dateForm" name="dateForm">
-				<span>납기일자 </span> <input type="date" id="fromDate" name="fromDate"
-					value=${outDate }> <span> ~ </span> <input type="date"
-					id="toDate" name="toDate" value=${outDate }>&nbsp;
-				<button id="btnunExportModal" type="button" class="btn btn-primary"
-					data-remote="false" data-toggle="modal"
-					data-target="#unExportModal">미출고 읽기</button>
+				<span>납기일자 </span>
+				<input type="date" id="fromDate" name="fromDate">
+				<span> ~ </span>
+				<input type="date" id="toDate" name="toDate">&nbsp;
+					<button id="btnunExportModal" name="btnunExportModal" type="button" class="btn btn-primary">미출고 읽기</button>
 			</form>
 		</div>
 	</div>
 </div>
 <div class="mb-4" align="right">
-	<button type="button" class="btn btn-primary" id="btnGridAdd">추가</button>
 	<button type="button" class="btn btn-primary" id="btnGridDel">삭제</button>
 </div>
 <div class="col-lg-12">
 	<div id="grid" />
 </div>
 
-<div class="modal fade" id="compModal" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="unExportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content" id="compContent" align="center"></div>
-	</div>
-</div>
-<div class="modal fade" id="unExportModal" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content" id="unExportContent" align="center">
 		</div>
 	</div>

@@ -44,32 +44,6 @@
 	</select>
 	<select id="getExport" resultType="com.rest.app.bus.vo.OrdersVO">
 		select distinct
-		p.product_code,p.product_name,p.std_id,p.unit_id,
-		o.order_no,o.order_count,o.out_count,o.company_code,
-		d.export_code,d.price,d.product_lot,
-		TO_CHAR(e.export_date,'YYYY-MM-DD')as export_date,
-		(o.order_count -
-		o.out_count) as un_export,
-		(SELECT SUM(product_count) FROM storage
-		WHERE product_code = o.product_code
-		AND product_state='포장완료') as
-		dayCount
-		from orders o, storage s, product p,detailexport d,export e
-		where o.product_code = p.product_code
-		and o.product_code =
-		s.product_code
-		and export_date BETWEEN TO_DATE(#{fromDate},
-		'YYYY-MM-DD')
-		AND
-		TO_DATE(#{toDate}, 'YYYY-MM-DD')
-		<if test="companyCode !=null and companyCode !=''">
-			and o.company_code=#{companyCode}
-		</if>
-	</select>
-	<select id="getUnExportModal"
-		resultType="com.rest.app.bus.vo.OrdersVO"
-		parameterType="com.rest.app.bus.vo.OrdersVO">
-		select distinct
 		p.product_code,p.product_name,p.std_id,p.unit_id,o.order_no,o.order_count,
 		o.out_count,(o.order_count - o.out_count) as un_export,
 		(SELECT
@@ -77,47 +51,50 @@
 		AND product_state='포장완료') as dayCount
 		from orders o, storage s, product
 		p,export e
-		where o.out_count != o.order_count
+		where o.product_code = p.product_code
 		and o.product_code =
-		p.product_code
-		and o.product_code = s.product_code
-		and e.export_date
-		BETWEEN TO_DATE(#{fromDate},
-		'YYYY-MM-DD')
+		s.product_code
+		and e.export_date BETWEEN TO_DATE(#{fromDate}, 'YYYY-MM-DD')
 		AND
-		TO_DATE(#{toDate},
-		'YYYY-MM-DD')
-		<if test="keyword != null and keyword !=''">
-			and ${searchCondition} like '%'||#{keyword}||'%'
-		</if>
-		order by o.order_no
+		TO_DATE(#{toDate}, 'YYYY-MM-DD')
 	</select>
+	<select id="getUnExportModal"
+		resultType="com.rest.app.bus.vo.OrdersVO"
+		parameterType="com.rest.app.bus.vo.OrdersVO">
+		 select distinct
+		p.product_code,p.product_name,p.std_id,p.unit_id,o.order_no,o.order_count,
+		o.out_count,(o.order_count - o.out_count) as un_export,
+		(SELECT
+		SUM(product_count) FROM storage WHERE product_code = o.product_code
+		AND product_state='포장완료') as dayCount
+		from orders o, storage s, product
+		p,export e
+		where o.product_code = p.product_code
+		and o.product_code =
+		s.product_code
+		and e.export_date BETWEEN TO_DATE(#{fromDate}, 'YYYY-MM-DD')
+		AND
+		TO_DATE(#{toDate}, 'YYYY-MM-DD')	</select>
 
+	
 	<insert id="insertDetailExport" parameterType="com.rest.app.bus.vo.DetailExportVO">
-		<selectKey keyProperty="idx" resultType="int"
-			order="BEFORE">
-			SELECT NVL(MAX(idx),0)+1 FROM detailexport
-		</selectKey>
-		INSERT INTO detailplan VALUES(
-		#{productLot}, #{planCode}, #{orderNo},
-		#{productCode}, #{workDate}, #{comments}, #{workCount}
+		<selectKey keyProperty="idx" resultType="int" order="BEFORE">
+        	SELECT NVL(MAX(idx),0)+1 FROM detailExport
+    	</selectKey>    
+		INSERT INTO detailExport VALUES(
+		#{idx}, #{exportCode},	#{orderNo}, null, #{productCode}, #{exportCount}, #{price}, #{comments}
 		)
 	</insert>
-	<update id="updateDetailPlan" parameterType="DetailPlanVO">
-		UPDATE detailplan
-		SET work_date = #{workDate}, work_count = #{workCount},
-		comments =
-		#{comments}
+	<update id="updateDetailExport" parameterType="com.rest.app.bus.vo.DetailExportVO">
+		UPDATE detailExport SET export_count = #{exportCount}, comments = #{comments}
 		WHERE product_lot = #{productLot}
 	</update>
-	<delete id="deleteDetailPlan">
-		DELETE FROM detailplan WHERE product_lot =
-		#{productLot}
+	<delete id="deleteDetailExport">
+		DELETE FROM detailExport WHERE idx = #{idx}
 	</delete>
-	<delete id="deleteAllDetailPlan">
-		DELETE FROM detailplan WHERE plan_code = #{planCode}
+	<delete id="deleteAllDetailExport">
+		DELETE FROM detailExport WHERE export_code = #{exportCode}
 	</delete>
-
 
 
 	<select id="getProInventory"
@@ -139,7 +116,7 @@
 		AND
 		TO_DATE(#{toDate}, 'YYYY-MM-DD')
 		<if test="productCode !=null and productCode !=''">
-			and d.product_code=#{productCode}
+			and o.product_code=#{productCode}
 		</if>
 	</select>
 </mapper>

@@ -74,28 +74,21 @@ public class BusinessServiceImpl implements BusinessService {
 
 	@Override
 	public int insertDetailExport(DetailExportVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.insertDetailExport(vo);
 	}
 
 	@Override
 	public int updateDetailExport(DetailExportVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.updateDetailExport(vo);
 	}
 
 	@Override
 	public int deleteDetailExport(int idx) {
-		// TODO Auto-generated method stub
 		return mapper.deleteDetailExport(idx);
 	}
 
 	@Override
 	public int deleteAllDetailExport(String exportCode) {
-		// TODO Auto-generated method stub
 		return mapper.deleteAllDetailExport(exportCode);
 	}
-
-	
-	
 }

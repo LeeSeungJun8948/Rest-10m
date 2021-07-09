@@ -2,93 +2,95 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<title>Insert title here</title>
-<style type="text/css">
-.table {
-	border-bottom: 1px;
-}
 
-th {
-	width: 120px;
-}
-
-td {
-	width: 300px;
-}
-</style>
-</head>
 <body>
-	<div>
-		<h3>제품 품질 표준서 관리</h3>
-	</div>
 
-	<div>
-		<table class="table">
-			<tr>
-				<th scope="row">제품코드 <span style="color: red">*</span>
-				</th>
-				<td width="300px">
-
-					<form id="searchCheck" name="searchCheck" style="float: left">
-						<input type="text" size="20" tabindex="1" id='pdc'
-							name="productCode" value="${proInfo.productCode }"
-							style="margin-top: 4px">
-					</form> <a id="search" href="qcModal.do" rel="modal:open"
-					class="btn btn-primary" style="margin-left: 10px"> <img
-						src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
-				</a>
-				</td>
-				<th scope="row">제품명</th>
-				<td><input type="text" value="${proInfo.productName }"></td>
-				<th scope="row">규격</th>
-				<td><input type="text" value="${proInfo.stdId }"></td>
-				<th>Q.C담당자</th>
-				<td><input type="text" value="${proInfo.employeeName }"></td>
-			</tr>
-			<tr>
-				<th>고객코드</th>
-				<td><input type="text" value="${company.compCode}"></td>
-				<th>고객명</th>
-				<td><input type="text" value="${company.compName}"></td>
-				<th>관리단위</th>
-				<td><input type="text" value="${proInfo.unitNo }"></td>
-				<th>사용여부</th>
-				<td><input type="checkbox" name="checkYn" id="checkYn"
-					style="width: 20px; height: 20px"
-					<c:if test="${proInfo.useAt eq 'Y'}">checked="checked"</c:if>
-					value="${proInfo.useAt }"></td>
-			</tr>
-
-		</table>
-	</div>
-	<div>
-		<h3>이미지 첨부</h3>
-	</div>
-	<div class="row">
-		<div class="col-6">
-			<input type="file" id="pimg" name="uploadFile" accept="image/*"
-				style="display: none" onchange="setTumbnail(event);">
-			<button type="button" class="btn btn-primary" id="btnPimg">이미지업로드</button>
-			<h4>이미지 미리보기</h4>
-			<div id="pImgPreview">
-				<img id="pimg" />
-			</div>
+	<div class="flex row">
+		<div class="col-8">
+			<h3>제품 품질 표준서 관리</h3>
 		</div>
-		<div class="col-6">품질표준서 들어가는 곳</div>
+		<div class="col-4" align="right">
+			<button class="btn btn-primary" id="btnNew" type="button">
+				초기화</button>
+			<button type="submit" class="btn btn-primary">저장</button>
+			<button class="btn btn-primary" id="btnUdate" type="button">
+				수정</button>
+		</div>
 	</div>
+	<div class="flex row">
+	<div class="col-9 input-group input-group-sm align-self-start mt-4">
+		<form id="frm" class="form-inline" role="form">
+			<div class="row">
+				<div class="input-group-prepend col-4">
+					<span class="input-group-text" >제품코드</span>
+					<input id="productCode" name="productCode" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group-prepend col-4">
+					<span class="input-group-text" >제품명</span>
+					<input id="productName" name="productName" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group-prepend col-4">
+					<span class="input-group-text" >Q.C담당자</span>
+					<select name="employeeName" id="employeeName" class="form-control">
+						<c:forEach var="emp" items="${empList }">
+							<option value="${ emp.empCode }">${emp.employeeName }</option>
+						</c:forEach>
+					</select>
+				</div>
+				
+				<div class="col-12 mb-3"></div>
+				
+				<div class="input-group-prepend col-4">
+					<span class="input-group-text" >규격</span>
+					<input readonly id="stdId" name="stdId" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+						<button id="btnProductModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#productModal">
+							<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+						</button>	
+				</div>
+				<div class="input-group-prepend col-lg-4" >
+						<span class="input-group-text" >규격코드</span>
+						<input readonly id="stdNo" name="stdNo" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group-prepend col-4">
+					<span class="input-group-text" >사용여부</span>
+					<input id="useAt" name="useAt" type="checkbox" 
+						 class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+						 <c:if test="${use.useAt eq 'Y'} ">checked="checked"</c:if>>
+				</div>
+				
+				<div class="col-12 mb-3"></div>
+				
+				<div class="input-group-prepend col-4">
+					<span class="input-group-text" >단위</span>
+					<input readonly id="unitId" name="unitId" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+						<button id="btnUnitModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#unitModal">
+							<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+						</button>	
+				</div>
+				<div class="input-group-prepend col-lg-4" >
+						<span class="input-group-text" >관리단위</span>
+						<input readonly id="unitNo" name="unitNo" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group-prepend col-lg-4">
+					<input type="file" id="qcImg"
+							name="uploadFile" accept="image/*" style="display: none"
+							onchange="setThumbnail(event);">
+					<button type="button" class="input-group-text" id="btnQcImg">성적서첨부</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<div class="col-3" style="height:300px; ">
+		<div id="imagePreview"   >
+			<img id="image" style="width: 300px; height: 300px; "/>
+		</div>
+	</div>
+</div>
+
 	<div class="row">
 		<div class="col-6">제품</div>
 		<div class="col-6" align="right">
@@ -98,100 +100,23 @@ td {
 		</div>
 	</div>
 
-		<div id="proGrid"></div>
-		<script type="text/javascript">
-			const pdataSource = {
-				api : {
-					readData : {url : 'ajax/getProductList.do', method : 'GET'}
-			
+	<div id="proGrid"></div>
+	
+	<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" id="productContent" align="center">
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="unitModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" id="unitContent" align="center">
+			</div>
+		</div>
+	</div>
+	
 
-				},
-				contentType : 'application/json'
-			};
-			const progrid = new tui.Grid({
-				el : document.getElementById('proGrid'),
-				data : pdataSource,
-				rowHeaders: ['checkbox'],
-				scrollX : false,
-				scrollY : false,
-				columns : [ 
-					{
-						header : '제품코드',
-						name : 'productCode',
-						editor : 'text'
-
-					}, 
-					{
-						header : '제품명',
-						name : 'productName',
-						editor : 'text'
-					}, 
-					{
-						header : '규격',
-						name :  'stdId'
-						
-					},
-					{
-						header : '규격코드',
-						name :  'stdNo'
-						
-					},
-					{
-						header : '단위코드',
-						name :  'unitId'
-						
-					},
-					{
-						header : '관리단위',
-						name :  'unitNo',
-						
-					},
-					{
-						header : '사원코드',
-						name :  'empCode',
-						editor : 'text'
-					},
-					{
-						header : '사용여부',
-						name :  'useAt',
-						formatter:'listItemText',
-						editor:{
-							type:'select',
-							options:{
-								listItems:[
-									{text:'사용',value:'Y'},
-									{text:'미사용', value:'N'}
-								]
-							}
-						}
-					},
-
-					]
-			    });
-			$("#RowInsert").on("click", function(){
-				progrid.appendRow();
-			});
-			
-			var stdRowkey;
-			var snoRowkey;
-			progrid.on('click', (ev) => {
-				stdRowkey= ev.rowKey;
-				snoRowkey= ev.rowKey;
-				if(ev.columnName =='stdId'){
-					var href="productModal.do";
-				window.event.preventDefault();
-				$('.jquery-modal').remove();
-				$('.modal').remove();
-				this.blur();
-					$.get(href, function(html){
-						var modalOpen = $(html).appendTo('body').modal();
-						     });
-					}	   
-				});
-			
-		
-			</script>
-  
 </body>
-
+<script type="text/javascript" src="js/app/comm/Quality.js"></script>
 </html>
