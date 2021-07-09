@@ -92,21 +92,19 @@ public class InspectionController {
 	@ResponseBody
 	public Map<String, Object> modifyIns(@RequestBody GridData gridDate){
 		
-		System.out.println("컨트롤러===============");
 		Map<String, Object> data = new HashMap<String, Object>();
 		for (int i = 0; i < gridDate.createdRows.size(); i++) {
+			System.out.println(gridDate.createdRows.get(i));
 			mapper.insertIns(gridDate.createdRows.get(i));
 		}
 		for (int i = 0; i < gridDate.updatedRows.size(); i++) {
 			mapper.updateIns(gridDate.updatedRows.get(i));
 		}
 		for (int i = 0; i < gridDate.deletedRows.size(); i++) {
-			mapper.updateIns(gridDate.deletedRows.get(i));
+			mapper.deleteIns(gridDate.deletedRows.get(i));
 		}
 		data.put("result", true);
-		data.put("data", gridDate.createdRows);
-		data.put("data", gridDate.updatedRows);
-		data.put("data", gridDate.deletedRows);
+		data.put("data", gridDate);
 		return data;
 	}
 	
