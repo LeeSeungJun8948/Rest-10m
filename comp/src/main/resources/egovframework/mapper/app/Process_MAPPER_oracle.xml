@@ -33,6 +33,12 @@
 		select *
 		  from company
 		 where comp_no = 02
+		<if test="searchCondition == 'compCode'">AND
+			company_code LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		<if test="searchCondition == 'compName'">AND
+			company_name LIKE '%' || #{searchKeyword} || '%'
+		</if>
 	</select>
 	<!-- 외주업체 단건조회 -->
 	<select id="getCompName" resultType="com.rest.app.comm.vo.ProcessVO">

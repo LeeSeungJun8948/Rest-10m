@@ -1,5 +1,7 @@
 package com.rest.app.comm.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -24,4 +26,6 @@ public class QualityControlVO {
 	String compCode;
 	String companyName;
 	String compName;
+	
+	MultipartFile uploadFile;
 }

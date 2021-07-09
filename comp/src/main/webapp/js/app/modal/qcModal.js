@@ -46,10 +46,10 @@
 
 				
 				function fnSearch() {
-				$("#frm").submit();
+				$("#profrm").submit();
 				}
 				// bom 자재리스트 버튼
 				$('#btnSearch').on('click', function() {
-					var prm = $('#frm').serializeObject();
+					var prm = $('#profrm').serializeObject();
 					grid.readData(1, prm, true);
 				})

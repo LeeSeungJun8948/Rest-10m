@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <div class="row">
@@ -35,13 +36,13 @@
 						<td>
 							<div class="row">
 								<div class="col-md-4">
-									<input readonly class="form-control" type="text" id="companyCode" name="companyCode">
+									<input readonly class="form-control" type="text" id="productCode" name="productCode">
 								</div>
-								<a id="search" href="modal.do" rel="modal:open" style="margin-left: 10px">
+								<a id="search" href="errorProductModal.do" rel="modal:open" style="margin-left: 10px">
 									<img src="<c:url value='/images/app/all/btn_search.png'/>">
 								</a>
 								<div class="col-md-6">					
-									<input readonly class="form-control" type="text" id="productLot" name="productLot">
+									<input readonly class="form-control" type="text" id="productName" name="productName">
 								</div>
 							</div>
 						</td>
