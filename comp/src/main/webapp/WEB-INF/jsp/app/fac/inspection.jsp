@@ -34,4 +34,11 @@
 	<button type="button" class="btn btn-info" id="btnDel" name="btnDel" >삭제</button>
 </div>
 <div id="grid"></div>
+
+<div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content" id="facContent" align="center">
+		</div>
+	</div>
+</div>
 <script type="text/javascript" src="js/app/fac/inspection.js"></script>

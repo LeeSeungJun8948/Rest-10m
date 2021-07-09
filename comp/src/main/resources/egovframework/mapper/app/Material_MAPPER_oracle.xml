@@ -319,7 +319,7 @@
 		<where>
 			<if test="keyword != null and keyword !=''">
 				<if test='!searchCondition.equals("mat_no")'>
-					${searchCondition} like '%'||#{keyword}||'%' 
+					upper(${searchCondition}) like '%'||upper(#{keyword})||'%' 
 				</if>
 				<if test='searchCondition.equals("mat_no")'>
 					${searchCondition} in (SELECT code 

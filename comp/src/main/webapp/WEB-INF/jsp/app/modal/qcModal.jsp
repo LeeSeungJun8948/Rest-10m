@@ -42,7 +42,7 @@
 </style>
 
 <!-- Modal -->
-<form action="getQcProduct.do" method="post" id="frm">
+<form action="getQcProduct.do" method="post" id="profrm">
 	<input type="hidden" id="productCode" name="productCode">
 </form>
 <div class="modal-dialog" role="document" style="z-index: 100">

@@ -37,7 +37,7 @@
                         <a class="collapse-item" href="/comp/bomList.do">力前 BOM包府</a>
                         <a class="collapse-item" href="/comp/processList.do">傍沥包府</a>
                         <a class="collapse-item" href="/comp/empList.do">荤盔包府</a>
-                        <a class="collapse-item" href="/comp/errorList.do">阂樊内靛 包府 </a>
+                        <a class="collapse-item" href="/comp/error.do">阂樊内靛 包府 </a>
                         <a class="collapse-item" href="cards.html">力前 前龙 钎霖辑 包府</a>
 
                     </div>

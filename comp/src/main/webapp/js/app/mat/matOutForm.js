@@ -137,7 +137,6 @@ const grid = new tui.Grid({
 	}
 });
 	
-adjustGrid.disableColumn('inoutNo');
 
 function format(value){
 	value = value * 1;
