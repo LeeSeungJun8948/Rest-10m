@@ -30,7 +30,7 @@
 		</form>
 	
 		<div class="col-md-11 m-3">
-			<div id="modalProcListGrid"></div>
+			<div id="procGrid"></div>
 		</div>
 	
 		<div class="modal-footer">

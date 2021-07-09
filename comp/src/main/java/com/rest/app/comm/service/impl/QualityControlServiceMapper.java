@@ -34,10 +34,35 @@ public class QualityControlServiceMapper implements QualityControlService {
 
 	@Override
 	public List<QualityControlVO> getCodeList(QualityControlVO vo) {
-		// TODO Auto-generated method stub
+		// TODO 규격 리스트
 		return mapper.getCodeList(vo);
 	}
 
+	@Override
+	public List<QualityControlVO> getUnitList(QualityControlVO vo) {
+		// TODO 단위리스트
+		return mapper.getUnitList(vo);
+	}
+
+	@Override
+	public int insertProduct(QualityControlVO vo) {
+		// TODO 제품등록
+		return mapper.insertProduct(vo);
+	}
+
+
+	@Override
+	public int deleteProduct(QualityControlVO vo) {
+		// TODO 제품삭제
+		return mapper.deleteProduct(vo);
+	}
+
+	@Override
+	public int updateProdcut(QualityControlVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.updateProdcut(vo);
+	}
+	
 
 
 }

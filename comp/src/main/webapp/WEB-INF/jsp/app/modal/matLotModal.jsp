@@ -11,7 +11,7 @@
 	
 	<div class="modal-body">
 		<div class="col-md-11">
-			<div id="matLotListGrid"></div>
+			<div id="matLotGrid"></div>
 		</div>
 	
 		<div class="modal-footer">

@@ -2,8 +2,8 @@
 
 	$("#matLotModal").on('shown.bs.modal', function () {
 		
-		if(!checkNull($('#matLotListGrid').html())){
-			var matLotListData = {
+		if(!checkNull($('#matLotGrid').html())){
+			var matLotData = {
 				api : {
 					readData : {
 					url : 'ajax/matLotListModal.do',
@@ -13,9 +13,9 @@
 				contentType : 'application/json'
 			};
 			
-			var matLotListGrid = new tui.Grid({	
-				el : document.getElementById('matLotListGrid'),
-				data : matLotListData,
+			var matLotGrid = new tui.Grid({	
+				el : document.getElementById('matLotGrid'),
+				data : matLotData,
 				scrollX : false,	
 				scrollY : true,
 				bodyHeight: 360,
@@ -35,21 +35,21 @@
 			});
 			
 			var param = {'materialCode' : materialCode}
-			matLotListGrid.readData(1, param, true);
+			matLotGrid.readData(1, param, true);
 	
 			var lotNo;
 			var lotStock;
 			
-			matLotListGrid.on('click', (ev) => { 
-				lotNo = matLotListGrid.getValue(ev.rowKey, 'lotNo');
-				lotStock = matLotListGrid.getValue(ev.rowKey, 'lotStock');
+			matLotGrid.on('click', (ev) => { 
+				lotNo = matLotGrid.getValue(ev.rowKey, 'lotNo');
+				lotStock = matLotGrid.getValue(ev.rowKey, 'lotStock');
 			});
 			
 			$('#btnSelect').on('click', function(){
 				select();
 			});
 			
-			matLotListGrid.on('dblclick', function(){
+			matLotGrid.on('dblclick', function(){
 				select();
 			});
 			

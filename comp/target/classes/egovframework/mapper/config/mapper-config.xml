@@ -31,7 +31,7 @@
 		<typeAlias alias="PlanVO"		type="com.rest.app.prod.vo.PlanVO" />
 		<typeAlias alias="DetailPlanVO"		type="com.rest.app.prod.vo.DetailPlanVO" />
 		<typeAlias alias="InputMatVO"		type="com.rest.app.prod.vo.InputMatVO" />
-		<typeAlias alias="WorkProcessPlanVO"		type="com.rest.app.prod.vo.WorkProcessPlanVO" />
+		<typeAlias alias="WorkVO"		type="com.rest.app.prod.vo.WorkVO" />
 	</typeAliases>
 	
     

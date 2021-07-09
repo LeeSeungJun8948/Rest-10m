@@ -13,6 +13,7 @@
 	<select id="getProductList" resultType="com.rest.app.comm.vo.QualityControlVO">
 		SELECT *
  		  FROM product
+ 		 ORDER BY product_code
 	</select>
 	
 	<!-- 제품에대한 고객사코드/고객사명 list -->
@@ -36,10 +37,42 @@
 	 WHERE product_code = #{product_code}  
 	</update>
 	
-	<!-- 규격/단위 리스트 -->
+	<!-- 규격  리스트 -->
 	<select id="getCodeList" resultType="com.rest.app.comm.vo.QualityControlVO">
 		select code_id,code
   	  from COMTCCMMNDETAILCODE
  	 where code_id ='R_STD'
 	</select>
+	<!-- 단위 리스트 -->
+	<select id="getUnitList" resultType="com.rest.app.comm.vo.QualityControlVO">
+		select code_id,code
+  	  from COMTCCMMNDETAILCODE
+ 	 where code_id ='R_UNIT'
+	</select>
+	
+	<!-- insert product -->
+	<insert id="insertProduct" parameterType="com.rest.app.comm.vo.QualityControlVO">
+		insert into product (product_code ,product_name,
+                      			std_id, std_no,
+                      			unit_id, unit_no,
+                      			emp_code, use_at)
+		values (#{productCode},#{productName},#{stdId},#{stdNo},
+				#{unitId},#{unitNo},#{empCode},#{useAt})
+	</insert>
+	<!-- update product -->
+	<update id="updateProdcut" parameterType="com.rest.app.comm.vo.QualityControlVO">
+		update product
+		   set product_code = #{productCode}, product_name= #{productName},
+		  	   p_img= #{pImg}, qc_img= #{qcImg},
+		  	   std_id = #{stdId}, std_no = #{stdNo},
+		  	   unit_id = #{unitId}, unit_no = #{unitNo},
+		  	   emp_code = #{empCode}, use_at = #{useAt}
+		 where product_code = #{productCode}
+	</update>
+	
+	<!-- delete product -->
+	<delete id="deleteProduct" parameterType="com.rest.app.comm.vo.QualityControlVO">
+		delete from product
+		 where product_code = #{productCode}
+	</delete>
 </mapper>
