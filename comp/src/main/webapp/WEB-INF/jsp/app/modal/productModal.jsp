@@ -1,16 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-
-<div class="modal" >
 <style>
+.modal-backdrop {
+       top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+}
+
+
 .blocker, .modal {
 	z-index: 100;
 	}
 </style>
-	<div class="modal-content">
-		<div class="modal-header">
-		</div>
+
+<div id="modalContent" >
+	<div class="modal-header">
+	</div>
 		<div class="modal-body">
 			<!-- 필요한것 집어넣기 BODY 부분 -->
 			<div id=CodeListGird></div>
@@ -44,19 +52,10 @@
 					]
 				});
 
-			
 				
-				CodeGrid.on('click',(ev) =>{
-					var sId = CodeGrid.getRow(ev.rowKey).codeId;
-					var sNo = CodeGrid.getRow(ev.rowKey).code;
-					
-					progrid.setValue(stdRowkey,'stdId',sId,false);
-					progrid.setValue(stdRowkey,'stdNo',sNo,false);
-				});
-					
 			</script>
 		
 		</div>
-	</div>
+	
 </div>
 

@@ -50,6 +50,12 @@ const progrid = new tui.Grid({
 					editor : 'text'
 				},
 				{
+					header : '성적서',
+					name :  'qcImg',
+					editor : 'text'
+				},
+				
+				{
 					header : '사용여부',
 					name :  'useAt',
 					formatter:'listItemText',
@@ -72,7 +78,7 @@ $("#RowInsert").on("click", function(){
 				progrid.appendRow();
 			});
 			
-			
+
 var stdRowkey;
 var snoRowkey;
 var uiRowkey;
@@ -122,6 +128,7 @@ progrid.on('click', (ev)=>{
 	
 	var key = progrid.getRow(ev.rowKey).productCode;
 	
+
 	$.ajax({
 		
 		type:"get",
@@ -133,12 +140,13 @@ progrid.on('click', (ev)=>{
 		async : false,
 		
 		success : function(data){
-			$('#pdc').val(data.data.contents.productCode);
-			$('#productName').val(data.data.contents.productName);
-			$('#employeeName').val(data.data.contents.employeeName);
-			$('#stdId').val(data.data.contents.stdId);
-			$('#unitNo').val(data.data.contents.unitNo);
-			$('#useAt').val(data.data.contents.useAt);
+			$('#productCode').val(data.productCode);
+			$('#productName').val(data.productName);
+			$('#employeeName').val(data.employeeName);
+			$('#stdId').val(data.stdId);
+			$('#unitNo').val(data.unitNo);
+			$('#useAt').val(data.useAt);
+			alert();
 		},
 		error : function(){
 			alert("실패");
@@ -146,12 +154,7 @@ progrid.on('click', (ev)=>{
 	});
 });
 
-//
-	const imgBtn = document.querySelector('#btnQcImg'); //업로드 버튼
-	const input = document.querySelector('#qcImg');
-	imgBtn.addEventListener('click', function(event) {
-		input.click();
-	});
+
 
 // 이미지 미리보기 기능
 	function setThumbnail(event) {
@@ -164,5 +167,25 @@ progrid.on('click', (ev)=>{
 		};
 		reader.readAsDataURL(event.target.files[0]);
 	}
+	
+//초기화 버튼
+$('#btnNew').on('click',function(){
+		var img = document.getElementById('image');
+		img.setAttribute("src", '');
+		$('input').val('');
+})
 
+// 모달
+var forGrid = false;
 
+$("#btnProductModal").on("click", function(e) {
+    $('#productContent').load("productModal.do");
+});
+
+$(document).on('show.bs.modal','#btnProductModal', function (){});
+
+$('#stdId').on('click',function(){
+	$('#productModal').modal('show');
+	$('#productContent').load("productModal.do");
+	
+})

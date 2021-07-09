@@ -45,9 +45,14 @@
 	</select>
 	<!-- 단위 리스트 -->
 	<select id="getUnitList" resultType="com.rest.app.comm.vo.QualityControlVO">
-		select code_id,code
+		select code_id, code
   	  from COMTCCMMNDETAILCODE
  	 where code_id ='R_UNIT'
+	</select>
+	<!-- 사원 리스트  -->
+	<select id="getEmpList" resultType="com.rest.app.comm.vo.QualityControlVO">
+		select emp_code, employee_name
+		  from employee
 	</select>
 	
 	<!-- insert product -->
