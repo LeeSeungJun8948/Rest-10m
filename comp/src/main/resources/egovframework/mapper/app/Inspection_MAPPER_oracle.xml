@@ -19,8 +19,7 @@
     <insert id="insertIns" parameterType="com.rest.app.fac.inspection.vo.InspectionVO">
     	insert into inspection
     	values (inspection_seq.nextval, #{judgement}, #{insComment},
-    			#{beforeDate}, #{today}, #{afterDate}, #{facCode}
-    			)
+    			#{beforeDate}, #{today}, #{afterDate}, #{facCode})
     </insert>
     
     <update id="updateIns" parameterType="com.rest.app.fac.inspection.vo.InspectionVO">

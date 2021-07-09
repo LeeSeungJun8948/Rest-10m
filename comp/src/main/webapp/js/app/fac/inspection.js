@@ -78,7 +78,7 @@ $('#btnRead').on('click',  function(){
 	grid.readData(1, param, true);
 });
 
-// 삭제
+//삭제
 $("#btnDel").on("click", function() {
 	grid.removeCheckedRows(true);
 });
