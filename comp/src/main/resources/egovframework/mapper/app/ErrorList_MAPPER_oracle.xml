@@ -8,10 +8,10 @@
 		where a.process_code = c.process_code
 		and a.product_code = d.product_code	
 			<if test = "startDate != null and startDate != '' and endDate != null and endDate != ''">
-			AND trunc(a.work_date) BETWEEN #{startDate} AND #{endDate} 
+			AND trunc(work_date) BETWEEN #{startDate} AND #{endDate} 
 			</if>
-			<if test="productLot != null and productLot != ''">
-				AND product_lot = #{productLot}
+			<if test="productCode != null and productCode != ''">
+				AND a.product_code = #{productCode}
 			</if>	
 	</select>
 </mapper>
