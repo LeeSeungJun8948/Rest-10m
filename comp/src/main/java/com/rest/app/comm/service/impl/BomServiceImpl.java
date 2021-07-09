@@ -72,7 +72,7 @@ public class BomServiceImpl implements BomService {
 	}
 
 	@Override
-	public List<BomVO> getCompanyList(BomVO vo) {
+	public BomVO getCompanyList(BomVO vo) {
 		// TODO 제품에 대한 고객코드/고객사명 List
 		return mapper.getCompanyList(vo);
 	}

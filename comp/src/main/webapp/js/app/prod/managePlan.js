@@ -209,6 +209,11 @@ $('#btnGridDel').on('click', function(){
 	grid.removeCheckedRows(false);
 });
 
+// 조회버튼 (모달)
+$("#btnPlanModal").on("click", function() {
+	$('#planContent').load("planModal.do");
+});
+
 // 전체체크 선택
 grid.on('check', ev => {
 });
