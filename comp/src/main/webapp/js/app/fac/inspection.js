@@ -34,7 +34,7 @@ const grid = new tui.Grid({
 		name : 'facInspection'
 	}, {
 		header : '전점검일',
-		name : 'beforeDate'
+		name : 'beforeDate',
 	}, {
 		header : '점검일',
 		name : 'today',
@@ -113,7 +113,9 @@ $("#btnAdd").on("click", function(){
 		});		
 	}
 	
-	newRowData = {'inspectionCode' : newInsCode, 'today' : getFormatDate(new Date())};
+	newRowData = {'inspectionCode' : newInsCode, 
+				  'today' : getFormatDate(new Date()),
+				 };
 	grid.appendRow(newRowData,{
 		at : grid.getRowCount(),
 		focus : true
@@ -135,6 +137,10 @@ function getFormatDate(date){
     return  year + '-' + month + '-' + day;
 }
 
+function getBeforeDate(date) {
+	var rowKey = date.rowKey;
+	var facInspection = grid.getValue(rowKey, 'facInspection')
+}
 // 그리드 설비명 클릭
 var rowKey;
 grid.on('dblclick', function(ev){
@@ -142,6 +148,6 @@ grid.on('dblclick', function(ev){
 		rowKey = ev.rowKey;
 		facilitiesName = grid.getValue(rowKey, 'facilitiesName');
 		$('#facModal').modal('show');
-		$('#facContent').load(".do");
+		$('#facContent').load("facModel.do");
 	}
 })

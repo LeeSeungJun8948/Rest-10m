@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.fac.inspection.service.impl.InspectionMapper;
 import com.rest.app.fac.inspection.vo.InspectionVO;
+import com.rest.app.fac.vo.FacilitiesVO;
 
 import lombok.Data;
 
@@ -107,6 +108,26 @@ public class InspectionController {
 		data.put("data", gridDate);
 		return data;
 	}
+	
+	// 설비검색 모달 페이지
+		@RequestMapping("/facModel.do")
+		public String facModel() {
+			return "app/modal/facModel";
+		}
+		
+		@RequestMapping("/ajax/facListModel.do")
+		@ResponseBody
+		public Map<String, Object> ajaxfacListModel(Model model, FacilitiesVO vo) { 
+			
+			Map<String,Object> datas = new HashMap<>();
+			Map<String,Object> data = new HashMap<>();
+			
+			data.put("result", true);
+			datas.put("contents", mapper.getFacListModal(vo));
+			data.put("data", datas);
+			
+			return data;
+		}
 	
 }
 
