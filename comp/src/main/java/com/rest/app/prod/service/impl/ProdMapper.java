@@ -18,6 +18,7 @@ public interface ProdMapper {
 	int insertPlan(PlanVO vo); 
 	int updatePlan(PlanVO vo);
 	int deletePlan(String planCode);
+	DetailPlanVO selectDetailPlan(String productLot);
 	int insertDetailPlan(DetailPlanVO vo); 
 	int updateDetailPlan(DetailPlanVO vo);
 	int deleteDetailPlan(String productLot);

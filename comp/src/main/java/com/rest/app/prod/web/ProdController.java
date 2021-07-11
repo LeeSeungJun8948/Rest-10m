@@ -80,9 +80,12 @@ public class ProdController {
 
 	// 작업실적 저장
 	@RequestMapping("saveWork.do")
-	public String saveWork(WorkVO vo) {
+	@ResponseBody
+	public Map<String, Object> saveWork(WorkVO vo) {
+		Map<String, Object> data = new HashMap<>();
 		svc.insertWork(vo);
-		return "prod/manageWork.page";
+		data.put("result", true);
+		return data;
 	}
 
 	// 작업실적조회 페이지
@@ -147,14 +150,12 @@ public class ProdController {
 		List<DetailPlanVO> dList = gridData.deletedRows;
 		cList.forEach(vo -> {
 			if (vo.getWorkCount() != 0) {
-				vo.setProductLot(makeLot(vo));
 				svc.insertDetailPlan(vo);
 			}
 		});
 		uList.forEach(vo -> {
 			if (vo.getWorkCount() != 0) {
 				if (vo.getProductLot() == null) {
-					vo.setProductLot(makeLot(vo));
 					svc.insertDetailPlan(vo);
 				} else {
 					svc.updateDetailPlan(vo);
@@ -199,6 +200,18 @@ public class ProdController {
 	@ResponseBody
 	public String findProductName(String productCode) {
 		return svc.findProductName(productCode);
+	}
+
+	// 제품LOT 찾기
+	@RequestMapping("selectDetailPlan.do")
+	@ResponseBody
+	public Map<String, Object> selectDetailPlan(String productLot) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		datas.put("contents", svc.selectDetailPlan(productLot));
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
 	}
 
 	// 자재LOT별 재고량리스트 가져오기
@@ -249,12 +262,6 @@ public class ProdController {
 		});
 		data.put("result", true);
 		return data;
-	}
-
-	public String makeLot(DetailPlanVO vo) {
-		String productLot = "PROD-" + vo.getWorkDate().replace("-", "").substring(2) + "-"
-				+ String.valueOf(vo.getProductCode()) + "-" + String.valueOf(vo.getOrderNo());
-		return productLot;
 	}
 }
 

@@ -6,7 +6,7 @@ import lombok.Data;
 public class WorkVO {
 	String workNo;  // 작업지시번호
 	int processCode; // 공정코드
-	String lotNo; // 제품LOT
+	String productLot; // 제품LOT
 	String workDiv; // 작업구분
 	String workDate; // 작업일자
 	String startTime; // 작업시작 시간
@@ -16,5 +16,4 @@ public class WorkVO {
 	String productCode; // 제품코드
 	int workCount; // 작업량
 	int errorCount; // 불량량
-	
 }

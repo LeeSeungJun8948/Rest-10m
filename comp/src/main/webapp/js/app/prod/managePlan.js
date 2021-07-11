@@ -153,7 +153,7 @@ $("#btnReset").click(function() {
 
 // 계획저장 버튼
 $('#btnSave').on('click', function() {
-	if (formCheck()){
+	if (formCheck()) {
 		$.ajax({
 			type: 'POST',
 			url: 'savePlan.do',
@@ -300,9 +300,12 @@ function formCheck() {
 	if(!checkNull($('#planDate').val()) || !checkNull($('#planName').val())) {
 		toastr.warning('값을 입력해주십시오.');
 		return false;
-	} else if(checkNull($('#productCode').val()) && !checkNull($('#workCount').val()) && ($('#workCount').val() != $('#inputCount').val())) {
-		toastr.warning('소요량이 부족합니다.');
+	} else if(checkNull($('#productCode').val()) && !checkNull($('#workCount').val()) && ($('#workCount').val() > $('#inputCount').val())) {
+		toastr.warning('투입량이 부족합니다.');
 		return false;
+	} else if(checkNull($('#productCode').val()) && !checkNull($('#workCount').val()) && ($('#workCount').val() < $('#inputCount').val())) {
+		toastr.warning('투입량이 작업량보다 많습니다.');
+		return false;		
 	} else {
 		return true;
 	}

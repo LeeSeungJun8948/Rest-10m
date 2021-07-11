@@ -3,19 +3,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <h1 class="h3 mb-4 text-gray-700">작업실적 관리</h1>
-<div class="mb-4" align="right">
-	<button type="button" class="btn btn-primary" id="btnSave">저장</button>
-</div>
-<div>
-	<form id="workFrm" name="workFrm" action="saveWork.do" method="post">
-		<input type="hidden" id="workNo" name="workNo">
+<form id="workFrm" name="workFrm">
+	<div class="mb-4" align="right">
+		<button type="button" class="btn btn-primary" id="btnSave">저장</button>
+		<input type="reset" class="btn btn-primary" id="btnReset" value="초기화">
+	</div>
+	<div>
 		<table class="table">
 			<tbody>
 				<tr>
 					<th>작업일자</th>
-					<td><input type="date" id="workDate" name="workDate" readonly></td>
+					<td><input type="date" id="workDate" name="workDate"></td>
 					<th>작업구분</th>
-					<td><input type="text" id="workDiv" name="workDiv" readonly></td>
+					<td>
+						<select class="custom-select" name="workDiv">
+							<option value="1" selected>배합공정</option>
+							<option value="4">검사공정</option>
+							<option value="5">포장공정</option>
+						</select>
+					</td>
 					<th>작업자</th>
 					<td><input type="text" id="empName" name="empName" readonly>
 						<input type="hidden" id="empCode" name="empCode">
@@ -25,12 +31,14 @@
 					</td>
 				</tr>
 				<tr>
-					<th>작업번호</th>
-					<td><input type="text" id="workNo" name="workNo" readonly></td>
-					<th>제품코드</th>
-					<td><input type="text" id="productCode" name="productCode" readonly></td>
+					<th>주문번호</th>
+					<td><input type="text" id="orderNo" name="orderNo" readonly></td>
+					<th>제품명</th>
+					<td><input type="text" id="productName" name="productName" readonly>
+						<input type="hidden" id="productCode" name="productCode">
+					</td>
 					<th>제품LOT</th>
-					<td><input type="text" id="productLot" name="productLot"></td>
+					<td><input type="text" id="productLot" name="productLot" onchange="findLot(this.value)"></td>
 				</tr>
 				<tr>
 					<th>작업량</th>
@@ -53,8 +61,8 @@
 				</tr>
 			</tbody>
 		</table>
-	</form>
-</div>
+	</div>
+</form>
 
 <div class="modal fade" id="workEmpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">

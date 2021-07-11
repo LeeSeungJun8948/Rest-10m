@@ -42,6 +42,7 @@ public class ProdServiceImpl implements ProdService {
 
 	@Override
 	public int insertDetailPlan(DetailPlanVO vo) {
+		vo.setProductLot(makeLot(vo));
 		return mapper.insertDetailPlan(vo);
 	}
 
@@ -128,5 +129,16 @@ public class ProdServiceImpl implements ProdService {
 	@Override
 	public int insertWork(WorkVO vo) {
 		return mapper.insertWork(vo);
+	}
+
+	@Override
+	public DetailPlanVO selectDetailPlan(String productLot) {
+		return mapper.selectDetailPlan(productLot);
+	}
+	
+	public String makeLot(DetailPlanVO vo) {
+		String productLot = "PROD-" + vo.getWorkDate().replace("-", "").substring(2) + "-"
+				+ String.valueOf(vo.getProductCode()) + "-" + String.valueOf(vo.getOrderNo());
+		return productLot;
 	}
 }
