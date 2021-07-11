@@ -4,9 +4,12 @@
 
 <h1 class="h3 mb-4 text-gray-700">작업실적 관리</h1>
 <form id="workFrm" name="workFrm">
+	<input type="hidden" id="workCode" name="workCode">
 	<div class="mb-4" align="right">
+		<button id="btnWorkModal" type="button" class="btn btn-primary" data-remote="false" data-toggle="modal" data-target="#workModal">조회</button>
 		<button type="button" class="btn btn-primary" id="btnSave">저장</button>
 		<input type="reset" class="btn btn-primary" id="btnReset" value="초기화">
+		<button type="button" class="btn btn-primary" id="btnDel">삭제</button>
 	</div>
 	<div>
 		<table class="table">
@@ -16,7 +19,7 @@
 					<td><input type="date" id="workDate" name="workDate"></td>
 					<th>작업구분</th>
 					<td>
-						<select class="custom-select" name="workDiv">
+						<select class="custom-select" name="workDiv" id="workDiv">
 							<option value="1" selected>배합공정</option>
 							<option value="4">검사공정</option>
 							<option value="5">포장공정</option>
@@ -42,9 +45,9 @@
 				</tr>
 				<tr>
 					<th>작업량</th>
-					<td><input type="text" id="workCount" name="workCount"></td>
+					<td><input type="text" id="workCount" name="workCount" value="0"></td>
 					<th>불량량</th>
-					<td><input type="text" id="errorCount" name="errorCount"></td>
+					<td><input type="text" id="errorCount" name="errorCount" value="0"></td>
 					<th>불량명</th>
 					<td><input type="text" id="errorName" name="errorName" readonly>
 						<input type="hidden" id="errorCode" name="errorCode">
@@ -63,14 +66,18 @@
 		</table>
 	</div>
 </form>
-
+<div class="modal fade" id="workModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content" id="workContent" align="center">
+		</div>
+	</div>
+</div>
 <div class="modal fade" id="workEmpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" id="workEmpContent" align="center">
 		</div>
 	</div>
 </div>
-
 <div class="modal fade" id="workErrorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" id="workErrorContent" align="center">

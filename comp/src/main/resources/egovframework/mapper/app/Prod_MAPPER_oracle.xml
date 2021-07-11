@@ -125,27 +125,35 @@
 	<!-- 생산작업 -->
 	<select id="searchWork" resultType="WorkVO">
 		SELECT DISTINCT
-			w.work_no, w.process_code, TO_CHAR(w.work_date,'YYYY-MM-DD') work_date,
-			w.product_code, w.work_count, w.error_count
-		FROM work w, process p 
-		WHERE w.work_date = #{workDate}
+			w.work_code, w.process_code, TO_CHAR(w.work_date,'YYYY-MM-DD') work_date, w.product_lot, w.emp_code, emp.employee_name,
+			w.product_code, w.work_count, w.error_count, p.process_name, w.start_time, w.end_time, w.error_code, prod.product_name,
+			(SELECT error_name FROM error WHERE error_code = w.error_code) error_name, d.order_no
+		FROM work w, process p, employee emp, product prod, detailplan d
+		WHERE w.work_date BETWEEN TO_DATE(#{workDtS}, 'YYYY-MM-DD')
+        	AND TO_DATE(#{workDtE}, 'YYYY-MM-DD')
 		AND w.process_code = p.process_code
-		<if test="workDiv != null">
+		AND w.emp_code = emp.emp_code
+		AND w.product_code = prod.product_code
+		AND w.product_lot = d.product_lot
+		<if test="workDiv != null and workDiv!= ''">
 			AND p.process_name = #{workDiv}
 		</if>
-        ORDER BY w.work_date
+        ORDER BY work_date
 	</select>
-	<insert id="insertWork">
-		<selectKey keyProperty="workNo" resultType="int" order="BEFORE">
-        	SELECT NVL(MAX(work_no)+1,0) FROM work
-    	</selectKey> 
+	<insert id="insertWork" parameterType="WorkVO">
 		INSERT INTO work VALUES(
-		#{workNo}, #{workDiv}, #{productLot}, #{workDate}, #{startTime}, #{endTime},
+		#{workCode}, #{workDiv}, #{productLot}, #{workDate}, #{startTime}, #{endTime},
 		#{empCode}, #{errorCode}, #{productCode}, #{workCount}, #{errorCount}
 		)
 	</insert>
+	<update id="updateWork" parameterType="WorkVO">
+		UPDATE work SET
+			work_date = #{workDate}, emp_code = #{empCode}, error_code = #{errorCode}, product_lot = #{productLot},
+			error_count = #{errorCount}, work_count = #{workCount}, start_time = #{startTime}, end_time = #{endTime}
+		WHERE work_code = #{workCode}
+	</update>
 	<delete id="deleteWork">
-		DELETE FROM work WHERE work_no = #{workNo}
+		DELETE FROM work WHERE work_code = #{workCode}
 	</delete>	
 	
 	<select id="searchEmp" resultType="com.rest.app.comm.vo.EmployeeVO">

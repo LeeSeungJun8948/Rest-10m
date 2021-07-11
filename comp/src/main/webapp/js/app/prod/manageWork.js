@@ -1,4 +1,4 @@
-// 저장
+// 작업저장
 $("#btnSave").on("click", function() {
 	if (formCheck()) {
 		$.ajax({
@@ -7,12 +7,32 @@ $("#btnSave").on("click", function() {
 			data: $('#workFrm').serialize(),
 			dataType: 'json',
 			async: false,
-			success: function() {
+			success: function(data) {
+				var workCode = data.data.contents.workCode;
+				$('#workCode').val(workCode);
 				toastr.success("저장되었습니다.");
-				$("#workFrm")[0].reset();
 			}
 		});
 	}
+});
+
+// 조회버튼 (모달)
+$("#btnWorkModal").on("click", function() {
+	$('#workContent').load("workModal.do");
+});
+
+// 작업삭제 버튼
+$('#btnDel').on('click', function(){
+	$.ajax({
+		type: 'POST',
+		url: 'deleteWork.do',
+		data: {workNo: $('#workNo').val()},
+		dataType: 'json',
+		success: function(){
+			toastr.success("삭제되었습니다.");
+			$("#workFrm")[0].reset();
+		}
+	});
 });
 
 // 작업자

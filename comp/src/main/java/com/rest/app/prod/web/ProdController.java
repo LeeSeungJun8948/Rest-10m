@@ -30,68 +30,10 @@ public class ProdController {
 		return "prod/managePlan.page";
 	}
 
-	// 생산계획관리 페이지
-	@RequestMapping("manageWork.do")
-	public String manageWork() {
-		return "prod/manageWork.page";
-	}
-
 	// 생산계획 - 조회 모달
 	@RequestMapping("planModal.do")
 	public String planModal() {
 		return "app/prod/planModal";
-	}
-
-	// 작업실적 - 작업자 모달
-	@RequestMapping("workEmpModal.do")
-	public String workEmpModal() {
-		return "app/prod/workEmpModal";
-	}
-
-	// 작업자 검색
-	@RequestMapping("/ajax/workEmpModal.do")
-	@ResponseBody
-	public Map<String, Object> ajaxWorkEmpModal(@RequestBody Map<String, Object> param) {
-		Map<String, Object> datas = new HashMap<>();
-		Map<String, Object> data = new HashMap<>();
-		data.put("result", true);
-		datas.put("contents", svc.searchEmp(param));
-		data.put("data", datas);
-		return data;
-	}
-
-	// 작업실적 - 불량코드 모달
-	@RequestMapping("workErrorModal.do")
-	public String workErrorModal() {
-		return "app/prod/workErrorModal";
-	}
-
-	// 작업자 검색
-	@RequestMapping("/ajax/workErrorModal.do")
-	@ResponseBody
-	public Map<String, Object> ajaxWorkErrorModal(@RequestBody Map<String, Object> param) {
-		Map<String, Object> datas = new HashMap<>();
-		Map<String, Object> data = new HashMap<>();
-		data.put("result", true);
-		datas.put("contents", svc.searchError(param));
-		data.put("data", datas);
-		return data;
-	}
-
-	// 작업실적 저장
-	@RequestMapping("saveWork.do")
-	@ResponseBody
-	public Map<String, Object> saveWork(WorkVO vo) {
-		Map<String, Object> data = new HashMap<>();
-		svc.insertWork(vo);
-		data.put("result", true);
-		return data;
-	}
-
-	// 작업실적조회 페이지
-	@RequestMapping("viewWork.do")
-	public String viewWork() {
-		return "prod/viewWork.page";
 	}
 
 	// 미완료주문 읽기
@@ -202,6 +144,18 @@ public class ProdController {
 		return svc.findProductName(productCode);
 	}
 
+	// 작업실적관리 페이지
+	@RequestMapping("manageWork.do")
+	public String manageWork() {
+		return "prod/manageWork.page";
+	}
+	
+	// 작업실적 - 작업검색 모달
+	@RequestMapping("workModal.do")
+	public String workModal() {
+		return "app/prod/workModal";
+	}
+
 	// 제품LOT 찾기
 	@RequestMapping("selectDetailPlan.do")
 	@ResponseBody
@@ -238,7 +192,66 @@ public class ProdController {
 		return data;
 	}
 
-	// 생산작업 검색
+	// 작업실적 - 작업자 모달
+	@RequestMapping("workEmpModal.do")
+	public String workEmpModal() {
+		return "app/prod/workEmpModal";
+	}
+
+	// 작업자 검색
+	@RequestMapping("/ajax/workEmpModal.do")
+	@ResponseBody
+	public Map<String, Object> ajaxWorkEmpModal(@RequestBody Map<String, Object> param) {
+		Map<String, Object> datas = new HashMap<>();
+		Map<String, Object> data = new HashMap<>();
+		data.put("result", true);
+		datas.put("contents", svc.searchEmp(param));
+		data.put("data", datas);
+		return data;
+	}
+
+	// 작업실적 - 불량코드 모달
+	@RequestMapping("workErrorModal.do")
+	public String workErrorModal() {
+		return "app/prod/workErrorModal";
+	}
+
+	// 작업자 검색
+	@RequestMapping("/ajax/workErrorModal.do")
+	@ResponseBody
+	public Map<String, Object> ajaxWorkErrorModal(@RequestBody Map<String, Object> param) {
+		Map<String, Object> datas = new HashMap<>();
+		Map<String, Object> data = new HashMap<>();
+		data.put("result", true);
+		datas.put("contents", svc.searchError(param));
+		data.put("data", datas);
+		return data;
+	}
+
+	// 작업실적 저장
+	@RequestMapping("saveWork.do")
+	@ResponseBody
+	public Map<String, Object> saveWork(WorkVO vo) {
+		Map<String, Object> data = new HashMap<>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		if (vo.getWorkCode() == null || vo.getWorkCode().equals("")) {
+			svc.insertWork(vo);
+		} else {
+			svc.updateWork(vo);
+		}
+		datas.put("contents", vo);
+		data.put("data", datas);
+		data.put("result", true);
+		return data;
+	}
+
+	// 작업실적조회 페이지
+	@RequestMapping("viewWork.do")
+	public String viewWork() {
+		return "prod/viewWork.page";
+	}
+
+	// 작업 검색
 	@RequestMapping("searchWork.do")
 	@ResponseBody
 	public Map<String, Object> searchWork(@RequestBody Map<String, Object> param) {
@@ -250,17 +263,15 @@ public class ProdController {
 		data.put("data", datas);
 		return data;
 	}
-
-	// 생산작업 삭제
+	
+	// 작업삭제
 	@RequestMapping("deleteWork.do")
 	@ResponseBody
-	public Map<String, Object> deleteWork(@RequestBody WorkGridData gridData) {
-		List<WorkVO> dList = gridData.deletedRows;
+	public Map<String, Object> deleteWork(@RequestParam String workNo) {
 		Map<String, Object> data = new HashMap<String, Object>();
-		dList.forEach(vo -> {
-			svc.deleteWork(vo.getWorkNo());
-		});
+		svc.deleteWork(workNo);
 		data.put("result", true);
+		data.put("check", "save");
 		return data;
 	}
 }

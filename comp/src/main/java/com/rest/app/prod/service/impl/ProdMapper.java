@@ -32,6 +32,7 @@ public interface ProdMapper {
 	PlanVO selectPlanCode();
 	List<WorkVO> searchWork(Map<String, Object> param);
 	int insertWork(WorkVO vo);
+	int updateWork(WorkVO vo);
 	int deleteWork(String workNo);
 	List<EmployeeVO> searchEmp(Map<String, Object> param);
 	List<ErrorVO> searchError(Map<String, Object> param);

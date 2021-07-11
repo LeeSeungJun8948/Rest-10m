@@ -19,7 +19,7 @@ import com.rest.app.prod.vo.WorkVO;
 public class ProdServiceImpl implements ProdService {
 	@Autowired
 	ProdMapper mapper;
-	
+
 	@Override
 	public List<OrdersVO> getUnplanOrders(Map<String, Object> param) {
 		return mapper.getUnplanOrders(param);
@@ -75,7 +75,7 @@ public class ProdServiceImpl implements ProdService {
 	public int deleteAllInputMat(String planCode) {
 		return mapper.deleteAllInputMat(planCode);
 	}
-	
+
 	@Override
 	public String findProductName(String productCode) {
 		return mapper.findProductName(productCode);
@@ -128,17 +128,31 @@ public class ProdServiceImpl implements ProdService {
 
 	@Override
 	public int insertWork(WorkVO vo) {
+		vo.setWorkCode(makeWorkCode(vo));
 		return mapper.insertWork(vo);
+	}
+
+	@Override
+	public int updateWork(WorkVO vo) {
+		return mapper.updateWork(vo);
 	}
 
 	@Override
 	public DetailPlanVO selectDetailPlan(String productLot) {
 		return mapper.selectDetailPlan(productLot);
 	}
-	
+
 	public String makeLot(DetailPlanVO vo) {
-		String productLot = "PROD-" + vo.getWorkDate().replace("-", "").substring(2) + "-"
-				+ String.valueOf(vo.getProductCode()) + "-" + String.valueOf(vo.getOrderNo());
+		String productLot = "PR-" + vo.getWorkDate().replace("-", "").substring(2) + "-"
+				+ String.valueOf(vo.getProductCode()) + String.valueOf(vo.getOrderNo())
+				+ String.valueOf(vo.getWorkCount()).substring(0, 2);
 		return productLot;
+	}
+
+	public String makeWorkCode(WorkVO vo) {
+		String workCode = "WK-" + vo.getWorkDate().replace("-", "").substring(2) + "-"
+				+ String.valueOf(vo.getProductCode()) + String.valueOf(vo.getProcessCode())
+				+ String.valueOf(vo.getWorkCount()).substring(0, 2);
+		return workCode;
 	}
 }
