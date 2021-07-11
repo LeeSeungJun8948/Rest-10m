@@ -1,8 +1,16 @@
 var dataSource = {
 	contentType: 'application/json',
 	api: {
-		readData: { url: 'readUnplanOrders.do', method: 'POST' },
-		modifyData: { url: 'saveDeplan.do', method: 'PUT' },
+		readData: { url: 'readUnfinPlans.do', method: 'POST' },
+		modifyData: { url: 'saveDetailProrder.do', method: 'PUT' },
+  }
+}
+
+var dataSourceInput = {
+	contentType: 'application/json',
+	api: {
+		readData: { url: 'getInputMat.do', method: 'POST', },
+		modifyData: { url: 'saveInput.do', method: 'PUT' },
   }
 }
 
@@ -30,20 +38,17 @@ const grid = new tui.Grid({
         	valueInput(ev);
       		}
 		}, {
-		header: '주문번호',
-		name: 'orderNo'
+		header: '계획번호',
+		name: 'planCode'
 		}, {
-		header: '납기일자',
-		name: 'outDate'
+		header: '계획량',
+		name: 'planCount',
 		}, {
-		header: '주문량',
-		name: 'orderCount',
+		header: '기지시량',
+		name: 'prorCount'
 		}, {
-		header: '기계획량',
-		name: 'planCount'
-		}, {
-		header: '미계획량',
-		name: 'unplanCount',
+		header: '미지시량',
+		name: 'unprorCount',
 		}, {
 		header: '작업량',
 		name: 'workCount',
@@ -75,19 +80,74 @@ const grid = new tui.Grid({
             required: true
           }
 		}, {
-		header: '순번',
-		name: 'deplanIdx',
-		hidden: true
+		header: '제품LOT',
+		name: 'productLot'
 		}, {
 		header: '비고',
 		name: 'comments',
 		editor: 'text'
 		}, {
-		header: '생산계획번호',
-		name: 'planCode',
+		header: '생산지시번호',
+		name: 'prorderCode',
+		hidden: true
+		}, {
+		header: '순번',
+		name: 'deplanIdx',
 		hidden: true
 		}
 	]
+});
+
+const gridInput = new tui.Grid({
+	el: document.getElementById('gridInput'),
+	scrollX: false,
+	scrollY: true,
+	data: dataSourceInput,
+	columns: [ {
+		header: '자재코드',
+		name: 'materialCode'
+		}, {
+		header: '자재명',
+		name: 'materialName'
+		}, {
+		header: '자재 LOT',
+		name: 'materialLot'
+		}, {
+		header: '재고량',
+		name: 'materialCount',
+		}, {
+		header: '투입량',
+		name: 'inputCount',
+		editor: 'text',
+		validation: {
+			dataType: 'number',
+            required: true
+          },
+		onAfterChange(ev) {
+        	countSum();
+      		}
+		}, {
+		header: '비고',
+		name: 'comments',
+		editor: 'text'	
+		}, {
+		header: '제품LOT',
+		name: 'productLot',
+		hidden: true
+		}, {
+		header: '생산계획번호',
+		name: 'planCode',
+		hidden: true
+		}, {
+		header: '순번',
+		name: 'inputIdx',
+		hidden: true
+		} ]
+});
+
+// 조회버튼 (모달)
+$("#btnProrModal").on("click", function() {
+	$('#prorContent').load("prorModal.do");
 });
 
 // 초기화 버튼
@@ -101,23 +161,25 @@ $('#btnSave').on('click', function() {
 	if (formCheck()) {
 		$.ajax({
 			type: 'POST',
-			url: 'savePlan.do',
+			url: 'saveProrder.do',
 			data: $('#inputFrm').serialize(),
 			dataType: 'json',
 			async: false,
 			success: function(data){
-				var planCode = data.data.contents.planCode;
-				$('#planCode').val(planCode);
-				grid.setColumnValues('planCode', planCode);
+				var prorderCode = data.data.contents.prorderCode;
+				$('#prorderCode').val(prorderCode);
+				grid.setColumnValues('prorderCode', prorderCode);
 			}
 		});
 		grid.request('modifyData');
 		grid.on('successResponse', function(ev){
 			var text = JSON.parse(ev.xhr.responseText);
 			if(text.check == 'save') {
-				grid.readData(1, {planCode: $('#planCode').val()}, true);
+				grid.readData(1, {prorderCode: $('#prorderCode').val()}, true);
 			}
 		});
+		gridInput.request('modifyData');
+		gridInput.clear();
 		toastr.success("저장되었습니다.");
 	}
 });
@@ -126,8 +188,8 @@ $('#btnSave').on('click', function() {
 $('#btnDel').on('click', function(){
 	$.ajax({
 		type: 'POST',
-		url: 'deletePlan.do',
-		data: {planCode: $('#planCode').val()},
+		url: 'deleteProrder.do',
+		data: {planCode: $('#prorderCode').val()},
 		dataType: 'json',
 		success: function(){
 			toastr.success("삭제되었습니다.");
@@ -136,7 +198,7 @@ $('#btnDel').on('click', function(){
 	});
 });
 
-// 미생산 읽기 버튼
+// 미지시계획 읽기 버튼
 $('#btnRead').on('click', function(){
 	var param = $('#dateFrm').serializeObject();
 	grid.readData(1, param, true);
@@ -150,11 +212,6 @@ $('#btnGridAdd').on('click', function(){
 // 행삭제버튼
 $('#btnGridDel').on('click', function(){
 	grid.removeCheckedRows(false);
-});
-
-// 조회버튼 (모달)
-$("#btnPlanModal").on("click", function() {
-	$('#planContent').load("planModal.do");
 });
 
 // 전체체크 선택
@@ -182,6 +239,23 @@ function findProductName(ev){
 	}
 }
 
+// 더블클릭해서 투입자재 설정
+grid.on('dblclick', (ev) => {
+	var rowKey = ev.rowKey;
+	var productCode = grid.getValue(rowKey, 'productCode');
+	var productName = grid.getValue(rowKey, 'productName');
+	var workCount = grid.getValue(rowKey, 'workCount');
+	var productLot = grid.getValue(rowKey, 'productLot');
+	var prorderCode = grid.getValue(rowKey, 'prorderCode');
+	if (productLot != null) {
+		$('#workCount').val(workCount);
+		$('#productCode').val(productCode);
+		$('#productName').val(productName);
+		var param = {'productCode': productCode, 'productLot': productLot, 'prorderCode': prorderCode};
+		gridInput.readData(1, param, true);
+	}
+});
+
 // 제품코드, 작업량 입력시 폼에 입력
 function valueInput(ev) {
 	var rowKey = ev.rowKey;
@@ -189,11 +263,26 @@ function valueInput(ev) {
 	var productName = grid.getValue(rowKey, 'productName');
 	var workCount = grid.getValue(rowKey, 'workCount');
 	var productLot = grid.getValue(rowKey, 'productLot');
+	var prorderCode = grid.getValue(rowKey, 'prorderCode');
 	if (productLot != null) {
 		$('#workCount').val(workCount);
 		$('#productCode').val(productCode);
 		$('#productName').val(productName);
+		gridInput.setColumnValues('productLot', productLot);
+		gridInput.setColumnValues('prorderCode', prorderCode);
 	}
+}
+
+// 투입량 합계
+function countSum(){
+	var inputCount = gridInput.getColumnValues('inputCount');
+	var sum = 0;
+	for(count of inputCount){
+		if (checkNull(count)){
+			sum += parseInt(count);
+		}
+	}
+	$('#totalCount').val(sum);
 }
 
 // 초기화
@@ -201,15 +290,22 @@ function resetPage() {
 	$("form").each(function() {  
         this.reset();
 		grid.clear();
+		gridInput.clear();
     });  
-	$('#planCode').val('planCode');
+	$('#prorderCode').val('prorderCode');
 }
 
 // 폼체크
 function formCheck() {
-	if(!checkNull($('#planDate').val()) || !checkNull($('#planName').val())) {
+	if(!checkNull($('#prorDate').val()) || !checkNull($('#prorName').val())) {
 		toastr.warning('값을 입력해주십시오.');
 		return false;
+	} else if(checkNull($('#productCode').val()) && !checkNull($('#workCount').val()) && ($('#workCount').val() > $('#inputCount').val())) {
+		toastr.warning('투입량이 부족합니다.');
+		return false;
+	} else if(checkNull($('#productCode').val()) && !checkNull($('#workCount').val()) && ($('#workCount').val() < $('#inputCount').val())) {
+		toastr.warning('투입량이 작업량보다 많습니다.');
+		return false;		
 	} else {
 		return true;
 	}

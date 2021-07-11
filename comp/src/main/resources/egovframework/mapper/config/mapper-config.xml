@@ -30,6 +30,8 @@
 		<typeAlias alias="OrdersVO"		type="com.rest.app.bus.vo.OrdersVO" />
 		<typeAlias alias="PlanVO"		type="com.rest.app.prod.vo.PlanVO" />
 		<typeAlias alias="DetailPlanVO"		type="com.rest.app.prod.vo.DetailPlanVO" />
+		<typeAlias alias="ProrderVO"		type="com.rest.app.prod.vo.ProrderVO" />
+		<typeAlias alias="DetailProrderVO"		type="com.rest.app.prod.vo.DetailProrderVO" />
 		<typeAlias alias="InputMatVO"		type="com.rest.app.prod.vo.InputMatVO" />
 		<typeAlias alias="WorkVO"		type="com.rest.app.prod.vo.WorkVO" />
 	</typeAliases>

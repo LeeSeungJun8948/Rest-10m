@@ -86,6 +86,7 @@
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/comp/managePlan.do">생산계획 관리</a>
+                        <a class="collapse-item" href="/comp/manageProrder.do">생산지시 관리</a>
                         <a class="collapse-item" href="/comp/manageWork.do">작업실적 관리</a>
                         <a class="collapse-item" href="/comp/viewWork.do">작업실적 조회</a>
                         <a class="collapse-item" href="/comp/detailErrorList.do">불량내역 조회</a>

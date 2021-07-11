@@ -11,8 +11,10 @@ import com.rest.app.comm.vo.EmployeeVO;
 import com.rest.app.comm.vo.ErrorVO;
 import com.rest.app.prod.service.ProdService;
 import com.rest.app.prod.vo.DetailPlanVO;
+import com.rest.app.prod.vo.DetailProrderVO;
 import com.rest.app.prod.vo.InputMatVO;
 import com.rest.app.prod.vo.PlanVO;
+import com.rest.app.prod.vo.ProrderVO;
 import com.rest.app.prod.vo.WorkVO;
 
 @Service("prodService")
@@ -27,6 +29,7 @@ public class ProdServiceImpl implements ProdService {
 
 	@Override
 	public int insertPlan(PlanVO vo) {
+		vo.setPlanCode(makePlanCode(vo));
 		return mapper.insertPlan(vo);
 	}
 
@@ -42,7 +45,6 @@ public class ProdServiceImpl implements ProdService {
 
 	@Override
 	public int insertDetailPlan(DetailPlanVO vo) {
-		vo.setProductLot(makeLot(vo));
 		return mapper.insertDetailPlan(vo);
 	}
 
@@ -72,8 +74,8 @@ public class ProdServiceImpl implements ProdService {
 	}
 
 	@Override
-	public int deleteAllInputMat(String planCode) {
-		return mapper.deleteAllInputMat(planCode);
+	public int deleteAllInputMat(String prorCode) {
+		return mapper.deleteAllInputMat(prorCode);
 	}
 
 	@Override
@@ -86,9 +88,8 @@ public class ProdServiceImpl implements ProdService {
 		return mapper.readInputMat(param);
 	}
 
-	@Override
-	public PlanVO selectPlanCode() {
-		return mapper.selectPlanCode();
+	public int countPlanCode() {
+		return mapper.countPlanCode();
 	}
 
 	@Override
@@ -97,8 +98,8 @@ public class ProdServiceImpl implements ProdService {
 	}
 
 	@Override
-	public int deleteDetailPlan(String productLot) {
-		return mapper.deleteDetailPlan(productLot);
+	public int deleteDetailPlan(int deplanIdx) {
+		return mapper.deleteDetailPlan(deplanIdx);
 	}
 
 	@Override
@@ -142,11 +143,84 @@ public class ProdServiceImpl implements ProdService {
 		return mapper.selectDetailPlan(productLot);
 	}
 
-	public String makeLot(DetailPlanVO vo) {
+	@Override
+	public DetailPlanVO selectDetailPlan(int deplanIdx) {
+		return mapper.selectDetailPlan(deplanIdx);
+	}
+
+	@Override
+	public List<PlanVO> getUnfinPlans(Map<String, Object> param) {
+		return mapper.getUnfinPlans(param);
+	}
+
+	@Override
+	public List<ProrderVO> searchProrder(Map<String, Object> param) {
+		return mapper.searchProrder(param);
+	}
+
+	@Override
+	public List<DetailProrderVO> getDetailProrder(Map<String, Object> param) {
+		return mapper.getDetailProrder(param);
+	}
+
+	@Override
+	public int insertProrder(ProrderVO vo) {
+		vo.setProrCode(makeProrCode(vo));
+		return mapper.insertProrder(vo);
+	}
+
+	@Override
+	public int updateProrder(ProrderVO vo) {
+		return mapper.updateProrder(vo);
+	}
+
+	@Override
+	public int deleteProrder(String prorCode) {
+		return mapper.deleteProrder(prorCode);
+	}
+
+	@Override
+	public int insertDetailProrder(DetailProrderVO vo) {
+		vo.setProductLot(makeLot(vo));
+		return mapper.insertDetailProrder(vo);
+	}
+
+	@Override
+	public int updateDetailProrder(DetailProrderVO vo) {
+		return mapper.updateDetailProrder(vo);
+	}
+
+	@Override
+	public int deleteDetailProrder(String productLot) {
+		return mapper.deleteDetailProrder(productLot);
+	}
+
+	@Override
+	public int deleteAllDetailProrder(String prorCode) {
+		return mapper.deleteAllDetailProrder(prorCode);
+	}
+
+	public int countProrCode() {
+		return mapper.countProrCode();
+	}
+
+	public String makeLot(DetailProrderVO vo) {
 		String productLot = "PR-" + vo.getWorkDate().replace("-", "").substring(2) + "-"
-				+ String.valueOf(vo.getProductCode()) + String.valueOf(vo.getOrderNo())
+				+ String.valueOf(vo.getProductCode()) + vo.getPlanCode().substring(4, 6)
 				+ String.valueOf(vo.getWorkCount()).substring(0, 2);
 		return productLot;
+	}
+
+	public String makePlanCode(PlanVO vo) {
+		String planCode = "PL-" + vo.getPlanDate().replace("-", "").substring(2) + "-"
+				+ String.valueOf(countPlanCode());
+		return planCode;
+	}
+	
+	public String makeProrCode(ProrderVO vo) {
+		String planCode = "PO-" + vo.getProrDate().replace("-", "").substring(2) + "-"
+				+ String.valueOf(countProrCode());
+		return planCode;
 	}
 
 	public String makeWorkCode(WorkVO vo) {

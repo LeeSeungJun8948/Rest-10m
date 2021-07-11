@@ -20,5 +20,5 @@ public class WorkVO {
 	String errorName; // 불량명
 	int workCount; // 작업량
 	int errorCount; // 불량량
-	int orderNo;
+	String prorCode; // 작업지시번호
 }

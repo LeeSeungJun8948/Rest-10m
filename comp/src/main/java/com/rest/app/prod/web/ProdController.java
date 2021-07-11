@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.prod.service.ProdService;
 import com.rest.app.prod.vo.DetailPlanVO;
+import com.rest.app.prod.vo.DetailProrderVO;
 import com.rest.app.prod.vo.InputMatVO;
 import com.rest.app.prod.vo.PlanVO;
+import com.rest.app.prod.vo.ProrderVO;
 import com.rest.app.prod.vo.WorkVO;
 
 import lombok.Data;
@@ -36,6 +38,18 @@ public class ProdController {
 		return "app/prod/planModal";
 	}
 
+	// 모달 생산계획검색
+	@RequestMapping("searchPlan.do")
+	@ResponseBody
+	public Map<String, Object> searchPlan(@RequestBody Map<String, Object> param) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		datas.put("contents", svc.searchPlan(param));
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
+	}
+	
 	// 미완료주문 읽기
 	@RequestMapping("readUnplanOrders.do")
 	@ResponseBody
@@ -76,16 +90,15 @@ public class ProdController {
 		Map<String, Object> data = new HashMap<String, Object>();
 		svc.deletePlan(planCode);
 		svc.deleteAllDetailPlan(planCode);
-		svc.deleteAllInputMat(planCode);
 		data.put("result", true);
 		data.put("check", "save");
 		return data;
 	}
 
 	// 세부계획 CUD
-	@RequestMapping("saveGrid.do")
+	@RequestMapping("saveDeplan.do")
 	@ResponseBody
-	public Map<String, Object> saveGrid(@RequestBody GridData gridData) {
+	public Map<String, Object> saveDeplan(@RequestBody GridData gridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
 		List<DetailPlanVO> cList = gridData.createdRows;
 		List<DetailPlanVO> uList = gridData.updatedRows;
@@ -97,16 +110,129 @@ public class ProdController {
 		});
 		uList.forEach(vo -> {
 			if (vo.getWorkCount() != 0) {
-				if (vo.getProductLot() == null) {
+				if (vo.getDeplanIdx() == 0) {
 					svc.insertDetailPlan(vo);
 				} else {
 					svc.updateDetailPlan(vo);
+				}
+			} else {
+				if(vo.getDeplanIdx() != 0) {
+					svc.deleteDetailPlan(vo.getDeplanIdx());
+				}
+			}
+		});
+		dList.forEach(vo -> {
+			if (vo.getDeplanIdx() != 0) {
+				svc.deleteDetailPlan(vo.getDeplanIdx());
+			}
+		});
+		data.put("result", true);
+		data.put("check", "save");
+		return data;
+	}
+
+	// 제품명찾기
+	@RequestMapping("findProductName.do")
+	@ResponseBody
+	public String findProductName(String productCode) {
+		return svc.findProductName(productCode);
+	}
+
+	// 생산지시관리 페이지
+	@RequestMapping("manageProrder.do")
+	public String manageProrder() {
+		return "prod/manageProrder.page";
+	}
+
+	// 생산지시 - 조회 모달
+	@RequestMapping("prorModal.do")
+	public String prorModal() {
+		return "app/prod/prorModal";
+	}
+
+	// 모달 생산지시검색
+	@RequestMapping("searchProrder.do")
+	@ResponseBody
+	public Map<String, Object> searchProrder(@RequestBody Map<String, Object> param) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		datas.put("contents", svc.searchProrder(param));
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
+	}
+	
+	// 미완료계획 읽기
+	@RequestMapping("readUnfinPlans.do")
+	@ResponseBody
+	public Map<String, Object> readUnfinPlans(@RequestBody Map<String, Object> param) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		if (param.get("prorCode") == null) {
+			datas.put("contents", svc.getUnfinPlans(param));
+		} else {
+			datas.put("contents", svc.getDetailProrder(param));
+		}
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
+	}
+
+	// 지시저장
+	@RequestMapping("saveProrder.do")
+	@ResponseBody
+	public Map<String, Object> saveProrder(ProrderVO vo) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		if (vo.getProrCode().equals("prorCode")) {
+			svc.insertProrder(vo);
+		} else {
+			svc.updateProrder(vo);
+		}
+		datas.put("contents", vo);
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
+	}
+
+	// 지시삭제
+	@RequestMapping("deleteProrder.do")
+	@ResponseBody
+	public Map<String, Object> deleteProrder(@RequestParam String prorCode) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		svc.deleteProrder(prorCode);
+		svc.deleteAllDetailProrder(prorCode);
+		svc.deleteAllInputMat(prorCode);
+		data.put("result", true);
+		data.put("check", "save");
+		return data;
+	}
+
+	// 세부지시 CUD
+	@RequestMapping("saveDetailProrder.do")
+	@ResponseBody
+	public Map<String, Object> saveDetailProrder(@RequestBody ProrGridData gridData) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		List<DetailProrderVO> cList = gridData.createdRows;
+		List<DetailProrderVO> uList = gridData.updatedRows;
+		List<DetailProrderVO> dList = gridData.deletedRows;
+		cList.forEach(vo -> {
+			if (vo.getWorkCount() != 0) {
+				svc.insertDetailProrder(vo);
+			}
+		});
+		uList.forEach(vo -> {
+			if (vo.getWorkCount() != 0) {
+				if (vo.getProductLot() == null) {
+					svc.insertDetailProrder(vo);
+				} else {
+					svc.updateDetailProrder(vo);
 				}
 			}
 		});
 		dList.forEach(vo -> {
 			if (vo.getProductLot() != null) {
-				svc.deleteDetailPlan(vo.getProductLot());
+				svc.deleteDetailProrder(vo.getProductLot());
 			}
 		});
 		data.put("result", true);
@@ -137,19 +263,12 @@ public class ProdController {
 		return data;
 	}
 
-	// 제품명찾기
-	@RequestMapping("findProductName.do")
-	@ResponseBody
-	public String findProductName(String productCode) {
-		return svc.findProductName(productCode);
-	}
-
 	// 작업실적관리 페이지
 	@RequestMapping("manageWork.do")
 	public String manageWork() {
 		return "prod/manageWork.page";
 	}
-	
+
 	// 작업실적 - 작업검색 모달
 	@RequestMapping("workModal.do")
 	public String workModal() {
@@ -157,9 +276,9 @@ public class ProdController {
 	}
 
 	// 제품LOT 찾기
-	@RequestMapping("selectDetailPlan.do")
+	@RequestMapping("selectDetailProrder.do")
 	@ResponseBody
-	public Map<String, Object> selectDetailPlan(String productLot) {
+	public Map<String, Object> selectDetailProrder(String productLot) {
 		Map<String, Object> data = new HashMap<String, Object>();
 		Map<String, Object> datas = new HashMap<String, Object>();
 		datas.put("contents", svc.selectDetailPlan(productLot));
@@ -175,18 +294,6 @@ public class ProdController {
 		Map<String, Object> data = new HashMap<String, Object>();
 		Map<String, Object> datas = new HashMap<String, Object>();
 		datas.put("contents", svc.readInputMat(param));
-		data.put("result", true);
-		data.put("data", datas);
-		return data;
-	}
-
-	// 모달 생산계획검색
-	@RequestMapping("searchPlan.do")
-	@ResponseBody
-	public Map<String, Object> searchPlan(@RequestBody Map<String, Object> param) {
-		Map<String, Object> data = new HashMap<String, Object>();
-		Map<String, Object> datas = new HashMap<String, Object>();
-		datas.put("contents", svc.searchPlan(param));
 		data.put("result", true);
 		data.put("data", datas);
 		return data;
@@ -263,7 +370,7 @@ public class ProdController {
 		data.put("data", datas);
 		return data;
 	}
-	
+
 	// 작업삭제
 	@RequestMapping("deleteWork.do")
 	@ResponseBody
@@ -281,6 +388,13 @@ class GridData {
 	List<DetailPlanVO> createdRows;
 	List<DetailPlanVO> updatedRows;
 	List<DetailPlanVO> deletedRows;
+}
+
+@Data
+class ProrGridData {
+	List<DetailProrderVO> createdRows;
+	List<DetailProrderVO> updatedRows;
+	List<DetailProrderVO> deletedRows;
 }
 
 @Data

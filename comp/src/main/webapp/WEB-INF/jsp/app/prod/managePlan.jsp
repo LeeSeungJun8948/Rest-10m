@@ -51,30 +51,6 @@
 <div class="col-lg-12">
 	<div id="grid"></div>
 </div>
-<br><br><br><br>
-<div>
-	<form>
-		<div class="table">
-			<table class="table">
-				<tbody>
-					<tr>
-						<th>제품코드</th>
-						<td><input type="text" id="productCode" name="productCode" readonly="true"></td>
-						<th>제품명</th>
-						<td><input type="text" id="productName" name="productName" readonly="true"></td>
-						<th>작업량</th>
-						<td><input type="text" id="workCount" name="workCount" readonly="true"></td>
-						<th>소요량</th>
-						<td><input type="text" id="totalCount" name="totalCount" readonly="true"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</form>
-</div>
-<div>
-	<div id="gridInput"/>
-</div>
 <div class="modal fade" id="planModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content" id="planContent" align="center">

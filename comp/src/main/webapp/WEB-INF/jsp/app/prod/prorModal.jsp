@@ -1,0 +1,40 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	
+<div id="modalContent">	
+	<div class="modal-header">
+		<h4>생산지시 조회</h4>
+		<button id="btnCloseTop" type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<div>
+			<table class="table">
+				<tr>
+					<th>계획일자</th>
+					<td>
+						<div class="row">
+							<div class="col-lg-8">
+								<form id="modalFrm" name="modalFrm">
+									<input type="date" id="searchDtS" name="searchDtS">&nbsp;~&nbsp;
+									<input type="date" id="searchDtE" name="searchDtE">
+								</form>
+							</div>
+							<div class="col-lg-4">
+								<button type="button" class="btn btn-primary" id="btnSearch" name="btnSearch">검색</button>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>	
+		<div id="gridModal"></div>
+	</div>
+	<div class="modal-footer">
+		<button id="btnSelect" class="btn btn-success">선택</button>
+	   	<button id="btnCloseBottom" class="btn btn-primary" data-dismiss="modal">닫기</button>
+	</div>
+</div>
+
+<script type="text/javascript" src="js/app/prod/prorModal.js"></script>
