@@ -20,7 +20,7 @@
 					</select>
 				</div>
 				<div class="col-md-5">
-					<input id="keyword" name="keyword" type="text" class="form-control">
+					<input id="keyword" class="form-control" name="keyword" type="text" class="form-control">
 				</div>
 				<div class="col=md-1">
 					<button type="button" class="btn btn-primary" id="btnReadModal">조회</button>
@@ -34,9 +34,10 @@
 	</div>
 		
 	<div class="modal-footer">
-		<button id="btnCloseBottom" class="btn btn-primary" data-dismiss="modal">닫기</button>
 		<button id="btnSelect" class="btn btn-success">선택</button>
+		<button id="btnCloseBottom" class="btn btn-primary" data-dismiss="modal">닫기</button>
 	</div>
 </div>
 
+<link href="${pageContext.request.contextPath}/css/app/prod/prod.css" rel="stylesheet">
 <script type="text/javascript" src="js/app/prod/workErrorModal.js"></script>

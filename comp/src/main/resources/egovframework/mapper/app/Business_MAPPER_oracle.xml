@@ -42,7 +42,7 @@
 			and o.order_count = o.plan_count
 		</if>
 	</select>
-	
+
 	<select id="getUnExport"
 		resultType="com.rest.app.bus.vo.OrdersVO"
 		parameterType="com.rest.app.bus.vo.OrdersVO">
@@ -55,31 +55,77 @@
 		from orders o, storage s, product
 		p,export e
 		where o.order_count != o.out_count
-		and o.product_code = p.product_code
+		and o.product_code =
+		p.product_code
 		and o.product_code =
 		s.product_code
-		and e.export_date BETWEEN TO_DATE(#{fromDate}, 'YYYY-MM-DD')
+		and e.export_date
+		BETWEEN TO_DATE(#{fromDate}, 'YYYY-MM-DD')
 		AND
-		TO_DATE(#{toDate}, 'YYYY-MM-DD')	</select>
+		TO_DATE(#{toDate},
+		'YYYY-MM-DD')
+	</select>
 
-	
-	<insert id="insertDetailExport" parameterType="com.rest.app.bus.vo.DetailExportVO">
+	<select id="searchExport"
+		resultType="com.rest.app.bus.vo.ExportVO">
+		SELECT export_code,
+		to_char(export_date,'YYYY-MM-DD') export_date,
+		company_code,
+		comments from export
+		WHERE export_date BETWEEN TO_DATE(#{fromDate}, 'YYYY-MM-DD')
+		AND TO_DATE(#{toDate}, 'YYYY-MM-DD')
+		ORDER BY export_code
+
+	</select>
+
+	<select id="searchPlan" resultType="PlanVO">
+		SELECT plan_code, plan_name,
+		TO_CHAR(plan_date, 'YYYY-MM-DD') plan_date, comments FROM plan
+		WHERE plan_date BETWEEN TO_DATE(#{searchDtS}, 'YYYY-MM-DD')
+		AND TO_DATE(#{searchDtE}, 'YYYY-MM-DD')
+		ORDER BY plan_code
+	</select>
+	<select id="getDetailExport"
+		resultType="com.rest.app.bus.vo.DetailExportVO">
+		SELECT d.idx,d.export_code, d.order_no, d.product_code,
+				d.price,d.comments,d.export_count,
+				to_char(e.export_date,'YYYY-MM-DD')export_date,
+				p.product_name,p.std_id,p.unit_id,
+				(select out_count from orders where order_no = d.order_no)out_count,
+				(select order_count - out_count from orders where order_no = d.order_no)
+				unExport_count,
+				to_char(e.export_date,'YYYY-MM-DD')export_date,
+				(select company_code from orders where order_no = d.order_no)company_code
+			from detailexport d, product p, export e
+		WHERE e.export_code= #{exportCode}
+			AND d.product_code = p.product_code
+		ORDER BY d.idx;
+
+
+	</select>
+	<insert id="insertDetailExport"
+		parameterType="com.rest.app.bus.vo.DetailExportVO">
 		<selectKey keyProperty="idx" resultType="int" order="BEFORE">
-        	SELECT NVL(MAX(idx),0)+1 FROM detailExport
-    	</selectKey>    
+			SELECT
+			NVL(MAX(idx),0)+1 FROM detailExport
+		</selectKey>
 		INSERT INTO detailExport VALUES(
-		#{idx}, #{exportCode},	#{orderNo}, null, #{productCode}, #{exportCount}, #{price}, #{comments}
+		#{idx}, #{exportCode}, #{orderNo},
+		null, #{productCode}, #{exportCount}, #{price}, #{comments}
 		)
 	</insert>
-	<update id="updateDetailExport" parameterType="com.rest.app.bus.vo.DetailExportVO">
-		UPDATE detailExport SET export_count = #{exportCount}, comments = #{comments}
+	<update id="updateDetailExport"
+		parameterType="com.rest.app.bus.vo.DetailExportVO">
+		UPDATE detailExport SET export_count = #{exportCount},
+		comments = #{comments}
 		WHERE product_lot = #{productLot}
 	</update>
 	<delete id="deleteDetailExport">
 		DELETE FROM detailExport WHERE idx = #{idx}
 	</delete>
 	<delete id="deleteAllDetailExport">
-		DELETE FROM detailExport WHERE export_code = #{exportCode}
+		DELETE FROM detailExport WHERE export_code =
+		#{exportCode}
 	</delete>
 
 

@@ -10,10 +10,22 @@
 	</div>
 	
 	<div class="modal-body">
-		<form id="dateFrm" name="dateFrm">
-			<span>작업일자 </span><input type="date" id="workDtS" name="workDtS">
-			<span>&nbsp;~&nbsp;</span><input type="date" id="workDtE" name="workDtE">&nbsp;
-			<button type="button" class="btn btn-primary" id="btnRead">조회</button>
+		<form class="form-row mb-4" id="dateFrm" name="dateFrm">
+			<div class="col-2">
+				<span>작업일자</span>
+			</div>
+			<div class="col-3">
+				<input type="date" class="form-control" id="workDtS" name="workDtS">
+			</div>
+			<div class="col-1">
+				<span>~</span>
+			</div>
+			<div class="col-3">						
+				<input type="date" class="form-control" id="workDtE" name="workDtE">
+			</div>
+			<div class="col-2">
+				<button type="button" class="btn btn-primary" id="btnSearch" name="btnRead">검색</button>
+			</div>
 		</form>
 	
 		<div class="col-md-11 m-3">
@@ -27,4 +39,5 @@
 	</div>
 </div>
 
+<link href="${pageContext.request.contextPath}/css/app/prod/manageWork.css" rel="stylesheet">
 <script type="text/javascript" src="js/app/prod/workModal.js"></script>

@@ -14,7 +14,19 @@
 				<tbody>
 					<tr>
 						<th>작업일자</th>
-						<td><input type="date" id="workDtS" name="workDtS">&nbsp;~&nbsp;<input type="date" id="workDtE" name="workDtE"></td>
+						<td>
+							<div class="row">
+								<div class="col-3">
+									<input type="date" class="form-control" id="workDtS" name="workDtS">
+								</div>
+								<div class="col-1" align="right">
+									<span>~</span>
+								</div>
+								<div class="col-3">
+									<input type="date" class="form-control" id="workDtE" name="workDtE">
+								</div>
+							</div>
+						</td>
 						<th>작업구분</th>
 						<td> 
 							<span class="mr-4">전체 <input type="radio" name="workDiv" value="" checked></span>
@@ -46,7 +58,7 @@
 					<tbody>
 						<tr>
 							<th>작업일자</th>
-							<td><input type="date" id="workDate" name="workDate" readonly></td>
+							<td><input type="date" class="form-control" id="workDate" name="workDate" readonly></td>
 							<th>작업구분</th>
 							<td>
 								<select class="custom-select" name="workDiv" id="workDiv" readonly>
@@ -56,30 +68,30 @@
 								</select>
 							</td>
 							<th>작업자</th>
-							<td><input type="text" id="empName" name="empName" readonly></td>
+							<td><input type="text" class="form-control" id="empName" name="empName" readonly></td>
 						</tr>
 						<tr>
-							<th>주문번호</th>
-							<td><input type="text" id="orderNo" name="orderNo" readonly></td>
+							<th>지시번호</th>
+							<td><input type="text" class="form-control" id="workCode" name="workCode" readonly></td>
 							<th>제품명</th>
-							<td><input type="text" id="productName" name="productName" readonly>
+							<td><input type="text" class="form-control" id="productName" name="productName" readonly>
 							</td>
 							<th>제품LOT</th>
-							<td><input type="text" id="productLot" name="productLot" readonly></td>
+							<td><input type="text" class="form-control" id="productLot" name="productLot" readonly></td>
 						</tr>
 						<tr>
 							<th>작업량</th>
-							<td><input type="text" id="workCount" name="workCount" value="0" readonly></td>
+							<td><input type="text" class="form-control" id="workCount" name="workCount" value="0" readonly></td>
 							<th>불량량</th>
-							<td><input type="text" id="errorCount" name="errorCount" value="0" readonly></td>
+							<td><input type="text" class="form-control" id="errorCount" name="errorCount" value="0" readonly></td>
 							<th>불량명</th>
-							<td><input type="text" id="errorName" name="errorName" readonly></td>
+							<td><input type="text" class="form-control" id="errorName" name="errorName" readonly></td>
 						</tr>
 						<tr>
 							<th>작업시작</th>
-							<td><input type="text" id="startTime" name="startTime" readonly></td>
+							<td><input type="text" class="form-control" id="startTime" name="startTime" readonly></td>
 							<th>작업종료</th>
-							<td><input type="text" id="endTime" name="endTime" readonly></td>
+							<td><input type="text" class="form-control" id="endTime" name="endTime" readonly></td>
 						</tr>
 					</tbody>
 				</table>
@@ -91,4 +103,5 @@
 	</div>
 </div>
 
+<link href="${pageContext.request.contextPath}/css/app/prod/viewWork.css" rel="stylesheet">
 <script type="text/javascript" src="js/app/prod/viewWork.js"></script>

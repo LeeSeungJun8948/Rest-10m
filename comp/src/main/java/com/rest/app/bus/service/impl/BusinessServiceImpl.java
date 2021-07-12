@@ -93,6 +93,13 @@ public class BusinessServiceImpl implements BusinessService {
 		return mapper.deleteAllDetailExport(exportCode);
 	}
 
+
+	@Override
+	public List<ExportVO> searchExport(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return mapper.searchExport(param);
+	}
+
 	
 	
 }

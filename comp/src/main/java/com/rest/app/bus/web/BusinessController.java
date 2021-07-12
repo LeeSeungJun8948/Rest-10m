@@ -61,19 +61,24 @@ public class BusinessController {
 	}
 
 
-	// 출고 모달 그리드 데이터 리턴
-		@RequestMapping("/ajax/readExportModal.do")
-		@ResponseBody
-		public Map<String, Object> ajaxReadExportModal(@RequestBody Map<String, Object> param) { // 자재 요약 리스트 출력
-			
-			Map<String,Object> datas = new HashMap<>();
-			Map<String,Object> data = new HashMap<>();
-			data.put("result", true);
-			datas.put("contents", dao.getExportModal(param));
-			data.put("data", datas);
-			
-			return data;
-		}
+	// 출고관리 - 조회 모달
+	@RequestMapping("exportModal.do")
+	public String getExportModal() {
+		return "app/bus/exportModal";
+	}
+
+	// 모달 출고검색
+	@RequestMapping("searchExport.do")
+	@ResponseBody
+	public Map<String, Object> searchExport(@RequestBody Map<String, Object> param) {
+		System.out.println(param+"----");
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		datas.put("contents", dao.searchExport(param));
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
+	}
 	// 미출고 검색 그리드
 	@RequestMapping("readUnExport.do")
 	@ResponseBody
@@ -152,12 +157,7 @@ public class BusinessController {
 		return data;
 	}
 
-	// 일 출고List모달
-	@RequestMapping("ExportModal.do")
-	public String Exportmodal() {
-		return "app/bus/exportModal";
-	}
-
+	
 	@RequestMapping("productInventory.do") // 제품재고관리페이지
 	public String productInventory(Model model) {
 		return "bus/productInventory.page";
