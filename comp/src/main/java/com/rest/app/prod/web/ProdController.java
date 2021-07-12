@@ -49,7 +49,7 @@ public class ProdController {
 		data.put("data", datas);
 		return data;
 	}
-	
+
 	// 미완료주문 읽기
 	@RequestMapping("readUnplanOrders.do")
 	@ResponseBody
@@ -116,7 +116,7 @@ public class ProdController {
 					svc.updateDetailPlan(vo);
 				}
 			} else {
-				if(vo.getDeplanIdx() != 0) {
+				if (vo.getDeplanIdx() != 0) {
 					svc.deleteDetailPlan(vo.getDeplanIdx());
 				}
 			}
@@ -161,7 +161,7 @@ public class ProdController {
 		data.put("data", datas);
 		return data;
 	}
-	
+
 	// 미완료계획 읽기
 	@RequestMapping("readUnfinPlans.do")
 	@ResponseBody
@@ -228,6 +228,10 @@ public class ProdController {
 				} else {
 					svc.updateDetailProrder(vo);
 				}
+			} else {
+				if (vo.getProductLot() != null) {
+					svc.deleteDetailProrder(vo.getProductLot());
+				}
 			}
 		});
 		dList.forEach(vo -> {
@@ -237,6 +241,18 @@ public class ProdController {
 		});
 		data.put("result", true);
 		data.put("check", "save");
+		return data;
+	}
+
+	// 자재LOT별 재고량리스트 가져오기
+	@RequestMapping("getInputMat.do")
+	@ResponseBody
+	public Map<String, Object> getInputMat(@RequestBody Map<String, Object> param) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		datas.put("contents", svc.readInputMat(param));
+		data.put("result", true);
+		data.put("data", datas);
 		return data;
 	}
 
@@ -281,19 +297,7 @@ public class ProdController {
 	public Map<String, Object> selectDetailProrder(String productLot) {
 		Map<String, Object> data = new HashMap<String, Object>();
 		Map<String, Object> datas = new HashMap<String, Object>();
-		datas.put("contents", svc.selectDetailPlan(productLot));
-		data.put("result", true);
-		data.put("data", datas);
-		return data;
-	}
-
-	// 자재LOT별 재고량리스트 가져오기
-	@RequestMapping("getInputMat.do")
-	@ResponseBody
-	public Map<String, Object> getInputMat(@RequestBody Map<String, Object> param) {
-		Map<String, Object> data = new HashMap<String, Object>();
-		Map<String, Object> datas = new HashMap<String, Object>();
-		datas.put("contents", svc.readInputMat(param));
+		datas.put("contents", svc.selectDetailProrder(productLot));
 		data.put("result", true);
 		data.put("data", datas);
 		return data;
@@ -374,9 +378,9 @@ public class ProdController {
 	// 작업삭제
 	@RequestMapping("deleteWork.do")
 	@ResponseBody
-	public Map<String, Object> deleteWork(@RequestParam String workNo) {
+	public Map<String, Object> deleteWork(@RequestParam String workCode) {
 		Map<String, Object> data = new HashMap<String, Object>();
-		svc.deleteWork(workNo);
+		svc.deleteWork(workCode);
 		data.put("result", true);
 		data.put("check", "save");
 		return data;

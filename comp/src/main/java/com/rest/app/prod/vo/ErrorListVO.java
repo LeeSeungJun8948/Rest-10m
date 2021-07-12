@@ -13,7 +13,7 @@ public class ErrorListVO {
 	Integer productCode;
 	String productName;
 	String productLot;
-	String workNo;
+	String workCode;
 	int errorCode;
 	String startDate;
 	String endDate;

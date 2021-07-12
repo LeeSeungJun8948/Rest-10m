@@ -46,7 +46,6 @@
 					data : dataSourc,
 					scrollX : false,
 					scrollY : false,
-					rowHeaders : [ 'rowNum' ],
 					columns : [ {
 						header : '제품코드',
 						name : 'productCode',

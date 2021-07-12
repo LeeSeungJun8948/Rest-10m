@@ -9,26 +9,23 @@
 		</button>
 	</div>
 	<div class="modal-body">
-		<div>
-			<table class="table">
-				<tr>
-					<th>계획일자</th>
-					<td>
-						<div class="row">
-							<div class="col-lg-8">
-								<form id="modalFrm" name="modalFrm">
-									<input type="date" id="searchDtS" name="searchDtS">&nbsp;~&nbsp;
-									<input type="date" id="searchDtE" name="searchDtE">
-								</form>
-							</div>
-							<div class="col-lg-4">
-								<button type="button" class="btn btn-primary" id="btnSearch" name="btnSearch">검색</button>
-							</div>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div>	
+		<form class="form-row mb-4" id="modalFrm" name="modalFrm">
+			<div class="col-2">
+				<span>지시일자</span>
+			</div>
+			<div class="col-3">
+				<input type="date" class="form-control" id="searchDtS" name="searchDtS">
+			</div>
+			<div class="col-1">
+				<span>~</span>
+			</div>
+			<div class="col-3">						
+				<input type="date" class="form-control" id="searchDtE" name="searchDtE">
+			</div>
+			<div class="col-2">
+				<button type="button" class="btn btn-primary" id="btnSearch" name="btnSearch">검색</button>
+			</div>
+		</form>	
 		<div id="gridModal"></div>
 	</div>
 	<div class="modal-footer">
@@ -37,4 +34,5 @@
 	</div>
 </div>
 
+<link href="${pageContext.request.contextPath}/css/app/prod/prod.css" rel="stylesheet">
 <script type="text/javascript" src="js/app/prod/prorModal.js"></script>

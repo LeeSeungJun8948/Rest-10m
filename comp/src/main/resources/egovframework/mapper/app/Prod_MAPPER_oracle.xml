@@ -27,8 +27,8 @@
 	<delete id="deletePlan">
 		DELETE FROM plan WHERE plan_code = #{planCode}
 	</delete>
-	<select id="countPlanCode" resultType="int">
-		SELECT count(*)+1 planCode FROM plan 
+	<select id="countPlan" resultType="int">
+		SELECT count(*)+1 FROM plan 
 	</select>
 	<select id="searchPlan" resultType="PlanVO">
 		SELECT plan_code, plan_name, TO_CHAR(plan_date, 'YYYY-MM-DD') plan_date, comments FROM plan 
@@ -40,10 +40,9 @@
 	<!-- 세부계획 -->
 	<select id="getDetailPlan" resultType="DetailPlanVO">
 		SELECT DISTINCT 
-			d.deplan_idx, d.plan_code, d.order_no, d.product_code, d.comments, d.plan_count work_count,
+			d.deplan_idx, d.plan_code, d.order_no, d.product_code, d.comments, d.plan_count, d.plan_count work_count,
 			TO_CHAR(d.work_date, 'YYYY-MM-DD') work_date, p.product_name,
 			(SELECT order_count FROM orders WHERE order_no = d.order_no) order_count, 
-      		(SELECT plan_count FROM orders WHERE order_no = d.order_no) plan_count,
 			(SELECT order_count - plan_count FROM orders WHERE order_no = d.order_no) unplan_count, 
       		(SELECT TO_CHAR(out_date, 'YYYY-MM-DD') FROM orders WHERE order_no = d.order_no) out_date
 		FROM detailplan d, product p 
@@ -51,13 +50,6 @@
 		AND d.product_code = p.product_code
 		ORDER BY d.deplan_idx
 	</select>	
-	<select id="selectDetailPlan" resultType="DetailPlanVO">
-		SELECT d.product_lot, d.plan_code, d.order_no, d.product_code, TO_CHAR(d.work_date, 'YYYY-MM-DD') work_date,
-			d.work_count, d.comments, p.product_name
-		FROM detailplan d, product p
-		WHERE d.product_lot = #{productLot}
-		AND d.product_code = p.product_code
-	</select>
 	<insert id="insertDetailPlan" parameterType="DetailPlanVO">
 		<selectKey resultType="int" keyProperty="deplanIdx" order="BEFORE">
         	SELECT NVL(MAX(deplan_idx),0)+1 FROM detailplan
@@ -80,8 +72,8 @@
 	<!-- 미완료계획 읽기 -->
 	<select id="getUnfinPlans" resultType="DetailPlanVO">
 		SELECT DISTINCT 
-			d.deplan_idx, d.product_code, TO_CHAR(d.work_date, 'YYYY-MM-DD') work_date,
-			d.plan_count, d.pror_count,
+			d.deplan_idx, d.product_code, TO_CHAR(d.work_date, 'YYYY-MM-DD') plan_date,
+			d.plan_count, d.pror_count, d.plan_code,
 			d.plan_count - d.pror_count unpror_count, p.product_name
 		FROM detailplan d, product p
 		WHERE d.plan_count != d.pror_count
@@ -97,14 +89,14 @@
 		)
 	</insert>
 	<update id="updateProrder" parameterType="ProrderVO">
-		UPDATE proder SET pror_date = #{prorDate}, pror_name = #{prorName}, comments = #{comments}
+		UPDATE proRder SET pror_date = #{prorDate}, pror_name = #{prorName}, comments = #{comments}
 		WHERE pror_code = #{prorCode}
 	</update>
 	<delete id="deleteProrder">
 		DELETE FROM prorder WHERE pror_code = #{prorCode}
 	</delete>
-	<select id="countProrCode" resultType="int">
-		SELECT count(*)+1 pror_code FROM prorder
+	<select id="countPror" resultType="int">
+		SELECT count(*)+1 FROM prorder
 	</select>
 	<select id="searchProrder" resultType="ProrderVO">
 		SELECT pror_code, pror_name, TO_CHAR(pror_date, 'YYYY-MM-DD') pror_date, comments FROM prorder 
@@ -116,27 +108,28 @@
 	<!-- 세부지시 -->
 	<select id="getDetailProrder" resultType="DetailProrderVO">
 		SELECT DISTINCT 
-			d.product_lot, d.pror_code, d.plan_code, d.product_code, d.comments, d.work_count,
+			d.product_lot, d.pror_code, d.product_code, d.pror_count, d.pror_count work_count, d.comments, d.deplan_idx, 
 			TO_CHAR(d.work_date, 'YYYY-MM-DD') work_date, p.product_name,
-			(SELECT plan_count FROM plan WHERE plan_code = d.plan_code) plan_count, 
-      		(SELECT pror_count FROM plan WHERE plan_code = d.plan_code) pror_count,
-			(SELECT plan_count - pror_count FROM plan WHERE plan_code = d.plan_code) unpror_count, 
-      		(SELECT TO_CHAR(out_date, 'YYYY-MM-DD') FROM plan WHERE plan_code = d.plan_code) out_date
+			(SELECT plan_code FROM detailplan WHERE deplan_idx = d.deplan_idx) plan_code,
+			(SELECT plan_count FROM detailplan WHERE deplan_idx = d.deplan_idx) plan_count, 
+			(SELECT plan_count - pror_count FROM detailplan WHERE deplan_idx = d.deplan_idx) unpror_count,
+      		(SELECT TO_CHAR(work_date, 'YYYY-MM-DD') FROM detailplan WHERE deplan_idx = d.deplan_idx) plan_date
 		FROM detailprorder d, product p 
 		WHERE pror_code = #{prorCode}
 		AND d.product_code = p.product_code
 		ORDER BY d.product_lot
 	</select>	
+	<!-- 제품LOT로 정보찾기 -->
 	<select id="selectDetailProrder" resultType="DetailProrderVO">
-		SELECT d.product_lot, d.pror_code, d.plan_code, d.product_code, TO_CHAR(d.work_date, 'YYYY-MM-DD') work_date,
-			d.work_count, d.comments, p.product_name
+		SELECT d.product_lot, d.pror_code, d.pror_code, d.product_code, TO_CHAR(d.work_date, 'YYYY-MM-DD') work_date,
+			d.pror_count work_count, d.comments, p.product_name
 		FROM detailprorder d, product p
 		WHERE d.product_lot = #{productLot}
 		AND d.product_code = p.product_code
 	</select>
 	<insert id="insertDetailProrder" parameterType="DetailProrderVO">
 		INSERT INTO detailprorder VALUES(
-		#{productLot}, #{prorCode},	#{planCode}, #{productCode}, #{workDate}, #{workCount}, 0, #{comments}, #{deplanIdx}
+		#{productLot}, #{prorCode},	#{productCode}, #{workDate}, #{workCount}, 0, #{comments}, #{deplanIdx}
 		)
 	</insert>
 	<update id="updateDetailProrder" parameterType="DetailProrderVO">
@@ -150,6 +143,9 @@
 	<delete id="deleteAllDetailProrder">
 		DELETE FROM detailprorder WHERE pror_code = #{prorCode}
 	</delete>
+	<select id="countDetailPror" resultType="int">
+		SELECT count(*)+1 FROM detailprorder
+	</select>
 	
 	<!-- 제품명찾기 -->
 	<select id="findProductName" parameterType="String" resultType="String">
@@ -174,7 +170,7 @@
 		DELETE FROM inputMat WHERE input_idx = #{inputIdx}
 	</delete>
 	<delete id="deleteAllInputMat">
-		DELETE FROM inputMat WHERE plan_code = #{prorCode}
+		DELETE FROM inputMat WHERE pror_code = #{prorCode}
 	</delete>
 	<select id="readInputMat" resultType="InputMatVO">
 			SELECT DISTINCT 
@@ -196,13 +192,14 @@
 		  	ORDER BY m.material_code, i.lot_no
 	</select>
 	
-	<!-- 생산작업 -->
+	<!-- 작업실적 -->
 	<select id="searchWork" resultType="WorkVO">
 		SELECT DISTINCT
-			w.work_code, w.process_code, TO_CHAR(w.work_date,'YYYY-MM-DD') work_date, w.product_lot, w.emp_code, emp.employee_name,
-			w.product_code, w.work_count, w.error_count, p.process_name, w.start_time, w.end_time, w.error_code, prod.product_name,
-			(SELECT error_name FROM error WHERE error_code = w.error_code) error_name, d.order_no
-		FROM work w, process p, employee emp, product prod, detailplan d
+			w.work_code, w.process_code, TO_CHAR(w.work_date,'YYYY-MM-DD') work_date, w.product_lot, 
+			w.emp_code, emp.employee_name, w.product_code, w.work_count, w.error_count, p.process_name, 
+			w.start_time, w.end_time, w.error_code, prod.product_name,
+			(SELECT error_name FROM error WHERE error_code = w.error_code) error_name, d.pror_code
+		FROM work w, process p, employee emp, product prod, detailprorder d
 		WHERE w.work_date BETWEEN TO_DATE(#{workDtS}, 'YYYY-MM-DD')
         	AND TO_DATE(#{workDtE}, 'YYYY-MM-DD')
 		AND w.process_code = p.process_code
@@ -216,19 +213,23 @@
 	</select>
 	<insert id="insertWork" parameterType="WorkVO">
 		INSERT INTO work VALUES(
-		#{workCode}, #{workDiv}, #{productLot}, #{workDate}, #{startTime}, #{endTime},
-		#{empCode}, #{errorCode}, #{productCode}, #{workCount}, #{errorCount}
+		#{workCode}, #{workDiv}, #{productLot}, #{workDate}, #{startTime}, #{endTime}, 
+		#{empCode},	#{errorCode}, #{productCode}, #{workCount}, #{errorCount} 
 		)
 	</insert>
 	<update id="updateWork" parameterType="WorkVO">
 		UPDATE work SET
 			work_date = #{workDate}, emp_code = #{empCode}, error_code = #{errorCode}, product_lot = #{productLot},
-			error_count = #{errorCount}, work_count = #{workCount}, start_time = #{startTime}, end_time = #{endTime}
+			error_count = #{errorCount}, work_count = #{workCount}, start_time = #{startTime}, end_time = #{endTime},
+			process_code = #{workDiv}
 		WHERE work_code = #{workCode}
 	</update>
 	<delete id="deleteWork">
 		DELETE FROM work WHERE work_code = #{workCode}
 	</delete>	
+	<select id="countWork" resultType="int">
+		SELECT COUNT(*)+1 FROM work
+	</select>
 	
 	<select id="searchEmp" resultType="com.rest.app.comm.vo.EmployeeVO">
 		SELECT emp_code, dept, auth, employee_name FROM employee

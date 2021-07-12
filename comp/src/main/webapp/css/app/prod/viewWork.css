@@ -1,0 +1,17 @@
+.form-control{
+	width: 170px;
+}
+#workViewModal .form-control{
+	width: 220px;
+}
+#workViewModal #workDiv {
+	width: 220px;
+}
+
+th {
+	width: 80px;
+}
+
+td {
+	width: 500px;
+}

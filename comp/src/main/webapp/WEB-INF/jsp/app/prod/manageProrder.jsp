@@ -17,29 +17,43 @@
 				<tbody>
 					<tr>
 						<th>지시일자<span style="color: red">*</span></th>
-						<td><input type="date" id="prorDate" name="prorDate" required></td>
+						<td><input type="date" class="form-control" id="prorDate" name="prorDate" required></td>
 					</tr>
 					<tr>
 						<th>생산지시명<span style="color: red">*</span></th>
-						<td><input type="text" id="prorName" name="prorName" required></td>
+						<td><input type="text" class="form-control" id="prorName" name="prorName" required></td>
 					</tr>
 					<tr>
 						<th>특기사항</th>
-						<td><input type="text" id="comments" name="comments"></td>
+						<td><input type="text" class="form-control" id="comments" name="comments"></td>
 					</tr>
 				</tbody>
 			</table>
 		</form>
 	</div>
 	<div class="mb-2 col-lg-6">
-		<div>
+		<div class="mb-4">
 			<h5>미지시계획 검색</h5>
 		</div>
 		<div>
 			<form id="dateFrm" name="dateFrm">
-				<span>작업일자 </span><input type="date" id="prorderDtS" name="prorderDtS">
-				<span>&nbsp;~&nbsp;</span><input type="date" id="prorderDtE" name="prorderDtE">&nbsp;
-				<button type="button" class="btn btn-primary" id="btnRead">불러오기</button>
+				<div class="form-row">
+					<div class="col-2" align="center">
+						<span>작업일자</span>
+					</div>
+					<div class="col-3">
+						<input type="date" class="form-control" id="prorderDtS" name="prorderDtS">
+					</div>
+					<div class="col-1" align="center">
+						<span>~</span>
+					</div>
+					<div class="col-3">
+						<input type="date" class="form-control" id="prorderDtE" name="prorderDtE">
+					</div>
+					<div class="col-2">
+						<button type="button" class="btn btn-primary" id="btnRead">불러오기</button>
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>
@@ -59,13 +73,13 @@
 				<tbody>
 					<tr>
 						<th>제품코드</th>
-						<td><input type="text" id="productCode" name="productCode" readonly="true"></td>
+						<td><input type="text" class="form-control" id="productCode" name="productCode" readonly="true"></td>
 						<th>제품명</th>
-						<td><input type="text" id="productName" name="productName" readonly="true"></td>
+						<td><input type="text" class="form-control" id="productName" name="productName" readonly="true"></td>
 						<th>작업량</th>
-						<td><input type="text" id="workCount" name="workCount" readonly="true"></td>
-						<th>소요량</th>
-						<td><input type="text" id="totalCount" name="totalCount" readonly="true"></td>
+						<td><input type="text" class="form-control" id="workCount" name="workCount" readonly="true"></td>
+						<th>총 투입량</th>
+						<td><input type="text" class="form-control" id="totalCount" name="totalCount" readonly="true"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -82,4 +96,5 @@
 	</div>
 </div>
 
+<link href="${pageContext.request.contextPath}/css/app/prod/prod.css" rel="stylesheet">
 <script type="text/javascript" src="js/app/prod/manageProrder.js"></script>
