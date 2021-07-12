@@ -51,8 +51,8 @@ const progrid = new tui.Grid({
 				},
 				{
 					header : '성적서',
-					name :  'qcImg',
-					editor : 'text'
+					name :  'qcImg'
+					
 				},
 				
 				{
