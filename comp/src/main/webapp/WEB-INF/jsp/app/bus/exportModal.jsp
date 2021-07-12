@@ -3,7 +3,7 @@
 
 <div id="modalContent">
 	<div class="modal-header">
-		<h4>생산계획 조회</h4>
+		<h4>출고 조회</h4>
 		<button id="btnCloseTop" type="button" class="close"
 			data-dismiss="modal" aria-label="Close">
 			<span aria-hidden="true">&times;</span>

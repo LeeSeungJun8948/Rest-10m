@@ -28,6 +28,11 @@
 					name: 'companyCode',
 					align: 'center'
 				}, {
+					header: '고객사',
+					name: 'companyName',
+					align: 'center'
+				},
+				 {
 					header: '특기사항',
 					name: 'comments',
 					align: 'center'
@@ -44,12 +49,14 @@
 			var exportCode;
 			var exportDate;
 			var companyCode;
+			var companyName;
 			var comments;
 			
 			modalExportListGrid.on('click', (ev) => {
 				exportCode = modalExportListGrid.getValue(ev.rowKey, 'exportCode');
 				exportDate = modalExportListGrid.getValue(ev.rowKey, 'exportDate');
 				companyCode = modalExportListGrid.getValue(ev.rowKey, 'companyCode');
+				companyName = modalExportListGrid.getValue(ev.rowKey, 'companyName');
 				comments = modalExportListGrid.getValue(ev.rowKey, 'comments');
 			});
 $('#btnSelect').on('click', function() {
@@ -64,6 +71,7 @@ $('#btnSelect').on('click', function() {
 				$('#exportCode').val(exportCode);
 				$('#exportDate').val(exportDate);
 				$('#companyCode').val(companyCode);
+				$('#companyName').val(companyName);
 				$('#comments').val(comments);
 				grid.readData(1, { exportCode: exportCode }, true);
 				$('#exportModal').modal('hide');
