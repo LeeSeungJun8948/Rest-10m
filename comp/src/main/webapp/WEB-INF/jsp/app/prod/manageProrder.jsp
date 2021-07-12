@@ -33,7 +33,7 @@
 	</div>
 	<div class="mb-2 col-lg-6">
 		<div class="mb-4">
-			<h5>미지시계획 검색</h5>
+			<h5><strong>미지시계획 검색</strong></h5>
 		</div>
 		<div>
 			<form id="dateFrm" name="dateFrm">
