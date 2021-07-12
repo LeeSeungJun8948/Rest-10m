@@ -16,6 +16,12 @@ $("#btnSave").on("click", function() {
 	}
 });
 
+// 초기화 버튼
+$("#btnReset").click(function() {
+	$('#workCode').val("");
+	$('#errorCode').val(0);
+});
+
 // 조회버튼 (모달)
 $("#btnWorkModal").on("click", function() {
 	$('#workContent').load("workModal.do");
@@ -26,7 +32,7 @@ $('#btnDel').on('click', function(){
 	$.ajax({
 		type: 'POST',
 		url: 'deleteWork.do',
-		data: {workNo: $('#workNo').val()},
+		data: {workCode: $('#workCode').val()},
 		dataType: 'json',
 		success: function(){
 			toastr.success("삭제되었습니다.");
@@ -50,12 +56,12 @@ function findLot(lot) {
 	if (checkNull(lot)) {
 		$.ajax({
 			type: 'POST',
-			url: 'selectDetailPlan.do',
+			url: 'selectDetailProrder.do',
 			data: { 'productLot': lot },
 			success: function(data) {
 				if (data.data.contents != null) {
 					$("#workDate").val(data.data.contents.workDate);
-					$("#orderNo").val(data.data.contents.orderNo);
+					$("#prorCode").val(data.data.contents.prorCode);
 					$("#productName").val(data.data.contents.productName);
 					$("#productCode").val(data.data.contents.productCode);
 					$("#productLot").val(data.data.contents.productLot);
@@ -73,7 +79,7 @@ function checkNull(value) {
 }
 
 function formCheck() {
-	if (!checkNull($('#orderNo').val())) {
+	if (!checkNull($('#prorCode').val())) {
 		toastr.warning('공정이동표 바코드를 먼저 찍어주세요.');
 	} else if (!checkNull($('#workCount').val()) || !checkNull($('#startTime').val()) || !checkNull($('#endTime').val()) || !checkNull($('#empName').val())) {
 		toastr.warning('값을 입력해주십시오.');

@@ -16,7 +16,7 @@
 			<tbody>
 				<tr>
 					<th>작업일자</th>
-					<td><input type="date" id="workDate" name="workDate"></td>
+					<td><input type="date" class="form-control" id="workDate" name="workDate"></td>
 					<th>작업구분</th>
 					<td>
 						<select class="custom-select" name="workDiv" id="workDiv">
@@ -26,41 +26,51 @@
 						</select>
 					</td>
 					<th>작업자</th>
-					<td><input type="text" id="empName" name="empName" readonly>
-						<input type="hidden" id="empCode" name="empCode">
-						<button id="btnEmpModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#workEmpModal">
-							<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
-						</button>
+					<td>
+						<div class="row">
+							<div class="col-6">
+								<input type="text" class="form-control" id="empName" name="empName" readonly>
+							</div>
+							<input type="hidden" id="empCode" name="empCode">
+							<button id="btnEmpModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#workEmpModal">
+								<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+							</button>
+						</div>
 					</td>
 				</tr>
 				<tr>
-					<th>주문번호</th>
-					<td><input type="text" id="orderNo" name="orderNo" readonly></td>
+					<th>지시번호</th>
+					<td><input type="text" class="form-control" id="prorCode" name="prorCode" readonly></td>
 					<th>제품명</th>
-					<td><input type="text" id="productName" name="productName" readonly>
+					<td><input type="text" class="form-control" id="productName" name="productName" readonly>
 						<input type="hidden" id="productCode" name="productCode">
 					</td>
 					<th>제품LOT</th>
-					<td><input type="text" id="productLot" name="productLot" onchange="findLot(this.value)"></td>
+					<td><input type="text" class="form-control" id="productLot" name="productLot" onchange="findLot(this.value)"></td>
 				</tr>
 				<tr>
 					<th>작업량</th>
-					<td><input type="text" id="workCount" name="workCount" value="0"></td>
+					<td><input type="text" class="form-control" id="workCount" name="workCount" value="0"></td>
 					<th>불량량</th>
-					<td><input type="text" id="errorCount" name="errorCount" value="0"></td>
+					<td><input type="text" class="form-control" id="errorCount" name="errorCount" value="0"></td>
 					<th>불량명</th>
-					<td><input type="text" id="errorName" name="errorName" readonly>
-						<input type="hidden" id="errorCode" name="errorCode">
-						<button id="btnErrorModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#workErrorModal">
-							<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
-						</button>
+					<td>
+						<div class="row">
+							<div class="col-6">
+								<input type="text" class="form-control" id="errorName" name="errorName" readonly>
+							</div>
+							<input type="hidden" id="errorCode" name="errorCode" value="0">
+							<button id="btnErrorModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#workErrorModal">
+								<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+							</button>
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<th>작업시작</th>
-					<td><input type="text" id="startTime" name="startTime"></td>
+					<td><input type="text" class="form-control" id="startTime" name="startTime"></td>
 					<th>작업종료</th>
-					<td><input type="text" id="endTime" name="endTime"></td>
+					<td><input type="text" class="form-control" id="endTime" name="endTime"></td>
 				</tr>
 			</tbody>
 		</table>
@@ -85,4 +95,5 @@
 	</div>
 </div>
 
+<link href="${pageContext.request.contextPath}/css/app/prod/manageWork.css" rel="stylesheet">
 <script type="text/javascript" src="js/app/prod/manageWork.js"></script>

@@ -41,6 +41,9 @@ const grid = new tui.Grid({
 		header: '계획번호',
 		name: 'planCode'
 		}, {
+		header: '계획일자',
+		name: 'planDate'
+		}, {
 		header: '계획량',
 		name: 'planCount',
 		}, {
@@ -60,12 +63,6 @@ const grid = new tui.Grid({
 		onAfterChange(ev) {
         	valueInput(ev);
       		}
-		}, {
-		header: '일생산량',
-		name: 'dayCount'
-		}, {
-		header: '생산일수',
-		name: 'workDay'
 		}, {
 		header: '작업일자',
 		name: 'workDate',
@@ -88,7 +85,7 @@ const grid = new tui.Grid({
 		editor: 'text'
 		}, {
 		header: '생산지시번호',
-		name: 'prorderCode',
+		name: 'prorCode',
 		hidden: true
 		}, {
 		header: '순번',
@@ -135,8 +132,8 @@ const gridInput = new tui.Grid({
 		name: 'productLot',
 		hidden: true
 		}, {
-		header: '생산계획번호',
-		name: 'planCode',
+		header: '생산지시번호',
+		name: 'prorCode',
 		hidden: true
 		}, {
 		header: '순번',
@@ -156,7 +153,7 @@ $("#btnReset").click(function() {
 });
 
 
-// 계획저장 버튼
+// 지시저장 버튼
 $('#btnSave').on('click', function() {
 	if (formCheck()) {
 		$.ajax({
@@ -166,16 +163,16 @@ $('#btnSave').on('click', function() {
 			dataType: 'json',
 			async: false,
 			success: function(data){
-				var prorderCode = data.data.contents.prorderCode;
-				$('#prorderCode').val(prorderCode);
-				grid.setColumnValues('prorderCode', prorderCode);
+				var prorCode = data.data.contents.prorCode;
+				$('#prorCode').val(prorCode);
+				grid.setColumnValues('prorCode', prorCode);
 			}
 		});
 		grid.request('modifyData');
 		grid.on('successResponse', function(ev){
 			var text = JSON.parse(ev.xhr.responseText);
 			if(text.check == 'save') {
-				grid.readData(1, {prorderCode: $('#prorderCode').val()}, true);
+				grid.readData(1, {prorCode: $('#prorCode').val()}, true);
 			}
 		});
 		gridInput.request('modifyData');
@@ -184,12 +181,12 @@ $('#btnSave').on('click', function() {
 	}
 });
 
-// 계획삭제 버튼
+// 지시삭제 버튼
 $('#btnDel').on('click', function(){
 	$.ajax({
 		type: 'POST',
 		url: 'deleteProrder.do',
-		data: {planCode: $('#prorderCode').val()},
+		data: {prorCode: $('#prorCode').val()},
 		dataType: 'json',
 		success: function(){
 			toastr.success("삭제되었습니다.");
@@ -246,12 +243,12 @@ grid.on('dblclick', (ev) => {
 	var productName = grid.getValue(rowKey, 'productName');
 	var workCount = grid.getValue(rowKey, 'workCount');
 	var productLot = grid.getValue(rowKey, 'productLot');
-	var prorderCode = grid.getValue(rowKey, 'prorderCode');
+	var prorCode = grid.getValue(rowKey, 'prorCode');
 	if (productLot != null) {
 		$('#workCount').val(workCount);
 		$('#productCode').val(productCode);
 		$('#productName').val(productName);
-		var param = {'productCode': productCode, 'productLot': productLot, 'prorderCode': prorderCode};
+		var param = {'productCode': productCode, 'productLot': productLot, 'prorCode': prorCode};
 		gridInput.readData(1, param, true);
 	}
 });
@@ -263,13 +260,13 @@ function valueInput(ev) {
 	var productName = grid.getValue(rowKey, 'productName');
 	var workCount = grid.getValue(rowKey, 'workCount');
 	var productLot = grid.getValue(rowKey, 'productLot');
-	var prorderCode = grid.getValue(rowKey, 'prorderCode');
+	var prorCode = grid.getValue(rowKey, 'prorCode');
 	if (productLot != null) {
 		$('#workCount').val(workCount);
 		$('#productCode').val(productCode);
 		$('#productName').val(productName);
 		gridInput.setColumnValues('productLot', productLot);
-		gridInput.setColumnValues('prorderCode', prorderCode);
+		gridInput.setColumnValues('prorCode', prorCode);
 	}
 }
 
@@ -292,7 +289,7 @@ function resetPage() {
 		grid.clear();
 		gridInput.clear();
     });  
-	$('#prorderCode').val('prorderCode');
+	$('#prorCode').val('prorCode');
 }
 
 // 폼체크
@@ -300,10 +297,10 @@ function formCheck() {
 	if(!checkNull($('#prorDate').val()) || !checkNull($('#prorName').val())) {
 		toastr.warning('값을 입력해주십시오.');
 		return false;
-	} else if(checkNull($('#productCode').val()) && !checkNull($('#workCount').val()) && ($('#workCount').val() > $('#inputCount').val())) {
+	} else if(checkNull($('#productCode').val()) && !checkNull($('#workCount').val()) && ($('#workCount').val() > $('#totalCount').val())) {
 		toastr.warning('투입량이 부족합니다.');
 		return false;
-	} else if(checkNull($('#productCode').val()) && !checkNull($('#workCount').val()) && ($('#workCount').val() < $('#inputCount').val())) {
+	} else if(checkNull($('#productCode').val()) && !checkNull($('#workCount').val()) && ($('#workCount').val() < $('#totalCount').val())) {
 		toastr.warning('투입량이 작업량보다 많습니다.');
 		return false;		
 	} else {

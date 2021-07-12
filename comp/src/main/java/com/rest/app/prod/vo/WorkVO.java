@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class WorkVO {
 	String workCode;  // 작업지시번호
-	int processCode; // 공정코드
+	String processCode; // 공정코드
 	String processName; // 공정이름
-	String productCode; // 제품코드
+	int productCode; // 제품코드
 	String productName; // 제품명
 	String productLot; // 제품LOT
 	String workDiv; // 작업구분

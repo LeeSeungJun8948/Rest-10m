@@ -23,7 +23,7 @@
 				<div class="col-md-5">
 					<input id="keyword" name="keyword" type="text" class="form-control">
 				</div>
-				<div class="col=md-1">
+				<div>
 					<button type="button" class="btn btn-primary" id="btnReadModal">조회</button>
 				</div>
 			</div>
