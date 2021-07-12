@@ -52,7 +52,6 @@ const progrid = new tui.Grid({
 				{
 					header : '성적서',
 					name :  'qcImg'
-					
 				},
 				
 				{
@@ -78,10 +77,12 @@ const progrid = new tui.Grid({
 
 //클릭시 단건 조회
 progrid.on('click', (ev)=>{
-	console.log(progrid.getRow(ev.rowKey).productCode);
+	//console.log(progrid.getRow(ev.rowKey).productCode);
 	
 	var key = progrid.getRow(ev.rowKey).productCode;
 	
+	var image = progrid.getRow(ev.rowKey).qcImg;
+	var use = progrid.getRow(ev.rowKey).useAt;
 
 	$.ajax({
 		
@@ -94,6 +95,7 @@ progrid.on('click', (ev)=>{
 		async : false,
 		
 		success : function(data){
+			//단건 조회시 input value값 가져오기 
 			$('#productCode').val(data.data.contents.productCode);
 			$('#productName').val(data.data.contents.productName);
 			$('#employeeName').val(data.data.contents.empCode);
@@ -101,7 +103,20 @@ progrid.on('click', (ev)=>{
 			$('#stdId').val(data.data.contents.stdId);
 			$('#unitNo').val(data.data.contents.unitNo);
 			$('#unitId').val(data.data.contents.unitId);
-			$('#useAt').val(data.data.contents.useAt);
+			//단건 조회시 체크박스 체크여부
+			if(use == 'Y') {
+				$('#useAt').attr("checked", true);
+			
+			}else if(use == 'N'){
+				$('#useAt').attr("checked", false);
+			}
+		
+			if(image != null){
+				$("#image").attr("src", "qcfiledown.do?fileName="+image);
+				}else{ 
+					$("#image").attr("src", "qcfiledown.do?fileName=noimg.png");
+				}
+			console.log(data.data.contents.useAt);
 			console.log(data);
 		},
 		error : function(){
@@ -119,7 +134,7 @@ progrid.on('click', (ev)=>{
 		reader.onload = function(event) {
 			var img = document.getElementById('image');
 			img.setAttribute("src", event.target.result);
-			document.querySelector("div#imagePreview").appendChild(img);
+			document.querySelector("div#imagePreview").appendChild(qcimg);
 		};
 		reader.readAsDataURL(event.target.files[0]);
 	}
@@ -131,6 +146,37 @@ const input = document.querySelector('#qcImg');
 	imgBtn.addEventListener('click', function(event) {
 		input.click();
 	});
+//수정버튼
+$("#btnUdate").on("click", function() {
+		event.preventDefault();
+    
+    	var form = $('#frm')[0]
+   		var data = new FormData(form);
+	
+	$.ajax({
+				
+			type : "POST",
+			enctype: 'multipart/form-data',
+			url : "ajax/updateProdcut.do",
+			data : data,
+			dataType : "json",
+			processData: false,
+     	   	contentType: false,
+       		cache: false,
+			async : false,
+			success : function(data) {
+				if(data == 1){
+					alert('수정 완료');
+					grid.readData(1, null, true);
+				}
+					
+				else
+					alert('수정 실패');
+			},
+			error : function(request, status, error) {
+			}
+		});	
+	});
 
 	
 //초기화 버튼
@@ -140,19 +186,29 @@ $('#btnNew').on('click',function(){
 		$('input').val('');
 })
 
-
+//그리드 추가/업데이트
 $("#btnInsert").on("click", function(){
 		//progrid.request('createData');
 		progrid.request('modifyData', {
 		checkedOnly: true
 		});
 	});
+	
+//그리드 리스트 삭제
 $("#btnDelete").on("click",function() {
 	progrid.removeCheckedRows(false);
 	progrid.request('deleteData');
 })
 
-
+//체크박스 체크 >> DB에 insert
+function YnCheck(){
+	
+	if($('#checkUse').is(':checked') == true){
+		$('#useAt').val('Y');
+	}else{
+		$('#useAt').val('N');
+		}
+}
 
 
 
