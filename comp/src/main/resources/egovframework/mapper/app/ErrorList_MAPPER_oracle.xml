@@ -3,7 +3,7 @@
 <mapper namespace="com.rest.app.prod.service.impl.ErrorListMapper">
 	<select id="getErrorList" resultType="com.rest.app.prod.vo.ErrorListVO">
 		select c.process_name, TO_CHAR(a.work_date, 'YYYY-MM-DD')AS work_date, a.work_count, a.error_count, d.product_code, 
-      	d.product_name, a.product_lot, a.work_no, a.error_code
+      	d.product_name, a.product_lot, a.work_code, a.error_code
 		from work a, process c, product d
 		where a.process_code = c.process_code
 		and a.product_code = d.product_code	

@@ -14,7 +14,9 @@ public interface BusinessService {
 	public List<OrdersVO> getBus(Map<String, Object> param);//주문관리참조 조회 리스트
 	
 //	public List<OrdersVO> getExport(Map<String, Object> param);//출고검색
-	public List<ExportVO> getExportModal(Map<String, Object> param);//출고검색 모달
+	List<ExportVO> getExportModal(Map<String, Object> param);//출고검색 모달
+	
+	List<ExportVO> searchExport(Map<String, Object> param);//출고조회
 	
 	public List<OrdersVO> getUnExport(Map<String, Object> param);//미출고검색
 	
@@ -34,6 +36,8 @@ public interface BusinessService {
 	int updateDetailExport(DetailExportVO vo);
 	int deleteDetailExport(int idx);
 	int deleteAllDetailExport(String exportCode);
+
+
 
 
 

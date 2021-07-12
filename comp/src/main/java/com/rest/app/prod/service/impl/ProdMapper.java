@@ -20,7 +20,6 @@ public interface ProdMapper {
 	int insertPlan(PlanVO vo); 
 	int updatePlan(PlanVO vo);
 	int deletePlan(String planCode);
-	DetailPlanVO selectDetailPlan(int deplanIdx);
 	int insertDetailPlan(DetailPlanVO vo); 
 	int updateDetailPlan(DetailPlanVO vo);
 	int deleteDetailPlan(int deplanIdx);
@@ -31,7 +30,7 @@ public interface ProdMapper {
 	int insertProrder(ProrderVO vo); 
 	int updateProrder(ProrderVO vo);
 	int deleteProrder(String prorCode);
-	DetailPlanVO selectDetailPlan(String productLot);
+	DetailProrderVO selectDetailProrder(String productLot);
 	int insertDetailProrder(DetailProrderVO vo); 
 	int updateDetailProrder(DetailProrderVO vo);
 	int deleteDetailProrder(String productLot);
@@ -42,12 +41,14 @@ public interface ProdMapper {
 	int deleteAllInputMat(String planCode);
 	String findProductName(String productCode);
 	List<InputMatVO> readInputMat(Map<String, Object> param);
-	int countPlanCode();
-	int countProrCode();
+	int countPlan();
+	int countPror();
+	int countDetailPror();
+	int countWork();
 	List<WorkVO> searchWork(Map<String, Object> param);
 	int insertWork(WorkVO vo);
 	int updateWork(WorkVO vo);
-	int deleteWork(String workNo);
+	int deleteWork(String workCode);
 	List<EmployeeVO> searchEmp(Map<String, Object> param);
 	List<ErrorVO> searchError(Map<String, Object> param);
 }

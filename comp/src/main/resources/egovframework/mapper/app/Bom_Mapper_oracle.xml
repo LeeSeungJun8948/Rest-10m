@@ -14,6 +14,7 @@
 					product_name LIKE '%' || #{searchKeyword} || '%'
 				</if>
 		</where>
+		ORDER BY product_code
 	</select>
 	<!-- 제품단건조회(고객사코드/고객사명 제외) -->
 	<select id="getInfoProduct" resultType="com.rest.app.comm.vo.BomVO">

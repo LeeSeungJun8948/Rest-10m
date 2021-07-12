@@ -18,4 +18,5 @@ public class DetailPlanVO {
 	int unprorCount;
 	int workCount;
 	String comments;
+	String planDate;
 }

@@ -54,8 +54,8 @@
 					name: 'empName',
 					hidden: true
 					}, {
-					header: '주문번호',
-					name: 'orderNo',
+					header: '지시번호',
+					name: 'prorCode',
 					hidden: true
 					}, {
 					header: '작업공정',
@@ -102,7 +102,7 @@
 			var productLot;
 			var workCount;
 			var errorCount;
-			var orderNo;
+			var prorCode;
 			
 			workGrid.on('click', (ev) => {
 				workCode = workGrid.getValue(ev.rowKey, 'workCode');
@@ -119,7 +119,7 @@
 				productLot = workGrid.getValue(ev.rowKey, 'productLot');
 				workCount = workGrid.getValue(ev.rowKey, 'workCount');
 				errorCount = workGrid.getValue(ev.rowKey, 'errorCount');
-				orderNo = workGrid.getValue(ev.rowKey, 'orderNo');
+				prorCode = workGrid.getValue(ev.rowKey, 'prorCode');
 			});
 
 			$('#btnSelect').on('click', function() {
@@ -145,7 +145,7 @@
 				$('#productName').val(productName);
 				$('#workCount').val(workCount);
 				$('#errorCount').val(errorCount);
-				$('#orderNo').val(orderNo);
+				$('#prorCode').val(prorCode);
 				$('#workModal').modal('hide');
 				$('#modalContent').remove();
 			}

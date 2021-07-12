@@ -7,7 +7,7 @@ public class DetailProrderVO {
 	String productLot;
 	String prorCode;
 	String productName;
-	String outDate;
+	String planDate;
 	String planCode;
 	int productCode;
 	String workDate;
@@ -16,4 +16,5 @@ public class DetailProrderVO {
 	int unprorCount;
 	int workCount;
 	String comments;
+	int deplanIdx;
 }

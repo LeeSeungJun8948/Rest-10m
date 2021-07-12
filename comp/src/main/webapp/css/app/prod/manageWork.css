@@ -1,18 +1,9 @@
-.modal {
-	text-align: center;
+.form-control{
+	width: 170px;
 }
-
-.modal-dialog.modal-large {
-	display: inline-block; 
-	vertical-align: middle;
-	min-width: 1600px;
-	height: 80%; 
+#workFrm .form-control{
+	width: 220px;
 }
-
-#workContent {
-	height: 100%;
-}
-
-#workModal {
-	z-index: 1050;
+#workDiv {
+	width: 220px;
 }

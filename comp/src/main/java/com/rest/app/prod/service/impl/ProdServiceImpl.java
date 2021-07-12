@@ -88,8 +88,8 @@ public class ProdServiceImpl implements ProdService {
 		return mapper.readInputMat(param);
 	}
 
-	public int countPlanCode() {
-		return mapper.countPlanCode();
+	public int countPlan() {
+		return mapper.countPlan();
 	}
 
 	@Override
@@ -113,8 +113,8 @@ public class ProdServiceImpl implements ProdService {
 	}
 
 	@Override
-	public int deleteWork(String workNo) {
-		return mapper.deleteWork(workNo);
+	public int deleteWork(String workCode) {
+		return mapper.deleteWork(workCode);
 	}
 
 	@Override
@@ -139,13 +139,8 @@ public class ProdServiceImpl implements ProdService {
 	}
 
 	@Override
-	public DetailPlanVO selectDetailPlan(String productLot) {
-		return mapper.selectDetailPlan(productLot);
-	}
-
-	@Override
-	public DetailPlanVO selectDetailPlan(int deplanIdx) {
-		return mapper.selectDetailPlan(deplanIdx);
+	public DetailProrderVO selectDetailProrder(String productLot) {
+		return mapper.selectDetailProrder(productLot);
 	}
 
 	@Override
@@ -200,33 +195,36 @@ public class ProdServiceImpl implements ProdService {
 		return mapper.deleteAllDetailProrder(prorCode);
 	}
 
-	public int countProrCode() {
-		return mapper.countProrCode();
+	public int countPror() {
+		return mapper.countPror();
+	}
+
+	public int countDetailPror() {
+		return mapper.countDetailPror();
+	}
+
+	public int countWork() {
+		return mapper.countWork();
 	}
 
 	public String makeLot(DetailProrderVO vo) {
 		String productLot = "PR-" + vo.getWorkDate().replace("-", "").substring(2) + "-"
-				+ String.valueOf(vo.getProductCode()) + vo.getPlanCode().substring(4, 6)
-				+ String.valueOf(vo.getWorkCount()).substring(0, 2);
+				+ String.valueOf(countDetailPror());
 		return productLot;
 	}
 
 	public String makePlanCode(PlanVO vo) {
-		String planCode = "PL-" + vo.getPlanDate().replace("-", "").substring(2) + "-"
-				+ String.valueOf(countPlanCode());
+		String planCode = "PL-" + vo.getPlanDate().replace("-", "").substring(2) + "-" + String.valueOf(countPlan());
 		return planCode;
 	}
-	
+
 	public String makeProrCode(ProrderVO vo) {
-		String planCode = "PO-" + vo.getProrDate().replace("-", "").substring(2) + "-"
-				+ String.valueOf(countProrCode());
+		String planCode = "PO-" + vo.getProrDate().replace("-", "").substring(2) + "-" + String.valueOf(countPror());
 		return planCode;
 	}
 
 	public String makeWorkCode(WorkVO vo) {
-		String workCode = "WK-" + vo.getWorkDate().replace("-", "").substring(2) + "-"
-				+ String.valueOf(vo.getProductCode()) + String.valueOf(vo.getProcessCode())
-				+ String.valueOf(vo.getWorkCount()).substring(0, 2);
+		String workCode = "WK-" + vo.getWorkDate().replace("-", "").substring(2) + "-" + String.valueOf(countWork());
 		return workCode;
 	}
 }
