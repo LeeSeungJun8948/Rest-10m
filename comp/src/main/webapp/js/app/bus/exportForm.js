@@ -82,10 +82,8 @@ $.fn.serializeObject = function() {
 	return o;
 };
 // 조회 버튼
-$('#btnView').on('click', function(){
-	   var param = $('#inputFrm').serializeObject();
-				   console.log(param)
-				   grid.readData(1, param, true);
+$("#btnExportModal").on("click", function() {
+	$('#ExportContent').load("exportModal.do");
 });
 
 // 새자료 버튼
@@ -181,7 +179,13 @@ function findProductName(ev){
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
-
+//모달
+var forGrid = false;
+$("#btnCompModal").on("click", function(e) {
+    $('#compContent').load("compModalForProd.do");
+});
+$(document).on('show.bs.modal','#btnCompModal', function () {
+});
 // 폼체크
 function formCheck() {
 	if(!checkNull($('#fromDate').val()) || !checkNull($('#searchKeywordFrom').val()) 
