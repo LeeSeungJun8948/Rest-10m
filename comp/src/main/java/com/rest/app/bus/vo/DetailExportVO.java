@@ -13,5 +13,6 @@ public class DetailExportVO {
 	int unExport;//미출고량
 	int exportCount;//출고량
 	int price;//금액
-	int comments;//비고
+	String comments;//비고
+	String exportDate;
 }

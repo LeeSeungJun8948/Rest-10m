@@ -100,6 +100,12 @@ public class BusinessServiceImpl implements BusinessService {
 		return mapper.searchExport(param);
 	}
 
+
+	@Override
+	public List<DetailExportVO> getDetailExport(Map<String, Object> param) {
+		return mapper.getDetailExport(param);
+	}
+
 	
 	
 }

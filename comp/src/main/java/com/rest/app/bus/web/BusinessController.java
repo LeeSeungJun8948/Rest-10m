@@ -79,6 +79,7 @@ public class BusinessController {
 		data.put("data", datas);
 		return data;
 	}
+	
 	// 미출고 검색 그리드
 	@RequestMapping("readUnExport.do")
 	@ResponseBody
@@ -86,10 +87,10 @@ public class BusinessController {
 		System.out.println("=============");
 		Map<String, Object> datas = new HashMap<>();
 		Map<String, Object> data = new HashMap<>();
-		if (param.get("planCode") == null) {
+		if (param.get("exportCode") == null) {
 			datas.put("contents", dao.getUnExport(param));
-		}else {
-			datas.put("contents", dao.getUnExport(param));
+		} else {
+			datas.put("contents", dao.getDetailExport(param));
 		}
 		data.put("result", true);
 		data.put("data", datas);
@@ -116,10 +117,10 @@ public class BusinessController {
 	// 계획삭제
 	@RequestMapping("deleteExport.do")
 	@ResponseBody
-	public Map<String, Object> deleteExport(@RequestParam String ExportCode) {
+	public Map<String, Object> deleteExport(@RequestParam String exportCode) {
 		Map<String, Object> data = new HashMap<String, Object>();
-		dao.deleteExport(ExportCode);
-		dao.deleteAllDetailExport(ExportCode);
+		dao.deleteExport(exportCode);
+		dao.deleteAllDetailExport(exportCode);
 		data.put("result", true);
 		data.put("check", "save");
 		return data;

@@ -62,6 +62,10 @@ const grid = new tui.Grid({
 		header : '비고',
 		name : 'comments',
 		editor: 'text'
+		}, {
+		header: '순번',
+		name: 'idx',
+		hidden: true
 		}
 	]
 });
@@ -125,6 +129,7 @@ $('#btnDel').on('click', function(){
 		data: $('#exportCode').val(),
 		dataType: 'json',
 		success: function(){
+			resetPage();
 			toastr.success("삭제되었습니다.");
 		}
 	});
@@ -186,10 +191,10 @@ $("#btnCompModal").on("click", function(e) {
 });
 $(document).on('show.bs.modal','#btnCompModal', function () {
 });
+
 // 폼체크
 function formCheck() {
-	if(!checkNull($('#fromDate').val()) || !checkNull($('#searchKeywordFrom').val()) 
-		|| !checkNull($('#searchKeywordFromNm').val())) {
+	if(!checkNull($('#fromDate').val()) || !checkNull($('#searchKeywordFrom').val())) {
 		toastr.warning('값을 입력해주십시오.');
 		return false;
 	} else {

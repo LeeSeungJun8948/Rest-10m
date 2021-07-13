@@ -35,12 +35,12 @@ public interface ProdService {
 	int updateDetailProrder(DetailProrderVO vo);
 	int deleteDetailProrder(String productLot);
 	int deleteAllDetailProrder(String prorCode);
+	List<InputMatVO> readInputMat(Map<String, Object> param); 
 	int insertInputMat(InputMatVO vo); 
 	int updateInputMat(InputMatVO vo);
 	int deleteInputMat(int idx);
 	int deleteAllInputMat(String prorCode);
 	String findProductName(String productCode);
-	List<InputMatVO> readInputMat(Map<String, Object> param); 
 	List<WorkVO> searchWork(Map<String, Object> param);
 	int insertWork(WorkVO vo);
 	int updateWork(WorkVO vo);

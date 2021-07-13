@@ -99,9 +99,7 @@
 			from detailexport d, product p, export e
 		WHERE e.export_code= #{exportCode}
 			AND d.product_code = p.product_code
-		ORDER BY d.idx;
-
-
+		ORDER BY d.idx
 	</select>
 	<insert id="insertDetailExport"
 		parameterType="com.rest.app.bus.vo.DetailExportVO">
@@ -111,7 +109,7 @@
 		</selectKey>
 		INSERT INTO detailExport VALUES(
 		#{idx}, #{exportCode}, #{orderNo},
-		null, #{productCode}, #{exportCount}, #{price}, #{comments}
+		#{productCode}, #{exportCount}, #{price}, #{comments}
 		)
 	</insert>
 	<update id="updateDetailExport"
