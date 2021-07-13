@@ -23,7 +23,6 @@
  <!-- Divider -->
  <hr class="sidebar-divider">
 
-<<<<<<< HEAD
  <!-- Nav Item - Pages Collapse Menu -->
  <li class="nav-item">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -40,24 +39,6 @@
              <a class="collapse-item" href="/comp/empList.do">사원관리</a>
              <a class="collapse-item" href="/comp/errorList.do">불량코드 관리 </a>
              <a class="collapse-item" href="cards.html">제품 품질 표준서 관리</a>
-=======
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>기준정보관리</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/comp/sym/ccm/cca/SelectCcmCmmnCodeList.do">공통코드관리-마스터</a>
-                        <a class="collapse-item" href="/comp/sym/ccm/cde/SelectCcmCmmnDetailCodeList.do">공통코드관리-상세</a>
-                        <a class="collapse-item" href="/comp/matForm.do">자재정보관리</a>
-                        <a class="collapse-item" href="/comp/bomList.do">제품 BOM관리</a>
-                        <a class="collapse-item" href="/comp/processList.do">공정관리</a>
-                        <a class="collapse-item" href="/comp/empList.do">사원관리</a>
-                        <a class="collapse-item" href="/comp/error.do">불량코드 관리 </a>
-                        <a class="collapse-item" href="cards.html">제품 품질 표준서 관리</a>
->>>>>>> branch 'master' of https://github.com/LeeSeungJun8948/Rest-10m.git
 
          </div>
      </div>
@@ -96,7 +77,6 @@
  </li>
 
 
-<<<<<<< HEAD
 	<!-- Nav Item - Pages Collapse Menu -->
  <li class="nav-item">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true" aria-controls="collapsePages2">
@@ -111,23 +91,6 @@
          </div>
      </div>
  </li>
-=======
-			<!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true" aria-controls="collapsePages2">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>생산관리</span>
-                </a>
-                <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/comp/managePlan.do">생산계획 관리</a>
-                        <a class="collapse-item" href="/comp/manageWork.do">작업실적 관리</a>
-                        <a class="collapse-item" href="/comp/viewWork.do">작업실적 조회</a>
-                        <a class="collapse-item" href="/comp/detailErrorList.do">불량내역 조회</a>
-                    </div>
-                </div>
-            </li>
->>>>>>> branch 'master' of https://github.com/LeeSeungJun8948/Rest-10m.git
 
 	<!-- Nav Item - Pages Collapse Menu -->
  <li class="nav-item">
@@ -145,6 +108,36 @@
          </div>
      </div>
  </li>
+			<!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true" aria-controls="collapsePages2">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>생산관리</span>
+                </a>
+                <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/comp/managePlan.do">생산계획 관리</a>
+                        <a class="collapse-item" href="/comp/manageWork.do">작업실적 관리</a>
+                        <a class="collapse-item" href="/comp/viewWork.do">작업실적 조회</a>
+                        <a class="collapse-item" href="/comp/detailErrorList.do">불량내역 조회</a>
+                    </div>
+                </div>
+            </li>
+			<!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true" aria-controls="collapsePages2">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>생산관리</span>
+                </a>
+                <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/comp/managePlan.do">생산계획 관리</a>
+                        <a class="collapse-item" href="/comp/manageWork.do">작업실적 관리</a>
+                        <a class="collapse-item" href="/comp/viewWork.do">작업실적 조회</a>
+                        <a class="collapse-item" href="/comp/detailErrorList.do">불량내역 조회</a>
+                    </div>
+                </div>
+            </li>
 
  <!-- Divider -->
 	<hr class="sidebar-divider">
