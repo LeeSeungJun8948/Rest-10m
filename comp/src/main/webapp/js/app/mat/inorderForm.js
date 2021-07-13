@@ -129,6 +129,7 @@ function checkNull(value){
 }
 
 // 모달 오픈
+var forGrid = false;
 // 자재 돋보기
 $("#btnMatModal").on("click", function(e) {
     $('#matContent').load("matModal.do");

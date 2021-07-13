@@ -6,6 +6,7 @@ import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
+import com.rest.app.mat.vo.ProcMoveVO;
 import com.rest.app.mat.vo.SelectListVO;
 
 public interface MaterialService {
@@ -54,6 +55,10 @@ public interface MaterialService {
 	public int istMatAdjust(InoutVO vo);
 	public int udtMatAdjust(InoutVO vo);
 	public int delMatAdjust(InoutVO vo);
+	
+	public List<ProcMoveVO> getPlanList(ProcMoveVO vo);
+	
+	public List<ProcMoveVO> getInputMat(ProcMoveVO vo);
 	
 	// 모달
 	public List<SelectListVO> getMatListModal(SelectListVO vo); // 자재검색 모달 자재리스트

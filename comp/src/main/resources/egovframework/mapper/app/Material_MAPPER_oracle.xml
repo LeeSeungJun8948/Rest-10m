@@ -308,6 +308,35 @@
 		WHERE io_code = #{ioCode}
 	</insert>
 	
+	<!-- 공정이동 페이지 -->
+	<!-- 생산계획 -->
+	<select id="getPlanList" parameterType="ProcMoveVO" resultType="ProcMoveVO">
+		SELECT plan_code, 
+				product_code, 
+				f_find_prod_name(product_code) as product_name, 
+				product_lot, 
+				work_count, 
+				work_date, 
+        		f_find_comp_name((select company_code from orders where order_no = detailplan.order_no)) 
+        			as company_name
+		FROM detailPlan
+		WHERE TRUNC(work_date) BETWEEN #{startDate} AND #{endDate} 
+	</select>
+	
+	<!-- 투입자재 -->
+	<select id="getInputMat" parameterType="ProcMoveVO" resultType="ProcMoveVO">
+		SELECT  F_FIND_MAT_NAME( (SELECT distinct material_code 
+									FROM inout 
+									WHERE lot_no = inputMat.material_lot) ) 
+					AS material_name, 
+		        (SELECT distinct material_code FROM inout WHERE lot_no = inputMat.material_lot) 
+		        	AS material_code,
+		        material_lot, 
+		        input_count
+		FROM inputMat
+		WHERE product_lot = #{productLot}
+	</select>
+	
 	<!-- 모달 -->
 	<!-- 자재 리스트 모달 -->
 	<select id="getMatListModal" resultType="SelectListVO" parameterType="SelectListVO">

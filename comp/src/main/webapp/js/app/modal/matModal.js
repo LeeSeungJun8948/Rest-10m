@@ -56,12 +56,13 @@
 			});
 			
 			function select(){
-				$('#materialCode').val(materialCode);
-				$('#materialName').val(materialName);
 				
 				if(forGrid){
 					grid.setValue(rowKey, 'materialCode', materialCode, false);
 					forGrid = false;
+				}else{
+					$('#materialCode').val(materialCode);
+					$('#materialName').val(materialName);
 				}
 				
 				$('#matModal').modal('hide');

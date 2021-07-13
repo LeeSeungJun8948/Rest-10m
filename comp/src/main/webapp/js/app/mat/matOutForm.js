@@ -36,7 +36,10 @@ const grid = new tui.Grid({
 				language: 'ko',
 				format: 'yyyy-MM-dd'
 				}
-			}
+			},
+			validation: {
+            	required: true
+          	}
 		},
 		{
 			header : '자재코드',
@@ -47,6 +50,9 @@ const grid = new tui.Grid({
 			onAfterChange(ev) {
         		setMatInfo(ev);
       		},
+			validation: {
+            	required: true
+          	},
 			relations: [ {
 				targetNames: ['processCode'],
 				listItems({ value }){
@@ -80,13 +86,20 @@ const grid = new tui.Grid({
 			editor:'text',
 			formatter({value}) {
       			return format(value);
-    		}
+    		},
+			validation: {
+				dataType: 'number',
+            	required: true
+          	}
 		}, {
 			header : '자재LOT_NO',
 			name : 'lotNo',
 			width : 150,
 			align: 'center',
-			className: 'white'
+			className: 'white',
+			validation: {
+            	required: true
+          	}
 		}, {
 			header : '출고공정',
 			name : 'processCode',
@@ -99,7 +112,10 @@ const grid = new tui.Grid({
 				options: {
 					listItems: []
             	}
-			}
+			},
+			validation: {
+            	required: true
+          	}
 		}, {
 			header : '자재재고',
 			name : 'stock',
@@ -246,11 +262,65 @@ $("#btnGridDel").on("click", function(ev){
 
 
 $("#btnSave").on("click", function(){
-	grid.request('modifyData');
+	
+	for(var i = 0 ; i < grid.getRowCount() ; i++){
+		
+		if(checkEmpty(i, 'ioDate', '출고일자를 입력하세요.'));
+		else if(checkDate(i, 'ioDate', '출고일자를 확인하세요.'));
+		else if(checkEmpty(i, 'materialCode', '자재코드를 입력하세요.'));
+		else if(checkEmpty(i, 'lotNo', 'LOT를 선택하세요.'));
+		else if(checkEmpty(i, 'ioVolume', '출고량을 입력하세요.'));
+		else if(checkNum(i, 'unitPrice', '출고량을 확인하세요.'));
+		else{
+			if(i == grid.getRowCount()-1)
+				grid.request('modifyData');
+		}
+	}
+	
 });
 
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
+}
+
+
+function checkEmpty(rowKey, columnName, text){
+	if(!checkNull(grid.getValue(rowKey, columnName))){
+		toast(text, 'No.'+grid.getValue(rowKey, 'ioCode'));
+		focus(rowKey, columnName, true);
+		return true;
+	}else
+		return false;
+}
+
+function checkDate(rowKey, columnName, text){
+	var datatimeRegexp = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
+	if(!datatimeRegexp.test(grid.getValue(rowKey, columnName))){
+		toast(text, 'No.'+grid.getValue(rowKey, 'ioCode'));
+		grid.setValue(rowKey, columnName, '', false);
+		focus(rowKey, columnName, true);
+		return true;
+	}else
+		return false;
+}
+
+function checkNum(rowKey, columnName, text){
+	if(isNaN(grid.getValue(rowKey, columnName)) || grid.getValue(rowKey, columnName) < 0){
+		toast(text, 'No.'+grid.getValue(rowKey, 'ioCode'));
+		grid.setValue(rowKey, columnName, '', false);
+		focus(rowKey, columnName, true);
+		return true;
+	}else
+		return false;
+	
+}
+
+function toast(text, title){
+	toastr.options = {
+		closeButton: true,
+		showDuration: "200"
+ 	};
+	toastr.error(text,title);
 }
 
 // 모달
@@ -289,10 +359,14 @@ grid.on('dblclick', function(ev){
 // lot검색 모달 열기(그리드에서)
 grid.on('dblclick', function(ev){
 	if(ev.columnName == 'lotNo'){
-		rowKey = ev.rowKey;
-		materialCode = grid.getValue(rowKey, 'materialCode');
-		$('#matLotModal').modal('show');
-		$('#matLotContent').load("matLotModal.do");
+		if(checkNull(grid.getValue(ev.rowKey,'materialCode'))){
+			rowKey = ev.rowKey;
+			materialCode = grid.getValue(rowKey, 'materialCode');
+			$('#matLotModal').modal('show');
+			$('#matLotContent').load("matLotModal.do");	
+		}else{
+			toast('자재코드를 입력하고 선택하세요', 'No.'+grid.getValue(ev.rowKey, 'ioCode'))			
+		}
 	}
 })
 
