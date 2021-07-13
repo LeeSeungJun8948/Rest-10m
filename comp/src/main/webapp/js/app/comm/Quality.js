@@ -98,7 +98,7 @@ progrid.on('click', (ev)=>{
 			//단건 조회시 input value값 가져오기 
 			$('#productCode').val(data.data.contents.productCode);
 			$('#productName').val(data.data.contents.productName);
-			$('#employeeName').val(data.data.contents.empCode);
+			$('#empCode').val(data.data.contents.empCode);
 			$('#stdNo').val(data.data.contents.stdNo);
 			$('#stdId').val(data.data.contents.stdId);
 			$('#unitNo').val(data.data.contents.unitNo);
@@ -110,6 +110,8 @@ progrid.on('click', (ev)=>{
 			
 			}else if(use == 'N'){
 				$('#useAt').attr("checked", false);
+				$('#useAt').val(use);
+				console.log(use);
 			}
 		
 			if(image != null){
@@ -135,7 +137,7 @@ progrid.on('click', (ev)=>{
 		reader.onload = function(event) {
 			var img = document.getElementById('image');
 			img.setAttribute("src", event.target.result);
-			document.querySelector("div#imagePreview").appendChild(qcimg);
+			document.querySelector("div#imagePreview").appendChild(qcImg);
 		};
 		reader.readAsDataURL(event.target.files[0]);
 	}
@@ -147,37 +149,7 @@ const input = document.querySelector('#qcImg');
 	imgBtn.addEventListener('click', function(event) {
 		input.click();
 	});
-//수정버튼
-$("#btnUdate").on("click", function() {
-		event.preventDefault();
-    
-    	var form = $('#frm')[0]
-   		var data = new FormData(form);
-	
-	$.ajax({
-				
-			type : "POST",
-			enctype: 'multipart/form-data',
-			url : "ajax/updateProdcut.do",
-			data : data,
-			dataType : "json",
-			processData: false,
-     	   	contentType: false,
-       		cache: false,
-			async : false,
-			success : function(data) {
-				if(data == 1){
-					alert('수정 완료');
-					grid.readData(1, null, true);
-				}
-					
-				else
-					alert('수정 실패');
-			},
-			error : function(request, status, error) {
-			}
-		});	
-	});
+
 
 	
 //초기화 버튼
@@ -187,13 +159,7 @@ $('#btnNew').on('click',function(){
 		$('input').val('');
 })
 
-//그리드 추가/업데이트
-$("#btnInsert").on("click", function(){
-		//progrid.request('createData');
-		progrid.request('modifyData', {
-		checkedOnly: true
-		});
-	});
+
 	
 //그리드 리스트 삭제
 $("#btnDelete").on("click",function() {
