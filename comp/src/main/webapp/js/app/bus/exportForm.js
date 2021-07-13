@@ -17,7 +17,7 @@ var dataSourceInput = {
 	api: {
 		readData: { url: 'getExportLot.do', method: 'POST', },
 		modifyData: { url: 'saveExportLot.do', method: 'PUT' },
-  }
+	}
 }
 const grid = new tui.Grid({
 	el: document.getElementById('grid'),
@@ -30,18 +30,21 @@ const grid = new tui.Grid({
 		name: 'productCode',
 		editor: 'text',
 		validation: {
-            required: true
-          },
+			required: true
+		},
 		onAfterChange(ev) {
-        	findProductName(ev);
+			findProductName(ev);
 			valueInput(ev);
-      		}
+		}
 	}, {
 		header: '제품명',
 		name: 'productName',
 		onAfterChange(ev) {
-        	valueInput(ev);
-      		}
+			valueInput(ev);
+		}
+	}, {
+		header: '출고코드',
+		name: 'exportCode',
 	}, {
 		header: '규격',
 		name: 'stdId'
@@ -64,26 +67,33 @@ const grid = new tui.Grid({
 		editor: 'text',
 		validation: {
 			dataType: 'number',
-            required: true
-          },
+			required: true
+		},
 		onAfterChange(ev) {
-        	valueInput(ev);
-      		}
+			valueInput(ev);
+		}
 	}, {
 		header: '현재고',
 		name: 'dayCount'
 	}, {
 		header: '금액',
 		name: 'price',
+		editor: 'text',
+		validation: {
+			dataType: 'number',
+			required: true
+		},
+		onAfterChange(ev) {
+			valueInput(ev);
+		}
 
 	}, {
 		header: '비고',
 		name: 'comments',
 		editor: 'text'
-	},{
-		header:'순번',
+	}, {
+		header: '순번',
 		name: 'deIdx',
-		hidden: true
 	}
 	]
 });
@@ -92,46 +102,43 @@ const gridInput = new tui.Grid({
 	scrollX: false,
 	scrollY: true,
 	data: dataSourceInput,
-	columns: [ {
+	columns: [{
 		header: '제품코드',
 		name: 'productCode'
-		}, {
+	}, {
 		header: '제품명',
 		name: 'productName'
-		}, {
+	}, {
 		header: '제품 LOT',
 		name: 'productLot'
-		}, {
+	}, {
 		header: '출고코드',
 		name: 'exportCode',
-		hidden: true
-		}, {
+	}, {
 		header: '재고량',
 		name: 'productCount',
-		}, {
+	}, {
 		header: '출고량',
 		name: 'exportCount',
 		editor: 'text',
 		validation: {
 			dataType: 'number',
-            required: true
-          },
+			required: true
+		},
 		onAfterChange(ev) {
-        	countSum();
-      		}
-		}, {
+			countSum();
+		}
+	}, {
 		header: '비고',
 		name: 'comments',
-		editor: 'text'	
-		},{
+		editor: 'text'
+	}, {
 		header: 'Lot순번',
 		name: 'lotIdx',
-		hidden: true
-		},{
+	}, {
 		header: '세부기록순번',
 		name: 'deIdx',
-		hidden: true
-		} ]
+	}]
 });
 
 $.fn.serializeObject = function() {
@@ -181,6 +188,8 @@ $('#btnSave').on('click', function() {
 				grid.readData(1, { exportCode: $('#exportCode').val() }, true);
 			}
 		});
+		gridInput.request('modifyData');
+		gridInput.clear();
 		toastr.success("저장되었습니다.");
 	}
 });
@@ -190,7 +199,7 @@ $('#btnDel').on('click', function() {
 	$.ajax({
 		type: 'POST',
 		url: 'deleteExport.do',
-		data: {exportCode: $('#exportCode').val()},
+		data: { exportCode: $('#exportCode').val() },
 		dataType: 'json',
 		success: function() {
 			resetPage();
@@ -257,7 +266,8 @@ grid.on('dblclick', (ev) => {
 		$('#exportCount').val(exportCount);
 		$('#productCode').val(productCode);
 		$('#productName').val(productName);
-		var param = {'productCode': productCode, 'deIdx': deIdx, 'exportCode': exportCode};
+		$('#exportCode').val(exportCode);
+		var param = { 'productCode': productCode, 'deIdx': deIdx, 'exportCode': exportCode };
 		gridInput.readData(1, param, true);
 	}
 });
@@ -267,23 +277,26 @@ function valueInput(ev) {
 	var productCode = grid.getValue(rowKey, 'productCode');
 	var productName = grid.getValue(rowKey, 'productName');
 	var exportCount = grid.getValue(rowKey, 'exportCount');
+	var price = grid.getValue(rowKey, 'price');
 	var deIdx = grid.getValue(rowKey, 'deIdx');
 	var exportCode = grid.getValue(rowKey, 'exportCode');
 	if (deIdx != null) {
 		$('#exportCount').val(exportCount);
 		$('#productCode').val(productCode);
 		$('#productName').val(productName);
+		$('#exportCode').val(exportCode);
+		$('#price').val(price);
 		gridInput.setColumnValues('deIdx', deIdx);
 		gridInput.setColumnValues('exportCode', exportCode);
 	}
 }
 
 // 투입량 합계
-function countSum(){
+function countSum() {
 	var exportCount = gridInput.getColumnValues('exportCount');
 	var sum = 0;
-	for(count of exportCount){
-		if (checkNull(count)){
+	for (count of exportCount) {
+		if (checkNull(count)) {
 			sum += parseInt(count);
 		}
 	}
@@ -307,6 +320,7 @@ function resetPage() {
 		this.reset();
 	});
 	grid.clear();
+	gridInput.clear();
 	$('#exportCode').val('exportCode');
 }
 

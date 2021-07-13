@@ -85,8 +85,10 @@ $(matList).on('click','tr',function(){
 // 입력 / 수정 form 전송
 $('#btnSave').on('click',function(){
 	
-	if(!checkNull($('#materialName').val())){
-		toast('자재명을 입력하세요');
+	if(!checkNull($('#materialCode').val())){
+		toast('자재코드를 입력하세요');
+	}else if(!checkNull($('#materialName').val())){
+		toast('자재명을 입력하세요.');
 	}else if(!checkNull($('#matNo').val())){
 		toast('자재구분을 선택하세요.	');
 	}else if(!checkNull($('#unitNo').val())){
@@ -116,7 +118,7 @@ $('#btnSave').on('click',function(){
 function toast(text){
 	toastr.options = {
 		closeButton: true,
-		showDuration: "200"
+		showDuration: "500"
  	};
 	toastr.error(text);
 }

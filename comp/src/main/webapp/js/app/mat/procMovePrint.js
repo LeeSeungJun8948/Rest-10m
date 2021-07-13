@@ -20,7 +20,7 @@ const planGrid = new tui.Grid({
 	columns : [ 
 		{
 			header : '생산계획코드',
-			name : 'planCode',
+			name : 'prorCode',
 			width : 120,
 			align: 'center'
 		},
@@ -41,7 +41,7 @@ const planGrid = new tui.Grid({
 
 		}, {
 			header : '지시량',
-			name : 'workCount',
+			name : 'prorCount',
 			align: 'center'
 		}, {
 			header : '작업일자',
@@ -89,22 +89,25 @@ const procGrid = new tui.Grid({
 	bodyHeight: 250,
 	columns : [ 
 		{
-			header : '자재명',
-			name : 'materialName',
+			header : '순번',
+			name : 'idx',
+			align: 'center',
+			width: 80
+		},
+		{
+			header : '공정명',
+			name : 'processName',
 			align: 'center'
 		},
 		{
-			header : '자재LOT',
-			name : 'materialLot',
+			header : '작업번호',
+			name : 'workCode',
 			align: 'center'
 		},
 		{
-			header : '투입량',
-			name : 'inputCount',
-			align: 'right',
-			formatter({value}) {
-      			return format(value);
-    		}
+			header : '진행',
+			name : 'status',
+			align: 'center'
 		}
 	]
 });
@@ -122,9 +125,10 @@ function format(value){
 	});
 })(jQuery);
 
+var rowKey;
 
 planGrid.on('click',function(ev){
-	
+	rowKey = ev.rowKey;
 	inputGrid.resetData([],{});
 	
 	$.ajax({
@@ -134,9 +138,7 @@ planGrid.on('click',function(ev){
 		dataType : "json",
 		async : false,
 		success : function(data) {
-			console.log(data);
 			for(var i = 0 ; i < data.length ; i++){
-				console.log(data[i].materialLot)
 				newRowData = {
 					'materialName' : data[i].materialName, 
 					'materialLot' : data[i].materialLot,
@@ -151,203 +153,68 @@ planGrid.on('click',function(ev){
 		error : function() {
 		}
 	});		
-});
-
-/**
-const adjustDataSource = {
-	api : {
-		readData: {url: 'ajax/matAdjustNull.do', method: 'GET'},
-	},
-	contentType: 'application/json'
-};
 	
-const inputGrid = new tui.Grid({
-	el : document.getElementById('inputGrid'),
-	data : adjustDataSource,
-	rowHeaders: ['checkbox'],
-	scrollX : false,
-	scrollY : true,
-	bodyHeight: 300,
-	columns : [ 
-		{
-			header : '정산코드',
-			name : 'ioCode',
-			align: 'center'
+	procGrid.resetData([],{});
+	
+	$.ajax({
+		type : "get",
+		url : "ajax/getProcStatus.do",
+		data: {"productLot" : planGrid.getValue(ev.rowKey, 'productLot'),
+				"productCode" : planGrid.getValue(ev.rowKey, 'productCode')},
+		dataType : "json",
+		async : false,
+		success : function(data) {
+			for(var i = 0 ; i < data.length ; i++){
+				newRowData = {
+					'idx' : data[i].idx, 
+					'processName' : data[i].processName,
+					'workCode' : data[i].workCode,
+					'status' : data[i].status
+				};
+				procGrid.appendRow(newRowData, {
+					at : procGrid.getRowCount(),
+					focus : true
+				});
+			}
 		},
-		{
-			header : '자재코드',
-			name : 'materialCode',
-			align: 'center'
-		},
-		{
-			header : '자재명',
-			name : 'materialName',
-			align: 'center'
-		},
-		{
-			header : 'LOT',
-			name : 'lotNo',
-			align: 'center'
-		}, {
-			header : '단가',
-			name : 'unitPrice',
-			align: 'right',
-			formatter({value}) {
-      			return format(value);
-    		}
-		}, {
-			header : '실재고',
-			name : 'realLotPlan',
-			width : 120,
-			align: 'right',
-			editor: 'text',
-			className: 'red',
-			onAfterChange(ev) {
-        		setIoVolume(ev);
-      		},
-			validation: {
-				dataType: 'number',
-            	required: true
-          	}
-		}, {
-			header : '현재고',
-			name : 'lotPlan',
-			width : 120,
-			align: 'right',
-			formatter({value}) {
-      			return format(value);
-    		}
-		}, {
-			header : '조정수량',
-			name : 'ioVolume',
-			width : 120,
-			align: 'right',
-			formatter({value}) {
-      			return format(value);
-    		}
-		},  {
-			header : '정산',
-			name : 'inoutNo',
-			align: 'center',
-			formatter: 'listItemText',
-			className: 'blackText',
-			editor: {
-                type: 'select',
-				options: {
-					 listItems: [
-	                    { text: '정산입고', value: '03' },
-	                    { text: '정산출고', value: '04' },
-	                    { text: '', value: '' }
-                	]
-				}
-            }
-		}, {
-			header : '단위',
-			name : 'unitNo',
-			align: 'center',
-			width : 80
-		}, {
-			header : '정산일',
-			name : 'ioDate',
-			align: 'center',
-			editor: {
-				type: 'datePicker',
-				options: {
-				language: 'ko',
-				format: 'yyyy-MM-dd'
-				}
-			},
-			validation: {
-				dataType: 'number',
-            	required: true
-          	}
-		}, {
-			header : '비고',
-			name : 'comments',
-			align: 'center',
-			editor: 'text'
-		}  
-	]
-});
-
-inputGrid.disableColumn('inoutNo');
-
-function format(value){
-	value = value * 1;
-	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
-
-
-var newIoCode;
-
-
-
-function setIoVolume(ev){
-	
-	var realLotPlan = inputGrid.getValue(ev.rowKey, 'realLotPlan');
-	var lotPlan = inputGrid.getValue(ev.rowKey, 'lotPlan');
-	
-	var ioVolume = realLotPlan - lotPlan;
-	
-	if(ioVolume > 0){
-		inputGrid.setValue(ev.rowKey, 'inoutNo', '03', false);
-		inputGrid.setValue(ev.rowKey, 'ioVolume', ioVolume, false);
-	}else if(ioVolume < 0){
-		inputGrid.setValue(ev.rowKey, 'inoutNo', '04', false);
-		inputGrid.setValue(ev.rowKey, 'ioVolume', ioVolume*-1, false);
-	}else{
-		inputGrid.setValue(ev.rowKey, 'inoutNo', '', false);
-		inputGrid.setValue(ev.rowKey, 'ioVolume', ioVolume, false);
-	}
-}
-
-$("#btnGridDel").on("click", function(ev){
-	inputGrid.removeCheckedRows(false);
-});
-
-$("#btnSave").on("click", function(){
-	inputGrid.request('modifyData');
-	
-	(function($) {
-		if($('#ckExceptZeroPlan').is(":checked")){
-			$('#exceptZeroPlan').val($('#ckExceptZeroPlan').val());
-		}else{
-			$('#exceptZeroPlan').val('');
+		error : function() {
 		}
-
-		var param = $('#searchFrm').serializeObject();
-		console.log(param)
-		planGrid.readData(1, param, true);
-	})(jQuery);
+	});		
 	
-	alert('작성완료');	
-	inputGrid.resetData([],{});
 });
 
-// 모달
-var forGrid = false;
-// 자재 돋보기
-$("#btnMatModal").on("click", function(e) {
-    $('#matContent').load("matModal.do");
+$('#btnPrint').on('click',  function(){
+	
+	if(checkNull(rowKey)){
+		var url = 'printProcessMove.do?productLot='+ planGrid.getValue(rowKey, 'productLot')
+				+ "&productName=" + planGrid.getValue(rowKey, 'productName')
+				+ "&companyName=" + planGrid.getValue(rowKey, 'companyName')
+				+ "&prorCount=" + planGrid.getValue(rowKey, 'prorCount')
+				+ "&prorCode=" + planGrid.getValue(rowKey, 'prorCode');
+				
+		var _width = '550';
+	    var _height = '400';
+	 
+	    var _left = Math.ceil(( window.screen.width - _width )/2);
+	    var _top = Math.ceil(( window.screen.height - _height )/2); 
+	
+		window.open(url,'공정이동표', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top); 
+	}else{
+		toast('생산계획을 선택해주세요.',null);
+	}
+	
 });
 
-// 자재코드 입력창
-$('#materialCode').on('click', function(){
-	$('#matModal').modal('show');
-	$('#matContent').load("matModal.do");
-});
 
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }	
 
-function getFormatDate(date){
-    var year = date.getFullYear();              //yyyy
-    var month = (1 + date.getMonth());          //M
-    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
-    var day = date.getDate();                   //d
-    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-    return  year + '-' + month + '-' + day;
+function toast(text, title){
+	toastr.options = {
+		closeButton: true,
+		showDuration: "500"
+ 	};
+	toastr.error(text,title);
 }
 
- */

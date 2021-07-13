@@ -60,6 +60,8 @@ public interface MaterialService {
 	
 	public List<ProcMoveVO> getInputMat(ProcMoveVO vo);
 	
+	public List<ProcMoveVO> getProcStatus(ProcMoveVO vo);
+	
 	// 모달
 	public List<SelectListVO> getMatListModal(SelectListVO vo); // 자재검색 모달 자재리스트
 	

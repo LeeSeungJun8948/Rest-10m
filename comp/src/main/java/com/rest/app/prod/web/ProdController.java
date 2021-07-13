@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rest.app.mat.vo.SelectListVO;
 import com.rest.app.prod.service.ProdService;
 import com.rest.app.prod.vo.DetailPlanVO;
 import com.rest.app.prod.vo.DetailProrderVO;
@@ -138,6 +139,24 @@ public class ProdController {
 		return svc.findProductName(productCode);
 	}
 
+	// 생산계획 조회 페이지
+	@RequestMapping("viewPlan.do")
+	public String viewPlan() {
+		return "prod/viewPlan.page";
+	}
+
+	// 생산계획조회 - 검색
+	@RequestMapping("viewPlanSearch.do")
+	@ResponseBody
+	public Map<String, Object> viewPlanSearch(@RequestBody Map<String, Object> param) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		datas.put("contents", svc.viewPlanSearch(param));
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
+	}
+
 	// 생산지시관리 페이지
 	@RequestMapping("manageProrder.do")
 	public String manageProrder() {
@@ -148,6 +167,24 @@ public class ProdController {
 	@RequestMapping("prorModal.do")
 	public String prorModal() {
 		return "app/prod/prorModal";
+	}
+
+	// 생산지시 조회 페이지
+	@RequestMapping("viewProrder.do")
+	public String viewProrder() {
+		return "prod/viewProrder.page";
+	}
+
+	// 생산지시조회 - 검색
+	@RequestMapping("viewProrderSearch.do")
+	@ResponseBody
+	public Map<String, Object> viewProrderSearch(@RequestBody Map<String, Object> param) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		datas.put("contents", svc.viewProrderSearch(param));
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
 	}
 
 	// 모달 생산지시검색
@@ -383,6 +420,44 @@ public class ProdController {
 		svc.deleteWork(workCode);
 		data.put("result", true);
 		data.put("check", "save");
+		return data;
+	}
+
+	// 업체검색 모달
+	@RequestMapping("compSearchModal.do")
+	public String compSearchModal() {
+		return "app/prod/compSearchModal";
+	}
+
+	// 업체검색
+	@RequestMapping("ajax/compSearchModal.do")
+	@ResponseBody
+	public Map<String, Object> ajaxCompSearchModal(SelectListVO vo) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+
+		datas.put("contents", svc.ajaxCompSearchModal(vo));
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
+	}
+
+	// 제품검색 모달
+	@RequestMapping("prodSearchModal.do")
+	public String prodSearchModal() {
+		return "app/prod/prodSearchModal";
+	}
+
+	// 제품검색
+	@RequestMapping("ajax/prodSearchModal.do")
+	@ResponseBody
+	public Map<String, Object> ajaxProdSearchModal(SelectListVO vo) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+
+		datas.put("contents", svc.ajaxProdSearchModal(vo));
+		data.put("result", true);
+		data.put("data", datas);
 		return data;
 	}
 }
