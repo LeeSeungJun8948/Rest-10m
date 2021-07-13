@@ -37,4 +37,8 @@
 			COMPANY_CODE=#{companyCode}, COST=#{cost}, ETC=#{etc}
 		where repair_code=#{repairCode}
 	</update>
+	
+	<select id="getRepCode" resultType="int">
+    	select max(repair_code) + 1 as repair_code from repair
+    </select>
 </mapper>

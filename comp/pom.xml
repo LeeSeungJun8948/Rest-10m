@@ -34,7 +34,8 @@
 		</repository>
 		<repository>
 			<id>egovframe</id>
-			<url>http://maven.egovframe.go.kr/maven/</url>
+			<!-- <url>http://maven.egovframe.go.kr/maven/</url> -->
+			<url>https://repo.maven.apache.org/maven2/</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -42,7 +43,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<repository>
+<!-- 		<repository>
 			<id>egovframe_old1</id>
 			<url>http://maven.egovframe.kr:8080/maven/</url>
 			<releases>
@@ -61,7 +62,7 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</repository>
+		</repository> -->
 	</repositories>
 
 	<dependencies>
@@ -470,15 +471,15 @@
 			<version>9.4.1208</version>
 		</dependency>
 
-		<dependency>
+<!-- 		<dependency>
 			<groupId>ojdbc</groupId>
 			<artifactId>ojdbc</artifactId>
 			<version>6-11</version>
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ojdbc6-11.2.0.3.jar</systemPath>
-		</dependency>
+		</dependency> -->
 
-		<dependency>
+	<!-- 	<dependency>
 			<groupId>altibase</groupId>
 			<artifactId>altibase-jdbc-driver</artifactId>
 			<version>7.1.0</version>
@@ -500,9 +501,9 @@
 			<version>10.2</version>
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/JDBC-10.2-latest-cubrid.jar</systemPath>
-		</dependency>
+		</dependency> -->
 
-		<dependency>
+	<!-- 	<dependency>
 			<groupId>kr.go.mgov</groupId>
 			<artifactId>smeapi</artifactId>
 			<version>2.7</version>
@@ -525,7 +526,7 @@
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/libgpkiapi_jni-1.4.0.0.jar</systemPath>
 		</dependency>
-
+ -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
@@ -575,7 +576,7 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<directory>${basedir}/target</directory>
-		<finalName>${artifactId}-${version}</finalName>
+		<finalName>${project.artifactId}-${project.version}</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
