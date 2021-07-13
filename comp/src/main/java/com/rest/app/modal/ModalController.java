@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.mat.service.MaterialService;
 import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.SelectListVO;
@@ -153,6 +152,4 @@ public class ModalController {
 	public String QcModal() {
 		return "app/modal/qcModal";
 	}
-
-
 }

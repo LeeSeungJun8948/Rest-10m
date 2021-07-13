@@ -19,4 +19,8 @@ public class DetailPlanVO {
 	int workCount;
 	String comments;
 	String planDate;
+	int companyCode;
+	String companyName;
+	String searchDtS;
+	String searchDtE;
 }

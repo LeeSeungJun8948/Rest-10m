@@ -46,7 +46,7 @@
 			(SELECT order_count - plan_count FROM orders WHERE order_no = d.order_no) unplan_count, 
       		(SELECT TO_CHAR(out_date, 'YYYY-MM-DD') FROM orders WHERE order_no = d.order_no) out_date
 		FROM detailplan d, product p 
-		WHERE plan_code = #{planCode}
+		WHERE d.plan_code = #{planCode}
 		AND d.product_code = p.product_code
 		ORDER BY d.deplan_idx
 	</select>	
@@ -68,6 +68,27 @@
 	<delete id="deleteAllDetailPlan">
 		DELETE FROM detailplan WHERE plan_code = #{planCode}
 	</delete>
+	<select id="viewPlanSearch" resultType="DetailPlanVO">
+		SELECT TO_CHAR(p.plan_date, 'YYYY-MM-DD') plan_date, d.product_code, pr.product_name,
+		    d.order_no, c.company_name, TO_CHAR(o.out_date, 'YYYY-MM-DD') out_date,
+		    o.order_count, o.plan_count, TO_CHAR(d.work_date,'YYYY-MM-DD') work_date, d.comments
+		FROM plan p, detailplan d, product pr, company c, orders o
+		WHERE d.product_code = pr.product_code
+		  AND p.plan_code = d.plan_code
+		  AND d.order_no = o.order_no
+		  AND o.company_code = c.company_code
+		  <if test="searchDtS != null and searchDtS != '' and searchDtE != null and searchDtE != ''">
+		  AND p.plan_date BETWEEN TO_DATE(#{searchDtS}, 'YYYY-MM-DD') 
+		  AND TO_DATE(#{searchDtE}, 'YYYY-MM-DD')
+		  </if>
+		  <if test="companyCode != null and companyCode != ''">
+		  AND o.company_code = #{companyCode}
+		  </if>
+		  <if test="productCode != null and productCode != ''">
+		  AND pr.product_code = #{productCode}
+		  </if>
+		ORDER BY p.plan_date
+	</select>
 
 	<!-- 미완료계획 읽기 -->
 	<select id="getUnfinPlans" resultType="DetailPlanVO">
@@ -145,6 +166,49 @@
 	</delete>
 	<select id="countDetailPror" resultType="int">
 		SELECT count(*)+1 FROM detailprorder
+	</select>
+	<select id="viewProrderSearch" resultType="DetailProrderVO">
+		SELECT TO_CHAR(p.pror_date, 'YYYY-MM-DD') pror_date, d.product_code, pr.product_name,
+		  o.order_no, c.company_name, TO_CHAR(o.out_date,'YYYY-MM-DD') out_date,
+		  o.order_count, d.pror_count, TO_CHAR(d.work_date,'YYYY-MM-DD') work_date, d.comments
+		FROM detailprorder d, prorder p, product pr, orders o, company c, detailplan dp
+		WHERE o.company_code = c.company_code
+		  AND d.deplan_idx = dp.deplan_idx
+		  AND dp.order_no = o.order_no
+		  AND d.product_code = pr.product_code
+		  AND d.pror_code = p.pror_code
+		 <if test="searchDtS != null and searchDtS != '' and searchDtE != null and searchDtE != ''">
+		  AND p.pror_date BETWEEN TO_DATE(#{searchDtS}, 'YYYY-MM-DD') 
+		  AND TO_DATE(#{searchDtE}, 'YYYY-MM-DD')
+		  </if>
+		 <if test="companyCode != null and companyCode != ''">
+		  AND o.company_code = #{companyCode}
+		  </if>
+		  <if test="productCode != null and productCode != ''">
+		  AND pr.product_code = #{productCode}
+		  </if>
+		ORDER BY p.pror_date
+	</select>
+	
+	<select id="ajaxProdSearchModal" parameterType="SelectListVO" resultType="SelectListVO">
+		SELECT DISTINCT product_code, product_name 
+		FROM product
+		<where>
+			<if test="keyword != null and keyword !=''">
+				${searchCondition} like '%'||#{keyword}||'%'
+			</if>
+		</where>
+		ORDER BY product_code
+	</select>
+	<select id="ajaxCompSearchModal" parameterType="SelectListVO" resultType="SelectListVO">
+		SELECT DISTINCT company_code, company_name 
+		FROM company
+		<where>
+			<if test="keyword != null and keyword !=''">
+				${searchCondition} like '%'||#{keyword}||'%'
+			</if>
+		</where>
+		ORDER BY company_code
 	</select>
 	
 	<!-- 제품명찾기 -->

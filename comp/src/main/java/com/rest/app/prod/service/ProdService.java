@@ -6,6 +6,7 @@ import java.util.Map;
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.comm.vo.EmployeeVO;
 import com.rest.app.comm.vo.ErrorVO;
+import com.rest.app.mat.vo.SelectListVO;
 import com.rest.app.prod.vo.DetailPlanVO;
 import com.rest.app.prod.vo.DetailProrderVO;
 import com.rest.app.prod.vo.InputMatVO;
@@ -17,6 +18,7 @@ public interface ProdService {
 	List<OrdersVO> getUnplanOrders(Map<String, Object> param);
 	List<PlanVO> searchPlan(Map<String, Object> param);
 	List<DetailPlanVO> getDetailPlan(Map<String, Object> param);
+	List<DetailPlanVO> viewPlanSearch(Map<String, Object> param);
 	int insertPlan(PlanVO vo); 
 	int updatePlan(PlanVO vo);
 	int deletePlan(String planCode);
@@ -27,6 +29,7 @@ public interface ProdService {
 	List<PlanVO> getUnfinPlans(Map<String, Object> param);
 	List<ProrderVO> searchProrder(Map<String, Object> param);
 	List<DetailProrderVO> getDetailProrder(Map<String, Object> param);
+	List<DetailProrderVO> viewProrderSearch(Map<String, Object> param);
 	int insertProrder(ProrderVO vo); 
 	int updateProrder(ProrderVO vo);
 	int deleteProrder(String prorCode);
@@ -47,4 +50,6 @@ public interface ProdService {
 	int deleteWork(String workCode);
 	List<EmployeeVO> searchEmp(Map<String, Object> param);
 	List<ErrorVO> searchError(Map<String, Object> param);
+	List<SelectListVO> ajaxProdSearchModal(SelectListVO vo);
+	List<SelectListVO> ajaxCompSearchModal(SelectListVO vo);
 }
