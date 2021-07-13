@@ -59,7 +59,11 @@ const adjustGrid = new tui.Grid({
 			editor: 'text',
 			onAfterChange(ev) {
         		setInoutNo(ev);
-      		}
+      		},
+			validation: {
+				dataType: 'number',
+            	required: true
+          	}
 		},  {
 			header : '정산',
 			name : 'inoutNo',
@@ -108,7 +112,10 @@ const adjustGrid = new tui.Grid({
 				language: 'ko',
 				format: 'yyyy-MM-dd'
 				}
-			}
+			},
+			validation: {
+            	required: true
+          	}
 		}, {
 			header : '비고',
 			name : 'comments',
@@ -197,9 +204,58 @@ $("#btnGridDel").on("click", function(ev){
 });
 
 $("#btnSave").on("click", function(){
-	adjustGrid.request('modifyData');
+
+	for(var i = 0 ; i < adjustGrid.getRowCount() ; i++){
+		if(checkEmpty(i, 'ioDate', '정산일자를 입력하세요.'));
+		else if(checkDate(i, 'ioDate', '정산일자를 확인하세요.'));
+		else if(checkEmpty(i, 'ioVolume', '정산량을 확인하세요.'));
+		else if(checkNum(i, 'ioVolume', '정산량을 확인하세요.'));
+		else{
+			if(i == adjustGrid.getRowCount()-1)
+				adjustGrid.request('modifyData');
+		}
+	}
+	
 });
 
+function checkEmpty(rowKey, columnName, text){
+	if(!checkNull(adjustGrid.getValue(rowKey, columnName))){
+		toast(text, 'No.'+adjustGrid.getValue(rowKey, 'ioCode'));
+		focus(rowKey, columnName, true);
+		return true;
+	}else
+		return false;
+}
+
+function checkDate(rowKey, columnName, text){
+	var datatimeRegexp = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
+	if(!datatimeRegexp.test(adjustGrid.getValue(rowKey, columnName))){
+		toast(text, 'No.'+adjustGrid.getValue(rowKey, 'ioCode'));
+		adjustGrid.setValue(rowKey, columnName, '', false);
+		focus(rowKey, columnName, true);
+		return true;
+	}else
+		return false;
+}
+
+function checkNum(rowKey, columnName, text){
+	if(isNaN(adjustGrid.getValue(rowKey, columnName)) || adjustGrid.getValue(rowKey, columnName) < 0){
+		toast(text, 'No.'+adjustGrid.getValue(rowKey, 'ioCode'));
+		adjustGrid.setValue(rowKey, columnName, '', false);
+		focus(rowKey, columnName, true);
+		return true;
+	}else
+		return false;
+	
+}
+
+function toast(text, title){
+	toastr.options = {
+		closeButton: true,
+		showDuration: "200"
+ 	};
+	toastr.error(text,title);
+}
 
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';

@@ -25,15 +25,15 @@
 					</tr>
 					<tr>
 						<th>고객사코드</th>
-						<td><input type="text" id="companyCode"
-							name="companyCode" /> <button id="btnCompModal" type="button" class="btn btn-toggle"
+						<td><input type="text" id="companyCode" name="companyCode" />
+							<button id="btnCompModal" type="button" class="btn btn-toggle"
 								data-remote="false" data-toggle="modal" data-target="#compModal">
 								<img alt="btn_search"
 									src="<c:url value='/images/app/all/btn_search.png'/>">
 							</button></td>
 						<th>고객사</th>
-						<td><input type="text" id="companyName"
-							name="companyName" readonly="true" /></td>
+						<td><input type="text" id="companyName" name="companyName"
+							readonly="true" /></td>
 					</tr>
 					<tr>
 						<th>특기사항</th>
@@ -60,7 +60,34 @@
 	<button type="button" class="btn btn-primary" id="btnGridDel">삭제</button>
 </div>
 <div class="col-lg-12">
-	<div id="grid" ></div>
+	<div id="grid"></div>
+</div>
+<div>
+	<form>
+		<div class="table">
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>제품코드</th>
+						<td><input type="text" class="form-control" id="productCode"
+							name="productCode" readonly="true"></td>
+						<th>제품명</th>
+						<td><input type="text" class="form-control" id="productName"
+							name="productName" readonly="true"></td>
+						<th>출고량</th>
+						<td><input type="text" class="form-control" id="exportCount"
+							name="exportCount" readonly="true"></td>
+						<th>총 출고량</th>
+						<td><input type="text" class="form-control" id="totalCount"
+							name="totalCount" readonly="true"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</form>
+</div>
+<div>
+	<div id="gridInput" />
 </div>
 <div class="modal fade" id="compModal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
@@ -76,4 +103,5 @@
 	</div>
 </div>
 
+<link href="${pageContext.request.contextPath}/css/app/prod/prod.css" rel="stylesheet">
 <script type="text/javascript" src="js/app/bus/exportForm.js"></script>

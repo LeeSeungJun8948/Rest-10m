@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import com.rest.app.bus.service.BusinessService;
 import com.rest.app.bus.vo.CompanyVO;
 import com.rest.app.bus.vo.DetailExportVO;
+import com.rest.app.bus.vo.ExportLotVO;
 import com.rest.app.bus.vo.ExportVO;
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.comm.vo.BomVO;
+import com.rest.app.prod.vo.DetailProrderVO;
 
 
 @Service("businessService")
@@ -57,6 +59,7 @@ public class BusinessServiceImpl implements BusinessService {
 
 	@Override
 	public int insertExport(ExportVO vo) {
+		vo.setExportCode(makeExportCode(vo));
 		return mapper.insertExport(vo);
 		
 	}
@@ -99,6 +102,58 @@ public class BusinessServiceImpl implements BusinessService {
 		// TODO Auto-generated method stub
 		return mapper.searchExport(param);
 	}
+
+
+	@Override
+	public List<DetailExportVO> getDetailExport(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return mapper.getDetailExport(param);
+	}
+
+	public int countExportCode() {
+		return mapper.countExportCode();
+	}
+	public String makeExportCode(ExportVO vo) {
+		String exportCode = "EX-" + vo.getExportDate().replace("-", "").substring(2) + "-"
+				+ String.valueOf(countExportCode());
+		return exportCode;
+	}
+
+
+	@Override
+	public int insertExportLot(ExportLotVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.insertExportLot(vo);
+	}
+
+
+	@Override
+	public int updateExportLot(ExportLotVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.updateExportLot(vo);
+	}
+
+
+	@Override
+	public int deleteExportLot(int lotIdx) {
+		// TODO Auto-generated method stub
+		return mapper.deleteExportLot(lotIdx);
+	}
+
+
+	@Override
+	public int deleteAllExportLot(String exportCode) {
+		// TODO Auto-generated method stub
+		return mapper.deleteAllExportLot(exportCode);
+	}
+
+
+	@Override
+	public List<ExportLotVO> readExportLot(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	
 	

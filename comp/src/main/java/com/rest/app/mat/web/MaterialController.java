@@ -20,6 +20,7 @@ import com.rest.app.mat.service.impl.MaterialMapper;
 import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
+import com.rest.app.mat.vo.ProcMoveVO;
 import com.rest.app.mat.vo.SelectListVO;
 
 import lombok.Data;
@@ -105,6 +106,7 @@ public class MaterialController {
 		Map<String,Object> data = new HashMap<>();
 		
 		data.put("result", true);
+		
 		datas.put("contents", dao.getMatInoutList(vo));
 		data.put("data", datas);
 		
@@ -198,7 +200,7 @@ public class MaterialController {
 		return data;
 	}
 	
-	// 더미
+	// 그리드에 널값 넣기
 	@RequestMapping("/ajax/matAdjustNull.do")
 	@ResponseBody
 	public Map<String, Object> ajaxMatAdjust() {
@@ -279,7 +281,33 @@ public class MaterialController {
 		return "mat/matOutForm.page";
 	}
 	
+	@RequestMapping("procMovePrint.do")
+	public String procMovePrint(Model model) {
+		return "mat/procMovePrint.page";
+	}
+	
+	@RequestMapping("/ajax/planGrid.do")
+	@ResponseBody
+	public Map<String, Object> ajaxPlanGrid(ProcMoveVO vo) {
+		
+		Map<String,Object> datas = new HashMap<>();
+		Map<String,Object> data = new HashMap<>();
+		
+		data.put("result", true);
+		datas.put("contents", dao.getPlanList(vo));
+		data.put("data", datas);
+		
+		return data;
+	}
+	
+	
+	@RequestMapping("/ajax/getInputMatList.do")
+	@ResponseBody
+	public List<ProcMoveVO> ajaxGetInputMatList(ProcMoveVO vo) {
+		return dao.getInputMat(vo);
+	}
 }
+
 
 @Data
 class GridData {	

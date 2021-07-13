@@ -1,4 +1,4 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
@@ -108,6 +108,8 @@
 	</form>
 </div>
 
+<!-- 모달 -->
+<!-- 자재검색 -->
 <div class="modal fade" id="matModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" id="matContent" align="center">
@@ -115,6 +117,7 @@
 	</div>
 </div>
 
+<!-- 업체검색 -->
 <div class="modal fade" id="compModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" id="compContent" align="center">
@@ -122,6 +125,7 @@
 	</div>
 </div>
 
+<!-- 발주조회 -->
 <div class="modal fade" id="inorderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content" id="inorderContent" align="center">

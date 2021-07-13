@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.rest.app.bus.vo.CompanyVO;
 import com.rest.app.bus.vo.DetailExportVO;
+import com.rest.app.bus.vo.ExportLotVO;
 import com.rest.app.bus.vo.ExportVO;
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.comm.vo.BomVO;
@@ -34,12 +35,20 @@ public interface BusinessMapper {
 	
 	public int deleteExport(String exportCode);
 	
-	DetailExportVO getDetailExport(Map<String, Object> param);
+	public List<DetailExportVO> getDetailExport(Map<String, Object> param);//세부기록 
+	
 	int insertDetailExport(DetailExportVO vo); 
 	int updateDetailExport(DetailExportVO vo);
 	int deleteDetailExport(int idx);
 	int deleteAllDetailExport(String exportCode);
+	
+	int countExportCode();
 
+	int insertExportLot(ExportLotVO vo); 
+	int updateExportLot(ExportLotVO vo);
+	int deleteExportLot(int lotIdx);
+	int deleteAllExportLot(String exportCode);
+	List<ExportLotVO> readExportLot(Map<String, Object> param); 
 
 	
 }
