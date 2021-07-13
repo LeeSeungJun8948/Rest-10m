@@ -184,217 +184,37 @@ planGrid.on('click',function(ev){
 });
 
 $('#btnPrint').on('click',  function(){
-	var url = 'printProcessMove.do?productLot='+ planGrid.getValue(rowKey, 'productLot')
+	
+	if(checkNull(rowKey)){
+		var url = 'printProcessMove.do?productLot='+ planGrid.getValue(rowKey, 'productLot')
 				+ "&productName=" + planGrid.getValue(rowKey, 'productName')
 				+ "&companyName=" + planGrid.getValue(rowKey, 'companyName')
 				+ "&prorCount=" + planGrid.getValue(rowKey, 'prorCount')
 				+ "&prorCode=" + planGrid.getValue(rowKey, 'prorCode');
 				
-	var _width = '550';
-    var _height = '400';
- 
-    var _left = Math.ceil(( window.screen.width - _width )/2);
-    var _top = Math.ceil(( window.screen.height - _height )/2); 
-
-	window.open(url,'공정이동표', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top); 
+		var _width = '550';
+	    var _height = '400';
+	 
+	    var _left = Math.ceil(( window.screen.width - _width )/2);
+	    var _top = Math.ceil(( window.screen.height - _height )/2); 
 	
-});
-
-/**
-const adjustDataSource = {
-	api : {
-		readData: {url: 'ajax/matAdjustNull.do', method: 'GET'},
-	},
-	contentType: 'application/json'
-};
-	
-const inputGrid = new tui.Grid({
-	el : document.getElementById('inputGrid'),
-	data : adjustDataSource,
-	rowHeaders: ['checkbox'],
-	scrollX : false,
-	scrollY : true,
-	bodyHeight: 300,
-	columns : [ 
-		{
-			header : '정산코드',
-			name : 'ioCode',
-			align: 'center'
-		},
-		{
-			header : '자재코드',
-			name : 'materialCode',
-			align: 'center'
-		},
-		{
-			header : '자재명',
-			name : 'materialName',
-			align: 'center'
-		},
-		{
-			header : 'LOT',
-			name : 'lotNo',
-			align: 'center'
-		}, {
-			header : '단가',
-			name : 'unitPrice',
-			align: 'right',
-			formatter({value}) {
-      			return format(value);
-    		}
-		}, {
-			header : '실재고',
-			name : 'realLotPlan',
-			width : 120,
-			align: 'right',
-			editor: 'text',
-			className: 'red',
-			onAfterChange(ev) {
-        		setIoVolume(ev);
-      		},
-			validation: {
-				dataType: 'number',
-            	required: true
-          	}
-		}, {
-			header : '현재고',
-			name : 'lotPlan',
-			width : 120,
-			align: 'right',
-			formatter({value}) {
-      			return format(value);
-    		}
-		}, {
-			header : '조정수량',
-			name : 'ioVolume',
-			width : 120,
-			align: 'right',
-			formatter({value}) {
-      			return format(value);
-    		}
-		},  {
-			header : '정산',
-			name : 'inoutNo',
-			align: 'center',
-			formatter: 'listItemText',
-			className: 'blackText',
-			editor: {
-                type: 'select',
-				options: {
-					 listItems: [
-	                    { text: '정산입고', value: '03' },
-	                    { text: '정산출고', value: '04' },
-	                    { text: '', value: '' }
-                	]
-				}
-            }
-		}, {
-			header : '단위',
-			name : 'unitNo',
-			align: 'center',
-			width : 80
-		}, {
-			header : '정산일',
-			name : 'ioDate',
-			align: 'center',
-			editor: {
-				type: 'datePicker',
-				options: {
-				language: 'ko',
-				format: 'yyyy-MM-dd'
-				}
-			},
-			validation: {
-				dataType: 'number',
-            	required: true
-          	}
-		}, {
-			header : '비고',
-			name : 'comments',
-			align: 'center',
-			editor: 'text'
-		}  
-	]
-});
-
-inputGrid.disableColumn('inoutNo');
-
-function format(value){
-	value = value * 1;
-	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
-
-
-var newIoCode;
-
-
-
-function setIoVolume(ev){
-	
-	var realLotPlan = inputGrid.getValue(ev.rowKey, 'realLotPlan');
-	var lotPlan = inputGrid.getValue(ev.rowKey, 'lotPlan');
-	
-	var ioVolume = realLotPlan - lotPlan;
-	
-	if(ioVolume > 0){
-		inputGrid.setValue(ev.rowKey, 'inoutNo', '03', false);
-		inputGrid.setValue(ev.rowKey, 'ioVolume', ioVolume, false);
-	}else if(ioVolume < 0){
-		inputGrid.setValue(ev.rowKey, 'inoutNo', '04', false);
-		inputGrid.setValue(ev.rowKey, 'ioVolume', ioVolume*-1, false);
+		window.open(url,'공정이동표', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top); 
 	}else{
-		inputGrid.setValue(ev.rowKey, 'inoutNo', '', false);
-		inputGrid.setValue(ev.rowKey, 'ioVolume', ioVolume, false);
+		toast('생산계획을 선택해주세요.',null);
 	}
-}
-
-$("#btnGridDel").on("click", function(ev){
-	inputGrid.removeCheckedRows(false);
-});
-
-$("#btnSave").on("click", function(){
-	inputGrid.request('modifyData');
 	
-	(function($) {
-		if($('#ckExceptZeroPlan').is(":checked")){
-			$('#exceptZeroPlan').val($('#ckExceptZeroPlan').val());
-		}else{
-			$('#exceptZeroPlan').val('');
-		}
-
-		var param = $('#searchFrm').serializeObject();
-		console.log(param)
-		planGrid.readData(1, param, true);
-	})(jQuery);
-	
-	alert('작성완료');	
-	inputGrid.resetData([],{});
 });
 
-// 모달
-var forGrid = false;
-// 자재 돋보기
-$("#btnMatModal").on("click", function(e) {
-    $('#matContent').load("matModal.do");
-});
-
-// 자재코드 입력창
-$('#materialCode').on('click', function(){
-	$('#matModal').modal('show');
-	$('#matContent').load("matModal.do");
-});
 
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }	
 
-function getFormatDate(date){
-    var year = date.getFullYear();              //yyyy
-    var month = (1 + date.getMonth());          //M
-    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
-    var day = date.getDate();                   //d
-    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-    return  year + '-' + month + '-' + day;
+function toast(text, title){
+	toastr.options = {
+		closeButton: true,
+		showDuration: "500"
+ 	};
+	toastr.error(text,title);
 }
 
- */

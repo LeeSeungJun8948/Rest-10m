@@ -171,7 +171,6 @@ const adjustGrid = new tui.Grid({
 				}
 			},
 			validation: {
-				dataType: 'number',
             	required: true
           	}
 		}, {
@@ -263,22 +262,38 @@ $("#btnGridDel").on("click", function(ev){
 });
 
 $("#btnSave").on("click", function(){
-	adjustGrid.request('modifyData');
 	
-	(function($) {
-		if($('#ckExceptZeroStock').is(":checked")){
-			$('#exceptZeroStock').val($('#ckExceptZeroStock').val());
-		}else{
-			$('#exceptZeroStock').val('');
+	for(var valid of adjustGrid.validate()){
+		for(var errors of valid.errors){
+			var header;
+			for(var column of adjustGrid.getColumns()){
+				if(column.name == errors.columnName)
+					header = column.header;
+			}
+			toast(header+'를 확인하세요.',adjustGrid.getValue(valid.rowKey, 'ioCode'));	
 		}
-
-		var param = $('#searchFrm').serializeObject();
-		console.log(param)
-		stockGrid.readData(1, param, true);
-	})(jQuery);
+	}
 	
-	alert('작성완료');	
-	adjustGrid.resetData([],{});
+	if(adjustGrid.validate().length == 0){
+		
+		adjustGrid.request('modifyData');
+		
+		(function($) {
+			if($('#ckExceptZeroStock').is(":checked")){
+				$('#exceptZeroStock').val($('#ckExceptZeroStock').val());
+			}else{
+				$('#exceptZeroStock').val('');
+			}
+		
+			var param = $('#searchFrm').serializeObject();
+			console.log(param)
+			stockGrid.readData(1, param, true);
+		})(jQuery);
+
+		adjustGrid.resetData([],{});
+		alert('작성완료');
+	}
+
 });
 
 // 모달
@@ -311,3 +326,10 @@ function getFormatDate(date){
     return  year + '-' + month + '-' + day;
 }
 
+function toast(text, title){
+	toastr.options = {
+		closeButton: true,
+		showDuration: "200"
+ 	};
+	toastr.error(text,title);
+}

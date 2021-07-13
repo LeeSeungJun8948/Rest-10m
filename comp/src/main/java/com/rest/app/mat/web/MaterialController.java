@@ -218,7 +218,7 @@ public class MaterialController {
 		Map<String,Object> data = new HashMap<>();
 		
 		data.put("result", true);
-		datas.put("contents", "hi");
+		datas.put("contents", new int[0]);
 		data.put("data", datas);
 		
 		return data;
