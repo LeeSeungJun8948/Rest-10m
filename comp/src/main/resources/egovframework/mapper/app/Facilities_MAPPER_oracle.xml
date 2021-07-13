@@ -73,4 +73,7 @@
 		where
 			fac_code=#{facCode}
 	</update>
+	<select id="getFacCode" resultType="int">
+    	select max(fac_code) + 1 as fac_code from facilities
+    </select>
 </mapper>

@@ -64,7 +64,8 @@ public class FacilitiesController {
 	
 	// 설비관리
 	@RequestMapping("/facAdmin.do")
-	public String facAdmin() {
+	public String facAdmin(Model model) {
+		model.addAttribute("max", mapper.getFacCode());
 		return "fac/facAdmin.page";
 	}
 	

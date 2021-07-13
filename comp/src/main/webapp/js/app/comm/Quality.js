@@ -46,8 +46,8 @@ const progrid = new tui.Grid({
 				},
 				{
 					header : '사원코드',
-					name :  'empCode',
-					editor : 'text'
+					name :  'empCode'
+				
 				},
 				{
 					header : '성적서',
@@ -103,6 +103,7 @@ progrid.on('click', (ev)=>{
 			$('#stdId').val(data.data.contents.stdId);
 			$('#unitNo').val(data.data.contents.unitNo);
 			$('#unitId').val(data.data.contents.unitId);
+			
 			//단건 조회시 체크박스 체크여부
 			if(use == 'Y') {
 				$('#useAt').attr("checked", true);
@@ -116,7 +117,7 @@ progrid.on('click', (ev)=>{
 				}else{ 
 					$("#image").attr("src", "qcfiledown.do?fileName=noimg.png");
 				}
-			console.log(data.data.contents.useAt);
+			
 			console.log(data);
 		},
 		error : function(){
@@ -203,8 +204,10 @@ $("#btnDelete").on("click",function() {
 //체크박스 체크 >> DB에 insert
 function YnCheck(){
 	
-	if($('#checkUse').is(':checked') == true){
+	if($('#useAt').is(':checked') == true){
+	
 		$('#useAt').val('Y');
+
 	}else{
 		$('#useAt').val('N');
 		}

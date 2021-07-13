@@ -36,7 +36,8 @@ public class RepairController {
 	RepairMapper mapper;
 	
 	@RequestMapping("/repList.do")
-	public String getRep() {
+	public String getRep(Model model) {
+		model.addAttribute("max", mapper.getRepCode());
 		return "fac/repList.page";
 	}
 	
@@ -91,4 +92,5 @@ public class RepairController {
 	public int ajaxUpdateRep(Model model, RepairVO vo) {
 		return mapper.updateRep(vo);
 	}
+
 }
