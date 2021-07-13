@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.comm.vo.EmployeeVO;
 import com.rest.app.comm.vo.ErrorVO;
+import com.rest.app.mat.vo.SelectListVO;
 import com.rest.app.prod.service.ProdService;
 import com.rest.app.prod.vo.DetailPlanVO;
 import com.rest.app.prod.vo.DetailProrderVO;
@@ -226,5 +227,25 @@ public class ProdServiceImpl implements ProdService {
 	public String makeWorkCode(WorkVO vo) {
 		String workCode = "WK-" + vo.getWorkDate().replace("-", "").substring(2) + "-" + String.valueOf(countWork());
 		return workCode;
+	}
+
+	@Override
+	public List<DetailPlanVO> viewPlanSearch(Map<String, Object> param) {
+		return mapper.viewPlanSearch(param);
+	}
+
+	@Override
+	public List<DetailProrderVO> viewProrderSearch(Map<String, Object> param) {
+		return mapper.viewProrderSearch(param);
+	}
+
+	@Override
+	public List<SelectListVO> ajaxProdSearchModal(SelectListVO vo) {
+		return mapper.ajaxProdSearchModal(vo);
+	}
+	
+	@Override
+	public List<SelectListVO> ajaxCompSearchModal(SelectListVO vo) {
+		return mapper.ajaxCompSearchModal(vo);
 	}
 }

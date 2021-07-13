@@ -17,7 +17,7 @@ var dataSourceInput = {
 	api: {
 		readData: { url: 'getExportLot.do', method: 'POST', },
 		modifyData: { url: 'saveExportLot.do', method: 'PUT' },
-  }
+	}
 }
 const grid = new tui.Grid({
 	el: document.getElementById('grid'),
@@ -30,18 +30,18 @@ const grid = new tui.Grid({
 		name: 'productCode',
 		editor: 'text',
 		validation: {
-            required: true
-          },
+			required: true
+		},
 		onAfterChange(ev) {
-        	findProductName(ev);
+			findProductName(ev);
 			valueInput(ev);
-      		}
+		}
 	}, {
 		header: '제품명',
 		name: 'productName',
 		onAfterChange(ev) {
-        	valueInput(ev);
-      		}
+			valueInput(ev);
+		}
 	}, {
 		header: '규격',
 		name: 'stdId'
@@ -64,11 +64,11 @@ const grid = new tui.Grid({
 		editor: 'text',
 		validation: {
 			dataType: 'number',
-            required: true
-          },
+			required: true
+		},
 		onAfterChange(ev) {
-        	valueInput(ev);
-      		}
+			valueInput(ev);
+		}
 	}, {
 		header: '현재고',
 		name: 'dayCount'
@@ -80,8 +80,8 @@ const grid = new tui.Grid({
 		header: '비고',
 		name: 'comments',
 		editor: 'text'
-	},{
-		header:'순번',
+	}, {
+		header: '순번',
 		name: 'deIdx',
 		hidden: true
 	}
@@ -92,46 +92,46 @@ const gridInput = new tui.Grid({
 	scrollX: false,
 	scrollY: true,
 	data: dataSourceInput,
-	columns: [ {
+	columns: [{
 		header: '제품코드',
 		name: 'productCode'
-		}, {
+	}, {
 		header: '제품명',
 		name: 'productName'
-		}, {
+	}, {
 		header: '제품 LOT',
 		name: 'productLot'
-		}, {
+	}, {
 		header: '출고코드',
 		name: 'exportCode',
 		hidden: true
-		}, {
+	}, {
 		header: '재고량',
 		name: 'productCount',
-		}, {
+	}, {
 		header: '출고량',
 		name: 'exportCount',
 		editor: 'text',
 		validation: {
 			dataType: 'number',
-            required: true
-          },
+			required: true
+		},
 		onAfterChange(ev) {
-        	countSum();
-      		}
-		}, {
+			countSum();
+		}
+	}, {
 		header: '비고',
 		name: 'comments',
-		editor: 'text'	
-		},{
+		editor: 'text'
+	}, {
 		header: 'Lot순번',
 		name: 'lotIdx',
 		hidden: true
-		},{
+	}, {
 		header: '세부기록순번',
 		name: 'deIdx',
 		hidden: true
-		} ]
+	}]
 });
 
 $.fn.serializeObject = function() {
@@ -190,7 +190,7 @@ $('#btnDel').on('click', function() {
 	$.ajax({
 		type: 'POST',
 		url: 'deleteExport.do',
-		data: {exportCode: $('#exportCode').val()},
+		data: { exportCode: $('#exportCode').val() },
 		dataType: 'json',
 		success: function() {
 			resetPage();
@@ -206,14 +206,6 @@ $('#btnRead').on('click', function() {
 	grid.readData(1, param, true);
 });
 
-/*//제품코드입력창
-$('#productCode').on('click', function(){
-	$('#unExportModal').modal('show');
-	$('#unExportContent').load("unExportModal.do");
-});*/
-
-
-
 // 삭제버튼
 $('#btnGridDel').on('click', function() {
 	grid.removeCheckedRows(false);
@@ -226,7 +218,6 @@ grid.on('check', ev => {
 // 전체체크 해제
 grid.on('uncheck', ev => {
 });
-// ???????
 
 // 제품명찾기
 function findProductName(ev) {
@@ -257,7 +248,7 @@ grid.on('dblclick', (ev) => {
 		$('#exportCount').val(exportCount);
 		$('#productCode').val(productCode);
 		$('#productName').val(productName);
-		var param = {'productCode': productCode, 'deIdx': deIdx, 'exportCode': exportCode};
+		var param = { 'productCode': productCode, 'deIdx': deIdx, 'exportCode': exportCode };
 		gridInput.readData(1, param, true);
 	}
 });
@@ -279,11 +270,11 @@ function valueInput(ev) {
 }
 
 // 투입량 합계
-function countSum(){
+function countSum() {
 	var exportCount = gridInput.getColumnValues('exportCount');
 	var sum = 0;
-	for(count of exportCount){
-		if (checkNull(count)){
+	for (count of exportCount) {
+		if (checkNull(count)) {
 			sum += parseInt(count);
 		}
 	}
@@ -293,6 +284,7 @@ function countSum(){
 function checkNull(value) {
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
+
 //모달
 var forGrid = false;
 $("#btnCompModal").on("click", function(e) {
@@ -307,6 +299,7 @@ function resetPage() {
 		this.reset();
 	});
 	grid.clear();
+	gridInput.clear();
 	$('#exportCode').val('exportCode');
 }
 
