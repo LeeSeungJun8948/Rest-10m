@@ -31,10 +31,10 @@ const grid = new tui.Grid({
 		name : 'productName'
 	}, {
 		header : '규격',
-		name : 'unitId'
+		name : 'stdId'
 	}, {
 		header : '단위',
-		name : 'stdId'
+		name : 'unitId'
 	}, {
 		header : '접수일자',
 		name : 'inDate'
@@ -58,9 +58,9 @@ const grid = new tui.Grid({
 	    height:40,
 	    position:'bottom',
 	    columnContent:{
-	    	companyName:{
+	    	productName:{
 	            template(summary) {
-	                return '합계';
+	                return '합 계';
 	            } 
 	        },
 	        orderCount:{
@@ -117,10 +117,14 @@ function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
 
+//모달
+var forGrid = false;
 $("#btnCompModal").on("click", function(e) {
     $('#compContent').load("compModalForProd.do");
 });
-
+$("#btnProdModal").on("click", function(e) {
+    $('#prodContent').load("prodModal.do");
+});
 // ???????
 $(document).on('show.bs.modal','#btnCompModal', function () {
 });

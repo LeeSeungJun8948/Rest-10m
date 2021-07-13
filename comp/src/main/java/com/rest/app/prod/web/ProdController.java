@@ -30,28 +30,65 @@ public class ProdController {
 		return "prod/managePlan.page";
 	}
 
-	// 생산계획조회 모달
-	@RequestMapping("planModal.do")
-	public String planModal() {
-		return "app/prod/planModal";
-	}
-
-	// 생산작업관리 페이지
+	// 생산계획관리 페이지
 	@RequestMapping("manageWork.do")
 	public String manageWork() {
 		return "prod/manageWork.page";
 	}
 
-	// 생산작업등록 모달
-	@RequestMapping("workModal.do")
-	public String workModal() {
-		return "app/prod/workModal";
+	// 생산계획 - 조회 모달
+	@RequestMapping("planModal.do")
+	public String planModal() {
+		return "app/prod/planModal";
 	}
 
-	// 생산작업등록 사원검색모달
+	// 작업실적 - 작업자 모달
 	@RequestMapping("workEmpModal.do")
 	public String workEmpModal() {
 		return "app/prod/workEmpModal";
+	}
+
+	// 작업자 검색
+	@RequestMapping("/ajax/workEmpModal.do")
+	@ResponseBody
+	public Map<String, Object> ajaxWorkEmpModal(@RequestBody Map<String, Object> param) {
+		Map<String, Object> datas = new HashMap<>();
+		Map<String, Object> data = new HashMap<>();
+		data.put("result", true);
+		datas.put("contents", svc.searchEmp(param));
+		data.put("data", datas);
+		return data;
+	}
+
+	// 작업실적 - 불량코드 모달
+	@RequestMapping("workErrorModal.do")
+	public String workErrorModal() {
+		return "app/prod/workErrorModal";
+	}
+
+	// 작업자 검색
+	@RequestMapping("/ajax/workErrorModal.do")
+	@ResponseBody
+	public Map<String, Object> ajaxWorkErrorModal(@RequestBody Map<String, Object> param) {
+		Map<String, Object> datas = new HashMap<>();
+		Map<String, Object> data = new HashMap<>();
+		data.put("result", true);
+		datas.put("contents", svc.searchError(param));
+		data.put("data", datas);
+		return data;
+	}
+
+	// 작업실적 저장
+	@RequestMapping("saveWork.do")
+	public String saveWork(WorkVO vo) {
+		svc.insertWork(vo);
+		return "prod/manageWork.page";
+	}
+
+	// 작업실적조회 페이지
+	@RequestMapping("viewWork.do")
+	public String viewWork() {
+		return "prod/viewWork.page";
 	}
 
 	// 미완료주문 읽기
@@ -110,12 +147,14 @@ public class ProdController {
 		List<DetailPlanVO> dList = gridData.deletedRows;
 		cList.forEach(vo -> {
 			if (vo.getWorkCount() != 0) {
+				vo.setProductLot(makeLot(vo));
 				svc.insertDetailPlan(vo);
 			}
 		});
 		uList.forEach(vo -> {
 			if (vo.getWorkCount() != 0) {
 				if (vo.getProductLot() == null) {
+					vo.setProductLot(makeLot(vo));
 					svc.insertDetailPlan(vo);
 				} else {
 					svc.updateDetailPlan(vo);
@@ -210,6 +249,12 @@ public class ProdController {
 		});
 		data.put("result", true);
 		return data;
+	}
+
+	public String makeLot(DetailPlanVO vo) {
+		String productLot = "PROD-" + vo.getWorkDate().replace("-", "").substring(2) + "-"
+				+ String.valueOf(vo.getProductCode()) + "-" + String.valueOf(vo.getOrderNo());
+		return productLot;
 	}
 }
 

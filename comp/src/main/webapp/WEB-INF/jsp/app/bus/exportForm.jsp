@@ -12,14 +12,12 @@
 <div class="row">
 	<div class="mb-2 col-lg-6">
 		<form id="inputFrm" name="inputFrm">
-		<input type="hidden" value="${'exportCode' }" id="exportCode" name="exportCode">
+		<input type="hidden" value="exportCode" id="exportCode" name="exportCode">
 			<table class="table">
 				<tbody>
 					<tr>
 						<th>출고일자</th>
-						<td><input type="date" name="fromDate" id="fromDate"
-							value=${exportDate }> ~ <input type="date" name="toDate"
-							id="toDate" value=${exportDate }></td>
+						<td><input type="date" name="exportDate" id="exportDate"></td>
 						<!-- <th>출고번호</th>
 						<td><input type="export" id="Lot" name="Lot"></td> -->
 					</tr>
@@ -44,23 +42,20 @@
 	</div>
 	<div class="mb-4 col-lg-6">
 		<div>
-			<h5>검색자료관리</h5>
+			<h5>미출고주문 검색</h5>
 		</div>
 		<div>
 			<form id="dateForm" name="dateForm">
 				<span>납기일자 </span>
-				<input type="date" id="fromDate" name="fromDate"value=${outDate }>
+				<input type="date" id="fromDate" name="fromDate">
 				<span> ~ </span>
-				<input type="date" id="toDate" name="toDate"value=${outDate }>&nbsp;
-					<button id="btnunExportModal" type="button" class="btn btn-primary" 
-					data-remote="false" data-toggle="modal" data-target="#unExportModal">
-				미출고 읽기</button>
+				<input type="date" id="toDate" name="toDate">&nbsp;
+					<button type="button" class="btn btn-primary" id="btnRead">불러오기</button>
 			</form>
 		</div>
 	</div>
 </div>
 <div class="mb-4" align="right">
-	<button type="button" class="btn btn-primary" id="btnGridAdd">추가</button>
 	<button type="button" class="btn btn-primary" id="btnGridDel">삭제</button>
 </div>
 <div class="col-lg-12">
@@ -68,9 +63,9 @@
 </div>
 
 
-<div class="modal fade" id="unExportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="ExportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content" id="unExportContent" align="center">
+		<div class="modal-content" id="ExportContent" align="center">
 		</div>
 	</div>
 </div>

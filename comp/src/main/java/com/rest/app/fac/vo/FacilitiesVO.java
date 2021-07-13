@@ -39,4 +39,7 @@ public class FacilitiesVO {
 	MultipartFile uploadFile;
 	
 	String processName;
+	
+	String keyword;
+	String searchCondition;
 }

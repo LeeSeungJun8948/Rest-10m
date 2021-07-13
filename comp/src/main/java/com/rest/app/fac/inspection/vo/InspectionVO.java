@@ -35,4 +35,8 @@ public class InspectionVO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	Date endDate;
+	
+	String facilitiesName;
+	String facInspection;
+	
 }

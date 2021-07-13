@@ -18,8 +18,14 @@
 	border-radius: .25em;
 	border: 0;
 	background-size: 60%;
-}	
-	
+}
+.w-20{
+	width:13%;
+}
+.w-30{
+	width:30%;
+}
+
 </style>	
 <title>Insert title here</title>
 </head>
@@ -29,7 +35,7 @@
 			<h1>제품BOM관리</h1>
 		</div>
 		<div class="col-4" align="right">
-			<form action="deleteBom.do" id="deletefrm" name="deletefrm" method="post">
+			<form action="deleteBom.do" id="deletefrm" name="deletefrm" method="post" >
 				<input id="productCode2" name="productCode2" type="hidden" value="productCode">
 			</form>
 			<button type="button" class="btn btn-primary" onclick="location.href='bomList.do' ">초기화</button>
@@ -37,46 +43,44 @@
 			<button type="button" class="btn btn-primary" id="delBom">Bom삭제</button>
 		</div>
 	</div>
-	<div>
-		<table>
-			<tr>
-				<th width="100px" scope="row">
-				제품코드
-					<span style="color: red">*</span>
-				</th>  
-				<td width="450px">
-				<form  id="searchCheck" name="searchCheck" style="float:left" >
-					<input class="form-control" type="text" size="20"  tabindex="1" id='pdc' name="productCode" value="${info.productCode }" style="margin-top: 4px">
-				</form>
-					<a id="search" href="modal.do" rel="modal:open" style="margin-left: 10px">
-						<img src="<c:url value='/images/app/all/btn_search.png'/>">
-					</a>
-			
-				</td>
-				<th scope="row">제품명</th>
-				<td width="450px">${info.productName }</td>
-				<th scope="row">규격</th>
-				<td width="450px">${info.unitNo }</td>
-			</tr>
-			<tr>
-				<th>고객코드</th>
-				<td>
-				<c:forEach items="${companyList}" var="cc" varStatus="i">
-				${cc.companyCode }
-				<c:if test="${fn:length(companyList) != i.count}">,</c:if>
-				</c:forEach>
-				</td>
-				
-				<th>고객사명</th>
-				<td>
-				<c:forEach items="${companyList}" var="cn" varStatus="l">
-				${cn.companyName }
-				<c:if test="${fn:length(companyList) != l.count}">,</c:if>
-				</c:forEach>
-				</td>
-				<td><button type="button" class="btn btn-primary" id="btnMaterial">자재소요관리</button></td>
-			</tr>
-		</table>
+	<div class="flex row">
+		<div class="input-group-prepend col-4">
+			<span class="input-group-text" >제품코드</span>
+			<form  id="searchCheck" name="searchCheck" class="form w-a" >
+			<input readonly id="pdc" name="productCode" type="text"  value="${info.productCode }"
+				class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm"style="float:left">
+			</form>		
+				<a id="search" href="modal.do" rel="modal:open" >
+					<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+				</a>
+		</div>
+		<div class="input-group-prepend col-4">
+			<span class="input-group-text" >제품명</span>
+			<input id="productName" name="productName" type="text" value="${info.productName }"
+					class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+		</div>
+		<div class="input-group-prepend col-4">
+			<span class="input-group-text" >규격</span>
+			<input id="unitNo" name="unitNo" type="text" value="${info.unitNo }"
+				class="form-control w-20" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+		</div>
+		
+		<div class="col-12" style="margin-bottom: 10px; top: 10px;"></div>
+		
+		<div class="input-group-prepend col-4">
+			<span class="input-group-text" >회사코드</span>
+			<input id="companyCode" name="companyCode" type="text" value="${compList.compCode }"
+				class="form-control w-30" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+		</div>
+		<div class="input-group-prepend col-4">
+			<span class="input-group-text" >회사명</span>
+			<input id="companyName" name="companyName" type="text" value="${compList.compName }"
+				class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+		</div>
+		<div class="input-group-prepend col-4">
+		<button type="button" class="input-group-text" id="btnMaterial">자재소요관리</button>
+		</div>
+		
 	</div>
 	<div class="flex row" style="margin-top: 40px">
 		<div class="col-8">

@@ -18,12 +18,12 @@
 				scrollY : true,
 				bodyHeight: 360,
 				columns : [ {
-					header : '자재코드',
+					header : '제품코드',
 					name : 'productCode',
 					align: 'center',
 					width: 80
 				}, {
-					header : '자재명',
+					header : '제품명',
 					name : 'productName',
 					align: 'center'
 				}, {

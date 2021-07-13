@@ -357,6 +357,8 @@ grid.on('dblclick', function(ev){
 		$('#inorderModal').modal('show');
 		$('#inorderContent').load("inorderModal.do");
 	}
+
 })
+
 
 

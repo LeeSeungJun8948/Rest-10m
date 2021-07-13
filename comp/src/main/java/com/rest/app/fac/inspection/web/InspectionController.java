@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.fac.inspection.service.impl.InspectionMapper;
 import com.rest.app.fac.inspection.vo.InspectionVO;
+import com.rest.app.fac.vo.FacilitiesVO;
 
 import lombok.Data;
 
@@ -92,23 +93,41 @@ public class InspectionController {
 	@ResponseBody
 	public Map<String, Object> modifyIns(@RequestBody GridData gridDate){
 		
-		System.out.println("컨트롤러===============");
 		Map<String, Object> data = new HashMap<String, Object>();
 		for (int i = 0; i < gridDate.createdRows.size(); i++) {
+			System.out.println(gridDate.createdRows.get(i));
 			mapper.insertIns(gridDate.createdRows.get(i));
 		}
 		for (int i = 0; i < gridDate.updatedRows.size(); i++) {
 			mapper.updateIns(gridDate.updatedRows.get(i));
 		}
 		for (int i = 0; i < gridDate.deletedRows.size(); i++) {
-			mapper.updateIns(gridDate.deletedRows.get(i));
+			mapper.deleteIns(gridDate.deletedRows.get(i));
 		}
 		data.put("result", true);
-		data.put("data", gridDate.createdRows);
-		data.put("data", gridDate.updatedRows);
-		data.put("data", gridDate.deletedRows);
+		data.put("data", gridDate);
 		return data;
 	}
+	
+	// 설비검색 모달 페이지
+		@RequestMapping("/facModel.do")
+		public String facModel() {
+			return "app/modal/facModel";
+		}
+		
+		@RequestMapping("/ajax/facListModel.do")
+		@ResponseBody
+		public Map<String, Object> ajaxfacListModel(Model model, FacilitiesVO vo) { 
+			
+			Map<String,Object> datas = new HashMap<>();
+			Map<String,Object> data = new HashMap<>();
+			
+			data.put("result", true);
+			datas.put("contents", mapper.getFacListModal(vo));
+			data.put("data", datas);
+			
+			return data;
+		}
 	
 }
 

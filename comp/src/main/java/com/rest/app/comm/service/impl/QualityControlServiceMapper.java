@@ -62,6 +62,12 @@ public class QualityControlServiceMapper implements QualityControlService {
 		// TODO Auto-generated method stub
 		return mapper.updateProdcut(vo);
 	}
+
+	@Override
+	public List<QualityControlVO> getEmpList(QualityControlVO vo) {
+		// TODO 사원리스트
+		return mapper.getEmpList(vo);
+	}
 	
 
 

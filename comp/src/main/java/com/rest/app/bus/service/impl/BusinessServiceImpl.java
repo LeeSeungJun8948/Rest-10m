@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rest.app.bus.service.BusinessService;
 import com.rest.app.bus.vo.CompanyVO;
+import com.rest.app.bus.vo.DetailExportVO;
 import com.rest.app.bus.vo.ExportVO;
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.comm.vo.BomVO;
@@ -25,16 +26,17 @@ public class BusinessServiceImpl implements BusinessService {
 		return mapper.getBus(param);
 	}
 	
+
 	@Override
-	public List<OrdersVO> getExport(Map<String, Object> param) {//출고조회
+	public List<ExportVO> getExportModal(Map<String, Object> param) {//출고 모달창
 		// TODO Auto-generated method stub
-		return mapper.getExport(param);
+		return mapper.getExportModal(param);
 	}
 
 	
 	@Override
-	public List<OrdersVO> getUnExportModal(Map<String, Object> param) {//미출고조회
-			return mapper.getUnExportModal(param);
+	public List<OrdersVO> getUnExport(Map<String, Object> param) {//미출고조회
+			return mapper.getUnExport(param);
 	}
 
 	@Override
@@ -69,6 +71,26 @@ public class BusinessServiceImpl implements BusinessService {
 	public int deleteExport(String exportCode) {
 		return  mapper.deleteExport(exportCode);
 		
+	}
+
+	@Override
+	public int insertDetailExport(DetailExportVO vo) {
+		return mapper.insertDetailExport(vo);
+	}
+
+	@Override
+	public int updateDetailExport(DetailExportVO vo) {
+		return mapper.updateDetailExport(vo);
+	}
+
+	@Override
+	public int deleteDetailExport(int idx) {
+		return mapper.deleteDetailExport(idx);
+	}
+
+	@Override
+	public int deleteAllDetailExport(String exportCode) {
+		return mapper.deleteAllDetailExport(exportCode);
 	}
 
 	

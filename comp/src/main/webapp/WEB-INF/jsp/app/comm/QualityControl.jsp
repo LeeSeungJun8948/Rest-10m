@@ -2,101 +2,92 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-<title>Insert title here</title>
 
-<style type="text/css">
-.table {
-	border-bottom: 1px;
-}
-
-th {
-	width: 120px;
-}
-
-td {
-	width: 300px;
-}
-</style>
-</head>
-<body>
-	<div>
-		<h3>제품 품질 표준서 관리</h3>
-	</div>
-	<div class="flex row" style="height: 300px">
-	<div class="col-9" style="height: 300px">
-		<table class="table">
-			<tr>
-				<th scope="row">제품코드 <span style="color: red">*</span>
-				</th>
-				<td width="300px">
-
-					<form id="searchCheck" name="searchCheck" style="float: left">
-						<input type="text" size="20" tabindex="1" id='pdc'
-							name="productCode" style="background-color: #e2e2e2;" readonly
-							style="margin-top: 4px" value="${proInfo.productCode}">
-					</form> <a id="search" href="qcModal.do" rel="modal:open"
-					class="btn btn-primary" style="margin-left: 10px"> <img
-						src="<c:url value='/images/egovframework/com/cmm/btn/btn_search.png'/>">
-				</a>
-				</td>
-				<th scope="row">제품명</th>
-				<td><input id ="productName" name="productName" type="text" value="${proInfo.productName}"></td>
-				<th>Q.C담당자</th>
-				<td colspan="3"><input id = "employeeName" name="employeeName" type="text" value="${proInfo.employeeName}"></td>
-			</tr>
-			<tr>
-			
-				<th scope="row">규격</th>
-				<td><input id="stdId" name="stdId" type="text" value="${proInfo.stdId}"></td>
-				<th>관리단위</th>
-				<td><input id="unitNo" name="unitNo" type="text" value="${proInfo.unitNo}" ></td>
-				<th>사용여부</th>
-				<td style="width: 40px"><input type="checkbox" name="useAt" id="useAt"
-					style="width: 20px; height: 20px"
-					<c:if test="${proInfo.useAt eq 'Y'} ">checked="checked"</c:if>
-					></td>
-				<th style="width: 90px; padding-right: 1px; border-right: 1px" align="center">성적서</th>
-				<td style="padding-left: 0px">
-					<input type="file" id="qcImg" name="uploadFile" accept="image/*"
-					style="display: none" onchange="setThumbnail(event);">
-					<button type="button" class="btn btn-primary" id="btnQcImg" style="font-size: 5px">추가</button>
-				</td>
-			</tr>
-
-			</table>
+	<div class="flex row">
+		<div class="col-8">
+			<h3>제품 품질 표준서 관리</h3>
 		</div>
-		<div class = "col-3" style="height: 300px">
-	
-			<div id="imagePreview">
-				<img id="image" style="height: 250px; width: 350px"/>
+		<div class="col-4" align="right">
+			<button class="btn btn-primary" id="btnNew" type="button">
+				초기화</button>
+			<button type="submit" class="btn btn-primary">저장</button>
+			<button class="btn btn-primary" id="btnUdate" type="button">
+				수정</button>
+		</div>
+	</div>
+	<div class="flex row">
+	<div class="col-9 input-group input-group-sm align-self-start mt-4">
+		<form id="frm" class="form-inline" role="form">
+			<div class="row">
+				<div class="input-group-prepend col-4">
+					<span class="input-group-text" >제품코드</span>
+					<input id="productCode" name="productCode" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group-prepend col-4">
+					<span class="input-group-text" >제품명</span>
+					<input id="productName" name="productName" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group-prepend col-4">
+					<span class="input-group-text" >Q.C담당자</span>
+					<select name="employeeName" id="employeeName" class="form-control">
+						<c:forEach var="emp" items="${empList }">
+							<option value="${ emp.empCode }">${emp.employeeName }</option>
+						</c:forEach>
+					</select>
+				</div>
+				
+				<div class="col-12 mb-3"></div>
+				
+				<div class="input-group-prepend col-4">
+					<span class="input-group-text" >규격</span>
+					<input readonly id="stdId" name="stdId" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+						<button id="btnProductModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#productModal">
+							<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+						</button>	
+				</div>
+				<div class="input-group-prepend col-lg-4" >
+						<span class="input-group-text" >규격코드</span>
+						<input readonly id="stdNo" name="stdNo" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group-prepend col-4">
+					<span class="input-group-text" >사용여부</span>
+					<input id="useAt" name="useAt" type="checkbox" 
+						 class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+						 <c:if test="${use.useAt eq 'Y'} ">checked="checked"</c:if>>
+				</div>
+				
+				<div class="col-12 mb-3"></div>
+				
+				<div class="input-group-prepend col-4">
+					<span class="input-group-text" >단위</span>
+					<input readonly id="unitId" name="unitId" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+						<button id="btnUnitModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#unitModal">
+							<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+						</button>	
+				</div>
+				<div class="input-group-prepend col-lg-4" >
+						<span class="input-group-text" >관리단위</span>
+						<input readonly id="unitNo" name="unitNo" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+				</div>
+				<div class="input-group-prepend col-lg-4">
+					<input type="file" id="qcImg"
+							name="uploadFile" accept="image/*" style="display: none"
+							onchange="setThumbnail(event);">
+					<button type="button" class="input-group-text" id="btnQcImg">성적서첨부</button>
+				</div>
 			</div>
-			
-		
-		</div>
+		</form>
 	</div>
 	
+	<div class="col-3" style="height:300px; ">
+		<div id="imagePreview"   >
+			<img id="image" style="width: 300px; height: 300px; "/>
+		</div>
+	</div>
+</div>
+
 	<div class="row">
-		<div class="col-6">
-			
-		</div>
-	
-	</div>
-	<div class="row" >
 		<div class="col-6">제품</div>
 		<div class="col-6" align="right">
 			<button type="button" class="btn btn-primary" id="RowInsert">+</button>
@@ -105,8 +96,19 @@ td {
 		</div>
 	</div>
 
-		<div id="proGrid"></div>
-  
-</body>
+	<div id="proGrid"></div>
+	
+	<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" id="productContent" align="center">
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="unitModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" id="unitContent" align="center">
+			</div>
+		</div>
+	</div>
 <script type="text/javascript" src="js/app/comm/Quality.js"></script>
-</html>

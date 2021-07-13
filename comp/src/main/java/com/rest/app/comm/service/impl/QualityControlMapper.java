@@ -21,6 +21,9 @@ public interface QualityControlMapper {
 	//단위 리스트
 	public List<QualityControlVO> getUnitList(QualityControlVO vo);
 	
+	//사원 리스트
+	public List<QualityControlVO> getEmpList(QualityControlVO vo);
+	
 	//제품 추가
 	public int insertProduct(QualityControlVO vo);
 	
