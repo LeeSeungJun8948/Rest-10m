@@ -96,9 +96,6 @@ $( function() {
 			header : '구매일자',
 			name : 'purchaseDate'
 		}, {
-			header : '이미지',
-			name : 'img'
-		}, {
 			header : '공정코드',
 			name : 'processCode'
 		} ]
