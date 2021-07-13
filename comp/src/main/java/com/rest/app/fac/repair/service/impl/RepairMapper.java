@@ -10,5 +10,6 @@ public interface RepairMapper {
 	public int deleteRep(RepairVO vo);
 	public RepairVO getRepInfo(RepairVO vo);
 	public int updateRep(RepairVO vo);
+	public int getRepCode();
 }
  
