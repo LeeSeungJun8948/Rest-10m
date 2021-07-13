@@ -21,10 +21,16 @@ public class ProcMoveVO {
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul" )
 	Date endDate;
 	
+	String prorCode;
 	String planCode;
+	String workCode;
 	String productCode;
 	String productName;
 	String productLot;
+	
+	String processName;
+	
+	String prorCount;
 	String workCount;
 	
 	String companyName;
@@ -33,4 +39,10 @@ public class ProcMoveVO {
 	String materialName;
 	String materialLot;
 	String inputCount;
+	
+	String status;
+	String idx;
+	
+    String startTime;
+    String endTime;
 }

@@ -20,7 +20,7 @@ const planGrid = new tui.Grid({
 	columns : [ 
 		{
 			header : '생산계획코드',
-			name : 'planCode',
+			name : 'prorCode',
 			width : 120,
 			align: 'center'
 		},
@@ -41,7 +41,7 @@ const planGrid = new tui.Grid({
 
 		}, {
 			header : '지시량',
-			name : 'workCount',
+			name : 'prorCount',
 			align: 'center'
 		}, {
 			header : '작업일자',
@@ -89,22 +89,25 @@ const procGrid = new tui.Grid({
 	bodyHeight: 250,
 	columns : [ 
 		{
-			header : '자재명',
-			name : 'materialName',
+			header : '순번',
+			name : 'idx',
+			align: 'center',
+			width: 80
+		},
+		{
+			header : '공정명',
+			name : 'processName',
 			align: 'center'
 		},
 		{
-			header : '자재LOT',
-			name : 'materialLot',
+			header : '작업번호',
+			name : 'workCode',
 			align: 'center'
 		},
 		{
-			header : '투입량',
-			name : 'inputCount',
-			align: 'right',
-			formatter({value}) {
-      			return format(value);
-    		}
+			header : '진행',
+			name : 'status',
+			align: 'center'
 		}
 	]
 });
@@ -122,9 +125,10 @@ function format(value){
 	});
 })(jQuery);
 
+var rowKey;
 
 planGrid.on('click',function(ev){
-	
+	rowKey = ev.rowKey;
 	inputGrid.resetData([],{});
 	
 	$.ajax({
@@ -134,9 +138,7 @@ planGrid.on('click',function(ev){
 		dataType : "json",
 		async : false,
 		success : function(data) {
-			console.log(data);
 			for(var i = 0 ; i < data.length ; i++){
-				console.log(data[i].materialLot)
 				newRowData = {
 					'materialName' : data[i].materialName, 
 					'materialLot' : data[i].materialLot,
@@ -151,6 +153,51 @@ planGrid.on('click',function(ev){
 		error : function() {
 		}
 	});		
+	
+	procGrid.resetData([],{});
+	
+	$.ajax({
+		type : "get",
+		url : "ajax/getProcStatus.do",
+		data: {"productLot" : planGrid.getValue(ev.rowKey, 'productLot'),
+				"productCode" : planGrid.getValue(ev.rowKey, 'productCode')},
+		dataType : "json",
+		async : false,
+		success : function(data) {
+			for(var i = 0 ; i < data.length ; i++){
+				newRowData = {
+					'idx' : data[i].idx, 
+					'processName' : data[i].processName,
+					'workCode' : data[i].workCode,
+					'status' : data[i].status
+				};
+				procGrid.appendRow(newRowData, {
+					at : procGrid.getRowCount(),
+					focus : true
+				});
+			}
+		},
+		error : function() {
+		}
+	});		
+	
+});
+
+$('#btnPrint').on('click',  function(){
+	var url = 'printProcessMove.do?productLot='+ planGrid.getValue(rowKey, 'productLot')
+				+ "&productName=" + planGrid.getValue(rowKey, 'productName')
+				+ "&companyName=" + planGrid.getValue(rowKey, 'companyName')
+				+ "&prorCount=" + planGrid.getValue(rowKey, 'prorCount')
+				+ "&prorCode=" + planGrid.getValue(rowKey, 'prorCode');
+				
+	var _width = '550';
+    var _height = '400';
+ 
+    var _left = Math.ceil(( window.screen.width - _width )/2);
+    var _top = Math.ceil(( window.screen.height - _height )/2); 
+
+	window.open(url,'공정이동표', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top); 
+	
 });
 
 /**

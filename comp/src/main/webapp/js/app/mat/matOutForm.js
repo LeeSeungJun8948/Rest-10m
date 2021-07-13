@@ -327,22 +327,30 @@ function toast(text, title){
 var forGrid = false;
 // 자재 돋보기
 $("#btnMatModal").on("click", function(e) {
+	$('#materialCode').val('');
+	$('#materialName').val('');
     $('#matContent').load("matModal.do");
 });
 
 // 자재코드 입력창
 $('#materialCode').on('click', function(){
+	$('#materialCode').val('');
+	$('#materialName').val('');
 	$('#matModal').modal('show');
 	$('#matContent').load("matModal.do");
 });
 
 // 공정 돋보기
 $('#btnProcModal').on('click',function(e){
+	$('#processCode').val('');
+	$('#processName').val('');
 	$('#procContent').load("procModal.do");
 });
 
 // 공정코드 입력창
 $('#processCode').on('click', function(){
+	$('#processCode').val('');
+	$('#processName').val('');
 	$('#procModal').modal('show');
 	$('#procContent').load("procModal.do");
 });
