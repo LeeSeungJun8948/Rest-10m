@@ -23,7 +23,16 @@ import com.rest.app.mat.vo.MaterialVO;
 import com.rest.app.mat.vo.ProcMoveVO;
 import com.rest.app.mat.vo.SelectListVO;
 
+import egovframework.com.cmm.service.EgovProperties;
 import lombok.Data;
+
+import java.io.File;
+
+import net.sourceforge.barbecue.Barcode;
+import net.sourceforge.barbecue.BarcodeFactory;
+import net.sourceforge.barbecue.BarcodeImageHandler;
+
+
 
 @Controller
 public class MaterialController {
@@ -209,7 +218,7 @@ public class MaterialController {
 		Map<String,Object> data = new HashMap<>();
 		
 		data.put("result", true);
-		datas.put("contents", "hi");
+		datas.put("contents", new int[0]);
 		data.put("data", datas);
 		
 		return data;
@@ -265,7 +274,6 @@ public class MaterialController {
 		return "mat/matInForm.page";
 	}
 	
-	
 	@RequestMapping("matAdjustForm.do")
 	public String matStockForm(Model model) {
 		return "mat/matAdjustForm.page";
@@ -300,14 +308,36 @@ public class MaterialController {
 		return data;
 	}
 	
-	
 	@RequestMapping("/ajax/getInputMatList.do")
 	@ResponseBody
 	public List<ProcMoveVO> ajaxGetInputMatList(ProcMoveVO vo) {
 		return dao.getInputMat(vo);
 	}
-}
+	
+	@RequestMapping("/ajax/getProcStatus.do")
+	@ResponseBody
+	public List<ProcMoveVO> ajaxGetProcStatus(ProcMoveVO vo) {
+		return dao.getProcStatus(vo);
+	}
+	
+	@RequestMapping("/printProcessMove.do")
+	public String printProcessMove(ProcMoveVO vo, Model model) {
 
+		String str = vo.getProductLot();
+		try{
+			Barcode barcode = BarcodeFactory.createCode128B(str);
+			barcode.setBarHeight(80);
+			File file = new File(EgovProperties.getProperty("Globals.fileStorePath"), str+".jpg");
+			BarcodeImageHandler.saveJPEG(barcode, file);
+			model.addAttribute("barcode", str+".jpg");
+			model.addAttribute("vo", vo);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		return "app/mat/printProcessMove";
+	}
+}
 
 @Data
 class GridData {	

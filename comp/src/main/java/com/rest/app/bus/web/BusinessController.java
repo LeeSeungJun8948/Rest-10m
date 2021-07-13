@@ -50,7 +50,7 @@ public class BusinessController {
 //		// TODO Auto-generated method stub
 //		return dao.getBus();
 //	}
-	
+
 	@RequestMapping("/ajax/busList.do")
 	@ResponseBody
 	public Map<String, Object> busList(@RequestBody Map<String, Object> param) {
@@ -67,7 +67,6 @@ public class BusinessController {
 		return "bus/exportForm.page";
 	}
 
-
 	// 출고관리 - 조회 모달
 	@RequestMapping("exportModal.do")
 	public String getExportModal() {
@@ -78,7 +77,7 @@ public class BusinessController {
 	@RequestMapping("searchExport.do")
 	@ResponseBody
 	public Map<String, Object> searchExport(@RequestBody Map<String, Object> param) {
-		System.out.println(param+"----");
+		System.out.println(param + "----");
 		Map<String, Object> data = new HashMap<String, Object>();
 		Map<String, Object> datas = new HashMap<String, Object>();
 		datas.put("contents", dao.searchExport(param));
@@ -86,6 +85,7 @@ public class BusinessController {
 		data.put("data", datas);
 		return data;
 	}
+
 	// 미출고 검색 그리드
 	@RequestMapping("readUnExport.do")
 	@ResponseBody
@@ -93,9 +93,9 @@ public class BusinessController {
 		System.out.println("=============");
 		Map<String, Object> datas = new HashMap<>();
 		Map<String, Object> data = new HashMap<>();
-		if (param.get("exportCode")==null) {
+		if (param.get("exportCode") == null) {
 			datas.put("contents", dao.getUnExport(param));
-		}else {
+		} else {
 			datas.put("contents", dao.getDetailExport(param));
 		}
 		data.put("result", true);
@@ -166,39 +166,39 @@ public class BusinessController {
 	}
 
 	// 자재LOT별 재고량리스트 가져오기
-		@RequestMapping("getExportLot.do")
-		@ResponseBody
-		public Map<String, Object> getExportLot(@RequestBody Map<String, Object> param) {
-			Map<String, Object> data = new HashMap<String, Object>();
-			Map<String, Object> datas = new HashMap<String, Object>();
-			datas.put("contents", dao.readExportLot(param));
-			data.put("result", true);
-			data.put("data", datas);
-			return data;
-		}
+	@RequestMapping("getExportLot.do")
+	@ResponseBody
+	public Map<String, Object> getExportLot(@RequestBody Map<String, Object> param) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		datas.put("contents", dao.readExportLot(param));
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
+	}
 
-		// 투입자재 CUD
-		@RequestMapping("saveExportLot.do")
-		@ResponseBody
-		public Map<String, Object> saveExportLot(@RequestBody ExportLotGridData gridData) {
-			Map<String, Object> data = new HashMap<String, Object>();
-			List<ExportLotVO> uList = gridData.updatedRows;
+	// 투입자재 CUD
+	@RequestMapping("saveExportLot.do")
+	@ResponseBody
+	public Map<String, Object> saveExportLot(@RequestBody ExportLotGridData gridData) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		List<ExportLotVO> uList = gridData.updatedRows;
 
-			uList.forEach(vo -> {
-				if (vo.getLotIdx() != 0) {
-					if (vo.getExportCount() != 0) {
-						dao.updateExportLot(vo);
-					} else {
-						dao.deleteExportLot(vo.getLotIdx());
-					}
-				} else if (vo.getExportCount() != 0) {
-					dao.insertExportLot(vo);
+		uList.forEach(vo -> {
+			if (vo.getLotIdx() != 0) {
+				if (vo.getExportCount() != 0) {
+					dao.updateExportLot(vo);
+				} else {
+					dao.deleteExportLot(vo.getLotIdx());
 				}
-			});
-			data.put("result", true);
-			data.put("check", "save");
-			return data;
-		}
+			} else if (vo.getExportCount() != 0) {
+				dao.insertExportLot(vo);
+			}
+		});
+		data.put("result", true);
+		data.put("check", "save");
+		return data;
+	}
 
 	@RequestMapping("productInventory.do") // 제품재고관리페이지
 	public String productInventory(Model model) {
