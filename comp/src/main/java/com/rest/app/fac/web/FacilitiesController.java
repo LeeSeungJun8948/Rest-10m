@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -96,12 +98,13 @@ public class FacilitiesController {
 
 	// 저장
 	@RequestMapping(value = "/insertFac.do")
-	public String insertFac(HttpServletRequest request, FacilitiesVO vo) throws IllegalStateException, IOException {
+	public String insertFac(HttpServletRequest request, FacilitiesVO vo) throws Exception {
 		MultipartFile uploadFile = vo.getUploadFile();
 		String fileName = null;
 		if(uploadFile !=null && !uploadFile.isEmpty() && uploadFile.getSize()>0) {
 			fileName = uploadFile.getOriginalFilename();
 			String storePathString = EgovProperties.getProperty("Globals.fileStorePath");
+			fileName = uploadFile(fileName, uploadFile.getBytes());
 			uploadFile.transferTo(new File(storePathString, fileName));
 			//첨부파일명 VO에 지정
 			vo.setImg(fileName);
@@ -134,12 +137,13 @@ public class FacilitiesController {
 	// 수정
 	@RequestMapping("/ajax/updateFac.do")
 	@ResponseBody
-	public int ajaxUpdateFac(Model model, FacilitiesVO vo) throws IllegalStateException, IOException {
+	public int ajaxUpdateFac(Model model, FacilitiesVO vo) throws Exception {
 		MultipartFile uploadFile = vo.getUploadFile();
 		String fileName = null;
 		if(uploadFile !=null && !uploadFile.isEmpty() && uploadFile.getSize()>0) {
 			fileName = uploadFile.getOriginalFilename();
 			String storePathString = EgovProperties.getProperty("Globals.fileStorePath");
+			fileName = uploadFile(fileName, uploadFile.getBytes());
 			uploadFile.transferTo(new File(storePathString, fileName));
 			//첨부파일명 VO에 지정
 			vo.setImg(fileName);
@@ -188,5 +192,17 @@ public class FacilitiesController {
 			EgovResourceCloseHelper.close(outs, fin);
 		}
 	}
+	
+	 public String uploadFile(String originalName, byte[] fileData) throws Exception{
+		    
+	        UUID uuid = UUID.randomUUID();
+	        
+	        String fileName = uuid.toString()+"_"+originalName;
+	        String storePathString = EgovProperties.getProperty("Globals.fileStorePath");
+	        File target = new File(storePathString, fileName);
+	        FileCopyUtils.copy(fileData, target);
+	 
+	        return fileName;
+	    }
 	
 }
