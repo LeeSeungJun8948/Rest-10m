@@ -86,8 +86,11 @@
      <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
              <a class="collapse-item" href="/comp/managePlan.do">생산계획 관리</a>
-             <a class="collapse-item" href="/comp/detailErrorList.do">불량내역 조회</a>
+             <a class="collapse-item" href="/comp/manageProrder.do">생산지시 관리</a>
              <a class="collapse-item" href="/comp/procMovePrint.do">공정이동표 발행</a>
+             <a class="collapse-item" href="/comp/manageWork.do">작업실적 관리</a>
+             <a class="collapse-item" href="/comp/viewWork.do">작업실적 조회</a>
+             <a class="collapse-item" href="/comp/detailErrorList.do">불량내역 조회</a>
          </div>
      </div>
  </li>
@@ -108,37 +111,6 @@
          </div>
      </div>
  </li>
-			<!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true" aria-controls="collapsePages2">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>생산관리</span>
-                </a>
-                <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/comp/managePlan.do">생산계획 관리</a>
-                        <a class="collapse-item" href="/comp/manageWork.do">작업실적 관리</a>
-                        <a class="collapse-item" href="/comp/viewWork.do">작업실적 조회</a>
-                        <a class="collapse-item" href="/comp/detailErrorList.do">불량내역 조회</a>
-                    </div>
-                </div>
-            </li>
-			<!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true" aria-controls="collapsePages2">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>생산관리</span>
-                </a>
-                <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/comp/managePlan.do">생산계획 관리</a>
-                        <a class="collapse-item" href="/comp/manageProrder.do">생산지시 관리</a>
-                        <a class="collapse-item" href="/comp/manageWork.do">작업실적 관리</a>
-                        <a class="collapse-item" href="/comp/viewWork.do">작업실적 조회</a>
-                        <a class="collapse-item" href="/comp/detailErrorList.do">불량내역 조회</a>
-                    </div>
-                </div>
-            </li>
 
  <!-- Divider -->
 	<hr class="sidebar-divider">
