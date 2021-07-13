@@ -17,6 +17,7 @@
 		<typeAlias alias="ComDefaultCodeVO" type="egovframework.com.cmm.ComDefaultCodeVO" />
 		<typeAlias alias="comDefaultVO"		type="egovframework.com.cmm.ComDefaultVO" />
 		
+		<!-- 자재 -->
 		<!-- 자재vo -->
 		<typeAlias alias="MatVO"		type="com.rest.app.mat.vo.MaterialVO" />
 		<!-- 발주vo -->
@@ -25,6 +26,8 @@
 		<typeAlias alias="InoutVO"		type="com.rest.app.mat.vo.InoutVO" />
 		<!-- 라디오리스트vo -->
 		<typeAlias alias="SelectListVO"		type="com.rest.app.mat.vo.SelectListVO" />
+		<!-- 공정이동vo -->
+		<typeAlias alias="ProcMoveVO"		type="com.rest.app.mat.vo.ProcMoveVO" />
 		
 		<!-- 생산  -->
 		<typeAlias alias="OrdersVO"		type="com.rest.app.bus.vo.OrdersVO" />
