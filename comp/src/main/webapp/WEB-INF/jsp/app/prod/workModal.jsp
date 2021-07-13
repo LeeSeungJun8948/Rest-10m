@@ -1,67 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+	
 <div id="modalContent">
-	<div class="modal-header mb-4">
-		<div>
-			<h5 class="modal-title">
-				<strong>작업 조회</strong>
-			</h5>
-		</div>
-		<div align="right">
-			<button id="btnClose" class="btn btn-primary" data-dismiss="modal">닫기</button>
-		</div>
+	<div class="modal-header">
+		<h5 class="modal-title">작업실적 검색</h5>
+		<button id="btnCloseTop" type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
 	</div>
-	<div class="modal-body mb-4">
-		<div class="mb-4">
-			<form id="workFrm" name="workFrm">
-				<table class="table">
-					<tbody>
-						<tr>
-							<td>작업일자</td>
-							<td><input type="date" id="workDate" name="workDate"></td>
-							<td>공정명</td>
-							<td><input type="text" id="processName" name="processName"></td>
-							<td>사원코드</td>
-							<td><input type="text" id="empCode" name="empCode"></td>
-						</tr>
-						<tr>
-							<td>작업번호</td>
-							<td><input type="text" id="workNo" name="workNo"></td>
-							<td>제품코드</td>
-							<td><input type="text" id="productCode" name="productCode"></td>
-							<td>제품LOT</td>
-							<td><input type="text" id="productLot" name="productLot"></td>
-						</tr>
-						<tr>
-							<td>작업량</td>
-							<td><input type="text" id="workCount" name="workCount"></td>
-							<td>불량코드</td>
-							<td><input type="text" id="errorCode" name="errorCode"></td>
-							<td>불량량</td>
-							<td><input type="text" id="errorCount" name="errorCount"></td>
-						</tr>
-					</tbody>
-				</table>
+	
+	<div class="modal-body">
+		<form class="form-row mb-4" id="dateFrm" name="dateFrm">
+			<div class="col-2">
+				<span>작업일자</span>
 			</div>
-			<div class="row">
-				<div class="col-lg-2">
-					<strong>작업시작:</strong> 
-				</div>
-				<div class="col-lg-4">
-					<input type="text" id="startTime" name="startTime">
-				</div>
-				<div class="col-lg-2">
-					<strong>작업종료:</strong> 
-				</div>
-				<div class="col-lg-4">
-					<input type="text" id="endTime" name="endTime">
-				</div>
-			</form>
+			<div class="col-3">
+				<input type="date" class="form-control" id="workDtS" name="workDtS">
+			</div>
+			<div class="col-1">
+				<span>~</span>
+			</div>
+			<div class="col-3">						
+				<input type="date" class="form-control" id="workDtE" name="workDtE">
+			</div>
+			<div class="col-2">
+				<button type="button" class="btn btn-primary" id="btnSearch" name="btnRead">검색</button>
+			</div>
+		</form>
+	
+		<div class="col-md-11 m-3">
+			<div id="workGrid"></div>
 		</div>
 	</div>
+		
 	<div class="modal-footer">
+		<button id="btnCloseBottom" class="btn btn-primary" data-dismiss="modal">닫기</button>
+		<button id="btnSelect" class="btn btn-success">선택</button>
 	</div>
 </div>
 
+<link href="${pageContext.request.contextPath}/css/app/prod/manageWork.css" rel="stylesheet">
 <script type="text/javascript" src="js/app/prod/workModal.js"></script>

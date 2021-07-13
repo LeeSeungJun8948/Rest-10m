@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.bus.service.BusinessService;
 import com.rest.app.bus.vo.DetailExportVO;
+import com.rest.app.bus.vo.ExportLotVO;
 import com.rest.app.bus.vo.ExportVO;
-import com.rest.app.mat.vo.SelectListVO;
 
 import lombok.Data;
 
@@ -24,6 +24,13 @@ class GridData {
 	List<DetailExportVO> createdRows;
 	List<DetailExportVO> updatedRows;
 	List<DetailExportVO> deletedRows;
+}
+
+@Data
+class ExportLotGridData {
+	List<ExportLotVO> createdRows;
+	List<ExportLotVO> updatedRows;
+	List<ExportLotVO> deletedRows;
 }
 
 @Controller
@@ -61,19 +68,24 @@ public class BusinessController {
 	}
 
 
-	// 출고 모달 그리드 데이터 리턴
-		@RequestMapping("/ajax/readExportModal.do")
-		@ResponseBody
-		public Map<String, Object> ajaxReadExportModal(@RequestBody Map<String, Object> param) { // 자재 요약 리스트 출력
-			
-			Map<String,Object> datas = new HashMap<>();
-			Map<String,Object> data = new HashMap<>();
-			data.put("result", true);
-			datas.put("contents", dao.getExportModal(param));
-			data.put("data", datas);
-			
-			return data;
-		}
+	// 출고관리 - 조회 모달
+	@RequestMapping("exportModal.do")
+	public String getExportModal() {
+		return "app/bus/exportModal";
+	}
+
+	// 모달 출고검색
+	@RequestMapping("searchExport.do")
+	@ResponseBody
+	public Map<String, Object> searchExport(@RequestBody Map<String, Object> param) {
+		System.out.println(param+"----");
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		datas.put("contents", dao.searchExport(param));
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
+	}
 	// 미출고 검색 그리드
 	@RequestMapping("readUnExport.do")
 	@ResponseBody
@@ -81,10 +93,10 @@ public class BusinessController {
 		System.out.println("=============");
 		Map<String, Object> datas = new HashMap<>();
 		Map<String, Object> data = new HashMap<>();
-		if (param.get("planCode") == null) {
+		if (param.get("exportCode")==null) {
 			datas.put("contents", dao.getUnExport(param));
 		}else {
-			datas.put("contents", dao.getUnExport(param));
+			datas.put("contents", dao.getDetailExport(param));
 		}
 		data.put("result", true);
 		data.put("data", datas);
@@ -111,10 +123,10 @@ public class BusinessController {
 	// 계획삭제
 	@RequestMapping("deleteExport.do")
 	@ResponseBody
-	public Map<String, Object> deleteExport(@RequestParam String ExportCode) {
+	public Map<String, Object> deleteExport(@RequestParam String exportCode) {
 		Map<String, Object> data = new HashMap<String, Object>();
-		dao.deleteExport(ExportCode);
-		dao.deleteAllDetailExport(ExportCode);
+		dao.deleteExport(exportCode);
+		dao.deleteAllDetailExport(exportCode);
 		data.put("result", true);
 		data.put("check", "save");
 		return data;
@@ -135,7 +147,7 @@ public class BusinessController {
 		});
 		uList.forEach(vo -> {
 			if (vo.getExportCount() != 0) {
-				if (vo.getIdx() == 0) {
+				if (vo.getDeIdx() == 0) {
 					dao.insertDetailExport(vo);
 				} else {
 					dao.updateDetailExport(vo);
@@ -143,8 +155,8 @@ public class BusinessController {
 			}
 		});
 		dList.forEach(vo -> {
-			if (vo.getIdx() != 0) {
-				dao.deleteDetailExport(vo.getIdx());
+			if (vo.getDeIdx() != 0) {
+				dao.deleteDetailExport(vo.getDeIdx());
 			}
 		});
 		data.put("result", true);
@@ -152,11 +164,40 @@ public class BusinessController {
 		return data;
 	}
 
-	// 일 출고List모달
-	@RequestMapping("ExportModal.do")
-	public String Exportmodal() {
-		return "app/bus/exportModal";
-	}
+	// 자재LOT별 재고량리스트 가져오기
+		@RequestMapping("getExportLot.do")
+		@ResponseBody
+		public Map<String, Object> getExportLot(@RequestBody Map<String, Object> param) {
+			Map<String, Object> data = new HashMap<String, Object>();
+			Map<String, Object> datas = new HashMap<String, Object>();
+			datas.put("contents", dao.readExportLot(param));
+			data.put("result", true);
+			data.put("data", datas);
+			return data;
+		}
+
+		// 투입자재 CUD
+		@RequestMapping("saveExportLot.do")
+		@ResponseBody
+		public Map<String, Object> saveExportLot(@RequestBody ExportLotGridData gridData) {
+			Map<String, Object> data = new HashMap<String, Object>();
+			List<ExportLotVO> uList = gridData.updatedRows;
+
+			uList.forEach(vo -> {
+				if (vo.getLotIdx() != 0) {
+					if (vo.getExportCount() != 0) {
+						dao.updateExportLot(vo);
+					} else {
+						dao.deleteExportLot(vo.getLotIdx());
+					}
+				} else if (vo.getExportCount() != 0) {
+					dao.insertExportLot(vo);
+				}
+			});
+			data.put("result", true);
+			data.put("check", "save");
+			return data;
+		}
 
 	@RequestMapping("productInventory.do") // 제품재고관리페이지
 	public String productInventory(Model model) {

@@ -52,7 +52,13 @@ const grid = new tui.Grid({
 	}, {
 		header : '판정',
 		name : 'judgement',
-		editor: 'text'
+		editor: { type: 'select',
+        options: {
+        listItems: [
+          { text: '적합', value: '적합' },
+          { text: '부적합', value: '부적합' }
+          ]}
+		}
 	}, {
 		header : '조치사항',
 		name : 'insComment',
@@ -114,7 +120,8 @@ $("#btnAdd").on("click", function(){
 	}
 	
 	newRowData = {'inspectionCode' : newInsCode, 
-				  'today' : getFormatDate(new Date()),
+				 // 'today' : getFormatDate(new Date()),
+				 // 'beforeDate' :
 				 };
 	grid.appendRow(newRowData,{
 		at : grid.getRowCount(),
@@ -123,7 +130,7 @@ $("#btnAdd").on("click", function(){
 });
 
 
-// insCode, 날짜 추가시 자동입력
+// 행추가시 insCode, 날짜 추가시 자동입력때 필요한 함수
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
@@ -137,10 +144,6 @@ function getFormatDate(date){
     return  year + '-' + month + '-' + day;
 }
 
-function getBeforeDate(date) {
-	var rowKey = date.rowKey;
-	var facInspection = grid.getValue(rowKey, 'facInspection')
-}
 // 그리드 설비명 클릭
 var rowKey;
 grid.on('dblclick', function(ev){
@@ -150,4 +153,36 @@ grid.on('dblclick', function(ev){
 		$('#facModal').modal('show');
 		$('#facContent').load("facModel.do");
 	}
-})
+});
+
+// 점검일 설정시 전점검일/차기점검일 계산
+grid.on('afterChange', function(ev){
+		//console.log(ev);
+	if(ev.changes[0].columnName == 'today') {
+		rowKey = ev.changes[0].rowKey;
+		//console.log(ev.changes[0].value);
+		today = grid.getValue(rowKey, 'today');
+		inspec = grid.getValue(rowKey, 'facInspection');
+		
+		date = new Date(today);
+		date.setDate(date.getDate()-inspec);
+		before = getFormatDate(date);
+		//console.log('before: ' + before);
+		grid.setValue(rowKey, 'beforeDate', before);
+		
+		date = new Date(today);
+		//console.log('inspec: ' + parseInt(inspec));
+		date.setDate(date.getDate()+parseInt(inspec));
+		after =getFormatDate(date);
+		//console.log('after: ' + after);
+		grid.setValue(rowKey, 'afterDate', after);
+	}
+});
+
+// 적합/부적합 select값 넣기
+grid.on('dblclick', function(ev){
+	if(ev.columnName == 'judgement') {
+		rowKey = ev.columnName;
+		judgement = grid.getValue(rowKey, 'judgement');
+	}
+});

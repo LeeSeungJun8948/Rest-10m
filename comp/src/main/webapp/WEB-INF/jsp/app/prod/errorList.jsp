@@ -18,7 +18,7 @@
 			<table class="table">
 				<tbody>
 					<tr>
-						<th>불량 발생 일자</th>
+						<th>작업일자</th>
 						<td>
 							<div class="row">
 								<div class="col-md-5">
@@ -102,7 +102,7 @@
 					},
 					{
 						header : '작업지시번호',
-						name : 'workNo'
+						name : 'workCode'
 					},
 					{
 						header : '불량코드',

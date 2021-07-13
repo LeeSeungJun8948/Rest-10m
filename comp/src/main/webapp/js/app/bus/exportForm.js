@@ -1,4 +1,4 @@
-$( document ).ready(function() {	
+$(document).ready(function() {
 	document.getElementById('fromDate').valueAsDate = new Date();
 	document.getElementById('toDate').valueAsDate = new Date();
 });
@@ -12,58 +12,126 @@ var dataSource = {
 	}
 }
 
+var dataSourceInput = {
+	contentType: 'application/json',
+	api: {
+		readData: { url: 'getExportLot.do', method: 'POST', },
+		modifyData: { url: 'saveExportLot.do', method: 'PUT' },
+  }
+}
 const grid = new tui.Grid({
-	el : document.getElementById('grid'),
-	data : dataSource,
-			scrollX : false,
-			scrollY : false,
+	el: document.getElementById('grid'),
+	data: dataSource,
+	scrollX: false,
+	scrollY: false,
 	rowHeaders: ['checkbox'],
-	columns : [ {
-		header : '제품코드',
-		name : 'productCode',
+	columns: [{
+		header: '제품코드',
+		name: 'productCode',
 		editor: 'text',
+		validation: {
+            required: true
+          },
 		onAfterChange(ev) {
         	findProductName(ev);
+			valueInput(ev);
       		}
-		}, { 
-		header : '제품명',
-		name : 'productName'
-		}, {
-		header : '규격',
-		name : 'stdId'
-		}, {
-		header : '단위',
-		name : 'unitId'
-		}, {
-		header : '주문번호',
-		name : 'orderNo',
-		align : 'right' 
-		}, {
-		header : '기출고량',
-		name : 'outCount'
-		}, {
-		header : '미출고량',
-		name : 'unExport',
-		}, {
-		header : '출고량',
-		name : 'exportCount',
-		editor: 'text',
+	}, {
+		header: '제품명',
+		name: 'productName',
 		onAfterChange(ev) {
         	valueInput(ev);
       		}
-		}, {
-		header : '현재고',
-		name : 'dayCount'
-		}, {
-		header : '금액',
-		name : 'price',
-		
-		},{
-		header : '비고',
-		name : 'comments',
+	}, {
+		header: '규격',
+		name: 'stdId'
+	}, {
+		header: '단위',
+		name: 'unitId'
+	}, {
+		header: '주문번호',
+		name: 'orderNo',
+		align: 'right'
+	}, {
+		header: '기출고량',
+		name: 'outCount'
+	}, {
+		header: '미출고량',
+		name: 'unExportCount',
+	}, {
+		header: '출고량',
+		name: 'exportCount',
+		editor: 'text',
+		validation: {
+			dataType: 'number',
+            required: true
+          },
+		onAfterChange(ev) {
+        	valueInput(ev);
+      		}
+	}, {
+		header: '현재고',
+		name: 'dayCount'
+	}, {
+		header: '금액',
+		name: 'price',
+
+	}, {
+		header: '비고',
+		name: 'comments',
 		editor: 'text'
-		}
+	},{
+		header:'순번',
+		name: 'deIdx',
+		hidden: true
+	}
 	]
+});
+const gridInput = new tui.Grid({
+	el: document.getElementById('gridInput'),
+	scrollX: false,
+	scrollY: true,
+	data: dataSourceInput,
+	columns: [ {
+		header: '제품코드',
+		name: 'productCode'
+		}, {
+		header: '제품명',
+		name: 'productName'
+		}, {
+		header: '제품 LOT',
+		name: 'productLot'
+		}, {
+		header: '출고코드',
+		name: 'exportCode',
+		hidden: true
+		}, {
+		header: '재고량',
+		name: 'productCount',
+		}, {
+		header: '출고량',
+		name: 'exportCount',
+		editor: 'text',
+		validation: {
+			dataType: 'number',
+            required: true
+          },
+		onAfterChange(ev) {
+        	countSum();
+      		}
+		}, {
+		header: '비고',
+		name: 'comments',
+		editor: 'text'	
+		},{
+		header: 'Lot순번',
+		name: 'lotIdx',
+		hidden: true
+		},{
+		header: '세부기록순번',
+		name: 'deIdx',
+		hidden: true
+		} ]
 });
 
 $.fn.serializeObject = function() {
@@ -82,37 +150,35 @@ $.fn.serializeObject = function() {
 	return o;
 };
 // 조회 버튼
-$('#btnView').on('click', function(){
-	   var param = $('#inputFrm').serializeObject();
-				   console.log(param)
-				   grid.readData(1, param, true);
+$("#btnExportModal").on("click", function() {
+	$('#ExportContent').load("exportModal.do");
 });
 
 // 새자료 버튼
-$('#btnReset').on('click', function(){
-	grid.clear();
+$('#btnReset').on('click', function() {
+	resetPage();
 });
 
 // 계획저장 버튼
 $('#btnSave').on('click', function() {
-	if (formCheck()){
+	if (formCheck()) {
 		$.ajax({
 			type: 'POST',
 			url: 'saveExport.do',
 			data: $('#inputFrm').serialize(),
 			dataType: 'json',
 			async: false,
-			success: function(data){
+			success: function(data) {
 				var exportCode = data.data.contents.exportCode;
 				$('#exportCode').val(exportCode);
 				grid.setColumnValues('exportCode', exportCode);
 			}
 		});
 		grid.request('modifyData');
-		grid.on('successResponse', function(ev){
+		grid.on('successResponse', function(ev) {
 			var text = JSON.parse(ev.xhr.responseText);
-			if(text.check == 'save') {
-				grid.readData(1, {exportCode: $('#exportCode').val()}, true);
+			if (text.check == 'save') {
+				grid.readData(1, { exportCode: $('#exportCode').val() }, true);
 			}
 		});
 		toastr.success("저장되었습니다.");
@@ -120,20 +186,21 @@ $('#btnSave').on('click', function() {
 });
 
 // 삭제 버튼
-$('#btnDel').on('click', function(){
+$('#btnDel').on('click', function() {
 	$.ajax({
 		type: 'POST',
 		url: 'deleteExport.do',
-		data: $('#exportCode').val(),
+		data: {exportCode: $('#exportCode').val()},
 		dataType: 'json',
-		success: function(){
+		success: function() {
+			resetPage();
 			toastr.success("삭제되었습니다.");
 		}
 	});
 });
 
 // 미출고 읽기 버튼
-$('#btnRead').on('click',  function(){
+$('#btnRead').on('click', function() {
 	var param = $('#dateForm').serializeObject();
 	console.log(param)
 	grid.readData(1, param, true);
@@ -148,7 +215,7 @@ $('#productCode').on('click', function(){
 
 
 // 삭제버튼
-$('#btnGridDel').on('click', function(){
+$('#btnGridDel').on('click', function() {
 	grid.removeCheckedRows(false);
 });
 
@@ -162,30 +229,90 @@ grid.on('uncheck', ev => {
 // ???????
 
 // 제품명찾기
-function findProductName(ev){
+function findProductName(ev) {
 	var rowKey = ev.rowKey;
 	var productCode = grid.getValue(rowKey, 'productCode');
-	
-	if(checkNull(productCode)){
+
+	if (checkNull(productCode)) {
 		$.ajax({
 			type: 'POST',
 			url: 'findProductName.do',
-			data: {'productCode': productCode},
+			data: { 'productCode': productCode },
 			success: function(data) {
 				grid.setValue(rowKey, 'productName', data, false);
 			}
-		});	
+		});
 	}
 }
 
-function checkNull(value){
+// 더블클릭해서 투입자재 설정
+grid.on('dblclick', (ev) => {
+	var rowKey = ev.rowKey;
+	var productCode = grid.getValue(rowKey, 'productCode');
+	var productName = grid.getValue(rowKey, 'productName');
+	var exportCount = grid.getValue(rowKey, 'exportCount');
+	var deIdx = grid.getValue(rowKey, 'deIdx');
+	var exportCode = grid.getValue(rowKey, 'exportCode');
+	if (deIdx != null) {
+		$('#exportCount').val(exportCount);
+		$('#productCode').val(productCode);
+		$('#productName').val(productName);
+		var param = {'productCode': productCode, 'deIdx': deIdx, 'exportCode': exportCode};
+		gridInput.readData(1, param, true);
+	}
+});
+// 제품코드, 작업량 입력시 폼에 입력
+function valueInput(ev) {
+	var rowKey = ev.rowKey;
+	var productCode = grid.getValue(rowKey, 'productCode');
+	var productName = grid.getValue(rowKey, 'productName');
+	var exportCount = grid.getValue(rowKey, 'exportCount');
+	var deIdx = grid.getValue(rowKey, 'deIdx');
+	var exportCode = grid.getValue(rowKey, 'exportCode');
+	if (deIdx != null) {
+		$('#exportCount').val(exportCount);
+		$('#productCode').val(productCode);
+		$('#productName').val(productName);
+		gridInput.setColumnValues('deIdx', deIdx);
+		gridInput.setColumnValues('exportCode', exportCode);
+	}
+}
+
+// 투입량 합계
+function countSum(){
+	var exportCount = gridInput.getColumnValues('exportCount');
+	var sum = 0;
+	for(count of exportCount){
+		if (checkNull(count)){
+			sum += parseInt(count);
+		}
+	}
+	$('#totalCount').val(sum);
+}
+
+function checkNull(value) {
 	return value != null && value != '' && value != '[object HTMLInputElement]';
+}
+//모달
+var forGrid = false;
+$("#btnCompModal").on("click", function(e) {
+	$('#compContent').load("compModalForProd.do");
+});
+$(document).on('show.bs.modal', '#btnCompModal', function() {
+});
+
+// 초기화
+function resetPage() {
+	$("form").each(function() {
+		this.reset();
+	});
+	grid.clear();
+	$('#exportCode').val('exportCode');
 }
 
 // 폼체크
 function formCheck() {
-	if(!checkNull($('#fromDate').val()) || !checkNull($('#searchKeywordFrom').val()) 
-		|| !checkNull($('#searchKeywordFromNm').val())) {
+	if (!checkNull($('#exportDate').val()) || !checkNull($('#companyName').val())) {
 		toastr.warning('값을 입력해주십시오.');
 		return false;
 	} else {

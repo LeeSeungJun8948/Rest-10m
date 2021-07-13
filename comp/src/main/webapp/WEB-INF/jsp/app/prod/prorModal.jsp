@@ -3,7 +3,7 @@
 	
 <div id="modalContent">	
 	<div class="modal-header">
-		<h4 class="modal-title">생산계획 조회</h4>
+		<h4>생산지시 조회</h4>
 		<button id="btnCloseTop" type="button" class="close" data-dismiss="modal" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
@@ -11,7 +11,7 @@
 	<div class="modal-body">
 		<form class="form-row mb-4" id="modalFrm" name="modalFrm">
 			<div class="col-2">
-				<span>계획일자</span>
+				<span>지시일자</span>
 			</div>
 			<div class="col-3">
 				<input type="date" class="form-control" id="searchDtS" name="searchDtS">
@@ -35,4 +35,4 @@
 </div>
 
 <link href="${pageContext.request.contextPath}/css/app/prod/prod.css" rel="stylesheet">
-<script type="text/javascript" src="js/app/prod/planModal.js"></script>
+<script type="text/javascript" src="js/app/prod/prorModal.js"></script>

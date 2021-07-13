@@ -17,29 +17,43 @@
 				<tbody>
 					<tr>
 						<th>계획일자<span style="color: red">*</span></th>
-						<td><input type="date" id="planDate" name="planDate" required></td>
+						<td><input type="date" class="form-control" id="planDate" name="planDate" required></td>
 					</tr>
 					<tr>
 						<th>생산계획명<span style="color: red">*</span></th>
-						<td><input type="text" id="planName" name="planName" required></td>
+						<td><input type="text" class="form-control" id="planName" name="planName" required></td>
 					</tr>
 					<tr>
 						<th>특기사항</th>
-						<td><input type="text" id="comments" name="comments"></td>
+						<td><input type="text" class="form-control" id="comments" name="comments"></td>
 					</tr>
 				</tbody>
 			</table>
 		</form>
 	</div>
 	<div class="mb-2 col-lg-6">
-		<div>
-			<h5>미완료주문 검색</h5>
+		<div class="mb-4">
+			<h5><strong>미완료주문 검색</strong></h5>
 		</div>
 		<div>
 			<form id="dateFrm" name="dateFrm">
-				<span>납기일자 </span><input type="date" id="planDtS" name="planDtS">
-				<span>&nbsp;~&nbsp;</span><input type="date" id="planDtE" name="planDtE">&nbsp;
-				<button type="button" class="btn btn-primary" id="btnRead">불러오기</button>
+				<div class="form-row">
+					<div class="col-2" align="center">
+						<span>납기일자</span>
+					</div>
+					<div class="col-3">
+						<input type="date" class="form-control" id="planDtS" name="planDtS">
+					</div>
+					<div class="col-1" align="center">
+						<span>~</span>
+					</div>
+					<div class="col-3">
+						<input type="date" class="form-control" id="planDtE" name="planDtE">
+					</div>
+					<div class="col-2">
+						<button type="button" class="btn btn-primary" id="btnRead">불러오기</button>
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>
@@ -51,30 +65,6 @@
 <div class="col-lg-12">
 	<div id="grid"></div>
 </div>
-<br><br><br><br>
-<div>
-	<form>
-		<div class="table">
-			<table class="table">
-				<tbody>
-					<tr>
-						<th>제품코드</th>
-						<td><input type="text" id="productCode" name="productCode" readonly="true"></td>
-						<th>제품명</th>
-						<td><input type="text" id="productName" name="productName" readonly="true"></td>
-						<th>작업량</th>
-						<td><input type="text" id="workCount" name="workCount" readonly="true"></td>
-						<th>소요량</th>
-						<td><input type="text" id="totalCount" name="totalCount" readonly="true"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</form>
-</div>
-<div>
-	<div id="gridInput"/>
-</div>
 <div class="modal fade" id="planModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content" id="planContent" align="center">
@@ -82,4 +72,5 @@
 	</div>
 </div>
 
+<link href="${pageContext.request.contextPath}/css/app/prod/prod.css" rel="stylesheet">
 <script type="text/javascript" src="js/app/prod/managePlan.js"></script>

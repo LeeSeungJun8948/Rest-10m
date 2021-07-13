@@ -3,20 +3,18 @@ package com.rest.app.prod.vo;
 import lombok.Data;
 
 @Data
-public class DetailPlanVO {
-	int deplanIdx;
-	String planCode;
+public class DetailProrderVO {
+	String productLot;
+	String prorCode;
 	String productName;
-	String outDate;
-	int orderNo;
+	String planDate;
+	String planCode;
 	int productCode;
 	String workDate;
-	int orderCount;
 	int planCount;
 	int prorCount;
-	int unplanCount;
 	int unprorCount;
 	int workCount;
 	String comments;
-	String planDate;
+	int deplanIdx;
 }
