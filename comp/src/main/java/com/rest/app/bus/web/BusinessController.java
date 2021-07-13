@@ -127,6 +127,7 @@ public class BusinessController {
 		Map<String, Object> data = new HashMap<String, Object>();
 		dao.deleteExport(exportCode);
 		dao.deleteAllDetailExport(exportCode);
+		dao.deleteAllExportLot(exportCode);
 		data.put("result", true);
 		data.put("check", "save");
 		return data;

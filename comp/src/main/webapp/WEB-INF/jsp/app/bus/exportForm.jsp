@@ -19,23 +19,26 @@
 				<tbody>
 					<tr>
 						<th>출고일자</th>
-						<td><input type="date" name="exportDate" id="exportDate"></td>
-						<!-- <th>출고번호</th>
-						<td><input type="export" id="Lot" name="Lot"></td> -->
+						<td>
+							<div class="row">
+								<div class="col-md-5">
+									<input type="date" class="form-control" id="exportDate"
+										name="exportDate">
+								</div>
+							</div>
+						</td>
 					</tr>
 					<tr>
-						<th>고객사코드</th>
+						<th>고객사</th>
 						<td><input type="text" id="companyCode" name="companyCode" />
 							<button id="btnCompModal" type="button" class="btn btn-toggle"
 								data-remote="false" data-toggle="modal" data-target="#compModal">
 								<img alt="btn_search"
 									src="<c:url value='/images/app/all/btn_search.png'/>">
-							</button></td>
-						<th>고객사</th>
-						<td><input type="text" id="companyName" name="companyName"
+							</button> <input type="text" id="companyName" name="companyName"
 							readonly="true" /></td>
 					</tr>
-					<tr>
+
 						<th>특기사항</th>
 						<td><input type="text" id="comments" name="comments"></td>
 					</tr>
@@ -98,10 +101,12 @@
 
 <div class="modal fade" id="exportModal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content" id="ExportContent" align="center"></div>
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content" id="ExportContent" align="center">
+		</div>
 	</div>
 </div>
 
-<link href="${pageContext.request.contextPath}/css/app/prod/prod.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/app/prod/prod.css"
+	rel="stylesheet">
 <script type="text/javascript" src="js/app/bus/exportForm.js"></script>
