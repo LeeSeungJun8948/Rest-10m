@@ -119,4 +119,8 @@ const dataSource = {
 	});
 	
 
-	
+	function numberWithCommas(x) {
+ 	 x = x.replace(/[^0-9]/g,'');   
+ 	 x = x.replace(/,/g,'');        
+ 	 $("#cost").val(x.replace(/\B(?=(\d{3})+(?!\d))/g, ","));  
+}

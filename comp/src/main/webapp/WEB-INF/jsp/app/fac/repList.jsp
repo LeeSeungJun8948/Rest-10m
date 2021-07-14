@@ -5,14 +5,14 @@
 <h1 class="h3 mb-4 text-gray-700">설비 수리내역 관리</h1>
 <form action="insertRep.do" method="post" id="frm" name="frm"
 	onsubmit="return test()">
-	<div class="mb-4">
+	<div class="mb-4" style="float:right">
 		<input type="submit" class="btn btn-primary" value="저장">
 		<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
 		<button type="button" class="btn btn-primary" id="btnUpdate">수정</button>
 		<button type="reset" class="btn btn-primary">새입력</button>
 	</div>
 	<div class="row">
-		<div class="mb-4 col-lg-8">
+		<div class="mb-4">
 			<table class="table">
 				<tbody>
 					<tr>
@@ -36,7 +36,7 @@
 									src="<c:url value='/images/app/all/btn_search.png'/>">
 							</button></td>
 						<th>수리금액</th>
-						<td><input type="text" id="cost" name="cost"></td>
+						<td><input type="text" id="cost" name="cost" onkeyup="numberWithCommas(this.value)"></td>
 					</tr>
 					<tr>
 						<th>비고</th>
