@@ -194,7 +194,15 @@ public class BomController {
 	// 공정리스트
 	@RequestMapping("processList.do")
 	public String processList(Model model, ProcessVO vo) {
+		
 		return "comm/processList.page";
+	}
+	//max 공정코드
+	@RequestMapping("/ajax/maxProcessCode.do")
+	@ResponseBody
+	public ProcessVO maxProcessCode(ProcessVO vo) {
+		
+		return pdao.maxProcessCode();
 	}
 
 	// 공정리스트 ajax
