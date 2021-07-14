@@ -216,6 +216,7 @@ public class BusinessController {
 		data.put("data", datas);
 		return data;
 	}
+
 	// 제품Lot 모달 페이지 리턴
 	@RequestMapping("/prodLotModal.do")
 	public String prodLotModal() {
@@ -234,6 +235,23 @@ public class BusinessController {
 		datas.put("contents", dao.getProdLotModal(vo));
 		data.put("data", datas);
 
+		return data;
+	}
+
+	@RequestMapping("viewExport.do") // 출고조회페이지
+	public String viewExport(Model model) {
+		return "bus/viewExport.page";
+	}
+
+	// 출고
+	@RequestMapping("viewExportSearch.do")
+	@ResponseBody
+	public Map<String, Object> viewExportSearch(@RequestBody Map<String, Object> param) {
+		Map<String, Object> datas = new HashMap<>();
+		Map<String, Object> data = new HashMap<>();
+		data.put("result", true);
+		datas.put("contents", dao.viewExportSearch(param));
+		data.put("data", datas);
 		return data;
 	}
 }

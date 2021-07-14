@@ -13,7 +13,6 @@ import com.rest.app.bus.vo.ExportLotVO;
 import com.rest.app.bus.vo.ExportVO;
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.comm.vo.BomVO;
-import com.rest.app.prod.vo.DetailProrderVO;
 
 
 @Service("businessService")
@@ -24,14 +23,12 @@ public class BusinessServiceImpl implements BusinessService {
 	
 	@Override
 	public List<OrdersVO> getBus(Map<String, Object> param) {//주문관리조회
-		// TODO Auto-generated method stub
 		return mapper.getBus(param);
 	}
 	
 
 	@Override
 	public List<ExportVO> getExportModal(Map<String, Object> param) {//출고 모달창
-		// TODO Auto-generated method stub
 		return mapper.getExportModal(param);
 	}
 
@@ -43,12 +40,10 @@ public class BusinessServiceImpl implements BusinessService {
 
 	@Override
 	public List<CompanyVO> getCompany(CompanyVO vo) {//고객사모달창
-		// TODO Auto-generated method stub
 		return mapper.getCompany(vo);
 	}
 	@Override
 	public List<BomVO> getProduct(BomVO vo) {
-		// TODO 모달창 제품명,제품코드,규격 리스트
 		return mapper.getProduct(vo);
 	}   
 	
@@ -99,14 +94,12 @@ public class BusinessServiceImpl implements BusinessService {
 
 	@Override
 	public List<ExportVO> searchExport(Map<String, Object> param) {
-		// TODO Auto-generated method stub
 		return mapper.searchExport(param);
 	}
 
 
 	@Override
 	public List<DetailExportVO> getDetailExport(Map<String, Object> param) {
-		// TODO Auto-generated method stub
 		return mapper.getDetailExport(param);
 	}
 
@@ -122,46 +115,41 @@ public class BusinessServiceImpl implements BusinessService {
 
 	@Override
 	public int insertExportLot(ExportLotVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.insertExportLot(vo);
 	}
 
 
 	@Override
 	public int updateExportLot(ExportLotVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.updateExportLot(vo);
 	}
 
 
 	@Override
 	public int deleteExportLot(int lotIdx) {
-		// TODO Auto-generated method stub
 		return mapper.deleteExportLot(lotIdx);
 	}
 
 
 	@Override
 	public int deleteAllExportLot(String exportCode) {
-		// TODO Auto-generated method stub
 		return mapper.deleteAllExportLot(exportCode);
 	}
 
 
 	@Override
 	public List<ExportLotVO> readExportLot(Map<String, Object> param) {
-		// TODO Auto-generated method stub
 		return mapper.readExportLot(param);
 	}
 
 
 	@Override
 	public List<ExportVO> getProdLotModal(ExportLotVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.getProdLotModal(vo);
 	}
 
-
-	
-	
+	@Override
+	public List<ExportLotVO> viewExportSearch(Map<String, Object> param) {
+		return mapper.viewExportSearch(param);
+	}
 }

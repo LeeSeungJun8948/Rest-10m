@@ -236,4 +236,16 @@
 		</where>
 		ORDER BY lot_idx
 	</select>
+	
+	<select id="viewExportSearch" resultType="com.rest.app.bus.vo.DetailExportVO">
+		SELECT d.*, TO_CHAR(e.export_date,'YYYY-MM-DD') export_date, e.company_code, p.*, o.order_count
+		FROM detailexport d, export e, product p, orders o
+		WHERE d.export_code = e.export_code
+		AND d.order_no = o.order_no
+		AND d.product_code = p.product_code
+			<if test="keyword != null and keyword !=''">
+				AND ${searchCondition} like '%'||#{keyword}||'%'
+			</if>
+		ORDER BY e.export_date
+	</select>
 </mapper>

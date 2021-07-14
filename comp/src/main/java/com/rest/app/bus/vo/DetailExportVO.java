@@ -21,4 +21,5 @@ public class DetailExportVO {
 	int outCount;
 	int companyCode;
 	int dayCount;
+	int orderCount;
 }

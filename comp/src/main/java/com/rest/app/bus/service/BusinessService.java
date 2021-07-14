@@ -53,4 +53,6 @@ public interface BusinessService {
 	List<ExportLotVO> readExportLot(Map<String, Object> param);
 
 	public List<ExportVO> getProdLotModal(ExportLotVO vo);//제품Lot 
+	
+	List<ExportLotVO> viewExportSearch(Map<String, Object> param);
 }
