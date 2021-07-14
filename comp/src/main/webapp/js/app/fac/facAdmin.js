@@ -95,10 +95,7 @@ $( function() {
 		}, {
 			header : '구매일자',
 			name : 'purchaseDate'
-		}, {
-			header : '공정코드',
-			name : 'processCode'
-		} ]
+		}]
 		
 	});
 		

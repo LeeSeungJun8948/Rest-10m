@@ -17,10 +17,17 @@
 		f.FAC_INSPECTION,
 		f.PURCHASE_DATE,
 		f.IMG,
-		f.PROCESS_CODE,
    		p.process_name
 		from facilities f, process p
-  		where f.process_code=p.process_code
+  		<where>
+  		f.process_code=p.process_code
+  		<if test="searchCondition == 'facilitiesName'">and
+  			f.facilities_name LIKE '%' || #{searchKeyword} || '%'
+  		</if>
+  		<if test="searchCondition == 'processName'">and
+  			p.process_name LIKE '%' || #{searchKeyword} || '%'
+  		</if>
+  		</where>
    		order by fac_code
 	</select>
 	<insert id="insertFac"
