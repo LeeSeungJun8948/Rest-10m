@@ -3,9 +3,9 @@ function test() {
 		toastr.warning('설비명을 입력해주십시오.');
 			return false;
 		} else
-			return true;
+			return true; 
 	}
-
+   
 // 탭 기능
 $( function() {
     $( "#tabs" ).tabs({ activate: function( event, ui ) {
