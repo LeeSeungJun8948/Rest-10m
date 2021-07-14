@@ -109,7 +109,7 @@ $('#searchBtn').on('click',function(){
 		   grid.readData(1, param, true);
 		});
 $('#resetBtn').on('click', function(){
-	grid.clear();
+	resetPage();
 });
 	
 function checkNull(value){

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-<div id="modalContent">
+<div id="prodLotContent">
 	<div class="modal-header">
 		<h5 class="modal-title">제품Lot 검색</h5>
 		<button id="btnCloseTop" type="button" class="close"
@@ -15,7 +15,7 @@
 			<div class="row">
 				<div class="col-md-4 mr-0 ml-3">
 					<select class="custom-select" name="searchCondition">
-						<option value="productLot" selected>제품Lot코드</option>
+						<option value="product_lot" selected>제품Lot코드</option>
 					</select>
 				</div>
 				<div class="col-md-5">

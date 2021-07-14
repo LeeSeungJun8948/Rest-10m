@@ -156,10 +156,20 @@ public class BusinessServiceImpl implements BusinessService {
 
 
 	@Override
-	public List<ExportVO> getProdLotModal(ExportLotVO vo) {
+	public List<ExportLotVO> getProdLotModal(Map<String, Object> param) {
 		// TODO Auto-generated method stub
-		return mapper.getProdLotModal(vo);
+		return mapper.getProdLotModal(param);
 	}
+
+
+	@Override
+	public List<ExportLotVO> searchProdLotModal(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return mapper.searchProdLotModal(param);
+	}
+
+
+	
 
 
 	

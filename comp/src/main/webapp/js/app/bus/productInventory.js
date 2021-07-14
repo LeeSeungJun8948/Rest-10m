@@ -82,7 +82,7 @@ $('#btnView').on('click', function() {
 	grid.readData(1, param, true);
 });
 $('#resetBtn').on('click', function() {
-	grid.clear();
+	resetPage();
 });
 function checkNull(value) {
 	return value != null && value != '' && value != '[object HTMLInputElement]';
@@ -102,7 +102,10 @@ var forGrid = false;
 $("#btnProdModal").on("click", function(e) {
 	$('#prodContent').load("prodModal.do");
 });
+$("#btnProdLotModal").on("click", function(e) {
+	$('#modalContent').load("prodLotModal.do");
+});
 // ???????
-$(document).on('show.bs.modal', '#btnCompModal', function() {
+$(document).on('show.bs.modal','#btnProdLotModal', function () {
 });
 

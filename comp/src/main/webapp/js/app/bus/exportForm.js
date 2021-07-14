@@ -326,11 +326,17 @@ function resetPage() {
 
 // 폼체크
 function formCheck() {
-	if (!checkNull($('#exportDate').val()) || !checkNull($('#companyName').val())) {
-		toastr.warning('값을 입력해주십시오.');
-		return false;
-	} else {
-		return true;
-	}
+   if (!checkNull($('#exportDate').val()) || !checkNull($('#companyName').val())) {
+      toastr.warning('지시 정보를 입력해주십시오.');
+      return false;
+   } else if(checkNull($('#exportCount').val()) && ($('#exportCount').val() > $('#totalCount').val()) && $('#totalCount').val() != 0) {
+      toastr.warning('총 출고량이 부족합니다.');
+      return false;
+   } else if(checkNull($('#exportCount').val()) && ($('#exportCount').val() < $('#totalCount').val())) {
+      toastr.warning('총 출고량이 초과합니다.');
+      return false;      
+   } else {
+      return true;
+   }
 }
 

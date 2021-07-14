@@ -216,24 +216,22 @@ public class BusinessController {
 		data.put("data", datas);
 		return data;
 	}
-	// 제품Lot 모달 페이지 리턴
-	@RequestMapping("/prodLotModal.do")
-	public String prodLotModal() {
-		return "app/modal/prodLotModal";
-	}
+	// 출고관리 - 조회 모달
+		@RequestMapping("prodLotModal.do")
+		public String getProdLotModal() {
+			return "app/bus/prodLotModal";
+		}
 
-	// 제품Lot 모달 그리드 데이터 리턴
-	@RequestMapping("/ajax/prodLotModal.do")
-	@ResponseBody
-	public Map<String, Object> ajaxProdLotModal(Model model, ExportLotVO vo) { // 공정 요약 리스트 출력
-		System.out.println("====================");
-		Map<String, Object> datas = new HashMap<>();
-		Map<String, Object> data = new HashMap<>();
-
-		data.put("result", true);
-		datas.put("contents", dao.getProdLotModal(vo));
-		data.put("data", datas);
-
-		return data;
-	}
+		// 모달 출고검색
+		@RequestMapping("/searchProdLot.do")
+		@ResponseBody
+		public Map<String, Object> searchProdLotModal(@RequestBody Map<String, Object> param) {
+			System.out.println(param + "----------------");
+			Map<String, Object> data = new HashMap<String, Object>();
+			Map<String, Object> datas = new HashMap<String, Object>();
+			datas.put("contents", dao.searchProdLotModal(param));
+			data.put("result", true);
+			data.put("data", datas);
+			return data;
+		}
 }
