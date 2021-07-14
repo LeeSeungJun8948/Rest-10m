@@ -1,5 +1,5 @@
 package com.rest.app.fac.web;
-
+ 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -41,7 +41,7 @@ class GridData {
 	}
 
 	public void setDeletedRows(List<FacilitiesVO> deletedRows) {
-		this.deletedRows = deletedRows;
+		this.deletedRows = deletedRows;  
 	}
 	
 }

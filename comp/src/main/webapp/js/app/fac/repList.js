@@ -9,8 +9,8 @@ function test() {
 		} else
 			return true;
 	}
-
-const dataSource = {
+ 
+const dataSource = { 
 		api : {
 			readData : {
 				url : 'ajax/repList.do',
