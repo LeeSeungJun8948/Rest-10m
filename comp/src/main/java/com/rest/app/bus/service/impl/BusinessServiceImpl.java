@@ -151,7 +151,7 @@ public class BusinessServiceImpl implements BusinessService {
 	@Override
 	public List<ExportLotVO> readExportLot(Map<String, Object> param) {
 		// TODO Auto-generated method stub
-		return null;
+		return mapper.readExportLot(param);
 	}
 
 

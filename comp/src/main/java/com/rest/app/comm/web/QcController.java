@@ -81,10 +81,11 @@ public class QcController {
 	
 	@RequestMapping("QualityControl.do")
 	public String QualityControl(Model model , QualityControlVO vo) {
-		model.addAttribute("use", dao.getProduct(vo));
+		
 		model.addAttribute("empList", dao.getEmpList(vo));
 		model.addAttribute("unit", dao.getUnitList(vo));
 		model.addAttribute("std", dao.getCodeList(vo));
+		model.addAttribute("max", dao.maxProductCode());
 		return "comm/QualityControl.page";
 	}
 	
@@ -95,7 +96,9 @@ public class QcController {
 		mv.setViewName("/comm/QualityControl.page");
 		mv.addObject("proInfo", dao.getProduct(vo));
 		mv.addObject("company", dao.getCompany(vo));
+		System.out.println();
 		return mv;
+		
 	}
 	//제품 단건 조회 ajax
 	@RequestMapping("/ajax/getProduct.do")
@@ -106,6 +109,7 @@ public class QcController {
 		data.put("result", true);
 		datas.put("contents", dao.getProduct(vo));
 		data.put("data", datas);
+		
 		return data;
 	}
 	
@@ -135,7 +139,7 @@ public class QcController {
 	//불량코드,명  modify
 	@PutMapping(value = "/ajax/modifyProduct.do")
 	@ResponseBody
-	public Map<String, Object> modifyProduct(@RequestBody qcGrid qcgrid) {
+	public Map<String, Object> modifyProduct(@RequestBody qcGrid qcgrid , QualityControlVO vo) {
 		Map<String, Object> data = new HashMap<String, Object>();
 
 		for (int i = 0; i < qcgrid.createdRows.size(); i++) {
@@ -147,6 +151,7 @@ public class QcController {
 		data.put("result", true);
 		data.put("data", qcgrid.createdRows);
 		data.put("data", qcgrid.updatedRows);
+
 		return data;
 	}
 	
@@ -162,9 +167,9 @@ public class QcController {
 		data.put("data", qcgrid.deletedRows);
 		return data;
 	}
-	//저장
-	@RequestMapping(value= "/updateProduct.do")
-	public String updateProduct(HttpServletRequest request, QualityControlVO vo) throws IllegalStateException, IOException {
+	//제품저장
+	@RequestMapping(value= "/insertProduct.do")
+	public String insertProduct(HttpServletRequest request, QualityControlVO vo) throws IllegalStateException, IOException {
 		MultipartFile uploadFile = vo.getUploadFile();
 		String fileName = null;
 		if(uploadFile !=null && !uploadFile.isEmpty() && uploadFile.getSize()>0) {
@@ -174,10 +179,26 @@ public class QcController {
 			//첨부파일명 VO에 지정
 			vo.setQcImg(fileName);
 		}
-		dao.updateProdcut(vo);
+		System.out.println("************************************");
+		dao.insertProduct(vo);
 		return "redirect:QualityControl.do";
 	}
-	
+	//제품 수정
+	@RequestMapping("/ajax/updateProdcut.do")
+	@ResponseBody
+	public int ajaxUpdateProdcut(Model model, QualityControlVO vo ) throws IllegalStateException, IOException {
+		MultipartFile uploadFile = vo.getUploadFile();
+		String fileName = null;
+		if(uploadFile !=null && !uploadFile.isEmpty() && uploadFile.getSize()>0) {
+			fileName = uploadFile.getOriginalFilename();
+			String storePathString = EgovProperties.getProperty("Globals.fileStorePath");
+			uploadFile.transferTo(new File(storePathString, fileName));
+			//첨부파일명 VO에 지정
+			vo.setQcImg(fileName);
+		}
+		
+		return dao.updateProdcut(vo);
+	}
 	
 	//이미지 업로드 
 	@RequestMapping(value = "/qcfiledown.do")

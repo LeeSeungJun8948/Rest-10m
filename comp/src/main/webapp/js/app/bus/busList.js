@@ -13,7 +13,6 @@ const grid = new tui.Grid({
 	data : dataSource,
 	scrollX : false,
 	scrollY : false,
-	rowHeaders: ['checkbox'],
 	columns : [ {
 		header : '진행구분',
 		name : 'orderState'
@@ -52,7 +51,7 @@ const grid = new tui.Grid({
 		name : 'notCount'
 	}, {
 		header : '비   고',
-		name : 'remark'
+		name : 'comments'
 	} ], 
 	summary:{
 	    height:40,

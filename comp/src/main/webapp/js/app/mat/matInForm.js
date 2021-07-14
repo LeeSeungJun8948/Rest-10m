@@ -254,57 +254,28 @@ $("#btnGridDel").on("click", function(ev){
 
 
 $("#btnSave").on("click", function(){
-	for(var i = 0 ; i < grid.getRowCount() ; i++){
-		
-		if(checkEmpty(i, 'ioDate', '입고일자를 입력하세요.'));
-		else if(checkDate(i, 'ioDate', '입고일자를 확인하세요.'));
-		else if(checkEmpty(i, 'inorderCode', '발주번호를 입력하세요.'));
-		else if(checkEmpty(i, 'ioVolume', '입고량을 확인하세요.'));
-		else if(checkNum(i, 'ioVolume', '입고량을 확인하세요.'));
-		else if(checkEmpty(i, 'unitPrice', '단가를 입력하세요.'));
-		else if(checkNum(i, 'unitPrice', '단가를 확인하세요.'));
-		else{
-			if(i == grid.getRowCount()-1)
-				grid.request('modifyData');
+	
+	for(var valid of grid.validate()){
+		for(var errors of valid.errors){
+			var header;
+			for(var column of grid.getColumns()){
+				if(column.name == errors.columnName)
+					header = column.header;
+			}
+			toast(header+'를 확인하세요.',grid.getValue(valid.rowKey, 'ioCode'));	
 		}
 	}
-});
-
-function checkEmpty(rowKey, columnName, text){
-	if(!checkNull(grid.getValue(rowKey, columnName))){
-		toast(text, 'No.'+grid.getValue(rowKey, 'ioCode'));
-		focus(rowKey, columnName, true);
-		return true;
-	}else
-		return false;
-}
-
-function checkDate(rowKey, columnName, text){
-	var datatimeRegexp = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
-	if(!datatimeRegexp.test(grid.getValue(rowKey, columnName))){
-		toast(text, 'No.'+grid.getValue(rowKey, 'ioCode'));
-		grid.setValue(rowKey, columnName, '', false);
-		focus(rowKey, columnName, true);
-		return true;
-	}else
-		return false;
-}
-
-function checkNum(rowKey, columnName, text){
-	if(isNaN(grid.getValue(rowKey, columnName)) || grid.getValue(rowKey, columnName) < 0){
-		toast(text, 'No.'+grid.getValue(rowKey, 'ioCode'));
-		grid.setValue(rowKey, columnName, '', false);
-		focus(rowKey, columnName, true);
-		return true;
-	}else
-		return false;
 	
-}
+	if(grid.validate().length == 0){
+		grid.request('modifyData');
+	}
+	
+});
 
 function toast(text, title){
 	toastr.options = {
 		closeButton: true,
-		showDuration: "200"
+		showDuration: "500"
  	};
 	toastr.error(text,title);
 }
@@ -327,22 +298,30 @@ function getFormatDate(date){
 var forGrid = false;
 // 자재 돋보기
 $("#btnMatModal").on("click", function(e) {
+	$('#materialCode').val('');
+	$('#materialName').val('');
     $('#matContent').load("matModal.do");
 });
 
 // 자재코드 입력창
 $('#materialCode').on('click', function(){
+	$('#materialCode').val('');
+	$('#materialName').val('');
 	$('#matModal').modal('show');
 	$('#matContent').load("matModal.do");
 });
 
 // 업체 돋보기
 $("#btnCompModal").on("click", function(e) {
+	$('#companyCode').val('');
+	$('#companyName').val('');
     $('#compContent').load("compModal.do");
 });
 
 // 업체코드 입력창
 $('#companyCode').on('click',function(){
+	$('#companyCode').val('');
+	$('#companyName').val('');
 	$('#compModal').modal('show');
 	$('#compContent').load("compModal.do");
 	

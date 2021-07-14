@@ -28,11 +28,12 @@ public class OrdersVO {
 	int exportCount;//출고량
 	String productLot;//제품Lot
 	int outCount;//출고량
-	int unExport;//미출고량
+	int unExportCount;//미출고량
 	String export;//출고,미출고 여부
 	int price; //금액
 	String keyword;
 	String searchCondition;
 	String exportCode;//출고번호
+	String comments;//비고
 	
 }

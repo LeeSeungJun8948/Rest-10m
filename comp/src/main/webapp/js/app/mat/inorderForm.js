@@ -132,22 +132,30 @@ function checkNull(value){
 var forGrid = false;
 // 자재 돋보기
 $("#btnMatModal").on("click", function(e) {
+	$('#materialCode').val('');
+	$('#materialName').val('');
     $('#matContent').load("matModal.do");
 });
 
 // 자재코드 입력창
 $('#materialCode').on('click', function(){
+	$('#materialCode').val('');
+	$('#materialName').val('');
 	$('#matModal').modal('show');
 	$('#matContent').load("matModal.do");
 });
 
 // 업체 돋보기
 $("#btnCompModal").on("click", function(e) {
+	$('#companyCode').val('');
+	$('#companyName').val('');
     $('#compContent').load("compModal.do");
 });
 
 // 업체 코드 입력창
 $('#companyCode').on('click', function(){
+	$('#companyCode').val('');
+	$('#companyName').val('');
 	$('#compModal').modal('show');
 	$('#compContent').load("compModal.do");
 });

@@ -11,4 +11,7 @@ String exportCode;//출고번호
 String productLot;//제품lot
 int exportCount;//출고량
 String comments;//비고
+int productCode;
+String productName;
+int productCount;//재고량
 }

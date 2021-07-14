@@ -11,8 +11,11 @@ import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
 import com.rest.app.mat.vo.ProcMoveVO;
 import com.rest.app.mat.vo.SelectListVO;
+import com.sun.star.configuration.backend.PropertyInfo;
 
 import lombok.extern.log4j.Log4j;
+import net.sourceforge.barbecue.Barcode;
+import net.sourceforge.barbecue.BarcodeFactory;
 
 @Service("MaterialService")
 public class MaterialServiceImpl implements MaterialService{
@@ -178,4 +181,21 @@ public class MaterialServiceImpl implements MaterialService{
 	public List<ProcMoveVO> getInputMat(ProcMoveVO vo){
 		return mapper.getInputMat(vo);
 	}
+
+	@Override
+	public List<ProcMoveVO> getProcStatus(ProcMoveVO vo) {
+		List<ProcMoveVO> list = mapper.getProcStatus(vo);
+		for(ProcMoveVO data : list) {
+			if(data.getWorkCode() == null) {
+				data.setStatus("예정");
+			}else if(data.getEndTime() == null) {
+				data.setStatus("진행중");
+			}else {
+				data.setStatus("완료");
+			}
+		}
+		return list;
+	}
+
+	
 }

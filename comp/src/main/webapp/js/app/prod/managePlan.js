@@ -200,8 +200,8 @@ function valueInput(ev) {
 function resetPage() {  
 	$("form").each(function() {  
         this.reset();
-		grid.clear();
     });  
+	grid.clear();
 	$('#planCode').val('planCode');
 }
 
