@@ -2,6 +2,7 @@ package com.rest.app.mat.service.impl;
 
 import java.util.List;
 
+import com.rest.app.mat.vo.CommonCodeVO;
 import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
@@ -52,11 +53,26 @@ public interface MaterialMapper {
 	public List<InoutVO> getMatAdjustList(InoutVO vo);
 	
 	public int istMatAdjust(InoutVO vo);
+	
 	public int udtMatAdjust(InoutVO vo);
+	
 	public int delMatAdjust(InoutVO vo);
 
 	public InoutVO getInoutNo(InoutVO vo);
 	
+	// 공통 코드
+	public List<CommonCodeVO> getCodeIdList(CommonCodeVO vo);
+	public List<CommonCodeVO> getCodeList(CommonCodeVO vo);
+	
+	public int istCodeId(CommonCodeVO vo);
+	public int udtCodeId(CommonCodeVO vo);
+	public int delCodeId(CommonCodeVO vo);
+	public int istCode(CommonCodeVO vo);
+	public int udtCode(CommonCodeVO vo);
+	public int delCode(CommonCodeVO vo);
+	
+	
+	// 공정이동표
 	public List<ProcMoveVO> getPlanList(ProcMoveVO vo);
 	
 	public List<ProcMoveVO> getInputMat(ProcMoveVO vo);

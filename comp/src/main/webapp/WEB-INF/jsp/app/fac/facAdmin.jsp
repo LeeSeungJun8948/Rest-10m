@@ -11,13 +11,14 @@
 
 <form action="insertFac.do" method="post" id="frm" encType="multipart/form-data"
 	onsubmit="return test()">
-	<div class="mb-4">
+	<div class="mb-4" style="float:right">
 		<button class="btn btn-primary" id="btnNew" type="button"> 새입력 </button>
 		<button type="submit" class="btn btn-primary"> 저장 </button>
 		<button class="btn btn-primary" id="btnUdate" type="button"> 수정 </button>
+		<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
 	</div>
 	<div class="flax row">
-		<div class="mb-4 col-10f">
+		<div class="mb-4">
 			<table class="table">
 				<tbody>
 					<tr>
@@ -50,7 +51,7 @@
 						<th>사원번호</th>
 						<td><input type="text" id="empNo" name="empNo"></td>
 						<th>구매금액</th>
-						<td><input type="text" id="price" name="price"></td>
+						<td><input type="text" id="price" name="price" onkeyup="numberWithCommas(this.value)"></td>
 					</tr>
 					<tr>
 						<th>정기점검주기</th>
@@ -84,7 +85,6 @@
 	</ul>
 	
 	<div id="tabs-1">
-	<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
 		<div id="grid"></div>
 	</div>	
 	<div id="tabs-2">

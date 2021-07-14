@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -15,12 +17,12 @@
 		<h1>공정관리 ${cName.companyName }</h1>
 	</div>
 	<div align="right" style="margin-bottom: 5px">
-			<button type="button" class="btn btn-primary" id="btnRowInsert">행추가</button>
-			<button type="button" class="btn btn-primary" id="btnInsert">저장</button>
-			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
+		<button type="button" class="btn btn-primary" id="btnRowInsert">행추가</button>
+		<button type="button" class="btn btn-primary" id="btnInsert">저장</button>
+		<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
 	</div>
-	<div id="proGrid" style="z-index:10" class="bgird"></div>
-		<script type="text/javascript">
+	<div id="proGrid" style="z-index: 10" class="bgird"></div>
+	<script type="text/javascript">
         	const dataSource = {
         			api : {
         				readData : {url: 'ajax/processList.do', method:'get'},
@@ -47,7 +49,10 @@
 					{
 						header : '공정명',
 						name : 'processName',
-						editor: 'text'
+						editor: 'text',
+						validation: {
+			            	required: true
+			          	}
 						
 					},
 					{
@@ -102,9 +107,10 @@
 			   
 				   grid.on('click', (ev) => {
 					   rowKeyG = ev.rowKey;
-					   
-					   if(ev.columnName == 'outCompName'){
-		              	 var href="proModal.do";
+					   var out = grid.getRow(ev.rowKey).outStats;
+					   if(out == 'Y'){
+						   if(ev.columnName == 'outCompName'){
+		              	   	var href="proModal.do";
 		               window.event.preventDefault();
 		              $('.jquery-modal').remove();
 		               $('.modal').remove();
@@ -112,8 +118,10 @@
 		               $.get(href, function(html){
 		                  var modalOpen = $(html).appendTo('body').modal();
 		                  });
-		               }
+		                 }
+					   }
 		            });
+	
 		</script>
 </body>
 <script type="text/javascript" src="js/app/comm/process.js"></script>

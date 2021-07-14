@@ -18,8 +18,8 @@ function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
 
-var newProCode;
 
+var newProCode;
 $("#btnRowInsert").on("click", function(){
 	if(checkNull(newProCode)){
 		newProCode = newProCode * 1 + 1;
@@ -30,11 +30,11 @@ $("#btnRowInsert").on("click", function(){
 			dataType : "json",
 			async : false,
 			success : function(data) {
-				newProCode = data.newProCode;
-				alert(성공);
+				newProCode = data.processCode;
+				
 			},
 			error : function() {
-				alert(실패);
+			
 			}
 		});		
 	}
@@ -47,11 +47,30 @@ $("#btnRowInsert").on("click", function(){
 });
 
 $("#btnInsert").on("click", function(){
-		//grid.request('createData');
-		grid.request('modifyData', {
-		checkedOnly: true
-		});
-})
+		for(var valid of grid.validate()){
+			for(var errors of valid.errors){
+				var header;
+				for(var column of grid.getColumns()){
+					if(column.name == errors.columnName)
+					header = column.header;
+				}
+				toast(header+'를 확인하세요.',grid.getValue(valid.rowKey, 'processName'));
+			}
+		}
+		if(grid.validate().length == 0){
+		grid.request('modifyData'); 
+		}
+	});
+
+function toast(text, title){
+	toastr.options = {
+		closeButton: true,
+		showDuration: "200"
+ 	};
+	toastr.error(text,title);
+}
+
+
 
 $("#btnDelete").on("click",function() {
 	grid.removeCheckedRows(false);

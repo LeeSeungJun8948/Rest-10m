@@ -152,13 +152,13 @@ const input = document.querySelector('#qcImg');
 
 
 	
-//초기화 버튼
+/*//초기화 버튼
 $('#btnNew').on('click',function(){
 		var img = document.getElementById('image');
 		img.setAttribute("src", '');
 		$('input').val('');
 })
-
+*/
 
 	
 //그리드 리스트 삭제
@@ -179,6 +179,11 @@ function YnCheck(){
 		}
 }
 
+function save(){
+	if(confirm("저장하시겠습니까?")) {
+		$('#frm').submit();	
+ 		}
+	}
 
 
 // 모달
