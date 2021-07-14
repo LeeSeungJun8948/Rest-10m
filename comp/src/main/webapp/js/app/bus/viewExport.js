@@ -1,8 +1,8 @@
 var dataSource = {
 	contentType: 'application/json',
 	api: {
-		readData: { url: 'viewPlanSearch.do', method: 'POST' },
-  }
+		readData: { url: 'viewExportSearch.do', method: 'POST' },
+	}
 }
 
 const grid = new tui.Grid({
@@ -10,44 +10,44 @@ const grid = new tui.Grid({
 	scrollX: false,
 	scrollY: true,
 	data: dataSource,
-	columns: [ {
-		header: '계획일자',
-		name: 'planDate',
-		}, {
-		header: '계획명',
-		name: 'planName',
-		}, {
+	columns: [{
+		header: '출고일자',
+		name: 'exportDate',
+	}, {
 		header: '제품코드',
 		name: 'productCode',
-		}, {
+	}, {
 		header: '제품명',
 		name: 'productName',
-		}, {
+	}, {
+		header: '출고코드',
+		name: 'exportCode',
+	}, {
+		header: '규격',
+		name: 'stdId'
+	}, {
+		header: '단위',
+		name: 'unitId'
+	}, {
 		header: '주문번호',
 		name: 'orderNo',
-		}, {
-		header: '업체명',
-		name: 'companyName',
-		}, {
-		header: '납기일자',
-		name: 'outDate',
-		}, {
+	}, {
 		header: '주문량',
-		name: 'orderCount',
-		}, {
-		header: '계획량',
-		name: 'planCount',
-		}, {
-		header: '작업일자',
-		name: 'workDate',
-		}, {
+		name: 'orderCount'
+	}, {
+		header: '출고량',
+		name: 'exportCount',
+	}, {
+		header: '금액',
+		name: 'price',
+	}, {
 		header: '비고',
 		name: 'comments',
-		} ]
+	}]
 });
 
 // 조회 버튼
-$('#btnSearch').on('click', function(){
+$('#btnSearch').on('click', function() {
 	var param = $('#searchFrm').serializeObject();
 	grid.readData(1, param, true);
 });
@@ -59,19 +59,19 @@ $("#btnReset").click(function() {
 
 //모달
 $("#btnCompModal").on("click", function() {
-    $('#compContent').load("compSearchModal.do");
+	$('#compContent').load("compSearchModal.do");
 });
 
 $("#btnProdModal").on("click", function() {
-    $('#prodContent').load("prodSearchModal.do");
+	$('#prodContent').load("prodSearchModal.do");
 });
 
 // 초기화
-function resetPage() {  
-	$("form").each(function() {  
-        this.reset();
+function resetPage() {
+	$("form").each(function() {
+		this.reset();
 		grid.clear();
-    });  
+	});
 	$("#companyCode").val("");
 	$("#productCode").val("");
 }

@@ -55,4 +55,6 @@ public interface BusinessService {
 	public List<ExportLotVO> getProdLotModal(Map<String, Object> param);
 
 	public List<ExportLotVO> searchProdLotModal(Map<String, Object> param);
+	
+	List<ExportLotVO> viewExportSearch(Map<String, Object> param);
 }

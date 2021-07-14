@@ -46,4 +46,10 @@
 		  from company
 		 where company_name =#{companyName}
 	</select>
+	
+	<!-- max 공정코드 -->
+	<select id="maxProcessCode" resultType="com.rest.app.comm.vo.ProcessVO">
+		select max(process_code)+1 as process_code
+		  from process
+	</select>
 </mapper>

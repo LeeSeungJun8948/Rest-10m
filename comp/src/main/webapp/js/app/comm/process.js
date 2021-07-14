@@ -14,18 +14,63 @@ $.fn.serializeObject = function() {
 					return o;
 			};
 
+function checkNull(value){
+	return value != null && value != '' && value != '[object HTMLInputElement]';
+}
 
 
+var newProCode;
 $("#btnRowInsert").on("click", function(){
-		grid.appendRow();
+	if(checkNull(newProCode)){
+		newProCode = newProCode * 1 + 1;
+	}else{
+		$.ajax({
+			type : "get",
+			url : "ajax/maxProcessCode.do",
+			dataType : "json",
+			async : false,
+			success : function(data) {
+				newProCode = data.processCode;
+				
+			},
+			error : function() {
+			
+			}
+		});		
+	}
+
+	var newRowData = {'processCode' : newProCode};
+	grid.appendRow(newRowData,{
+		at : grid.getRowCount(),
+		focus : true
 	});
+});
 
 $("#btnInsert").on("click", function(){
-		//grid.request('createData');
-		grid.request('modifyData', {
-		checkedOnly: true
-		});
-})
+		for(var valid of grid.validate()){
+			for(var errors of valid.errors){
+				var header;
+				for(var column of grid.getColumns()){
+					if(column.name == errors.columnName)
+					header = column.header;
+				}
+				toast(header+'를 확인하세요.',grid.getValue(valid.rowKey, 'processName'));
+			}
+		}
+		if(grid.validate().length == 0){
+		grid.request('modifyData'); 
+		}
+	});
+
+function toast(text, title){
+	toastr.options = {
+		closeButton: true,
+		showDuration: "200"
+ 	};
+	toastr.error(text,title);
+}
+
+
 
 $("#btnDelete").on("click",function() {
 	grid.removeCheckedRows(false);

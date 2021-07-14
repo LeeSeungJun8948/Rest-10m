@@ -31,8 +31,7 @@
      </a>
      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="/comp/sym/ccm/cca/SelectCcmCmmnCodeList.do">공통코드관리-마스터</a>
-             <a class="collapse-item" href="/comp/sym/ccm/cde/SelectCcmCmmnDetailCodeList.do">공통코드관리-상세</a>
+             <a class="collapse-item" href="/comp/commonCodeForm.do">공통코드관리</a>
              <a class="collapse-item" href="/comp/matForm.do">자재정보관리</a>
              <a class="collapse-item" href="/comp/bomList.do">제품 BOM관리</a>
              <a class="collapse-item" href="/comp/processList.do">공정관리</a>
@@ -54,6 +53,7 @@
          <div class="bg-white py-2 collapse-inner rounded">
              <a class="collapse-item" href="/comp/busList.do">주문관리 참조조회</a>
              <a class="collapse-item" href="/comp/exportForm.do">출고 관리</a>
+             <a class="collapse-item" href="/comp/viewExport.do">출고 조회</a>
              <a class="collapse-item" href="/comp/productInventory.do">제품 재고 조회</a>
          </div>
      </div>

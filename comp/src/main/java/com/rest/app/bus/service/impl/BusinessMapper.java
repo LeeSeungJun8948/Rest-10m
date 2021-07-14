@@ -55,5 +55,5 @@ public interface BusinessMapper {
 	
 	public List<ExportLotVO> getProdLotModal(Map<String, Object> param);//제품Lot 
 	public List<ExportLotVO> searchProdLotModal(Map<String, Object> param);
-
+	List<ExportLotVO> viewExportSearch(Map<String, Object> param);
 }

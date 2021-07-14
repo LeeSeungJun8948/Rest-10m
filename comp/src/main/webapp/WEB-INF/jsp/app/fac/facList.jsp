@@ -10,9 +10,21 @@
 <meta charset="UTF-8">
 <title></title>
 </head>
-<body> 
+<body>
 	<div>
 		<h2>설비조회</h2>
+	</div>
+	<div class="mb-2">
+		<form id="searchCheck" name="searchCheck">
+			<select name="searchCondition" id="searchCondition"
+				title="검색조건2-검색어구분" style="width: 80px; height: 26px">
+				<option value="facilitiesName">설비명</option>
+				<option value="processName">공정명</option>
+			</select> 
+				<input id="searchKeyword" name="searchKeyword" type="text"
+				title="검색어" class="form-control" style="width: 200px;">
+			<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
+		</form>
 	</div>
 	<div id="grid"></div>
 	<script type="text/javascript">
@@ -30,10 +42,13 @@
 			}
 		}); */
 		const dataSource = {
-				api : { 
-					readData : {url: 'ajax/facList.do', method:'GET'},
+			api : {
+				readData : {
+					url : 'ajax/facList.do',
+					method : 'GET'
 				},
-				contentType: 'application/json'
+			},
+			contentType : 'application/json'
 		}
 
 		const grid = new tui.Grid({
@@ -79,13 +94,31 @@
 				header : '구매일자',
 				name : 'purchaseDate'
 			}, {
-				header : '이미지',
-				name : 'img'
-			}, {
-				header : '공정코드',
-				name : 'processCode'
+				header : '공정명',
+				name : 'processName'
 			} ]
-		}); 
+		});
+
+		$.fn.serializeObject = function() {
+			var o = {};
+			var a = this.serializeArray();
+			$.each(a, function() {
+				if (o[this.name]) {
+					if (!o[this.name].push) {
+						o[this.name] = [ o[this.name] ];
+					}
+					o[this.name].push(this.value || '');
+				} else {
+					o[this.name] = this.value || '';
+				}
+			});
+			return o;
+		};
+
+		$("#btnSearch").on("click", function() {
+			var param = $('#searchCheck').serializeObject();
+			grid.readData(1, param, true);
+		})
 	</script>
 </body>
 </html>

@@ -94,8 +94,7 @@ const grid = new tui.Grid({
 	}, {
 		header: '순번',
 		name: 'deIdx',
-	}
-	]
+	} ]
 });
 const gridInput = new tui.Grid({
 	el: document.getElementById('gridInput'),

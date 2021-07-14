@@ -4,22 +4,31 @@
 	namespace="com.rest.app.fac.service.impl.FacilitiesMapper">
 	<select id="getFac"
 		resultType="com.rest.app.fac.vo.FacilitiesVO">
-		select FAC_CODE,
-		FACILITIES_NAME,
-		MODEL,
-		FAC_SIZE,
-		PRODUCTION_COMPANY,
-		PURPOSE,
-		VOLUME,
-		PRODUCTION_DATE,
-		EMP_NO,
-		PRICE,
-		FAC_INSPECTION,
-		PURCHASE_DATE,
-		IMG,
-		PROCESS_CODE
-		from facilities
-		order by fac_code
+		select f.FAC_CODE,
+		f.FACILITIES_NAME,
+		f.MODEL,
+		f.FAC_SIZE,
+		f.PRODUCTION_COMPANY,
+		f.PURPOSE,
+		f.VOLUME,
+		f.PRODUCTION_DATE,
+		f.EMP_NO,
+		f.PRICE,
+		f.FAC_INSPECTION,
+		f.PURCHASE_DATE,
+		f.IMG,
+   		p.process_name
+		from facilities f, process p
+  		<where>
+  		f.process_code=p.process_code
+  		<if test="searchCondition == 'facilitiesName'">and
+  			f.facilities_name LIKE '%' || #{searchKeyword} || '%'
+  		</if>
+  		<if test="searchCondition == 'processName'">and
+  			p.process_name LIKE '%' || #{searchKeyword} || '%'
+  		</if>
+  		</where>
+   		order by fac_code
 	</select>
 	<insert id="insertFac"
 		parameterType="com.rest.app.fac.vo.FacilitiesVO">

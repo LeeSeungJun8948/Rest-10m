@@ -24,9 +24,10 @@
 				<input type="date" class="form-control" id="workDtE" name="workDtE">
 			</div>
 			<div class="col-2">
-				<button type="button" class="btn btn-primary" id="btnSearch" name="btnRead">검색</button>
+				<button type="button" class="btn btn-primary" id="btnSearch" name="btnSearch">검색</button>
 			</div>
 		</form>
+	</div>
 	
 		<div class="col-md-11 m-3">
 			<div id="workGrid"></div>

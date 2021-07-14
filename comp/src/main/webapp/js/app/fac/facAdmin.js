@@ -95,10 +95,7 @@ $( function() {
 		}, {
 			header : '구매일자',
 			name : 'purchaseDate'
-		}, {
-			header : '공정코드',
-			name : 'processCode'
-		} ]
+		}]
 		
 	});
 		
@@ -227,4 +224,10 @@ $( function() {
 function checkNull(value){
 		return value != null && value != '' && value != '[object HTMLInputElement]';
 	}; 
+	
+function numberWithCommas(x) {
+  x = x.replace(/[^0-9]/g,'');   
+  x = x.replace(/,/g,'');        
+  $("#price").val(x.replace(/\B(?=(\d{3})+(?!\d))/g, ","));  
+}
 	

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.comm.vo.EmployeeVO;
 import com.rest.app.comm.vo.ErrorVO;
+import com.rest.app.fac.vo.FacilitiesVO;
 import com.rest.app.mat.vo.SelectListVO;
 import com.rest.app.prod.vo.DetailPlanVO;
 import com.rest.app.prod.vo.DetailProrderVO;
@@ -50,6 +51,7 @@ public interface ProdService {
 	int deleteWork(String workCode);
 	List<EmployeeVO> searchEmp(Map<String, Object> param);
 	List<ErrorVO> searchError(Map<String, Object> param);
+	List<FacilitiesVO> searchFac(Map<String, Object> param);
 	List<SelectListVO> ajaxProdSearchModal(SelectListVO vo);
 	List<SelectListVO> ajaxCompSearchModal(SelectListVO vo);
 }

@@ -470,14 +470,14 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.4.1208</version>
 		</dependency>
-
-<!-- 		<dependency>
-			<groupId>ojdbc</groupId>
-			<artifactId>ojdbc</artifactId>
-			<version>6-11</version>
+		
+		<dependency>
+			<groupId>barbecue</groupId>
+			<artifactId>barbecue</artifactId>
+			<version>1-5</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ojdbc6-11.2.0.3.jar</systemPath>
-		</dependency> -->
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/barbecue-1.5-beta1.jar</systemPath>
+		</dependency> 
 
 	<!-- 	<dependency>
 			<groupId>altibase</groupId>

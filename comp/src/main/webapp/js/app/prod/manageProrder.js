@@ -41,6 +41,9 @@ const grid = new tui.Grid({
 		header: '계획번호',
 		name: 'planCode'
 		}, {
+		header: '계획명',
+		name: 'planName'
+		}, {
 		header: '계획일자',
 		name: 'planDate'
 		}, {
@@ -155,44 +158,48 @@ $("#btnReset").click(function() {
 
 // 지시저장 버튼
 $('#btnSave').on('click', function() {
-	if (formCheck()) {
-		$.ajax({
-			type: 'POST',
-			url: 'saveProrder.do',
-			data: $('#inputFrm').serialize(),
-			dataType: 'json',
-			async: false,
-			success: function(data){
-				var prorCode = data.data.contents.prorCode;
-				$('#prorCode').val(prorCode);
-				grid.setColumnValues('prorCode', prorCode);
-			}
-		});
-		grid.request('modifyData');
-		grid.on('successResponse', function(ev){
-			var text = JSON.parse(ev.xhr.responseText);
-			if(text.check == 'save') {
-				grid.readData(1, {prorCode: $('#prorCode').val()}, true);
-			}
-		});
-		gridInput.request('modifyData');
-		gridInput.clear();
-		toastr.success("저장되었습니다.");
+	if(confirm("저장하시겠습니까?")) {
+		if (formCheck()) {
+			$.ajax({
+				type: 'POST',
+				url: 'saveProrder.do',
+				data: $('#inputFrm').serialize(),
+				dataType: 'json',
+				async: false,
+				success: function(data){
+					var prorCode = data.data.contents.prorCode;
+					$('#prorCode').val(prorCode);
+					grid.setColumnValues('prorCode', prorCode);
+				}
+			});
+			grid.request('modifyData');
+			grid.on('successResponse', function(ev){
+				var text = JSON.parse(ev.xhr.responseText);
+				if(text.check == 'save') {
+					grid.readData(1, {prorCode: $('#prorCode').val()}, true);
+				}
+			});
+			gridInput.request('modifyData');
+			gridInput.clear();
+			toastr.success("저장되었습니다.");
+		}
 	}
 });
 
 // 지시삭제 버튼
 $('#btnDel').on('click', function(){
-	$.ajax({
-		type: 'POST',
-		url: 'deleteProrder.do',
-		data: {prorCode: $('#prorCode').val()},
-		dataType: 'json',
-		success: function(){
-			toastr.success("삭제되었습니다.");
-			resetPage();
-		}
-	});
+	if(confirm("삭제하시겠습니까?")) {
+		$.ajax({
+			type: 'POST',
+			url: 'deleteProrder.do',
+			data: {prorCode: $('#prorCode').val()},
+			dataType: 'json',
+			success: function(){
+				toastr.success("삭제되었습니다.");
+				resetPage();
+			}
+		});
+	}
 });
 
 // 미지시계획 읽기 버튼
@@ -295,12 +302,12 @@ function resetPage() {
 // 폼체크
 function formCheck() {
 	if(!checkNull($('#prorDate').val()) || !checkNull($('#prorName').val())) {
-		toastr.warning('값을 입력해주십시오.');
+		toastr.warning('지시 정보를 입력해주십시오.');
 		return false;
-	} else if(checkNull($('#productCode').val()) && !checkNull($('#workCount').val()) && ($('#workCount').val() > $('#totalCount').val())) {
+	} else if(checkNull($('#workCount').val()) && ($('#workCount').val() > $('#totalCount').val()) && $('#totalCount').val() != 0) {
 		toastr.warning('투입량이 부족합니다.');
 		return false;
-	} else if(checkNull($('#productCode').val()) && !checkNull($('#workCount').val()) && ($('#workCount').val() < $('#totalCount').val())) {
+	} else if(checkNull($('#workCount').val()) && ($('#workCount').val() < $('#totalCount').val())) {
 		toastr.warning('투입량이 작업량보다 많습니다.');
 		return false;		
 	} else {

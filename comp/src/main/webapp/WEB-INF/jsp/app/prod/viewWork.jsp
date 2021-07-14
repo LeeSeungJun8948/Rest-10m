@@ -45,7 +45,7 @@
 </div>
 
 <div class="modal fade" id="workViewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document" style="min-width: 80%; display: table;">
+	<div class="modal-dialog" role="document" style="min-width: 90%; display: table;">
 		<div class="modal-content" id="workViewContent" align="center">
 			<div class="modal-header">
 				<h5 class="modal-title">작업실적 조회</h5>
@@ -56,6 +56,10 @@
 			<div class="modal-body">
 				<table class="table">
 					<tbody>
+						<tr>
+							<th>제품LOT</th>
+							<td><input type="text" class="form-control" id="productLot" name="productLot" readonly></td>
+						</tr>
 						<tr>
 							<th>작업일자</th>
 							<td><input type="date" class="form-control" id="workDate" name="workDate" readonly></td>
@@ -76,8 +80,8 @@
 							<th>제품명</th>
 							<td><input type="text" class="form-control" id="productName" name="productName" readonly>
 							</td>
-							<th>제품LOT</th>
-							<td><input type="text" class="form-control" id="productLot" name="productLot" readonly></td>
+							<th>설비명</th>
+							<td><input type="text" class="form-control" id="facilitiesName" name="facilitiesName" readonly></td>
 						</tr>
 						<tr>
 							<th>작업량</th>
