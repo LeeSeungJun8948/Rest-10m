@@ -254,14 +254,22 @@
 	</select>
 	
 	<select id="viewExportSearch" resultType="com.rest.app.bus.vo.DetailExportVO">
-		SELECT d.*, TO_CHAR(e.export_date,'YYYY-MM-DD') export_date, e.company_code, p.*, o.order_count
-		FROM detailexport d, export e, product p, orders o
+		SELECT d.*, TO_CHAR(e.export_date,'YYYY-MM-DD') export_date, e.company_code, p.*, o.order_count,
+			c.company_name
+		FROM detailexport d, export e, product p, orders o, company c
 		WHERE d.export_code = e.export_code
 		AND d.order_no = o.order_no
 		AND d.product_code = p.product_code
-			<if test="keyword != null and keyword !=''">
-				AND ${searchCondition} like '%'||#{keyword}||'%'
-			</if>
+		AND o.company_code = c.company_code
+		<if test="keyword != null and keyword !=''">
+			AND ${searchCondition} like '%'||#{keyword}||'%'
+		</if>
+		<if test="productCode != null and productCode != ''">
+			AND d.product_code = #{productCode}
+		</if>
+		<if test="companyCode != null and companyCode != ''">
+			AND o.company_code = #{companyCode}
+		</if>
 		ORDER BY e.export_date
 	</select>
 </mapper>
