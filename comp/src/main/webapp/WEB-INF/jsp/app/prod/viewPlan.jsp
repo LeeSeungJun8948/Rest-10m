@@ -23,7 +23,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th>고객사</th>
+						<th>업체명</th>
 						<td>
 							<div class="row">
 								<input type="hidden" id="companyCode" name="companyCode" />
@@ -35,7 +35,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th>제품코드</th>
+						<th>제품명</th>
 						<td>
 							<div class="row">
 								<input type="hidden" id="productCode" name="productCode" />

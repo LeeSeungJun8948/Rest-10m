@@ -14,6 +14,9 @@ const grid = new tui.Grid({
 		header: '계획일자',
 		name: 'planDate',
 		}, {
+		header: '계획명',
+		name: 'planName',
+		}, {
 		header: '제품코드',
 		name: 'productCode',
 		}, {
@@ -69,8 +72,8 @@ function resetPage() {
         this.reset();
 		grid.clear();
     });  
-	$("#companyCode").val();
-	$("#productCode").val();
+	$("#companyCode").val("");
+	$("#productCode").val("");
 }
 
 // NULL값 체크, NULL이면 false

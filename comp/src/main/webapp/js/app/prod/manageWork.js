@@ -1,18 +1,20 @@
 // 작업저장
 $("#btnSave").on("click", function() {
-	if (formCheck()) {
-		$.ajax({
-			type: 'POST',
-			url: 'saveWork.do',
-			data: $('#workFrm').serialize(),
-			dataType: 'json',
-			async: false,
-			success: function(data) {
-				var workCode = data.data.contents.workCode;
-				$('#workCode').val(workCode);
-				toastr.success("저장되었습니다.");
-			}
-		});
+	if(confirm("저장하시겠습니까?")) {
+		if (formCheck()) {
+			$.ajax({
+				type: 'POST',
+				url: 'saveWork.do',
+				data: $('#workFrm').serialize(),
+				dataType: 'json',
+				async: false,
+				success: function(data) {
+					var workCode = data.data.contents.workCode;
+					$('#workCode').val(workCode);
+					toastr.success("저장되었습니다.");
+				}
+			});
+		}
 	}
 });
 
@@ -20,6 +22,7 @@ $("#btnSave").on("click", function() {
 $("#btnReset").click(function() {
 	$('#workCode').val("");
 	$('#errorCode').val(0);
+	$('#facCode').val(0);
 });
 
 // 조회버튼 (모달)
@@ -29,16 +32,18 @@ $("#btnWorkModal").on("click", function() {
 
 // 작업삭제 버튼
 $('#btnDel').on('click', function(){
-	$.ajax({
-		type: 'POST',
-		url: 'deleteWork.do',
-		data: {workCode: $('#workCode').val()},
-		dataType: 'json',
-		success: function(){
-			toastr.success("삭제되었습니다.");
-			$("#workFrm")[0].reset();
-		}
-	});
+	if(confirm("삭제하시겠습니까?")) {
+		$.ajax({
+			type: 'POST',
+			url: 'deleteWork.do',
+			data: {workCode: $('#workCode').val()},
+			dataType: 'json',
+			success: function(){
+				toastr.success("삭제되었습니다.");
+				$("#workFrm")[0].reset();
+			}
+		});
+	}
 });
 
 // 작업자
@@ -49,6 +54,11 @@ $("#btnEmpModal").on("click", function() {
 // 불량코드
 $("#btnErrorModal").on("click", function() {
 	$('#workErrorContent').load("workErrorModal.do");
+});
+
+// 설비코드
+$("#btnFacModal").on("click", function() {
+	$('#workFacContent').load("workFacModal.do");
 });
 
 // 제품LOT 입력시 조회

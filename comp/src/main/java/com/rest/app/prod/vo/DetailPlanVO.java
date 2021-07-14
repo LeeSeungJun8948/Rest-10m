@@ -6,6 +6,7 @@ import lombok.Data;
 public class DetailPlanVO {
 	int deplanIdx;
 	String planCode;
+	String planName;
 	String productName;
 	String outDate;
 	int orderNo;
