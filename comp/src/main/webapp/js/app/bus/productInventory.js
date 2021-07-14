@@ -81,7 +81,7 @@ $('#btnView').on('click', function() {
 	console.log(param)
 	grid.readData(1, param, true);
 });
-$('#resetBtn').on('click', function() {
+$('#btnReset').on('click', function() {
 	resetPage();
 });
 function checkNull(value) {
@@ -94,8 +94,6 @@ function resetPage() {
 		this.reset();
 	});
 	grid.clear();
-	gridInput.clear();
-	$('#exportCode').val('exportCode');
 }
 //모달
 var forGrid = false;

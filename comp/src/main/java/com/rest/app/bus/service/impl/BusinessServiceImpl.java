@@ -137,6 +137,7 @@ public class BusinessServiceImpl implements BusinessService {
 	@Override
 	public List<ExportLotVO> getProdLotModal(Map<String, Object> param) {
 		return mapper.getProdLotModal(param);
+	}
 
 	@Override
 	public List<ExportLotVO> searchProdLotModal(Map<String, Object> param) {
@@ -146,4 +147,5 @@ public class BusinessServiceImpl implements BusinessService {
 	@Override
 	public List<ExportLotVO> viewExportSearch(Map<String, Object> param) {
 		return mapper.viewExportSearch(param);
+	}
 }

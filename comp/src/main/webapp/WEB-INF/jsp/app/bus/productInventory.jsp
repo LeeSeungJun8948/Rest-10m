@@ -24,8 +24,8 @@
 								</div>
 								<div class="col-md-2">
 									<input class="form-check-input" type="radio" name="productState"
-										value="ProductCount" id="productCount"> <label
-										class="form-check-label" for="productCount">재고있음</label>&nbsp;&nbsp;&nbsp;&nbsp;
+										value="productCount" id="productCount"> <label
+										class="form-check-label" for="productCount">재고있음</label>
 								</div>
 								<div class="col-md-2">
 									<input class="form-check-input" type="radio" name="productState"

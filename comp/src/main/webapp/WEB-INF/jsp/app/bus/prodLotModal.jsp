@@ -15,7 +15,8 @@
 			<div class="row">
 				<div class="col-md-4 mr-0 ml-3">
 					<select class="custom-select" name="searchCondition">
-						<option value="product_lot" selected>제품Lot코드</option>
+						<option value="product_lot"selected>제품Lot코드</option>
+						<option value="lot_idx">순번</option>
 					</select>
 				</div>
 				<div class="col-md-5">
