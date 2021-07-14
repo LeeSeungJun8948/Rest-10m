@@ -43,6 +43,9 @@ const grid = new tui.Grid({
 			valueInput(ev);
 		}
 	}, {
+		header: '출고코드',
+		name: 'exportCode',
+	}, {
 		header: '규격',
 		name: 'stdId'
 	}, {
@@ -75,6 +78,14 @@ const grid = new tui.Grid({
 	}, {
 		header: '금액',
 		name: 'price',
+		editor: 'text',
+		validation: {
+			dataType: 'number',
+			required: true
+		},
+		onAfterChange(ev) {
+			valueInput(ev);
+		}
 
 	}, {
 		header: '비고',
@@ -83,7 +94,6 @@ const grid = new tui.Grid({
 	}, {
 		header: '순번',
 		name: 'deIdx',
-		hidden: true
 	}
 	]
 });
@@ -104,7 +114,6 @@ const gridInput = new tui.Grid({
 	}, {
 		header: '출고코드',
 		name: 'exportCode',
-		hidden: true
 	}, {
 		header: '재고량',
 		name: 'productCount',
@@ -126,11 +135,9 @@ const gridInput = new tui.Grid({
 	}, {
 		header: 'Lot순번',
 		name: 'lotIdx',
-		hidden: true
 	}, {
 		header: '세부기록순번',
 		name: 'deIdx',
-		hidden: true
 	}]
 });
 
@@ -181,6 +188,8 @@ $('#btnSave').on('click', function() {
 				grid.readData(1, { exportCode: $('#exportCode').val() }, true);
 			}
 		});
+		gridInput.request('modifyData');
+		gridInput.clear();
 		toastr.success("저장되었습니다.");
 	}
 });
@@ -206,6 +215,14 @@ $('#btnRead').on('click', function() {
 	grid.readData(1, param, true);
 });
 
+/*//제품코드입력창
+$('#productCode').on('click', function(){
+	$('#unExportModal').modal('show');
+	$('#unExportContent').load("unExportModal.do");
+});*/
+
+
+
 // 삭제버튼
 $('#btnGridDel').on('click', function() {
 	grid.removeCheckedRows(false);
@@ -218,6 +235,7 @@ grid.on('check', ev => {
 // 전체체크 해제
 grid.on('uncheck', ev => {
 });
+// ???????
 
 // 제품명찾기
 function findProductName(ev) {
@@ -248,6 +266,7 @@ grid.on('dblclick', (ev) => {
 		$('#exportCount').val(exportCount);
 		$('#productCode').val(productCode);
 		$('#productName').val(productName);
+		$('#exportCode').val(exportCode);
 		var param = { 'productCode': productCode, 'deIdx': deIdx, 'exportCode': exportCode };
 		gridInput.readData(1, param, true);
 	}
@@ -258,12 +277,15 @@ function valueInput(ev) {
 	var productCode = grid.getValue(rowKey, 'productCode');
 	var productName = grid.getValue(rowKey, 'productName');
 	var exportCount = grid.getValue(rowKey, 'exportCount');
+	var price = grid.getValue(rowKey, 'price');
 	var deIdx = grid.getValue(rowKey, 'deIdx');
 	var exportCode = grid.getValue(rowKey, 'exportCode');
 	if (deIdx != null) {
 		$('#exportCount').val(exportCount);
 		$('#productCode').val(productCode);
 		$('#productName').val(productName);
+		$('#exportCode').val(exportCode);
+		$('#price').val(price);
 		gridInput.setColumnValues('deIdx', deIdx);
 		gridInput.setColumnValues('exportCode', exportCode);
 	}
@@ -284,7 +306,6 @@ function countSum() {
 function checkNull(value) {
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
-
 //모달
 var forGrid = false;
 $("#btnCompModal").on("click", function(e) {

@@ -26,11 +26,7 @@
 					header : '제품명',
 					name : 'productName',
 					align: 'center'
-				}, {
-					header : '단위',
-					name : 'unitNo',
-					align: 'center'
-				} ]
+				}]
 			});
 			
 			$("#btnReadModal").on("click", function() {
@@ -55,19 +51,25 @@
 				select();
 			});
 			
-			function select(){
+			//function select(){
+				//$('#productCode').val(productCode);
+				//$('#productName').val(productName);
+				
+				//if(forGrid){
+					//grid.setValue(rowKey, 'productCode', productCode, false);
+					//forGrid = false;
+				//}
+				//
+				//$('#prodModal').modal('hide');
+				//$('#modalContent').remove();
+			//}
+				function select(){
 				$('#productCode').val(productCode);
 				$('#productName').val(productName);
-				
-				if(forGrid){
-					grid.setValue(rowKey, 'productCode', productCode, false);
-					forGrid = false;
-				}
-				
 				$('#prodModal').modal('hide');
 				$('#modalContent').remove();
 			}
-			 
+			  
 		}
 	
 	});

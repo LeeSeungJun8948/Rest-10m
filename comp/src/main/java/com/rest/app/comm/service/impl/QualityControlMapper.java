@@ -32,5 +32,7 @@ public interface QualityControlMapper {
 		
 	//삭제
 	public int deleteProduct(QualityControlVO vo);
+	
+	public int maxProductCode();
 		
 }

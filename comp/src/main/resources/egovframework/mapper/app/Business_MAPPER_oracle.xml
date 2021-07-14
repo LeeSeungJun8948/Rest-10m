@@ -2,26 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rest.app.bus.service.impl.BusinessMapper">
 	<select id="getBus" resultType="com.rest.app.bus.vo.OrdersVO">
-		select
-		F_FINDCOMPNAME(company_code)AS comp_name,
-		TO_CHAR(o.in_date,'YYYY-MM-DD')as in_date,
-		TO_CHAR(o.out_date,'YYYY-MM-DD')as out_date,
-		o.order_no,
-		p.product_code,p.product_name,
-		p.std_id,p.unit_id,o.order_count,o.out_count,
-		(o.order_count -
-		o.out_count) as not_count,
-		CASE
-		WHEN o.plan_count = 0
-		THEN '미계획'
-		WHEN
-		o.order_count > o.plan_count THEN
-		'진행중'
-		ELSE '완료'
-		END AS
-		order_state
-		FROM
-		orders o, product p
+		select F_FINDCOMPNAME(company_code)AS comp_name,
+		       TO_CHAR(o.in_date,'YYYY-MM-DD')as in_date,
+		       TO_CHAR(o.out_date,'YYYY-MM-DD')as out_date,
+		       o.order_no,
+		       p.product_code,
+		       p.product_name,
+		       p.std_id,
+		       p.unit_id,
+		       o.order_count,
+		       o.out_count,
+		       o.comments,
+		      (o.order_count - o.out_count) as not_count,
+		      CASE WHEN o.plan_count = 0 THEN '미계획'
+		      WHEN o.order_count > o.plan_count THEN '진행중'
+		      ELSE '완료'
+		      END AS order_state
+		      FROM orders o, product p
 		WHERE in_date BETWEEN
 		TO_DATE(#{fromDate},'YYYY-MM-DD')
 		AND TO_DATE(#{toDate}, 'YYYY-MM-DD')
@@ -47,50 +44,62 @@
 		resultType="com.rest.app.bus.vo.OrdersVO"
 		parameterType="com.rest.app.bus.vo.OrdersVO">
 		select distinct
-				p.product_code,
-				p.product_name,
-				p.std_id,p.unit_id,
-				o.order_no,
-				o.order_count,
-				o.out_count,
-				(o.order_count - o.out_count) as un_export,
-				(SELECT	SUM(product_count) 
-				  FROM storage 
-				 WHERE product_code = o.product_code
-				   AND product_state='포장완료') as dayCount
-		from orders o, 
-			 storage s, 
-			 product p
-	   where o.order_count != o.out_count
-		 and o.product_code =p.product_code
-		 and o.product_code =s.product_code
-		 and o.out_date	BETWEEN TO_DATE(#{fromDate}, 'YYYY-MM-DD') AND TO_DATE(#{toDate},	'YYYY-MM-DD')
+		p.product_code,
+		p.product_name,
+		p.std_id,p.unit_id,
+		o.order_no,
+		o.order_count,
+		o.out_count,
+		(o.order_count - o.out_count) as un_export_count,
+		(SELECT
+		SUM(product_count)
+		FROM storage
+		WHERE product_code = o.product_code
+		AND
+		product_state='포장완료') as dayCount
+		from orders o,
+		storage s,
+		product p
+		where o.order_count != o.out_count
+		and o.product_code =p.product_code
+		and o.product_code =s.product_code
+		and o.out_date BETWEEN
+		TO_DATE(#{fromDate}, 'YYYY-MM-DD') AND
+		TO_DATE(#{toDate}, 'YYYY-MM-DD')
 	</select>
-<insert id="insertExport" parameterType="com.rest.app.bus.vo.ExportVO">
-INSERT INTO export values(#{exportCode},#{exportDate},#{companyCode},#{comments})
+	<insert id="insertExport"
+		parameterType="com.rest.app.bus.vo.ExportVO">
+		INSERT INTO export
+		values(#{exportCode},#{exportDate},#{companyCode},#{comments})
 
-</insert>
-<update id="updateExport" parameterType="com.rest.app.bus.vo.ExportVO">
-UPDATE export SET export_date=#{exportDate},company_code=#{companyCode},comments=#{comments}
-where export_code=#{exportCode}
+	</insert>
+	<update id="updateExport"
+		parameterType="com.rest.app.bus.vo.ExportVO">
+		UPDATE export SET
+		export_date=#{exportDate},company_code=#{companyCode},comments=#{comments}
+		where export_code=#{exportCode}
 
-</update>
-<delete id="deleteExport">
-DELETE from export 
-where export_code=#{exportCode}
-</delete>
-<select id="countExportCode" resultType="int">
-select count(*)+1 from export
-</select>
+	</update>
+	<delete id="deleteExport">
+		DELETE from export
+		where export_code=#{exportCode}
+	</delete>
+	<select id="countExportCode" resultType="int">
+		select count(*)+1 from
+		export
+	</select>
 	<select id="searchExport"
 		resultType="com.rest.app.bus.vo.ExportVO">
 		SELECT e.export_code,
-		to_char(e.export_date,'YYYY-MM-DD') export_date,
+		to_char(e.export_date,'YYYY-MM-DD')
+		export_date,
 		c.company_code,c.company_name,
 		e.comments from export e
 		join company c on e.company_code=c.company_code
-		WHERE export_date BETWEEN TO_DATE(#{fromDate}, 'YYYY-MM-DD')
-		AND TO_DATE(#{toDate}, 'YYYY-MM-DD')
+		WHERE export_date
+		BETWEEN TO_DATE(#{fromDate}, 'YYYY-MM-DD')
+		AND TO_DATE(#{toDate},
+		'YYYY-MM-DD')
 		ORDER BY e.export_code
 
 	</select>
@@ -99,30 +108,38 @@ select count(*)+1 from export
 	<select id="getDetailExport"
 		resultType="com.rest.app.bus.vo.DetailExportVO">
 		SELECT d.de_idx,d.export_code, d.order_no, d.product_code,
-				d.price,d.comments,d.export_count,
-				to_char(e.export_date,'YYYY-MM-DD')export_date,
-				p.product_name,p.std_id,p.unit_id,
-				(select out_count from orders where order_no = d.order_no)out_count,
-				(select order_count - out_count from orders where order_no = d.order_no)
-				unExport_count,
-				(select company_code from orders where order_no = d.order_no)company_code,
-				(select sum(product_count) from storage where product_code = d.product_code
-				and product_state='포장완료')day_count
-			from detailexport d, product p, export e
+		d.price,d.comments,d.export_count,
+		to_char(e.export_date,'YYYY-MM-DD')export_date,
+		p.product_name,p.std_id,p.unit_id,
+		(select out_count from orders where
+		order_no = d.order_no)out_count,
+		(select order_count - out_count from
+		orders where order_no = d.order_no)
+		unExport_count,
+		(select company_code
+		from orders where order_no = d.order_no)company_code,
+		(select
+		sum(product_count) from storage where product_code =
+		d.product_code
+		and
+		product_state='포장완료')day_count
+		from detailexport d, product p, export e
 		WHERE e.export_code= #{exportCode}
-			 AND e.export_code=d.export_code
-			AND d.product_code = p.product_code
+		AND e.export_code=d.export_code
+		AND
+		d.product_code = p.product_code
 		ORDER BY d.de_idx
 	</select>
 	<insert id="insertDetailExport"
 		parameterType="com.rest.app.bus.vo.DetailExportVO">
-		<selectKey keyProperty="deIdx" resultType="int" order="BEFORE">
+		<selectKey keyProperty="deIdx" resultType="int"
+			order="BEFORE">
 			SELECT
 			NVL(MAX(de_idx),0)+1 FROM detailExport
 		</selectKey>
 		INSERT INTO detailExport VALUES(
 		#{deIdx}, #{exportCode}, #{orderNo},
-		 #{productCode}, #{exportCount}, #{price}, #{comments}
+		#{productCode}, #{exportCount}, #{price}, #{comments}
 		)
 	</insert>
 	<update id="updateDetailExport"
@@ -140,53 +157,83 @@ select count(*)+1 from export
 	</delete>
 
 	<!-- 투입자재 -->
-	<insert id="insertExportLot" parameterType="com.rest.app.bus.vo.ExportLotVO">
-		<selectKey keyProperty="lotIdx" resultType="int" order="BEFORE">
-        	SELECT NVL(MAX(lot_idx),0)+1 FROM exportLot
-    	</selectKey> 
+	<insert id="insertExportLot"
+		parameterType="com.rest.app.bus.vo.ExportLotVO">
+		<selectKey keyProperty="lotIdx" resultType="int"
+			order="BEFORE">
+			SELECT NVL(MAX(lot_idx),0)+1 FROM exportLot
+		</selectKey>
 		INSERT INTO ExportLot VALUES(
-		#{lotIdx}, #{deIdx},#{exportCode}, #{productLot}, #{exportCount}, #{comments} 
+		#{lotIdx}, #{deIdx},#{exportCode},
+		#{productLot}, #{exportCount}, #{comments}
 		)
 	</insert>
-	<update id="updateExportLot" parameterType="com.rest.app.bus.vo.ExportLotVO">
+	<update id="updateExportLot"
+		parameterType="com.rest.app.bus.vo.ExportLotVO">
 		UPDATE exportlot SET
-		export_count = #{exportCount}, comments = #{comments} 
+		export_count = #{exportCount},
+		comments = #{comments}
 		WHERE lot_idx = #{lotIdx}
 	</update>
 	<delete id="deleteExportLot">
 		DELETE FROM exportLot WHERE lot_idx = #{lotIdx}
 	</delete>
 	<delete id="deleteAllExportLot">
-		DELETE FROM exportlot WHERE export_code = #{exportCode}
+		DELETE FROM exportlot WHERE export_code =
+		#{exportCode}
 	</delete>
-	<select id="readExportLot" resultType="com.rest.app.bus.vo.ExportLotVO">
-			SELECT DISTINCT
-			s.*, p.product_name
-			FROM storage s,product p
-	 		WHERE s.product_state='포장완료'
-	 		and s.product_code = #{productCode} 
-		  	ORDER BY s.product_lot
+	<select id="readExportLot"
+		resultType="com.rest.app.bus.vo.ExportLotVO">
+		SELECT DISTINCT
+		s.*, p.product_name, d.export_code,
+		(SELECT
+		lot_idx FROM exportlot WHERE product_lot = s.product_lot
+		and export_code = d.export_code)
+		lot_idx,
+		(SELECT export_count FROM
+		exportlot WHERE product_lot = s.product_lot
+		and export_code =
+		d.export_code)
+		export_count,
+		(SELECT comments FROM exportlot WHERE
+		product_lot = s.product_lot
+		and export_code = d.export_code)comments,
+		#{deIdx}de_idx
+		FROM storage s,product p,detailexport d
+		WHERE
+		s.product_state='포장완료'
+		and s.product_code = #{productCode}
+		AND
+		s.product_code = p.product_code
+		AND d.export_code = #{exportCode}
+		AND s.product_code = d.product_code
+		ORDER BY s.product_lot
 	</select>
 	<select id="getProInventory"
 		resultType="com.rest.app.bus.vo.OrdersVO"
 		parameterType="com.rest.app.bus.vo.OrdersVO">
 
-		select p.product_code,p.product_name,p.std_id,p.unit_id,
-		s.product_lot,s.product_count,s.product_state,d.export_code,
-		e.export_date
-		from DETAILEXPORT d
-		inner join product p on
-		p.product_code=d.product_code
-		inner join storage s on
-		s.product_code=d.product_code
-		inner join export e on
-		e.export_code=d.export_code
-		WHERE e.export_date BETWEEN
-		TO_DATE(#{fromDate},'YYYY-MM-DD')
-		AND
-		TO_DATE(#{toDate}, 'YYYY-MM-DD')
+		 select 
+      p.product_code, p.product_name, p.std_id,p.unit_id,
+      s.product_lot,s.product_count, s.product_state
+      from product p,storage s
+      where p.product_code=s.product_code
 		<if test="productCode !=null and productCode !=''">
-			and o.product_code=#{productCode}
+			and s.product_code=#{productCode}
 		</if>
+	</select>
+	
+	<!-- 제품Lot 리스트 모달 -->
+	<select id="getProdLotModal" parameterType="com.rest.app.bus.vo.ExportLotVO" resultType="com.rest.app.bus.vo.ExportLotVO">
+		SELECT product_lot, 
+				lot_idx
+		FROM exportlot
+		
+		<where>
+			<if test="keyword != null and keyword !=''">
+				${searchCondition} like '%'||#{keyword}||'%'
+			</if>
+		</where>
+		ORDER BY lot_idx
 	</select>
 </mapper>

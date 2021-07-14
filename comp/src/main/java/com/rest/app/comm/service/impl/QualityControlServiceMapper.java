@@ -68,6 +68,12 @@ public class QualityControlServiceMapper implements QualityControlService {
 		// TODO 사원리스트
 		return mapper.getEmpList(vo);
 	}
+
+	@Override
+	public int maxProductCode() {
+		// TODO Auto-generated method stub
+		return mapper.maxProductCode();
+	}
 	
 
 

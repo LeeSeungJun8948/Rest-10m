@@ -19,7 +19,7 @@
 						<th>수리코드</th>
 						<td><input type="text" id="repairCode" name="repairCode" value="${max}"
 							style="background-color: #e2e2e2;" readonly></td>
-						<th>설비코드</th>
+						<th>설비코드*</th>
 						<td><input type="text" id="facCode" name="facCode"></td>
 						<th>수리일자</th>
 						<td><input type="date" id="repairDate" name="repairDate"></td>
