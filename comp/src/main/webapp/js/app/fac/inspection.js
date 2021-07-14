@@ -13,8 +13,8 @@ const dataSource = {
 		modifyData : { url : 'ajax/modifyIns.do', method : 'PUT'}
 	},
 	contentType: 'application/json'
-}
-const grid = new tui.Grid({
+}    
+const grid = new tui.Grid({ 
 	el : document.getElementById('grid'),
 	data : dataSource,
 	scrollX : false,
@@ -25,7 +25,8 @@ const grid = new tui.Grid({
 		name : 'inspectionCode'
 	}, {
 		header : '설비명',
-		name : 'facilitiesName'
+		name : 'facilitiesName',
+		validation: { required: true }
 	}, {
 		header : '설비코드',
 		name : 'facCode',
@@ -186,3 +187,18 @@ grid.on('dblclick', function(ev){
 		judgement = grid.getValue(rowKey, 'judgement');
 	}
 });
+
+grid.on('dblclick', function(ev){
+	rowKey = ev.rowKey;
+	facilitiesName = grid.getValue(rowKey, 'facilitiesName');
+	if(ev.columnName == 'today') {
+		if(!checkNull(facilitiesName)) {
+		toastr.warning('설비명을 선택해주십시오.');
+			return false;
+		} else
+			return true;	
+	}
+});
+function checkNull(value){ 
+		return value != null && value != '' && value != '[object HTMLInputElement]';
+	}; 
