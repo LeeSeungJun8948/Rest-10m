@@ -64,13 +64,18 @@
         UPDATE SET p.product_name = #{productName},  
     			   p.std_id = 'R_STD', p.std_no = #{stdNo},
 				   p.unit_id = 'R_UNIT', p.unit_no = #{unitNo},
-  		           p.emp_code = #{empCode} 
+  		           p.emp_code = #{empCode} 	
   		           <if test ="qcImg != null and qcImg !=''">
 		 			,p.qc_img= #{qcImg}
 				   </if>
-				   <if test ="useAt != null and useAt !=''">
-					,p.use_at = #{useAt}
+				   <if test ="useAt != null and useAt !=''" >
+				   ,p.use_at = #{useAt}
 				   </if>
+				   <if test ="useAt == null and useAt ==''">
+				   ,p.use_at = NVL(#{useAt},'N')
+				   </if>
+				   
+									   
 		WHEN NOT MATCHED THEN
         INSERT (p.product_code ,p.product_name, p.qc_img, p.std_id, p.std_no,unit_id, p.unit_no,p.emp_code, p.use_at)  
         VALUES (#{productCode}, #{productName}, #{qcImg},'R_STD', #{stdNo},
