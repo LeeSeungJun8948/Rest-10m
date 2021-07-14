@@ -68,10 +68,10 @@
   		           <if test ="qcImg != null and qcImg !=''">
 		 			,p.qc_img= #{qcImg}
 				   </if>
-				   <if test ="useAt != null and useAt !=''" >
+				   <if test ="useAt != null" >
 				   ,p.use_at = #{useAt}
 				   </if>
-				   <if test ="useAt == null and useAt ==''">
+				   <if test ="useAt == null">
 				   ,p.use_at = NVL(#{useAt},'N')
 				   </if>
 				   
@@ -80,9 +80,9 @@
         INSERT (p.product_code ,p.product_name, p.qc_img, p.std_id, p.std_no,unit_id, p.unit_no,p.emp_code, p.use_at)  
         VALUES (#{productCode}, #{productName}, #{qcImg},'R_STD', #{stdNo},
 				'R_UNIT', #{unitNo}, #{empCode}, NVL(#{useAt},'N'))
-		
         
 	</insert>
+	
 	<!-- update product -->
 	<update id="updateProdcut" parameterType="com.rest.app.comm.vo.QualityControlVO">
 		update product
