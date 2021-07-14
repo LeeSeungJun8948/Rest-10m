@@ -10,9 +10,9 @@
 			<h3>제품  / 품질 표준서 관리</h3>
 		</div>
 		<div class="col-4" align="right">
-			<button class="btn btn-primary" id="btnNew" type="button">
+			<button class="btn btn-primary" id="btnNew" type="reset">
 				초기화</button>
-			<button type="submit" class="btn btn-primary" id="btninsert">저장</button>
+			<button type="button" class="btn btn-primary" id="btninsert" onclick="save()">저장</button>
 			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
 		
 		</div>
@@ -104,7 +104,6 @@
 		</div>
 		
 	</div>
-
 	<div id="proGrid"></div>
 	
 	

@@ -3,32 +3,45 @@
 <mapper namespace="com.rest.app.mat.service.impl.MaterialMapper">
 
 	<select id="getMatList" resultType="MatVO">
-		SELECT m.material_code, m.material_name, cm.code_nm as mat_nm
+		SELECT m.material_code, 
+				m.material_name, 
+				cm.code_nm AS mat_nm
 		FROM material m LEFT JOIN COMTCCMMNDETAILCODE cm
-		ON m.mat_id = cm.code_id and m.mat_no = cm.code
+				ON m.mat_id = cm.code_id and m.mat_no = cm.code
 		ORDER BY m.material_code
 	</select>
 	
 	<select id="getMatInfo" resultType="MatVO" parameterType="MatVO">
-		SELECT m.material_code, m.material_name, mat_no, cm.code_nm as mat_nm, m.company_code, c.company_name, unit_id, unit_no, save_stock, min_stock, max_stock, month_stock 
+		SELECT m.material_code, 
+				m.material_name, 
+				mat_no, 
+				cm.code_nm AS mat_nm, 
+				m.company_code, 
+				c.company_name, 
+				unit_id, 
+				unit_no, 
+				save_stock, 
+				min_stock, 
+				max_stock, 
+				month_stock 
 		FROM material m LEFT JOIN company c 
-		ON m.company_Code = c.company_Code
-		LEFT JOIN COMTCCMMNDETAILCODE cm
-		ON m.mat_no = cm.code and m.mat_id = cm.code_id
+				ON m.company_Code = c.company_Code
+				LEFT JOIN COMTCCMMNDETAILCODE cm
+				ON m.mat_no = cm.code and m.mat_id = cm.code_id
 		WHERE m.material_code = #{materialCode}
 	</select>
 	
 	<!-- 자재 구분, 단위 들고오기 -->
 	<select id="getMatNo" resultType="MatVO">
-		SELECT code as mat_no, 
-      			code_nm as mat_nm 
+		SELECT code AS mat_no, 
+      			code_nm AS mat_nm 
 		FROM COMTCCMMNDETAILCODE 
 		WHERE code_id = 'R_MAT'
 	</select>
 	
 	<select id="getUnitNo" resultType="MatVO">
-		SELECT code as unit_no, 
-        		code_nm as unit_nm 
+		SELECT code AS unit_no, 
+        		code_nm AS unit_nm 
 		FROM COMTCCMMNDETAILCODE 
 		WHERE code_id = 'R_UNIT'
 	</select>
@@ -41,20 +54,26 @@
 	
 	<update id="udtMat" parameterType="MatVO">
 		UPDATE material 
-		SET material_name = #{materialName}, mat_no = #{matNo}, unit_no = #{unitNo}, company_code =  #{companyCode}
-		, MIN_STOCK =  #{minStock} , MAX_STOCK =  #{maxStock}, SAVE_STOCK =  #{saveStock}, MONTH_STOCK =  #{monthStock}
+		SET material_name = #{materialName}, 
+			mat_no = #{matNo}, 
+			unit_no = #{unitNo}, 
+			company_code =  #{companyCode}, 
+			MIN_STOCK =  #{minStock}, 
+			MAX_STOCK =  #{maxStock}, 
+			SAVE_STOCK =  #{saveStock}, 
+			MONTH_STOCK =  #{monthStock}
 		WHERE material_code = #{materialCode}
 	</update>
 	
 	<!-- 새 자재를 추가할때 code 값 불러오기 -->
 	<select id="newMatCode" resultType="MatVO">
-		SELECT max(material_code) + 1 as  material_code
+		SELECT max(material_code) + 1 AS material_code
 		FROM material 
 	</select>
 	
 	<insert id="istMat" parameterType="MatVO" >
-		insert into material(material_code, material_name, company_code, unit_id, unit_no, mat_id, mat_no, save_stock, min_stock, max_stock, month_stock)
-		values(#{materialCode}, #{materialName}, #{companyCode}, 'R_UNIT', #{unitNo}, 'R_MAT', #{matNo}, #{saveStock}, #{minStock}, #{maxStock},  #{monthStock})
+		INSERT INTO material(material_code, material_name, company_code, unit_id, unit_no, mat_id, mat_no, save_stock, min_stock, max_stock, month_stock)
+		VALUES(#{materialCode}, #{materialName}, #{companyCode}, 'R_UNIT', #{unitNo}, 'R_MAT', #{matNo}, #{saveStock}, #{minStock}, #{maxStock},  #{monthStock})
 	</insert>
 	
 	<delete id="matDel" parameterType="MatVO">
@@ -160,8 +179,10 @@
 	
 	<!-- 발주번호 입력시 자재정보 불러오기 -->
 	<select id="getMatInfoForIn" resultType="InoutVO" parameterType="InoutVO" >
-		SELECT material_code, F_FINDMATNAME(material_code) AS material_name, unit_no, 
-				F_FIND_MAT_STOCK(material.material_code) as stock
+		SELECT material_code, 
+				F_FINDMATNAME(material_code) AS material_name, 
+				unit_no, 
+				F_FIND_MAT_STOCK(material.material_code) AS stock
 		FROM material 
 		WHERE material_code = (SELECT material_code FROM inorder WHERE inorder_code = #{inorderCode})
 	</select>
@@ -175,8 +196,14 @@
 	<!-- 입출고 업데이트 -->
 	<update id="udtInout" parameterType="InoutVO">
 		UPDATE inout 
-		SET io_date = #{ioDate}, inorder_code = #{inorderCode}, material_code = #{materialCode}, io_volume = #{ioVolume}, unit_price = #{unitPrice}
-					,lot_no = #{lotNo}, process_code = #{processCode}, comments = #{comments}
+		SET io_date = #{ioDate}, 
+			inorder_code = #{inorderCode}, 
+			material_code = #{materialCode}, 
+			io_volume = #{ioVolume}, 
+			unit_price = #{unitPrice},
+			lot_no = #{lotNo}, 
+			process_code = #{processCode}, 
+			comments = #{comments}
 		WHERE io_code = #{ioCode}
 	</update>
 	
@@ -189,7 +216,7 @@
 	<select id="getMatInfoForOut" resultType="InoutVO" parameterType="InoutVO" >
 		SELECT F_FINDMATNAME(material_code) AS material_name, 
 				unit_no,
-				F_FIND_MAT_STOCK(material_code) as stock
+				F_FIND_MAT_STOCK(material_code) AS stock
 		FROM material 
 		WHERE material_code = #{materialCode}
 	</select>
@@ -197,7 +224,8 @@
 	<!-- 출고관리, 자재코드 입력시 사용공정 리스트 출력 -->
 	<select id="getProcessList" parameterType="SelectListVO" resultType="SelectListVO">
 		SELECT process_code, 		      
-				(SELECT process_name FROM process WHERE process_code = bom.process_code) AS process_name
+				(SELECT process_name FROM process WHERE process_code = bom.process_code) 
+					AS process_name
 		FROM bom 
 		WHERE material_code = #{materialCode}
 	</select>
@@ -357,6 +385,60 @@
 		WHERE pc.product_code = #{productCode} 
 		ORDER BY idx
 	</select>
+	
+	<!-- 공통코드 -->
+	<select id="getCodeIdList" resultType="CommonCodeVO" parameterType="CommonCodeVO">
+		SELECT code_id, 
+				code_id_nm, 
+				code_id_dc, 
+				use_at AS code_id_use_at
+		FROM COMTCCMMNCODE 
+		WHERE cl_code = 'R10'
+	</select>
+	
+	<insert id="istCodeId" parameterType="CommonCodeVO">
+		INSERT INTO COMTCCMMNCODE
+		VALUES(#{codeId}, #{codeIdNm}, #{codeIdDc}, #{codeIdUseAt}, 'R10', sysdate, 'SYSTEM', sysdate 'SYSTEM')
+	</insert>
+	
+	<update  id="udtCodeId" parameterType="CommonCodeVO">
+		UPDATE COMTCCMMNCODE
+		SET code_id_nm = #{codeIdNm}, code_id_dc = #{codeIdDc}, use_at = #{codeIdUseAt}
+		WHERE code_id = #{codeId}
+	</update>
+	
+	<delete id="delCodeId" parameterType="CommonCodeVO">
+		DELETE FROM COMTCCMMNCODE
+		WHERE code_id = #{codeId}
+	</delete>
+	
+	<!-- 공통상세코드 -->
+	<select id="getCodeList" resultType="CommonCodeVO" parameterType="CommonCodeVO">
+		SELECT code_id, 
+				code, 
+				code_nm, 
+				code_dc, 
+				use_at AS code_use_at
+		FROM COMTCCMMNDETAILCODE 
+		WHERE code_id = #{codeId}
+	</select>
+	
+	<insert id="istCode" parameterType="CommonCodeVO">
+		INSERT INTO COMTCCMMNDETAILCODE
+		VALUES(#{codeId}, #{code}, #{codeNm}, #{codeDc}, #{codeUseAt}, sysdate, 'SYSTEM', sysdate 'SYSTEM')
+	</insert>
+	
+	<update  id="udtCode" parameterType="CommonCodeVO">
+		UPDATE COMTCCMMNDETAILCODE
+		SET code_nm = #{codeNm}, code_dc = #{codeDc}, use_at=#{codeUseAt}
+		WHERE code_id = #{codeId} and code = #{code}
+	</update>
+	
+	<delete id="delCode" parameterType="CommonCodeVO">
+		DELETE FROM COMTCCMMNDETAILCODE
+		WHERE code_id = #{codeId} and code = #{code}
+	</delete>
+	
 	
 	<!-- 모달 -->
 	<!-- 자재 리스트 모달 -->

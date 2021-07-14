@@ -48,7 +48,7 @@
 	</select>
 	
 	<!-- max 공정코드 -->
-	<select id="maxProcessCode" resultType="int">
+	<select id="maxProcessCode" resultType="com.rest.app.comm.vo.ProcessVO">
 		select max(process_code)+1 as process_code
 		  from process
 	</select>

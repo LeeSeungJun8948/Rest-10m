@@ -12,6 +12,7 @@ public class ProcessVO extends ComDefaultVO  {
 	String outStats;
 	String outCompName;
 	
+	
 	int companyCode;
 	String companyName;
 	int companyNum;
