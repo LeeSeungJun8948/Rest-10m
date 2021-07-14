@@ -51,19 +51,25 @@
 				select();
 			});
 			
-			function select(){
+			//function select(){
+				//$('#productCode').val(productCode);
+				//$('#productName').val(productName);
+				
+				//if(forGrid){
+					//grid.setValue(rowKey, 'productCode', productCode, false);
+					//forGrid = false;
+				//}
+				//
+				//$('#prodModal').modal('hide');
+				//$('#modalContent').remove();
+			//}
+				function select(){
 				$('#productCode').val(productCode);
 				$('#productName').val(productName);
-				
-				if(forGrid){
-					grid.setValue(rowKey, 'productCode', productCode, false);
-					forGrid = false;
-				}
-				
 				$('#prodModal').modal('hide');
 				$('#modalContent').remove();
 			}
-			 
+			  
 		}
 	
 	});

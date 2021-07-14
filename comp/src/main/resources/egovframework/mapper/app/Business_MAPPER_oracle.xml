@@ -213,28 +213,27 @@
 		resultType="com.rest.app.bus.vo.OrdersVO"
 		parameterType="com.rest.app.bus.vo.OrdersVO">
 
-		select p.product_code,
-		p.product_name,
-		p.std_id,
-		p.unit_id,
-		s.product_lot,
-		s.product_count,
-		s.product_state,
-		d.export_code,
-		e.export_date
-		from DETAILEXPORT d
-		inner join product p
-		on p.product_code=d.product_code
-		inner join storage s
-		on s.product_code=d.product_code
-		inner join export e
-		on e.export_code=d.export_code
-		WHERE e.export_date BETWEEN
-		TO_DATE(#{fromDate},'YYYY-MM-DD')
-		AND
-		TO_DATE(#{toDate}, 'YYYY-MM-DD')
+		 select 
+      p.product_code, p.product_name, p.std_id,p.unit_id,
+      s.product_lot,s.product_count, s.product_state
+      from product p,storage s
+      where p.product_code=s.product_code
 		<if test="productCode !=null and productCode !=''">
-			and d.product_code=#{productCode}
+			and s.product_code=#{productCode}
 		</if>
+	</select>
+	
+	<!-- 제품Lot 리스트 모달 -->
+	<select id="getProdLotModal" parameterType="com.rest.app.bus.vo.ExportLotVO" resultType="com.rest.app.bus.vo.ExportLotVO">
+		SELECT product_lot, 
+				lot_idx
+		FROM exportlot
+		
+		<where>
+			<if test="keyword != null and keyword !=''">
+				${searchCondition} like '%'||#{keyword}||'%'
+			</if>
+		</where>
+		ORDER BY lot_idx
 	</select>
 </mapper>

@@ -155,6 +155,13 @@ public class BusinessServiceImpl implements BusinessService {
 	}
 
 
+	@Override
+	public List<ExportVO> getProdLotModal(ExportLotVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.getProdLotModal(vo);
+	}
+
+
 	
 	
 }
