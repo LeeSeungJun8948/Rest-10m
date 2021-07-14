@@ -21,4 +21,8 @@ public class WorkVO {
 	int workCount; // 작업량
 	int errorCount; // 불량량
 	String prorCode; // 작업지시번호
+	String workDtS;
+	String workDtE;
+	int facCode;
+	String facilitiesName;
 }

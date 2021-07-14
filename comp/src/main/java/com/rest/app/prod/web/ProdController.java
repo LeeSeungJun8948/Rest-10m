@@ -376,6 +376,24 @@ public class ProdController {
 		return data;
 	}
 
+	// 작업실적 - 불량코드 모달
+	@RequestMapping("workFacModal.do")
+	public String workFacModal() {
+		return "app/prod/workFacModal";
+	}
+
+	// 작업자 검색
+	@RequestMapping("/ajax/workFacModal.do")
+	@ResponseBody
+	public Map<String, Object> ajaxWorkFacModal(@RequestBody Map<String, Object> param) {
+		Map<String, Object> datas = new HashMap<>();
+		Map<String, Object> data = new HashMap<>();
+		data.put("result", true);
+		datas.put("contents", svc.searchFac(param));
+		data.put("data", datas);
+		return data;
+	}
+
 	// 작업실적 저장
 	@RequestMapping("saveWork.do")
 	@ResponseBody

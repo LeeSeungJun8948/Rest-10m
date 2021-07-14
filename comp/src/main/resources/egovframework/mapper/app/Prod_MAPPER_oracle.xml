@@ -69,7 +69,7 @@
 		DELETE FROM detailplan WHERE plan_code = #{planCode}
 	</delete>
 	<select id="viewPlanSearch" resultType="DetailPlanVO">
-		SELECT TO_CHAR(p.plan_date, 'YYYY-MM-DD') plan_date, d.product_code, pr.product_name,
+		SELECT TO_CHAR(p.plan_date, 'YYYY-MM-DD') plan_date, p.plan_name, d.product_code, pr.product_name,
 		    d.order_no, c.company_name, TO_CHAR(o.out_date, 'YYYY-MM-DD') out_date,
 		    o.order_count, o.plan_count, TO_CHAR(d.work_date,'YYYY-MM-DD') work_date, d.comments
 		FROM plan p, detailplan d, product pr, company c, orders o
@@ -93,11 +93,12 @@
 	<!-- 미완료계획 읽기 -->
 	<select id="getUnfinPlans" resultType="DetailPlanVO">
 		SELECT DISTINCT 
-			d.deplan_idx, d.product_code, TO_CHAR(d.work_date, 'YYYY-MM-DD') plan_date,
-			d.plan_count, d.pror_count, d.plan_code,
+			d.deplan_idx, d.product_code, TO_CHAR(d.work_date, 'YYYY-MM-DD') plan_date, 
+			plan.plan_name, d.plan_count, d.pror_count, d.plan_code,
 			d.plan_count - d.pror_count unpror_count, p.product_name
-		FROM detailplan d, product p
+		FROM detailplan d, product p, plan
 		WHERE d.plan_count != d.pror_count
+		AND plan.plan_code = d.plan_code
 		AND d.product_code = p.product_code
 		AND d.work_date BETWEEN TO_DATE(#{prorderDtS}, 'YYYY-MM-DD') 
         	AND TO_DATE(#{prorderDtE}, 'YYYY-MM-DD')
@@ -132,10 +133,12 @@
 			d.product_lot, d.pror_code, d.product_code, d.pror_count, d.pror_count work_count, d.comments, d.deplan_idx, 
 			TO_CHAR(d.work_date, 'YYYY-MM-DD') work_date, p.product_name,
 			(SELECT plan_code FROM detailplan WHERE deplan_idx = d.deplan_idx) plan_code,
+			(SELECT plan_name FROM plan, detailplan dp 	WHERE dp.deplan_idx = d.deplan_idx
+				AND dp.plan_code = plan.plan_code) plan_name,
 			(SELECT plan_count FROM detailplan WHERE deplan_idx = d.deplan_idx) plan_count, 
 			(SELECT plan_count - pror_count FROM detailplan WHERE deplan_idx = d.deplan_idx) unpror_count,
       		(SELECT TO_CHAR(work_date, 'YYYY-MM-DD') FROM detailplan WHERE deplan_idx = d.deplan_idx) plan_date
-		FROM detailprorder d, product p 
+		FROM detailprorder d, product p
 		WHERE pror_code = #{prorCode}
 		AND d.product_code = p.product_code
 		ORDER BY d.product_lot
@@ -169,7 +172,7 @@
 	</select>
 	<select id="viewProrderSearch" resultType="DetailProrderVO">
 		SELECT TO_CHAR(p.pror_date, 'YYYY-MM-DD') pror_date, d.product_code, pr.product_name,
-		  o.order_no, c.company_name, TO_CHAR(o.out_date,'YYYY-MM-DD') out_date,
+		  o.order_no, c.company_name, TO_CHAR(o.out_date,'YYYY-MM-DD') out_date, p.pror_name,
 		  o.order_count, d.pror_count, TO_CHAR(d.work_date,'YYYY-MM-DD') work_date, d.comments
 		FROM detailprorder d, prorder p, product pr, orders o, company c, detailplan dp
 		WHERE o.company_code = c.company_code
@@ -261,7 +264,8 @@
 		SELECT DISTINCT
 			w.work_code, w.process_code, TO_CHAR(w.work_date,'YYYY-MM-DD') work_date, w.product_lot, 
 			w.emp_code, emp.employee_name, w.product_code, w.work_count, w.error_count, p.process_name, 
-			w.start_time, w.end_time, w.error_code, prod.product_name,
+			w.start_time, w.end_time, w.error_code, prod.product_name, w.fac_code,
+			(SELECT facilities_name FROM facilities WHERE fac_code = w.fac_code) facilities_name,
 			(SELECT error_name FROM error WHERE error_code = w.error_code) error_name, d.pror_code
 		FROM work w, process p, employee emp, product prod, detailprorder d
 		WHERE w.work_date BETWEEN TO_DATE(#{workDtS}, 'YYYY-MM-DD')
@@ -278,14 +282,14 @@
 	<insert id="insertWork" parameterType="WorkVO">
 		INSERT INTO work VALUES(
 		#{workCode}, #{workDiv}, #{productLot}, #{workDate}, #{startTime}, #{endTime}, 
-		#{empCode},	#{errorCode}, #{productCode}, #{workCount}, #{errorCount} 
+		#{empCode},	#{errorCode}, #{productCode}, #{workCount}, #{errorCount}, #{facCode}
 		)
 	</insert>
 	<update id="updateWork" parameterType="WorkVO">
 		UPDATE work SET
 			work_date = #{workDate}, emp_code = #{empCode}, error_code = #{errorCode}, product_lot = #{productLot},
 			error_count = #{errorCount}, work_count = #{workCount}, start_time = #{startTime}, end_time = #{endTime},
-			process_code = #{workDiv}
+			process_code = #{workDiv}, fac_code = #{facCode}
 		WHERE work_code = #{workCode}
 	</update>
 	<delete id="deleteWork">
@@ -304,7 +308,6 @@
 		</where>
 		ORDER BY emp_code
 	</select>
-	
 	<select id="searchError" resultType="com.rest.app.comm.vo.ErrorVO">
 		SELECT * FROM error
 		<where>
@@ -313,5 +316,14 @@
 			</if>
 		</where>
 		ORDER BY error_code
+	</select>
+	<select id="searchFac" resultType="com.rest.app.fac.vo.FacilitiesVO">
+		SELECT * FROM facilities
+		<where>
+			<if test="keyword != null and keyword !=''">
+				${searchCondition} like '%'||#{keyword}||'%' 
+			</if>
+		</where>
+		ORDER BY fac_code
 	</select>
 </mapper>

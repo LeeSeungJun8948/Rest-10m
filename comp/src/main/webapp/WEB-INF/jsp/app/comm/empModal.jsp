@@ -44,7 +44,7 @@
 }
 </style>
 <!-- Modal -->
-<form action="insertEmp.do" method="post">
+<form id = "frm" action="insertEmp.do" method="post">
 	<div class="modal-content">
 		<div class="modal-header">
 			<h5 class="modal-title">
@@ -99,9 +99,17 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<input type="submit" class="btn btn-primary"> 
+			<button id="btnSave" class="btn btn-primary" onclick="fnSearch()">저장</button> 
 			<a href="#" rel="modal:close" ><button class="btn btn-primary">닫기</button></a>
 		</div>
 	</div>
 </form>
+<script>
+	function fnSearch(){
+		if(confirm("저장하시겠습니까?")) { 			
+			$("#frm").submit();
+		}
+	}
+
+</script>
 

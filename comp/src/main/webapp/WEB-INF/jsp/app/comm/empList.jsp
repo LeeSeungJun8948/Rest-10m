@@ -166,6 +166,7 @@
 				grid.resetOriginData();
 			})
 			
+	
 			function format(value){
 				value = value * 1;
 				return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
