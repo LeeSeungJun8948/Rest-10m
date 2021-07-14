@@ -116,6 +116,16 @@ function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
 
+// 초기화
+function resetPage() {
+	$("form").each(function() {
+		this.reset();
+	});
+	grid.clear();
+	gridInput.clear();
+	$('#exportCode').val('exportCode');
+}
+
 //모달
 var forGrid = false;
 $("#btnCompModal").on("click", function(e) {

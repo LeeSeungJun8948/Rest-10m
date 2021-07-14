@@ -51,4 +51,6 @@ public interface BusinessService {
 	int deleteAllExportLot(String exportCode);
 
 	List<ExportLotVO> readExportLot(Map<String, Object> param);
+
+	public List<ExportVO> getProdLotModal(ExportLotVO vo);//제품Lot 
 }

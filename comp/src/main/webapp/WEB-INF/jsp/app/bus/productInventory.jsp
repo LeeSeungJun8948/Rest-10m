@@ -12,23 +12,16 @@
 <div class="mb-2 col-lg-6">
 	<form id="inputFrm" name="inputFrm">
 		<table class="table">
-			<tbody>
-				<tr>
-						<th>주문일자*</th>
-						<td>
-							<div class="row">
-								<div class="col-md-5">
-									<input type="date" class="form-control" id="fromDate"
-										name="fromDate">
-								</div>
-								~
-								<div class="col-md-5">
-									<input type="date" class="form-control" id="toDate"
-										name="toDate">
-								</div>
-							</div>
-						</td>
-					</tr>
+			<tbody>	
+			<tr>
+					<th>제품Lot</th>
+					<td><input type="text" id="productLot" name="productLot" />
+						<button id="btnProdLotModal" type="button" class="btn btn-toggle"
+							data-remote="false" data-toggle="modal" data-target="#prodLotModal">
+							<img alt="btn_search"
+								src="<c:url value='/images/app/all/btn_search.png'/>">
+						</button></td>
+				</tr>
 				<tr>
 					<th>제품코드</th>
 					<td><input type="text" id="productCode" name="productCode" />
@@ -38,18 +31,17 @@
 								src="<c:url value='/images/app/all/btn_search.png'/>">
 						</button> <input type="text" id="productName" name="productName"
 						maxlength="20" readonly="true" /></td>
-
-
-
-				</tr>
-				<tr>
-					<th>특기사항</th>
-					<td><input type="text" id="comments" name="comments"></td>
 				</tr>
 			</tbody>
 		</table>
 	</form>
 
+</div>
+<div class="modal fade" id="prodLotModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="prodLotContent" align="center">
+		</div>
+	</div>
 </div>
 <div class="modal fade" id="prodModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -57,6 +49,7 @@
 		</div>
 	</div>
 </div>
+
 <div id="grid"></div>
 	<script type="text/javascript" src="js/app/bus/productInventory.js"></script>
 	
