@@ -64,7 +64,7 @@ $(matList).on('click','tr',function(){
 		dataType : "json",
 		async : false,
 		success : function(data) {
-			$('#materialCode').val(data.data.contents.materialCode);
+			$('#materialCode').val(data.materialCode);
 			$('#materialName').val(data.materialName);
 			$('#matNo').val(data.matNo).prop("selected",true);
 			$('#companyCode').val(data.companyCode);

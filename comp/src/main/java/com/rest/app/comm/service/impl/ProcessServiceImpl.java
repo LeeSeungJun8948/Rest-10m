@@ -50,4 +50,11 @@ public class ProcessServiceImpl implements ProcessService {
 		return mapper.getCompName(vo);
 	}
 
+
+	@Override
+	public ProcessVO maxProcessCode() {
+		// TODO Auto-generated method stub
+		return mapper.maxProcessCode();
+	}
+
 }

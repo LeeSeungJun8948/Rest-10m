@@ -19,7 +19,7 @@ $.fn.serializeObject = function() {
 					return o;
 			};
 
-
+// 그리드 행추가시  code +1
 var newErrorCode; 
 $("#btnRowInsert").on("click", function(){
 		if(checkNull(newErrorCode)){

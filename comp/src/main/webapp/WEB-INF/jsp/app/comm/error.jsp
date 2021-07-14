@@ -28,7 +28,7 @@
 				<button type="button" class="btn btn-primary" id="btnCheck">조회</button>
 				</div>
 			</form>
-		<div class="col-4"  style="margin-top: 28px">
+		<div align="right"  style="margin-top: 28px">
 			<button type="button" class="btn btn-primary" id="btnRowInsert">행추가</button>
 			<button type="button" class="btn btn-primary" id="btnInsert">저장</button>
 			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>

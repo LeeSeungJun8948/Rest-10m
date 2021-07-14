@@ -10,6 +10,7 @@ var dataSource = {
 const grid = new tui.Grid({
 	el: document.getElementById('grid'),
 	data: dataSource,
+	dataType:'local',
 	scrollX: false,
 	scrollY: false,
 	rowHeaders: ['checkbox'],
@@ -34,9 +35,6 @@ const grid = new tui.Grid({
 	}, {
 		header: '제품상태',
 		name: 'productState'
-	}, {
-		header: '비   고',
-		name: 'remark'
 	}
 	], summary: {
 		height: 40,
@@ -88,6 +86,16 @@ $('#resetBtn').on('click', function() {
 });
 function checkNull(value) {
 	return value != null && value != '' && value != '[object HTMLInputElement]';
+}
+
+// 초기화
+function resetPage() {
+	$("form").each(function() {
+		this.reset();
+	});
+	grid.clear();
+	gridInput.clear();
+	$('#exportCode').val('exportCode');
 }
 //모달
 var forGrid = false;

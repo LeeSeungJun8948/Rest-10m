@@ -12,5 +12,6 @@ public interface ProcessMapper {
 	int insertProcess(ProcessVO vo);
 	int updateProcess(ProcessVO vo);
 	int deleteProcess(ProcessVO vo);
+	public ProcessVO maxProcessCode();
 
 }

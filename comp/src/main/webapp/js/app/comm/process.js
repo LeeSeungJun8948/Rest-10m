@@ -14,11 +14,37 @@ $.fn.serializeObject = function() {
 					return o;
 			};
 
+function checkNull(value){
+	return value != null && value != '' && value != '[object HTMLInputElement]';
+}
 
+var newProCode;
 
 $("#btnRowInsert").on("click", function(){
-		grid.appendRow();
+	if(checkNull(newProCode)){
+		newProCode = newProCode * 1 + 1;
+	}else{
+		$.ajax({
+			type : "get",
+			url : "ajax/maxProcessCode.do",
+			dataType : "json",
+			async : false,
+			success : function(data) {
+				newProCode = data.newProCode;
+				alert(성공);
+			},
+			error : function() {
+				alert(실패);
+			}
+		});		
+	}
+
+	var newRowData = {'processCode' : newProCode};
+	grid.appendRow(newRowData,{
+		at : grid.getRowCount(),
+		focus : true
 	});
+});
 
 $("#btnInsert").on("click", function(){
 		//grid.request('createData');

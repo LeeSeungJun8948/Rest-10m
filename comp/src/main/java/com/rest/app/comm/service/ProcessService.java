@@ -11,4 +11,5 @@ public interface ProcessService {
 	int insertProcess(ProcessVO vo);
 	int updateProcess(ProcessVO vo);
 	int deleteProcess(ProcessVO vo);
+	public ProcessVO maxProcessCode();
 }
