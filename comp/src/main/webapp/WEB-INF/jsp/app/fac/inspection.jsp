@@ -28,7 +28,7 @@
 		</div>
 	</div>
 </form>
-<div class="mb-4" align="left">
+<div class="mb-4" align="right">
 	<button type="button" class="btn btn-primary" id="btnSave" name="btnSave" >저장</button>
 	<button type="button" class="btn btn-info" id="btnAdd" name="btnAdd" >추가</button>
 	<button type="button" class="btn btn-info" id="btnDel" name="btnDel" >삭제</button>
