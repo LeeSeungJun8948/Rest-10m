@@ -1,4 +1,12 @@
-	// 탭 기능
+function test() {
+	if(!checkNull($('#facilitiesName').val())) {
+		toastr.warning('설비명을 입력해주십시오.');
+			return false;
+		} else
+			return true;
+	}
+
+// 탭 기능
 $( function() {
     $( "#tabs" ).tabs({ activate: function( event, ui ) {
 		console.log()
@@ -87,9 +95,6 @@ $( function() {
 		}, {
 			header : '구매일자',
 			name : 'purchaseDate'
-		}, {
-			header : '이미지',
-			name : 'img'
 		}, {
 			header : '공정코드',
 			name : 'processCode'
@@ -218,4 +223,8 @@ $( function() {
 		img.setAttribute("src", '');
 		$('input').val('');
 	})
+	
+function checkNull(value){
+		return value != null && value != '' && value != '[object HTMLInputElement]';
+	}; 
 	

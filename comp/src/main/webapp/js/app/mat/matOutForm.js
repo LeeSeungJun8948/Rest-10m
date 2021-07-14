@@ -36,7 +36,10 @@ const grid = new tui.Grid({
 				language: 'ko',
 				format: 'yyyy-MM-dd'
 				}
-			}
+			},
+			validation: {
+            	required: true
+          	}
 		},
 		{
 			header : '자재코드',
@@ -47,6 +50,9 @@ const grid = new tui.Grid({
 			onAfterChange(ev) {
         		setMatInfo(ev);
       		},
+			validation: {
+            	required: true
+          	},
 			relations: [ {
 				targetNames: ['processCode'],
 				listItems({ value }){
@@ -80,13 +86,20 @@ const grid = new tui.Grid({
 			editor:'text',
 			formatter({value}) {
       			return format(value);
-    		}
+    		},
+			validation: {
+				dataType: 'number',
+            	required: true
+          	}
 		}, {
 			header : '자재LOT_NO',
 			name : 'lotNo',
 			width : 150,
 			align: 'center',
-			className: 'white'
+			className: 'white',
+			validation: {
+            	required: true
+          	}
 		}, {
 			header : '출고공정',
 			name : 'processCode',
@@ -99,7 +112,10 @@ const grid = new tui.Grid({
 				options: {
 					listItems: []
             	}
-			}
+			},
+			validation: {
+            	required: true
+          	}
 		}, {
 			header : '자재재고',
 			name : 'stock',
@@ -246,33 +262,65 @@ $("#btnGridDel").on("click", function(ev){
 
 
 $("#btnSave").on("click", function(){
-	grid.request('modifyData');
+	
+	for(var valid of grid.validate()){
+		for(var errors of valid.errors){
+			var header;
+			for(var column of grid.getColumns()){
+				if(column.name == errors.columnName)
+					header = column.header;
+			}
+			toast(header+'를 확인하세요.',grid.getValue(valid.rowKey, 'ioCode'));	
+		}
+	}
+	
+	if(grid.validate().length == 0){
+		grid.request('modifyData');
+	}
+
 });
 
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
 
+
+function toast(text, title){
+	toastr.options = {
+		closeButton: true,
+		showDuration: "200"
+ 	};
+	toastr.error(text,title);
+}
+
 // 모달
 var forGrid = false;
 // 자재 돋보기
 $("#btnMatModal").on("click", function(e) {
+	$('#materialCode').val('');
+	$('#materialName').val('');
     $('#matContent').load("matModal.do");
 });
 
 // 자재코드 입력창
 $('#materialCode').on('click', function(){
+	$('#materialCode').val('');
+	$('#materialName').val('');
 	$('#matModal').modal('show');
 	$('#matContent').load("matModal.do");
 });
 
 // 공정 돋보기
 $('#btnProcModal').on('click',function(e){
+	$('#processCode').val('');
+	$('#processName').val('');
 	$('#procContent').load("procModal.do");
 });
 
 // 공정코드 입력창
 $('#processCode').on('click', function(){
+	$('#processCode').val('');
+	$('#processName').val('');
 	$('#procModal').modal('show');
 	$('#procContent').load("procModal.do");
 });
@@ -289,10 +337,14 @@ grid.on('dblclick', function(ev){
 // lot검색 모달 열기(그리드에서)
 grid.on('dblclick', function(ev){
 	if(ev.columnName == 'lotNo'){
-		rowKey = ev.rowKey;
-		materialCode = grid.getValue(rowKey, 'materialCode');
-		$('#matLotModal').modal('show');
-		$('#matLotContent').load("matLotModal.do");
+		if(checkNull(grid.getValue(ev.rowKey,'materialCode'))){
+			rowKey = ev.rowKey;
+			materialCode = grid.getValue(rowKey, 'materialCode');
+			$('#matLotModal').modal('show');
+			$('#matLotContent').load("matLotModal.do");	
+		}else{
+			toast('자재코드를 입력하고 선택하세요', 'No.'+grid.getValue(ev.rowKey, 'ioCode'))			
+		}
 	}
 })
 

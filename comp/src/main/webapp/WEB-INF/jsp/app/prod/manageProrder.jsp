@@ -87,7 +87,7 @@
 	</form>
 </div>
 <div>
-	<div id="gridInput"/>
+	<div id="gridInput"></div>
 </div>
 <div class="modal fade" id="prorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">

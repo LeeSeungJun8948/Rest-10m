@@ -17,7 +17,7 @@
 				<tbody>
 					<tr>
 						<th>수리코드</th>
-						<td><input type="text" id="repairCode" name="repairCode"
+						<td><input type="text" id="repairCode" name="repairCode" value="${max}"
 							style="background-color: #e2e2e2;" readonly></td>
 						<th>설비코드</th>
 						<td><input type="text" id="facCode" name="facCode"></td>

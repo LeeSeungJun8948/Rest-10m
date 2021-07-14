@@ -40,7 +40,10 @@ const grid = new tui.Grid({
 			},
 			onAfterChange(ev) {
         		makeLot(ev);
-      		}
+      		},
+			validation: {
+            	required: true
+          	}
 		}, {
 			header : '발주번호',
 			name : 'inorderCode',
@@ -50,7 +53,10 @@ const grid = new tui.Grid({
 			onAfterChange(ev) {
 				setMatInfo(ev);
         		makeLot(ev);
-      		}
+      		},
+			validation: {
+            	required: true
+          	}
 		}, {
 			header : '자재코드',
 			name : 'materialCode',
@@ -77,7 +83,11 @@ const grid = new tui.Grid({
     		},
 			onAfterChange(ev) {
         		calPrice(ev);
-      		}
+      		},
+			validation: {
+				dataType: 'number',
+            	required: true
+          	}
 		}, {
 			header : '단가',
 			name : 'unitPrice',
@@ -90,6 +100,10 @@ const grid = new tui.Grid({
 			onAfterChange(ev) {
         		calPrice(ev);
       		},
+			validation: {
+				dataType: 'number',
+            	required: true
+          	}
 		}, {
 			header : '총액',
 			name : 'price',
@@ -102,7 +116,10 @@ const grid = new tui.Grid({
 			header : 'LOT_NO',
 			name : 'lotNo',
 			width : 140,
-			align: 'center'
+			align: 'center',
+			validation: {
+            	required: true
+          	}
 		}, {
 			header : '자재재고',
 			name : 'stock',
@@ -237,9 +254,31 @@ $("#btnGridDel").on("click", function(ev){
 
 
 $("#btnSave").on("click", function(){
-	grid.request('modifyData');
+	
+	for(var valid of grid.validate()){
+		for(var errors of valid.errors){
+			var header;
+			for(var column of grid.getColumns()){
+				if(column.name == errors.columnName)
+					header = column.header;
+			}
+			toast(header+'를 확인하세요.',grid.getValue(valid.rowKey, 'ioCode'));	
+		}
+	}
+	
+	if(grid.validate().length == 0){
+		grid.request('modifyData');
+	}
+	
 });
 
+function toast(text, title){
+	toastr.options = {
+		closeButton: true,
+		showDuration: "500"
+ 	};
+	toastr.error(text,title);
+}
 
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
@@ -259,22 +298,30 @@ function getFormatDate(date){
 var forGrid = false;
 // 자재 돋보기
 $("#btnMatModal").on("click", function(e) {
+	$('#materialCode').val('');
+	$('#materialName').val('');
     $('#matContent').load("matModal.do");
 });
 
 // 자재코드 입력창
 $('#materialCode').on('click', function(){
+	$('#materialCode').val('');
+	$('#materialName').val('');
 	$('#matModal').modal('show');
 	$('#matContent').load("matModal.do");
 });
 
 // 업체 돋보기
 $("#btnCompModal").on("click", function(e) {
+	$('#companyCode').val('');
+	$('#companyName').val('');
     $('#compContent').load("compModal.do");
 });
 
 // 업체코드 입력창
 $('#companyCode').on('click',function(){
+	$('#companyCode').val('');
+	$('#companyName').val('');
 	$('#compModal').modal('show');
 	$('#compContent').load("compModal.do");
 	
@@ -289,4 +336,8 @@ grid.on('dblclick', function(ev){
 		$('#inorderModal').modal('show');
 		$('#inorderContent').load("inorderModal.do");
 	}
+
 })
+
+
+

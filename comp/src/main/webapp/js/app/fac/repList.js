@@ -1,8 +1,10 @@
 function test() {
-		var check = document.frm.facCode.value;
+		/*var check = document.frm.facCode.value;
 		if (!check) {
 			alert("설비코드 필수입력");
-			document.frm.facCode.focus();
+			document.frm.facCode.focus();*/
+	if(!checkNull($('#facCode').val())) {
+		toastr.warning('설비코드를 입력해주십시오.');
 			return false;
 		} else
 			return true;

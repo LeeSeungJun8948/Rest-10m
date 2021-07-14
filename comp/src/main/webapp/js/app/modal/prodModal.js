@@ -26,11 +26,7 @@
 					header : '제품명',
 					name : 'productName',
 					align: 'center'
-				}, {
-					header : '단위',
-					name : 'unitNo',
-					align: 'center'
-				} ]
+				}]
 			});
 			
 			$("#btnReadModal").on("click", function() {

@@ -59,7 +59,11 @@ const adjustGrid = new tui.Grid({
 			editor: 'text',
 			onAfterChange(ev) {
         		setInoutNo(ev);
-      		}
+      		},
+			validation: {
+				dataType: 'number',
+            	required: true
+          	}
 		},  {
 			header : '정산',
 			name : 'inoutNo',
@@ -108,7 +112,10 @@ const adjustGrid = new tui.Grid({
 				language: 'ko',
 				format: 'yyyy-MM-dd'
 				}
-			}
+			},
+			validation: {
+            	required: true
+          	}
 		}, {
 			header : '비고',
 			name : 'comments',
@@ -197,9 +204,30 @@ $("#btnGridDel").on("click", function(ev){
 });
 
 $("#btnSave").on("click", function(){
-	adjustGrid.request('modifyData');
+	
+	for(var valid of adjustGrid.validate()){
+		for(var errors of valid.errors){
+			var header;
+			for(var column of adjustGrid.getColumns()){
+				if(column.name == errors.columnName)
+					header = column.header;
+			}
+			toast(header+'를 확인하세요.',adjustGrid.getValue(valid.rowKey, 'ioCode'));	
+		}
+	}
+	
+	if(adjustGrid.validate().length == 0){
+		adjustGrid.request('modifyData');
+	}
 });
 
+function toast(text, title){
+	toastr.options = {
+		closeButton: true,
+		showDuration: "500"
+ 	};
+	toastr.error(text,title);
+}
 
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
@@ -219,11 +247,15 @@ function getFormatDate(date){
 var forGrid = false;
 // 자재 돋보기
 $("#btnMatModal").on("click", function(e) {
+	$('#materialCode').val('');
+	$('#materialName').val('');
     $('#matContent').load("matModal.do");
 });
 
 // 자재코드 입력창
 $('#materialCode').on('click', function(){
+	$('#materialCode').val('');
+	$('#materialName').val('');
 	$('#matModal').modal('show');
 	$('#matContent').load("matModal.do");
 });

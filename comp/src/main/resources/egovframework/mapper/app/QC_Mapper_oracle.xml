@@ -30,10 +30,10 @@
  	 WHERE a.product_code = #{productCode}
 	</select>
 	
-	<!-- 이미지 저장 -->
+	<!-- 수정 -->
 	<update id="updateProduct" parameterType="com.rest.app.comm.vo.QualityControlVO">
 	UPDATE product
-	   SET product_name = p_img=#{pImg}, qc_img=#{qcImg}
+	   SET product_name =#{productName}, p_img=#{pImg}, qc_img=#{qcImg}
 	 WHERE product_code = #{product_code}  
 	</update>
 	
@@ -55,22 +55,36 @@
 		  from employee
 	</select>
 	
-	<!-- insert product -->
+	<!-- merge insert and update -->
 	<insert id="insertProduct" parameterType="com.rest.app.comm.vo.QualityControlVO">
-		insert into product (product_code ,product_name,
-                      			std_id, std_no,
-                      			unit_id, unit_no,
-                      			emp_code, use_at)
-		values (#{productCode},#{productName},#{stdId},#{stdNo},
-				#{unitId},#{unitNo},#{empCode},#{useAt})
+		MERGE INTO product p   
+    	USING DUAL
+       	   ON (p.product_code = #{productCode})  
+        WHEN MATCHED THEN
+        UPDATE SET p.product_name = #{productName},  
+    			   p.std_id = 'R_STD', p.std_no = #{stdNo},
+				   p.unit_id = 'R_UNIT', p.unit_no = #{unitNo},
+  		           p.emp_code = #{empCode} 
+  		           <if test ="qcImg != null and qcImg !=''">
+		 			,p.qc_img= #{qcImg}
+				   </if>
+				   <if test ="useAt != null and useAt !=''">
+					,p.use_at = #{useAt}
+				   </if>
+		WHEN NOT MATCHED THEN
+        INSERT (p.product_code ,p.product_name, p.qc_img, p.std_id, p.std_no,unit_id, p.unit_no,p.emp_code, p.use_at)  
+        VALUES (#{productCode}, #{productName}, #{qcImg},'R_STD', #{stdNo},
+				'R_UNIT', #{unitNo}, #{empCode}, NVL(#{useAt},'N'))
+		
+        
 	</insert>
 	<!-- update product -->
 	<update id="updateProdcut" parameterType="com.rest.app.comm.vo.QualityControlVO">
 		update product
 		   set product_code = #{productCode}, product_name= #{productName},
-		  	   p_img= #{pImg}, qc_img= #{qcImg},
-		  	   std_id = #{stdId}, std_no = #{stdNo},
-		  	   unit_id = #{unitId}, unit_no = #{unitNo},
+		  	   qc_img= #{qcImg},
+		  	   std_id = 'R_STD', std_no = #{stdNo},
+		  	   unit_id = 'R_UNIT', unit_no = #{unitNo},
 		  	   emp_code = #{empCode}, use_at = #{useAt}
 		 where product_code = #{productCode}
 	</update>
@@ -80,4 +94,10 @@
 		delete from product
 		 where product_code = #{productCode}
 	</delete>
+	
+	<!-- max productCode -->
+	<select id="maxProductCode" resultType="int">
+		select max(product_code) 
+		  from product
+	</select>
 </mapper>

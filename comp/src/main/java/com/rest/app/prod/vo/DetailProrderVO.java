@@ -17,4 +17,12 @@ public class DetailProrderVO {
 	int workCount;
 	String comments;
 	int deplanIdx;
+	String prorDate;
+	int orderNo;
+	int companyCode;
+	String companyName;
+	String outDate;
+	int orderCount;
+	String searchDtS;
+	String searchDtE;
 }

@@ -9,7 +9,8 @@
 
 <h1 class="h3 mb-4 text-gray-700">설비관리</h1>
 
-<form action="insertFac.do" method="post" id="frm" encType="multipart/form-data">
+<form action="insertFac.do" method="post" id="frm" encType="multipart/form-data"
+	onsubmit="return test()">
 	<div class="mb-4">
 		<button class="btn btn-primary" id="btnNew" type="button"> 새입력 </button>
 		<button type="submit" class="btn btn-primary"> 저장 </button>
@@ -21,7 +22,7 @@
 				<tbody>
 					<tr>
 						<th>설비코드</th>
-						<td><input type="text" id="facCode" name="facCode" 
+						<td><input type="text" id="facCode" name="facCode" value="${max}"
 						style="background-color: #e2e2e2;" readonly></td> 
 					</tr>
 					<tr>
