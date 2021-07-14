@@ -32,6 +32,9 @@ const grid = new tui.Grid({
 		header: '주문번호',
 		name: 'orderNo',
 	}, {
+		header: '업체명',
+		name: 'companyName',
+	}, {
 		header: '주문량',
 		name: 'orderCount'
 	}, {
