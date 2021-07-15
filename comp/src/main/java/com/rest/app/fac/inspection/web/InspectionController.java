@@ -46,6 +46,23 @@ public class InspectionController {
 		return data;
 	}
 	
+	// 점검내역 조회
+	@RequestMapping("inspectionList.do")
+	public String inspectionList() {
+		return "fac/inspectionList.page";
+	}
+	
+	@RequestMapping("/ajax/inspecList.do")
+	@ResponseBody
+	public Map<String, Object> ajaxinspecList(InspectionVO vo) {
+		Map<String,Object> data = new HashMap<String,Object>();
+		Map<String,Object> datas = new HashMap<String,Object>();
+		data.put("result", true);
+		datas.put("contents", mapper.inspectionList());
+		data.put("data", datas);
+		return data;
+	}
+	
 	// 삭제
 	@PostMapping(value="ajax/deleteIns.do")
 	@ResponseBody

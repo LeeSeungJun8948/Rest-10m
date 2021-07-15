@@ -9,12 +9,11 @@
 
 <h1 class="h3 mb-4 text-gray-700">설비관리</h1>
 
-<form action="insertFac.do" method="post" id="frm" encType="multipart/form-data"
+<form action="insertFacilities.do" method="post" id="frm" encType="multipart/form-data"
 	onsubmit="return test()">
 	<div class="mb-4" style="float:right">
 		<button class="btn btn-primary" id="btnNew" type="button"> 새입력 </button>
 		<button type="submit" class="btn btn-primary"> 저장 </button>
-		<button class="btn btn-primary" id="btnUdate" type="button"> 수정 </button>
 		<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
 	</div>
 	<div class="flax row">

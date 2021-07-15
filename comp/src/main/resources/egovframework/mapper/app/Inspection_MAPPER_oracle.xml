@@ -37,6 +37,12 @@
     <select id="getFacListModal" parameterType="com.rest.app.fac.vo.FacilitiesVO" resultType="com.rest.app.fac.vo.FacilitiesVO">
     	select facilities_name, fac_code, fac_inspection
     	from facilities
-    	
     </select>
+    
+    <select id="inspectionList" resultType="com.rest.app.fac.inspection.vo.InspectionVO">
+    	select i.inspection_code, i.fac_code, f.facilities_name, f.fac_inspection, i.before_date, i.today, i.after_date, i.judgement, i.ins_comment
+		from inspection i, facilities f
+		where i.fac_code=f.fac_code
+		order by i.inspection_code
+	</select>
 </mapper>  

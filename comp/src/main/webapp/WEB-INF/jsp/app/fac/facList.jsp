@@ -16,14 +16,22 @@
 	</div>
 	<div class="mb-2">
 		<form id="searchCheck" name="searchCheck">
+		<div>
+			<div>
 			<select name="searchCondition" id="searchCondition"
 				title="검색조건2-검색어구분" style="width: 80px; height: 26px">
 				<option value="facilitiesName">설비명</option>
 				<option value="processName">공정명</option>
 			</select> 
+			</div>
+			<div style="float:left">
 				<input id="searchKeyword" name="searchKeyword" type="text"
-				title="검색어" class="form-control" style="width: 200px;">
-			<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
+					title="검색어" class="form-control" style="width: 200px;">
+			</div>
+			<div style="float:left">
+				<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
+			</div>
+		</div>
 		</form>
 	</div>
 	<div id="grid"></div>
