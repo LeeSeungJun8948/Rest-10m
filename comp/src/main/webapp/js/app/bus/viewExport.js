@@ -1,7 +1,7 @@
 var dataSource = {
 	contentType: 'application/json',
 	api: {
-		readData: { url: 'viewExportSearch.do', method: 'POST' },
+		readData: { url: contextPath+'/ajax/viewExportSearch.do', method: 'POST' },
 	}
 }
 
@@ -62,11 +62,11 @@ $("#btnReset").click(function() {
 
 //모달
 $("#btnCompModal").on("click", function() {
-	$('#compContent').load("compSearchModal.do");
+	$('#compContent').load("compModal.do");
 });
 
 $("#btnProdModal").on("click", function() {
-	$('#prodContent').load("prodSearchModal.do");
+	$('#prodContent').load("prodModal.do");
 });
 
 // 초기화

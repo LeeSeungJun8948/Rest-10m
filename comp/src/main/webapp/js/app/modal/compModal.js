@@ -5,7 +5,7 @@
 			var compData = {
 				api : {
 					readData : {
-					url : 'ajax/compListModal.do',
+					url : contextPath + '/ajax/compListModal.do',
 					method : 'GET'
 					}
 				},

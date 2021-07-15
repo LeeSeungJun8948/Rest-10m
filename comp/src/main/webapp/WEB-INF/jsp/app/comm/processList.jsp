@@ -104,7 +104,7 @@
 				});
 			
 			   var rowKeyG;			
-			   
+			   		//그리드 아웃컴프네임 행 클릭시 모달
 				   grid.on('click', (ev) => {
 					   rowKeyG = ev.rowKey;
 					   var out = grid.getRow(ev.rowKey).outStats;

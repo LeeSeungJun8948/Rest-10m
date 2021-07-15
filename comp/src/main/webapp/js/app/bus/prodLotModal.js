@@ -4,7 +4,7 @@
 			var prodLotData = {
 				api: {
 					readData: {
-						url: 'searchProdLot.do',
+						url: contextPath+'/ajax/searchProdLot.do',
 						method: 'POST'
 					}
 				},

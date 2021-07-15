@@ -1,7 +1,7 @@
 
 var dataSource = {
 	api : {
-		readData : {url: 'ajax/busList.do', method:'POST' }
+		readData : {url: contextPath+'/ajax/busList.do', method:'POST' }
 	},
 	contentType: 'application/json'
 			

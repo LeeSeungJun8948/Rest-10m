@@ -46,9 +46,10 @@
         ON c.company_code = a.company_code       
  	 WHERE a.product_code = #{productCode}
 	</select>
+	
 	<!-- 자재코드 입력시 자재명 출력 -->
 	<select id="getMatName" resultType="com.rest.app.comm.vo.BomVO">
-		select material_name
+		select material_code, material_name
   		  from material
  		 where material_code = #{materialCode}
  	<!-- 공정코드 입력시 공정명 출력 -->
@@ -80,8 +81,9 @@
 	<update id="updateBom" parameterType="com.rest.app.comm.vo.BomVO">
 		update bom
    		   set material_Code = #{materialCode}, process_code= #{processCode} , kg = #{kg}, etc=#{etc}
- 		 where product_code = #{productCode}
+ 		 where bom_no = #{bomNo}
 	</update>
+	
 	<!-- Bom delete -->
 	<delete id="deleteBom" parameterType="com.rest.app.comm.vo.BomVO">
 		delete from bom
@@ -91,6 +93,7 @@
 	<select id="getNewProductCode" resultType="com.rest.app.comm.vo.BomVO">
 		select product_code
 		  from product
+		
 	</select>
 
 </mapper>

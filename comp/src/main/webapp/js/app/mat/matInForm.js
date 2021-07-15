@@ -6,8 +6,8 @@ $( document ).ready(function() {
 
 const dataSource = {
 	api : {
-		readData : {url: 'ajax/matInList.do' , method:'GET' },
-		modifyData : { url: 'ajax/matInModify.do', method: 'PUT'}
+		readData : {url: contextPath + '/ajax/matInList.do' , method:'GET' },
+		modifyData : { url: contextPath + '/ajax/matInModify.do', method: 'PUT'}
 	},
 	contentType: 'application/json'
 };
@@ -196,7 +196,7 @@ function setMatInfo(ev){
 		$.ajax({
 			type : "get",
 			data: {"inorderCode" : inorderCode},
-			url : "ajax/getMatInfoForIn.do",
+			url : contextPath + "/ajax/getMatInfoForIn.do",
 			dataType : "json",
 			async : false,
 			success : function(data) {
@@ -230,7 +230,7 @@ $("#btnGridAdd").on("click", function(){
 	}else{
 		$.ajax({
 			type : "get",
-			url : "ajax/getNewIoCode.do",
+			url : contextPath + "/ajax/getNewIoCode.do",
 			dataType : "json",
 			async : false,
 			success : function(data) {
@@ -300,7 +300,7 @@ var forGrid = false;
 $("#btnMatModal").on("click", function(e) {
 	$('#materialCode').val('');
 	$('#materialName').val('');
-    $('#matContent').load("matModal.do");
+    $('#matContent').load(contextPath +"/matModal.do");
 });
 
 // 자재코드 입력창
@@ -308,14 +308,14 @@ $('#materialCode').on('click', function(){
 	$('#materialCode').val('');
 	$('#materialName').val('');
 	$('#matModal').modal('show');
-	$('#matContent').load("matModal.do");
+	$('#matContent').load(contextPath +"/matModal.do");
 });
 
 // 업체 돋보기
 $("#btnCompModal").on("click", function(e) {
 	$('#companyCode').val('');
 	$('#companyName').val('');
-    $('#compContent').load("compModal.do");
+    $('#compContent').load(contextPath +"/compModal.do");
 });
 
 // 업체코드 입력창
@@ -323,7 +323,7 @@ $('#companyCode').on('click',function(){
 	$('#companyCode').val('');
 	$('#companyName').val('');
 	$('#compModal').modal('show');
-	$('#compContent').load("compModal.do");
+	$('#compContent').load(contextPath +"/compModal.do");
 	
 });
 

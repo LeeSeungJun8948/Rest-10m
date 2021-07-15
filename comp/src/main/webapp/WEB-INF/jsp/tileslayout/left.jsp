@@ -31,13 +31,13 @@
      </a>
      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="commonCodeForm.do">공통코드관리</a>
-             <a class="collapse-item" href="matForm.do">자재정보관리</a>
-             <a class="collapse-item" href="bomList.do">제품 BOM관리</a>
-             <a class="collapse-item" href="processList.do">공정관리</a>
-             <a class="collapse-item" href="empList.do">사원관리</a>
-             <a class="collapse-item" href="error.do">불량코드 관리 </a>
-             <a class="collapse-item" href="QualityControl.do">제품 품질 표준서 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/commonCodeForm.do">공통코드관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/matForm.do">자재정보관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/bomList.do">제품 BOM관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/processList.do">공정관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/empList.do">사원관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/error.do">불량코드 관리 </a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/QualityControl.do">제품 품질 표준서 관리</a>
          </div>
      </div>
  </li>
@@ -50,10 +50,10 @@
      </a>
      <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="busList.do">주문관리 참조조회</a>
-             <a class="collapse-item" href="exportForm.do">출고 관리</a>
-             <a class="collapse-item" href="viewExport.do">출고 조회</a>
-             <a class="collapse-item" href="productInventory.do">제품 재고 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/bus/view/busList.do">주문관리 참조조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/bus/mng/exportForm.do">출고 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/bus/view/viewExport.do">출고 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/bus/view/productInventory.do">제품 재고 조회</a>
          </div>
      </div>
  </li>
@@ -66,11 +66,14 @@
      </a>
      <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="inorderForm.do">발주 조회</a>
-             <a class="collapse-item" href="matInForm.do">자재입고 관리</a>
-             <a class="collapse-item" href="matOutForm.do">자재출고 관리</a>
-             <a class="collapse-item" href="matAdjustList.do">자재재고조정 전표 관리</a>
-             <a class="collapse-item" href="matAdjustForm.do">자재재고조정 전표 작성</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/inorderList.do">발주 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/matInList.do">자재입고 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matInForm.do">자재입고 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/matOutList.do">자재출고 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matOutForm.do">자재출고 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/matAdjustList.do">자재재고조정 전표 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matAdjustForm.do">자재재고조정 전표 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matAdjustWrite.do">자재재고조정 전표 작성</a>
          </div>
      </div>
  </li>

@@ -61,4 +61,4 @@
 </div>
 	
 
-<script type="text/javascript" src="js/app/mat/commonCodeForm.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/mat/commonCodeForm.js"></script>

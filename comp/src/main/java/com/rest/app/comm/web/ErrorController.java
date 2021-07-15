@@ -31,7 +31,7 @@ public class ErrorController {
 	@Autowired
 	ErrorService dao;
 	
-	@RequestMapping("error.do")
+	@RequestMapping("/error.do")
 	public String error(Model model) {
 		return "comm/error.page";
 	}
