@@ -49,7 +49,7 @@ public class BomController {
 	}
 
 	// 공정모달
-	@RequestMapping("proModal.do")
+	@RequestMapping("/proModal.do")
 	public String proModal() {
 		return "app/comm/proModal";
 	}
@@ -60,7 +60,7 @@ public class BomController {
 	}
 
 	// 제품코드,제품명,규격 리스트 (모달)
-	@RequestMapping("bomList.do")
+	@RequestMapping("/bomList.do")
 	public String getProduct(Model model, BomVO vo) {
 		return "comm/bomList.page";
 	}
@@ -78,13 +78,13 @@ public class BomController {
 	}
 
 	// 모달
-	@RequestMapping("modal.do")
+	@RequestMapping("/modal.do")
 	public String modal() {
 		return "app/comm/modal";
 	}
 
 	// 제품 조회 , 소요자재조회
-	@RequestMapping("getInfoProduct.do")
+	@RequestMapping("/getInfoProduct.do")
 	public ModelAndView getInfoProduct(Model model, BomVO vo) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/comm/bomList.page");
@@ -172,7 +172,7 @@ public class BomController {
 	}
 
 	// 소요자재 삭제
-	@PostMapping(value = "ajax/deleteBom.do")
+	@PostMapping(value = "/ajax/deleteBom.do")
 	@ResponseBody
 	public Map deleteBom(@RequestBody BomGridData bomGirdData) {
 		Map<String, Object> data = new HashMap();
@@ -185,14 +185,14 @@ public class BomController {
 	}
 
 	// Bom 삭제
-	@RequestMapping("deleteBom.do")
+	@RequestMapping("/deleteBom.do")
 	public String deleteBom(BomVO vo) {
 		dao.deleteBom(vo);
 		return "comm/bomList.page";
 	}
 
 	// 공정리스트
-	@RequestMapping("processList.do")
+	@RequestMapping("/processList.do")
 	public String processList(Model model, ProcessVO vo) {
 		
 		return "comm/processList.page";
@@ -261,7 +261,7 @@ public class BomController {
 	}
 
 	// 공정삭제
-	@PostMapping(value = "ajax/deleteProcess.do")
+	@PostMapping(value = "/ajax/deleteProcess.do")
 	@ResponseBody
 	public Map deleteProcess(@RequestBody ProGridData ProGridData) {
 		Map<String, Object> data = new HashMap();
@@ -273,7 +273,7 @@ public class BomController {
 		return data;
 	}
 	// 회사명조회
-	@RequestMapping("getCompName.do")
+	@RequestMapping("/getCompName.do")
 	public ModelAndView getCompName(Model model, ProcessVO vo) {
 		ModelAndView comMv = new ModelAndView();
 		comMv.setViewName("/comm/processList.page");
