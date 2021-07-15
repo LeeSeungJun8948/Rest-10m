@@ -107,13 +107,13 @@
      </a>
      <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="facAdmin.do">설비 관리</a>
-             <a class="collapse-item" href="facList.do">설비 조회</a>
-             <a class="collapse-item" href="repList.do">설비 수리내역 관리</a>
-             <a class="collapse-item" href="repairList.do">설비 수리내역 조회</a>
-             <a class="collapse-item" href="inspection.do">설비 점검내역 관리</a>
-             <a class="collapse-item" href="inspectionList.do">설비 점검내역 조회</a>
-             <a class="collapse-item" href="facProdList.do">설비 생산이력 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/mng/facAdmin.do">설비 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/view/facList.do">설비 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/mng/repList.do">설비 수리내역 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/view/repairList.do">설비 수리내역 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/mng/inspection.do">설비 점검내역 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/view/inspectionList.do">설비 점검내역 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/view/facProdList.do">설비 생산이력 조회</a>
          </div>
      </div>
  </li>

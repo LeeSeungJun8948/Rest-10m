@@ -3,12 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <h1 class="h3 mb-4 text-gray-700">설비 수리내역 관리</h1>
-<form action="insertRep.do" method="post" id="frm" name="frm"
+<form action="insertRepair.do" method="post" id="frm" name="frm"
 	onsubmit="return test()">
 	<div class="mb-4" style="float:right">
 		<input type="submit" class="btn btn-primary" value="저장">
 		<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
-		<button type="button" class="btn btn-primary" id="btnUpdate">수정</button>
 		<button type="reset" class="btn btn-primary">새입력</button>
 	</div>
 	<div class="row">
@@ -56,43 +55,4 @@
 	</div>
 </div>
 
-<script>
-const dataSource = { 
-		api : {
-			readData : {
-				url : 'ajax/repList.do',
-				method : 'GET'
-			}
-		},
-		contentType : 'application/json'
-	}
-
-	const grid = new tui.Grid({
-		el : document.getElementById('grid'),
-		data : dataSource,
-		scrollX : false,
-		scrollY : false,
-		columns : [ {
-			header : '수리코드',
-			name : 'repairCode'
-		}, {
-			header : '설비코드',
-			name : 'facCode'
-		}, {
-			header : '수리일자',
-			name : 'repairDate'
-		}, {
-			header : '수리내역',
-			name : 'repairComment'
-		}, {
-			header : '업체코드',
-			name : 'companyCode'
-		}, {
-			header : '수리금액',
-			name : 'cost'
-		}, {
-			header : '비고',
-			name : 'etc'
-		} ]
-	});
-</script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/fac/repList.js"></script>

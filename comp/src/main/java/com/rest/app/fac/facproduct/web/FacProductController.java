@@ -16,7 +16,7 @@ public class FacProductController {
 	@Autowired
 	FacProductMapper mapper;
 	    
-	@RequestMapping("/facProdList.do")
+	@RequestMapping("/fac/view/facProdList.do")
 	public String getFP() {
 		return "fac/facProdList.page";
 	}
