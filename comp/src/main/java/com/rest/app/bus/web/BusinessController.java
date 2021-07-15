@@ -39,7 +39,7 @@ public class BusinessController {
 	@Autowired
 	BusinessService dao;
 
-	@RequestMapping("busList.do") // 주문관리참조조회
+	@RequestMapping("bus/view/busList.do") // 주문관리참조조회
 	public String business(Model model) {
 		return "bus/busList.page";
 	}
@@ -62,7 +62,7 @@ public class BusinessController {
 		return data;
 	}
 
-	@RequestMapping("exportForm.do") // 출고관리페이지
+	@RequestMapping("bus/mng/exportForm.do") // 출고관리페이지
 	public String exportForm(Model model) {
 		return "bus/exportForm.page";
 	}
@@ -200,7 +200,7 @@ public class BusinessController {
 		return data;
 	}
 
-	@RequestMapping("productInventory.do") // 제품재고관리페이지
+	@RequestMapping("bus/view/productInventory.do") // 제품재고 조회 페이지
 	public String productInventory(Model model) {
 		return "bus/productInventory.page";
 	}
@@ -234,4 +234,22 @@ public class BusinessController {
 			data.put("data", datas);
 			return data;
 		}
+		
+		@RequestMapping("bus/view/viewExport.do") // 출고조회페이지
+		public String viewExport(Model model) {
+			return "bus/viewExport.page";
+		}
+		
+		@RequestMapping("viewExportSearch.do")//출고조회 그리드
+		@ResponseBody
+		public Map<String, Object> viewExportSearch(@RequestBody Map<String, Object> param) {
+			Map<String, Object> datas = new HashMap<String, Object>();
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("result", true);
+			datas.put("contents", dao.viewExportSearch(param));
+			data.put("data", datas);
+			return data;
+		}
+
+
 }
