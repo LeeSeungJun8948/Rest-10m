@@ -66,6 +66,8 @@ public interface MaterialService {
 	//공통코드
 	public List<CommonCodeVO> getCodeIdList(CommonCodeVO vo);
 	public List<CommonCodeVO> getCodeList(CommonCodeVO vo);
+	public CommonCodeVO getDetailCodeId(CommonCodeVO vo);
+	
 	public int istCodeId(CommonCodeVO vo);
 	public int udtCodeId(CommonCodeVO vo);
 	public int delCodeId(CommonCodeVO vo);
