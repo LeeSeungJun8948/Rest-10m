@@ -2,10 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script> -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!--  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>   -->
 
 <h1 class="h3 mb-4 text-gray-700">설비관리</h1>
 
@@ -49,7 +49,14 @@
 						<td><input type="date" id="productionDate"
 							name="productionDate">
 						<th>사원번호</th>
-						<td><input type="text" id="empNo" name="empNo"></td>
+						<td><input type="text" id="empNo" name="empNo"
+							style="background-color: #e2e2e2;" readonly>
+						<button id="btnEmpModal" type="button" class="btn btn-toggle"
+								data-remote="false" data-toggle="modal" data-target="#empModal">
+								<img alt="btn_search"
+									src="<c:url value='/images/app/all/btn_search.png'/>">
+						</button>
+						</td>
 						<th>구매금액</th>
 						<td><input type="text" id="price" name="price" onkeyup="numberWithCommas(this.value)"></td>
 					</tr>
@@ -60,7 +67,13 @@
 						<th>구매일자</th>
 						<td><input type="date" id="purchaseDate" name="purchaseDate"></td>
 						<th>공정코드</th>
-						<td><input type="text" id="processCode" name="processCode"></td>
+						<td><input type="text" id="processCode" name="processCode"
+									style="background-color: #e2e2e2;" readonly>
+						<button id="btnProcModal" type="button" class="btn btn-toggle"
+								data-remote="false" data-toggle="modal" data-target="#procModal">
+								<img alt="btn_search"
+									src="<c:url value='/images/app/all/btn_search.png'/>">
+							</button></td>
 					</tr>
 				</tbody>
 			</table>
@@ -91,4 +104,19 @@
 		<div id="grid2"></div>
 	</div>
 </div>
+
+<div class="modal fade" id="procModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="procContent" align="center">
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="empModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content" id="empContent" align="center">
+		</div>
+	</div>
+</div>
+
 <script type="text/javascript" src="js/app/fac/facAdmin.js"></script>

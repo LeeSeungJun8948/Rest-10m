@@ -97,4 +97,4 @@
 </div>
 
 <link href="${pageContext.request.contextPath}/css/app/prod/prod.css" rel="stylesheet">
-<script type="text/javascript" src="js/app/prod/manageProrder.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/prod/manageProrder.js"></script>
