@@ -20,5 +20,7 @@ public class DetailExportVO {
 	String unitId;
 	int outCount;
 	int companyCode;
+	String companyName;
 	int dayCount;
+	int orderCount;
 }

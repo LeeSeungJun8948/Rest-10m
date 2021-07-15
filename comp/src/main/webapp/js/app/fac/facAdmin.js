@@ -17,7 +17,8 @@ $( function() {
 			grid2.refreshLayout();
 		}
 	}});
- 		 } );
+ 		 });
+
 	//input file 업로드를 버튼으로 업로드 하게 바꾸는 기능
 	const imgBtn = document.querySelector('#btnImg');
 	const input = document.querySelector('#img');
@@ -42,7 +43,7 @@ $( function() {
 	const dataSource = {
 		api : {
 			readData : {
-				url : 'ajax/facList.do',
+				url : 'ajax/facList2.do',
 				method : 'GET'
 			},
 			deleteData : {
@@ -95,10 +96,7 @@ $( function() {
 		}, {
 			header : '구매일자',
 			name : 'purchaseDate'
-		}, {
-			header : '공정코드',
-			name : 'processCode'
-		} ]
+		}]
 		
 	});
 		
@@ -233,4 +231,20 @@ function numberWithCommas(x) {
   x = x.replace(/,/g,'');        
   $("#price").val(x.replace(/\B(?=(\d{3})+(?!\d))/g, ","));  
 }
+
+
+var forGrid = false;
+
+$('#btnProcModal').on('click',function(e){
+	$('#processCode').val('');
+	$('#processName').val('');
+	$('#procContent').load("procModal.do");
+});
+
+$('#btnEmpModal').on('click',function(e){
+	$('#employeeName').val('');
+	$('#empCode').val('');
+	$('#empContent').load("empListModal.do");
+});
+
 	

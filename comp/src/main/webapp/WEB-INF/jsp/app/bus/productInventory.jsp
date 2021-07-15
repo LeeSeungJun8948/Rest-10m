@@ -14,6 +14,29 @@
 		<table class="table">
 			<tbody>	
 			<tr>
+						<th>재고상태</th>
+						<td>
+							<div class="row ml-4">
+								<div class="col-md-2">
+									<input class="form-check-input" type="radio" name="productState"
+										value="productAll" id="productAll" checked> <label
+										class="form-check-label" for="productAll">전체</label>
+								</div>
+								<div class="col-md-2">
+									<input class="form-check-input" type="radio" name="productState"
+										value="productCount" id="productCount"> <label
+										class="form-check-label" for="productCount">재고있음</label>
+								</div>
+								<div class="col-md-2">
+									<input class="form-check-input" type="radio" name="productState"
+										value="noProduct" id="noProduct"> <label
+										class="form-check-label" for="noProduct">재고없음</label>
+								</div>
+							</div>
+
+						</td>
+					</tr>
+			<tr>
 					<th>제품Lot</th>
 					<td><input type="text" id="productLot" name="productLot" />
 						<button id="btnProdLotModal" type="button" class="btn btn-toggle"
@@ -39,7 +62,7 @@
 </div>
 <div class="modal fade" id="prodLotModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content" id="prodLotContent" align="center">
+		<div class="modal-content" id="modalContent" align="center">
 		</div>
 	</div>
 </div>

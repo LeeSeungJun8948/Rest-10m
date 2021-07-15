@@ -13,7 +13,7 @@
 		<div>
 			<table class="table">
 				<tr>
-					<th>계획일자</th>
+					<th>출고일자</th>
 					<td>
 						<div class="row">
 							<div class="col-lg-8">

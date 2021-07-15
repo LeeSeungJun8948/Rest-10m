@@ -17,10 +17,17 @@
 		f.FAC_INSPECTION,
 		f.PURCHASE_DATE,
 		f.IMG,
-		f.PROCESS_CODE,
    		p.process_name
 		from facilities f, process p
-  		where f.process_code=p.process_code
+  		<where>
+  		f.process_code=p.process_code
+  		<if test="searchCondition == 'facilitiesName'">and
+  			f.facilities_name LIKE '%' || #{searchKeyword} || '%'
+  		</if>
+  		<if test="searchCondition == 'processName'">and
+  			p.process_name LIKE '%' || #{searchKeyword} || '%'
+  		</if>
+  		</where>
    		order by fac_code
 	</select>
 	<insert id="insertFac"
@@ -78,4 +85,14 @@
 	<select id="getFacCode" resultType="int">
     	select max(fac_code) + 1 as fac_code from facilities
     </select>
+    
+    <select id="getFacList" resultType="com.rest.app.fac.vo.FacilitiesVO">
+		select * from facilities
+		order by fac_code
+	</select>
+	
+	 <select id="getEmpListModal" resultType="com.rest.app.comm.vo.EmployeeVO">
+		select emp_code, employee_name
+		from employee
+	</select>
 </mapper>

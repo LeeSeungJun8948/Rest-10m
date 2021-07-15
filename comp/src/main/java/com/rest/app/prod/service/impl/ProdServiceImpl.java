@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 import com.rest.app.bus.vo.OrdersVO;
 import com.rest.app.comm.vo.EmployeeVO;
 import com.rest.app.comm.vo.ErrorVO;
+import com.rest.app.fac.vo.FacilitiesVO;
 import com.rest.app.mat.vo.SelectListVO;
 import com.rest.app.prod.service.ProdService;
 import com.rest.app.prod.vo.DetailPlanVO;
 import com.rest.app.prod.vo.DetailProrderVO;
+import com.rest.app.prod.vo.ErrorListVO;
 import com.rest.app.prod.vo.InputMatVO;
 import com.rest.app.prod.vo.PlanVO;
 import com.rest.app.prod.vo.ProrderVO;
@@ -247,5 +249,15 @@ public class ProdServiceImpl implements ProdService {
 	@Override
 	public List<SelectListVO> ajaxCompSearchModal(SelectListVO vo) {
 		return mapper.ajaxCompSearchModal(vo);
+	}
+
+	@Override
+	public List<FacilitiesVO> searchFac(Map<String, Object> param) {
+		return mapper.searchFac(param);
+	}
+	
+	@Override
+	public List<ErrorListVO> getErrorList(ErrorListVO vo) {
+		return mapper.getErrorList(vo);
 	}
 }

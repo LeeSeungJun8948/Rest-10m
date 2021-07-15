@@ -3,22 +3,22 @@
 <mapper namespace="com.rest.app.bus.service.impl.BusinessMapper">
 	<select id="getBus" resultType="com.rest.app.bus.vo.OrdersVO">
 		select F_FINDCOMPNAME(company_code)AS comp_name,
-		       TO_CHAR(o.in_date,'YYYY-MM-DD')as in_date,
-		       TO_CHAR(o.out_date,'YYYY-MM-DD')as out_date,
-		       o.order_no,
-		       p.product_code,
-		       p.product_name,
-		       p.std_id,
-		       p.unit_id,
-		       o.order_count,
-		       o.out_count,
-		       o.comments,
-		      (o.order_count - o.out_count) as not_count,
-		      CASE WHEN o.plan_count = 0 THEN '미계획'
-		      WHEN o.order_count > o.plan_count THEN '진행중'
-		      ELSE '완료'
-		      END AS order_state
-		      FROM orders o, product p
+		TO_CHAR(o.in_date,'YYYY-MM-DD')as in_date,
+		TO_CHAR(o.out_date,'YYYY-MM-DD')as out_date,
+		o.order_no,
+		p.product_code,
+		p.product_name,
+		p.std_id,
+		p.unit_id,
+		o.order_count,
+		o.out_count,
+		o.comments,
+		(o.order_count - o.out_count) as not_count,
+		CASE WHEN o.plan_count = 0 THEN '미계획'
+		WHEN o.order_count > o.plan_count THEN '진행중'
+		ELSE '완료'
+		END AS order_state
+		FROM orders o, product p
 		WHERE in_date BETWEEN
 		TO_DATE(#{fromDate},'YYYY-MM-DD')
 		AND TO_DATE(#{toDate}, 'YYYY-MM-DD')
@@ -188,7 +188,8 @@
 		s.*, p.product_name, d.export_code,
 		(SELECT
 		lot_idx FROM exportlot WHERE product_lot = s.product_lot
-		and export_code = d.export_code)
+		and
+		export_code = d.export_code)
 		lot_idx,
 		(SELECT export_count FROM
 		exportlot WHERE product_lot = s.product_lot
@@ -206,34 +207,67 @@
 		AND
 		s.product_code = p.product_code
 		AND d.export_code = #{exportCode}
-		AND s.product_code = d.product_code
+		AND
+		s.product_code = d.product_code
 		ORDER BY s.product_lot
 	</select>
 	<select id="getProInventory"
 		resultType="com.rest.app.bus.vo.OrdersVO"
 		parameterType="com.rest.app.bus.vo.OrdersVO">
 
-		 select 
-      p.product_code, p.product_name, p.std_id,p.unit_id,
-      s.product_lot,s.product_count, s.product_state
-      from product p,storage s
-      where p.product_code=s.product_code
-		<if test="productCode !=null and productCode !=''">
-			and s.product_code=#{productCode}
-		</if>
-	</select>
-	
-	<!-- 제품Lot 리스트 모달 -->
-	<select id="getProdLotModal" parameterType="com.rest.app.bus.vo.ExportLotVO" resultType="com.rest.app.bus.vo.ExportLotVO">
-		SELECT product_lot, 
-				lot_idx
-		FROM exportlot
-		
+		select
+		p.product_code, p.product_name, p.std_id,p.unit_id,
+		s.product_lot,s.product_count, s.product_state
+		from product p,storage s
 		<where>
-			<if test="keyword != null and keyword !=''">
-				${searchCondition} like '%'||#{keyword}||'%'
+			p.product_code=s.product_code
+			<if test="productLot !=null and productLot !=''">
+				and s.product_lot=#{productLot}
+			</if>
+			<if test="productCode !=null and productCode !=''">
+				and s.product_code=#{productCode}
+			</if>
+			<if test="productState != 'productAll'">
+				<if test="productState == 'productCount'">
+					and s.product_count !=0
+				</if>
+				<if test="productState == 'noProduct'">
+					and s.product_count = 0
+				</if>
 			</if>
 		</where>
-		ORDER BY lot_idx
+	</select>
+
+	<!-- 제품Lot 리스트 모달 -->
+	<select id="searchProdLotModal"
+		parameterType="com.rest.app.bus.vo.ExportLotVO"
+		resultType="com.rest.app.bus.vo.ExportLotVO">
+		SELECT product_lot
+		FROM storage
+		<where>
+			<if test="keyword != null and keyword !=''">
+				 ${searchCondition} like '%'||#{keyword}||'%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="viewExportSearch" resultType="com.rest.app.bus.vo.DetailExportVO">
+		SELECT d.*, TO_CHAR(e.export_date,'YYYY-MM-DD') export_date, e.company_code, p.*, o.order_count,
+			c.company_name
+		FROM detailexport d, export e, product p, orders o, company c
+		WHERE d.export_code = e.export_code
+		AND d.order_no = o.order_no
+		AND d.product_code = p.product_code
+		AND o.company_code = c.company_code
+		<if test="keyword != null and keyword !=''">
+			AND ${searchCondition} like '%'||#{keyword}||'%'
+		</if>
+		<if test="productCode != null and productCode != ''">
+			AND d.product_code = #{productCode}
+		</if>
+		<if test="companyCode != null and companyCode != ''">
+			AND o.company_code = #{companyCode}
+		</if>
+		ORDER BY e.export_date
 	</select>
 </mapper>

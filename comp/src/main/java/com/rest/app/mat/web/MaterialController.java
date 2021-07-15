@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.mat.service.MaterialService;
 import com.rest.app.mat.service.impl.MaterialMapper;
+import com.rest.app.mat.vo.CommonCodeVO;
 import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
@@ -81,7 +82,7 @@ public class MaterialController {
 		return dao.matDel(vo);
 	}
 	
-	@RequestMapping("inorderForm.do")
+	@RequestMapping("mat/view/inorderForm.do")
 	public String inorderForm(Model model) {
 		return "mat/inorderForm.page";
 	}
@@ -269,27 +270,27 @@ public class MaterialController {
 		return mapper.getInoutNo(vo); // 서비스 만들기 귀찮아서 걍 바로씀..
 	}
 	
-	@RequestMapping("matInForm.do")
+	@RequestMapping("mat/mng/matInForm.do")
 	public String matInForm(Model model) {
 		return "mat/matInForm.page";
 	}
 	
-	@RequestMapping("matAdjustForm.do")
+	@RequestMapping("mat/mng/matAdjustForm.do")
 	public String matStockForm(Model model) {
 		return "mat/matAdjustForm.page";
 	}
 	
-	@RequestMapping("matAdjustList.do")
+	@RequestMapping("mat/mng/matAdjustList.do")
 	public String matSaveStockList(Model model) {
 		return "mat/matAdjustList.page";
 	}
 	
-	@RequestMapping("matOutForm.do")
+	@RequestMapping("mat/mng/matOutForm.do")
 	public String matOutForm(Model model) {
 		return "mat/matOutForm.page";
 	}
 	
-	@RequestMapping("procMovePrint.do")
+	@RequestMapping("prod/mng/procMovePrint.do")
 	public String procMovePrint(Model model) {
 		return "mat/procMovePrint.page";
 	}
@@ -337,8 +338,98 @@ public class MaterialController {
 	
 		return "app/mat/printProcessMove";
 	}
+	
+	// 공통 코드
+	@RequestMapping("/commonCodeForm.do")
+	public String commonCodeForm(){
+		return "mat/commonCodeForm.page";
+	}
+	
+	@RequestMapping("/ajax/getCodeIdList.do")
+	@ResponseBody
+	public Map<String,Object> ajaxGetCodeIdList(CommonCodeVO vo) {
+		
+		Map<String,Object> datas = new HashMap<>();
+		Map<String,Object> data = new HashMap<>();
+		
+		data.put("result", true);
+		datas.put("contents", dao.getCodeIdList(vo));
+		data.put("data", datas);
+		
+		return data;
+	}
+	
+	@RequestMapping("/ajax/getDetailCode.do")
+	@ResponseBody
+		public CommonCodeVO ajaxGetCode(CommonCodeVO vo) {
+		return dao.getDetailCodeId(vo);
+	}
+	
+	@RequestMapping("/ajax/getDetailCodeList.do")
+	@ResponseBody
+		public Map<String,Object> ajaxGetCodeList(CommonCodeVO vo) {
+		
+		Map<String,Object> datas = new HashMap<>();
+		Map<String,Object> data = new HashMap<>();
+		
+		data.put("result", true);
+		datas.put("contents", dao.getCodeList(vo));
+		data.put("data", datas);
+		
+		return data;
+	}
+	
+	@PutMapping("/ajax/codeIdModify.do")
+	@ResponseBody
+	public Map<String, Object> ajaxCodeIdModify(HttpServletRequest request, @RequestBody CommonGridData gridData) {
+		Map<String,Object> data = new HashMap<String, Object>();
+		
+		for(int i = 0; i < gridData.createdRows.size(); i++) {
+			dao.istCodeId(gridData.createdRows.get(i));
+		}
+		for(int i = 0; i < gridData.updatedRows.size(); i++) {
+			dao.udtCodeId(gridData.updatedRows.get(i));
+		}
+		for(int i = 0; i < gridData.deletedRows.size(); i++) {
+			dao.delCodeId(gridData.deletedRows.get(i));
+		}
+		
+		data.put("result", true);
+		data.put("data", gridData.updatedRows);
+		data.put("data", gridData.createdRows);
+		data.put("data", gridData.deletedRows);
+		return data;
+	}
+	
+	@PutMapping("/ajax/codeModify.do")
+	@ResponseBody
+	public Map<String, Object> ajaxCodeModify(HttpServletRequest request, @RequestBody CommonGridData gridData) {
+		Map<String,Object> data = new HashMap<String, Object>();
+		
+		for(int i = 0; i < gridData.createdRows.size(); i++) {
+			dao.istCode(gridData.createdRows.get(i));
+		}
+		for(int i = 0; i < gridData.updatedRows.size(); i++) {
+			dao.udtCode(gridData.updatedRows.get(i));
+		}
+		for(int i = 0; i < gridData.deletedRows.size(); i++) {
+			dao.delCode(gridData.deletedRows.get(i));
+		}
+		
+		data.put("result", true);
+		data.put("data", gridData.updatedRows);
+		data.put("data", gridData.createdRows);
+		data.put("data", gridData.deletedRows);
+		return data;
+	}
 }
 
+@Data
+class CommonGridData{
+	List<CommonCodeVO> deletedRows;
+	List<CommonCodeVO> updatedRows;
+	List<CommonCodeVO> createdRows;
+}
 @Data
 class GridData {	
 	List<InoutVO> deletedRows;

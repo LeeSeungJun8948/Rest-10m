@@ -14,6 +14,9 @@ const grid = new tui.Grid({
 		header: '지시일자',
 		name: 'prorDate',
 		}, {
+		header: '지시명',
+		name: 'prorName'
+		}, {
 		header: '제품코드',
 		name: 'productCode',
 		}, {
@@ -69,8 +72,8 @@ function resetPage() {
         this.reset();
 		grid.clear();
     });  
-	$("#companyCode").val();
-	$("#productCode").val();
+	$("#companyCode").val("");
+	$("#productCode").val("");
 }
 
 // NULL값 체크, NULL이면 false

@@ -3,6 +3,7 @@ package com.rest.app.mat.service;
 import java.util.List;
 
 import com.rest.app.bus.vo.OrdersVO;
+import com.rest.app.mat.vo.CommonCodeVO;
 import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
@@ -61,6 +62,18 @@ public interface MaterialService {
 	public List<ProcMoveVO> getInputMat(ProcMoveVO vo);
 	
 	public List<ProcMoveVO> getProcStatus(ProcMoveVO vo);
+	
+	//공통코드
+	public List<CommonCodeVO> getCodeIdList(CommonCodeVO vo);
+	public List<CommonCodeVO> getCodeList(CommonCodeVO vo);
+	public CommonCodeVO getDetailCodeId(CommonCodeVO vo);
+	
+	public int istCodeId(CommonCodeVO vo);
+	public int udtCodeId(CommonCodeVO vo);
+	public int delCodeId(CommonCodeVO vo);
+	public int istCode(CommonCodeVO vo);
+	public int udtCode(CommonCodeVO vo);
+	public int delCode(CommonCodeVO vo);
 	
 	// 모달
 	public List<SelectListVO> getMatListModal(SelectListVO vo); // 자재검색 모달 자재리스트

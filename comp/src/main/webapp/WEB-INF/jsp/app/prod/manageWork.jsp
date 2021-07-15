@@ -15,6 +15,10 @@
 		<table class="table">
 			<tbody>
 				<tr>
+					<th>제품LOT</th>
+					<td><input type="text" class="form-control" id="productLot" name="productLot" onchange="findLot(this.value)"></td>
+				</tr>
+				<tr>
 					<th>작업일자</th>
 					<td><input type="date" class="form-control" id="workDate" name="workDate"></td>
 					<th>작업구분</th>
@@ -45,8 +49,17 @@
 					<td><input type="text" class="form-control" id="productName" name="productName" readonly>
 						<input type="hidden" id="productCode" name="productCode">
 					</td>
-					<th>제품LOT</th>
-					<td><input type="text" class="form-control" id="productLot" name="productLot" onchange="findLot(this.value)"></td>
+					<th>설비명</th>
+					<td>
+						<div class="row">
+							<div class="col-6">
+						<input type="text" class="form-control" id="facilitiesName" name="facilitiesName" readonly>
+						</div>
+						<input type="hidden" id="facCode" name="facCode" value="0">
+						<button id="btnFacModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#workFacModal">
+								<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+						</button>
+					</td>
 				</tr>
 				<tr>
 					<th>작업량</th>
@@ -94,6 +107,12 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="workFacModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="workFacContent" align="center">
+		</div>
+	</div>
+</div>
 
 <link href="${pageContext.request.contextPath}/css/app/prod/manageWork.css" rel="stylesheet">
-<script type="text/javascript" src="js/app/prod/manageWork.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/prod/manageWork.js"></script>

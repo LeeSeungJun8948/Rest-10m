@@ -1,5 +1,7 @@
 package com.rest.app.fac.repair.vo;
 
+import java.util.Date;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -13,7 +15,7 @@ public class RepairVO {
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	String repairDate;
+	Date repairDate;
 	
 	String repairComment;
 	String companyCode;

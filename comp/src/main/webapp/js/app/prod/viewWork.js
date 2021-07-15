@@ -51,6 +51,10 @@ const workGrid = new tui.Grid({
 		name: 'orderNo',
 		hidden: true
 		}, {
+		header: '설비명',
+		name: 'facilitiesName',
+		hidden: true
+		}, {
 		header: '작업공정',
 		name: 'processName',
 		}, {
@@ -102,6 +106,7 @@ workGrid.on('dblclick', (ev) => {
 	var workCount = workGrid.getValue(ev.rowKey, 'workCount');
 	var errorCount = workGrid.getValue(ev.rowKey, 'errorCount');
 	var orderNo = workGrid.getValue(ev.rowKey, 'orderNo');
+	var facilitiesName = workGrid.getValue(ev.rowKey, 'facilitiesName');
 	$('#productLot').val(productLot);
 	$('#workCode').val(workCode);
 	$('#workDiv').val(processCode);
@@ -116,6 +121,7 @@ workGrid.on('dblclick', (ev) => {
 	$('#productName').val(productName);
 	$('#workCount').val(workCount);
 	$('#errorCount').val(errorCount);
+	$('#facilitiesName').val(facilitiesName);
 	$('#orderNo').val(orderNo);
 	$("#workViewModal").modal();
 });

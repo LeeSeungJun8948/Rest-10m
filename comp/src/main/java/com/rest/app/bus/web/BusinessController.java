@@ -39,7 +39,7 @@ public class BusinessController {
 	@Autowired
 	BusinessService dao;
 
-	@RequestMapping("busList.do") // 주문관리참조조회
+	@RequestMapping("bus/view/busList.do") // 주문관리참조조회
 	public String business(Model model) {
 		return "bus/busList.page";
 	}
@@ -62,7 +62,7 @@ public class BusinessController {
 		return data;
 	}
 
-	@RequestMapping("exportForm.do") // 출고관리페이지
+	@RequestMapping("bus/mng/exportForm.do") // 출고관리페이지
 	public String exportForm(Model model) {
 		return "bus/exportForm.page";
 	}
@@ -200,7 +200,7 @@ public class BusinessController {
 		return data;
 	}
 
-	@RequestMapping("productInventory.do") // 제품재고관리페이지
+	@RequestMapping("bus/view/productInventory.do") // 제품재고 조회 페이지
 	public String productInventory(Model model) {
 		return "bus/productInventory.page";
 	}
@@ -216,24 +216,40 @@ public class BusinessController {
 		data.put("data", datas);
 		return data;
 	}
-	// 제품Lot 모달 페이지 리턴
-	@RequestMapping("/prodLotModal.do")
-	public String prodLotModal() {
-		return "app/modal/prodLotModal";
-	}
+	// 출고관리 - 조회 모달
+		@RequestMapping("prodLotModal.do")
+		public String getProdLotModal() {
+			return "app/bus/prodLotModal";
+		}
 
-	// 제품Lot 모달 그리드 데이터 리턴
-	@RequestMapping("/ajax/prodLotModal.do")
-	@ResponseBody
-	public Map<String, Object> ajaxProdLotModal(Model model, ExportLotVO vo) { // 공정 요약 리스트 출력
-		System.out.println("====================");
-		Map<String, Object> datas = new HashMap<>();
-		Map<String, Object> data = new HashMap<>();
+		// 모달 출고검색
+		@RequestMapping("/searchProdLot.do")
+		@ResponseBody
+		public Map<String, Object> searchProdLotModal(@RequestBody Map<String, Object> param) {
+			System.out.println(param + "----------------");
+			Map<String, Object> data = new HashMap<String, Object>();
+			Map<String, Object> datas = new HashMap<String, Object>();
+			datas.put("contents", dao.searchProdLotModal(param));
+			data.put("result", true);
+			data.put("data", datas);
+			return data;
+		}
+		
+		@RequestMapping("bus/view/viewExport.do") // 출고조회페이지
+		public String viewExport(Model model) {
+			return "bus/viewExport.page";
+		}
+		
+		@RequestMapping("viewExportSearch.do")//출고조회 그리드
+		@ResponseBody
+		public Map<String, Object> viewExportSearch(@RequestBody Map<String, Object> param) {
+			Map<String, Object> datas = new HashMap<String, Object>();
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("result", true);
+			datas.put("contents", dao.viewExportSearch(param));
+			data.put("data", datas);
+			return data;
+		}
 
-		data.put("result", true);
-		datas.put("contents", dao.getProdLotModal(vo));
-		data.put("data", datas);
 
-		return data;
-	}
 }

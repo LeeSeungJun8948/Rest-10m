@@ -129,6 +129,7 @@ var rowKey;
 
 planGrid.on('click',function(ev){
 	rowKey = ev.rowKey;
+	console.log(rowKey + "그리드클릭")
 	inputGrid.resetData([],{});
 	
 	$.ajax({
@@ -184,8 +185,7 @@ planGrid.on('click',function(ev){
 });
 
 $('#btnPrint').on('click',  function(){
-	
-	if(checkNull(rowKey)){
+	if(checkNull(rowKey) || rowKey == 0){ //왠진 모르겠는데 0이면 null취급됨
 		var url = 'printProcessMove.do?productLot='+ planGrid.getValue(rowKey, 'productLot')
 				+ "&productName=" + planGrid.getValue(rowKey, 'productName')
 				+ "&companyName=" + planGrid.getValue(rowKey, 'companyName')

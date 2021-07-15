@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rest.app.mat.service.MaterialService;
+import com.rest.app.mat.vo.CommonCodeVO;
 import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
@@ -197,5 +198,49 @@ public class MaterialServiceImpl implements MaterialService{
 		return list;
 	}
 
+	@Override
+	public int istCodeId(CommonCodeVO vo) {
+		return mapper.istCodeId(vo);
+	}
+
+	@Override
+	public int udtCodeId(CommonCodeVO vo) {
+		return mapper.udtCodeId(vo);
+	}
+
+	@Override
+	public int delCodeId(CommonCodeVO vo) {
+		return mapper.delCodeId(vo);
+	}
+
+	@Override
+	public int istCode(CommonCodeVO vo) {
+		return mapper.istCode(vo);
+	}
+
+	@Override
+	public int udtCode(CommonCodeVO vo) {
+		return mapper.udtCode(vo);
+	}
+
+	@Override
+	public int delCode(CommonCodeVO vo) {
+		return mapper.delCode(vo);
+	}
+
+	@Override
+	public List<CommonCodeVO> getCodeIdList(CommonCodeVO vo) {
+		return mapper.getCodeIdList(vo);
+	}
+
+	@Override
+	public List<CommonCodeVO> getCodeList(CommonCodeVO vo) {
+		return mapper.getCodeList(vo);
+	}
+
+	@Override
+	public CommonCodeVO getDetailCodeId(CommonCodeVO vo) {
+		return mapper.getDetailCodeId(vo);
+	}
 	
 }

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<h1 class="h3 mb-4 text-gray-700">생산계획 조회</h1>
+<h1 class="h3 mb-4 text-gray-700">출고 조회</h1>
 <form id="searchFrm" name="searchFrm">
 	<div class="mb-4" align="right">
 		<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
@@ -13,7 +13,7 @@
 			<table class="table">
 				<tbody>
 					<tr>
-						<th>계획일자</th>
+						<th>출고일자</th>
 						<td>
 							<div class="row">
 								<input type="date" class="form-control" id="searchDtS" name="searchDtS">
@@ -68,4 +68,4 @@
 </div>
 
 <link href="${pageContext.request.contextPath}/css/app/prod/viewWork.css" rel="stylesheet">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/prod/viewPlan.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/bus/viewExport.js"></script>
