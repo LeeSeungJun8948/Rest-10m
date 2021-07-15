@@ -27,7 +27,7 @@
 <script src="${pageContext.request.contextPath}/js/toastr.js"></script>
 
 <script>
-	var contextPath = ${pageContext.request.contextPath};
+	var contextPath = "${pageContext.request.contextPath}";
 </script>
 
 <!-- toast -->

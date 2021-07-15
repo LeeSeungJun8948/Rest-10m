@@ -2,7 +2,7 @@
 const codeIdData = {
 	api : {
 		readData : {url: contextPath + '/ajax/getCodeIdList.do' , method:'GET' },
-		modifyData : { url: 'ajax/codeIdModify.do', method: 'PUT'}
+		modifyData : { url: contextPath + '/ajax/codeIdModify.do', method: 'PUT'}
 	},
 	contentType: 'application/json'
 };
