@@ -76,6 +76,12 @@ public class BomServiceImpl implements BomService {
 		// TODO 제품에 대한 고객코드/고객사명 List
 		return mapper.getCompanyList(vo);
 	}
+
+	@Override
+	public List<BomVO> matCodeList(BomVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.matCodeList(vo);
+	}
 	
 	
 }

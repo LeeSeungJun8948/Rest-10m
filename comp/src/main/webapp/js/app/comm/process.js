@@ -21,6 +21,7 @@ function checkNull(value){
 
 var newProCode;
 $("#btnRowInsert").on("click", function(){
+	//행추가시 코드+1
 	if(checkNull(newProCode)){
 		newProCode = newProCode * 1 + 1;
 	}else{
@@ -47,6 +48,7 @@ $("#btnRowInsert").on("click", function(){
 });
 
 $("#btnInsert").on("click", function(){
+		//입력시 안내문구		
 		for(var valid of grid.validate()){
 			for(var errors of valid.errors){
 				var header;
