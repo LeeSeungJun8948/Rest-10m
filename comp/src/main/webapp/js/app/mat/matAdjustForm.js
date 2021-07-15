@@ -1,104 +1,35 @@
-/**
 $( document ).ready(function() {	
-	var	nowDate = new Date();
-	document.getElementById('startDate').valueAsDate = new Date(nowDate.setDate(nowDate.getDate() - 7));
+	document.getElementById('startDate').valueAsDate = new Date();
 	document.getElementById('endDate').valueAsDate = new Date();
 });
- */
 
-toastr.options = {
-	closeButton: true,
-	showDuration: "500",
-	 positionClass: "toast-top-center"
- };
-toastr.info('재고 열 더블클릭 혹은 선택 후 작성');
-
-// 재고 리스트 
-const stockDataSource = {
+const dataSource = {
 	api : {
-		readData : {url: 'ajax/matLotStock.do' , method:'GET' },
-	},
-	contentType: 'application/json'
-};
-	
-const stockGrid = new tui.Grid({
-	el : document.getElementById('stockGrid'),
-	data : stockDataSource,
-	scrollX : false,
-	scrollY : true,
-	bodyHeight: 200,
-	rowHeaders: ['checkbox'],
-	columns : [ 
-		{
-			header : '자재코드',
-			name : 'materialCode',
-			width : 80,
-			align: 'center'
-		},
-		{
-			header : '자재명',
-			name : 'materialName',
-			align: 'center'
-		},
-		{
-			header : 'LOT',
-			name : 'lotNo',
-			align: 'center'
-		}, {
-			header : '입고단가',
-			name : 'unitPrice',
-			align: 'right',
-			width : 100,
-			formatter({value}) {
-      			return format(value);
-    		}
-		}, {
-			header : '정산일자',
-			name : 'ioDate',
-			align: 'center'
-		}, {
-			header : '현재고',
-			name : 'lotStock',
-			width : 180,
-			align: 'right',
-			formatter({value}) {
-      			return format(value);
-    		}
-		}, {
-			header : '단위',
-			name : 'unitNo',
-			align: 'center',
-			width : 80
-		} 
-	]
-		
-});
-
-const adjustDataSource = {
-	api : {
-		readData: {url: 'ajax/matAdjustNull.do', method: 'GET'},
-		modifyData : { url: 'ajax/matAdjustModify.do', method: 'PUT'}
+		readData : {url: contextPath + '/ajax/matAdjustList.do' , method:'GET'},
+		modifyData : { url: contextPath + '/ajax/matAdjustModify.do', method: 'PUT'}
 	},
 	contentType: 'application/json'
 };
 	
 const adjustGrid = new tui.Grid({
 	el : document.getElementById('adjustGrid'),
-	data : adjustDataSource,
-	rowHeaders: ['checkbox'],
+	data : dataSource,
 	scrollX : false,
 	scrollY : true,
-	bodyHeight: 300,
+	bodyHeight: 360,
+	rowHeaders: ['checkbox'],
 	columns : [ 
 		{
 			header : '정산코드',
 			name : 'ioCode',
-			align: 'center'
+			align: 'center',
+			width : 120
 		},
 		{
 			header : '자재코드',
 			name : 'materialCode',
-			align: 'center'
+			align: 'center',
+			width : 120
 		},
 		{
 			header : '자재명',
@@ -113,39 +44,26 @@ const adjustGrid = new tui.Grid({
 			header : '단가',
 			name : 'unitPrice',
 			align: 'right',
+			width : 120,
 			formatter({value}) {
       			return format(value);
     		}
 		}, {
-			header : '실재고',
-			name : 'realLotStock',
-			width : 120,
-			align: 'right',
-			editor: 'text',
-			className: 'red',
-			onAfterChange(ev) {
-        		setIoVolume(ev);
-      		},
-			validation: {
-				dataType: 'number',
-            	required: true
-          	}
-		}, {
-			header : '현재고',
-			name : 'lotStock',
-			width : 120,
-			align: 'right',
-			formatter({value}) {
-      			return format(value);
-    		}
-		}, {
-			header : '조정수량',
+			header : '정산수량',
 			name : 'ioVolume',
 			width : 120,
 			align: 'right',
 			formatter({value}) {
       			return format(value);
-    		}
+    		},
+			editor: 'text',
+			onAfterChange(ev) {
+        		setInoutNo(ev);
+      		},
+			validation: {
+				dataType: 'number',
+            	required: true
+          	}
 		},  {
 			header : '정산',
 			name : 'inoutNo',
@@ -163,14 +81,31 @@ const adjustGrid = new tui.Grid({
 				}
             }
 		}, {
+			header : '총액',
+			name : 'stock', // 걍 변수이름만 사용한거지 재고가 아니라 총액임
+			align: 'right',
+			width: 120,
+			formatter({value}) {
+      			return format(value);
+    		},
+		}, {
 			header : '단위',
 			name : 'unitNo',
 			align: 'center',
 			width : 80
 		}, {
+			header : '현재고',
+			name : 'lotStock',
+			width : 120,
+			align: 'right',
+			formatter({value}) {
+      			return format(value);	
+    		}
+		}, {
 			header : '정산일',
 			name : 'ioDate',
 			align: 'center',
+			width : 120,
 			editor: {
 				type: 'datePicker',
 				options: {
@@ -187,9 +122,40 @@ const adjustGrid = new tui.Grid({
 			align: 'center',
 			editor: 'text'
 		}  
-	]
+	],
+	summary : {
+		
+		height: 40,
+	   	position: 'bottom',
+	   	columnContent: {
+        	materialName: {
+                template(summary) {
+        			return '합 계';
+                } 
+            },	
+			unitPrice: {
+                template(summary) {
+        			var summaryResult = (summary.sum);
+        			return format(summaryResult);
+                } 
+            },
+			ioVolume: {
+                template(summary) {
+        			var summaryResult = (summary.sum);
+        			return format(summaryResult);
+                } 
+            },
+			stock: {
+                template(summary) {
+        			var summaryResult = (summary.sum);
+        			return format(summaryResult);
+                } 
+            }
+		}
+	}
 });
 
+	
 adjustGrid.disableColumn('inoutNo');
 
 function format(value){
@@ -197,112 +163,45 @@ function format(value){
 	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
-(function($) {
-	$('#btnRead').on('click',  function(){
-		if($('#ckExceptZeroStock').is(":checked")){
-			$('#exceptZeroStock').val($('#ckExceptZeroStock').val());
-		}else{
-			$('#exceptZeroStock').val('');
-		}
-
-		var param = $('#searchFrm').serializeObject();
-		console.log(param)
-		stockGrid.readData(1, param, true);
-	});
-})(jQuery);
-
-var newIoCode;
-
-stockGrid.on('dblclick',function(ev){
+$('#btnRead').on('click',  function(){
 	
-	if(checkNull(newIoCode)){
-		newIoCode = newIoCode * 1 + 1;
-	}else{
+	var param = $('#searchFrm').serializeObject();
+	console.log(param)
+	adjustGrid.readData(1, param, true);
+	
+});
+
+
+function setInoutNo(ev){
+	
+	var ioVolume = adjustGrid.getValue(ev.rowKey, 'ioVolume');
+	
+	if(ioVolume == 0){
+		adjustGrid.setValue(ev.rowKey, 'inoutNo', '',false);
+	}else if(!checkNull(adjustGrid.getValue(ev.rowKey, 'inoutNo'))){
+		var ioCode = adjustGrid.getValue(ev.rowKey, 'ioCode');
 		$.ajax({
 			type : "get",
-			url : "ajax/getNewIoCode.do",
+			url : contextPath + "/ajax/getInoutNo.do",
+			data: {"ioCode" : ioCode},
 			dataType : "json",
 			async : false,
 			success : function(data) {
-				newIoCode = data.ioCode;
+				adjustGrid.setValue(ev.rowKey, 'inoutNo', data.inoutNo, false);
 			},
 			error : function() {
 			}
-		});		
-	}
-	
-	newRowData = {'ioCode' : newIoCode, 
-					'materialCode' : stockGrid.getValue(ev.rowKey, 'materialCode'),
-					'materialName' : stockGrid.getValue(ev.rowKey, 'materialName'),
-					'lotNo' : stockGrid.getValue(ev.rowKey, 'lotNo'),
-					'unitPrice' : stockGrid.getValue(ev.rowKey, 'unitPrice'),
-					'lotStock' : stockGrid.getValue(ev.rowKey, 'lotStock'),
-					'unitNo' : stockGrid.getValue(ev.rowKey, 'unitNo'),
-					'ioDate' : getFormatDate(new Date()),
-					};
-	adjustGrid.appendRow(newRowData,{
-		at : adjustGrid.getRowCount(),
-		focus : true
-	});
-});
-
-function setIoVolume(ev){
-	
-	var realLotStock = adjustGrid.getValue(ev.rowKey, 'realLotStock');
-	var lotStock = adjustGrid.getValue(ev.rowKey, 'lotStock');
-	
-	var ioVolume = realLotStock - lotStock;
-	
-	if(ioVolume > 0){
-		adjustGrid.setValue(ev.rowKey, 'inoutNo', '03', false);
-		adjustGrid.setValue(ev.rowKey, 'ioVolume', ioVolume, false);
-	}else if(ioVolume < 0){
-		adjustGrid.setValue(ev.rowKey, 'inoutNo', '04', false);
-		adjustGrid.setValue(ev.rowKey, 'ioVolume', ioVolume*-1, false);
-	}else{
-		adjustGrid.setValue(ev.rowKey, 'inoutNo', '', false);
-		adjustGrid.setValue(ev.rowKey, 'ioVolume', ioVolume, false);
-	}
-}
-
-$("#btnGridDel").on("click", function(ev){
-	adjustGrid.removeCheckedRows(false);
-});
-
-$('#btnWrite').on('click',function(){
-	
-	for(var writeRowKey of stockGrid.getCheckedRowKeys()){
-		if(checkNull(newIoCode)){
-			newIoCode = newIoCode * 1 + 1;
-		}else{
-			$.ajax({
-				type : "get",
-				url : "ajax/getNewIoCode.do",
-				dataType : "json",
-				async : false,
-				success : function(data) {
-					newIoCode = data.ioCode;
-				},
-				error : function() {
-				}
-			});		
-		}
-		
-		newRowData = {'ioCode' : newIoCode, 
-						'materialCode' : stockGrid.getValue(writeRowKey, 'materialCode'),
-						'materialName' : stockGrid.getValue(writeRowKey, 'materialName'),
-						'lotNo' : stockGrid.getValue(writeRowKey, 'lotNo'),
-						'unitPrice' : stockGrid.getValue(writeRowKey, 'unitPrice'),
-						'lotStock' : stockGrid.getValue(writeRowKey, 'lotStock'),
-						'unitNo' : stockGrid.getValue(writeRowKey, 'unitNo'),
-						'ioDate' : getFormatDate(new Date()),
-						};
-		adjustGrid.appendRow(newRowData,{
-			at : adjustGrid.getRowCount(),
-			focus : true
 		});
 	}
-})
+	
+	adjustGrid.setValue(ev.rowKey, 'stock', 
+						adjustGrid.getValue(ev.rowKey, 'ioVolume')
+						* adjustGrid.getValue(ev.rowKey, 'unitPrice'), false);
+};
+
+$("#btnGridDel").on("click", function(ev){
+	adjustGrid.removeCheckedRows(true);
+});
 
 $("#btnSave").on("click", function(){
 	
@@ -318,47 +217,21 @@ $("#btnSave").on("click", function(){
 	}
 	
 	if(adjustGrid.validate().length == 0){
-		
 		adjustGrid.request('modifyData');
-		
-		(function($) {
-			if($('#ckExceptZeroStock').is(":checked")){
-				$('#exceptZeroStock').val($('#ckExceptZeroStock').val());
-			}else{
-				$('#exceptZeroStock').val('');
-			}
-		
-			var param = $('#searchFrm').serializeObject();
-			console.log(param)
-			stockGrid.readData(1, param, true);
-		})(jQuery);
-
-		adjustGrid.resetData([],{});
-		alert('작성완료');
 	}
-
 });
 
-// 모달
-var forGrid = false;
-// 자재 돋보기
-$("#btnMatModal").on("click", function(e) {
-	$('#materialCode').val('');
-	$('#materialName').val('');    
-	$('#matContent').load("matModal.do");
-});
-
-// 자재코드 입력창
-$('#materialCode').on('click', function(){
-	$('#materialCode').val('');
-	$('#materialName').val('');	
-	$('#matModal').modal('show');
-	$('#matContent').load("matModal.do");
-});
+function toast(text, title){
+	toastr.options = {
+		closeButton: true,
+		showDuration: "500"
+ 	};
+	toastr.error(text,title);
+}
 
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
-}	
+}
 
 function getFormatDate(date){
     var year = date.getFullYear();              //yyyy
@@ -369,10 +242,22 @@ function getFormatDate(date){
     return  year + '-' + month + '-' + day;
 }
 
-function toast(text, title){
-	toastr.options = {
-		closeButton: true,
-		showDuration: "200"
- 	};
-	toastr.error(text,title);
-}
+
+// 모달
+var forGrid = false;
+// 자재 돋보기
+$("#btnMatModal").on("click", function(e) {
+	$('#materialCode').val('');
+	$('#materialName').val('');
+    $('#matContent').load("matModal.do");
+});
+
+// 자재코드 입력창
+$('#materialCode').on('click', function(){
+	$('#materialCode').val('');
+	$('#materialName').val('');
+	$('#matModal').modal('show');
+	$('#matContent').load("matModal.do");
+});
+
+

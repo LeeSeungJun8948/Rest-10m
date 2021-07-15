@@ -15,4 +15,5 @@ public interface FacilitiesMapper {
 	public int updateFac(FacilitiesVO vo); // 불러온 데이터 수정하기
 	public int getFacCode();
 	public List<EmployeeVO> getEmpListModal(EmployeeVO vo);
+	public int insertFacilities(FacilitiesVO vo);
 }

@@ -5,7 +5,7 @@
 			var empData = {
 				api : {
 					readData : {
-					url : 'ajax/empListModal.do',
+					url : contextPath + '/ajax/empListModal.do',
 					method : 'GET'
 					}
 				},

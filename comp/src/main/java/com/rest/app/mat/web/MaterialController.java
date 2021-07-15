@@ -275,8 +275,13 @@ public class MaterialController {
 		return "mat/matInForm.page";
 	}
 	
-	@RequestMapping("mat/mng/matAdjustForm.do")
+	@RequestMapping("mat/mng/matAdjustWrite.do")
 	public String matStockForm(Model model) {
+		return "mat/matAdjustWrite.page";
+	}
+	
+	@RequestMapping("mat/mng/matAdjustForm.do")
+	public String matSaveStockForm(Model model) {
 		return "mat/matAdjustForm.page";
 	}
 	

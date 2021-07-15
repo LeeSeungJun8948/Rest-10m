@@ -52,19 +52,19 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService dao;
 
-	@RequestMapping("empList.do")
+	@RequestMapping("/empList.do")
 	public String empList(Model model) {
 		return "comm/empList.page";
 	}
 
-	@RequestMapping("insertEmp.do")
+	@RequestMapping("/insertEmp.do")
 	public String insertEmp(EmployeeVO vo) {
 		dao.insertEmp(vo);
 		return "redirect:empList.do";
 	}
 
 	// 모달
-	@RequestMapping("empModal.do")
+	@RequestMapping("/empModal.do")
 	public String modal(Model model) {
 		model.addAttribute("max", dao.maxEmpCode());
 		return "app/comm/empModal";

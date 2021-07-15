@@ -186,7 +186,7 @@ $( function() {
 
 	
 	// 수정버튼
-	$("#btnUdate").on("click", function() {
+	/*$("#btnUdate").on("click", function() {
 		event.preventDefault();
     
     	var form = $('#frm')[0]
@@ -214,7 +214,7 @@ $( function() {
 			error : function(request, status, error) {
 			}
 		});	
-	});
+	});*/
 	
 	$('#btnNew').on('click',function(){
 		var img = document.getElementById('image');

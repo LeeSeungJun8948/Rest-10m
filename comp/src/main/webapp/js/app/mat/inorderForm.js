@@ -8,7 +8,7 @@ $( document ).ready(function() {
 
 	const dataSource = {
 		api : {
-			readData : {url: 'ajax/getInorderList.do' , method:'GET' },
+			readData : {url: contextPath + '/ajax/getInorderList.do' , method:'GET' },
 		},
 		contentType: 'application/json'
 	};
@@ -134,7 +134,7 @@ var forGrid = false;
 $("#btnMatModal").on("click", function(e) {
 	$('#materialCode').val('');
 	$('#materialName').val('');
-    $('#matContent').load("matModal.do");
+    $('#matContent').load(contextPath +"/matModal.do");
 });
 
 // 자재코드 입력창
@@ -142,14 +142,14 @@ $('#materialCode').on('click', function(){
 	$('#materialCode').val('');
 	$('#materialName').val('');
 	$('#matModal').modal('show');
-	$('#matContent').load("matModal.do");
+	$('#matContent').load(contextPath +"/matModal.do");
 });
 
 // 업체 돋보기
 $("#btnCompModal").on("click", function(e) {
 	$('#companyCode').val('');
 	$('#companyName').val('');
-    $('#compContent').load("compModal.do");
+    $('#compContent').load(contextPath +"/compModal.do");
 });
 
 // 업체 코드 입력창
@@ -157,6 +157,6 @@ $('#companyCode').on('click', function(){
 	$('#companyCode').val('');
 	$('#companyName').val('');
 	$('#compModal').modal('show');
-	$('#compContent').load("compModal.do");
+	$('#compContent').load(contextPath +"/compModal.do");
 });
 

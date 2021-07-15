@@ -18,6 +18,11 @@ public class BomVO extends ComDefaultVO{
 	String kg;
 	String etc;
 	
+	String matNo;
+	String matNm;
+	String codeId;
+	String code;
+	
 	String compCode;
 	String compName;
 }

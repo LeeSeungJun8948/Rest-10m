@@ -15,7 +15,7 @@ function showMatList(){
 	// listData 가져오기
 	$.ajax({
 		type : "get",
-		url : "ajax/matList.do",
+		url : contextPath + "/ajax/matList.do",
 		dataType : "json",
 		async : false,
 		success : function(data) {
@@ -57,7 +57,7 @@ listGrid.on('click',function(e){
 	$.ajax({
 		
 		type : "get",
-		url : "ajax/matInfo.do",
+		url : contextPath + "/ajax/matInfo.do",
 		data : {
 			'materialCode' : listGrid.getValue(e.rowKey, 'materialCode')
 		},
@@ -96,7 +96,7 @@ $('#btnSave').on('click',function(){
 	}else{
 		$.ajax({
 			type : "get",
-			url : "ajax/matSave.do",
+			url : contextPath + "/ajax/matSave.do",
 			data : $('#frm').serialize(),
 			dataType : "json",
 			async : false,
@@ -129,7 +129,7 @@ $('#btnNew').on('click',function(){
 	$.ajax({
 		
 		type : "get",
-		url : "ajax/newMatCode.do",
+		url : contextPath + "/ajax/newMatCode.do",
 		dataType : "json",
 		async : false,
 		success : function(data) {
@@ -154,7 +154,7 @@ $('#btnDel').on('click',function(){
     		$.ajax({
 			
 				type : "get",
-				url : "ajax/matDel.do",
+				url : contextPath + "/ajax/matDel.do",
 				data : $('#frm').serialize(),
 				dataType : "json",
 				async : false,
@@ -185,14 +185,14 @@ $('#btnDel').on('click',function(){
 var forGrid = false;
 
 $("#btnCompModal").on("click", function(e) {
-    $('#compContent').load("compModal.do");
+    $('#compContent').load(contextPath + "/compModal.do");
 });
 
 $(document).on('show.bs.modal','#btnCompModal', function (){});
 
 $('#companyCode').on('click',function(){
 	$('#compModal').modal('show');
-	$('#compContent').load("compModal.do");
+	$('#compContent').load(contextPath + "/compModal.do");
 	
 })
 

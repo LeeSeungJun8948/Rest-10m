@@ -6,7 +6,7 @@
 			var procData = {
 				api : {
 					readData : {
-					url : 'ajax/procListModal.do',
+					url : contextPath + '/ajax/procListModal.do',
 					method : 'GET'
 					}
 				},

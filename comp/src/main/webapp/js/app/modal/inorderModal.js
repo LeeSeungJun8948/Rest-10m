@@ -5,7 +5,7 @@
 			var inorderData = {
 				api : {
 					readData : {
-					url : 'ajax/inorderListModal.do',
+					url : contextPath + '/ajax/inorderListModal.do',
 					method : 'GET'
 					}
 				},

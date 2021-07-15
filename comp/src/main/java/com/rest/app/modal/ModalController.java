@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rest.app.bus.vo.ExportLotVO;
 import com.rest.app.bus.vo.OrdersVO;
+import com.rest.app.comm.service.BomService;
+import com.rest.app.comm.vo.BomVO;
 import com.rest.app.mat.service.MaterialService;
 import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.SelectListVO;
@@ -20,7 +22,9 @@ public class ModalController {
 
 	@Autowired
 	MaterialService dao;
-
+	@Autowired
+	BomService bDao;
+	
 	// 자재검색 모달 페이지 리턴
 	@RequestMapping("/matModal.do")
 	public String matModal() {
@@ -172,6 +176,27 @@ public class ModalController {
 		System.out.println(vo.getKeyword());
 		data.put("result", true);
 		datas.put("contents", dao.getProdListModal(vo));
+		data.put("data", datas);
+
+		return data;
+	}
+	@RequestMapping("/matCodeModal.do")
+	public String matCodeModal() {
+		return "app/modal/matCodeModal";
+	}
+	
+	
+	// Bom 소요자재 그리드 자재코드/코드명 데이터 리턴
+	@RequestMapping("ajax/matCodeModal.do")
+	@ResponseBody
+	public Map<String, Object> ajaxMatCodeModal(Model model, BomVO vo) { 
+		System.out.println("====================");
+		Map<String, Object> datas = new HashMap<>();
+		Map<String, Object> data = new HashMap<>();
+
+		
+		data.put("result", true);
+		datas.put("contents", bDao.matCodeList(vo));
 		data.put("data", datas);
 
 		return data;

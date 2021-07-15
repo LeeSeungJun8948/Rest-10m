@@ -12,4 +12,5 @@ public interface InspectionMapper {
 	public int updateIns(InspectionVO vo);
 	public InspectionVO getInsCode();
 	public List<FacilitiesVO> getFacListModal(FacilitiesVO vo);
+	public List<InspectionVO> inspectionList();
 }

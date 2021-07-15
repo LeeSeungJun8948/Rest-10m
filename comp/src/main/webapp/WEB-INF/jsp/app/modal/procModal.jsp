@@ -40,5 +40,5 @@
 	
 	</div>
 	
-	<script type="text/javascript" src="js/app/modal/procModal.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/modal/procModal.js"></script>
 </div>

@@ -5,7 +5,7 @@
 			var matData = {
 				api : {
 					readData : {
-					url : 'ajax/matListModal.do',
+					url : contextPath + '/ajax/matListModal.do',
 					method : 'GET'
 					}
 				},
