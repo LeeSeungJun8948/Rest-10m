@@ -62,11 +62,11 @@ $("#btnReset").click(function() {
 
 //모달
 $("#btnCompModal").on("click", function() {
-	$('#compContent').load("compModal.do");
+	$('#compContent').load(contextPath+"/compModal.do");
 });
 
 $("#btnProdModal").on("click", function() {
-	$('#prodContent').load("prodModal.do");
+	$('#prodContent').load(contextPath+"/prodModal.do");
 });
 
 // 초기화

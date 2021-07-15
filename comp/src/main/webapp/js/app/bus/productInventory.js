@@ -95,7 +95,7 @@ function resetPage() {
 //모달
 var forGrid = false;
 $("#btnProdModal").on("click", function(e) {
-	$('#prodContent').load("prodModal.do");
+	$('#prodContent').load(contextPath+"/prodModal.do");
 });
 $("#btnProdLotModal").on("click", function(e) {
 	$('#modalContent').load(contextPath+"/prodLotModal.do");

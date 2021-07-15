@@ -170,7 +170,7 @@ $('#btnSave').on('click', function() {
 	if (formCheck()) {
 		$.ajax({
 			type: 'POST',
-			url: 'saveExport.do',
+			url: contextPath+'/ajax/saveExport.do',
 			data: $('#inputFrm').serialize(),
 			dataType: 'json',
 			async: false,
@@ -197,7 +197,7 @@ $('#btnSave').on('click', function() {
 $('#btnDel').on('click', function() {
 	$.ajax({
 		type: 'POST',
-		url: 'deleteExport.do',
+		url: contextPath+'/ajax/deleteExport.do',
 		data: { exportCode: $('#exportCode').val() },
 		dataType: 'json',
 		success: function() {
@@ -308,7 +308,7 @@ function checkNull(value) {
 //모달
 var forGrid = false;
 $("#btnCompModal").on("click", function(e) {
-	$('#compContent').load("compModalForProd.do");
+	$('#compContent').load(contextPath+"/compModalForProd.do");
 });
 $(document).on('show.bs.modal', '#btnCompModal', function() {
 });

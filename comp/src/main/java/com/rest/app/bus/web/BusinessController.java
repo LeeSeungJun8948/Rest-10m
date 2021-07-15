@@ -104,7 +104,7 @@ public class BusinessController {
 	}
 
 	// 출고저장
-	@RequestMapping("saveExport.do")
+	@RequestMapping("/ajax/saveExport.do")
 	@ResponseBody
 	public Map<String, Object> saveExport(ExportVO vo) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -121,7 +121,7 @@ public class BusinessController {
 	}
 
 	// 출고삭제
-	@RequestMapping("deleteExport.do")
+	@RequestMapping("/ajax/deleteExport.do")
 	@ResponseBody
 	public Map<String, Object> deleteExport(@RequestParam String exportCode) {
 		Map<String, Object> data = new HashMap<String, Object>();
