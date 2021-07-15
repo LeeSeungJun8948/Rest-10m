@@ -40,6 +40,6 @@ public class FacilitiesVO {
 	
 	String processName;
 	
-	String keyword;
+	String searchKeyword;
 	String searchCondition;
 }

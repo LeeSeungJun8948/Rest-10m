@@ -85,4 +85,9 @@
 	<select id="getFacCode" resultType="int">
     	select max(fac_code) + 1 as fac_code from facilities
     </select>
+    
+    <select id="getFacList" resultType="com.rest.app.fac.vo.FacilitiesVO">
+		select * from facilities
+		order by fac_code
+	</select>
 </mapper>
