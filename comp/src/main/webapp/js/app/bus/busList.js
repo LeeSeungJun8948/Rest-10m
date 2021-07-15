@@ -67,7 +67,7 @@ const grid = new tui.Grid({
 	                return (summary.sum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	            }
 	        },
-	        kg:{
+	        outCount:{
 	            template(summary) {
 	                return (summary.sum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	            }
@@ -109,7 +109,7 @@ $('#searchBtn').on('click',function(){
 		   grid.readData(1, param, true);
 		});
 $('#resetBtn').on('click', function(){
-	grid.clear();
+	resetPage();
 });
 	
 function checkNull(value){
@@ -117,13 +117,12 @@ function checkNull(value){
 }
 
 // 초기화
+// 초기화
 function resetPage() {
 	$("form").each(function() {
 		this.reset();
 	});
 	grid.clear();
-	gridInput.clear();
-	$('#exportCode').val('exportCode');
 }
 
 //모달

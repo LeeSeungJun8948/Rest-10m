@@ -81,8 +81,8 @@ $('#btnView').on('click', function() {
 	console.log(param)
 	grid.readData(1, param, true);
 });
-$('#resetBtn').on('click', function() {
-	grid.clear();
+$('#btnReset').on('click', function() {
+	resetPage();
 });
 function checkNull(value) {
 	return value != null && value != '' && value != '[object HTMLInputElement]';
@@ -94,15 +94,16 @@ function resetPage() {
 		this.reset();
 	});
 	grid.clear();
-	gridInput.clear();
-	$('#exportCode').val('exportCode');
 }
 //모달
 var forGrid = false;
 $("#btnProdModal").on("click", function(e) {
 	$('#prodContent').load("prodModal.do");
 });
+$("#btnProdLotModal").on("click", function(e) {
+	$('#modalContent').load("prodLotModal.do");
+});
 // ???????
-$(document).on('show.bs.modal', '#btnCompModal', function() {
+$(document).on('show.bs.modal','#btnProdLotModal', function () {
 });
 

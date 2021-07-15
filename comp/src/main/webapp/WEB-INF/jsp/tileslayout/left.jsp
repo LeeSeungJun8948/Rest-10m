@@ -53,6 +53,7 @@
          <div class="bg-white py-2 collapse-inner rounded">
              <a class="collapse-item" href="/comp/busList.do">주문관리 참조조회</a>
              <a class="collapse-item" href="/comp/exportForm.do">출고 관리</a>
+             <a class="collapse-item" href="/comp/viewExport.do">출고 조회</a>
              <a class="collapse-item" href="/comp/productInventory.do">제품 재고 조회</a>
          </div>
      </div>
