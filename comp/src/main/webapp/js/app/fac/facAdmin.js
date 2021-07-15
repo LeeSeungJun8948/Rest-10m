@@ -1,3 +1,4 @@
+console.log(contextPath);
 function test() {
 	if(!checkNull($('#facilitiesName').val())) {
 		toastr.warning('설비명을 입력해주십시오.');
@@ -43,11 +44,11 @@ $( function() {
 	const dataSource = {
 		api : {
 			readData : {
-				url : 'ajax/facList2.do',
+				url : contextPath + '/ajax/facList2.do',
 				method : 'GET'
 			},
 			deleteData : {
-				url : 'ajax/deleteFac.do',
+				url : contextPath + '/ajax/deleteFac.do',
 				method : 'POST'
 			}
 		},
@@ -111,7 +112,7 @@ $( function() {
 		$.ajax({
 				
 				type : "get",
-				url : "ajax/facInfo.do",
+				url : contextPath + "/ajax/facInfo.do",
 				data : {
 					'facCode' : key
 				},
@@ -148,7 +149,7 @@ $( function() {
 	const dataSource2 = {
 		api : {
 			readData : {
-				url : 'ajax/facProcessList.do',
+				url : contextPath + '/ajax/facProcessList.do',
 				method : 'GET'
 			}
 		},
@@ -238,13 +239,13 @@ var forGrid = false;
 $('#btnProcModal').on('click',function(e){
 	$('#processCode').val('');
 	$('#processName').val('');
-	$('#procContent').load("procModal.do");
+	$('#procContent').load(contextPath + "/procModal.do");
 });
 
 $('#btnEmpModal').on('click',function(e){
 	$('#employeeName').val('');
 	$('#empCode').val('');
-	$('#empContent').load("empListModal.do");
+	$('#empContent').load(contextPath + "/empListModal.do");
 });
 
 	
