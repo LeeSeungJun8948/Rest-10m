@@ -82,7 +82,7 @@ public class MaterialController {
 		return dao.matDel(vo);
 	}
 	
-	@RequestMapping("inorderForm.do")
+	@RequestMapping("mat/view/inorderForm.do")
 	public String inorderForm(Model model) {
 		return "mat/inorderForm.page";
 	}
@@ -270,27 +270,27 @@ public class MaterialController {
 		return mapper.getInoutNo(vo); // 서비스 만들기 귀찮아서 걍 바로씀..
 	}
 	
-	@RequestMapping("matInForm.do")
+	@RequestMapping("mat/mng/matInForm.do")
 	public String matInForm(Model model) {
 		return "mat/matInForm.page";
 	}
 	
-	@RequestMapping("matAdjustForm.do")
+	@RequestMapping("mat/mng/matAdjustForm.do")
 	public String matStockForm(Model model) {
 		return "mat/matAdjustForm.page";
 	}
 	
-	@RequestMapping("matAdjustList.do")
+	@RequestMapping("mat/mng/matAdjustList.do")
 	public String matSaveStockList(Model model) {
 		return "mat/matAdjustList.page";
 	}
 	
-	@RequestMapping("matOutForm.do")
+	@RequestMapping("mat/mng/matOutForm.do")
 	public String matOutForm(Model model) {
 		return "mat/matOutForm.page";
 	}
 	
-	@RequestMapping("procMovePrint.do")
+	@RequestMapping("prod/mng/procMovePrint.do")
 	public String procMovePrint(Model model) {
 		return "mat/procMovePrint.page";
 	}

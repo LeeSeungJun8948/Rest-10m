@@ -178,10 +178,10 @@ function fnInit() {
     alert("loginMessage:<c:out value='${loginMessage}'/>");
     </c:if>
     
-    // reload "_top" frame page
+/*     // reload "_top" frame page
     if (parent.frames["_top"] == undefined)
     	console.log("'_top' frame is not exist!");
-    parent.frames["_top"].location.reload();
+    parent.frames["_top"].location.reload(); */
 }
 
 function fnLoginTypeSelect(objName){

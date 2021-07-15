@@ -8,7 +8,7 @@ $( document ).ready(function() {
 
 	const dataSource = {
 		api : {
-			readData : {url: 'ajax/inorderList.do' , method:'GET' },
+			readData : {url: 'ajax/getInorderList.do' , method:'GET' },
 		},
 		contentType: 'application/json'
 	};

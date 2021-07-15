@@ -3,7 +3,7 @@
 
 
  <!-- Sidebar - Brand -->
- <a class="sidebar-brand d-flex align-items-center justify-content-center" href="main.do">
+ <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/pro/view/main.do">
      <div class="sidebar-brand-icon rotate-n-15">
          <i class="fas fa-laugh-wink"></i>
      </div>
@@ -15,7 +15,7 @@
 
  <!-- Nav Item - Dashboard -->
  <li class="nav-item active">
-     <a class="nav-link" href="main.do">
+     <a class="nav-link" href="${pageContext.request.contextPath}/pro/view/main.do">
          <i class="fas fa-fw fa-tachometer-alt"></i>
          <span>메인</span></a>
  </li>
@@ -84,14 +84,14 @@
      </a>
      <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="managePlan.do">생산계획 관리</a>
-             <a class="collapse-item" href="viewPlan.do">생산계획 조회</a>
-             <a class="collapse-item" href="manageProrder.do">생산지시 관리</a>
-             <a class="collapse-item" href="viewProrder.do">생산지시 조회</a>
-             <a class="collapse-item" href="procMovePrint.do">공정이동표 발행</a>
-             <a class="collapse-item" href="manageWork.do">작업실적 관리</a>
-             <a class="collapse-item" href="viewWork.do">작업실적 조회</a>
-             <a class="collapse-item" href="detailErrorList.do">불량내역 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/mng/managePlan.do">생산계획 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/viewPlan.do">생산계획 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/mng/manageProrder.do">생산지시 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/viewProrder.do">생산지시 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/procMovePrint.do">공정이동표 발행</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/manageWork.do">작업실적 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/viewWork.do">작업실적 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/detailErrorList.do">불량내역 조회</a>
          </div>
      </div>
  </li>
