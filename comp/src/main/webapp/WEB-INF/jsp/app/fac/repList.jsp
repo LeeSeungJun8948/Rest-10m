@@ -56,5 +56,43 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="js/app/fac/repList.js">
+<script>
+const dataSource = { 
+		api : {
+			readData : {
+				url : 'ajax/repList.do',
+				method : 'GET'
+			}
+		},
+		contentType : 'application/json'
+	}
+
+	const grid = new tui.Grid({
+		el : document.getElementById('grid'),
+		data : dataSource,
+		scrollX : false,
+		scrollY : false,
+		columns : [ {
+			header : '수리코드',
+			name : 'repairCode'
+		}, {
+			header : '설비코드',
+			name : 'facCode'
+		}, {
+			header : '수리일자',
+			name : 'repairDate'
+		}, {
+			header : '수리내역',
+			name : 'repairComment'
+		}, {
+			header : '업체코드',
+			name : 'companyCode'
+		}, {
+			header : '수리금액',
+			name : 'cost'
+		}, {
+			header : '비고',
+			name : 'etc'
+		} ]
+	});
 </script>

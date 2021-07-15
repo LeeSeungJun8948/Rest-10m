@@ -5,6 +5,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,20 +58,8 @@ public class FacilitiesController {
 	public String getFac(Model model) {
 		return "fac/facList.page";
 	}
-
-//	@RequestMapping("ajax/facList.do")
-//	@ResponseBody
-//	public List<FacilitiesVO> ajaxGetFac(Model model) {
-//		return mapper.getFac();
-//	}
 	
-	// 설비관리
-	@RequestMapping("/facAdmin.do")
-	public String facAdmin(Model model) {
-		model.addAttribute("max", mapper.getFacCode());
-		return "fac/facAdmin.page";
-	}
-	
+	// 설비 조회
 	@RequestMapping("ajax/facList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetFac(FacilitiesVO vo) {
@@ -81,6 +70,15 @@ public class FacilitiesController {
 		data.put("data", datas);
 		return data;
 	}
+	
+	// 설비관리
+	@RequestMapping("/facAdmin.do")
+	public String facAdmin(Model model) {
+		model.addAttribute("max", mapper.getFacCode());
+		return "fac/facAdmin.page";
+	}
+	
+	
 	// 탭1 설비 관리 목록
 	@RequestMapping("ajax/facList2.do")
 	@ResponseBody
@@ -103,7 +101,23 @@ public class FacilitiesController {
 		data.put("data", datas);
 		return data;
 	}
-
+	
+	// 저장&수정
+	@RequestMapping("/insertFacilities.do")
+	public String insertFacilities(HttpServletRequest request, FacilitiesVO vo) throws IOException, Exception {
+		MultipartFile uploadFile = vo.getUploadFile();
+		String fileName = null;
+		if(uploadFile !=null && !uploadFile.isEmpty() && uploadFile.getSize()>0) {
+			fileName = uploadFile.getOriginalFilename();
+			String storePathString = EgovProperties.getProperty("Globals.fileStorePath");
+			fileName = uploadFile(fileName, uploadFile.getBytes());
+			uploadFile.transferTo(new File(storePathString, fileName));
+			//첨부파일명 VO에 지정
+			vo.setImg(fileName);
+		}
+		mapper.insertFacilities(vo);
+		return "redirect:facAdmin.do";
+	}
 
 	// 저장
 	@RequestMapping(value = "/insertFac.do")
@@ -136,12 +150,6 @@ public class FacilitiesController {
 		return data;
 	}
 	
-	// grid list 불러오기
-	@RequestMapping("/ajax/facInfo.do")
-	@ResponseBody
-	public FacilitiesVO ajaxFacInfo(Model model, FacilitiesVO vo) {
-		return mapper.getFacInfo(vo);
-	}
 	
 	// 수정
 	@RequestMapping("/ajax/updateFac.do")
@@ -159,6 +167,13 @@ public class FacilitiesController {
 		}
 		
 		return mapper.updateFac(vo);
+	}
+	
+	// grid list 불러오기
+	@RequestMapping("/ajax/facInfo.do")
+	@ResponseBody
+	public FacilitiesVO ajaxFacInfo(Model model, FacilitiesVO vo) {
+		return mapper.getFacInfo(vo);
 	}
 	
 	// 사원검색 모달
