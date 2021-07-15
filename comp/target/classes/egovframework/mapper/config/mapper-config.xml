@@ -28,6 +28,8 @@
 		<typeAlias alias="SelectListVO"		type="com.rest.app.mat.vo.SelectListVO" />
 		<!-- 공정이동vo -->
 		<typeAlias alias="ProcMoveVO"		type="com.rest.app.mat.vo.ProcMoveVO" />
+		<!-- 공통코드 -->
+		<typeAlias alias="CommonCodeVO"		type="com.rest.app.mat.vo.CommonCodeVO" />
 		
 		<!-- 생산  -->
 		<typeAlias alias="OrdersVO"		type="com.rest.app.bus.vo.OrdersVO" />

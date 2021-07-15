@@ -7,7 +7,7 @@
 	<div>
 	<h2>설비생산이력조회</h2>
 	</div>
-		<div class="mb-2" style="float:right">
+		<div class="mb-2">
 			<form id="searchCheck" name="searchCheck">
 				<label>제품명 검색
 				<input type="text" id="searchKeyword" name="searchKeyword" title="검색어" class="form-control" style="width:200px;">

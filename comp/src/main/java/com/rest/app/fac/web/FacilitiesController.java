@@ -71,18 +71,27 @@ public class FacilitiesController {
 		return "fac/facAdmin.page";
 	}
 	
-	// 탭1 설비 관리 목록
 	@RequestMapping("ajax/facList.do")
 	@ResponseBody
-	public Map<String, Object> ajaxGetFac() {
+	public Map<String, Object> ajaxGetFac(FacilitiesVO vo) {
 		Map<String,Object> datas = new HashMap<String,Object>();
 		Map<String,Object> data = new HashMap<String,Object>();
 		data.put("result", true);
-		datas.put("contents", mapper.getFac());
+		datas.put("contents", mapper.getFac(vo));
 		data.put("data", datas);
 		return data;
 	}
-	
+	// 탭1 설비 관리 목록
+	@RequestMapping("ajax/facList2.do")
+	@ResponseBody
+	public Map<String, Object> ajaxGetFacList() {
+		Map<String,Object> datas = new HashMap<String,Object>();
+		Map<String,Object> data = new HashMap<String,Object>();
+		data.put("result", true);
+		datas.put("contents", mapper.getFacList());
+		data.put("data", datas);
+		return data;
+	}
 	// 탭2 설비 공정 목록
 	@RequestMapping("ajax/facProcessList.do")
 	@ResponseBody

@@ -1,6 +1,5 @@
 (function($) {
 	$("#workModal").on('shown.bs.modal', function() {
-
 		if (!checkNull($('#workGrid').html())) {
 			var workData = {
 				api: {
@@ -58,6 +57,10 @@
 					name: 'prorCode',
 					hidden: true
 					}, {
+					header: '설비명',
+					name: 'facilitiesName',
+					hidden: true
+					}, {
 					header: '작업공정',
 					name: 'processName',
 					}, {
@@ -83,7 +86,7 @@
 					}]
 			});
 
-			$("#btnRead").on("click", function() {
+			$("#btnSearch").on("click", function() {
 				var param = $('#dateFrm').serializeObject();
 				workGrid.readData(1, param, true);
 			});
@@ -103,6 +106,7 @@
 			var workCount;
 			var errorCount;
 			var prorCode;
+			var facilitiesName;
 			
 			workGrid.on('click', (ev) => {
 				workCode = workGrid.getValue(ev.rowKey, 'workCode');
@@ -120,6 +124,7 @@
 				workCount = workGrid.getValue(ev.rowKey, 'workCount');
 				errorCount = workGrid.getValue(ev.rowKey, 'errorCount');
 				prorCode = workGrid.getValue(ev.rowKey, 'prorCode');
+				facilitiesName = workGrid.getValue(ev.rowKey, 'facilitiesName');
 			});
 
 			$('#btnSelect').on('click', function() {
@@ -146,6 +151,7 @@
 				$('#workCount').val(workCount);
 				$('#errorCount').val(errorCount);
 				$('#prorCode').val(prorCode);
+				$('#facilitiesName').val(facilitiesName);
 				$('#workModal').modal('hide');
 				$('#modalContent').remove();
 			}

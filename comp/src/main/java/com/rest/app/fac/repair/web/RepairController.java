@@ -54,14 +54,14 @@ public class RepairController {
 	
 	// 저장
 	@RequestMapping(value="/insertRep.do")
-	public String insertRep(HttpServletRequest request) {
-		RepairVO vo = new RepairVO();
-		vo.setFacCode(request.getParameter("facCode"));
-		vo.setRepairDate(request.getParameter("repairDate"));
-		vo.setRepairComment(request.getParameter("repairComment"));
-		vo.setCompanyCode(request.getParameter("companyCode"));
-		vo.setCost(request.getParameter("cost"));
-		vo.setEtc(request.getParameter("etc"));
+	public String insertRep(HttpServletRequest request, RepairVO vo) {
+//		RepairVO vo = new RepairVO();
+//		vo.setFacCode(request.getParameter("facCode"));
+//		vo.setRepairDate(request.getParameter("repairDate"));
+//		vo.setRepairComment(request.getParameter("repairComment"));
+//		vo.setCompanyCode(request.getParameter("companyCode"));
+//		vo.setCost(request.getParameter("cost"));
+//		vo.setEtc(request.getParameter("etc"));
 		mapper.insertRep(vo);
 		return "redirect:repList.do";
 	}

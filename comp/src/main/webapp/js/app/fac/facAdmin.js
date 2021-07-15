@@ -42,7 +42,7 @@ $( function() {
 	const dataSource = {
 		api : {
 			readData : {
-				url : 'ajax/facList.do',
+				url : 'ajax/facList2.do',
 				method : 'GET'
 			},
 			deleteData : {
@@ -95,10 +95,7 @@ $( function() {
 		}, {
 			header : '구매일자',
 			name : 'purchaseDate'
-		}, {
-			header : '공정코드',
-			name : 'processCode'
-		} ]
+		}]
 		
 	});
 		
