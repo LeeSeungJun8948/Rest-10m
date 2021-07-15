@@ -238,5 +238,9 @@ public class MaterialServiceImpl implements MaterialService{
 		return mapper.getCodeList(vo);
 	}
 
+	@Override
+	public CommonCodeVO getDetailCodeId(CommonCodeVO vo) {
+		return mapper.getDetailCodeId(vo);
+	}
 	
 }

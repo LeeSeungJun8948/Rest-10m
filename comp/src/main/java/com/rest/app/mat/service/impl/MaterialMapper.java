@@ -62,6 +62,7 @@ public interface MaterialMapper {
 	
 	// 공통 코드
 	public List<CommonCodeVO> getCodeIdList(CommonCodeVO vo);
+	public CommonCodeVO getDetailCodeId(CommonCodeVO vo);
 	public List<CommonCodeVO> getCodeList(CommonCodeVO vo);
 	
 	public int istCodeId(CommonCodeVO vo);

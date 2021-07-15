@@ -42,7 +42,7 @@ $( function() {
 	const dataSource = {
 		api : {
 			readData : {
-				url : 'ajax/facList.do',
+				url : 'ajax/facList2.do',
 				method : 'GET'
 			},
 			deleteData : {
