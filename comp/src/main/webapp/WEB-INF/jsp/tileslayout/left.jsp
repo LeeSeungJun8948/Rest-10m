@@ -66,7 +66,7 @@
      </a>
      <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/inorderForm.do">발주 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/inorderList.do">발주 조회</a>
              <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/matInList.do">자재입고 조회</a>
              <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matInForm.do">자재입고 관리</a>
              <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/matOutList.do">자재출고 조회</a>
