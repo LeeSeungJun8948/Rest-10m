@@ -95,4 +95,28 @@
 		select emp_code, employee_name
 		from employee
 	</select>
+	
+	<insert id="insertFacilities" parameterType="com.rest.app.fac.vo.FacilitiesVO">
+		MERGE 
+		INTO facilities f
+		USING dual
+		ON (f.fac_code = #{facCode})
+		WHEN MATCHED THEN
+		UPDATE SET 	f.FACILITIES_NAME=#{facilitiesName}, f.MODEL=#{model}, f.FAC_SIZE=#{facSize},
+					f.PRODUCTION_COMPANY=#{productionCompany}, f.PURPOSE=#{purpose},
+					f.VOLUME=#{volume}, f.PRODUCTION_DATE=#{productionDate}, f.EMP_NO=#{empNo},
+					f.PRICE=#{price}, f.FAC_INSPECTION=#{facInspection}, f.PURCHASE_DATE=#{purchaseDate},
+					f.PROCESS_CODE=#{processCode}
+					<if test="img!=null and img!=''">
+					,f.IMG=#{img}
+					</if> 
+					
+		WHEN NOT MATCHED THEN
+		INSERT (f.FAC_CODE, f.FACILITIES_NAME, f.MODEL, f.FAC_SIZE, f.PRODUCTION_COMPANY, 
+				f.PURPOSE, f.VOLUME, f.PRODUCTION_DATE, f.EMP_NO, f.PRICE,
+				f.FAC_INSPECTION, f.PURCHASE_DATE, f.IMG, f.PROCESS_CODE)
+		VALUES (fac_seq.nextval, #{facilitiesName}, #{model}, #{facSize}, #{productionCompany},
+				#{purpose}, #{volume}, #{productionDate}, #{empNo}, #{price},
+				#{facInspection}, #{purchaseDate}, #{img}, #{processCode})
+	</insert>
 </mapper>

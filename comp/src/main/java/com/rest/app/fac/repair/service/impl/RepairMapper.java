@@ -11,5 +11,6 @@ public interface RepairMapper {
 	public RepairVO getRepInfo(RepairVO vo);
 	public int updateRep(RepairVO vo);
 	public int getRepCode();
+	public List<RepairVO> repairList();
 }
  

@@ -40,6 +40,7 @@ public class RepairController {
 		model.addAttribute("max", mapper.getRepCode());
 		return "fac/repList.page";
 	}
+
 	
 	@RequestMapping("ajax/repList.do")
 	@ResponseBody
@@ -48,6 +49,24 @@ public class RepairController {
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("result", true);
 		datas.put("contents", mapper.getRep());
+		data.put("data", datas);
+		return data;
+	}
+	
+	
+	// 수리내역조회
+	@RequestMapping("/repairList.do")
+	public String repList() {
+		return "fac/repairList.page";
+	}
+	
+	@RequestMapping("ajax/repairList.do")
+	@ResponseBody
+	public Map<String, Object> ajaxGetRepair() {
+		Map<String, Object> datas = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", mapper.repairList());
 		data.put("data", datas);
 		return data;
 	}

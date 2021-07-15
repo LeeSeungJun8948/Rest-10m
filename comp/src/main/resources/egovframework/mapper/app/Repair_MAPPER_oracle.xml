@@ -41,4 +41,12 @@
 	<select id="getRepCode" resultType="int">
     	select max(repair_code) + 1 as repair_code from repair
     </select>
+    
+    <select id="repairList" resultType="com.rest.app.fac.repair.vo.RepairVO">
+		select 	r.repair_code, f.facilities_name, r.repair_date,
+				r.repair_comment, c.company_name, r.cost, r.etc
+		from 	facilities f, repair r, company c
+		where	f.fac_code=r.fac_code
+		and 	r.company_code=c.company_code
+    </select>
 </mapper>

@@ -21,4 +21,8 @@ public class RepairVO {
 	String companyCode;
 	String cost;
 	String etc;
+	
+	// 수리 내역 조회
+	String facilitiesName;
+	String companyName;
 }
