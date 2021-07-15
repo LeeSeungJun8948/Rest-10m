@@ -28,11 +28,10 @@
 	
 	<insert id ="insertEmp" parameterType="com.rest.app.comm.vo.EmployeeVO">
 		insert into employee
-		values(#{empCode}, #{id}, #{pwd}, #{dept}, #{auth}, #{phone}, #{email}, #{hireDate}, #{employeeName}, #{companyCode}, sysdate, #{salary}, #{birthDay})
+		values(#{empCode}, #{id}, #{pwd}, #{dept}, #{auth}, #{phone}, #{email}, #{hireDate}, #{employeeName}, #{companyCode}, sysdate, #{salary}, #{birthDay}, null, null)
 	</insert>
 	
 	<select id="maxEmpCode" resultType = "int">
 		select MAX(emp_code) from employee
 	</select>
-
 </mapper>  

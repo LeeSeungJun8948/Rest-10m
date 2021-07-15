@@ -1,5 +1,6 @@
 package comp;
 
-public class test {
 
+public class test {
+	
 }

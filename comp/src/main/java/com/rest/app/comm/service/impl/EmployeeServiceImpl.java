@@ -1,13 +1,14 @@
 package com.rest.app.comm.service.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rest.app.comm.service.EmployeeService;
 import com.rest.app.comm.vo.EmployeeVO;
+
+import egovframework.com.utl.sim.service.EgovFileScrty;
 
 
 @Service("EmployeeService")
@@ -37,16 +38,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public int insertEmp(EmployeeVO vo) {
+		try {
+			String pwd =  EgovFileScrty.encryptPassword(vo.getPwd(), vo.getId());
+			vo.setPwd(pwd);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mapper.insertEmp(vo);
 	}
 
 
 	@Override
 	public int maxEmpCode() {
-		// TODO Auto-generated method stub
 		return mapper.maxEmpCode();
 	}
-
-
-
 }
