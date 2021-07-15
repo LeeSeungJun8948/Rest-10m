@@ -32,9 +32,6 @@ const grid = new tui.Grid({
 	}, {
 		header: '제품재고',
 		name: 'productCount'
-	}, {
-		header: '제품상태',
-		name: 'productState'
 	}
 	], summary: {
 		height: 40,
