@@ -100,8 +100,11 @@ const dataSource = {
 			dataType : "json",
 			async : false,
 			success : function(data) {
-				if (data == 1)
+				if(data == 1){
 					alert('수정 완료');
+					grid.readData(1, null, true);
+				}
+					
 				else
 					alert('수정 실패');
 			},
