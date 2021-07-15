@@ -39,7 +39,7 @@ public class BusinessController {
 	@Autowired
 	BusinessService dao;
 
-	@RequestMapping("busList.do") // 주문관리참조조회
+	@RequestMapping("bus/view/busList.do") // 주문관리참조조회
 	public String business(Model model) {
 		return "bus/busList.page";
 	}
@@ -62,19 +62,19 @@ public class BusinessController {
 		return data;
 	}
 
-	@RequestMapping("exportForm.do") // 출고관리페이지
+	@RequestMapping("bus/mng/exportForm.do") // 출고관리페이지
 	public String exportForm(Model model) {
 		return "bus/exportForm.page";
 	}
 
 	// 출고관리 - 조회 모달
-	@RequestMapping("exportModal.do")
+	@RequestMapping("/exportModal.do")
 	public String getExportModal() {
 		return "app/bus/exportModal";
 	}
 
 	// 모달 출고검색
-	@RequestMapping("searchExport.do")
+	@RequestMapping("/ajax/searchExport.do")
 	@ResponseBody
 	public Map<String, Object> searchExport(@RequestBody Map<String, Object> param) {
 		System.out.println(param + "----");
@@ -87,7 +87,7 @@ public class BusinessController {
 	}
 
 	// 미출고 검색 그리드
-	@RequestMapping("readUnExport.do")
+	@RequestMapping("/ajax/readUnExport.do")
 	@ResponseBody
 	public Map<String, Object> ajaxUnExport(@RequestBody Map<String, Object> param) {
 		System.out.println("=============");
@@ -134,7 +134,7 @@ public class BusinessController {
 	}
 
 	// 세부출고 CUD
-	@RequestMapping("saveDetailExport.do")
+	@RequestMapping("/ajax/saveDetailExport.do")
 	@ResponseBody
 	public Map<String, Object> saveDetailExport(@RequestBody GridData gridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -166,7 +166,7 @@ public class BusinessController {
 	}
 
 	// 제품LOT별 재고량리스트 가져오기
-	@RequestMapping("getExportLot.do")
+	@RequestMapping("/ajax/getExportLot.do")
 	@ResponseBody
 	public Map<String, Object> getExportLot(@RequestBody Map<String, Object> param) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -178,7 +178,7 @@ public class BusinessController {
 	}
 
 	//제품 lot CUD
-	@RequestMapping("saveExportLot.do")
+	@RequestMapping("/ajax/saveExportLot.do")
 	@ResponseBody
 	public Map<String, Object> saveExportLot(@RequestBody ExportLotGridData gridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -200,7 +200,7 @@ public class BusinessController {
 		return data;
 	}
 
-	@RequestMapping("productInventory.do") // 제품재고 조회 페이지
+	@RequestMapping("bus/view/productInventory.do") // 제품재고 조회 페이지
 	public String productInventory(Model model) {
 		return "bus/productInventory.page";
 	}
@@ -217,13 +217,13 @@ public class BusinessController {
 		return data;
 	}
 	// 출고관리 - 조회 모달
-		@RequestMapping("prodLotModal.do")
+		@RequestMapping("/prodLotModal.do")
 		public String getProdLotModal() {
 			return "app/bus/prodLotModal";
 		}
 
 		// 모달 출고검색
-		@RequestMapping("/searchProdLot.do")
+		@RequestMapping("/ajax/searchProdLot.do")
 		@ResponseBody
 		public Map<String, Object> searchProdLotModal(@RequestBody Map<String, Object> param) {
 			System.out.println(param + "----------------");
@@ -235,12 +235,12 @@ public class BusinessController {
 			return data;
 		}
 		
-		@RequestMapping("viewExport.do") // 출고조회페이지
+		@RequestMapping("bus/view/viewExport.do") // 출고조회페이지
 		public String viewExport(Model model) {
 			return "bus/viewExport.page";
 		}
 		
-		@RequestMapping("viewExportSearch.do")//출고조회 그리드
+		@RequestMapping("/ajax/viewExportSearch.do")//출고조회 그리드
 		@ResponseBody
 		public Map<String, Object> viewExportSearch(@RequestBody Map<String, Object> param) {
 			Map<String, Object> datas = new HashMap<String, Object>();

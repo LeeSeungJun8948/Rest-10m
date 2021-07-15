@@ -1,6 +1,6 @@
 var dataSource = {
 	api: {
-		readData: { url: 'ajax/productInventory.do', method: 'POST' }
+		readData: { url: contextPath+'/ajax/productInventory.do', method: 'POST' }
 	},
 	contentType: 'application/json'
 
@@ -98,7 +98,7 @@ $("#btnProdModal").on("click", function(e) {
 	$('#prodContent').load("prodModal.do");
 });
 $("#btnProdLotModal").on("click", function(e) {
-	$('#modalContent').load("prodLotModal.do");
+	$('#modalContent').load(contextPath+"/prodLotModal.do");
 });
 // ???????
 $(document).on('show.bs.modal','#btnProdLotModal', function () {

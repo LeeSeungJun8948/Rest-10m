@@ -1,7 +1,7 @@
 var dataSource = {
 	contentType: 'application/json',
 	api: {
-		readData: { url: 'viewExportSearch.do', method: 'POST' },
+		readData: { url: contextPath+'/ajax/viewExportSearch.do', method: 'POST' },
 	}
 }
 

@@ -5,7 +5,7 @@
 		var dataSourceModal = {
 				contentType: 'application/json',
 				api: {
-					readData: { url: 'searchExport.do', method: 'POST' },
+					readData: { url: contextPath+'/ajax/searchExport.do', method: 'POST' },
 				}
 			}
 			var modalExportListGrid = new tui.Grid({
