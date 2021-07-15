@@ -38,5 +38,5 @@
 		<button id="btnSelect" class="btn btn-success">선택</button>
 	</div>
 	
-	<script type="text/javascript" src="js/app/prod/prodSearchModal.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/prod/prodSearchModal.js"></script>
 </div>
