@@ -52,14 +52,14 @@ function showMatList(){
 }
 	
 // list에서 선택한 자재 정보 가져오기
-$(matList).on('click','tr',function(){
+listGrid.on('click',function(e){
 	
 	$.ajax({
 		
 		type : "get",
 		url : "ajax/matInfo.do",
 		data : {
-			'materialCode' : $(this).children().eq(0).children().eq(0).html()
+			'materialCode' : listGrid.getValue(e.rowKey, 'materialCode')
 		},
 		dataType : "json",
 		async : false,

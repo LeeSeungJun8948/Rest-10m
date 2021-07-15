@@ -58,61 +58,49 @@
 <div class="col-lg-12">
 	<div id="errorGrid"></div>
 </div>
-	<script type="text/javascript">
-			var dataSource = {
-				api : {
-					readData : {url : 'ajax/detailErrorList.do', method : 'get'},
-				},
-				contentType : 'application/json'
-			};
-			var errorGrid = new tui.Grid({
-				el : document.getElementById('errorGrid'),
-				data : dataSource,
-				scrollX : false,
-				scrollY : false,
-				columns : [ 
-					{
-						header : '공정명',
-						name : 'processName'
-
-					}, 
-					{
-						header : '불량발생일자',
-						name : 'workDate'
-					}, 
-					{
-						header : '작업량',
-						name : 'workCount'
-					},
-					{
-						header : '불량량',
-						name : 'errorCount'
-					},	
-					{
-						header : '제품코드',
-						name : 'productCode'
-					},
-					{
-						header : '제품명',
-						name : 'productName'
-					},
-					{
-						header : '제품LOT',
-						name : 'productLot'
-					},
-					{
-						header : '작업지시번호',
-						name : 'workCode'
-					},
-					{
-						header : '불량코드',
-						name : 'errorCode'
-					}
-					]
-				});
-			$('#btnRead').on('click',  function(){
-				var param = $('#frm').serializeObject();
-				errorGrid.readData(1, param, true);
-			});
-		</script>
-
+<script type="text/javascript">
+	var dataSource = {
+		api : {
+			readData : {url : 'ajax/detailErrorList.do', method : 'get'},
+		},
+		contentType : 'application/json'
+	};
+	var errorGrid = new tui.Grid({
+		el : document.getElementById('errorGrid'),
+		data : dataSource,
+		scrollX : false,
+		scrollY : false,
+		columns : [ {
+				header : '공정명',
+				name : 'processName'
+			}, {
+				header : '불량발생일자',
+				name : 'workDate'
+			}, {
+				header : '작업량',
+				name : 'workCount'
+			}, {
+				header : '불량량',
+				name : 'errorCount'
+			}, {
+				header : '제품코드',
+				name : 'productCode'
+			}, {
+				header : '제품명',
+				name : 'productName'
+			}, {
+				header : '제품LOT',
+				name : 'productLot'
+			}, {
+				header : '작업지시번호',
+				name : 'workCode'
+			}, {
+				header : '불량코드',
+				name : 'errorCode'
+			} ]
+		});
+	$('#btnRead').on('click',  function(){
+		var param = $('#frm').serializeObject();
+		errorGrid.readData(1, param, true);
+	});
+</script>

@@ -359,6 +359,12 @@ public class MaterialController {
 		return data;
 	}
 	
+	@RequestMapping("/ajax/getDetailCode.do")
+	@ResponseBody
+		public CommonCodeVO ajaxGetCode(CommonCodeVO vo) {
+		return dao.getDetailCodeId(vo);
+	}
+	
 	@RequestMapping("/ajax/getDetailCodeList.do")
 	@ResponseBody
 		public Map<String,Object> ajaxGetCodeList(CommonCodeVO vo) {
@@ -370,6 +376,28 @@ public class MaterialController {
 		datas.put("contents", dao.getCodeList(vo));
 		data.put("data", datas);
 		
+		return data;
+	}
+	
+	@PutMapping("/ajax/codeIdModify.do")
+	@ResponseBody
+	public Map<String, Object> ajaxCodeIdModify(HttpServletRequest request, @RequestBody CommonGridData gridData) {
+		Map<String,Object> data = new HashMap<String, Object>();
+		
+		for(int i = 0; i < gridData.createdRows.size(); i++) {
+			dao.istCodeId(gridData.createdRows.get(i));
+		}
+		for(int i = 0; i < gridData.updatedRows.size(); i++) {
+			dao.udtCodeId(gridData.updatedRows.get(i));
+		}
+		for(int i = 0; i < gridData.deletedRows.size(); i++) {
+			dao.delCodeId(gridData.deletedRows.get(i));
+		}
+		
+		data.put("result", true);
+		data.put("data", gridData.updatedRows);
+		data.put("data", gridData.createdRows);
+		data.put("data", gridData.deletedRows);
 		return data;
 	}
 	

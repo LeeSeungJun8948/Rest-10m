@@ -242,15 +242,13 @@
 	<select id="searchProdLotModal"
 		parameterType="com.rest.app.bus.vo.ExportLotVO"
 		resultType="com.rest.app.bus.vo.ExportLotVO">
-		SELECT product_lot,
-		lot_idx
-		FROM exportlot
+		SELECT product_lot
+		FROM storage
 		<where>
 			<if test="keyword != null and keyword !=''">
 				 ${searchCondition} like '%'||#{keyword}||'%'
 			</if>
 		</where>
-		ORDER BY lot_idx
 	</select>
 	
 	<select id="viewExportSearch" resultType="com.rest.app.bus.vo.DetailExportVO">

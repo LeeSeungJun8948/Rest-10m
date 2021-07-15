@@ -39,5 +39,5 @@
 	
 	</div>
 	
-	<script type="text/javascript" src="js/app/prod/compSearchModal.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/prod/compSearchModal.js"></script>
 </div>
