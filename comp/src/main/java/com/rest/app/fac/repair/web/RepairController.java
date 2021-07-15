@@ -35,7 +35,7 @@ public class RepairController {
 	@Autowired
 	RepairMapper mapper;
 	
-	@RequestMapping("/repList.do")
+	@RequestMapping("/fac/mng/repList.do")
 	public String getRep(Model model) {
 		model.addAttribute("max", mapper.getRepCode());
 		return "fac/repList.page";
@@ -55,7 +55,7 @@ public class RepairController {
 	
 	
 	// 수리내역조회
-	@RequestMapping("/repairList.do")
+	@RequestMapping("/fac/view/repairList.do")
 	public String repList() {
 		return "fac/repairList.page";
 	}

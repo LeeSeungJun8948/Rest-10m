@@ -30,7 +30,7 @@ public class InspectionController {
 	@Autowired 
 	InspectionMapper mapper;
 	
-	@RequestMapping("/inspection.do")
+	@RequestMapping("/fac/mng/inspection.do")
 	public String inspection(Model model) {
 		return "fac/inspection.page";
 	}
@@ -47,7 +47,7 @@ public class InspectionController {
 	}
 	
 	// 점검내역 조회
-	@RequestMapping("/inspectionList.do")
+	@RequestMapping("/fac/view/inspectionList.do")
 	public String inspectionList() {
 		return "fac/inspectionList.page";
 	}

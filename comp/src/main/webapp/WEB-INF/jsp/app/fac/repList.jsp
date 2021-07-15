@@ -55,4 +55,4 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="js/app/fac/repList.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/fac/repList.js"></script>

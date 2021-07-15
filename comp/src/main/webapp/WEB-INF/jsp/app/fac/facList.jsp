@@ -52,7 +52,7 @@
 		const dataSource = {
 			api : {
 				readData : {
-					url : 'ajax/facList.do',
+					url : contextPath + '/ajax/facList.do',
 					method : 'GET'
 				},
 			},
