@@ -67,10 +67,13 @@
      <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
              <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/inorderForm.do">발주 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/matInList.do">자재입고 조회</a>
              <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matInForm.do">자재입고 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/matOutList.do">자재출고 조회</a>
              <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matOutForm.do">자재출고 관리</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matAdjustList.do">자재재고조정 전표 관리</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matAdjustForm.do">자재재고조정 전표 작성</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/matAdjustList.do">자재재고조정 전표 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matAdjustForm.do">자재재고조정 전표 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matAdjustWrite.do">자재재고조정 전표 작성</a>
          </div>
      </div>
  </li>
