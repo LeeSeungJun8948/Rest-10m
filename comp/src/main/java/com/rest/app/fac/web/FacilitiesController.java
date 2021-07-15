@@ -5,7 +5,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.rest.app.comm.vo.EmployeeVO;
 import com.rest.app.fac.service.impl.FacilitiesMapper;
 import com.rest.app.fac.vo.FacilitiesVO;
 
@@ -161,6 +161,26 @@ public class FacilitiesController {
 		return mapper.updateFac(vo);
 	}
 	
+	// 사원검색 모달
+	@RequestMapping("/empListModal.do")
+	public String empModal() {
+		return "app/modal/empModal";
+	}
+	
+	@RequestMapping("/ajax/empListModal.do")
+	@ResponseBody
+	public Map<String, Object> ajaxEmpModal(Model model, EmployeeVO vo) {
+		Map<String,Object> datas = new HashMap<>();
+		Map<String,Object> data = new HashMap<>();
+		
+		data.put("result", true);
+		datas.put("contents", mapper.getEmpListModal(vo));
+		data.put("data", datas);
+		
+		return data;
+	}
+	
+	// 파일
 	@RequestMapping(value = "/filedown.do")
 	public void getDown(HttpServletResponse response, @RequestParam String fileName) throws Exception{
 		String serverSubPath  = "c:/upload";

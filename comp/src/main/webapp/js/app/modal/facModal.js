@@ -62,7 +62,7 @@
 				grid.setValue(rowKey, 'facilitiesName', facilitiesName, false);
 				grid.setValue(rowKey, 'facInspection', facInspection, false);
 				$('#facModal').modal('hide');
-				$('#facContent').remove();
+				$('#modalContent').remove();
 			}
 			 
 		}

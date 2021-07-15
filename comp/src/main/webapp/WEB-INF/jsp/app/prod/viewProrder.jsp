@@ -67,4 +67,4 @@
 	</div>
 </div>
 <link href="${pageContext.request.contextPath}/css/app/prod/viewWork.css" rel="stylesheet">
-<script type="text/javascript" src="js/app/prod/viewProrder.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/prod/viewProrder.js"></script>

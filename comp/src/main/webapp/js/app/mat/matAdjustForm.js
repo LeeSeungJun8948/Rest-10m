@@ -6,6 +6,13 @@ $( document ).ready(function() {
 });
  */
 
+toastr.options = {
+	closeButton: true,
+	showDuration: "500",
+	 positionClass: "toast-top-center"
+ };
+toastr.info('재고 열 더블클릭 혹은 선택 후 작성');
+
 // 재고 리스트 
 const stockDataSource = {
 	api : {
@@ -20,6 +27,7 @@ const stockGrid = new tui.Grid({
 	scrollX : false,
 	scrollY : true,
 	bodyHeight: 200,
+	rowHeaders: ['checkbox'],
 	columns : [ 
 		{
 			header : '자재코드',
@@ -260,6 +268,41 @@ function setIoVolume(ev){
 $("#btnGridDel").on("click", function(ev){
 	adjustGrid.removeCheckedRows(false);
 });
+
+$('#btnWrite').on('click',function(){
+	
+	for(var writeRowKey of stockGrid.getCheckedRowKeys()){
+		if(checkNull(newIoCode)){
+			newIoCode = newIoCode * 1 + 1;
+		}else{
+			$.ajax({
+				type : "get",
+				url : "ajax/getNewIoCode.do",
+				dataType : "json",
+				async : false,
+				success : function(data) {
+					newIoCode = data.ioCode;
+				},
+				error : function() {
+				}
+			});		
+		}
+		
+		newRowData = {'ioCode' : newIoCode, 
+						'materialCode' : stockGrid.getValue(writeRowKey, 'materialCode'),
+						'materialName' : stockGrid.getValue(writeRowKey, 'materialName'),
+						'lotNo' : stockGrid.getValue(writeRowKey, 'lotNo'),
+						'unitPrice' : stockGrid.getValue(writeRowKey, 'unitPrice'),
+						'lotStock' : stockGrid.getValue(writeRowKey, 'lotStock'),
+						'unitNo' : stockGrid.getValue(writeRowKey, 'unitNo'),
+						'ioDate' : getFormatDate(new Date()),
+						};
+		adjustGrid.appendRow(newRowData,{
+			at : adjustGrid.getRowCount(),
+			focus : true
+		});
+	}
+})
 
 $("#btnSave").on("click", function(){
 	

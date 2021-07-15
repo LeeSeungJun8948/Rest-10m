@@ -35,13 +35,13 @@ public class ProdController {
 	}
 
 	// 생산계획 - 조회 모달
-	@RequestMapping("planModal.do")
+	@RequestMapping("pro/mng/planModal.do")
 	public String planModal() {
 		return "app/prod/planModal";
 	}
 
 	// 모달 생산계획검색
-	@RequestMapping("searchPlan.do")
+	@RequestMapping("pro/mng/searchPlan.do")
 	@ResponseBody
 	public Map<String, Object> searchPlan(@RequestBody Map<String, Object> param) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -53,7 +53,7 @@ public class ProdController {
 	}
 
 	// 미완료주문 읽기
-	@RequestMapping("readUnplanOrders.do")
+	@RequestMapping("pro/mng/readUnplanOrders.do")
 	@ResponseBody
 	public Map<String, Object> readUnplanOrders(@RequestBody Map<String, Object> param) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -69,7 +69,7 @@ public class ProdController {
 	}
 
 	// 계획저장
-	@RequestMapping("savePlan.do")
+	@RequestMapping("pro/mng/savePlan.do")
 	@ResponseBody
 	public Map<String, Object> savePlan(PlanVO vo) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -86,7 +86,7 @@ public class ProdController {
 	}
 
 	// 계획삭제
-	@RequestMapping("deletePlan.do")
+	@RequestMapping("pro/mng/deletePlan.do")
 	@ResponseBody
 	public Map<String, Object> deletePlan(@RequestParam String planCode) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -98,7 +98,7 @@ public class ProdController {
 	}
 
 	// 세부계획 CUD
-	@RequestMapping("saveDeplan.do")
+	@RequestMapping("pro/mng/saveDeplan.do")
 	@ResponseBody
 	public Map<String, Object> saveDeplan(@RequestBody GridData gridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -147,7 +147,7 @@ public class ProdController {
 	}
 
 	// 생산계획조회 - 검색
-	@RequestMapping("viewPlanSearch.do")
+	@RequestMapping("pro/view/viewPlanSearch.do")
 	@ResponseBody
 	public Map<String, Object> viewPlanSearch(@RequestBody Map<String, Object> param) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -165,7 +165,7 @@ public class ProdController {
 	}
 
 	// 생산지시 - 조회 모달
-	@RequestMapping("prorModal.do")
+	@RequestMapping("pro/mng/prorModal.do")
 	public String prorModal() {
 		return "app/prod/prorModal";
 	}
@@ -177,7 +177,7 @@ public class ProdController {
 	}
 
 	// 생산지시조회 - 검색
-	@RequestMapping("viewProrderSearch.do")
+	@RequestMapping("pro/view/viewProrderSearch.do")
 	@ResponseBody
 	public Map<String, Object> viewProrderSearch(@RequestBody Map<String, Object> param) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -189,7 +189,7 @@ public class ProdController {
 	}
 
 	// 모달 생산지시검색
-	@RequestMapping("searchProrder.do")
+	@RequestMapping("pro/mng/searchProrder.do")
 	@ResponseBody
 	public Map<String, Object> searchProrder(@RequestBody Map<String, Object> param) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -201,7 +201,7 @@ public class ProdController {
 	}
 
 	// 미완료계획 읽기
-	@RequestMapping("readUnfinPlans.do")
+	@RequestMapping("pro/mng/readUnfinPlans.do")
 	@ResponseBody
 	public Map<String, Object> readUnfinPlans(@RequestBody Map<String, Object> param) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -217,7 +217,7 @@ public class ProdController {
 	}
 
 	// 지시저장
-	@RequestMapping("saveProrder.do")
+	@RequestMapping("pro/mng/saveProrder.do")
 	@ResponseBody
 	public Map<String, Object> saveProrder(ProrderVO vo) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -234,7 +234,7 @@ public class ProdController {
 	}
 
 	// 지시삭제
-	@RequestMapping("deleteProrder.do")
+	@RequestMapping("pro/mng/deleteProrder.do")
 	@ResponseBody
 	public Map<String, Object> deleteProrder(@RequestParam String prorCode) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -247,7 +247,7 @@ public class ProdController {
 	}
 
 	// 세부지시 CUD
-	@RequestMapping("saveDetailProrder.do")
+	@RequestMapping("pro/mng/saveDetailProrder.do")
 	@ResponseBody
 	public Map<String, Object> saveDetailProrder(@RequestBody ProrGridData gridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -283,7 +283,7 @@ public class ProdController {
 	}
 
 	// 자재LOT별 재고량리스트 가져오기
-	@RequestMapping("getInputMat.do")
+	@RequestMapping("pro/mng/getInputMat.do")
 	@ResponseBody
 	public Map<String, Object> getInputMat(@RequestBody Map<String, Object> param) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -295,7 +295,7 @@ public class ProdController {
 	}
 
 	// 투입자재 CUD
-	@RequestMapping("saveInput.do")
+	@RequestMapping("pro/mng/saveInput.do")
 	@ResponseBody
 	public Map<String, Object> saveInput(@RequestBody InputGridData gridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -324,13 +324,13 @@ public class ProdController {
 	}
 
 	// 작업실적 - 작업검색 모달
-	@RequestMapping("workModal.do")
+	@RequestMapping("pro/view/workModal.do")
 	public String workModal() {
 		return "app/prod/workModal";
 	}
 
 	// 제품LOT 찾기
-	@RequestMapping("selectDetailProrder.do")
+	@RequestMapping("pro/view/selectDetailProrder.do")
 	@ResponseBody
 	public Map<String, Object> selectDetailProrder(String productLot) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -342,13 +342,13 @@ public class ProdController {
 	}
 
 	// 작업실적 - 작업자 모달
-	@RequestMapping("workEmpModal.do")
+	@RequestMapping("pro/view/workEmpModal.do")
 	public String workEmpModal() {
 		return "app/prod/workEmpModal";
 	}
 
 	// 작업자 검색
-	@RequestMapping("/ajax/workEmpModal.do")
+	@RequestMapping("pro/view/ajax/workEmpModal.do")
 	@ResponseBody
 	public Map<String, Object> ajaxWorkEmpModal(@RequestBody Map<String, Object> param) {
 		Map<String, Object> datas = new HashMap<>();
@@ -360,13 +360,13 @@ public class ProdController {
 	}
 
 	// 작업실적 - 불량코드 모달
-	@RequestMapping("workErrorModal.do")
+	@RequestMapping("pro/view/workErrorModal.do")
 	public String workErrorModal() {
 		return "app/prod/workErrorModal";
 	}
 
 	// 작업자 검색
-	@RequestMapping("/ajax/workErrorModal.do")
+	@RequestMapping("pro/view/ajax/workErrorModal.do")
 	@ResponseBody
 	public Map<String, Object> ajaxWorkErrorModal(@RequestBody Map<String, Object> param) {
 		Map<String, Object> datas = new HashMap<>();
@@ -378,13 +378,13 @@ public class ProdController {
 	}
 
 	// 작업실적 - 불량코드 모달
-	@RequestMapping("workFacModal.do")
+	@RequestMapping("pro/view/workFacModal.do")
 	public String workFacModal() {
 		return "app/prod/workFacModal";
 	}
 
 	// 작업자 검색
-	@RequestMapping("/ajax/workFacModal.do")
+	@RequestMapping("pro/view/ajax/workFacModal.do")
 	@ResponseBody
 	public Map<String, Object> ajaxWorkFacModal(@RequestBody Map<String, Object> param) {
 		Map<String, Object> datas = new HashMap<>();
@@ -396,7 +396,7 @@ public class ProdController {
 	}
 
 	// 작업실적 저장
-	@RequestMapping("saveWork.do")
+	@RequestMapping("pro/view/saveWork.do")
 	@ResponseBody
 	public Map<String, Object> saveWork(WorkVO vo) {
 		Map<String, Object> data = new HashMap<>();
@@ -419,7 +419,7 @@ public class ProdController {
 	}
 
 	// 작업 검색
-	@RequestMapping("searchWork.do")
+	@RequestMapping("pro/view/searchWork.do")
 	@ResponseBody
 	public Map<String, Object> searchWork(@RequestBody Map<String, Object> param) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -432,7 +432,7 @@ public class ProdController {
 	}
 
 	// 작업삭제
-	@RequestMapping("deleteWork.do")
+	@RequestMapping("pro/view/deleteWork.do")
 	@ResponseBody
 	public Map<String, Object> deleteWork(@RequestParam String workCode) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -443,13 +443,13 @@ public class ProdController {
 	}
 
 	// 업체검색 모달
-	@RequestMapping("compSearchModal.do")
+	@RequestMapping("pro/view/compSearchModal.do")
 	public String compSearchModal() {
 		return "app/prod/compSearchModal";
 	}
 
 	// 업체검색
-	@RequestMapping("ajax/compSearchModal.do")
+	@RequestMapping("pro/view/ajax/compSearchModal.do")
 	@ResponseBody
 	public Map<String, Object> ajaxCompSearchModal(SelectListVO vo) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -462,13 +462,13 @@ public class ProdController {
 	}
 
 	// 제품검색 모달
-	@RequestMapping("prodSearchModal.do")
+	@RequestMapping("pro/view/prodSearchModal.do")
 	public String prodSearchModal() {
 		return "app/prod/prodSearchModal";
 	}
 
 	// 제품검색
-	@RequestMapping("ajax/prodSearchModal.do")
+	@RequestMapping("pro/view/ajax/prodSearchModal.do")
 	@ResponseBody
 	public Map<String, Object> ajaxProdSearchModal(SelectListVO vo) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -487,7 +487,7 @@ public class ProdController {
 	}
 	
 	//불량리스트 
-	@RequestMapping("/ajax/detailErrorList.do")
+	@RequestMapping("pro/view/ajax/detailErrorList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGeterrorList(ErrorListVO vo) {
 		Map<String, Object> datas = new HashMap<String, Object>();
