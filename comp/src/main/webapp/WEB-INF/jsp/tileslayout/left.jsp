@@ -31,8 +31,8 @@
      </a>
      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="commonCodeForm.do">공통코드관리</a>
-             <a class="collapse-item" href="matForm.do">자재정보관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/commonCodeForm.do">공통코드관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/matForm.do">자재정보관리</a>
              <a class="collapse-item" href="bomList.do">제품 BOM관리</a>
              <a class="collapse-item" href="processList.do">공정관리</a>
              <a class="collapse-item" href="empList.do">사원관리</a>
@@ -66,11 +66,11 @@
      </a>
      <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="inorderForm.do">발주 조회</a>
-             <a class="collapse-item" href="matInForm.do">자재입고 관리</a>
-             <a class="collapse-item" href="matOutForm.do">자재출고 관리</a>
-             <a class="collapse-item" href="matAdjustList.do">자재재고조정 전표 관리</a>
-             <a class="collapse-item" href="matAdjustForm.do">자재재고조정 전표 작성</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/inorderForm.do">발주 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matInForm.do">자재입고 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matOutForm.do">자재출고 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matAdjustList.do">자재재고조정 전표 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matAdjustForm.do">자재재고조정 전표 작성</a>
          </div>
      </div>
  </li>
