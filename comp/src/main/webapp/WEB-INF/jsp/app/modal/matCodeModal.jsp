@@ -41,7 +41,7 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="js/app/modal/matCodeModal.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/modal/matCodeModal.js"></script>
 </div>
 
 

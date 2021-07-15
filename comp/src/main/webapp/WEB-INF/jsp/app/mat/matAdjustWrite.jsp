@@ -97,4 +97,4 @@
 		</div> 
 	</div>
 </div>
-<script type="text/javascript" src="js/app/mat/matAdjustForm.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/mat/matAdjustWrite.js"></script>

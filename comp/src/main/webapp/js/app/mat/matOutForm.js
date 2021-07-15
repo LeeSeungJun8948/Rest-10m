@@ -5,8 +5,8 @@ $( document ).ready(function() {
 
 const dataSource = {
 	api : {
-		readData : {url: 'ajax/matOutList.do' , method:'GET' },
-		modifyData : { url: 'ajax/matOutModify.do', method: 'PUT'}
+		readData : {url: contextPath + '/ajax/matOutList.do' , method:'GET' },
+		modifyData : { url: contextPath + '/ajax/matOutModify.do', method: 'PUT'}
 	},
 	contentType: 'application/json'
 };
@@ -172,7 +172,7 @@ function setMatInfo(ev){
 		$.ajax({
 			type : "get",
 			data: {"materialCode" : materialCode},
-			url : "ajax/getMatInfoForOut.do",
+			url : contextPath + "/ajax/getMatInfoForOut.do",
 			dataType : "json",
 			async : false,
 			success : function(data) {
@@ -202,7 +202,7 @@ function makeProcessList(materialCode){
 	$.ajax({
 		type : "get",
 		data: {"materialCode" : materialCode},
-		url : "ajax/getProcessList.do",
+		url : contextPath + "/ajax/getProcessList.do",
 		dataType : "json",
 		async : false,
 		success : function(datas) {
@@ -237,7 +237,7 @@ $("#btnGridAdd").on("click", function(){
 	}else{
 		$.ajax({
 			type : "get",
-			url : "ajax/getNewIoCode.do",
+			url : contextPath + "/ajax/getNewIoCode.do",
 			dataType : "json",
 			async : false,
 			success : function(data) {
@@ -299,7 +299,7 @@ var forGrid = false;
 $("#btnMatModal").on("click", function(e) {
 	$('#materialCode').val('');
 	$('#materialName').val('');
-    $('#matContent').load("matModal.do");
+    $('#matContent').load(contextPath +"/matModal.do");
 });
 
 // 자재코드 입력창
@@ -307,14 +307,14 @@ $('#materialCode').on('click', function(){
 	$('#materialCode').val('');
 	$('#materialName').val('');
 	$('#matModal').modal('show');
-	$('#matContent').load("matModal.do");
+	$('#matContent').load(contextPath +"/matModal.do");
 });
 
 // 공정 돋보기
 $('#btnProcModal').on('click',function(e){
 	$('#processCode').val('');
 	$('#processName').val('');
-	$('#procContent').load("procModal.do");
+	$('#procContent').load(contextPath +"/procModal.do");
 });
 
 // 공정코드 입력창
@@ -322,7 +322,7 @@ $('#processCode').on('click', function(){
 	$('#processCode').val('');
 	$('#processName').val('');
 	$('#procModal').modal('show');
-	$('#procContent').load("procModal.do");
+	$('#procContent').load(contextPath +"/procModal.do");
 });
 
 grid.on('dblclick', function(ev){
@@ -330,7 +330,7 @@ grid.on('dblclick', function(ev){
 		rowKey = ev.rowKey;
 		forGrid = true;
 		$('#matModal').modal('show');
-		$('#matContent').load("matModal.do");
+		$('#matContent').load(contextPath +"/matModal.do");
 	}
 })
 
@@ -341,7 +341,7 @@ grid.on('dblclick', function(ev){
 			rowKey = ev.rowKey;
 			materialCode = grid.getValue(rowKey, 'materialCode');
 			$('#matLotModal').modal('show');
-			$('#matLotContent').load("matLotModal.do");	
+			$('#matLotContent').load(contextPath +"/matLotModal.do");	
 		}else{
 			toast('자재코드를 입력하고 선택하세요', 'No.'+grid.getValue(ev.rowKey, 'ioCode'))			
 		}

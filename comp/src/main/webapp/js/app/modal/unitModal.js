@@ -1,6 +1,6 @@
 				var cdataSource = {
 					api : {
-						readData : {url : 'ajax/getUnitList.do',method : 'GET'}
+						readData : {url : contextPath + '/ajax/getUnitList.do',method : 'GET'}
 					},
 					contentType : 'application/json'
 				};

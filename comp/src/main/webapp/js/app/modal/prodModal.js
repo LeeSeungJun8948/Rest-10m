@@ -5,7 +5,7 @@
 			var prodData = {
 				api : {
 					readData : {
-					url : 'ajax/prodListModal.do',
+					url : contextPath + '/ajax/prodListModal.do',
 					method : 'GET'
 					}
 				},
