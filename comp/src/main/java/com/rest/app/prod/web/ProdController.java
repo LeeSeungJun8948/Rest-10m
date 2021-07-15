@@ -15,6 +15,7 @@ import com.rest.app.mat.vo.SelectListVO;
 import com.rest.app.prod.service.ProdService;
 import com.rest.app.prod.vo.DetailPlanVO;
 import com.rest.app.prod.vo.DetailProrderVO;
+import com.rest.app.prod.vo.ErrorListVO;
 import com.rest.app.prod.vo.InputMatVO;
 import com.rest.app.prod.vo.PlanVO;
 import com.rest.app.prod.vo.ProrderVO;
@@ -28,7 +29,7 @@ public class ProdController {
 	ProdService svc;
 
 	// 생산계획관리 페이지
-	@RequestMapping("managePlan.do")
+	@RequestMapping("pro/mng/managePlan.do")
 	public String managePlan() {
 		return "prod/managePlan.page";
 	}
@@ -140,7 +141,7 @@ public class ProdController {
 	}
 
 	// 생산계획 조회 페이지
-	@RequestMapping("viewPlan.do")
+	@RequestMapping("pro/view/viewPlan.do")
 	public String viewPlan() {
 		return "prod/viewPlan.page";
 	}
@@ -158,7 +159,7 @@ public class ProdController {
 	}
 
 	// 생산지시관리 페이지
-	@RequestMapping("manageProrder.do")
+	@RequestMapping("pro/mng/manageProrder.do")
 	public String manageProrder() {
 		return "prod/manageProrder.page";
 	}
@@ -170,7 +171,7 @@ public class ProdController {
 	}
 
 	// 생산지시 조회 페이지
-	@RequestMapping("viewProrder.do")
+	@RequestMapping("pro/view/viewProrder.do")
 	public String viewProrder() {
 		return "prod/viewProrder.page";
 	}
@@ -317,7 +318,7 @@ public class ProdController {
 	}
 
 	// 작업실적관리 페이지
-	@RequestMapping("manageWork.do")
+	@RequestMapping("pro/view/manageWork.do")
 	public String manageWork() {
 		return "prod/manageWork.page";
 	}
@@ -412,7 +413,7 @@ public class ProdController {
 	}
 
 	// 작업실적조회 페이지
-	@RequestMapping("viewWork.do")
+	@RequestMapping("pro/view/viewWork.do")
 	public String viewWork() {
 		return "prod/viewWork.page";
 	}
@@ -475,6 +476,24 @@ public class ProdController {
 
 		datas.put("contents", svc.ajaxProdSearchModal(vo));
 		data.put("result", true);
+		data.put("data", datas);
+		return data;
+	}
+	
+	// 불량내역조회 페이지
+	@RequestMapping("pro/view/detailErrorList.do")
+	public String errorList() {
+		return "prod/errorList.page";
+	}
+	
+	//불량리스트 
+	@RequestMapping("/ajax/detailErrorList.do")
+	@ResponseBody
+	public Map<String, Object> ajaxGeterrorList(ErrorListVO vo) {
+		Map<String, Object> datas = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", svc.getErrorList(vo));
 		data.put("data", datas);
 		return data;
 	}
