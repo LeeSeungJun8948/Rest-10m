@@ -39,7 +39,7 @@ public class BusinessController {
 	@Autowired
 	BusinessService dao;
 
-	@RequestMapping("bus/view/busList.do") // 주문관리참조조회
+	@RequestMapping("busList.do") // 주문관리참조조회
 	public String business(Model model) {
 		return "bus/busList.page";
 	}
@@ -62,7 +62,7 @@ public class BusinessController {
 		return data;
 	}
 
-	@RequestMapping("bus/mng/exportForm.do") // 출고관리페이지
+	@RequestMapping("exportForm.do") // 출고관리페이지
 	public String exportForm(Model model) {
 		return "bus/exportForm.page";
 	}
@@ -103,7 +103,7 @@ public class BusinessController {
 		return data;
 	}
 
-	// 계획저장
+	// 출고저장
 	@RequestMapping("saveExport.do")
 	@ResponseBody
 	public Map<String, Object> saveExport(ExportVO vo) {
@@ -120,7 +120,7 @@ public class BusinessController {
 		return data;
 	}
 
-	// 계획삭제
+	// 출고삭제
 	@RequestMapping("deleteExport.do")
 	@ResponseBody
 	public Map<String, Object> deleteExport(@RequestParam String exportCode) {
@@ -133,7 +133,7 @@ public class BusinessController {
 		return data;
 	}
 
-	// 세부계획 CUD
+	// 세부출고 CUD
 	@RequestMapping("saveDetailExport.do")
 	@ResponseBody
 	public Map<String, Object> saveDetailExport(@RequestBody GridData gridData) {
@@ -165,7 +165,7 @@ public class BusinessController {
 		return data;
 	}
 
-	// 자재LOT별 재고량리스트 가져오기
+	// 제품LOT별 재고량리스트 가져오기
 	@RequestMapping("getExportLot.do")
 	@ResponseBody
 	public Map<String, Object> getExportLot(@RequestBody Map<String, Object> param) {
@@ -177,7 +177,7 @@ public class BusinessController {
 		return data;
 	}
 
-	// 투입자재 CUD
+	//제품 lot CUD
 	@RequestMapping("saveExportLot.do")
 	@ResponseBody
 	public Map<String, Object> saveExportLot(@RequestBody ExportLotGridData gridData) {
@@ -200,7 +200,7 @@ public class BusinessController {
 		return data;
 	}
 
-	@RequestMapping("bus/view/productInventory.do") // 제품재고 조회 페이지
+	@RequestMapping("productInventory.do") // 제품재고 조회 페이지
 	public String productInventory(Model model) {
 		return "bus/productInventory.page";
 	}
@@ -235,7 +235,7 @@ public class BusinessController {
 			return data;
 		}
 		
-		@RequestMapping("bus/view/viewExport.do") // 출고조회페이지
+		@RequestMapping("viewExport.do") // 출고조회페이지
 		public String viewExport(Model model) {
 			return "bus/viewExport.page";
 		}
