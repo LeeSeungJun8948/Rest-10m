@@ -389,11 +389,18 @@
 	<!-- 공통코드 -->
 	<select id="getCodeIdList" resultType="CommonCodeVO" parameterType="CommonCodeVO">
 		SELECT code_id, 
+				code_id_nm
+		FROM COMTCCMMNCODE 
+		WHERE cl_code = 'R10'
+	</select>
+	
+	<select id="getDetailCodeId" resultType="CommonCodeVO" parameterType="CommonCodeVO">
+		SELECT code_id, 
 				code_id_nm, 
 				code_id_dc, 
 				use_at AS code_id_use_at
 		FROM COMTCCMMNCODE 
-		WHERE cl_code = 'R10'
+		WHERE code_id = #{codeId}
 	</select>
 	
 	<insert id="istCodeId" parameterType="CommonCodeVO">
@@ -401,7 +408,7 @@
 		VALUES(#{codeId}, #{codeIdNm}, #{codeIdDc}, #{codeIdUseAt}, 'R10', sysdate, 'SYSTEM', sysdate 'SYSTEM')
 	</insert>
 	
-	<update  id="udtCodeId" parameterType="CommonCodeVO">
+	<update id="udtCodeId" parameterType="CommonCodeVO">
 		UPDATE COMTCCMMNCODE
 		SET code_id_nm = #{codeIdNm}, code_id_dc = #{codeIdDc}, use_at = #{codeIdUseAt}
 		WHERE code_id = #{codeId}
