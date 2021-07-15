@@ -50,10 +50,10 @@
      </a>
      <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="busList.do">주문관리 참조조회</a>
-             <a class="collapse-item" href="exportForm.do">출고 관리</a>
-             <a class="collapse-item" href="viewExport.do">출고 조회</a>
-             <a class="collapse-item" href="productInventory.do">제품 재고 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/bus/view/busList.do">주문관리 참조조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/bus/mng/exportForm.do">출고 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/bus/view/viewExport.do">출고 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/bus/view/productInventory.do">제품 재고 조회</a>
          </div>
      </div>
  </li>
