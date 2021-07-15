@@ -90,4 +90,9 @@
 		select * from facilities
 		order by fac_code
 	</select>
+	
+	 <select id="getEmpListModal" resultType="com.rest.app.comm.vo.EmployeeVO">
+		select emp_code, employee_name
+		from employee
+	</select>
 </mapper>
