@@ -33,8 +33,6 @@ import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeFactory;
 import net.sourceforge.barbecue.BarcodeImageHandler;
 
-
-
 @Controller
 public class MaterialController {
 	
@@ -82,12 +80,12 @@ public class MaterialController {
 		return dao.matDel(vo);
 	}
 	
-	@RequestMapping("mat/view/inorderForm.do")
+	@RequestMapping("/mat/view/inorderList.do")
 	public String inorderForm(Model model) {
-		return "mat/inorderForm.page";
+		return "mat/inorderList.page";
 	}
 	
-	@RequestMapping("/ajax/inorderList.do")
+	@RequestMapping("/ajax/getInorderList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxInorderList(InorderVO vo) {
 		
@@ -270,32 +268,42 @@ public class MaterialController {
 		return mapper.getInoutNo(vo); // 서비스 만들기 귀찮아서 걍 바로씀..
 	}
 	
-	@RequestMapping("mat/mng/matInForm.do")
+	@RequestMapping("/mat/view/matInList.do")
+	public String matInList(Model model) {
+		return "mat/matInList.page";
+	}
+	
+	@RequestMapping("/mat/mng/matInForm.do")
 	public String matInForm(Model model) {
 		return "mat/matInForm.page";
 	}
 	
-	@RequestMapping("mat/mng/matAdjustWrite.do")
+	@RequestMapping("/mat/mng/matAdjustWrite.do")
 	public String matStockForm(Model model) {
 		return "mat/matAdjustWrite.page";
 	}
 	
-	@RequestMapping("mat/mng/matAdjustForm.do")
+	@RequestMapping("/mat/mng/matAdjustForm.do")
 	public String matSaveStockForm(Model model) {
 		return "mat/matAdjustForm.page";
 	}
 	
-	@RequestMapping("mat/mng/matAdjustList.do")
+	@RequestMapping("/mat/view/matAdjustList.do")
 	public String matSaveStockList(Model model) {
 		return "mat/matAdjustList.page";
 	}
 	
-	@RequestMapping("mat/mng/matOutForm.do")
+	@RequestMapping("/mat/mng/matOutForm.do")
 	public String matOutForm(Model model) {
 		return "mat/matOutForm.page";
 	}
 	
-	@RequestMapping("prod/mng/procMovePrint.do")
+	@RequestMapping("/mat/view/matOutList.do")
+	public String matOutList(Model model) {
+		return "mat/matOutList.page";
+	}
+	
+	@RequestMapping("/pro/view/procMovePrint.do")
 	public String procMovePrint(Model model) {
 		return "mat/procMovePrint.page";
 	}

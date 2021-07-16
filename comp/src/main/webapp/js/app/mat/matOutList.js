@@ -5,8 +5,7 @@ $( document ).ready(function() {
 
 const dataSource = {
 	api : {
-		readData : {url: contextPath + '/ajax/matOutList.do' , method:'GET' },
-		modifyData : { url: contextPath + '/ajax/matOutModify.do', method: 'PUT'}
+		readData : {url: contextPath + '/ajax/matOutList.do' , method:'GET' }
 	},
 	contentType: 'application/json'
 };
@@ -30,13 +29,6 @@ const grid = new tui.Grid({
 			name : 'ioDate',
 			width : 120,
 			align: 'center',
-			editor: {
-				type: 'datePicker',
-				options: {
-				language: 'ko',
-				format: 'yyyy-MM-dd'
-				}
-			},
 			validation: {
             	required: true
           	}
@@ -52,22 +44,7 @@ const grid = new tui.Grid({
       		},
 			validation: {
             	required: true
-          	},
-			relations: [ {
-				targetNames: ['processCode'],
-				listItems({ value }){
-					
-					let items = [];
-					
-					if(checkNull(value)){
-						items = makeProcessList(value);
-					}
-					return items;	
-				},
-				disabled({ value }) {
-                	return !value;
-              	}
-			} ]
+          	}
 		}, {
 			header : '자재명',
 			name : 'materialName',
@@ -83,7 +60,6 @@ const grid = new tui.Grid({
 			name : 'ioVolume',
 			width : 120,
 			align: 'right',
-			editor:'text',
 			formatter({value}) {
       			return format(value);
     		},
@@ -102,17 +78,10 @@ const grid = new tui.Grid({
           	}
 		}, {
 			header : '출고공정',
-			name : 'processCode',
+			name : 'processName',
 			width : 120,
 			align: 'center',	
 			className: 'white',
-			formatter: 'listItemText',
-			editor: {
-				type: 'select',
-				options: {
-					listItems: []
-            	}
-			},
 			validation: {
             	required: true
           	}
@@ -128,8 +97,7 @@ const grid = new tui.Grid({
 			header : '비고',
 			name : 'comments',
 			width : 160,
-			align: 'center',
-			editor: 'text'
+			align: 'center'
 		}
 
 	],
@@ -162,62 +130,6 @@ function format(value){
 var rowKey;
 var materialCode;
 
-function setMatInfo(ev){
-	
-	rowKey = ev.rowKey;
-	materialCode =  grid.getValue(rowKey, 'materialCode');
-	
-	if(checkNull(materialCode)){
-		
-		$.ajax({
-			type : "get",
-			data: {"materialCode" : materialCode},
-			url : contextPath + "/ajax/getMatInfoForOut.do",
-			dataType : "json",
-			async : false,
-			success : function(data) {
-				grid.setValue(rowKey, 'materialName', data.materialName, false);
-				grid.setValue(rowKey, 'unitNo', data.unitNo, false);
-				grid.setValue(rowKey, 'stock', data.stock, false);
-			},
-			error:function(request, status, error){
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-		
-		rowKey = ev.rowKey;
-		grid.setValue(rowKey, 'processCode', null, false);
-		grid.setValue(rowKey, 'lotNo', null, false);
-		$('#matLotModal').modal('show');
-		$('#matLotContent').load(contextPath + "/matLotModal.do");
-	
-	}
-	
-}
-
-function makeProcessList(materialCode){
-	
-	let processList = [];
-	
-	$.ajax({
-		type : "get",
-		data: {"materialCode" : materialCode},
-		url : contextPath + "/ajax/getProcessList.do",
-		dataType : "json",
-		async : false,
-		success : function(datas) {
-			for(let data of datas){
-				processList.push({text: data.processName, value: data.processCode});
-			}
-		},
-		error:function(request, status, error){
-			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	});	
-	
-	return processList;
-}
-
 (function($) {
 	
 $('#btnRead').on('click',  function(){
@@ -228,62 +140,9 @@ $('#btnRead').on('click',  function(){
 
 })(jQuery);
 
-var newIoCode;
-	
-$("#btnGridAdd").on("click", function(){
-	
-	if(checkNull(newIoCode)){
-		newIoCode = newIoCode * 1 + 1;
-	}else{
-		$.ajax({
-			type : "get",
-			url : contextPath + "/ajax/getNewIoCode.do",
-			dataType : "json",
-			async : false,
-			success : function(data) {
-				newIoCode = data.ioCode;
-			},
-			error : function() {
-			}
-		});		
-	}
-
-	newRowData = {'ioCode' : newIoCode, 'ioDate' : getFormatDate(new Date())};
-	grid.appendRow(newRowData,{
-		at : grid.getRowCount(),
-		focus : true
-	});
-});
-
-
-$("#btnGridDel").on("click", function(ev){
-	grid.removeCheckedRows(true);
-});
-
-
-$("#btnSave").on("click", function(){
-	
-	for(var valid of grid.validate()){
-		for(var errors of valid.errors){
-			var header;
-			for(var column of grid.getColumns()){
-				if(column.name == errors.columnName)
-					header = column.header;
-			}
-			toast(header+'를 확인하세요.',grid.getValue(valid.rowKey, 'ioCode'));	
-		}
-	}
-	
-	if(grid.validate().length == 0){
-		grid.request('modifyData');
-	}
-
-});
-
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
-
 
 function toast(text, title){
 	toastr.options = {
@@ -325,28 +184,6 @@ $('#processCode').on('click', function(){
 	$('#procContent').load(contextPath +"/procModal.do");
 });
 
-grid.on('dblclick', function(ev){
-	if(ev.columnName == 'materialCode'){
-		rowKey = ev.rowKey;
-		forGrid = true;
-		$('#matModal').modal('show');
-		$('#matContent').load(contextPath +"/matModal.do");
-	}
-})
-
-// lot검색 모달 열기(그리드에서)
-grid.on('dblclick', function(ev){
-	if(ev.columnName == 'lotNo'){
-		if(checkNull(grid.getValue(ev.rowKey,'materialCode'))){
-			rowKey = ev.rowKey;
-			materialCode = grid.getValue(rowKey, 'materialCode');
-			$('#matLotModal').modal('show');
-			$('#matLotContent').load(contextPath +"/matLotModal.do");	
-		}else{
-			toast('자재코드를 입력하고 선택하세요', 'No.'+grid.getValue(ev.rowKey, 'ioCode'))			
-		}
-	}
-})
 
 function getFormatDate(date){
     var year = date.getFullYear();              //yyyy

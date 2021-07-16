@@ -196,6 +196,10 @@ $('#btnNewCodeId').on('click', function(){
 })
 
 $('#btnDelCodeId').on('click', function(){
+	for(var checked of codeIdGrid.getCheckedRowKeys()){
+		if(newRowKey == checked)
+			newRowKey = null;	
+	}
 	codeIdGrid.removeCheckedRows(true);
 })
 
@@ -221,6 +225,15 @@ $('#btnDelCode').on('click', function(){
 $('#btnSave').on('click',function(){
 	
 })
+
+$('input').on('propertychange change keyup paste input', function(){
+	codeIdGrid.setValue(idRowKey, $('this').attr('id'));
+})
+
+$('select').on('propertychange change keyup paste input', function(){
+	codeIdGrid.setValue(idRowKey, $('this').attr('id'));
+})
+
 function toast(text, title){
 	toastr.options = {
 		closeButton: true,
