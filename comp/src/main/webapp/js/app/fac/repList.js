@@ -63,7 +63,6 @@ const dataSource = {
 	// input 데이터 불러오기
 	grid.on('click', function(ev) {
 		var key = grid.getRow(ev.rowKey).repairCode;
-		console.log(key);
 		$.ajax({
 			type : "get",
 			url : contextPath + "/ajax/repInfo.do",
