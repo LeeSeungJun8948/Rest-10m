@@ -134,7 +134,7 @@ public class ProdController {
 	}
 
 	// 제품명찾기
-	@RequestMapping("/findProductName.do")
+	@RequestMapping("/pro/mng/findProductName.do")
 	@ResponseBody
 	public String findProductName(String productCode) {
 		return svc.findProductName(productCode);

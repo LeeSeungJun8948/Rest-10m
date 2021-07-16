@@ -17,10 +17,10 @@
 	        <AppenderRef ref="console" />
 	    </Logger>
 	    
-        <Logger name="egovframework" level="DEBUG" additivity="false">
+        <Logger name="egovframework" level="ERROR" additivity="false">
             <AppenderRef ref="console" />
         </Logger>
-	    <Logger name="org.springframework" level="DEBUG" additivity="false">
+	    <Logger name="org.springframework" level="ERROR" additivity="false">
 	        <AppenderRef ref="console" />
 	    </Logger>
 	    	    <Logger name="org.apache" level="ERROR" additivity="false">
