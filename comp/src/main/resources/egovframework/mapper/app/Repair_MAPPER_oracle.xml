@@ -48,6 +48,7 @@
 		from 	facilities f, repair r, company c
 		where	f.fac_code=r.fac_code
 		and 	r.company_code=c.company_code
+		order by r.repair_code
     </select>
     
     <insert id="insertRepair" parameterType="com.rest.app.fac.repair.vo.RepairVO">

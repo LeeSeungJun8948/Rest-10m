@@ -103,7 +103,7 @@ public class FacilitiesController {
 	}
 	
 	// 저장&수정
-	@RequestMapping("/insertFacilities.do")
+	@RequestMapping("/fac/mng/insertFacilities.do")
 	public String insertFacilities(HttpServletRequest request, FacilitiesVO vo) throws IOException, Exception {
 		MultipartFile uploadFile = vo.getUploadFile();
 		String fileName = null;
@@ -196,7 +196,7 @@ public class FacilitiesController {
 	}
 	
 	// 파일
-	@RequestMapping(value = "/filedown.do")
+	@RequestMapping(value = "/fac/mng/filedown.do")
 	public void getDown(HttpServletResponse response, @RequestParam String fileName) throws Exception{
 		String serverSubPath  = "c:/upload";
 		String downFileName = serverSubPath + "/" + fileName;
