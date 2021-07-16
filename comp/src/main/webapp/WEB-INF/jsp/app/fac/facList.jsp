@@ -18,23 +18,23 @@
 	</div>
 	<form id="searchCheck" name="searchCheck">
 		<div class="row">
-			<div class="mb-2 col-md-6">
+			<div class="mb-2 col-md-4">
 				<table class="table">
 					<tr>
 						<td>
 							<div class="row">
-								<div class="col-md-2">
-									<select name="searchCondition" id="searchCondition"
-										title="검색조건2-검색어구분" style="width: 100px; height: 35px">
+								<div class="col-md-4">
+									<select class="custom-select" name="searchCondition" id="searchCondition"
+										title="검색조건2-검색어구분">
 										<option value="facilitiesName">설비명</option>
 										<option value="processName">공정명</option>
 									</select>
 								</div>
-								<input id="searchKeyword" name="searchKeyword" type="text"
-									title="검색어" class="form-control" style="width: 200px;">
-								<div class="col-md-2">
-									<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
+								<div class="col-md-5">
+									<input id="searchKeyword" name="searchKeyword" type="text"
+										title="검색어" class="form-control">
 								</div>
+									<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
 							</div>
 						</td>
 					</tr>

@@ -39,7 +39,7 @@ public class BusinessController {
 	@Autowired
 	BusinessService dao;
 
-	@RequestMapping("bus/view/busList.do") // 주문관리참조조회
+	@RequestMapping("/bus/view/busList.do") // 주문관리참조조회
 	public String business(Model model) {
 		return "bus/busList.page";
 	}
@@ -62,14 +62,14 @@ public class BusinessController {
 		return data;
 	}
 
-	@RequestMapping("bus/mng/exportForm.do") // 출고관리페이지
+	@RequestMapping("/bus/mng/exportForm.do") // 출고관리페이지
 	public String exportForm(Model model) {
 		System.out.println("^^^^^^^^^^^^^^^^^^^^^");
 		return "bus/exportForm.page";
 	}
 
 	// 출고관리 - 조회 모달
-	@RequestMapping("/exportModal.do")
+	@RequestMapping("/modal/exportModal.do")
 	public String getExportModal() {
 		return "app/bus/exportModal";
 	}
@@ -201,7 +201,7 @@ public class BusinessController {
 		return data;
 	}
 
-	@RequestMapping("bus/view/productInventory.do") // 제품재고 조회 페이지
+	@RequestMapping("/bus/view/productInventory.do") // 제품재고 조회 페이지
 	public String productInventory(Model model) {
 		return "bus/productInventory.page";
 	}
@@ -218,7 +218,7 @@ public class BusinessController {
 		return data;
 	}
 	// 출고관리 - 조회 모달
-		@RequestMapping("/prodLotModal.do")
+		@RequestMapping("/modal/prodLotModal.do")
 		public String getProdLotModal() {
 			return "app/bus/prodLotModal";
 		}
@@ -236,7 +236,7 @@ public class BusinessController {
 			return data;
 		}
 		
-		@RequestMapping("bus/view/viewExport.do") // 출고조회페이지
+		@RequestMapping("/bus/view/viewExport.do") // 출고조회페이지
 		public String viewExport(Model model) {
 			return "bus/viewExport.page";
 		}

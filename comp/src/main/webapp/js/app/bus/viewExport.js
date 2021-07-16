@@ -68,27 +68,27 @@ $("#btnReset").click(function() {
 
 //모달
 $("#btnCompModal").on("click", function() {
-	$('#compContent').load(contextPath+"/compModalForProd.do");
+	$('#compContent').load(contextPath+"/modal/compModalForProd.do");
 });
 
 $("#companyCode").on("click", function() {
-	$('#compContent').load(contextPath+"/compModalForProd.do");
+	$('#compContent').load(contextPath+"/modal/compModalForProd.do");
 });
 
 $("#companyName").on("click", function() {
-	$('#compContent').load(contextPath+"/compModalForProd.do");
+	$('#compContent').load(contextPath+"/modal/compModalForProd.do");
 });
 
 $("#btnProdModal").on("click", function() {
-	$('#prodContent').load(contextPath+"/prodModal.do");
+	$('#prodContent').load(contextPath+"/modal/prodModal.do");
 });
 
 $("#productCode").on("click", function() {
-	$('#prodContent').load(contextPath+"/prodModal.do");
+	$('#prodContent').load(contextPath+"/modal/prodModal.do");
 });
 
 $("#productName").on("click", function() {
-	$('#prodContent').load(contextPath+"/prodModal.do");
+	$('#prodContent').load(contextPath+"/modal/prodModal.do");
 });
 
 // 초기화

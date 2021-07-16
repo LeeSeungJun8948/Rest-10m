@@ -95,21 +95,21 @@ function resetPage() {
 //모달
 var forGrid = false;
 $("#btnProdModal").on("click", function(e) {
-	$('#prodContent').load(contextPath+"/prodModal.do");
+	$('#prodContent').load(contextPath+"/modal/prodModal.do");
 });
 $("#productCode").on("click", function(e) {
-	$('#prodContent').load(contextPath+"/prodModal.do");
+	$('#prodContent').load(contextPath+"/modal/prodModal.do");
 });
 
 $("#productName").on("click", function(e) {
-	$('#prodContent').load(contextPath+"/prodModal.do");
+	$('#prodContent').load(contextPath+"/modal/prodModal.do");
 });
 $("#productLot").on("click", function(e) {
-	$('#modalContent').load(contextPath+"/prodLotModal.do");
+	$('#modalContent').load(contextPath+"/modal/prodLotModal.do");
 });
 
 $("#btnProdLotModal").on("click", function(e) {
-	$('#modalContent').load(contextPath+"/prodLotModal.do");
+	$('#modalContent').load(contextPath+"/modal/prodLotModal.do");
 });
 // ???????
 $(document).on('show.bs.modal','#btnProdLotModal', function () {

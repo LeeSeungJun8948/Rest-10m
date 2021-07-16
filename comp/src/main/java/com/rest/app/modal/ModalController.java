@@ -26,7 +26,7 @@ public class ModalController {
 	BomService bDao;
 	
 	// 자재검색 모달 페이지 리턴
-	@RequestMapping("/matModal.do")
+	@RequestMapping("/modal/matModal.do")
 	public String matModal() {
 		return "app/modal/matModal";
 	}
@@ -48,7 +48,7 @@ public class ModalController {
 	}
 
 	// 공정검색 모달 페이지 리턴
-	@RequestMapping("/procModal.do")
+	@RequestMapping("/modal/procModal.do")
 	public String procModal() {
 		return "app/modal/procModal";
 	}
@@ -70,7 +70,7 @@ public class ModalController {
 	}
 
 	// 자재별 LOT목록 검색 모달 페이지 리턴
-	@RequestMapping("/matLotModal.do")
+	@RequestMapping("/modal/matLotModal.do")
 	public String matLotModal() {
 		return "app/modal/matLotModal";
 	}
@@ -92,13 +92,13 @@ public class ModalController {
 	}
 
 	// 업체검색 모달 페이지 리턴
-	@RequestMapping("/compModal.do")
+	@RequestMapping("/modal/compModal.do")
 	public String compModal() {
 		return "app/modal/compModal";
 	}
 
 	// 업체구분에서 전체/주문업체를 위한 구분
-	@RequestMapping("/compModalForProd.do")
+	@RequestMapping("/modal/compModalForProd.do")
 	public String compModalForProd() {
 		return "app/modal/compModalForProd";
 	}
@@ -120,7 +120,7 @@ public class ModalController {
 	}
 
 	// 발주검색 모달 페이지 리턴
-	@RequestMapping("/inorderModal.do")
+	@RequestMapping("/modal/inorderModal.do")
 	public String inorderModal() {
 		return "app/modal/inorderModal";
 	}
@@ -142,25 +142,25 @@ public class ModalController {
 	}
 
 	// 규격리스트 모달
-	@RequestMapping("/productModal.do")
+	@RequestMapping("/modal/productModal.do")
 	public String productModal() {
 		return "app/modal/productModal";
 	}
 
 	// 단위리스트 모달
-	@RequestMapping("unitModal.do")
+	@RequestMapping("/modal/unitModal.do")
 	public String unitModal() {
 		return "app/modal/unitModal";
 	}
 
 	// qc모달
-	@RequestMapping("qcModal.do")
+	@RequestMapping("/modal/qcModal.do")
 	public String QcModal() {
 		return "app/modal/qcModal";
 	}
 
 	// 제품검색 모달 페이지 리턴
-	@RequestMapping("/prodModal.do")
+	@RequestMapping("/modal/prodModal.do")
 	public String prodModal() {
 		return "app/modal/prodModal";
 	}
@@ -180,14 +180,14 @@ public class ModalController {
 
 		return data;
 	}
-	@RequestMapping("/matCodeModal.do")
+	@RequestMapping("/modal/matCodeModal.do")
 	public String matCodeModal() {
 		return "app/modal/matCodeModal";
 	}
 	
 	
 	// Bom 소요자재 그리드 자재코드/코드명 데이터 리턴
-	@RequestMapping("ajax/matCodeModal.do")
+	@RequestMapping("/ajax/matCodeModal.do")
 	@ResponseBody
 	public Map<String, Object> ajaxMatCodeModal(Model model, BomVO vo) { 
 		System.out.println("====================");

@@ -158,7 +158,7 @@ var forGrid = false;
 $("#btnMatModal").on("click", function(e) {
 	$('#materialCode').val('');
 	$('#materialName').val('');
-    $('#matContent').load(contextPath +"/matModal.do");
+    $('#matContent').load(contextPath +"/modal/matModal.do");
 });
 
 // 자재코드 입력창
@@ -166,14 +166,14 @@ $('#materialCode').on('click', function(){
 	$('#materialCode').val('');
 	$('#materialName').val('');
 	$('#matModal').modal('show');
-	$('#matContent').load(contextPath +"/matModal.do");
+	$('#matContent').load(contextPath +"/modal/matModal.do");
 });
 
 // 공정 돋보기
 $('#btnProcModal').on('click',function(e){
 	$('#processCode').val('');
 	$('#processName').val('');
-	$('#procContent').load(contextPath +"/procModal.do");
+	$('#procContent').load(contextPath +"/modal/procModal.do");
 });
 
 // 공정코드 입력창
@@ -181,7 +181,7 @@ $('#processCode').on('click', function(){
 	$('#processCode').val('');
 	$('#processName').val('');
 	$('#procModal').modal('show');
-	$('#procContent').load(contextPath +"/procModal.do");
+	$('#procContent').load(contextPath +"/modal/procModal.do");
 });
 
 
