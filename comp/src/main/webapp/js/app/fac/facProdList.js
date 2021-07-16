@@ -51,11 +51,11 @@ $('#btnRead').on('click',  function(){
 var forGrid = false;
 
 $("#btnFacModal").on("click", function(e) {
-	    $('#facContent').load(contextPath + "/facModel.do");
+	    $('#facContent').load(contextPath + "/modal/facModel.do");
 	});
 	
 $("#btnProdModal").on("click", function() {
-	$('#prodContent').load(contextPath+"/prodModal.do");
+	$('#prodContent').load(contextPath+"/modal/prodModal.do");
 });
 
 
