@@ -31,13 +31,13 @@
      </a>
      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="${pageContext.request.contextPath}/commonCodeForm.do">傍烹内靛包府</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/matForm.do">磊犁沥焊包府</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/bomList.do">力前 BOM包府</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/processList.do">傍沥包府</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/empList.do">荤盔包府</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/error.do">阂樊内靛 包府 </a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/QualityControl.do">力前 前龙 钎霖辑 包府</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/commonCodeForm.do">傍烹内靛包府</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/matForm.do">磊犁沥焊包府</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/bomList.do">力前 BOM包府</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/processList.do">傍沥包府</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/empList.do">荤盔包府</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/error.do">阂樊内靛 包府 </a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/QualityControl.do">力前 前龙 钎霖辑 包府</a>
          </div>
      </div>
  </li>
