@@ -22,6 +22,7 @@ import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
 import com.rest.app.mat.vo.ProcMoveVO;
+import com.rest.app.mat.vo.ProdVO;
 import com.rest.app.mat.vo.SelectListVO;
 
 import egovframework.com.cmm.service.EgovProperties;
@@ -433,6 +434,17 @@ public class MaterialController {
 		data.put("data", gridData.createdRows);
 		data.put("data", gridData.deletedRows);
 		return data;
+	}
+	
+	@RequestMapping("/pro/view/prodMonitoring.do")
+	public String prodMonitoring(Model model) {
+		return "mat/prodMonitoring.page";
+	}
+	
+	@RequestMapping("/ajax/getProdMonitoring.do")
+	@ResponseBody
+	public List<ProdVO> ajaxGetProdMonitoring() {
+		return dao.getProdMonitoring();
 	}
 }
 
