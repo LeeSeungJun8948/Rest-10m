@@ -31,17 +31,17 @@
 			scrollX : false,
 			scrollY : false,
 			columns : [ {
-				header : '설비코드',
-				name : 'facCode'
+				header : '작업일자',
+				name : 'workDate'
 			}, {
 				header : '설비명',
 				name : 'facilitiesName'
 			}, {
-				header : '제품코드',
-				name : 'productCode'
-			}, {
 				header : '제품명',
 				name : 'productName'
+			}, {
+				header : '제품LOT',
+				name : 'productLot'
 			}]
 		});
 		

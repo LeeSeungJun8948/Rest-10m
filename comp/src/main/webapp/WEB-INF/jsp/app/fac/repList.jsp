@@ -19,7 +19,13 @@
 						<td><input type="text" id="repairCode" name="repairCode" value="${max}"
 							style="background-color: #e2e2e2;" readonly></td>
 						<th>설비코드*</th>
-						<td><input type="text" id="facCode" name="facCode"></td>
+						<td><input type="text" id="facCode" name="facCode" 
+							style="background-color: #e2e2e2;" readonly>
+						<button id="btnFacModal" type="button" class="btn btn-toggle"
+								data-remote="false" data-toggle="modal" data-target="#facModal">
+								<img alt="btn_search"
+									src="<c:url value='/images/app/all/btn_search.png'/>"></button>
+						</td>
 						<th>수리일자</th>
 						<td><input type="date" id="repairDate" name="repairDate"></td>
 					</tr>
@@ -28,7 +34,8 @@
 						<td><input type="text" id="repairComment"
 							name="repairComment"></td>
 						<th>업체코드</th>
-						<td><input type="text" id="companyCode" name="companyCode">
+						<td><input type="text" id="companyCode" name="companyCode" 
+							style="background-color: #e2e2e2;" readonly>
 							<button id="btnCompModal" type="button" class="btn btn-toggle"
 								data-remote="false" data-toggle="modal" data-target="#compModal">
 								<img alt="btn_search"
@@ -51,6 +58,13 @@
 <div class="modal fade" id="compModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" id="compContent" align="center">
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content" id="facContent" align="center">
 		</div>
 	</div>
 </div>

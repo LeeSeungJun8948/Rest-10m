@@ -116,11 +116,17 @@ const dataSource = {
 	function checkNull(value){
 		return value != null && value != '' && value != '[object HTMLInputElement]';
 	}
-
+	
+	// 모달
+	var forGrid = false;
+	
 	$("#btnCompModal").on("click", function(e) {
 	    $('#compContent').load(contextPath + "/compModal.do");
 	});
 	
+	$("#btnFacModal").on("click", function(e) {
+	    $('#facContent').load(contextPath + "/facModel.do");
+	});
 
 	function numberWithCommas(x) {
  	 x = x.replace(/[^0-9]/g,'');   
