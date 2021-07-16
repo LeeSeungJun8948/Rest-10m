@@ -70,16 +70,16 @@
 		<!-- 업무사용자 -->
 		<if test="userSe != null and userSe == 'USR'">
 			
-			SELECT emplyr_id AS id
-			     , user_nm AS name
-			     , password AS password
-			     , ihidnum AS ihidNum
-			     , email_adres AS email
+			SELECT id AS id
+			     , employee_name AS name
+			     , pwd AS password
+			     , ' ' AS ihidNum
+			     , email AS email
 			     , 'USR' AS userSe
-			     , orgnzt_id AS orgnztId
-			     , esntl_id AS uniqId
-			  FROM COMTNEMPLYRINFO
-			 WHERE ESNTL_ID = #{uniqId}
+			     , ' ' AS orgnztId
+			     , emp_code AS uniqId
+			  FROM EMPLOYEE
+			 WHERE emp_code = #{uniqId}
 			   AND emplyr_sttus_code = 'P'
 			
 		</if>
@@ -124,19 +124,18 @@
 		</if>
 		<!-- 업무사용자 -->
 		<if test="userSe != null and userSe == 'USR'">
-			
-			SELECT emplyr_id AS id
-			     , user_nm AS name
-			     , password AS password
-			     , ihidnum AS ihidNum
-			     , email_adres AS email
+				SELECT id AS id
+			     , employee_name AS name
+			     , pwd AS password
+			     , ' ' AS ihidNum
+			     , email AS email
 			     , 'USR' AS userSe
-			     , orgnzt_id AS orgnztId
-			     , esntl_id AS uniqId
-			  FROM COMTNEMPLYRINFO
-			 WHERE emplyr_id = #{id}
-			   AND password = #{password}
-			   AND emplyr_sttus_code = 'P'
+			     , ' ' AS orgnztId
+			     , emp_code AS uniqId
+			  FROM EMPLOYEE
+			 WHERE id = #{id}
+			   AND pwd = #{password}
+			   <!-- AND emplyr_sttus_code = 'P' -->
 			
 		</if>
 	</select>
@@ -296,14 +295,14 @@
 	<!-- 업무사용자 -->
 	<if test="userSe != null and userSe == 'USR'">
 	<![CDATA[
-	SELECT  EMPLYR_ID AS USER_ID
-         ,  PASSWORD AS USER_PW
-	     ,  USER_NM AS USER_NM
-	     ,  ESNTL_ID AS UNIQ_ID
-	     ,  NVL(LOCK_AT,'N') LOCK_AT
-	     ,  NVL(LOCK_CNT,0) AS LOCK_CNT
-      FROM  COMTNEMPLYRINFO
-	 WHERE  EMPLYR_ID = #{id} 
+	SELECT  ID AS USER_ID
+         ,  PWD AS USER_PW
+	     ,  EMPLOYEE_NAME AS USER_NM
+	     ,  EMP_CODE AS UNIQ_ID
+	     ,  'N' AS LOCK_AT
+	     ,  0 AS LOCK_CNT
+      FROM  EMPLOYEE
+	 WHERE  ID = #{id} 
 	]]>
 	</if>
 	</select>
@@ -399,10 +398,10 @@
 		<!-- LOCK 카운트 설정 -->
 		<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isEquals(updateAt,'C')">
 			<![CDATA[
-			UPDATE  COMTNEMPLYRINFO
+			UPDATE  EMPLOYEE
 			   SET  LOCK_CNT  = NVL(LOCK_CNT,0)+1
 			     ,  LOCK_LAST_PNTTM = sysdate     
-			   WHERE EMPLYR_ID = #{id}
+			   WHERE ID = #{id}
 			]]>
 		</if>
 	</update>
@@ -427,10 +426,9 @@
 		</if>
 		<!-- 업무사용자 -->
 		<if test="userSe != null and userSe == 'USR'">
-			
-			SELECT NVL(TO_DATE(sysdate) - TO_DATE(CHG_PWD_LAST_PNTTM),0)
-			  FROM COMTNEMPLYRINFO
-			 WHERE emplyr_id = #{id}
+			SELECT 1 <!-- NVL(TO_DATE(sysdate) - TO_DATE(CHG_PWD_LAST_PNTTM),0) -->
+			  FROM EMPLOYEE
+			 WHERE id = #{id}
 			
 		</if>
 	</select>
