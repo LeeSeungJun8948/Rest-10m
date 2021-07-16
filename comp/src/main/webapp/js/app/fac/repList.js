@@ -120,11 +120,11 @@ const dataSource = {
 	var forGrid = false;
 	
 	$("#btnCompModal").on("click", function(e) {
-	    $('#compContent').load(contextPath + "/compModal.do");
+	    $('#compContent').load(contextPath + "/modal/compModal.do");
 	});
 	
 	$("#btnFacModal").on("click", function(e) {
-	    $('#facContent').load(contextPath + "/facModel.do");
+	    $('#facContent').load(contextPath + "/modal/facModel.do");
 	});
 
 	function numberWithCommas(x) {
