@@ -43,13 +43,13 @@ public class BomController {
 	@Autowired
 	ProcessService pdao;
 
-	@RequestMapping("/commList.do")
+	@RequestMapping("/comm/commList.do")
 	public String commList() {
 		return "/sym/ccm/cde/SelectCcmCmmnDetailCodeList.do";
 	}
 
 	// 공정모달
-	@RequestMapping("/proModal.do")
+	@RequestMapping("/comm/proModal.do")
 	public String proModal() {
 		return "app/comm/proModal";
 	}
@@ -60,13 +60,13 @@ public class BomController {
 	}
 
 	// 제품코드,제품명,규격 리스트 (모달)
-	@RequestMapping("/bomList.do")
+	@RequestMapping("/comm/bomList.do")
 	public String getProduct(Model model, BomVO vo) {
 		return "comm/bomList.page";
 	}
 
 	// 제품코드,제품명,규격 리스트 ajax
-	@RequestMapping("/ajax/bomList.do")
+	@RequestMapping("/comm/ajax/bomList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetBomList(BomVO vo) {
 		Map<String, Object> datas = new HashMap<String, Object>();
@@ -78,13 +78,13 @@ public class BomController {
 	}
 
 	// 모달
-	@RequestMapping("/modal.do")
+	@RequestMapping("/comm/modal.do")
 	public String modal() {
 		return "app/comm/modal";
 	}
 
 	// 제품 조회 , 소요자재조회
-	@RequestMapping("/getInfoProduct.do")
+	@RequestMapping("/comm/getInfoProduct.do")
 	public ModelAndView getInfoProduct(Model model, BomVO vo) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/comm/bomList.page");
@@ -95,7 +95,7 @@ public class BomController {
 	}
 
 	// ajax 소요자재조회
-	@RequestMapping("/ajax/getInfoProduct.do")
+	@RequestMapping("/comm/ajax/getInfoProduct.do")
 	@ResponseBody
 	public Map<String, Object> ajaxgetInfoProduct(BomVO vo) {
 		Map<String, Object> datas = new HashMap<String, Object>();
@@ -132,7 +132,7 @@ public class BomController {
 	}
 
 	// 소요자재 수정
-	@PutMapping(value = "/ajax/updateBom.do")
+	@PutMapping(value = "/comm/ajax/updateBom.do")
 	@ResponseBody
 	public Map<String, Object> updateBom(@RequestBody BomGridData bomGridData) {
 
@@ -145,7 +145,7 @@ public class BomController {
 		return data;
 	}
 
-	@PutMapping(value = "/ajax/modifyBom.do")
+	@PutMapping(value = "/comm/ajax/modifyBom.do")
 	@ResponseBody
 	public Map<String, Object> modifyBom(@RequestBody BomGridData bomGridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -165,14 +165,14 @@ public class BomController {
 	}
 
 	// 입출력 행 추가시 불러올 제품코드
-	@RequestMapping("/ajax/getNewProductCode.do")
+	@RequestMapping("/comm/ajax/getNewProductCode.do")
 	@ResponseBody
 	public BomVO getNewProductCode(BomVO vo) {
 		return dao.getNewProductCode();
 	}
 
 	// 소요자재 삭제
-	@PostMapping(value = "/ajax/deleteBom.do")
+	@PostMapping(value = "/comm/ajax/deleteBom.do")
 	@ResponseBody
 	public Map deleteBom(@RequestBody BomGridData bomGirdData) {
 		Map<String, Object> data = new HashMap();
@@ -185,20 +185,20 @@ public class BomController {
 	}
 
 	// Bom 삭제
-	@RequestMapping("/deleteBom.do")
+	@RequestMapping("/comm/deleteBom.do")
 	public String deleteBom(BomVO vo) {
 		dao.deleteBom(vo);
 		return "comm/bomList.page";
 	}
 
 	// 공정리스트
-	@RequestMapping("/processList.do")
+	@RequestMapping("/comm/processList.do")
 	public String processList(Model model, ProcessVO vo) {
 		
 		return "comm/processList.page";
 	}
 	//max 공정코드
-	@RequestMapping("/ajax/maxProcessCode.do")
+	@RequestMapping("/comm/ajax/maxProcessCode.do")
 	@ResponseBody
 	public ProcessVO maxProcessCode(ProcessVO vo) {
 		
@@ -206,7 +206,7 @@ public class BomController {
 	}
 
 	// 공정리스트 ajax
-	@RequestMapping("/ajax/processList.do")
+	@RequestMapping("/comm/ajax/processList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetprocessList(ProcessVO vo) {
 		Map<String, Object> datas = new HashMap<String, Object>();
@@ -218,7 +218,7 @@ public class BomController {
 	}
 
 	// 공정 추가
-	@PostMapping(value = "/ajax/insertProcess.do")
+	@PostMapping(value = "/comm/ajax/insertProcess.do")
 	@ResponseBody
 	public Map<String, Object> insertProcess(@RequestBody ProGridData ProGridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -229,7 +229,7 @@ public class BomController {
 	}
 
 	// 공정 수정
-	@PutMapping(value = "/ajax/updateProcess.do")
+	@PutMapping(value = "/comm/ajax/updateProcess.do")
 	@ResponseBody
 	public Map<String, Object> updateProcess(@RequestBody ProGridData ProGridData) {
 
@@ -242,7 +242,7 @@ public class BomController {
 		return data;
 	}
 
-	@PutMapping(value = "/ajax/modifyProcess.do")
+	@PutMapping(value = "/comm/ajax/modifyProcess.do")
 	@ResponseBody
 	public Map<String, Object> modifyProcess(@RequestBody ProGridData ProGridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -261,7 +261,7 @@ public class BomController {
 	}
 
 	// 공정삭제
-	@PostMapping(value = "/ajax/deleteProcess.do")
+	@PostMapping(value = "/comm/ajax/deleteProcess.do")
 	@ResponseBody
 	public Map deleteProcess(@RequestBody ProGridData ProGridData) {
 		Map<String, Object> data = new HashMap();
@@ -273,7 +273,7 @@ public class BomController {
 		return data;
 	}
 	// 회사명조회
-	@RequestMapping("/getCompName.do")
+	@RequestMapping("/comm/getCompName.do")
 	public ModelAndView getCompName(Model model, ProcessVO vo) {
 		ModelAndView comMv = new ModelAndView();
 		comMv.setViewName("/comm/processList.page");
@@ -284,7 +284,7 @@ public class BomController {
 	
 	
 	// 회사리스트
-	@RequestMapping("/ajax/getCompList.do")
+	@RequestMapping("/comm/ajax/getCompList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxgetCompList(ProcessVO vo) {
 		Map<String, Object> datas = new HashMap<String, Object>();

@@ -3,8 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <h1 class="h3 mb-4 text-gray-700">생산지시 조회</h1>
-<form id="searchFrm" name="searchFrm">
+<form id="searchFrm" name="searchFrm" method="post" action="viewProrExcel.do">
 	<div class="mb-4" align="right">
+		<input type="submit" class="btn btn-primary" id="btnExcel" value="엑셀">
 		<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
 		<button type="reset" class="btn btn-primary" id="btnReset">초기화</button>
 	</div>

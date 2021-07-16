@@ -113,7 +113,6 @@
 		id="jsonView">
 		<property name="contentType" value="text/html;charset=UTF-8" />
 	</bean>
-
 	<!-- Facebook 설정 -->
 	<mvc:default-servlet-handler />
 	<!-- <bean class="org.springframework.social.connect.web.ProviderSignInController"> 

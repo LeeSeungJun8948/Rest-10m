@@ -320,10 +320,25 @@
 	<select id="searchFac" resultType="com.rest.app.fac.vo.FacilitiesVO">
 		SELECT * FROM facilities
 		<where>
+			fac_code NOT IN (SELECT fac_code FROM work WHERE end_time IS NULL)
 			<if test="keyword != null and keyword !=''">
-				${searchCondition} like '%'||#{keyword}||'%' 
+				AND ${searchCondition} like '%'||#{keyword}||'%' 
 			</if>
 		</where>
 		ORDER BY fac_code
+	</select>
+	
+	<select id="getErrorList" resultType="com.rest.app.prod.vo.ErrorListVO">
+		select c.process_name, TO_CHAR(a.work_date, 'YYYY-MM-DD')AS work_date, a.work_count, a.error_count, d.product_code, 
+      	d.product_name, a.product_lot, a.work_code, a.error_code
+		from work a, process c, product d
+		where a.process_code = c.process_code
+		and a.product_code = d.product_code	
+			<if test = "startDate != null and startDate != '' and endDate != null and endDate != ''">
+			AND trunc(work_date) BETWEEN #{startDate} AND #{endDate} 
+			</if>
+			<if test="productCode != null and productCode != ''">
+				AND a.product_code = #{productCode}
+			</if>	
 	</select>
 </mapper>

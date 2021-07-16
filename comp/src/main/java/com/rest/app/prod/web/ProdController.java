@@ -1,15 +1,19 @@
 package com.rest.app.prod.web;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.rest.app.mat.vo.SelectListVO;
 import com.rest.app.prod.service.ProdService;
@@ -158,6 +162,34 @@ public class ProdController {
 		return data;
 	}
 
+	// 생산계획 조회 - 엑셀
+	@RequestMapping("/pro/view/viewPlanExcel.do")
+	public ModelAndView viewPlanExcel(@RequestParam Map<String, Object> param)
+			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> headerMap = new HashMap<String, Object>();
+		List<DetailPlanVO> list = svc.viewPlanSearch(param);
+		List<Map<String, String>> data = new ArrayList<>();
+		for (DetailPlanVO vo : list) {
+			data.add(BeanUtils.describe(vo));
+		}
+		headerMap.put("planDate", "계획일자");
+		headerMap.put("planName", "계획명");
+		headerMap.put("productCode", "제품코드");
+		headerMap.put("productName", "제품명");
+		headerMap.put("orderNo", "주문번호");
+		headerMap.put("companyName", "업체명");
+		headerMap.put("outDate", "납기일자");
+		headerMap.put("orderCount", "주문량");
+		headerMap.put("planCount", "계획량");
+		headerMap.put("workDate", "작업일자");
+		headerMap.put("comments", "비고");
+		map.put("headerMap", headerMap);
+		map.put("filename", "excel_plan");
+		map.put("datas", data);
+		return new ModelAndView("commonExcelView", map);
+	}
+
 	// 생산지시관리 페이지
 	@RequestMapping("/pro/mng/manageProrder.do")
 	public String manageProrder() {
@@ -186,6 +218,34 @@ public class ProdController {
 		data.put("result", true);
 		data.put("data", datas);
 		return data;
+	}
+
+	// 생산지시 조회 - 엑셀
+	@RequestMapping("/pro/view/viewProrExcel.do")
+	public ModelAndView viewProrExcel(@RequestParam Map<String, Object> param)
+			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> headerMap = new HashMap<String, Object>();
+		List<DetailProrderVO> list = svc.viewProrderSearch(param);
+		List<Map<String, String>> data = new ArrayList<>();
+		for (DetailProrderVO vo : list) {
+			data.add(BeanUtils.describe(vo));
+		}
+		headerMap.put("prorDate", "지시일자");
+		headerMap.put("prorName", "지시명");
+		headerMap.put("productCode", "제품코드");
+		headerMap.put("productName", "제품명");
+		headerMap.put("orderNo", "주문번호");
+		headerMap.put("companyName", "업체명");
+		headerMap.put("outDate", "납기일자");
+		headerMap.put("orderCount", "주문량");
+		headerMap.put("prorCount", "지시량");
+		headerMap.put("workDate", "작업일자");
+		headerMap.put("comments", "비고");
+		map.put("headerMap", headerMap);
+		map.put("filename", "excel_pror");
+		map.put("datas", data);
+		return new ModelAndView("commonExcelView", map);
 	}
 
 	// 모달 생산지시검색
@@ -431,6 +491,43 @@ public class ProdController {
 		return data;
 	}
 
+	// 작업실적 조회 - 엑셀
+	@RequestMapping("/pro/view/viewWorkExcel.do")
+	public ModelAndView viewWorkExcel(@RequestParam Map<String, Object> param)
+			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> headerMap = new HashMap<String, Object>();
+		List<WorkVO> list = svc.searchWork(param);
+		List<Map<String, String>> data = new ArrayList<>();
+		for (WorkVO vo : list) {
+			data.add(BeanUtils.describe(vo));
+		}
+		headerMap.put("prorDate", "지시일자");
+		headerMap.put("prorName", "지시명");
+		headerMap.put("productCode", "제품코드");
+		headerMap.put("productName", "제품명");
+		headerMap.put("productLot", "제품LOT");
+		headerMap.put("workCode", "작업번호");
+		headerMap.put("empCode", "사원번호");
+		headerMap.put("employeeName", "사원명");
+		headerMap.put("processCode", "공정코드");
+		headerMap.put("processName", "공정명");
+		headerMap.put("workCount", "작업량");
+		headerMap.put("errorCount", "불량량");
+		headerMap.put("errorCode", "불량코드");
+		headerMap.put("errorName", "불량명");
+		headerMap.put("workDate", "작업일자");
+		headerMap.put("startTime", "시작시간");
+		headerMap.put("endTime", "종료시간");
+		headerMap.put("facCode", "설비코드");
+		headerMap.put("facilitiesName", "설비명");
+		headerMap.put("prorCode", "지시번호");
+		map.put("headerMap", headerMap);
+		map.put("filename", "excel_work");
+		map.put("datas", data);
+		return new ModelAndView("commonExcelView", map);
+	}
+
 	// 작업삭제
 	@RequestMapping("/pro/view/deleteWork.do")
 	@ResponseBody
@@ -479,14 +576,14 @@ public class ProdController {
 		data.put("data", datas);
 		return data;
 	}
-	
+
 	// 불량내역조회 페이지
 	@RequestMapping("/pro/view/detailErrorList.do")
 	public String errorList() {
 		return "prod/errorList.page";
 	}
-	
-	//불량리스트 
+
+	// 불량리스트
 	@RequestMapping("/pro/view/ajax/detailErrorList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGeterrorList(ErrorListVO vo) {
@@ -496,6 +593,32 @@ public class ProdController {
 		datas.put("contents", svc.getErrorList(vo));
 		data.put("data", datas);
 		return data;
+	}
+
+	// 불량내역 조회 - 엑셀
+	@RequestMapping("/pro/view/viewErrorExcel.do")
+	public ModelAndView viewErrorExcel(ErrorListVO vo)
+			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> headerMap = new HashMap<String, Object>();
+		List<ErrorListVO> list = svc.getErrorList(vo);
+		List<Map<String, String>> data = new ArrayList<>();
+		for (ErrorListVO errorVO : list) {
+			data.add(BeanUtils.describe(errorVO));
+		}
+		headerMap.put("processName", "공정명");
+		headerMap.put("workDate", "작업일자");
+		headerMap.put("workCount", "작업량");
+		headerMap.put("errorCount", "불량량");
+		headerMap.put("productCode", "제품코드");
+		headerMap.put("productName", "제품명");
+		headerMap.put("productLot", "제품LOT");
+		headerMap.put("workCode", "작업번호");
+		headerMap.put("errorCode", "불량코드");
+		map.put("headerMap", headerMap);
+		map.put("filename", "excel_error");
+		map.put("datas", data);
+		return new ModelAndView("commonExcelView", map);
 	}
 }
 
