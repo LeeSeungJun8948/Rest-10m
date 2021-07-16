@@ -97,6 +97,17 @@ var forGrid = false;
 $("#btnProdModal").on("click", function(e) {
 	$('#prodContent').load(contextPath+"/prodModal.do");
 });
+$("#productCode").on("click", function(e) {
+	$('#prodContent').load(contextPath+"/prodModal.do");
+});
+
+$("#productName").on("click", function(e) {
+	$('#prodContent').load(contextPath+"/prodModal.do");
+});
+$("#productLot").on("click", function(e) {
+	$('#modalContent').load(contextPath+"/prodLotModal.do");
+});
+
 $("#btnProdLotModal").on("click", function(e) {
 	$('#modalContent').load(contextPath+"/prodLotModal.do");
 });
