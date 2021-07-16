@@ -11,29 +11,37 @@
 <title></title>
 </head>
 <body>
-	<div>
-		<h2>설비조회</h2>
+	<div class="row">
+		<div class="col-md-8">
+			<h1 class="h3 mb-4 text-gray-700">설비조회</h1>
+		</div>
 	</div>
-	<div class="mb-2">
-		<form id="searchCheck" name="searchCheck">
-		<div>
-			<div>
-			<select name="searchCondition" id="searchCondition"
-				title="검색조건2-검색어구분" style="width: 80px; height: 26px">
-				<option value="facilitiesName">설비명</option>
-				<option value="processName">공정명</option>
-			</select> 
-			</div>
-			<div style="float:left">
-				<input id="searchKeyword" name="searchKeyword" type="text"
-					title="검색어" class="form-control" style="width: 200px;">
-			</div>
-			<div style="float:left">
-				<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
+	<form id="searchCheck" name="searchCheck">
+		<div class="row">
+			<div class="mb-2 col-md-6">
+				<table class="table">
+					<tr>
+						<td>
+							<div class="row">
+								<div class="col-md-2">
+									<select name="searchCondition" id="searchCondition"
+										title="검색조건2-검색어구분" style="width: 100px; height: 35px">
+										<option value="facilitiesName">설비명</option>
+										<option value="processName">공정명</option>
+									</select>
+								</div>
+								<input id="searchKeyword" name="searchKeyword" type="text"
+									title="검색어" class="form-control" style="width: 200px;">
+								<div class="col-md-2">
+									<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
-		</form>
-	</div>
+	</form>
 	<div id="grid"></div>
 	<script type="text/javascript">
 		/* var gridData;

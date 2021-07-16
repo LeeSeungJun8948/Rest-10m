@@ -35,7 +35,8 @@
 								<div class="row">
 									<div class="col-md-4">
 										<input class="form-control" type="text" id="companyCode"
-											name="companyCode">
+											name="companyCode" data-remote="false" data-toggle="modal"
+										data-target="#compModal">
 									</div>
 									<button id="btnCompModal" type="button" class="btn btn-toggle"
 										data-remote="false" data-toggle="modal"
@@ -45,7 +46,8 @@
 									</button>
 									<div class="col-md-6">
 										<input class="form-control" type="text" id="companyName"
-											name="companyName">
+											name="companyName" data-remote="false" data-toggle="modal"
+										data-target="#compModal">
 									</div>
 								</div>
 							</td>
@@ -56,7 +58,8 @@
 								<div class="row">
 									<div class="col-md-4">
 										<input class="form-control" type="text" id="productCode"
-											name="productCode">
+											name="productCode" data-remote="false" data-toggle="modal"
+										data-target="#prodModal">
 									</div>
 									<button id="btnProdModal" type="button" class="btn btn-toggle"
 										data-remote="false" data-toggle="modal"
@@ -66,7 +69,8 @@
 									</button>
 									<div class="col-md-6">
 										<input class="form-control" type="text" id="productName"
-											name="productName">
+											name="productName" data-remote="false" data-toggle="modal"
+										data-target="#prodModal">
 									</div>
 								</div>
 							</td>

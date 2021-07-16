@@ -146,6 +146,8 @@ function getFormatDate(date){
 }
 
 // 그리드 설비명 클릭
+var forGrid = true;
+
 var rowKey;
 grid.on('dblclick', function(ev){
 	if(ev.columnName == 'facilitiesName'){
