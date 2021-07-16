@@ -1,7 +1,7 @@
 
 var dataSource = {
 	api : {
-		readData : {url: 'ajax/busList.do', method:'POST' }
+		readData : {url: contextPath+'/ajax/busList.do', method:'POST' }
 	},
 	contentType: 'application/json'
 			
@@ -128,10 +128,10 @@ function resetPage() {
 //모달
 var forGrid = false;
 $("#btnCompModal").on("click", function(e) {
-    $('#compContent').load("compModalForProd.do");
+    $('#compContent').load(contextPath+"/compModalForProd.do");
 });
 $("#btnProdModal").on("click", function(e) {
-    $('#prodContent').load("prodModal.do");
+    $('#prodContent').load(contextPath+"/prodModal.do");
 });
 // ???????
 $(document).on('show.bs.modal','#btnCompModal', function () {

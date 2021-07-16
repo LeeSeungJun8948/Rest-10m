@@ -6,11 +6,11 @@ $( document ).ready(function() {
 // 그리드
 const dataSource = {
 	api : {
-		readData : { url: 'ajax/inspectionList.do', method:'GET' },
-		deleteData : { url : 'ajax/deleteIns.do', method : 'POST' },
-		createData : { url : 'ajax/insertIns.do', method : 'POST' },
-		updateData : { url : 'ajax/updateIns.do', method : 'PUT'},
-		modifyData : { url : 'ajax/modifyIns.do', method : 'PUT'}
+		readData : { url: contextPath + '/ajax/inspectionList.do', method:'GET' },
+		deleteData : { url : contextPath + '/ajax/deleteIns.do', method : 'POST' },
+		createData : { url : contextPath + '/ajax/insertIns.do', method : 'POST' },
+		updateData : { url : contextPath + '/ajax/updateIns.do', method : 'PUT'},
+		modifyData : { url : contextPath + '/ajax/modifyIns.do', method : 'PUT'}
 	},
 	contentType: 'application/json'
 }    
@@ -109,7 +109,7 @@ $("#btnAdd").on("click", function(){
 	}else{
 		$.ajax({
 			type : "get",
-			url : "ajax/getInsCode.do",
+			url : contextPath + "/ajax/getInsCode.do",
 			dataType : "json",
 			async : false,
 			success : function(data) {
@@ -152,7 +152,7 @@ grid.on('dblclick', function(ev){
 		rowKey = ev.rowKey;
 		facilitiesName = grid.getValue(rowKey, 'facilitiesName');
 		$('#facModal').modal('show');
-		$('#facContent').load("facModel.do");
+		$('#facContent').load(contextPath + "/facModel.do");
 	}
 });
 

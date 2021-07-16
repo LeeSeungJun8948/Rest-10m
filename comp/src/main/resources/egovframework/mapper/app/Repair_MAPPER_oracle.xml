@@ -49,4 +49,19 @@
 		where	f.fac_code=r.fac_code
 		and 	r.company_code=c.company_code
     </select>
+    
+    <insert id="insertRepair" parameterType="com.rest.app.fac.repair.vo.RepairVO">
+    MERGE 
+		INTO repair r
+		USING dual
+		ON (r.repair_code = #{repairCode})
+		WHEN MATCHED THEN
+		UPDATE SET 	r.FAC_CODE=#{facCode}, r.REPAIR_DATE=#{repairDate}, r.REPAIR_COMMENT=#{repairComment},
+					r.COMPANY_CODE=#{companyCode}, r.COST=#{cost}, r.ETC=#{etc}
+					
+		WHEN NOT MATCHED THEN
+		INSERT (r.REPAIR_CODE, r.FAC_CODE, r.REPAIR_DATE, r.REPAIR_COMMENT, r.COMPANY_CODE, r.COST, r.ETC)
+		VALUES (repair_seq.nextval, #{facCode}, #{repairDate}, #{repairComment}, 
+				#{companyCode}, #{cost}, #{etc})
+    </insert>
 </mapper>

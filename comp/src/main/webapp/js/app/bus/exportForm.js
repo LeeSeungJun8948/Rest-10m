@@ -7,16 +7,16 @@ $(document).ready(function() {
 var dataSource = {
 	contentType: 'application/json',
 	api: {
-		readData: { url: 'readUnExport.do', method: 'POST' },
-		modifyData: { url: 'saveDetailExport.do', method: 'PUT' },
+		readData: { url: contextPath+'/ajax/readUnExport.do', method: 'POST' },
+		modifyData: { url: contextPath+'/ajax/saveDetailExport.do', method: 'PUT' },
 	}
 }
 
 var dataSourceInput = {
 	contentType: 'application/json',
 	api: {
-		readData: { url: 'getExportLot.do', method: 'POST', },
-		modifyData: { url: 'saveExportLot.do', method: 'PUT' },
+		readData: { url: contextPath+'/ajax/getExportLot.do', method: 'POST', },
+		modifyData: { url: contextPath+'/ajax/saveExportLot.do', method: 'PUT' },
 	}
 }
 const grid = new tui.Grid({
@@ -157,7 +157,7 @@ $.fn.serializeObject = function() {
 };
 // 조회 버튼
 $("#btnExportModal").on("click", function() {
-	$('#ExportContent').load("exportModal.do");
+	$('#ExportContent').load(contextPath+"/exportModal.do");
 });
 
 // 새자료 버튼
@@ -170,7 +170,7 @@ $('#btnSave').on('click', function() {
 	if (formCheck()) {
 		$.ajax({
 			type: 'POST',
-			url: 'saveExport.do',
+			url: contextPath+'/ajax/saveExport.do',
 			data: $('#inputFrm').serialize(),
 			dataType: 'json',
 			async: false,
@@ -197,7 +197,7 @@ $('#btnSave').on('click', function() {
 $('#btnDel').on('click', function() {
 	$.ajax({
 		type: 'POST',
-		url: 'deleteExport.do',
+		url: contextPath+'/ajax/deleteExport.do',
 		data: { exportCode: $('#exportCode').val() },
 		dataType: 'json',
 		success: function() {
@@ -308,7 +308,7 @@ function checkNull(value) {
 //모달
 var forGrid = false;
 $("#btnCompModal").on("click", function(e) {
-	$('#compContent').load("compModalForProd.do");
+	$('#compContent').load(contextPath+"/compModalForProd.do");
 });
 $(document).on('show.bs.modal', '#btnCompModal', function() {
 });

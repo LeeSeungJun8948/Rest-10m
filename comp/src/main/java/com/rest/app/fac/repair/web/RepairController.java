@@ -35,14 +35,14 @@ public class RepairController {
 	@Autowired
 	RepairMapper mapper;
 	
-	@RequestMapping("/repList.do")
+	@RequestMapping("/fac/mng/repList.do")
 	public String getRep(Model model) {
 		model.addAttribute("max", mapper.getRepCode());
 		return "fac/repList.page";
 	}
 
 	
-	@RequestMapping("ajax/repList.do")
+	@RequestMapping("/ajax/repList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetRep() {
 		Map<String, Object> datas = new HashMap<String, Object>();
@@ -55,12 +55,12 @@ public class RepairController {
 	
 	
 	// 수리내역조회
-	@RequestMapping("/repairList.do")
+	@RequestMapping("/fac/view/repairList.do")
 	public String repList() {
 		return "fac/repairList.page";
 	}
 	
-	@RequestMapping("ajax/repairList.do")
+	@RequestMapping("/ajax/repairList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetRepair() {
 		Map<String, Object> datas = new HashMap<String, Object>();
@@ -69,6 +69,13 @@ public class RepairController {
 		datas.put("contents", mapper.repairList());
 		data.put("data", datas);
 		return data;
+	}
+	
+	// 저장&수정
+	@RequestMapping("/insertRepair.do")
+	public String insertRepiar(HttpServletRequest request, RepairVO vo) {
+		mapper.insertRepair(vo);
+		return "redirect:repList.do";
 	}
 	
 	// 저장
@@ -86,7 +93,7 @@ public class RepairController {
 	}
 	
 	// 삭제
-	@PostMapping(value="ajax/deleteRep.do")
+	@PostMapping(value="/ajax/deleteRep.do")
 	@ResponseBody
 	public Map<String, Object> deleteRep(@RequestBody GridData gridData) {
 		Map<String,Object> data = new HashMap<String,Object>();

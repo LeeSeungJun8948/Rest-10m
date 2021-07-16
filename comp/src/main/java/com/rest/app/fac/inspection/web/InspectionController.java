@@ -30,7 +30,7 @@ public class InspectionController {
 	@Autowired 
 	InspectionMapper mapper;
 	
-	@RequestMapping("inspection.do")
+	@RequestMapping("/fac/mng/inspection.do")
 	public String inspection(Model model) {
 		return "fac/inspection.page";
 	}
@@ -47,7 +47,7 @@ public class InspectionController {
 	}
 	
 	// 점검내역 조회
-	@RequestMapping("inspectionList.do")
+	@RequestMapping("/fac/view/inspectionList.do")
 	public String inspectionList() {
 		return "fac/inspectionList.page";
 	}
@@ -64,7 +64,7 @@ public class InspectionController {
 	}
 	
 	// 삭제
-	@PostMapping(value="ajax/deleteIns.do")
+	@PostMapping(value="/ajax/deleteIns.do")
 	@ResponseBody
 	public Map<String,Object> deleteIns(@RequestBody GridData gridDate) {
 		Map<String,Object> data = new HashMap<String,Object>();
@@ -77,7 +77,7 @@ public class InspectionController {
 	}
 	
 	// 행 추가시 불러오는 코드
-	@RequestMapping("ajax/getInsCode.do")
+	@RequestMapping("/ajax/getInsCode.do")
 	@ResponseBody
 	public InspectionVO getInsCode(InspectionVO vo) {
 		return mapper.getInsCode();

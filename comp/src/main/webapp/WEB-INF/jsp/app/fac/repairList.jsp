@@ -13,7 +13,7 @@
 const dataSource = { 
 		api : {
 			readData : {
-				url : 'ajax/repairList.do',
+				url : contextPath + '/ajax/repairList.do',
 				method : 'GET'
 			}
 		},
