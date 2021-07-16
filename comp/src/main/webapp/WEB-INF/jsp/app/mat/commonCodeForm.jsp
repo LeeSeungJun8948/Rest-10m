@@ -9,6 +9,10 @@
 #companyName{
 	background-color: #EAEAEA;	
 }
+.normal{
+	background-color: #f4f4f4;
+    border-color: #eee;
+}
 </style>
 <div class="row">
 	<div class="col-md-8">

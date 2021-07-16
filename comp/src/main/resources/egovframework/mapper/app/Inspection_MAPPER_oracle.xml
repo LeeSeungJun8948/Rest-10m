@@ -8,6 +8,7 @@
 		from 	inspection i, facilities f
 		where 	i.fac_code=f.fac_code
 		and 	trunc(today) between #{startDate} and #{endDate}
+		order by i.inspection_code
     </select>
     
     <delete id="deleteIns" parameterType="com.rest.app.fac.inspection.vo.InspectionVO">

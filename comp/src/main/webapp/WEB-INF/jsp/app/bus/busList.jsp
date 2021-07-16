@@ -3,8 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-
-<h2>주문관리참조 조회</h2>
+<h1 class="h3 mb-4 text-gray-700">주문관리참조 조회</h1>
 <div class="mb-4" align="right">
 	<button type="button" class="btn btn-primary" id="searchBtn">조회</button>
 	<button type="reset" class="btn btn-primary" id="resetBtn">새자료</button>
@@ -46,7 +45,7 @@
 									<input type="date" class="form-control" id="fromDate"
 										name="fromDate">
 								</div>
-								~
+								<span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
 								<div class="col-md-5">
 									<input type="date" class="form-control" id="toDate"
 										name="toDate">
@@ -55,29 +54,48 @@
 						</td>
 					</tr>
 					<tr>
-						<th>고객사</th>
-						<td><input type="text" id="companyCode" name="companyCode" />
-							<button id="btnCompModal" type="button" class="btn btn-toggle"
-								data-remote="false" data-toggle="modal" data-target="#compModal">
-								<img alt="btn_search"
-									src="<c:url value='/images/app/all/btn_search.png'/>">
-							</button> <input type="text" id="companyName" name="companyName"
-							readonly="true" /></td>
+						<th>업체명</th>
+						<td>
+							<div class="row">
+								<div class="col-md-4">
+									<input class="form-control" type="text"
+										id="companyCode" name="companyCode">
+								</div>
+								<button id="btnCompModal" type="button" class="btn btn-toggle"
+									data-remote="false" data-toggle="modal"
+									data-target="#compModal">
+									<img alt="btn_search"
+										src="<c:url value='/images/app/all/btn_search.png'/>">
+								</button>
+								<div class="col-md-6">
+									<input class="form-control" type="text"
+										id="companyName" name="companyName">
+								</div>
+							</div>
+						</td>
 					</tr>
-
 					<tr>
-						<th>제품코드</th>
-						<td><input type="text" id="productCode" name="productCode" />
-							<button id="btnProdModal" type="button" class="btn btn-toggle"
-								data-remote="false" data-toggle="modal" data-target="#prodModal">
-								<img alt="btn_search"
-									src="<c:url value='/images/app/all/btn_search.png'/>">
-							</button> <input type="text" id="productName" name="productName"
-							maxlength="20" readonly="true" /></td>
-
-
-
+						<th>제품명</th>
+						<td>
+							<div class="row">
+								<div class="col-md-4">
+									<input class="form-control" type="text"
+										id="productCode" name="productCode">
+								</div>
+								<button id="btnProdModal" type="button" class="btn btn-toggle"
+									data-remote="false" data-toggle="modal"
+									data-target="#prodModal">
+									<img alt="btn_search"
+										src="<c:url value='/images/app/all/btn_search.png'/>">
+								</button>
+								<div class="col-md-6">
+									<input class="form-control" type="text"
+										id="productName" name="productName">
+								</div>
+							</div>
+						</td>
 					</tr>
+
 				</tbody>
 			</table>
 
@@ -99,4 +117,5 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/bus/busList.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/app/bus/busList.js"></script>

@@ -159,7 +159,6 @@ public class MaterialController {
 				gridData.updatedRows.get(i).setInoutNo("02");
 			}
 			
-			System.out.println(gridData.updatedRows.get(i).getProcessCode() + "---------");
 			dao.udtInout(gridData.updatedRows.get(i));	
 		}
 		

@@ -9,5 +9,6 @@
 		AND p.process_code=pc.process_code
 		AND pc.product_code=d.product_code 
 		AND	d.product_name LIKE '%' || #{searchKeyword} || '%'
+		order by f.fac_code
 	</select>
 </mapper>
