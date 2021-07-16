@@ -9,6 +9,10 @@
 #companyName{
 	background-color: #EAEAEA;	
 }
+.normal{
+	background-color: #f4f4f4;
+    border-color: #eee;
+}
 </style>
 <div class="row">
 	<div class="col-md-8">
@@ -42,14 +46,14 @@
 						<th>사용여부</th>
 						<td> 
 							<select name="codeIdUseAt" id="codeIdUseAt" class="form-control">
-								<option value="Y">YES</option>
-								<option value="N">NO</option>
+								<option value="Y">Y</option>
+								<option value="N">N</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<th>코드ID설명</th>
-						<td colspan="5"> <input type="text" class="form-control" id="codeIddc" name="codeIddc"></td>
+						<td colspan="5"> <input type="text" class="form-control" id="codeIdDc" name="codeIdDc"></td>
 						
 					</tr>
 				</table>
