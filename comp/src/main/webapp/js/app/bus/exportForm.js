@@ -158,7 +158,7 @@ $.fn.serializeObject = function() {
 };
 // 조회 버튼
 $("#btnExportModal").on("click", function() {
-	$('#ExportContent').load(contextPath+"/exportModal.do");
+	$('#ExportContent').load(contextPath+"/modal/exportModal.do");
 });
 
 // 새자료 버튼

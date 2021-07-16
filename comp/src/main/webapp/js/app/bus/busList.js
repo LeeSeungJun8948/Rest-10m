@@ -134,22 +134,22 @@ function resetPage() {
 //모달
 var forGrid = false;
 $("#companyCode").on("click", function(e) {
-    $('#compContent').load(contextPath+"/compModalForProd.do");
+    $('#compContent').load(contextPath+"/modal/compModalForProd.do");
 });
 $("#companyName").on("click", function(e) {
-    $('#compContent').load(contextPath+"/compModalForProd.do");
+    $('#compContent').load(contextPath+"/modal/compModalForProd.do");
 });
 $("#productCode").on("click", function(e) {
-    $('#prodContent').load(contextPath+"/prodModal.do");
+    $('#prodContent').load(contextPath+"/modal/prodModal.do");
 });
 $("#productName").on("click", function(e) {
-    $('#prodContent').load(contextPath+"/prodModal.do");
+    $('#prodContent').load(contextPath+"/modal/prodModal.do");
 });
 $("#btnCompModal").on("click", function(e) {
-    $('#compContent').load(contextPath+"/compModalForProd.do");
+    $('#compContent').load(contextPath+"/modal/compModalForProd.do");
 });
 $("#btnProdModal").on("click", function(e) {
-    $('#prodContent').load(contextPath+"/prodModal.do");
+    $('#prodContent').load(contextPath+"/modal/prodModal.do");
 });
 // ???????
 $(document).on('show.bs.modal','#btnCompModal', function () {
