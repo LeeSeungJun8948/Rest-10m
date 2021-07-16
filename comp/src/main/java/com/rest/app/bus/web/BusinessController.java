@@ -64,6 +64,7 @@ public class BusinessController {
 
 	@RequestMapping("bus/mng/exportForm.do") // 출고관리페이지
 	public String exportForm(Model model) {
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^");
 		return "bus/exportForm.page";
 	}
 

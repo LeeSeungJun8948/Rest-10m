@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	document.getElementById('exportDate').valueAsDate = new Date();
 	document.getElementById('fromDate').valueAsDate = new Date();
 	document.getElementById('toDate').valueAsDate = new Date();
 });
@@ -307,6 +308,12 @@ function checkNull(value) {
 }
 //모달
 var forGrid = false;
+$("#companyCode").on("click", function(e) {
+	$('#compContent').load(contextPath+"/compModalForProd.do");
+});
+$("#companyName").on("click", function(e) {
+	$('#compContent').load(contextPath+"/compModalForProd.do");
+});
 $("#btnCompModal").on("click", function(e) {
 	$('#compContent').load(contextPath+"/compModalForProd.do");
 });
