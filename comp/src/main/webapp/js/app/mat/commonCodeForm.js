@@ -24,7 +24,8 @@ const codeIdGrid = new tui.Grid({
 			validation: {
             	required: true
           	},
-			className: 'normal'
+			className: 'normal',
+			sortable: true
 		}, {
 			header : '코드ID명',
 			name : 'codeIdNm',
@@ -32,7 +33,8 @@ const codeIdGrid = new tui.Grid({
 			validation: {
             	required: true
           	},
-			className: 'normal'
+			className: 'normal',
+			sortable: true
 		}, {
 			header : '코드ID설명',
 			name : 'codeIdDc',
@@ -77,15 +79,18 @@ const codeGrid = new tui.Grid({
             	required: true
           	},
 			editor: 'text',
-			className: 'normal'	
+			className: 'normal',
+			sortable: true
 		}, {
 			header : '코드명',
 			name : 'codeNm',
 			align: 'center',
 			editor : 'text',
+			width : 250,
 			validation: {
             	required: true
-          	}
+          	},
+			sortable: true
 		}, {
 			header : '코드설명',
 			name : 'codeDc',
@@ -173,6 +178,13 @@ codeIdGrid.on('click',function(e){
 	
 })
 
+$('#btnSrc').on('click',function(){
+	var param = {'srcCodeIdNm' : $('#srcCodeIdNm').val()}
+	console.log(param)
+	codeIdGrid.readData(1, param, true);
+})
+
+// 코드 선택
 function grinOnEvent(){
 	
 	$('#codeId').val(codeIdGrid.getValue(idRowKey, 'codeId'));
@@ -205,12 +217,19 @@ $('#btnNewCodeId').on('click', function(){
 
 })
 
+// 코드ID 삭제
 $('#btnDelCodeId').on('click', function(){
-	for(var checked of codeIdGrid.getCheckedRowKeys()){
+	
+	if(codeGrid.getRowCount() > 0){
+		toast('상세코드가 남아있어 삭제할수 없습니다.','')
+	}else{
+		for(var checked of codeIdGrid.getCheckedRowKeys()){
 		if(newRowKey == checked)
 			newRowKey = null;	
+		}
+		codeIdGrid.removeCheckedRows(true);	
 	}
-	codeIdGrid.removeCheckedRows(true);
+	
 })
 
 $('#btnNewCode').on('click', function(){
@@ -241,7 +260,7 @@ $('#btnSave').on('click',function(){
 				if(column.name == errors.columnName)
 					header = column.header;
 			}
-			toast(header+'를 확인하세요.',valid.rowKey*1+1);	
+			toast(header+'를 확인하세요.','No.' + valid.rowKey*1+1);	
 		}
 	}
 	
@@ -252,7 +271,7 @@ $('#btnSave').on('click',function(){
 				if(column.name == errors.columnName)
 					header = column.header;
 			}
-			toast(header+'를 확인하세요.',valid.rowKey*1+1);	
+			toast(header+'를 확인하세요.','No.' + valid.rowKey*1+1);	
 		}
 	}
 	
