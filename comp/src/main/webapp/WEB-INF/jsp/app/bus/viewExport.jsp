@@ -8,46 +8,72 @@
 		<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
 		<button type="reset" class="btn btn-primary" id="btnReset">초기화</button>
 	</div>
-	<div class="row">	
-		<div class="mb-2 col-lg-12">
-			<table class="table">
-				<tbody>
-					<tr>
-						<th>출고일자</th>
+	<div class="row">
+		<div class="mb-2 col-lg-6">
+			<form id="dataForm" name="dataForm">
+				<table class="table">
+					<tbody>
+						<tr>
+						<th>주문일자*</th>
 						<td>
 							<div class="row">
-								<input type="date" class="form-control" id="searchDtS" name="searchDtS">
-								<span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
-								<input type="date" class="form-control" id="searchDtE" name="searchDtE">
+								<div class="col-md-4">
+									<input type="date" class="form-control" id="searchDtS"
+										name="searchDtS">
+								</div>
+								<span>~&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<div class="col-md-4">
+									<input type="date" class="form-control" id="searchDtE"
+										name="searchDtE">
+								</div>
 							</div>
 						</td>
 					</tr>
-					<tr>
-						<th>업체명</th>
-						<td>
-							<div class="row">
-								<input type="hidden" id="companyCode" name="companyCode" />
-								<input type="text" class="form-control" id="companyName" name="companyName" readonly="true" />
-								<button id="btnCompModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#compModal">
-									<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
-								</button> 
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th>제품명</th>
-						<td>
-							<div class="row">
-								<input type="hidden" id="productCode" name="productCode" />
-								<input type="text" class="form-control" id="productName" name="productName" maxlength="20" readonly="true" />
-								<button id="btnProdModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#prodModal">
-									<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
-								</button>
-							</div> 
-						</td>
-					</tr>
-				</tbody>
-			</table>
+						<tr>
+							<th>업체명</th>
+							<td>
+								<div class="row">
+									<div class="col-md-4">
+										<input class="form-control" type="text" id="companyCode"
+											name="companyCode">
+									</div>
+									<button id="btnCompModal" type="button" class="btn btn-toggle"
+										data-remote="false" data-toggle="modal"
+										data-target="#compModal">
+										<img alt="btn_search"
+											src="<c:url value='/images/app/all/btn_search.png'/>">
+									</button>
+									<div class="col-md-6">
+										<input class="form-control" type="text" id="companyName"
+											name="companyName">
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>제품명</th>
+							<td>
+								<div class="row">
+									<div class="col-md-4">
+										<input class="form-control" type="text" id="productCode"
+											name="productCode">
+									</div>
+									<button id="btnProdModal" type="button" class="btn btn-toggle"
+										data-remote="false" data-toggle="modal"
+										data-target="#prodModal">
+										<img alt="btn_search"
+											src="<c:url value='/images/app/all/btn_search.png'/>">
+									</button>
+									<div class="col-md-6">
+										<input class="form-control" type="text" id="productName"
+											name="productName">
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
 		</div>
 	</div>
 </form>
@@ -67,5 +93,8 @@
 	</div>
 </div>
 
-<link href="${pageContext.request.contextPath}/css/app/prod/viewWork.css" rel="stylesheet">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/bus/viewExport.js"></script>
+<link
+	href="${pageContext.request.contextPath}/css/app/prod/viewWork.css"
+	rel="stylesheet">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/app/bus/viewExport.js"></script>
