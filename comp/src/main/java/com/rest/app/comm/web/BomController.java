@@ -54,7 +54,7 @@ public class BomController {
 		return "app/comm/proModal";
 	}
 
-	@RequestMapping("/comm/main.do")
+	@RequestMapping("/main.do")
 	public String main(Model model) {
 		return "comm/main.page";
 	}
