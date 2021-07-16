@@ -3,7 +3,7 @@
 
 
  <!-- Sidebar - Brand -->
- <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/pro/view/main.do">
+ <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/main.do">
      <div class="sidebar-brand-icon rotate-n-15">
          <i class="fas fa-laugh-wink"></i>
      </div>
@@ -15,7 +15,7 @@
 
  <!-- Nav Item - Dashboard -->
  <li class="nav-item active">
-     <a class="nav-link" href="${pageContext.request.contextPath}/pro/view/main.do">
+     <a class="nav-link" href="${pageContext.request.contextPath}/main.do">
          <i class="fas fa-fw fa-tachometer-alt"></i>
          <span>메인</span></a>
  </li>
@@ -94,6 +94,7 @@
              <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/procMovePrint.do">공정이동표 발행</a>
              <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/manageWork.do">작업실적 관리</a>
              <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/viewWork.do">작업실적 조회</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/prodMonitoring.do">생산 모니터링</a>
              <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/detailErrorList.do">불량내역 조회</a>
          </div>
      </div>
@@ -117,7 +118,33 @@
          </div>
      </div>
  </li>
-
+	<!-- Nav Item - Pages Collapse Menu -->
+ <li class="nav-item">
+     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages4" aria-expanded="true" aria-controls="collapsePages4">
+         <i class="fas fa-fw fa-folder"></i>
+         <span>사용자 권한 관리</span>
+     </a>
+     <div id="collapsePages4" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+         <div class="bg-white py-2 collapse-inner rounded">
+             <a class="collapse-item" href="${pageContext.request.contextPath}/sec/rmt/EgovRoleList.do">롤 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/sec/ram/EgovAuthorList.do">권한 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/sec/rgm/EgovAuthorGroupList.do">권한 그룹 관리</a>
+         </div>
+     </div>
+ </li>
+ 	<!-- Nav Item - Pages Collapse Menu -->
+ <li class="nav-item">
+     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages5" aria-expanded="true" aria-controls="collapsePages5">
+         <i class="fas fa-fw fa-folder"></i>
+         <span>프로그램/메뉴관리</span>
+     </a>
+     <div id="collapsePages5" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+         <div class="bg-white py-2 collapse-inner rounded">
+             <a class="collapse-item" href="#">프로그램 관리</a>
+             <a class="collapse-item" href="#">메뉴 관리</a>
+         </div>
+     </div>
+ </li>
  <!-- Divider -->
 	<hr class="sidebar-divider">
 

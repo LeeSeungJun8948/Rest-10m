@@ -58,9 +58,16 @@
 			});
 			
 			function select(){
-				grid.setValue(rowKey, 'facCode', facCode, false);
-				grid.setValue(rowKey, 'facilitiesName', facilitiesName, false);
-				grid.setValue(rowKey, 'facInspection', facInspection, false);
+				if(forGrid) {
+					grid.setValue(rowKey, 'facCode', facCode, false);
+					grid.setValue(rowKey, 'facilitiesName', facilitiesName, false);
+					grid.setValue(rowKey, 'facInspection', facInspection, false); 
+				} else {
+					$('#facCode').val(facCode);
+					$('#facilitiesName').val(facilitiesName);
+					$('#facInspection').val(facInspection);
+				}
+				
 				$('#facModal').modal('hide');
 				$('#modalContent').remove();
 			}

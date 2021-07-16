@@ -2,7 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<h1 class="h3 mb-4 text-gray-700">설비 점검내역 관리</h1>
+<div class="row">
+	<div class="col-md-8">
+		<h1 class="h3 mb-4 text-gray-700">설비 점검내역 관리</h1>
+	</div>
+	<div class="col-md-4 mb-4" align="right" role="form">
+		<button type="button" class="btn btn-primary" id="btnSave"
+			name="btnSave">저장</button>
+		<button type="button" class="btn btn-info" id="btnAdd" name="btnAdd">추가</button>
+		<button type="button" class="btn btn-info" id="btnDel" name="btnDel">삭제</button>
+	</div>
+</div>
 <form id="frm" name="frm">
 	<div class="flax row">
 		<div class="mb-4 col-10f">
@@ -13,32 +23,30 @@
 						<td>
 							<div class="row">
 								<div class="col-md-5">
-									<input type="date" class="form-control" id="startDate" name="startDate" >
+									<input type="date" class="form-control" id="startDate"
+										name="startDate">
 								</div>
-								~ 
+								~
 								<div class="col-md-5">
-									<input type="date" class="form-control" id="endDate" name="endDate" >
+									<input type="date" class="form-control" id="endDate"
+										name="endDate">
 								</div>
 								<button type="button" class="btn btn-primary" id="btnRead">조회</button>
 							</div>
 						</td>
-					</tr>			
+					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
 </form>
-<div class="mb-4" align="right">
-	<button type="button" class="btn btn-primary" id="btnSave" name="btnSave" >저장</button>
-	<button type="button" class="btn btn-info" id="btnAdd" name="btnAdd" >추가</button>
-	<button type="button" class="btn btn-info" id="btnDel" name="btnDel" >삭제</button>
-</div>
 <div id="grid"></div>
 
-<div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="facModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content" id="facContent" align="center">
-		</div>
+		<div class="modal-content" id="facContent" align="center"></div>
 	</div>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/fac/inspection.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/app/fac/inspection.js"></script>

@@ -63,7 +63,6 @@ const dataSource = {
 	// input 데이터 불러오기
 	grid.on('click', function(ev) {
 		var key = grid.getRow(ev.rowKey).repairCode;
-		console.log(key);
 		$.ajax({
 			type : "get",
 			url : contextPath + "/ajax/repInfo.do",
@@ -116,11 +115,17 @@ const dataSource = {
 	function checkNull(value){
 		return value != null && value != '' && value != '[object HTMLInputElement]';
 	}
-
+	
+	// 모달
+	var forGrid = false;
+	
 	$("#btnCompModal").on("click", function(e) {
-	    $('#compContent').load(contextPath + "/compModal.do");
+	    $('#compContent').load(contextPath + "/modal/compModal.do");
 	});
 	
+	$("#btnFacModal").on("click", function(e) {
+	    $('#facContent').load(contextPath + "/modal/facModel.do");
+	});
 
 	function numberWithCommas(x) {
  	 x = x.replace(/[^0-9]/g,'');   

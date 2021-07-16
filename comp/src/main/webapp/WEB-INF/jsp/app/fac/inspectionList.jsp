@@ -5,7 +5,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 	<div>
-	<h2>설비 점검내역 조회</h2>
+	<h1 class="h3 mb-4 text-gray-700">설비 점검내역 조회</h1>
 	</div>
 	<div id="grid"></div>
 <script type="text/javascript">

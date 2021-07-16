@@ -104,7 +104,7 @@ public class EgovAuthorManageController {
         model.addAttribute("paginationInfo", paginationInfo);
         model.addAttribute("message", egovMessageSource.getMessage("success.common.select"));
 
-        return "egovframework/com/sec/ram/EgovAuthorManage";
+        return "egovframework/com/sec/ram/EgovAuthorManage.tiles";
     } 
     
     /**

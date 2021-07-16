@@ -127,7 +127,7 @@ public class InspectionController {
 	}
 	
 	// 설비검색 모달 페이지
-		@RequestMapping("/facModel.do")
+		@RequestMapping("/modal/facModel.do")
 		public String facModel() {
 			return "app/modal/facModel";
 		}

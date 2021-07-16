@@ -102,7 +102,7 @@ public class EgovAuthorGroupController {
 
         model.addAttribute("message", egovMessageSource.getMessage("success.common.select"));
         
-        return "egovframework/com/sec/rgm/EgovAuthorGroupManage";
+        return "egovframework/com/sec/rgm/EgovAuthorGroupManage.tiles";
 	}
 
 	/**

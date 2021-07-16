@@ -116,7 +116,7 @@ public class EgovRoleManageController {
         model.addAttribute("paginationInfo", paginationInfo);
         model.addAttribute("message", egovMessageSource.getMessage("success.common.select"));
 
-        return "egovframework/com/sec/rmt/EgovRoleManage";
+        return "egovframework/com/sec/rmt/EgovRoleManage.tiles";
 	}
 
 	/**

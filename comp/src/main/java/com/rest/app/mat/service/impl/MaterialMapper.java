@@ -7,6 +7,7 @@ import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
 import com.rest.app.mat.vo.ProcMoveVO;
+import com.rest.app.mat.vo.ProdVO;
 import com.rest.app.mat.vo.SelectListVO;
 
 public interface MaterialMapper {
@@ -59,6 +60,9 @@ public interface MaterialMapper {
 	public int delMatAdjust(InoutVO vo);
 
 	public InoutVO getInoutNo(InoutVO vo);
+	
+	// 생산 모니터링
+	public List<ProdVO> getProdMonitoring();
 	
 	// 공통 코드
 	public List<CommonCodeVO> getCodeIdList(CommonCodeVO vo);

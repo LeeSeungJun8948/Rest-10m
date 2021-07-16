@@ -239,13 +239,13 @@ var forGrid = false;
 $('#btnProcModal').on('click',function(e){
 	$('#processCode').val('');
 	$('#processName').val('');
-	$('#procContent').load(contextPath + "/procModal.do");
+	$('#procContent').load(contextPath + "/modal/procModal.do");
 });
 
 $('#btnEmpModal').on('click',function(e){
 	$('#employeeName').val('');
 	$('#empCode').val('');
-	$('#empContent').load(contextPath + "/empListModal.do");
+	$('#empContent').load(contextPath + "/modal/empListModal.do");
 });
 
 	

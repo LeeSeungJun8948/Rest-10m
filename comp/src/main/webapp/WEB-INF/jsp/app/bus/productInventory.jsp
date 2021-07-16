@@ -41,7 +41,8 @@
 					<td>
 					<div class="row">
 					<div class="col-md-4">
-					<input type="text" class="form-control" id="productLot" name="productLot" max-length="20" />
+					<input type="text" class="form-control" id="productLot" name="productLot" max-length="20"
+					data-remote="false" data-toggle="modal" data-target="#prodLotModal" />
 						</div>
 						<button id="btnProdLotModal" type="button" class="btn btn-toggle"
 							data-remote="false" data-toggle="modal" data-target="#prodLotModal">
@@ -58,7 +59,8 @@
 							<div class="row">
 								<div class="col-md-4">
 									<input class="form-control" type="text"
-										id="productCode" name="productCode">
+										id="productCode" name="productCode" data-remote="false" data-toggle="modal"
+									data-target="#prodModal">
 								</div>
 								<button id="btnProdModal" type="button" class="btn btn-toggle"
 									data-remote="false" data-toggle="modal"
@@ -68,7 +70,8 @@
 								</button>
 								<div class="col-md-6">
 									<input class="form-control" type="text"
-										id="productName" name="productName">
+										id="productName" name="productName" data-remote="false" data-toggle="modal"
+									data-target="#prodModal">
 								</div>
 							</div>
 						</td>

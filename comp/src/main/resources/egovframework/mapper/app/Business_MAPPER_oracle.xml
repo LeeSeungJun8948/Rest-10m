@@ -259,6 +259,9 @@
 		AND d.order_no = o.order_no
 		AND d.product_code = p.product_code
 		AND o.company_code = c.company_code
+		AND export_date
+		BETWEEN TO_DATE(#{searchDtS}, 'YYYY-MM-DD')
+		AND TO_DATE(#{searchDtE},'YYYY-MM-DD')
 		<if test="keyword != null and keyword !=''">
 			AND ${searchCondition} like '%'||#{keyword}||'%'
 		</if>
