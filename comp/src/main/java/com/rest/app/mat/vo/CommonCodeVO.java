@@ -15,4 +15,6 @@ public class CommonCodeVO {
 	String codeDc;
 	String codeUseAt;
 	
+	String srcCodeIdNm;
+	
 }

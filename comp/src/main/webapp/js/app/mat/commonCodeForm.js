@@ -20,25 +20,43 @@ const codeIdGrid = new tui.Grid({
 			header : '코드ID',
 			name : 'codeId',	
 			width : 150,
-			align: 'center'
+			align: 'center',
+			validation: {
+            	required: true
+          	},
+			className: 'normal',
+			sortable: true
 		}, {
-			header : '코드명',
+			header : '코드ID명',
 			name : 'codeIdNm',
-			align: 'center'
+			align: 'center',
+			validation: {
+            	required: true
+          	},
+			className: 'normal',
+			sortable: true
 		}, {
+			header : '코드ID설명',
 			name : 'codeIdDc',
-			hidden: true
+			hidden: true,
+			validation: {
+            	required: true
+          	}
 		}, {
+			header : '코드ID사용여부',
 			name : 'codeIdUseAt',
-			hidden: true
+			hidden: true,
+			validation: {
+            	required: true
+          	}
 		} ]
 });
 
 
 const codeData = {
 	api : {
-		readData : {url: 'ajax/getDetailCodeList.do' , method:'GET' },
-		modifyData : { url: 'ajax/codeModify.do', method: 'PUT'}
+		readData : {url: contextPath + '/ajax/getDetailCodeList.do' , method:'GET' },
+		modifyData : { url: contextPath + '/ajax/codeModify.do', method: 'PUT'}
 	},
 	contentType: 'application/json'
 };
@@ -59,15 +77,20 @@ const codeGrid = new tui.Grid({
 			align: 'center',
 			validation: {
             	required: true
-          	}
+          	},
+			editor: 'text',
+			className: 'normal',
+			sortable: true
 		}, {
 			header : '코드명',
 			name : 'codeNm',
 			align: 'center',
 			editor : 'text',
+			width : 250,
 			validation: {
             	required: true
-          	}
+          	},
+			sortable: true
 		}, {
 			header : '코드설명',
 			name : 'codeDc',
@@ -102,12 +125,13 @@ const codeGrid = new tui.Grid({
 			hidden: true,
 			relations: [
 				{
-			        targetNames: ['codeId'],
+			        targetNames: ['code'],
 			        editable({value}) {
-			          return value == '1';
+						console.log(value == 'yes');
+						return value == 'yes';
 					}
 		      }
-]
+			]
 		} ]
 });
 
@@ -154,23 +178,20 @@ codeIdGrid.on('click',function(e){
 	
 })
 
+$('#btnSrc').on('click',function(){
+	var param = {'srcCodeIdNm' : $('#srcCodeIdNm').val()}
+	console.log(param)
+	codeIdGrid.readData(1, param, true);
+})
+
+// 코드 선택
 function grinOnEvent(){
 	
-	$.ajax({
-		type : "get",
-		url : "ajax/getDetailCode.do",
-		data : {"codeId" : codeIdGrid.getValue(idRowKey, 'codeId')},
-		dataType : "json",
-		success : function(data) {
-			$('#codeId').val(data.codeId);
-			$('#codeIdNm').val(data.codeIdNm);
-			$('#codeIddc').val(data.codeIdDc);
-			$('#codeIdUseAt').val(data.codeIdUseAt);
-		},
-		error : function() {
-		}
-	});
-	
+	$('#codeId').val(codeIdGrid.getValue(idRowKey, 'codeId'));
+	$('#codeIdNm').val(codeIdGrid.getValue(idRowKey, 'codeIdNm'));
+	$('#codeIdDc').val(codeIdGrid.getValue(idRowKey, 'codeIdDc'));
+	$('#codeIdUseAt').val(codeIdGrid.getValue(idRowKey, 'codeIdUseAt'));
+
 	var param = {"codeId" : codeIdGrid.getValue(idRowKey, 'codeId')};
 	console.log(param);
 	codeGrid.readData(1, param, true);
@@ -182,6 +203,7 @@ $('#btnNewCodeId').on('click', function(){
 		toast('한번에 하나의 코드만 추가할 수 있습니다. 저장 후 새입력 해주세요.','')
 	}else{
 		newRowKey = codeIdGrid.getRowCount();
+		idRowKey = newRowKey;
 		
 		codeIdGrid.appendRow({},{
 			at : codeIdGrid.getRowCount(),
@@ -195,23 +217,30 @@ $('#btnNewCodeId').on('click', function(){
 
 })
 
+// 코드ID 삭제
 $('#btnDelCodeId').on('click', function(){
-	for(var checked of codeIdGrid.getCheckedRowKeys()){
+	
+	if(codeGrid.getRowCount() > 0){
+		toast('상세코드가 남아있어 삭제할수 없습니다.','')
+	}else{
+		for(var checked of codeIdGrid.getCheckedRowKeys()){
 		if(newRowKey == checked)
 			newRowKey = null;	
+		}
+		codeIdGrid.removeCheckedRows(true);	
 	}
-	codeIdGrid.removeCheckedRows(true);
+	
 })
 
 $('#btnNewCode').on('click', function(){
 	
 	if(checkNull(codeIdGrid.getValue(idRowKey, 'codeId'))){
-		newRowData = {"codeId" : codeIdGrid.getValue(idRowKey, 'codeId')}
+		newRowData = {"codeId" : codeIdGrid.getValue(idRowKey, 'codeId'),
+						'newRow' : 'yes'}
 		codeGrid.appendRow(newRowData,{
 			at : codeGrid.getRowCount(),
 			focus : true
 		});	
-		codeGrid.setValue(newRowData,'newRow','1',false);
 	}else{
 		toast('코드ID를 입력해주세요.','')
 	}
@@ -224,14 +253,59 @@ $('#btnDelCode').on('click', function(){
 
 $('#btnSave').on('click',function(){
 	
+	for(var valid of codeIdGrid.validate()){
+		for(var errors of valid.errors){
+			var header;
+			for(var column of codeIdGrid.getColumns()){
+				if(column.name == errors.columnName)
+					header = column.header;
+			}
+			toast(header+'를 확인하세요.','No.' + valid.rowKey*1+1);	
+		}
+	}
+	
+	for(var valid of codeGrid.validate()){
+		for(var errors of valid.errors){
+			var header;
+			for(var column of codeGrid.getColumns()){
+				if(column.name == errors.columnName)
+					header = column.header;
+			}
+			toast(header+'를 확인하세요.','No.' + valid.rowKey*1+1);	
+		}
+	}
+	
+	var change = false;
+	
+	for(modified in codeIdGrid.getModifiedRows()){
+		if(codeIdGrid.getModifiedRows()[modified].length > 0){
+			change = true;
+		}
+	}
+			
+	if(change && codeIdGrid.validate().length == 0 && codeGrid.validate().length == 0){
+		codeIdGrid.request('modifyData');
+		newRowKey = null;
+		change = false;
+	}
+	
+	for(modified in codeGrid.getModifiedRows()){
+		if(codeGrid.getModifiedRows()[modified].length > 0){
+			change = true;
+		}
+	}
+	
+	if(change && codeIdGrid.validate().length == 0 && codeGrid.validate().length == 0){
+		codeGrid.request('modifyData');
+	}
 })
 
 $('input').on('propertychange change keyup paste input', function(){
-	codeIdGrid.setValue(idRowKey, $('this').attr('id'));
+	codeIdGrid.setValue(idRowKey, $(this).attr('id'), $(this).val(), false);
 })
 
-$('select').on('propertychange change keyup paste input', function(){
-	codeIdGrid.setValue(idRowKey, $('this').attr('id'));
+$('select').on('change', function(){
+	codeIdGrid.setValue(idRowKey, $(this).attr('id'), $(this).val(), false);
 })
 
 function toast(text, title){

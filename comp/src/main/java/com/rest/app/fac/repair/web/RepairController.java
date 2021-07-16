@@ -72,7 +72,7 @@ public class RepairController {
 	}
 	
 	// 저장&수정
-	@RequestMapping("/insertRepair.do")
+	@RequestMapping("/fac/mng/insertRepair.do")
 	public String insertRepiar(HttpServletRequest request, RepairVO vo) {
 		mapper.insertRepair(vo);
 		return "redirect:repList.do";

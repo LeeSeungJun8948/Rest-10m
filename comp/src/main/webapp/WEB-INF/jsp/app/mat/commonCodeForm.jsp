@@ -9,6 +9,10 @@
 #companyName{
 	background-color: #EAEAEA;	
 }
+.normal{
+	background-color: #f4f4f4;
+    border-color: #eee;
+}
 </style>
 <div class="row">
 	<div class="col-md-8">
@@ -17,12 +21,18 @@
 	<div class="col-md-2 mb-4" align="right">
 		<button class="btn btn-primary" id="btnSave" type="button"> 저장 </button>
 	</div>
-</div>	
+</div>
 <div class="row">
 	<div id="codeIdGrid" class="col-3">
-		<div align="right" class="mb-4">
-			<button class="btn btn-info" id="btnNewCodeId" type="button"> 추가 </button>
-			<button class="btn btn-info" id="btnDelCodeId" type="button"> 삭제 </button>
+		<div class="row">
+			<div class="col-6 mr-0">
+				<input type="text" id="srcCodeIdNm" name="srcCodeIdNm" class="form-control w-5" placeholder="코드ID명">
+			</div>
+			<div class="ml-0 mb-4">
+				<button class="btn btn-light" id="btnSrc" type="button"> 검색 </button>
+				<button class="btn btn-info" id="btnNewCodeId" type="button"> 추가 </button>
+				<button class="btn btn-info" id="btnDelCodeId" type="button"> 삭제 </button>
+			</div>
 		</div>
 	</div>
 	

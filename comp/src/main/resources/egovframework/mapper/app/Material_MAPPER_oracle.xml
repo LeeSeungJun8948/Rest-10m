@@ -389,9 +389,14 @@
 	<!-- 공통코드 -->
 	<select id="getCodeIdList" resultType="CommonCodeVO" parameterType="CommonCodeVO">
 		SELECT code_id, 
-				code_id_nm
+				code_id_nm,
+				code_id_dc,
+				use_at AS code_id_use_at
 		FROM COMTCCMMNCODE 
-		WHERE cl_code = 'R10'
+		WHERE cl_code = 'R10' 
+		<if test="srcCodeIdNm != null and srcCodeIdNm !=''">
+			AND UPPER(code_id_nm) LIKE '%'||UPPER(#{srcCodeIdNm})||'%'
+		</if>
 	</select>
 	
 	<select id="getDetailCodeId" resultType="CommonCodeVO" parameterType="CommonCodeVO">
@@ -405,7 +410,7 @@
 	
 	<insert id="istCodeId" parameterType="CommonCodeVO">
 		INSERT INTO COMTCCMMNCODE
-		VALUES(#{codeId}, #{codeIdNm}, #{codeIdDc}, #{codeIdUseAt}, 'R10', sysdate, 'SYSTEM', sysdate 'SYSTEM')
+		VALUES(#{codeId}, #{codeIdNm}, #{codeIdDc}, #{codeIdUseAt}, 'R10', sysdate, 'SYSTEM', sysdate, 'SYSTEM')
 	</insert>
 	
 	<update id="udtCodeId" parameterType="CommonCodeVO">
@@ -432,7 +437,7 @@
 	
 	<insert id="istCode" parameterType="CommonCodeVO">
 		INSERT INTO COMTCCMMNDETAILCODE
-		VALUES(#{codeId}, #{code}, #{codeNm}, #{codeDc}, #{codeUseAt}, sysdate, 'SYSTEM', sysdate 'SYSTEM')
+		VALUES(#{codeId}, #{code}, #{codeNm}, #{codeDc}, #{codeUseAt}, sysdate, 'SYSTEM', sysdate, 'SYSTEM')
 	</insert>
 	
 	<update  id="udtCode" parameterType="CommonCodeVO">
