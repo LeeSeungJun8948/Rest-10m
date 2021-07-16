@@ -8,6 +8,7 @@ import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
 import com.rest.app.mat.vo.ProcMoveVO;
+import com.rest.app.mat.vo.ProdVO;
 import com.rest.app.mat.vo.SelectListVO;
 
 public interface MaterialService {
@@ -74,6 +75,9 @@ public interface MaterialService {
 	public int istCode(CommonCodeVO vo);
 	public int udtCode(CommonCodeVO vo);
 	public int delCode(CommonCodeVO vo);
+
+	// 생산 모니터링
+	public List<ProdVO> getProdMonitoring();
 	
 	// 모달
 	public List<SelectListVO> getMatListModal(SelectListVO vo); // 자재검색 모달 자재리스트

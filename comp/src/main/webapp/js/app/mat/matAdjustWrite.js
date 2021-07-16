@@ -345,7 +345,7 @@ var forGrid = false;
 $("#btnMatModal").on("click", function(e) {
 	$('#materialCode').val('');
 	$('#materialName').val('');    
-	$('#matContent').load(contextPath + "/matModal.do");
+	$('#matContent').load(contextPath + "/modal/matModal.do");
 });
 
 // 자재코드 입력창
@@ -353,7 +353,7 @@ $('#materialCode').on('click', function(){
 	$('#materialCode').val('');
 	$('#materialName').val('');	
 	$('#matModal').modal('show');
-	$('#matContent').load(contextPath + "/matModal.do");
+	$('#matContent').load(contextPath + "/modal/matModal.do");
 });
 
 function checkNull(value){

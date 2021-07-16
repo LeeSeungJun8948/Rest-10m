@@ -146,13 +146,15 @@ function getFormatDate(date){
 }
 
 // 그리드 설비명 클릭
+var forGrid = true;
+// 모달
 var rowKey;
 grid.on('dblclick', function(ev){
 	if(ev.columnName == 'facilitiesName'){
 		rowKey = ev.rowKey;
 		facilitiesName = grid.getValue(rowKey, 'facilitiesName');
 		$('#facModal').modal('show');
-		$('#facContent').load(contextPath + "/facModel.do");
+		$('#facContent').load(contextPath + "/modal/facModel.do");
 	}
 });
 

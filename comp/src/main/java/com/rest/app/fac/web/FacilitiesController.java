@@ -177,7 +177,7 @@ public class FacilitiesController {
 	}
 	
 	// 사원검색 모달
-	@RequestMapping("/empListModal.do")
+	@RequestMapping("/modal/empListModal.do")
 	public String empModal() {
 		return "app/modal/empModal";
 	}

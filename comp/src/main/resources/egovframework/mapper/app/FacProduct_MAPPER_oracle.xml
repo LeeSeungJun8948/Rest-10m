@@ -7,7 +7,15 @@
 		from 	facilities f, work w, product p
 		where 	f.fac_code=w.fac_code
 		and 	w.product_code=p.product_code
-		AND		p.product_name LIKE '%' || #{searchKeyword} || '%'
+		AND		trunc(w.work_date) BETWEEN #{startDate} AND #{endDate}
+		
+		<if test="facilitiesName !=null and facilitiesName !=''">
+			AND f.facilities_name =#{facilitiesName}
+		</if>
+		
+		<if test="productName !=null and productName !=''">
+			AND p.product_name = #{productName}
+		</if>
 		order by w.work_date
 	</select>
 </mapper>
