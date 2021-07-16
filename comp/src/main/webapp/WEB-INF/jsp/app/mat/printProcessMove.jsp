@@ -22,7 +22,7 @@ table{
 	<table>
 		<tr>
 			<th width="300px" colspan="2">
-				<img class="image" src="filedown.do?fileName=${barcode }">
+				<img class="image" src="${pageContext.request.contextPath}/fac/mng/filedown.do?fileName=${barcode }">
 			</th>
 		</tr>
 		<tr>

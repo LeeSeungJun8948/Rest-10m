@@ -11,6 +11,7 @@ import com.rest.app.mat.vo.InorderVO;
 import com.rest.app.mat.vo.InoutVO;
 import com.rest.app.mat.vo.MaterialVO;
 import com.rest.app.mat.vo.ProcMoveVO;
+import com.rest.app.mat.vo.ProdVO;
 import com.rest.app.mat.vo.SelectListVO;
 import com.sun.star.configuration.backend.PropertyInfo;
 
@@ -242,5 +243,9 @@ public class MaterialServiceImpl implements MaterialService{
 	public CommonCodeVO getDetailCodeId(CommonCodeVO vo) {
 		return mapper.getDetailCodeId(vo);
 	}
-	
+
+	@Override
+	public List<ProdVO> getProdMonitoring(){
+		return mapper.getProdMonitoring();
+	}
 }
