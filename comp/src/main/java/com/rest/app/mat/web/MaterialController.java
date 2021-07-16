@@ -334,7 +334,7 @@ public class MaterialController {
 		return dao.getProcStatus(vo);
 	}
 	
-	@RequestMapping("/printProcessMove.do")
+	@RequestMapping("/pro/view/printProcessMove.do")
 	public String printProcessMove(ProcMoveVO vo, Model model) {
 
 		String str = vo.getProductLot();

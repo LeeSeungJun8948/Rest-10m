@@ -173,7 +173,7 @@ var forGrid = false;
 $("#btnMatModal").on("click", function(e) {
 	$('#materialCode').val('');
 	$('#materialName').val('');
-    $('#matContent').load(contextPath +"/matModal.do");
+    $('#matContent').load(contextPath +"/modal/matModal.do");
 });
 
 // 자재코드 입력창
@@ -181,14 +181,14 @@ $('#materialCode').on('click', function(){
 	$('#materialCode').val('');
 	$('#materialName').val('');
 	$('#matModal').modal('show');
-	$('#matContent').load(contextPath +"/matModal.do");
+	$('#matContent').load(contextPath +"/modal/matModal.do");
 });
 
 // 업체 돋보기
 $("#btnCompModal").on("click", function(e) {
 	$('#companyCode').val('');
 	$('#companyName').val('');
-    $('#compContent').load(contextPath +"/compModal.do");
+    $('#compContent').load(contextPath +"/modal/compModal.do");
 });
 
 // 업체코드 입력창
@@ -196,7 +196,7 @@ $('#companyCode').on('click',function(){
 	$('#companyCode').val('');
 	$('#companyName').val('');
 	$('#compModal').modal('show');
-	$('#compContent').load(contextPath +"/compModal.do");
+	$('#compContent').load(contextPath +"/modal/compModal.do");
 	
 });
 

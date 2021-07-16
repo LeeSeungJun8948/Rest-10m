@@ -189,7 +189,7 @@ function setMatInfo(ev){
 		grid.setValue(rowKey, 'processCode', null, false);
 		grid.setValue(rowKey, 'lotNo', null, false);
 		$('#matLotModal').modal('show');
-		$('#matLotContent').load(contextPath + "/matLotModal.do");
+		$('#matLotContent').load(contextPath + "/modal/matLotModal.do");
 	
 	}
 	
@@ -299,7 +299,7 @@ var forGrid = false;
 $("#btnMatModal").on("click", function(e) {
 	$('#materialCode').val('');
 	$('#materialName').val('');
-    $('#matContent').load(contextPath +"/matModal.do");
+    $('#matContent').load(contextPath +"/modal/matModal.do");
 });
 
 // 자재코드 입력창
@@ -307,14 +307,14 @@ $('#materialCode').on('click', function(){
 	$('#materialCode').val('');
 	$('#materialName').val('');
 	$('#matModal').modal('show');
-	$('#matContent').load(contextPath +"/matModal.do");
+	$('#matContent').load(contextPath +"/modal/matModal.do");
 });
 
 // 공정 돋보기
 $('#btnProcModal').on('click',function(e){
 	$('#processCode').val('');
 	$('#processName').val('');
-	$('#procContent').load(contextPath +"/procModal.do");
+	$('#procContent').load(contextPath +"/modal/procModal.do");
 });
 
 // 공정코드 입력창
@@ -322,7 +322,7 @@ $('#processCode').on('click', function(){
 	$('#processCode').val('');
 	$('#processName').val('');
 	$('#procModal').modal('show');
-	$('#procContent').load(contextPath +"/procModal.do");
+	$('#procContent').load(contextPath +"/modal/procModal.do");
 });
 
 grid.on('dblclick', function(ev){
@@ -330,7 +330,7 @@ grid.on('dblclick', function(ev){
 		rowKey = ev.rowKey;
 		forGrid = true;
 		$('#matModal').modal('show');
-		$('#matContent').load(contextPath +"/matModal.do");
+		$('#matContent').load(contextPath +"/modal/matModal.do");
 	}
 })
 
@@ -341,7 +341,7 @@ grid.on('dblclick', function(ev){
 			rowKey = ev.rowKey;
 			materialCode = grid.getValue(rowKey, 'materialCode');
 			$('#matLotModal').modal('show');
-			$('#matLotContent').load(contextPath +"/matLotModal.do");	
+			$('#matLotContent').load(contextPath +"/modal/matLotModal.do");	
 		}else{
 			toast('자재코드를 입력하고 선택하세요', 'No.'+grid.getValue(ev.rowKey, 'ioCode'))			
 		}

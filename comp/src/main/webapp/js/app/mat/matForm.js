@@ -185,14 +185,14 @@ $('#btnDel').on('click',function(){
 var forGrid = false;
 
 $("#btnCompModal").on("click", function(e) {
-    $('#compContent').load(contextPath + "/compModal.do");
+    $('#compContent').load(contextPath + "/modal/compModal.do");
 });
 
 $(document).on('show.bs.modal','#btnCompModal', function (){});
 
 $('#companyCode').on('click',function(){
 	$('#compModal').modal('show');
-	$('#compContent').load(contextPath + "/compModal.do");
+	$('#compContent').load(contextPath + "/modal/compModal.do");
 	
 })
 
