@@ -53,14 +53,14 @@ public class FacilitiesController {
 	@Autowired
 	FacilitiesMapper mapper;
 	
-	// 설비 조회
-	@RequestMapping("/facList.do")
+	// 설비 조회 페이지
+	@RequestMapping("/fac/view/facList.do")
 	public String getFac(Model model) {
 		return "fac/facList.page";
 	}
 	
 	// 설비 조회
-	@RequestMapping("ajax/facList.do")
+	@RequestMapping("/ajax/facList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetFac(FacilitiesVO vo) {
 		Map<String,Object> datas = new HashMap<String,Object>();
@@ -72,7 +72,7 @@ public class FacilitiesController {
 	}
 	
 	// 설비관리
-	@RequestMapping("/facAdmin.do")
+	@RequestMapping("/fac/mng/facAdmin.do")
 	public String facAdmin(Model model) {
 		model.addAttribute("max", mapper.getFacCode());
 		return "fac/facAdmin.page";
@@ -80,7 +80,7 @@ public class FacilitiesController {
 	
 	
 	// 탭1 설비 관리 목록
-	@RequestMapping("ajax/facList2.do")
+	@RequestMapping("/ajax/facList2.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetFacList() {
 		Map<String,Object> datas = new HashMap<String,Object>();
@@ -91,7 +91,7 @@ public class FacilitiesController {
 		return data;
 	}
 	// 탭2 설비 공정 목록
-	@RequestMapping("ajax/facProcessList.do")
+	@RequestMapping("/ajax/facProcessList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetFacProcess() {
 		Map<String,Object> datas = new HashMap<String,Object>();
@@ -138,7 +138,7 @@ public class FacilitiesController {
 	}
 	
 	// 삭제
-	@PostMapping(value="ajax/deleteFac.do")
+	@PostMapping(value="/ajax/deleteFac.do")
 	@ResponseBody
 	public Map<String,Object> deleteFac(@RequestBody GridData gridDate) {
 		Map<String,Object> data = new HashMap<String,Object>();

@@ -71,7 +71,7 @@
 			</div>
 
 			<script type="text/javascript">
-				const dataSourc = {
+				var dataSourc = {
 					api : {
 						readData : {
 							url : 'ajax/bomList.do',
@@ -81,7 +81,7 @@
 					},
 					contentType : 'application/json'
 				};
-				const matGrid = new tui.Grid({
+				var matGrid = new tui.Grid({
 					el : document.getElementById('matGrid'),
 					data : dataSourc,
 					scrollX : false,

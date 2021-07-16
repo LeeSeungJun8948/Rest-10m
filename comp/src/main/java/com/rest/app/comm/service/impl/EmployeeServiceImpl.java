@@ -32,6 +32,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public int updateEmp(EmployeeVO vo)   {
+		try {
+			String pwd =  EgovFileScrty.encryptPassword(vo.getPwd(), vo.getId());
+			vo.setPwd(pwd);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mapper.updateEmp(vo);
 	}
 

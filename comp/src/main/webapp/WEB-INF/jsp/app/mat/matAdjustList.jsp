@@ -15,11 +15,10 @@
 </style>
 <div class="row">
 	<div class="col-md-8">
-		<h1 class="h3 mb-4 text-gray-700">자재재고조정 전표 관리</h1>
+		<h1 class="h3 mb-4 text-gray-700">자재재고조정 전표 조회</h1>
 	</div>
 	<div class="col-md-4 mb-4" align="right">
 		<button type="button" class="btn btn-primary" id="btnRead">조회</button>
-		<button type="button" class="btn btn-primary" id="btnSave">저장</button>
 	</div>
 </div>
 
@@ -86,7 +85,6 @@
 	</div>
 </form>
 <div class="mb-4" align="right">
-	<button type="button" class="btn btn-info" id="btnGridDel">삭제</button>
 </div>
 <div class="col-lg-12">
 		<div id="adjustGrid"></div>
@@ -99,4 +97,4 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="js/app/mat/matAdjustList.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/mat/matAdjustList.js"></script>	

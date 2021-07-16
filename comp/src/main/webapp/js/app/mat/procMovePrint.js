@@ -6,7 +6,7 @@ $( document ).ready(function() {
 
 const planDataSource = {
 	api : {
-		readData : {url: 'ajax/planGrid.do' , method:'GET' },
+		readData : {url: contextPath + '/ajax/planGrid.do' , method:'GET' },
 	},
 	contentType: 'application/json'
 };
@@ -37,7 +37,7 @@ const planGrid = new tui.Grid({
 		}, {
 			header : '제품LOT',
 			name : 'productLot',
-			align: 'right',
+			align: 'center'
 
 		}, {
 			header : '지시량',
@@ -46,7 +46,7 @@ const planGrid = new tui.Grid({
 		}, {
 			header : '작업일자',
 			name : 'workDate',
-			align: 'right'
+			align: 'center'
 		}, {
 			header : '고객사',
 			name : 'companyName',
@@ -134,7 +134,7 @@ planGrid.on('click',function(ev){
 	
 	$.ajax({
 		type : "get",
-		url : "ajax/getInputMatList.do",
+		url : contextPath + "/ajax/getInputMatList.do",
 		data: {"productLot" : planGrid.getValue(ev.rowKey, 'productLot')},
 		dataType : "json",
 		async : false,
@@ -159,7 +159,7 @@ planGrid.on('click',function(ev){
 	
 	$.ajax({
 		type : "get",
-		url : "ajax/getProcStatus.do",
+		url : contextPath + "/ajax/getProcStatus.do",
 		data: {"productLot" : planGrid.getValue(ev.rowKey, 'productLot'),
 				"productCode" : planGrid.getValue(ev.rowKey, 'productCode')},
 		dataType : "json",
@@ -186,7 +186,7 @@ planGrid.on('click',function(ev){
 
 $('#btnPrint').on('click',  function(){
 	if(checkNull(rowKey) || rowKey == 0){ //왠진 모르겠는데 0이면 null취급됨
-		var url = 'printProcessMove.do?productLot='+ planGrid.getValue(rowKey, 'productLot')
+		var url = contextPath + '/printProcessMove.do?productLot='+ planGrid.getValue(rowKey, 'productLot')
 				+ "&productName=" + planGrid.getValue(rowKey, 'productName')
 				+ "&companyName=" + planGrid.getValue(rowKey, 'companyName')
 				+ "&prorCount=" + planGrid.getValue(rowKey, 'prorCount')

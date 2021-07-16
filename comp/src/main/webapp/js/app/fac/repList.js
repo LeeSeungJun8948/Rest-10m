@@ -13,11 +13,11 @@ function test() {
 const dataSource = { 
 		api : {
 			readData : {
-				url : 'ajax/repList.do',
+				url : contextPath + '/ajax/repList.do',
 				method : 'GET'
 			},
 			deleteData : {
-				url : 'ajax/deleteRep.do',
+				url : contextPath + '/ajax/deleteRep.do',
 				method : 'POST'
 			}
 		},
@@ -66,7 +66,7 @@ const dataSource = {
 		console.log(key);
 		$.ajax({
 			type : "get",
-			url : "ajax/repInfo.do",
+			url : contextPath + "/ajax/repInfo.do",
 			data : {
 				'repairCode' : key
 			},
@@ -95,7 +95,7 @@ const dataSource = {
 		$.ajax({
 
 			type : "get",
-			url : "ajax/updateRep.do",
+			url : contextPath + "/ajax/updateRep.do",
 			data : $('#frm').serialize(),
 			dataType : "json",
 			async : false,
@@ -118,7 +118,7 @@ const dataSource = {
 	}
 
 	$("#btnCompModal").on("click", function(e) {
-	    $('#compContent').load("compModal.do");
+	    $('#compContent').load(contextPath + "/compModal.do");
 	});
 	
 

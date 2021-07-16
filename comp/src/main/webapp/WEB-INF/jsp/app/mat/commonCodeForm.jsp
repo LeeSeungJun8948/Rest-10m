@@ -42,14 +42,14 @@
 						<th>사용여부</th>
 						<td> 
 							<select name="codeIdUseAt" id="codeIdUseAt" class="form-control">
-								<option value="Y">YES</option>
-								<option value="N">NO</option>
+								<option value="Y">Y</option>
+								<option value="N">N</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<th>코드ID설명</th>
-						<td colspan="5"> <input type="text" class="form-control" id="codeIddc" name="codeIddc"></td>
+						<td colspan="5"> <input type="text" class="form-control" id="codeIdDc" name="codeIdDc"></td>
 						
 					</tr>
 				</table>
@@ -61,4 +61,4 @@
 </div>
 	
 
-<script type="text/javascript" src="js/app/mat/commonCodeForm.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/mat/commonCodeForm.js"></script>

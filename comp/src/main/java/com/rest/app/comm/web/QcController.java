@@ -79,7 +79,7 @@ public class QcController {
 		return data;
 	}
 	
-	@RequestMapping("QualityControl.do")
+	@RequestMapping("/QualityControl.do")
 	public String QualityControl(Model model , QualityControlVO vo) {
 		
 		model.addAttribute("empList", dao.getEmpList(vo));
@@ -90,7 +90,7 @@ public class QcController {
 	}
 	
 	//제품 단건 조회 
-	@RequestMapping("getQcProduct.do")
+	@RequestMapping("/getQcProduct.do")
 	public ModelAndView getQcProduct(Model model, QualityControlVO vo) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/comm/QualityControl.page");

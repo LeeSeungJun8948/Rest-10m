@@ -3,16 +3,16 @@ $( document ).ready(function() {
 	document.getElementById('endDate').valueAsDate = new Date();
 });
 
+
 const dataSource = {
 	api : {
-		readData : {url: contextPath + '/ajax/matAdjustList.do' , method:'GET'},
-		modifyData : { url: contextPath + '/ajax/matAdjustModify.do', method: 'PUT'}
+		readData : {url: contextPath + '/ajax/matInList.do' , method:'GET' }
 	},
 	contentType: 'application/json'
 };
 	
-const adjustGrid = new tui.Grid({
-	el : document.getElementById('adjustGrid'),
+const grid = new tui.Grid({
+	el : document.getElementById('matInList'),
 	data : dataSource,
 	scrollX : false,
 	scrollY : true,
@@ -20,36 +20,45 @@ const adjustGrid = new tui.Grid({
 	rowHeaders: ['checkbox'],
 	columns : [ 
 		{
-			header : '정산코드',
+			header : '입고번호',
 			name : 'ioCode',
-			align: 'center',
-			width : 120
+			width : 80,
+			align: 'center'
 		},
 		{
+			header : '입고일자',
+			name : 'ioDate',
+			width : 120,
+			align: 'center',
+			validation: {
+            	required: true
+          	}
+		}, {
+			header : '발주번호',
+			name : 'inorderCode',
+			width : 80,
+			align: 'center',
+			className: 'white',
+			validation: {
+            	required: true
+          	}
+		}, {
 			header : '자재코드',
 			name : 'materialCode',
-			align: 'center',
-			width : 120
-		},
-		{
+			width : 80,
+			align: 'center'
+		}, {
 			header : '자재명',
 			name : 'materialName',
-			align: 'center'
-		},
-		{
-			header : 'LOT',
-			name : 'lotNo',
-			align: 'center'
-		}, {
-			header : '단가',
-			name : 'unitPrice',
-			align: 'right',
 			width : 120,
-			formatter({value}) {
-      			return format(value);
-    		}
+			align: 'center'
 		}, {
-			header : '정산수량',
+			header : '단위',
+			name : 'unitNo',
+			width : 70,
+			align: 'center'
+		}, {
+			header : '입고량',
 			name : 'ioVolume',
 			width : 120,
 			align: 'right',
@@ -60,80 +69,62 @@ const adjustGrid = new tui.Grid({
 				dataType: 'number',
             	required: true
           	}
-		},  {
-			header : '정산',
-			name : 'inoutNo',
-			align: 'center',
-			formatter: 'listItemText',
-			className: 'blackText',
-			editor: {
-                type: 'select',
-				options: {
-					 listItems: [
-	                    { text: '정산입고', value: '03' },
-	                    { text: '정산출고', value: '04' },
-	                    { text: '', value: '' }
-                	]
-				}
-            }
 		}, {
-			header : '총액',
-			name : 'stock', // 걍 변수이름만 사용한거지 재고가 아니라 총액임
+			header : '단가',
+			name : 'unitPrice',
+			width : 120,
 			align: 'right',
-			width: 120,
 			formatter({value}) {
       			return format(value);
     		},
+			validation: {
+				dataType: 'number',
+            	required: true
+          	}
 		}, {
-			header : '단위',
-			name : 'unitNo',
-			align: 'center',
-			width : 80
-		}, {
-			header : '현재고',
-			name : 'lotStock',
+			header : '총액',
+			name : 'price',
 			width : 120,
 			align: 'right',
 			formatter({value}) {
-      			return format(value);	
+      			return format(value);
     		}
 		}, {
-			header : '정산일',
-			name : 'ioDate',
+			header : 'LOT_NO',
+			name : 'lotNo',
+			width : 140,
 			align: 'center',
-			width : 120,
 			validation: {
             	required: true
           	}
 		}, {
-			header : '비고',
-			name : 'comments',
-			align: 'center'
-		}  
+			header : '자재재고',
+			name : 'stock',
+			width : 120,
+			align: 'right'
+			,formatter({value}) {
+      			return format(value);
+    		}
+ 			
+		}
 	],
 	summary : {
 		
 		height: 40,
 	   	position: 'bottom',
 	   	columnContent: {
-        	materialName: {
+        	inorderCode: {
                 template(summary) {
         			return '합 계';
                 } 
             },	
-			unitPrice: {
-                template(summary) {
-        			var summaryResult = (summary.sum);
-        			return format(summaryResult);
-                } 
-            },
 			ioVolume: {
                 template(summary) {
         			var summaryResult = (summary.sum);
         			return format(summaryResult);
                 } 
             },
-			stock: {
+			price: {
                 template(summary) {
         			var summaryResult = (summary.sum);
         			return format(summaryResult);
@@ -142,20 +133,16 @@ const adjustGrid = new tui.Grid({
 		}
 	}
 });
-
-adjustGrid.disableColumn('inoutNo');
-
+	
 function format(value){
 	value = value * 1;
 	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
 $('#btnRead').on('click',  function(){
-	
 	var param = $('#searchFrm').serializeObject();
 	console.log(param)
-	adjustGrid.readData(1, param, true);
-	
+	grid.readData(1, param, true);
 });
 
 function toast(text, title){
@@ -186,7 +173,7 @@ var forGrid = false;
 $("#btnMatModal").on("click", function(e) {
 	$('#materialCode').val('');
 	$('#materialName').val('');
-    $('#matContent').load(contextPath + "/matModal.do");
+    $('#matContent').load(contextPath +"/matModal.do");
 });
 
 // 자재코드 입력창
@@ -194,7 +181,27 @@ $('#materialCode').on('click', function(){
 	$('#materialCode').val('');
 	$('#materialName').val('');
 	$('#matModal').modal('show');
-	$('#matContent').load(contextPath + "/matModal.do");
+	$('#matContent').load(contextPath +"/matModal.do");
 });
+
+// 업체 돋보기
+$("#btnCompModal").on("click", function(e) {
+	$('#companyCode').val('');
+	$('#companyName').val('');
+    $('#compContent').load(contextPath +"/compModal.do");
+});
+
+// 업체코드 입력창
+$('#companyCode').on('click',function(){
+	$('#companyCode').val('');
+	$('#companyName').val('');
+	$('#compModal').modal('show');
+	$('#compContent').load(contextPath +"/compModal.do");
+	
+});
+
+var rowKey;
+// 발주번호 입력창 그리드
+
 
 

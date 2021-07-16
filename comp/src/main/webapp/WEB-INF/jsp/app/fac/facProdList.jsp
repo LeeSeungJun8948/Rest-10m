@@ -20,7 +20,7 @@
 		
 		const dataSource = {
 				api : {
-					readData : {url: 'ajax/facProd.do', method : 'GET'}
+					readData : {url: contextPath + '/ajax/facProd.do', method : 'GET'}
 				},
 				contentType: 'application/json'
 		}
