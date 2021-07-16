@@ -56,10 +56,6 @@ const adjustGrid = new tui.Grid({
 			formatter({value}) {
       			return format(value);
     		},
-			editor: 'text',
-			onAfterChange(ev) {
-        		setInoutNo(ev);
-      		},
 			validation: {
 				dataType: 'number',
             	required: true
@@ -106,21 +102,13 @@ const adjustGrid = new tui.Grid({
 			name : 'ioDate',
 			align: 'center',
 			width : 120,
-			editor: {
-				type: 'datePicker',
-				options: {
-				language: 'ko',
-				format: 'yyyy-MM-dd'
-				}
-			},
 			validation: {
             	required: true
           	}
 		}, {
 			header : '비고',
 			name : 'comments',
-			align: 'center',
-			editor: 'text'
+			align: 'center'
 		}  
 	],
 	summary : {
@@ -155,7 +143,6 @@ const adjustGrid = new tui.Grid({
 	}
 });
 
-	
 adjustGrid.disableColumn('inoutNo');
 
 function format(value){
@@ -169,56 +156,6 @@ $('#btnRead').on('click',  function(){
 	console.log(param)
 	adjustGrid.readData(1, param, true);
 	
-});
-
-
-function setInoutNo(ev){
-	
-	var ioVolume = adjustGrid.getValue(ev.rowKey, 'ioVolume');
-	
-	if(ioVolume == 0){
-		adjustGrid.setValue(ev.rowKey, 'inoutNo', '',false);
-	}else if(!checkNull(adjustGrid.getValue(ev.rowKey, 'inoutNo'))){
-		var ioCode = adjustGrid.getValue(ev.rowKey, 'ioCode');
-		$.ajax({
-			type : "get",
-			url : contextPath + "/ajax/getInoutNo.do",
-			data: {"ioCode" : ioCode},
-			dataType : "json",
-			async : false,
-			success : function(data) {
-				adjustGrid.setValue(ev.rowKey, 'inoutNo', data.inoutNo, false);
-			},
-			error : function() {
-			}
-		});
-	}
-	
-	adjustGrid.setValue(ev.rowKey, 'stock', 
-						adjustGrid.getValue(ev.rowKey, 'ioVolume')
-						* adjustGrid.getValue(ev.rowKey, 'unitPrice'), false);
-};
-
-$("#btnGridDel").on("click", function(ev){
-	adjustGrid.removeCheckedRows(true);
-});
-
-$("#btnSave").on("click", function(){
-	
-	for(var valid of adjustGrid.validate()){
-		for(var errors of valid.errors){
-			var header;
-			for(var column of adjustGrid.getColumns()){
-				if(column.name == errors.columnName)
-					header = column.header;
-			}
-			toast(header+'를 확인하세요.',adjustGrid.getValue(valid.rowKey, 'ioCode'));	
-		}
-	}
-	
-	if(adjustGrid.validate().length == 0){
-		adjustGrid.request('modifyData');
-	}
 });
 
 function toast(text, title){

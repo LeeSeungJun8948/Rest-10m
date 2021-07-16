@@ -37,7 +37,7 @@ const planGrid = new tui.Grid({
 		}, {
 			header : '제품LOT',
 			name : 'productLot',
-			align: 'right',
+			align: 'center'
 
 		}, {
 			header : '지시량',
@@ -46,7 +46,7 @@ const planGrid = new tui.Grid({
 		}, {
 			header : '작업일자',
 			name : 'workDate',
-			align: 'right'
+			align: 'center'
 		}, {
 			header : '고객사',
 			name : 'companyName',
