@@ -1,73 +1,83 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
-	<div>
-	<h2>설비생산이력조회</h2>
+<div class="row">
+	<div class="col-md-8">
+		<h1 class="h3 mb-4 text-gray-700">설비 생산이력 조회</h1>
 	</div>
-		<div class="mb-2">
-			<form id="searchCheck" name="searchCheck">
-				<label>제품명 검색
-				<input type="text" id="searchKeyword" name="searchKeyword" title="검색어" class="form-control" style="width:200px;">
-				</label>
-				<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
-			</form>
+	<div class="col-md-4 mb-4" align="right" role="form">
+		<button type="button" class="btn btn-primary" id="btnRead">조회</button>
+	</div>
+</div>
+
+<form id="frm" name="frm">
+	<div class="row">
+		<div class="mb-2 col-md-6">
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>작업일자</th>
+						<td>
+							<div class="row">
+								<div class="col-md-5">
+									<input type="date" class="form-control" id="startDate" name="startDate">
+								</div>
+								~ 
+								<div class="col-md-5">
+									<input type="date" class="form-control" id="endDate" name="endDate">
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>설비명</th>
+						<td>
+							<div class="row">
+								<div class="col-md-4">
+									<input readonly class="form-control" type="text" id="facilitiesName" name="facilitiesName">
+								</div>
+								<button id="btnFacModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#facModal">
+										<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+								</button>	
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>제품명</th>
+						<td>
+							<div class="row">
+								<div class="col-md-4">
+									<input readonly class="form-control" type="text" id="productName" name="productName">
+								</div>
+								<button id="btnProdModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#prodModal">
+										<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+								</button>	
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-	<div id="grid"></div>
-	<script type="text/javascript">
-		
-		const dataSource = {
-				api : {
-					readData : {url: contextPath + '/ajax/facProd.do', method : 'GET'}
-				},
-				contentType: 'application/json'
-		}
-	
-		const grid = new tui.Grid({
-			el : document.getElementById('grid'),
-			data : dataSource,
-			scrollX : false,
-			scrollY : false,
-			columns : [ {
-				header : '설비코드',
-				name : 'facCode'
-			}, {
-				header : '설비명',
-				name : 'facilitiesName'
-			}, {
-				header : '제품코드',
-				name : 'productCode'
-			}, {
-				header : '제품명',
-				name : 'productName'
-			}]
-		});
-		
-		$.fn.serializeObject = function() {
-			var o = {};
-			var a = this.serializeArray();
-			$.each(a, function() {
-				if (o[this.name]) {
-					if (!o[this.name].push) {
-						o[this.name] = [o[this.name]];
-					}
-					o[this.name].push(this.value || '');
-				} else {
-					o[this.name] = this.value || '';
-				}
-			});
-			return o;
-		};
-		
-		$("#btnSearch").on("click",function() {
-			var param = $('#searchCheck').serializeObject();
-			grid.readData(1, param, true);
-		});
-		
-		/* grid.on('response', function(data) {
-			grid.resetOriginData();
-		})*/ 			
-			
-	</script>
+		<div class="mb-4 col-lg-6">
+		</div>
+	</div>
+</form>
+
+<div id="grid"></div>
+
+<div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content" id="facContent" align="center">
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="prodModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="prodContent" align="center"></div>
+	</div>
+</div>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/fac/facProdList.js"></script>
