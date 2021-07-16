@@ -393,7 +393,10 @@
 				code_id_dc,
 				use_at AS code_id_use_at
 		FROM COMTCCMMNCODE 
-		WHERE cl_code = 'R10'
+		WHERE cl_code = 'R10' 
+		<if test="srcCodeIdNm != null and srcCodeIdNm !=''">
+			AND UPPER(code_id_nm) LIKE '%'||UPPER(#{srcCodeIdNm})||'%'
+		</if>
 	</select>
 	
 	<select id="getDetailCodeId" resultType="CommonCodeVO" parameterType="CommonCodeVO">

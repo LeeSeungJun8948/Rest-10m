@@ -3,12 +3,11 @@
 <mapper 
 	namespace="com.rest.app.fac.facproduct.service.impl.FacProductMapper">
 	<select id="getFP" resultType="com.rest.app.fac.facproduct.vo.FacProductVO">
-		SELECT f.fac_code, f.facilities_name, d.product_code, d.product_name
-		FROM facilities f, process p, pc, product d
-		WHERE f.process_code=p.process_code
-		AND p.process_code=pc.process_code
-		AND pc.product_code=d.product_code 
-		AND	d.product_name LIKE '%' || #{searchKeyword} || '%'
-		order by f.fac_code
+		select 	w.work_date, f.facilities_name, p.product_name, w.product_lot
+		from 	facilities f, work w, product p
+		where 	f.fac_code=w.fac_code
+		and 	w.product_code=p.product_code
+		AND		p.product_name LIKE '%' || #{searchKeyword} || '%'
+		order by w.work_date
 	</select>
 </mapper>
