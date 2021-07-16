@@ -3,16 +3,16 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<div class="row">
-	<div class="col-md-8">
-		<h1 class="h3 mb-4 text-gray-700">불량 내역 조회</h1>
+<form id="frm" name="frm" method="post" action="viewErrorExcel.do">
+	<div class="row">
+		<div class="col-md-8">
+			<h1 class="h3 mb-4 text-gray-700">불량 내역 조회</h1>
+		</div>
+		<div class="col-md-4 mb-4" align="right" role="form">
+			<input type="submit" class="btn btn-primary" id="btnExcel" value="엑셀">
+			<button type="button" class="btn btn-primary" id="btnRead">조회</button>
+		</div>
 	</div>
-	<div class="col-md-4 mb-4" align="right" role="form">
-		<button type="button" class="btn btn-primary" id="btnRead">조회</button>
-	</div>
-</div>
-
-<form id="frm" name="frm">
 	<div class="row">
 		<div class="mb-2 col-md-6">
 			<table class="table">

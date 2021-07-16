@@ -27,7 +27,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.rest.app.comm.service.QualityControlService;
 import com.rest.app.comm.vo.QualityControlVO;
-import com.thoughtworks.xstream.mapper.Mapper;
 
 import egovframework.com.cmm.EgovWebUtil;
 import egovframework.com.cmm.service.EgovProperties;
@@ -65,10 +64,8 @@ public class QcController {
 	@Autowired
 	QualityControlService dao;
 	
-	
-	
 	//모달창 제품 리스트 조회
-	@RequestMapping("/ajax/getProductList.do")
+	@RequestMapping("/comm/ajax/getProductList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxgetProductList(QualityControlVO vo) {
 		Map<String, Object> datas = new HashMap<String, Object>();
@@ -79,7 +76,7 @@ public class QcController {
 		return data;
 	}
 	
-	@RequestMapping("/QualityControl.do")
+	@RequestMapping("/comm/QualityControl.do")
 	public String QualityControl(Model model , QualityControlVO vo) {
 		
 		model.addAttribute("empList", dao.getEmpList(vo));
@@ -90,7 +87,7 @@ public class QcController {
 	}
 	
 	//제품 단건 조회 
-	@RequestMapping("/getQcProduct.do")
+	@RequestMapping("/comm/getQcProduct.do")
 	public ModelAndView getQcProduct(Model model, QualityControlVO vo) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/comm/QualityControl.page");
@@ -101,7 +98,7 @@ public class QcController {
 		
 	}
 	//제품 단건 조회 ajax
-	@RequestMapping("/ajax/getProduct.do")
+	@RequestMapping("/comm/ajax/getProduct.do")
 	@ResponseBody
 	public Map<String, Object> ajaxgetProduct(QualityControlVO vo) {
 		Map<String, Object> datas = new HashMap<String, Object>();
@@ -115,7 +112,7 @@ public class QcController {
 	
 	
 	//규격 리스트
-	@RequestMapping("/ajax/getCodeList.do")
+	@RequestMapping("/comm/ajax/getCodeList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxgetCodeList(QualityControlVO vo) {
 		Map<String, Object> datas = new HashMap<String, Object>();
@@ -126,7 +123,7 @@ public class QcController {
 		return data;
 	}
 	//단위 리스트
-	@RequestMapping("/ajax/getUnitList.do")
+	@RequestMapping("/comm/ajax/getUnitList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxgetUnitList(QualityControlVO vo) {
 		Map<String, Object> datas = new HashMap<String, Object>();
@@ -137,7 +134,7 @@ public class QcController {
 		return data;
 	}
 	//불량코드,명  modify
-	@PutMapping(value = "/ajax/modifyProduct.do")
+	@PutMapping(value = "/comm/ajax/modifyProduct.do")
 	@ResponseBody
 	public Map<String, Object> modifyProduct(@RequestBody qcGrid qcgrid , QualityControlVO vo) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -156,7 +153,7 @@ public class QcController {
 	}
 	
 	// 제품삭제
-	@PostMapping(value = "/ajax/deleteProduct.do")
+	@PostMapping(value = "/comm/ajax/deleteProduct.do")
 	@ResponseBody
 	public Map deleteProduct(@RequestBody qcGrid qcgrid) {
 		Map<String, Object> data = new HashMap();
@@ -168,7 +165,7 @@ public class QcController {
 		return data;
 	}
 	//제품저장
-	@RequestMapping(value= "/insertProduct.do")
+	@RequestMapping(value= "/comm/insertProduct.do")
 	public String insertProduct(HttpServletRequest request, QualityControlVO vo) throws IllegalStateException, IOException {
 		MultipartFile uploadFile = vo.getUploadFile();
 		String fileName = null;
@@ -184,7 +181,7 @@ public class QcController {
 		return "redirect:QualityControl.do";
 	}
 	//제품 수정
-	@RequestMapping("/ajax/updateProdcut.do")
+	@RequestMapping("/comm/ajax/updateProdcut.do")
 	@ResponseBody
 	public int ajaxUpdateProdcut(Model model, QualityControlVO vo ) throws IllegalStateException, IOException {
 		MultipartFile uploadFile = vo.getUploadFile();
@@ -201,7 +198,7 @@ public class QcController {
 	}
 	
 	//이미지 업로드 
-	@RequestMapping(value = "/qcfiledown.do")
+	@RequestMapping(value = "/comm/qcfiledown.do")
 	public void getDown(HttpServletResponse response, @RequestParam String fileName) throws Exception{
 		String serverSubPath  = "c:/upload";
 		String downFileName = serverSubPath + "/" + fileName;

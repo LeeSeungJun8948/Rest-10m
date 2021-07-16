@@ -42,7 +42,7 @@ public class MaterialController {
 	@Autowired
 	MaterialMapper mapper;
 
-	@RequestMapping("/matForm.do")
+	@RequestMapping("/comm/matForm.do")
 	public String matForm(Model model) { // 자재 정보 관리 page
 		model.addAttribute("mats",dao.getMatNo());
 		model.addAttribute("units",dao.getUnitNo());

@@ -52,25 +52,25 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService dao;
 
-	@RequestMapping("/empList.do")
+	@RequestMapping("/comm/empList.do")
 	public String empList(Model model) {
 		return "comm/empList.page";
 	}
 
-	@RequestMapping("/insertEmp.do")
+	@RequestMapping("/comm/insertEmp.do")
 	public String insertEmp(EmployeeVO vo) {
 		dao.insertEmp(vo);
 		return "redirect:empList.do";
 	}
 
 	// 모달
-	@RequestMapping("/empModal.do")
+	@RequestMapping("/comm/empModal.do")
 	public String modal(Model model) {
 		model.addAttribute("max", dao.maxEmpCode());
 		return "app/comm/empModal";
 	}
 
-	@RequestMapping("/ajax/empList.do")
+	@RequestMapping("/comm/ajax/empList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetEmp(EmployeeVO vo) {
 		Map<String, Object> datas = new HashMap<String, Object>();
@@ -87,7 +87,7 @@ public class EmployeeController {
 		return data;
 	}
 
-	@PostMapping(value = "/ajax/deleteEmp.do")
+	@PostMapping(value = "/comm/ajax/deleteEmp.do")
 	@ResponseBody
 	public Map deleteEmp(@RequestBody GridData gridData) {
 		Map<String, Object> data = new HashMap();
@@ -99,7 +99,7 @@ public class EmployeeController {
 		return data;
 	}
 
-	@PutMapping(value = "/ajax/updateEmp.do")
+	@PutMapping(value = "/comm/ajax/updateEmp.do")
 	@ResponseBody
 	public Map updateEmp(@RequestBody GridData gridData) {
 
@@ -121,7 +121,7 @@ public class EmployeeController {
 	 * data.put("data", gridData.createdRows); return data; }
 	 */
 
-	@PutMapping(value = "/ajax/modifyEmp.do")
+	@PutMapping(value = "/comm/ajax/modifyEmp.do")
 	@ResponseBody
 	public Map modifyEmp(@RequestBody GridData gridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
