@@ -29,32 +29,57 @@
 						</td>
 					</tr>
 					<tr>
-						<th>고객사</th>
-						<td><input type="text" id="companyCode" name="companyCode" />
-							<button id="btnCompModal" type="button" class="btn btn-toggle"
-								data-remote="false" data-toggle="modal" data-target="#compModal">
-								<img alt="btn_search"
-									src="<c:url value='/images/app/all/btn_search.png'/>">
-							</button> <input type="text" id="companyName" name="companyName"
-							readonly="true" /></td>
+						<th>업체명</th>
+						<td>
+							<div class="row">
+								<div class="col-md-4">
+									<input class="form-control" type="text"
+										id="companyCode" name="companyCode">
+								</div>
+								<button id="btnCompModal" type="button" class="btn btn-toggle"
+									data-remote="false" data-toggle="modal"
+									data-target="#compModal">
+									<img alt="btn_search"
+										src="<c:url value='/images/app/all/btn_search.png'/>">
+								</button>
+								<div class="col-md-6">
+									<input class="form-control" type="text"
+										id="companyName" name="companyName">
+								</div>
+							</div>
+						</td>
 					</tr>
 
 						<th>특기사항</th>
-						<td><input type="text" id="comments" name="comments"></td>
+						<td><input class="form-control" type="text" id="comments" name="comments"></td>
 					</tr>
 				</tbody>
 			</table>
 		</form>
 	</div>
-	<div class="mb-4 col-lg-6">
-		<div>
-			<h5>미출고주문 검색</h5>
+	<div class="mb-2 col-lg-6">
+		<div class="mb-4">
+			<h5><strong>미출고 주문 검색</strong></h5>
 		</div>
 		<div>
-			<form id="dateForm" name="dateForm">
-				<span>납기일자 </span> <input type="date" id="fromDate" name="fromDate">
-				<span> ~ </span> <input type="date" id="toDate" name="toDate">&nbsp;
-				<button type="button" class="btn btn-primary" id="btnRead">불러오기</button>
+			<form id="dateFrm" name="dateFrm">
+				<div class="form-row">
+					<div class="col-2" align="center">
+						<span>납기일자</span>
+					</div>
+					<div class="col-3">
+						<input type="date" class="form-control" id="fromDate" name="fromDate">
+					</div>
+					<div class="col-1" align="center">
+						<span>~&nbsp;&nbsp;</span>
+					</div>
+					<div class="col-3">
+						<input type="date" class="form-control" id="toDate" name="toDate">
+					</div>
+					<div class="col-2">
+						<button type="button" class="btn btn-primary" id="btnRead">불러오기</button>
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>

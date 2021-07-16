@@ -91,7 +91,7 @@ function checkNull(value) {
 function formCheck() {
 	if (!checkNull($('#prorCode').val())) {
 		toastr.warning('공정이동표 바코드를 먼저 찍어주세요.');
-	} else if (!checkNull($('#workCount').val()) || !checkNull($('#startTime').val()) || !checkNull($('#endTime').val()) || !checkNull($('#empName').val())) {
+	} else if (!checkNull($('#workCount').val()) || !checkNull($('#startTime').val()) || !checkNull($('#empName').val())) {
 		toastr.warning('값을 입력해주십시오.');
 		return false;
 	} else {

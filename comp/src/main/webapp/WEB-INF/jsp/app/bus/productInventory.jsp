@@ -38,23 +38,42 @@
 					</tr>
 			<tr>
 					<th>제품Lot</th>
-					<td><input type="text" id="productLot" name="productLot" />
+					<td>
+					<div class="row">
+					<div class="col-md-4">
+					<input type="text" class="form-control" id="productLot" name="productLot" max-length="20" />
+						</div>
 						<button id="btnProdLotModal" type="button" class="btn btn-toggle"
 							data-remote="false" data-toggle="modal" data-target="#prodLotModal">
 							<img alt="btn_search"
 								src="<c:url value='/images/app/all/btn_search.png'/>">
-						</button></td>
+						</button>
+						
+						</div>
+						</td>
 				</tr>
 				<tr>
-					<th>제품코드</th>
-					<td><input type="text" id="productCode" name="productCode" />
-						<button id="btnProdModal" type="button" class="btn btn-toggle"
-							data-remote="false" data-toggle="modal" data-target="#prodModal">
-							<img alt="btn_search"
-								src="<c:url value='/images/app/all/btn_search.png'/>">
-						</button> <input type="text" id="productName" name="productName"
-						maxlength="20" readonly="true" /></td>
-				</tr>
+						<th>제품명</th>
+						<td>
+							<div class="row">
+								<div class="col-md-4">
+									<input class="form-control" type="text"
+										id="productCode" name="productCode">
+								</div>
+								<button id="btnProdModal" type="button" class="btn btn-toggle"
+									data-remote="false" data-toggle="modal"
+									data-target="#prodModal">
+									<img alt="btn_search"
+										src="<c:url value='/images/app/all/btn_search.png'/>">
+								</button>
+								<div class="col-md-6">
+									<input class="form-control" type="text"
+										id="productName" name="productName">
+								</div>
+							</div>
+						</td>
+					</tr>
+
 			</tbody>
 		</table>
 	</form>
