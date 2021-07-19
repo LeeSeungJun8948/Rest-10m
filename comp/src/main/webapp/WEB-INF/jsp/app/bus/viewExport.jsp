@@ -3,9 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <h1 class="h3 mb-4 text-gray-700">출고 조회</h1>
-<form id="searchFrm" name="searchFrm">
+<form id="searchFrm" name="searchFrm" method="post" action="exportExcel.do">
 	<div class="mb-4" align="right">
 		<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
+		<input type="submit" class="btn btn-primary" id="btnExcel" value="엑셀">
 		<button type="reset" class="btn btn-primary" id="btnReset">초기화</button>
 	</div>
 	<div class="row">
