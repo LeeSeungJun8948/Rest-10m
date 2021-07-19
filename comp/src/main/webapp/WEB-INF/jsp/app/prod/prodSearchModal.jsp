@@ -4,8 +4,7 @@
 <div id="modalContent">
 	<div class="modal-header">
 		<h5 class="modal-title">제품검색</h5>
-		<button id="btnCloseTop" type="button" class="close"
-			data-dismiss="modal" aria-label="Close">
+		<button id="btnCloseTop" type="button" class="close" data-dismiss="modal" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
 	</div>
