@@ -22,7 +22,7 @@
 					<input id="keyword" class="form-control" name="keyword" type="text" class="form-control">
 				</div>
 				<div class="col=md-1">
-					<button type="button" class="btn btn-primary" id="btnReadModal">조회</button>
+					<button type="button" class="btn btn-primary" id="btnReadModal">검색</button>
 				</div>
 			</div>
 		</form>
