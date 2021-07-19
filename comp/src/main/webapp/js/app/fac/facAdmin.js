@@ -9,6 +9,9 @@ function test() {
 		} else if(!checkNull($('#processCode').val())) {
 			toastr.warning('공정을 입력해주십시오.');
 			return false; 
+		} else if(!checkNull($('#facInspection').val())) {
+			toastr.warning('점검주기를 입력해주십시오.');
+			return false; 
 		}
 			return true; 
 	}	

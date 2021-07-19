@@ -1,18 +1,23 @@
 package com.rest.app.fac.repair.web;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.rest.app.fac.repair.service.impl.RepairMapper;
 import com.rest.app.fac.repair.vo.RepairVO;
@@ -69,6 +74,30 @@ public class RepairController {
 		datas.put("contents", mapper.repairList());
 		data.put("data", datas);
 		return data;
+	}
+	
+	// 수리 조회 엑셀
+	@RequestMapping("/fac/view/repairListExcel.do")
+	public ModelAndView repairListExcel(@RequestParam Map<String, Object> param)
+			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> headerMap = new HashMap<String, Object>();
+		List<RepairVO> list = mapper.repairList(param);
+		List<Map<String, String>> data = new ArrayList<>();
+		for(RepairVO vo : list) {
+			data.add(BeanUtils.describe(vo));
+		}
+		headerMap.put("repairCode", "수리코드");
+		headerMap.put("facilitiesName", "설비명");
+		headerMap.put("repairDate", "수리일자");
+		headerMap.put("repairComment", "수리내역");
+		headerMap.put("companyName", "업체명");
+		headerMap.put("cost", "수리금액");
+		headerMap.put("etc", "비고");
+		map.put("headerMap", headerMap);
+		map.put("filename", "excel_plan");
+		map.put("datas", data);
+		return new ModelAndView("commonExcelView", map); 
 	}
 	
 	// 저장&수정
