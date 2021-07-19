@@ -1,183 +1,212 @@
 $('#matNo').val('');
 $('#unitNo').val('');
 
-$( document ).ready(function() {
-   	showMatList();
-});
 
 function gridClear(){
 	
 }
 	
-function showMatList(){
-	var listData; // list그리드에 넣을 데이터
+const listData = {
+	api : {
+		readData : {url: contextPath + '/ajax/matList.do' , method:'GET' },
+		modifyData : {url: contextPath + '/ajax/matModify.do' , method:'PUT'}
+	},
+	contentType: 'application/json'
+};
 
-	// listData 가져오기
-	$.ajax({
-		type : "get",
-		url : contextPath + "/ajax/matList.do",
-		dataType : "json",
-		async : false,
-		success : function(data) {
-			listData = data;
+// listGrid 생성
+const listGrid = new tui.Grid({
+	el : document.getElementById('matList'),
+	data : listData,
+	scrollX : false,
+	scrollY : true,
+	bodyHeight: 450,
+	selectionUnit: 'row',
+	columns : [ {
+		header : '자재코드',
+		name : 'materialCode',
+		width : 120,
+		align: 'center',
+		validation: {
+           	required: true
 		},
-		error : function() {
+		sortable: true
+	}, {
+		header : '자재명',
+		name : 'materialName',
+		validation: {
+           	required: true
+       	},
+		sortable: true
+	}, {
+		header : '구분',
+		name : 'matNm',
+		width : 120,
+		align: 'center',
+		validation: {
+			required: true
+		},
+		sortable: true
+	}, {
+		header : '자재구분',
+		name : 'matNo',
+		hidden: true,
+		validation: {
+	  		required: true
 		}
-	});
+	}, {
+		header : '입고업체',
+		name : 'companyCode',
+		hidden: true,
+		validation: {
+			required: true
+		}
+	}, {
+		header : '입고업체',
+		hidden: true
+	}, {
+		header : '관리단위',
+		name : 'unitNo',
+		hidden: true,
+		validation: {
+	  		required: true
+		}
+	}, {
+		name : 'saveStock',
+		hidden: true
+	}, {
+		name : 'minStock',
+		hidden: true
+	}, {
+		name : 'maxStock',
+		hidden: true
+	}, {
+		name : 'monthStock',
+		hidden: true
+	} ]
+});
 
-
-	// listGrid 생성
-	const listGrid = new tui.Grid({
-		el : document.getElementById('matList'),
-		data : listData,
-		scrollX : false,
-		scrollY : true,
-		bodyHeight: 450,
-		selectionUnit: 'row',
-		columns : [ {
-			header : '자재코드',
-			name : 'materialCode',
-			width : 80,
-			align: 'center'
-		}, {
-			header : '자재명',
-			name : 'materialName'
-		}, {
-			header : '구분',
-			name : 'matNm',
-			width : 80,
-			align: 'center'
-		} ]
-	});
-}
-	
+var rowKey;
 // list에서 선택한 자재 정보 가져오기
 listGrid.on('click',function(e){
 	
-	$.ajax({
+	rowKey = e.rowKey;
 		
-		type : "get",
-		url : contextPath + "/ajax/matInfo.do",
-		data : {
-			'materialCode' : listGrid.getValue(e.rowKey, 'materialCode')
-		},
-		dataType : "json",
-		async : false,
-		success : function(data) {
-			$('#materialCode').val(data.materialCode);
-			$('#materialName').val(data.materialName);
-			$('#matNo').val(data.matNo).prop("selected",true);
-			$('#companyCode').val(data.companyCode);
-			$('#companyName').val(data.companyName);
-			$('#unitNo').val(data.unitNo).prop("selected",true);
-			$('#saveStock').val(data.saveStock);
-			$('#minStock').val(data.minStock);
-			$('#maxStock').val(data.maxStock);
-			$('#monthStock').val(data.monthStock);
-			
-		},
-		error : function() {
-		}
-	});
+	$('#materialCode').val(listGrid.getValue(rowKey, 'materialCode'));
+	$('#materialName').val(listGrid.getValue(rowKey, 'materialName'));
+	$('#matNo').val(listGrid.getValue(rowKey, 'matNo')).prop("selected",true);
+	$('#companyCode').val(listGrid.getValue(rowKey, 'companyCode'));
+	$('#companyName').val(listGrid.getValue(rowKey, 'companyName'));
+	$('#unitNo').val(listGrid.getValue(rowKey, 'unitNo')).prop("selected",true);
+	$('#saveStock').val(listGrid.getValue(rowKey, 'saveStock'));
+	$('#minStock').val(listGrid.getValue(rowKey, 'minStock'));
+	$('#maxStock').val(listGrid.getValue(rowKey, 'maxStock'));
+	$('#monthStock').val(listGrid.getValue(rowKey, 'monthStock'));
 	
 });
+
+
+//readonly 값도 실시간 감지하기위해.. 원리는 모름
+$(document).ready(function(){
+    var $input = $("#companyCode"); // readonly inputBox  
+        $("#companyCode").on('input', function() {
+			listGrid.setValue(rowKey, $(this).attr('id'), $(this).val(), false);
+        });
+});
+
+(function ($) {
+    var originalVal = $.fn.val;
+    $.fn.val = function (value) {
+        var res = originalVal.apply(this, arguments);
+ 
+        if (this.is('input[readonly="readonly"]') && arguments.length > 0) {
+            this.trigger("input");
+        }
+        return res;
+    };
+})(jQuery);
+
+
+$('input').on('propertychange change keyup paste input', function(){
+	listGrid.setValue(rowKey, $(this).attr('id'), $(this).val(), false);
+})
+
+$(document).on('change','#matNo',function(){
+	listGrid.setValue(rowKey, 'matNo', $(this).val(), false);
+	listGrid.setValue(rowKey, 'matNm',$(this).find("option[value='"+$(this).val() +"']").html() , false);
+});
+
+$(document).on('change','#unitNo',function(){
+	listGrid.setValue(rowKey, 'unitNo', $(this).val(), false);
+});
 	
-// 입력 / 수정 form 전송
 $('#btnSave').on('click',function(){
 	
-	if(!checkNull($('#materialCode').val())){
-		toast('자재코드를 입력하세요');
-	}else if(!checkNull($('#materialName').val())){
-		toast('자재명을 입력하세요.');
-	}else if(!checkNull($('#matNo').val())){
-		toast('자재구분을 선택하세요.	');
-	}else if(!checkNull($('#unitNo').val())){
-		toast('관리단위를 선택하세요');
-	}else{
-		$.ajax({
-			type : "get",
-			url : contextPath + "/ajax/matSave.do",
-			data : $('#frm').serialize(),
-			dataType : "json",
-			async : false,
-			success : function(data) {
-				if(data == 1)
-					alert('1건 입력 완료');
-				else
-					alert('입력 실패 : 지속될 시 관리자에게 문의');
-					
-				$("#matList").empty()
-				showMatList();
-			},
-			error : function(request, status, error) {
+	for(var valid of listGrid.validate()){
+		for(var errors of valid.errors){
+			var header;
+			for(var column of listGrid.getColumns()){
+				if(column.name == errors.columnName)
+					header = column.header;
 			}
-		});
+			toast(header+'를 확인하세요.','No.' + listGrid.getValue(valid.rowKey,'materialCode'));
+		}
 	}
+	
+	if(listGrid.validate().length == 0)
+		listGrid.request('modifyData');
+	
 });
 	
-function toast(text){
+function toast(text, title){
 	toastr.options = {
 		closeButton: true,
 		showDuration: "500"
  	};
-	toastr.error(text);
+	toastr.error(text, title);
 }
 
+var newMatCode;
+
 // 새 자재 클릭시 matCode 불러오기
-$('#btnNew').on('click',function(){
+$('#btnNew').on('click',function(){	
 	
-	$.ajax({
-		
-		type : "get",
-		url : contextPath + "/ajax/newMatCode.do",
-		dataType : "json",
-		async : false,
-		success : function(data) {
-			$('input').val('');
-			$('#materialCode').val(data.materialCode);
-			$('#matNo').val('');
-			$('#unitNo').val('');
-		},
-		error : function(request, status, error) {
-			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
+	if(checkNull(newMatCode)){
+		newMatCode += 1;
+	}else{
+		$.ajax({
+			type : "get",
+			url : contextPath + "/ajax/newMatCode.do",
+			dataType : "json",
+			async : false,
+			success : function(data) {
+				newMatCode = data.materialCode;
+			},
+			error : function(request, status, error) {
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+	
+	newRowData = {"materialCode" : newMatCode}
+	rowKey = listGrid.getRowCount();
+	listGrid.appendRow(newRowData,{
+		at : listGrid.getRowCount(),
+		focus : true
 	});
+	$('input').val('');
+	$('select').val('');
+	$('#materialCode').val(newMatCode); // 이거 지워보기
 });
 	
 	
 // 자재 정보 삭제
 $('#btnDel').on('click',function(){
-	
-	if($('#materialCode').val() != null && $('#materialCode').val() != ''){
-		if(confirm("정말로 " + $('#materialCode').val() + "번 자재를 삭제하겠습니까?")){
-		
-    		$.ajax({
-			
-				type : "get",
-				url : contextPath + "/ajax/matDel.do",
-				data : $('#frm').serialize(),
-				dataType : "json",
-				async : false,
-				success : function(data) {
-					if(data == 1)
-						alert('삭제되었습니다.');
-					else
-						alert('삭제 실패 : 지속될 시 관리자에게 문의');
-					
-					$('input').val('');
-					$("#matList").empty()
-					showMatList();
-				},
-				error : function(request, status, error) {
-					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-				}
-			});
-	
-		}else
-			return;
-
-	} // end if
-	
+	if(confirm(listGrid.getValue(rowKey, 'materialName') +' 자재를 정말로 삭제하시겠습니까?(저장시 적용)')){
+		listGrid.removeRow(rowKey, {});
+		$('input').val('');
+		$('select').val('');
+	}
 });
 
 
@@ -188,14 +217,11 @@ $("#btnCompModal").on("click", function(e) {
     $('#compContent').load(contextPath + "/modal/compModal.do");
 });
 
-$(document).on('show.bs.modal','#btnCompModal', function (){});
-
 $('#companyCode').on('click',function(){
 	$('#compModal').modal('show');
 	$('#compContent').load(contextPath + "/modal/compModal.do");
 	
 })
-
 
 function checkNull(value){
 	return value != null && value != '' && value != '[object HTMLInputElement]';

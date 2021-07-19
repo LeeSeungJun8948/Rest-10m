@@ -36,13 +36,10 @@ public class MaterialServiceImpl implements MaterialService{
 	}
 
 	@Override
-	public int saveMat(MaterialVO vo) { // 업데이트인지 새로운 값인지 
-		if(mapper.saveMat(vo) == 0) // 입력된 matCode가 없으면 새 자재 입력
-			return istMat(vo);
-		else 
-			return udtMat(vo);
+	public int istMat(MaterialVO vo) { // 새 자재정보 입력
+		return mapper.istMat(vo);
 	}
-
+	
 	@Override
 	public int udtMat(MaterialVO vo) { // 업데이트
 		return mapper.udtMat(vo);
@@ -51,11 +48,6 @@ public class MaterialServiceImpl implements MaterialService{
 	@Override
 	public MaterialVO newMatCode() { // 새 자재 입력시 새 자재코드 불러오기
 		return mapper.newMatCode();
-	}
-
-	@Override
-	public int istMat(MaterialVO vo) { // 새 자재정보 입력
-		return mapper.istMat(vo);
 	}
 
 	@Override

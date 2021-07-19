@@ -43,7 +43,30 @@ const grid = new tui.Grid({
 		}, {
 		header: '비고',
 		name: 'comments',
-		}]
+		}], summary: {
+			height: 40,
+			position: 'bottom',
+			columnContent: {
+				outDate: {
+					template(summary) {
+						return '합계:';
+					}
+				},
+				orderCount: {
+					template(summary) {
+						return (summary.sum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+					}
+				},
+				prorCount: {
+					template(summary) {
+						return (summary.sum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+					}
+				}
+			}
+		},
+		columnOptions: {
+			resizable: true
+		}
 });
 
 // 조회 버튼

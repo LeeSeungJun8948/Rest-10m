@@ -62,9 +62,9 @@
              <![CDATA[
                     ) ALL_LIST
                     )
-             WHERE  RNUM  > #{firstIndex}
-               AND  RNUM <= #{firstIndex} + #{recordCountPerPage}
                ]]>
+<!--              WHERE  RNUM  > #{firstIndex}
+               AND  RNUM <= #{firstIndex} + #{recordCountPerPage} -->
                
     </select>
 

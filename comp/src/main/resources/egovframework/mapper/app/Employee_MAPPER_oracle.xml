@@ -4,13 +4,14 @@
 	<select id="getEmp" resultType="com.rest.app.comm.vo.EmployeeVO">
 		select * from employee
 		<where>
-				<if test="searchCondition == 'id'">AND
-					id LIKE '%' || #{searchKeyword} || '%'
-				</if>
-				<if test="searchCondition == 'employeeName'">AND
-					employee_Name LIKE '%' || #{searchKeyword} || '%'
-				</if>
+			<if test="searchCondition == 'id'">AND
+				id LIKE '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="searchCondition == 'employeeName'">AND
+				employee_Name LIKE '%' || #{searchKeyword} || '%'
+			</if>
 		</where>
+		order by emp_code
 	</select>
 	
 	<delete id="deleteEmp" parameterType="com.rest.app.comm.vo.EmployeeVO">
@@ -31,7 +32,7 @@
 		values(#{empCode}, #{id}, #{pwd}, #{dept}, #{auth}, #{phone}, #{email}, #{hireDate}, #{employeeName}, #{companyCode}, sysdate, #{salary}, #{birthDay}, null, null)
 	</insert>
 	
-	<select id="maxEmpCode" resultType = "int">
+	<select id="maxEmpCode" resultType ="int">
 		select MAX(emp_code) from employee
 	</select>
 </mapper>  
