@@ -210,7 +210,7 @@ $('#btnDel').on('click', function() {
 
 // 미출고 읽기 버튼
 $('#btnRead').on('click', function() {
-	var param = $('#dateForm').serializeObject();
+	var param = $('#dateFrm').serializeObject();
 	console.log(param)
 	grid.readData(1, param, true);
 });
@@ -309,13 +309,13 @@ function checkNull(value) {
 //모달
 var forGrid = false;
 $("#companyCode").on("click", function(e) {
-	$('#compContent').load(contextPath+"/compModalForProd.do");
+	$('#compContent').load(contextPath+"/modal/compModalForProd.do");
 });
 $("#companyName").on("click", function(e) {
-	$('#compContent').load(contextPath+"/compModalForProd.do");
+	$('#compContent').load(contextPath+"/modal/compModalForProd.do");
 });
 $("#btnCompModal").on("click", function(e) {
-	$('#compContent').load(contextPath+"/compModalForProd.do");
+	$('#compContent').load(contextPath+"/modal/compModalForProd.do");
 });
 $(document).on('show.bs.modal', '#btnCompModal', function() {
 });

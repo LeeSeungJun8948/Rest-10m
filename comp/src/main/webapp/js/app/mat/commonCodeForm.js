@@ -139,7 +139,6 @@ var idRowKey;
 var newRowKey;
 
 codeIdGrid.on('click',function(e){
-	// 똥꼬쇼...
 	var change = true;	
 	
 	if(!checkNull(idRowKey))

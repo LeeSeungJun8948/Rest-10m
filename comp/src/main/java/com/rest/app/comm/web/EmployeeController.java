@@ -59,15 +59,13 @@ public class EmployeeController {
 
 	@RequestMapping("/comm/insertEmp.do")
 	public String insertEmp(EmployeeVO vo) {
-		dao.insertEmp(vo);
+		if (vo.getEmpCode().equals("")) {
+			vo.setEmpCode(String.valueOf(dao.maxEmpCode() + 1));
+			dao.insertEmp(vo);
+		} else {
+			dao.updateEmp(vo);
+		}
 		return "redirect:empList.do";
-	}
-
-	// 모달
-	@RequestMapping("/comm/empModal.do")
-	public String modal(Model model) {
-		model.addAttribute("max", dao.maxEmpCode());
-		return "app/comm/empModal";
 	}
 
 	@RequestMapping("/comm/ajax/empList.do")
@@ -78,12 +76,6 @@ public class EmployeeController {
 		data.put("result", true);
 		datas.put("contents", dao.getEmp(vo));
 		data.put("data", datas);
-		/*
-		 * "result": true, "data": {
-		 * 
-		 * result + data vo하나 contents vo하나 pagingation page,totalcount 들어가는 vo하나
-		 * "contents": [], "pagination": { "page": 1, "totalCount": 100 } }
-		 */
 		return data;
 	}
 
@@ -98,44 +90,4 @@ public class EmployeeController {
 		data.put("data", gridData.deletedRows);
 		return data;
 	}
-
-	@PutMapping(value = "/comm/ajax/updateEmp.do")
-	@ResponseBody
-	public Map updateEmp(@RequestBody GridData gridData) {
-
-		Map<String, Object> data = new HashMap<String, Object>();
-		for (int i = 0; i < gridData.updatedRows.size(); i++) {
-			dao.updateEmp(gridData.updatedRows.get(i));
-		}
-		data.put("result", true);
-		data.put("data", gridData.updatedRows);
-		return data;
-	}
-
-	/*
-	 * @PostMapping(value = "/ajax/insertEmp.do")
-	 * 
-	 * @ResponseBody public Map insertEmp(@RequestBody GridData gridData) {
-	 * Map<String,Object> data = new HashMap<String, Object>();
-	 * dao.insertEmp(gridData.createdRows.get(0)); data.put("result", true);
-	 * data.put("data", gridData.createdRows); return data; }
-	 */
-
-	@PutMapping(value = "/comm/ajax/modifyEmp.do")
-	@ResponseBody
-	public Map modifyEmp(@RequestBody GridData gridData) {
-		Map<String, Object> data = new HashMap<String, Object>();
-		for (int i = 0; i < gridData.createdRows.size(); i++) {
-
-			dao.insertEmp(gridData.createdRows.get(i));
-		}
-		for (int i = 0; i < gridData.updatedRows.size(); i++) {
-			dao.updateEmp(gridData.updatedRows.get(i));
-		}
-		data.put("result", true);
-		data.put("data", gridData.updatedRows);
-		data.put("data", gridData.createdRows);
-		return data;
-	}
-
 }

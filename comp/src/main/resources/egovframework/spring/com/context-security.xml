@@ -24,6 +24,7 @@
  	<security:http pattern="/js/**" security="none"/>
  	<security:http pattern="/ajax/**" security="none"/>
  	<security:http pattern="/*/*Modal.do" security="none"/>
+ 	<security:http pattern="/modal/*.do" security="none"/>
  	<security:http pattern="/*Modal.do" security="none"/>
  	<security:http pattern="/*/*modal.do" security="none"/>
  	<security:http pattern="/*modal.do" security="none"/>
