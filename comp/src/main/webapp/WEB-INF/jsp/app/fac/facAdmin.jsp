@@ -26,7 +26,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="mb-2 col-md-10">
+		<div class="mb-2 col-md-8">
 			<table class="table">
 				<tbody>
 					<tr>
@@ -60,10 +60,10 @@
 						<th>제작일자</th>
 						<td><input type="date" id="productionDate"
 							name="productionDate" class="form-control">
-						<th>사원번호</th>
+						<th>사원번호<span style="color: red">*</span></th>
 						<td>
 							<div class="row">
-								<div class="col-md-8">
+								<div class="col-md-2">
 									<input type="text" id="empNo" name="empNo" readonly
 										class="form-control">
 								</div>
@@ -72,6 +72,10 @@
 									<img alt="btn_search"
 										src="<c:url value='/images/app/all/btn_search.png'/>">
 								</button>
+								<div class="col-md-6">
+									<input type="text" id="employeeName" name="employeeName" readonly
+										class="form-control">
+								</div>
 							</div>
 						</td>
 						<th>구매금액</th>
@@ -79,16 +83,16 @@
 							onkeyup="numberWithCommas(this.value)" class="form-control"></td>
 					</tr>
 					<tr>
-						<th>정기점검주기</th>
+						<th>정기점검주기(DAY)</th>
 						<td><input type="text" id="facInspection"
 							name="facInspection" class="form-control"></td>
 						<th>구매일자</th>
 						<td><input type="date" id="purchaseDate" name="purchaseDate"
 							class="form-control"></td>
-						<th>공정코드</th>
+						<th>공정코드<span style="color: red">*</span></th>
 						<td>
 							<div class="row">
-								<div class="col-md-8">
+								<div class="col-md-3">
 									<input type="text" id="processCode" name="processCode" readonly
 										class="form-control">
 								</div>
@@ -98,6 +102,10 @@
 									<img alt="btn_search"
 										src="<c:url value='/images/app/all/btn_search.png'/>">
 								</button>
+								<div class="col-md-6">
+								<input type="text" id="processName" name="processName" readonly
+										class="form-control">
+								</div>
 							</div>
 						</td>
 					</tr>

@@ -167,6 +167,26 @@ function getFormatDate(date){
 }
 
 
+//excel
+$("#btnExcel").on("click", function(e) {
+	/**
+	var header = {};
+	for(var i = 0 ; i < grid.getColumns().length ; i++){
+		header[grid.getColumns()[i].name] = grid.getColumns()[i].header;
+	}
+	 */
+
+	var data = grid.getData();
+	for(var i = 0 ; i < data.length ; i++){
+		delete data[i]._attributes;
+		delete data[i].rowKey;
+	}
+	
+	$('#param').val(JSON.stringify(data));
+	console.log($('#param').val());
+	frmExcel.submit();	
+})
+
 // 모달
 var forGrid = false;
 // 자재 돋보기

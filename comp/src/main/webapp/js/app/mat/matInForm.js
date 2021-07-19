@@ -293,7 +293,6 @@ function getFormatDate(date){
     return  year + '-' + month + '-' + day;
 }
 
-
 // 모달
 var forGrid = false;
 // 자재 돋보기

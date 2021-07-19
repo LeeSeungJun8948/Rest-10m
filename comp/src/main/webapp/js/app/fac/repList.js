@@ -4,9 +4,12 @@ function test() {
 			alert("설비코드 필수입력");
 			document.frm.facCode.focus();*/
 	if(!checkNull($('#facCode').val())) {
-		toastr.warning('설비코드를 입력해주십시오.');
+			toastr.warning('설비코드를 입력해주십시오.');
 			return false;
-		} else
+		} else if(!checkNull($('#companyCode').val())) {
+			toastr.warning('업체코드를 입력해주십시오.');
+			return false;
+		}
 			return true;
 	}
  
@@ -37,6 +40,9 @@ const dataSource = {
 			header : '설비코드',
 			name : 'facCode'
 		}, {
+			header : '설비명',
+			name : 'facilitiesName'
+		}, {
 			header : '수리일자',
 			name : 'repairDate'
 		}, {
@@ -45,6 +51,9 @@ const dataSource = {
 		}, {
 			header : '업체코드',
 			name : 'companyCode'
+		}, {
+			header : '업체명',
+			name : 'companyName'
 		}, {
 			header : '수리금액',
 			name : 'cost'
@@ -124,7 +133,7 @@ const dataSource = {
 	});
 	
 	$("#btnFacModal").on("click", function(e) {
-	    $('#facContent').load(contextPath + "/modal/facModel.do");
+	    $('#facContent').load(contextPath + "/modal/facModal.do");
 	});
 
 	function numberWithCommas(x) {

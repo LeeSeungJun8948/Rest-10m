@@ -1,6 +1,7 @@
 package com.rest.app.fac.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rest.app.comm.vo.EmployeeVO;
 import com.rest.app.fac.vo.FacilitiesVO;
@@ -16,4 +17,5 @@ public interface FacilitiesMapper {
 	public int getFacCode();
 	public List<EmployeeVO> getEmpListModal(EmployeeVO vo);
 	public int insertFacilities(FacilitiesVO vo);
+	public List<FacilitiesVO> getFac(Map<String, Object> param);
 }
