@@ -156,5 +156,6 @@ function format(value){
 function fnSearch(){
 	if(confirm("저장하시겠습니까?")) { 			
 		$("#frm").submit();
+		toastr.success("저장되었습니다.");
 	}
 }
