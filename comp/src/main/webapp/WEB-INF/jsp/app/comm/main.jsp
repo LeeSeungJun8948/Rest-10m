@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 
 <div align="center">
-	<h2>메인 페이지</h2>
-	<img alt="doge" src="<c:url value='/images/app/all/doge.jpg'/>">
+	<div class="mb-8">
+		<h2>메인 페이지</h2>
+	</div>
 </div>
