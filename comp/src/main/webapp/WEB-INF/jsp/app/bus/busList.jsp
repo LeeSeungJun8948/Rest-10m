@@ -4,13 +4,16 @@
 
 
 <h1 class="h3 mb-4 text-gray-700">주문관리참조 조회</h1>
-<div class="mb-4" align="right">
-	<button type="button" class="btn btn-primary" id="searchBtn">조회</button>
-	<button type="reset" class="btn btn-primary" id="resetBtn">새자료</button>
-</div>
-<div class="row">
-	<div class="mb-2 col-lg-6">
-		<form id="dataForm" name="dataForm">
+<form id="dataForm" name="dataForm" method="post"
+	action="busListExcel.do">
+	<div class="mb-4" align="right">
+		<button type="button" class="btn btn-primary" id="searchBtn">조회</button>
+		<input type="submit" class="btn btn-primary" id="btnExcel" value="엑셀">
+		<button type="reset" class="btn btn-primary" id="resetBtn">새자료</button>
+	</div>
+	<div class="row">
+		<div class="mb-2 col-lg-6">
+
 			<table class="table">
 				<tbody>
 					<tr>
@@ -58,9 +61,9 @@
 						<td>
 							<div class="row">
 								<div class="col-md-4">
-									<input class="form-control" type="text"
-										id="companyCode" name="companyCode"data-remote="false" data-toggle="modal"
-									data-target="#compModal">
+									<input class="form-control" type="text" id="companyCode"
+										name="companyCode" data-remote="false" data-toggle="modal"
+										data-target="#compModal">
 								</div>
 								<button id="btnCompModal" type="button" class="btn btn-toggle"
 									data-remote="false" data-toggle="modal"
@@ -69,9 +72,9 @@
 										src="<c:url value='/images/app/all/btn_search.png'/>">
 								</button>
 								<div class="col-md-6">
-									<input class="form-control" type="text"
-										id="companyName" name="companyName"data-remote="false" data-toggle="modal"
-									data-target="#compModal">
+									<input class="form-control" type="text" id="companyName"
+										name="companyName" data-remote="false" data-toggle="modal"
+										data-target="#compModal">
 								</div>
 							</div>
 						</td>
@@ -81,9 +84,9 @@
 						<td>
 							<div class="row">
 								<div class="col-md-4">
-									<input class="form-control" type="text"
-										id="productCode" name="productCode"data-remote="false" data-toggle="modal"
-									data-target="#prodModal">
+									<input class="form-control" type="text" id="productCode"
+										name="productCode" data-remote="false" data-toggle="modal"
+										data-target="#prodModal">
 								</div>
 								<button id="btnProdModal" type="button" class="btn btn-toggle"
 									data-remote="false" data-toggle="modal"
@@ -92,9 +95,9 @@
 										src="<c:url value='/images/app/all/btn_search.png'/>">
 								</button>
 								<div class="col-md-6">
-									<input class="form-control" type="text"
-										id="productName" name="productName"data-remote="false" data-toggle="modal"
-									data-target="#prodModal">
+									<input class="form-control" type="text" id="productName"
+										name="productName" data-remote="false" data-toggle="modal"
+										data-target="#prodModal">
 								</div>
 							</div>
 						</td>
@@ -102,10 +105,9 @@
 
 				</tbody>
 			</table>
-
-		</form>
+		</div>
 	</div>
-</div>
+</form>
 <div id="grid"></div>
 
 <div class="modal fade" id="compModal" tabindex="-1" role="dialog"
