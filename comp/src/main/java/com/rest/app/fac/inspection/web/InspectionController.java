@@ -127,12 +127,12 @@ public class InspectionController {
 	}
 	
 	// 설비검색 모달 페이지
-		@RequestMapping("/modal/facModel.do")
+		@RequestMapping("/modal/facModal.do")
 		public String facModel() {
-			return "app/modal/facModel";
+			return "app/modal/facModal";
 		}
 		
-		@RequestMapping("/ajax/facListModel.do")
+		@RequestMapping("/ajax/facListModal.do")
 		@ResponseBody
 		public Map<String, Object> ajaxfacListModel(Model model, FacilitiesVO vo) { 
 			

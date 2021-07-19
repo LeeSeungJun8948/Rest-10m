@@ -31,7 +31,7 @@
 						<th>설비코드<span style="color: red">*</span></th>
 						<td>
 							<div class="row">
-								<div class="col-md-8">
+								<div class="col-md-2">
 									<input type="text" id="facCode" name="facCode"
 										 readonly class="form-control">
 								</div>
@@ -40,6 +40,10 @@
 									<img alt="btn_search"
 										src="<c:url value='/images/app/all/btn_search.png'/>">
 								</button>
+								<div class="col-md-6">
+									<input type="text" id="facilitiesName" name="facilitiesName"
+										 readonly class="form-control">
+								</div>
 							</div>
 						</td>
 						<th>수리일자</th>
@@ -50,10 +54,10 @@
 						<th>수리내역</th>
 						<td><input type="text" id="repairComment"
 							name="repairComment" class="form-control"></td>
-						<th>업체코드</th>
+						<th>업체코드<span style="color: red">*</span></th>
 						<td>
 							<div class="row">
-								<div class="col-md-8">
+								<div class="col-md-2">
 									<input type="text" id="companyCode" name="companyCode"
 										 readonly class="form-control">
 								</div>
@@ -63,6 +67,10 @@
 									<img alt="btn_search"
 										src="<c:url value='/images/app/all/btn_search.png'/>">
 								</button>
+								<div class="col-md-6">
+									<input type="text" id="companyName" name="companyName"
+										 readonly class="form-control">
+								</div>
 							</div>
 						</td>
 						<th>수리금액</th>

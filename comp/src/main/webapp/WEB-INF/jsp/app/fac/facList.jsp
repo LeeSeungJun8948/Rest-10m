@@ -98,8 +98,8 @@
 				header : '제작일자',
 				name : 'productionDate'
 			}, {
-				header : '사원번호',
-				name : 'empNo'
+				header : '사원명',
+				name : 'employeeName'
 			}, {
 				header : '구매금액',
 				name : 'price'
