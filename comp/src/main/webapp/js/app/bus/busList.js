@@ -146,10 +146,10 @@ $("#productName").on("click", function(e) {
     $('#prodContent').load(contextPath+"/modal/prodModal.do");
 });
 $("#btnCompModal").on("click", function(e) {
-    $('#compContent').load(contextPath+"/modal/compModalForProd.do");
+	$('#compContent').load(contextPath+"/modal/compModalForProd.do");
 });
 $("#btnProdModal").on("click", function(e) {
-    $('#prodContent').load(contextPath+"/modal/prodModal.do");
+	$('#prodContent').load(contextPath+"/modal/prodModal.do");
 });
 // ???????
 $(document).on('show.bs.modal','#btnCompModal', function () {
