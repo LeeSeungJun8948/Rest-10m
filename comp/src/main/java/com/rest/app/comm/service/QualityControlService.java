@@ -1,8 +1,10 @@
 package com.rest.app.comm.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rest.app.comm.vo.QualityControlVO;
+
 
 public interface QualityControlService {
 	
@@ -34,5 +36,8 @@ public interface QualityControlService {
 	public int deleteProduct(QualityControlVO vo);
 	
 	public int maxProductCode();
+	
+	//excel
+	List<QualityControlVO> getProductList(Map<String, Object> param);
 	
 }

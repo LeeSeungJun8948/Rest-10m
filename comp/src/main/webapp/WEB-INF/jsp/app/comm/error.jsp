@@ -38,9 +38,9 @@
 		<script type="text/javascript">
 			const dataSource = {
 				api : {
-					readData : {url : 'ajax/errorList.do', method : 'get'},
-					deleteData : { url: 'ajax/deleteError.do', method: 'POST' },
-					modifyData : { url: 'ajax/modifyError.do', method: 'PUT'}
+					readData : {url : contextPath 	+ '/ajax/errorList.do', method : 'get'},
+					deleteData : { url: contextPath	+ '/ajax/deleteError.do', method: 'POST' },
+					modifyData : { url: contextPath	+ '/ajax/modifyError.do', method: 'PUT'}
 
 				},
 				contentType : 'application/json'
@@ -73,5 +73,5 @@
 			
 		</script>
 </body>
-	<script type="text/javascript" src="js/app/comm/error.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/comm/error.js"></script>
 </html>

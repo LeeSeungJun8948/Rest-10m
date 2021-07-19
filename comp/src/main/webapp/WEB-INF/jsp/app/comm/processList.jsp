@@ -25,11 +25,11 @@
 	<script type="text/javascript">
         	const dataSource = {
         			api : {
-        				readData : {url: 'ajax/processList.do', method:'get'},
-        				createData : { url: 'ajax/insertProcess.do', method: 'POST'},
-        				updateData : { url: 'ajax/updateProcess.do', method: 'PUT' },
-        				deleteData : { url: 'ajax/deleteProcess.do', method: 'POST'},
-        				modifyData : { url: 'ajax/modifyProcess.do', method: 'PUT'}
+        				readData : {url: contextPath + '/ajax/processList.do', method:'get'},
+        				createData : { url: contextPath +'/ajax/insertProcess.do', method: 'POST'},
+        				updateData : { url: contextPath + '/ajax/updateProcess.do', method: 'PUT' },
+        				deleteData : { url: contextPath + '/ajax/deleteProcess.do', method: 'POST'},
+        				modifyData : { url: contextPath + '/ajax/modifyProcess.do', method: 'PUT'}
 						},
 						contentType: 'application/json'
 					}; 
@@ -124,5 +124,5 @@
 	
 		</script>
 </body>
-<script type="text/javascript" src="js/app/comm/process.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/comm/process.js"></script>
 </html>

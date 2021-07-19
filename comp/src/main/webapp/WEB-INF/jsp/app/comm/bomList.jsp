@@ -43,8 +43,7 @@
 				<input id="productCode2" name="productCode2" type="hidden"
 					value="productCode">
 			</form>
-			<button type="button" class="btn btn-primary"
-				onclick="location.href='bomList.do' ">초기화</button>
+			<button type="reset" class="btn btn-primary">초기화</button>
 			<button type="button" class="btn btn-primary" id="btnInsert">저장</button>
 			<button type="button" class="btn btn-primary" id="delBom">Bom삭제</button>
 		</div>
@@ -109,11 +108,11 @@
 	<script type="text/javascript">
     	const dataSource = {
 			api : {
-				readData : {url: 'ajax/getInfoProduct.do', method:'get'},
-				createData : { url: 'ajax/insertBom.do', method: 'POST'},
-				updateData : { url: 'ajax/updateBom.do', method: 'PUT' },
-				deleteData : { url: 'ajax/deleteBom.do', method: 'POST' },
-				modifyData : { url: 'ajax/modifyBom.do', method: 'PUT'}
+				readData : {url: contextPath +'/ajax/getInfoProduct.do', method:'get'},
+				createData : { url: contextPath + '/ajax/insertBom.do', method: 'POST'},
+				updateData : { url: contextPath + '/ajax/updateBom.do', method: 'PUT' },
+				deleteData : { url: contextPath + '/ajax/deleteBom.do', method: 'POST' },
+				modifyData : { url: contextPath + '/ajax/modifyBom.do', method: 'PUT'}
 				},
 			contentType: 'application/json'
 			}; 
@@ -122,7 +121,7 @@
 				data : dataSource,
 				rowHeaders: ['checkbox'],
 				scrollX : false,
-				scrollY : false,
+				scrollY : true,
 				columns : [
 				{
 					header : '제품코드',
@@ -219,6 +218,13 @@
 				 		grid.request('modifyData', {
 					    checkedOnly: true
 					  });
+				 		grid.on('successResponse' , function(ev){
+				 			var text = JSON.parse(ev.xhr.responseText);
+							if (text.check == 'save') {
+								
+							}
+				 		});
+				 		toastr.success("저장되었습니다.");
 			})
 			function setMatCode(ev){
 				var rowKey = ev.rowKey;
@@ -232,6 +238,7 @@
 						async: false,
 						success : function(data){
 							grid.setValue(rowKey,'materialName',data.materialName,false);
+						
 						},
 						error:function(request, status, error){
 							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -257,8 +264,7 @@
 						}
 					});
 				}
-			}
-			
+			} 
 		
 			function checkNull(value){
 				return value != null && value != '' && value != '[object HTMLInputElement]';
@@ -269,15 +275,15 @@
 					document.deletefrm.submit();
 				});
 			});
-			
+			var context ='${pageContext.request.contextPath}';
 			var matCoderowKey;
 			//클릭시 모달 창 띄우기
 			grid.on('click', (ev) => {
-				matCoderowKey = ev.rowKey;
-				var mc = grid.getRow(ev.rowKey).materialCode;
-				var mn = grid.getRow(ev.rowKey).materialName;
+				procCoderowKey = ev.rowKey;
+				var pc = grid.getRow(ev.rowKey).processCode;
+				var pn = grid.getRow(ev.rowKey).processName;
 				if(ev.columnName == 'processName'){
-					var href="proModal.do";
+					var href="procCodeModal.do";
 	               	window.event.preventDefault();
 	              	$('.jquery-modal').remove(); 
 	              	$('.modal').remove(); 
@@ -287,13 +293,14 @@
 	                 });
 				  }
 	          });
-			
+		
+			//그리드 자재명 클릭시 모달실행
 			grid.on('click', (ev) => {
 				matCoderowKey = ev.rowKey;
 				var mc = grid.getRow(ev.rowKey).materialCode;
 				var mn = grid.getRow(ev.rowKey).materialName;
 				if(ev.columnName == 'materialName'){
-					var href="matCodeModal.do";
+					var href= context + "/modal/matCodeModal.do";
 	               	window.event.preventDefault();
 	              	$('.jquery-modal').remove(); 
 	              	$('.modal').remove(); 

@@ -1,8 +1,7 @@
 const pdataSource = {
 	api : {
-		readData : {url : 'ajax/getProductList.do', method : 'GET'},
-		modifyData : {url: 'ajax/modifyProduct.do', method : 'PUT'},
-		deleteData :{url: 'ajax/deleteProduct.do', method:'POST'}
+		readData : {url : contextPath + '/ajax/getProductList.do', method : 'GET'},
+		deleteData :{url:  contextPath + '/ajax/deleteProduct.do', method:'POST'}
 			},
 	contentType : 'application/json'
 };
@@ -87,7 +86,7 @@ progrid.on('click', (ev)=>{
 	$.ajax({
 		
 		type:"get",
-		url : "ajax/getProduct.do",
+		url :  contextPath + "/ajax/getProduct.do",
 		data : {
 			'productCode' : key
 		},
