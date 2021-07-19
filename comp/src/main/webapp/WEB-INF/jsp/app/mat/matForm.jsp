@@ -29,7 +29,7 @@
 				<div class="row">
 					<div class="input-group-prepend col-lg-3">
 						<span class="input-group-text" >자재코드</span>
-						<input id="materialCode" name="materialCode" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+						<input readonly="readonly" id="materialCode" name="materialCode" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 					</div>
 					<div class="input-group-prepend col-lg-6" >
 						<span class="input-group-text" >자재명</span>
@@ -39,7 +39,7 @@
 						<span class="input-group-text" >자재구분</span>
 						<select name="matNo" id="matNo" class="form-control">
 							<c:forEach var="mat" items="${mats}">
-								<option value="${mat.matNo}">${mat.matNm }</option>
+								<option value="${mat.matNo}">${mat.matNm}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -48,20 +48,20 @@
 					
 					<div class="input-group-prepend col-lg-3" >
 						<span class="input-group-text" >입고업체</span>
-						<input readonly id="companyCode" name="companyCode" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+						<input readonly='readonly' id="companyCode" name="companyCode" type="text" class="form-control w-50" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 						<button id="btnCompModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#compModal">
 							<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
 						</button>	
 					</div>
 					<div class="input-group-prepend col-lg-6" >
 						<span class="input-group-text" >업체명</span>
-						<input readonly id="companyName" name="companyName" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+						<input readonly='readonly' id="companyName" name="companyName" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 					</div>
 					<div class="input-group-prepend col-lg-3">
 						<span class="input-group-text" >관리단위</span>
 						<select name="unitNo" id="unitNo"  class="form-control">
 							<c:forEach var="unit" items="${units}">
-								<option value="${unit.unitNo}">${unit.unitNm }</option>
+								<option value="${unit.unitNo}">${unit.unitNm}</option>
 							</c:forEach>
 						</select>
 					</div>

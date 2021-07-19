@@ -52,21 +52,15 @@ public class MaterialController {
 	
 	@RequestMapping("/ajax/matList.do")
 	@ResponseBody
-	public List<MaterialVO> ajaxMatForm(Model model) { // 자재 요약 리스트 출력
-		return dao.getMatList();
-	}
-	
-	
-	@RequestMapping("/ajax/matInfo.do")
-	@ResponseBody
-	public MaterialVO ajaxMatInfo(Model model, MaterialVO vo) { // 자재 리스트에서 클릭시 자재 상세 정보 출력
-		return dao.getMatInfo(vo);
-	}
-	
-	@RequestMapping("/ajax/matSave.do")
-	@ResponseBody
-	public int ajaxMatSave(Model model, MaterialVO vo) { // 자재 입력&수정
-		return dao.saveMat(vo);
+	public Map<String,Object> ajaxMatForm(Model model) { // 자재 요약 리스트 출력
+		Map<String,Object> datas = new HashMap<>();
+		Map<String,Object> data = new HashMap<>();
+		
+		data.put("result", true);
+		datas.put("contents", dao.getMatList());
+		data.put("data", datas);
+		
+		return data;
 	}
 	
 	@RequestMapping("/ajax/newMatCode.do")
@@ -74,11 +68,27 @@ public class MaterialController {
 	public MaterialVO ajaxNewMatCode(Model model, MaterialVO vo) { // 새 자재 입력폼에서  새로 들어갈 자재코드 불러오기
 		return dao.newMatCode();
 	}
-	
-	@RequestMapping("/ajax/matDel.do")
+
+	@PutMapping("/ajax/matModify.do")
 	@ResponseBody
-	public int ajaxMatDel(Model model, MaterialVO vo) { // 자재 입력&수정
-		return dao.matDel(vo);
+	public Map<String, Object> ajaxMatModify(HttpServletRequest request, @RequestBody MatGridData gridData) {
+		Map<String,Object> data = new HashMap<String, Object>();
+		
+		for(int i = 0; i < gridData.createdRows.size(); i++) {
+			dao.istMat(gridData.createdRows.get(i));
+		}
+		for(int i = 0; i < gridData.updatedRows.size(); i++) {
+			dao.udtMat(gridData.updatedRows.get(i));
+		}
+		for(int i = 0; i < gridData.deletedRows.size(); i++) {
+			dao.matDel(gridData.deletedRows.get(i));
+		}
+		
+		data.put("result", true);
+		data.put("data", gridData.updatedRows);
+		data.put("data", gridData.createdRows);
+		data.put("data", gridData.deletedRows);
+		return data;
 	}
 	
 	@RequestMapping("/mat/view/inorderList.do")
@@ -448,6 +458,12 @@ public class MaterialController {
 	}
 }
 
+@Data
+class MatGridData {	
+	List<MaterialVO> deletedRows;
+	List<MaterialVO> updatedRows;
+	List<MaterialVO> createdRows;
+}
 @Data
 class CommonGridData{
 	List<CommonCodeVO> deletedRows;
