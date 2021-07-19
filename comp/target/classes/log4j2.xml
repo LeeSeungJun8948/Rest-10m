@@ -10,17 +10,17 @@
 			<level value="INFO" />
 			<appender-ref ref="console" />
 		</logger>
-        <Logger name="java.sql" level="INFO" additivity="false">
+        <Logger name="java.sql" level="ERROR" additivity="false">
             <AppenderRef ref="console" />
         </Logger>
-	    <Logger name="jdbc.sqltiming" level="INFO" additivity="false">
+	    <Logger name="jdbc.sqltiming" level="ERROR" additivity="false">
 	        <AppenderRef ref="console" />
 	    </Logger>
 	    
-        <Logger name="egovframework" level="DEBUG" additivity="false">
+        <Logger name="egovframework" level="ERROR" additivity="false">
             <AppenderRef ref="console" />
         </Logger>
-	    <Logger name="org.springframework" level="DEBUG" additivity="false">
+	    <Logger name="org.springframework" level="ERROR" additivity="false">
 	        <AppenderRef ref="console" />
 	    </Logger>
 	    	    <Logger name="org.apache" level="ERROR" additivity="false">
