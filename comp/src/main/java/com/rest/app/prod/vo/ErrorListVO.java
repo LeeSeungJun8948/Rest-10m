@@ -1,7 +1,5 @@
 package com.rest.app.prod.vo;
 
-
-
 import lombok.Data;
 
 @Data
@@ -17,4 +15,5 @@ public class ErrorListVO {
 	int errorCode;
 	String startDate;
 	String endDate;
+	String errorName;
 }

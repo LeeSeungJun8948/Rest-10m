@@ -4,8 +4,7 @@
 <div id="modalContent">
 	<div class="modal-header">
 		<h5 class="modal-title">불량검색</h5>
-		<button id="btnCloseTop" type="button" class="close"
-			data-dismiss="modal" aria-label="Close">
+		<button id="btnCloseTop" type="button" class="close" data-dismiss="modal" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
 	</div>
@@ -23,7 +22,7 @@
 					<input id="keyword" class="form-control" name="keyword" type="text" class="form-control">
 				</div>
 				<div class="col=md-1">
-					<button type="button" class="btn btn-primary" id="btnReadModal">조회</button>
+					<button type="button" class="btn btn-primary" id="btnReadModal">검색</button>
 				</div>
 			</div>
 		</form>

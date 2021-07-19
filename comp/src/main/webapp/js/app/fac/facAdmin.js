@@ -1,11 +1,20 @@
 console.log(contextPath);
 function test() {
 	if(!checkNull($('#facilitiesName').val())) {
-		toastr.warning('설비명을 입력해주십시오.');
+			toastr.warning('설비명을 입력해주십시오.');
 			return false;
-		} else
+		} else if(!checkNull($('#empNo').val())) {
+			toastr.warning('사원을 입력해주십시오.');
+			return false;
+		} else if(!checkNull($('#processCode').val())) {
+			toastr.warning('공정을 입력해주십시오.');
+			return false; 
+		} else if(!checkNull($('#facInspection').val())) {
+			toastr.warning('점검주기를 입력해주십시오.');
+			return false; 
+		}
 			return true; 
-	}
+	}	
    
 // 탭 기능
 $( function() {
@@ -89,6 +98,9 @@ $( function() {
 			header : '사원번호',
 			name : 'empNo'
 		}, {
+			header : '사원명',
+			name : 'employeeName'
+		}, {
 			header : '구매금액',
 			name : 'price'
 		}, {
@@ -128,6 +140,7 @@ $( function() {
 					$('#volume').val(data.volume);
 					$('#productionDate').val(data.productionDate);
 					$('#empNo').val(data.empNo);
+					$('#employeeName').val(data.employeeName);
 					$('#price').val(data.price);
 					$('#facInspection').val(data.facInspection);
 					$('#purchaseDate').val(data.purchaseDate);
@@ -138,6 +151,7 @@ $( function() {
 					$("#image").attr("src", "filedown.do?fileName=noimg.png");
 					}
 					$('#processCode').val(data.processCode);
+					$('#processName').val(data.processName);
 				},
 
 				error : function() {

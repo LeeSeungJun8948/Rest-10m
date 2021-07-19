@@ -75,7 +75,30 @@ const workGrid = new tui.Grid({
 		}, {
 		header: '불량량',
 		name: 'errorCount',
-		}]
+		}], summary: {
+			height: 40,
+			position: 'bottom',
+			columnContent: {
+				productLot: {
+					template(summary) {
+						return '합계:';
+					}
+				},
+				workCount: {
+					template(summary) {
+						return (summary.sum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+					}
+				},
+				errorCount: {
+					template(summary) {
+						return (summary.sum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+					}
+				}
+			}
+		},
+		columnOptions: {
+			resizable: true
+		}
 });
 
 // 조회 버튼

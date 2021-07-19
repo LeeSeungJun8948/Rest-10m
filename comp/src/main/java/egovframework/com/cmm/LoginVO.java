@@ -52,6 +52,22 @@ public class LoginVO implements Serializable{
 	private String ip;
 	/** GPKI인증 DN */
 	private String dn;
+	
+	private String menuNm;
+	private String chkURL;
+	
+	public String getMenuNm() {
+		return menuNm;
+	}
+	public void setMenuNm(String menuNm) {
+		this.menuNm = menuNm;
+	}
+	public String getChkURL() {
+		return chkURL;
+	}
+	public void setChkURL(String chkURL) {
+		this.chkURL = chkURL;
+	}
 	/**
 	 * id attribute 를 리턴한다.
 	 * @return String

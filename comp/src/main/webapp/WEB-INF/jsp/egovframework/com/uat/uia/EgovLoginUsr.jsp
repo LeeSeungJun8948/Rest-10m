@@ -38,25 +38,7 @@
 <script type="text/javascript" src="<c:url value='/js/egovframework/com/cmm/jquery.js'/>" ></script>
 <script type="text/javaScript" language="javascript">
 function checkLogin(userSe) {
-    // 일반회원
-    if (userSe == "GNR") {
-        document.loginForm.rdoSlctUsr[0].checked = true;
-        document.loginForm.rdoSlctUsr[1].checked = false;
-        document.loginForm.rdoSlctUsr[2].checked = false;
-        document.loginForm.userSe.value = "GNR";
-    // 기업회원
-    } else if (userSe == "ENT") {
-        document.loginForm.rdoSlctUsr[0].checked = false;
-        document.loginForm.rdoSlctUsr[1].checked = true;
-        document.loginForm.rdoSlctUsr[2].checked = false;
-        document.loginForm.userSe.value = "ENT";
-    // 업무사용자
-    } else if (userSe == "USR") {
-        document.loginForm.rdoSlctUsr[0].checked = false;
-        document.loginForm.rdoSlctUsr[1].checked = false;
-        document.loginForm.rdoSlctUsr[2].checked = true;
         document.loginForm.userSe.value = "USR";
-    }
 }
 
 function actionLogin() {
@@ -94,19 +76,7 @@ function goRegiUsr() {
 
     var userSe = document.loginForm.userSe.value;
  
-    // 일반회원
-    if (userSe == "GNR") {
-        document.loginForm.action="<c:url value='/uss/umt/EgovStplatCnfirmMber.do'/>";
-        document.loginForm.submit();
-    // 기업회원
-    } else if (userSe == "ENT") {
-        document.loginForm.action="<c:url value='/uss/umt/EgovStplatCnfirmEntrprs.do'/>";
-        document.loginForm.submit();
-    // 업무사용자
-    } else if (userSe == "USR") {
-    	<%-- 업무사용자는 별도의 회원가입이 필요하지 않습니다. --%>
-        alert("<spring:message code="comUatUia.validate.membershipCheck" />");
-    }
+       alert("<spring:message code="comUatUia.validate.membershipCheck" />");
 }
 
 function goGpkiIssu() {
@@ -172,7 +142,7 @@ function fnInit() {
     
     getid(document.loginForm);
     
-    fnLoginTypeSelect("typeGnr");
+    fnLoginTypeSelect("typeUsr");
 
     <c:if test="${not empty fn:trim(loginMessage) &&  loginMessage ne ''}">
     alert("loginMessage:<c:out value='${loginMessage}'/>");
@@ -186,20 +156,7 @@ function fnInit() {
 
 function fnLoginTypeSelect(objName){
 
-		document.getElementById("typeGnr").className = "";
-		document.getElementById("typeEnt").className = "";
-		document.getElementById("typeUsr").className = "";
-		
-		document.getElementById(objName).className = "on";
-		
-		if(objName == "typeGnr"){ //일반회원
-			document.loginForm.userSe.value = "GNR";
-		}else if(objName == "typeEnt"){	//기업회원
-			 document.loginForm.userSe.value = "ENT";
-		}else if(objName == "typeUsr"){	//업무사용자
-			 document.loginForm.userSe.value = "USR";
-		}
-	
+		 document.loginForm.userSe.value = "USR";
 }
 
 function fnShowLogin(stat) {
@@ -227,15 +184,6 @@ function fnShowLogin(stat) {
 	<input type="hidden" id="message" name="message" value="<c:out value='${message}'/>">
 	
 	<fieldset>
-		<img src="<c:url value='/images/egovframework/com/uat/uia/login_tit.png'/>" style="margin:30px 0 0px 60px" alt="login title image"  title="login title image">
-		<div class="login_type">
-			<ul id="ulLoginType">
-				<li><a href="javascript:fnLoginTypeSelect('typeGnr');" id="typeGnr" title=""><spring:message code="comUatUia.loginForm.GNR"/></a></li> <!-- 일반 -->
-				<li><a href="javascript:fnLoginTypeSelect('typeEnt');" id="typeEnt" title=""><spring:message code="comUatUia.loginForm.ENT"/></a></li> <!-- 기업 -->
-				<li><a href="javascript:fnLoginTypeSelect('typeUsr');" id="typeUsr" title=""><spring:message code="comUatUia.loginForm.USR"/></a></li> <!-- 업무 -->
-			</ul>
-		</div>
-	
 		<div class="login_input">
 			<ul>
 				<!-- 아이디 -->
@@ -258,18 +206,6 @@ function fnShowLogin(stat) {
 				<li>
 					<input type="button" class="btn_login" value="<spring:message code="comUatUia.loginForm.login"/>" onclick="actionLogin()"> <!-- 로그인  -->
 				</li>
-				<li>
-					<ul class="btn_idpw" >
-						<li><a href="#" onclick="goRegiUsr(); return false;"><spring:message code="comUatUia.loginForm.regist"/></a></li> <!-- 회원가입  -->
-					</ul>
-				</li>
-				<li>
-					<ul class="btn_idpw" >
-						<li><a href="#" onclick="fnShowLogin(1);"><spring:message code="comUatUia.loginForm.login.gpki"/></a></li><!-- 인증서로그인 -->
-						<li><a href="<c:url value='/uat/uia/egovGpkiIssu.do'/>"><spring:message code="comUatUia.loginForm.gpki.info"/></a></li><!-- 인증서안내 -->
-					</ul>
-				</li>
-				
 			</ul>
 		</div>
 		

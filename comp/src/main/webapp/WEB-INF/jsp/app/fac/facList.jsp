@@ -11,12 +11,17 @@
 <title></title>
 </head>
 <body>
-	<div class="row">
-		<div class="col-md-8">
-			<h1 class="h3 mb-4 text-gray-700">설비조회</h1>
+	<form id="searchCheck" name="searchCheck" method="post"
+		action="facListExcel.do">
+		<div class="row">
+			<div class="col-md-8">
+				<h1 class="h3 mb-4 text-gray-700">설비조회</h1>
+			</div>
+			<div class="col-md-4 mb-4" align="right">
+					<input type="submit" class="btn btn-primary" id="btnExcel"
+						value="엑셀">
+				</div>
 		</div>
-	</div>
-	<form id="searchCheck" name="searchCheck">
 		<div class="row">
 			<div class="mb-2 col-md-4">
 				<table class="table">
@@ -24,8 +29,8 @@
 						<td>
 							<div class="row">
 								<div class="col-md-4">
-									<select class="custom-select" name="searchCondition" id="searchCondition"
-										title="검색조건2-검색어구분">
+									<select class="custom-select" name="searchCondition"
+										id="searchCondition" title="검색조건2-검색어구분">
 										<option value="facilitiesName">설비명</option>
 										<option value="processName">공정명</option>
 									</select>
@@ -34,7 +39,7 @@
 									<input id="searchKeyword" name="searchKeyword" type="text"
 										title="검색어" class="form-control">
 								</div>
-									<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
+								<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
 							</div>
 						</td>
 					</tr>
@@ -98,8 +103,8 @@
 				header : '제작일자',
 				name : 'productionDate'
 			}, {
-				header : '사원번호',
-				name : 'empNo'
+				header : '사원명',
+				name : 'employeeName'
 			}, {
 				header : '구매금액',
 				name : 'price'

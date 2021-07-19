@@ -92,7 +92,7 @@ public class EgovAuthorRoleController {
 
         model.addAttribute("message", egovMessageSource.getMessage("success.common.select"));
         
-        return "egovframework/com/sec/ram/EgovAuthorRoleManage";
+        return "egovframework/com/sec/ram/EgovAuthorRoleManage.tiles";
 	}
     
 	/**

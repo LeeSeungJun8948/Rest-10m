@@ -4,31 +4,19 @@
 
 	<select id="getMatList" resultType="MatVO">
 		SELECT m.material_code, 
-				m.material_name, 
-				cm.code_nm AS mat_nm
-		FROM material m LEFT JOIN COMTCCMMNDETAILCODE cm
-				ON m.mat_id = cm.code_id and m.mat_no = cm.code
-		ORDER BY m.material_code
-	</select>
-	
-	<select id="getMatInfo" resultType="MatVO" parameterType="MatVO">
-		SELECT m.material_code, 
-				m.material_name, 
+				material_name, 
 				mat_no, 
 				cm.code_nm AS mat_nm, 
-				m.company_code, 
-				c.company_name, 
+				company_code, 
+				F_FIND_COMP_NAME(m.company_code) as company_name,
 				unit_id, 
 				unit_no, 
 				save_stock, 
 				min_stock, 
 				max_stock, 
 				month_stock 
-		FROM material m LEFT JOIN company c 
-				ON m.company_Code = c.company_Code
-				LEFT JOIN COMTCCMMNDETAILCODE cm
+		FROM material m LEFT JOIN COMTCCMMNDETAILCODE cm
 				ON m.mat_no = cm.code and m.mat_id = cm.code_id
-		WHERE m.material_code = #{materialCode}
 	</select>
 	
 	<!-- 자재 구분, 단위 들고오기 -->
@@ -84,14 +72,16 @@
 	<!-- 발주 -->
 	<select id="getInorderList" resultType="InorderVO"  parameterType="InorderVO">
 	
-		SELECT inorder_code, inorder_date, material_code, 
-			f_findMatName(material_code) as material_name,
-			f_findCompName(company_code) as company_name,
-			(select max(io_date) from inout where inorder_code = inorder.inorder_code) as in_date,
-			inorder_count,
-			nvl((select sum(io_volume) from inout where inorder_code = inorder.inorder_code),0) as in_count,
-			inorder_count - nvl((select sum(io_volume) from inout where inorder_code = inorder.inorder_code),0) as yet_count,
-			comments
+		SELECT inorder_code, 
+				inorder_date, 
+				material_code, 
+				f_findMatName(material_code) as material_name,
+				f_findCompName(company_code) as company_name,
+				(select max(io_date) from inout where inorder_code = inorder.inorder_code) as in_date,
+				inorder_count,
+				nvl((select sum(io_volume) from inout where inorder_code = inorder.inorder_code),0) as in_count,
+				inorder_count - nvl((select sum(io_volume) from inout where inorder_code = inorder.inorder_code),0) as yet_count,
+				comments
 			
 		FROM inorder
 		
@@ -118,7 +108,7 @@
 		
 	</select>
 	
-	<!-- 입출고/정산입출고 한방에 -->
+	<!-- 입출고 -->
 	<select id="getMatInoutList" resultType="InoutVO"  parameterType="InoutVO">
 	
 		SELECT io_code, 
@@ -294,12 +284,13 @@
 		        material_code,
 		        (SELECT unit_no FROM material WHERE material_code = inout.material_code) as unit_no, 
 		        f_find_mat_name(material_code) as material_name, 
-		        (select max(unit_price) from inout i where lot_no = inout.lot_no and inout_no = '01' ) as unit_price,
+		        (select distinct unit_price from inout i where lot_no = inout.lot_no and inout_no = '01' ) as unit_price,
 		        inout_no, 
 		        comments,
 		        F_MAT_COUNT(lot_no) AS lot_stock, 
-		        (select max(unit_price) from inout i where lot_no = inout.lot_no and inout_no = '01' ) * io_volume 
-		        as stock <!-- 걍 변수이름만 사용한거지 재고가 아니라 총액임 -->
+		        (select distinct unit_price from inout i where lot_no = inout.lot_no and inout_no = '01' ) * io_volume 
+		        as stock <!-- 걍 변수이름만 사용한거지 재고가 아니라 총액임 
+		        				까먹었었는데 걍 price쓰면됐음.. 근데 바꾸기 귀찮아서 그냥 놔둠-->
 		FROM inout
 		WHERE inout_no NOT IN ('01','02','05') 
 				AND TRUNC(io_date) BETWEEN #{startDate} AND #{endDate} 

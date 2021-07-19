@@ -136,7 +136,7 @@ public class EgovProgrmManageController {
 		paginationInfo.setTotalRecordCount(totCnt);
         model.addAttribute("paginationInfo", paginationInfo);
 
-      	return "egovframework/com/sym/prm/EgovProgramListManage";
+      	return "egovframework/com/sym/prm/EgovProgramListManage.tiles";
 
     }
 
@@ -195,14 +195,14 @@ public class EgovProgrmManageController {
     	Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
     	if(!isAuthenticated) {
     		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-        	return "egovframework/com/uat/uia/EgovLoginUsr";
+        	return "egovframework/com/uat/uia/EgovLoginUsr.tiles";
     	}
 
         String sCmd = commandMap.get("cmd") == null ? "" : (String)commandMap.get("cmd");
         if(sCmd.equals("insert")){
 	        beanValidator.validate(progrmManageVO, bindingResult);
 			if (bindingResult.hasErrors()){
-				sLocationUrl = "egovframework/com/sym/prm/EgovProgramListRegist";
+				sLocationUrl = "egovframework/com/sym/prm/EgovProgramListRegist.tiles";
 				return sLocationUrl;
 			}
 			if(progrmManageVO.getProgrmDc()==null || progrmManageVO.getProgrmDc().equals("")){progrmManageVO.setProgrmDc(" ");}
@@ -210,7 +210,7 @@ public class EgovProgrmManageController {
 			resultMsg = egovMessageSource.getMessage("success.common.insert");
 	        sLocationUrl = "forward:/sym/prm/EgovProgramListManageSelect.do";
         }else{
-            sLocationUrl = "egovframework/com/sym/prm/EgovProgramListRegist";
+            sLocationUrl = "egovframework/com/sym/prm/EgovProgramListRegist.tiles";
         }
     	model.addAttribute("resultMsg", resultMsg);
 		return sLocationUrl;

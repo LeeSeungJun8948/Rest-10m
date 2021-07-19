@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="EUC-KR"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tiles-definitions PUBLIC
   "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
   "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
@@ -29,7 +29,10 @@
  	<definition name="*/*/*/*/*.tiles" extends="base">
 		 <put-attribute name="body" value="/WEB-INF/jsp/{1}/{2}/{3}/{4}/{5}.jsp" />
  	</definition>  
- 	
+ 	 
+ 	 <definition name="*/*/*.tiles" extends="base">
+		 <put-attribute name="body" value="/WEB-INF/jsp/{1}/{2}/{3}.jsp" />
+ 	</definition> 
  	
  	<definition name="baseEmpty" template="/WEB-INF/jsp/tileslayout/templateEmpty.jsp">
     </definition>

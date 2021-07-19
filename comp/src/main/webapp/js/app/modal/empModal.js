@@ -53,6 +53,7 @@
 			
 			function select(){
 				$('#empNo').val(empCode);
+				$('#employeeName').val(employeeName);
 				$('#empModal').modal('hide');
 				$('#modalContent').remove();
 			}
