@@ -20,19 +20,19 @@ const grid = new tui.Grid({
 	}, {
 		header: '제품명',
 		name: 'productName'
-	}, {
-		header: '규격',
-		name: 'stdId'
-	}, {
-		header: '단위',
-		name: 'unitId'
-	}, {
+	},  {
 		header: '제품LOT_NO',
 		name: 'productLot'
 	}, {
 		header: '제품재고',
 		name: 'productCount'
-	}
+	},{
+		header: '규격',
+		name: 'stdId'
+	}, {
+		header: '단위',
+		name: 'unitId'
+	},
 	], summary: {
 		height: 40,
 		position: 'bottom',
