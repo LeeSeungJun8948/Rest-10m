@@ -8,7 +8,7 @@
 			<option value="id">ID</option>
 			<option value="employeeName">이름</option>
 		</select> 
-		<input id="searchKeyword" name="searchKeyword" type="text" title="검색어" class="form-control" style="width: 200px; margin-left: 10px">
+		<input id="searchKeyword" name="searchKeyword" type="text" title="검색어" class="form-control mr-2" style="width: 200px; margin-left: 10px">
 		<button type="button" class="btn btn-primary" id="btnSearch">
 			<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
 		</button>
@@ -80,9 +80,7 @@
 				</div>
 				<div class="modal-footer">
 					<button id="btnSave" class="btn btn-primary" onclick="fnSearch()">저장</button> 
-					<a href="#" rel="modal:close" >
-						<button class="btn btn-primary">닫기</button>
-					</a>
+					<button id="btnCloseBottom" class="btn btn-primary" data-dismiss="modal">닫기</button>
 				</div>
 			</div>
 		</form>

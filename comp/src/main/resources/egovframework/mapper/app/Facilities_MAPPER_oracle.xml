@@ -4,23 +4,15 @@
 	namespace="com.rest.app.fac.service.impl.FacilitiesMapper">
 	<select id="getFac"
 		resultType="com.rest.app.fac.vo.FacilitiesVO">
-		select f.FAC_CODE,
-		f.FACILITIES_NAME,
-		f.MODEL,
-		f.FAC_SIZE,
-		f.PRODUCTION_COMPANY,
-		f.PURPOSE,
-		f.VOLUME,
-		f.PRODUCTION_DATE,
-		f.EMP_NO,
-		f.PRICE,
-		f.FAC_INSPECTION,
-		f.PURCHASE_DATE,
-		f.IMG,
-   		p.process_name
-		from facilities f, process p
+		select 
+			f.*,
+   			p.process_name,
+   			e.employee_name
+		from
+			facilities f, process p, employee e
   		<where>
-  		f.process_code=p.process_code
+  			f.process_code=p.process_code
+  			and f.emp_no=e.emp_code
   		<if test="searchCondition == 'facilitiesName'">and
   			f.facilities_name LIKE '%' || #{searchKeyword} || '%'
   		</if>
@@ -28,7 +20,7 @@
   			p.process_name LIKE '%' || #{searchKeyword} || '%'
   		</if>
   		</where>
-   		order by fac_code
+  	 		order by fac_code
 	</select>
 	<insert id="insertFac"
 		parameterType="com.rest.app.fac.vo.FacilitiesVO">
@@ -49,22 +41,13 @@
 	</select>
 	<select id="getFacInfo" resultType="com.rest.app.fac.vo.FacilitiesVO" parameterType="com.rest.app.fac.vo.FacilitiesVO">
 		select 
-			fac_code,
-			FACILITIES_NAME,
-			MODEL,
-			FAC_SIZE,
-			PRODUCTION_COMPANY,
-			PURPOSE,
-			VOLUME,
-			PRODUCTION_DATE,
-			EMP_NO,
-			PRICE,
-			FAC_INSPECTION,
-			PURCHASE_DATE,
-			IMG,
-			PROCESS_CODE
-		from facilities
-		where fac_code = #{facCode}
+			f.*, e.employee_name, p.process_name
+ 		from
+ 			facilities f, employee e, process p
+ 		where
+ 			f.emp_no=e.emp_code
+  		and f.process_code=p.process_code
+		and	fac_code = #{facCode}
 	</select>
 	<update id="updateFac" parameterType="com.rest.app.fac.vo.FacilitiesVO">
 		update 
@@ -87,8 +70,15 @@
     </select>
     
     <select id="getFacList" resultType="com.rest.app.fac.vo.FacilitiesVO">
-		select * from facilities
-		order by fac_code
+		select 
+			f.*, e.employee_name, p.process_name
+		from
+ 			facilities f, employee e, process p
+ 		where
+ 			f.emp_no=e.emp_code
+  		and f.process_code=p.process_code
+		order by
+			f.fac_code
 	</select>
 	
 	 <select id="getEmpListModal" resultType="com.rest.app.comm.vo.EmployeeVO">

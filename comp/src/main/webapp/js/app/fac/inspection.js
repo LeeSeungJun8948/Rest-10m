@@ -97,7 +97,7 @@ $("#btnDel").on("click", function() {
 
 //저장
 $("#btnSave").on("click", function(){
-	grid.request('modifyData');
+		grid.request('modifyData');
 });
 
 // 행추가
@@ -154,7 +154,7 @@ grid.on('dblclick', function(ev){
 		rowKey = ev.rowKey;
 		facilitiesName = grid.getValue(rowKey, 'facilitiesName');
 		$('#facModal').modal('show');
-		$('#facContent').load(contextPath + "/modal/facModel.do");
+		$('#facContent').load(contextPath + "/modal/facModal.do");
 	}
 });
 

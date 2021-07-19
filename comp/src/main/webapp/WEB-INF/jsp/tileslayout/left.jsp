@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
  <!-- Sidebar - Brand -->
  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/main.do">
      <div class="sidebar-brand-icon rotate-n-15">
-         <i class="fas fa-laugh-wink"></i>
+         <i class="fas fa-building"></i>
      </div>
      <div class="sidebar-brand-text mx-3">MES</div>
  </a>
@@ -13,31 +12,21 @@
  <!-- Divider -->
  <hr class="sidebar-divider my-0">
 
- <!-- Nav Item - Dashboard -->
- <li class="nav-item active">
-     <a class="nav-link" href="${pageContext.request.contextPath}/main.do">
-         <i class="fas fa-fw fa-tachometer-alt"></i>
-         <span>¸ÞÀÎ</span></a>
- </li>
-
- <!-- Divider -->
- <hr class="sidebar-divider">
-
  <!-- Nav Item - Pages Collapse Menu -->
  <li class="nav-item">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-         <i class="fas fa-fw fa-cog"></i>
-         <span>±âÁØÁ¤º¸°ü¸®</span>
+         <i class="fas fa-fw fa-book"></i>
+         <span>ê¸°ì¤€ì •ë³´ê´€ë¦¬</span>
      </a>
      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/commonCodeForm.do">°øÅëÄÚµå°ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/matForm.do">ÀÚÀçÁ¤º¸°ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/bomList.do">Á¦Ç° BOM°ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/processList.do">°øÁ¤°ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/empList.do">»ç¿ø°ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/error.do">ºÒ·®ÄÚµå °ü¸® </a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/QualityControl.do">Á¦Ç° Ç°Áú Ç¥ÁØ¼­ °ü¸®</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/commonCodeForm.do">ê³µí†µì½”ë“œê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/matForm.do">ìžìž¬ì •ë³´ê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/bomList.do">ì œí’ˆ BOMê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/processList.do">ê³µì •ê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/empList.do">ì‚¬ì›ê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/error.do">ë¶ˆëŸ‰ì½”ë“œ ê´€ë¦¬ </a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/comm/QualityControl.do">ì œí’ˆ í’ˆì§ˆ í‘œì¤€ì„œ ê´€ë¦¬</a>
          </div>
      </div>
  </li>
@@ -45,15 +34,15 @@
  <!-- Nav Item - Utilities Collapse Menu -->
  <li class="nav-item">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-         <i class="fas fa-fw fa-wrench"></i>
-         <span>¿µ¾÷°ü¸®</span>
+         <i class="fas fa-fw fa-calculator"></i>
+         <span>ì˜ì—…ê´€ë¦¬</span>
      </a>
      <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="${pageContext.request.contextPath}/bus/view/busList.do">ÁÖ¹®°ü¸® ÂüÁ¶Á¶È¸</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/bus/mng/exportForm.do">Ãâ°í °ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/bus/view/viewExport.do">Ãâ°í Á¶È¸</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/bus/view/productInventory.do">Á¦Ç° Àç°í Á¶È¸</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/bus/view/busList.do">ì£¼ë¬¸ê´€ë¦¬ ì°¸ì¡°ì¡°íšŒ</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/bus/mng/exportForm.do">ì¶œê³  ê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/bus/view/viewExport.do">ì¶œê³  ì¡°íšŒ</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/bus/view/productInventory.do">ì œí’ˆ ìž¬ê³  ì¡°íšŒ</a>
          </div>
      </div>
  </li>
@@ -61,19 +50,19 @@
  <!-- Nav Item - Pages Collapse Menu -->
  <li class="nav-item">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-         <i class="fas fa-fw fa-folder"></i>
-         <span>ÀÚÀç°ü¸®</span>
+         <i class="fas fa-fw fa-crosshairs"></i>
+         <span>ìžìž¬ê´€ë¦¬</span>
      </a>
      <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/inorderList.do">¹ßÁÖ Á¶È¸</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/matInList.do">ÀÚÀçÀÔ°í Á¶È¸</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matInForm.do">ÀÚÀçÀÔ°í °ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/matOutList.do">ÀÚÀçÃâ°í Á¶È¸</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matOutForm.do">ÀÚÀçÃâ°í °ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/matAdjustList.do">ÀÚÀçÀç°íÁ¶Á¤ ÀüÇ¥ Á¶È¸</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matAdjustForm.do">ÀÚÀçÀç°íÁ¶Á¤ ÀüÇ¥ °ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matAdjustWrite.do">ÀÚÀçÀç°íÁ¶Á¤ ÀüÇ¥ ÀÛ¼º</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/inorderList.do">ë°œì£¼ ì¡°íšŒ</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/matInList.do">ìžìž¬ìž…ê³  ì¡°íšŒ</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matInForm.do">ìžìž¬ìž…ê³  ê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/matOutList.do">ìžìž¬ì¶œê³  ì¡°íšŒ</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matOutForm.do">ìžìž¬ì¶œê³  ê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/view/matAdjustList.do">ìžìž¬ìž¬ê³ ì¡°ì • ì „í‘œ ì¡°íšŒ</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matAdjustForm.do">ìžìž¬ìž¬ê³ ì¡°ì • ì „í‘œ ê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/mat/mng/matAdjustWrite.do">ìžìž¬ìž¬ê³ ì¡°ì • ì „í‘œ ìž‘ì„±</a>
          </div>
      </div>
  </li>
@@ -82,20 +71,20 @@
 	<!-- Nav Item - Pages Collapse Menu -->
  <li class="nav-item">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true" aria-controls="collapsePages2">
-         <i class="fas fa-fw fa-folder"></i>
-         <span>»ý»ê°ü¸®</span>
+         <i class="fas fa-fw fa-cube"></i>
+         <span>ìƒì‚°ê´€ë¦¬</span>
      </a>
      <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/mng/managePlan.do">»ý»ê°èÈ¹ °ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/viewPlan.do">»ý»ê°èÈ¹ Á¶È¸</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/mng/manageProrder.do">»ý»êÁö½Ã °ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/viewProrder.do">»ý»êÁö½Ã Á¶È¸</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/procMovePrint.do">°øÁ¤ÀÌµ¿Ç¥ ¹ßÇà</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/manageWork.do">ÀÛ¾÷½ÇÀû °ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/viewWork.do">ÀÛ¾÷½ÇÀû Á¶È¸</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/prodMonitoring.do">»ý»ê ¸ð´ÏÅÍ¸µ</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/detailErrorList.do">ºÒ·®³»¿ª Á¶È¸</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/mng/managePlan.do">ìƒì‚°ê³„íš ê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/viewPlan.do">ìƒì‚°ê³„íš ì¡°íšŒ</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/mng/manageProrder.do">ìƒì‚°ì§€ì‹œ ê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/viewProrder.do">ìƒì‚°ì§€ì‹œ ì¡°íšŒ</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/procMovePrint.do">ê³µì •ì´ë™í‘œ ë°œí–‰</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/manageWork.do">ìž‘ì—…ì‹¤ì  ê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/viewWork.do">ìž‘ì—…ì‹¤ì  ì¡°íšŒ</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/prodMonitoring.do">ìƒì‚° ëª¨ë‹ˆí„°ë§</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/pro/view/detailErrorList.do">ë¶ˆëŸ‰ë‚´ì—­ ì¡°íšŒ</a>
          </div>
      </div>
  </li>
@@ -103,54 +92,50 @@
 	<!-- Nav Item - Pages Collapse Menu -->
  <li class="nav-item">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3" aria-expanded="true" aria-controls="collapsePages3">
-         <i class="fas fa-fw fa-folder"></i>
-         <span>¼³ºñ°ü¸®</span>
+         <i class="fas fa-fw fa-cog"></i>
+         <span>ì„¤ë¹„ê´€ë¦¬</span>
      </a>
      <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/mng/facAdmin.do">¼³ºñ °ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/view/facList.do">¼³ºñ Á¶È¸</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/mng/repList.do">¼³ºñ ¼ö¸®³»¿ª °ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/view/repairList.do">¼³ºñ ¼ö¸®³»¿ª Á¶È¸</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/mng/inspection.do">¼³ºñ Á¡°Ë³»¿ª °ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/view/inspectionList.do">¼³ºñ Á¡°Ë³»¿ª Á¶È¸</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/view/facProdList.do">¼³ºñ »ý»êÀÌ·Â Á¶È¸</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/mng/facAdmin.do">ì„¤ë¹„ ê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/view/facList.do">ì„¤ë¹„ ì¡°íšŒ</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/mng/repList.do">ì„¤ë¹„ ìˆ˜ë¦¬ë‚´ì—­ ê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/view/repairList.do">ì„¤ë¹„ ìˆ˜ë¦¬ë‚´ì—­ ì¡°íšŒ</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/mng/inspection.do">ì„¤ë¹„ ì ê²€ë‚´ì—­ ê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/view/inspectionList.do">ì„¤ë¹„ ì ê²€ë‚´ì—­ ì¡°íšŒ</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/fac/view/facProdList.do">ì„¤ë¹„ ìƒì‚°ì´ë ¥ ì¡°íšŒ</a>
          </div>
      </div>
  </li>
 	<!-- Nav Item - Pages Collapse Menu -->
  <li class="nav-item">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages4" aria-expanded="true" aria-controls="collapsePages4">
-         <i class="fas fa-fw fa-folder"></i>
-         <span>»ç¿ëÀÚ ±ÇÇÑ °ü¸®</span>
+         <i class="fas fa-fw fa-child"></i>
+         <span>ì‚¬ìš©ìž ê¶Œí•œ ê´€ë¦¬</span>
      </a>
      <div id="collapsePages4" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="${pageContext.request.contextPath}/sec/rmt/EgovRoleList.do">·Ñ °ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/sec/ram/EgovAuthorList.do">±ÇÇÑ °ü¸®</a>
-             <a class="collapse-item" href="${pageContext.request.contextPath}/sec/rgm/EgovAuthorGroupList.do">±ÇÇÑ ±×·ì °ü¸®</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/sec/rmt/EgovRoleList.do">ë¡¤ ê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/sec/ram/EgovAuthorList.do">ê¶Œí•œ ê´€ë¦¬</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/sec/rgm/EgovAuthorGroupList.do">ê¶Œí•œ ê·¸ë£¹ ê´€ë¦¬</a>
          </div>
      </div>
  </li>
  	<!-- Nav Item - Pages Collapse Menu -->
  <li class="nav-item">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages5" aria-expanded="true" aria-controls="collapsePages5">
-         <i class="fas fa-fw fa-folder"></i>
-         <span>ÇÁ·Î±×·¥/¸Þ´º°ü¸®</span>
+         <i class="fas fa-fw fa-paste"></i>
+         <span>í”„ë¡œê·¸ëž¨/ë©”ë‰´ê´€ë¦¬</span>
      </a>
      <div id="collapsePages5" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="#">ÇÁ·Î±×·¥ °ü¸®</a>
-             <a class="collapse-item" href="#">¸Þ´º °ü¸®</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/sym/mnu/mpm/EgovMenuListSelect.do">ë©”ë‰´ ëª©ë¡</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/sym/mnu/mpm/EgovMenuManageSelect.do">ë©”ë‰´ ê´€ë¦¬ ë¦¬ìŠ¤íŠ¸</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/sym/mnu/mcm/EgovMenuCreatManageSelect.do">ë©”ë‰´ ìƒì„± ê´€ë¦¬</a>
+         	 <a class="collapse-item" href="${pageContext.request.contextPath}/sym/prm/EgovProgramListManageSelect.do">í”„ë¡œê·¸ëž¨ ê´€ë¦¬</a>
          </div>
      </div>
  </li>
+ 
  <!-- Divider -->
-	<hr class="sidebar-divider">
-
- <!-- Sidebar Toggler (Sidebar) -->
- <div class="text-center d-none d-md-inline">
-     <button class="rounded-circle border-0" id="sidebarToggle"></button>
- </div>
-
-
+<hr class="sidebar-divider">

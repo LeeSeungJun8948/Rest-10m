@@ -134,7 +134,7 @@ public class EgovAuthorManageController {
     @RequestMapping("/sec/ram/EgovAuthorInsertView.do")
     public String insertAuthorView(@ModelAttribute("authorManage") AuthorManage authorManage)
             throws Exception {
-        return "egovframework/com/sec/ram/EgovAuthorInsert";
+        return "egovframework/com/sec/ram/EgovAuthorInsert.tiles";
     }
     
     /**
