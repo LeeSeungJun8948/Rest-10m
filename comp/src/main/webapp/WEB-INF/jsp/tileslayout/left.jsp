@@ -140,8 +140,10 @@
      </a>
      <div id="collapsePages5" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-             <a class="collapse-item" href="#">프로그램 관리</a>
-             <a class="collapse-item" href="#">메뉴 관리</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/sym/mnu/mpm/EgovMenuListSelect.do">메뉴 목록</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/sym/mnu/mpm/EgovMenuManageSelect.do">메뉴 관리 리스트</a>
+             <a class="collapse-item" href="${pageContext.request.contextPath}/sym/mnu/mcm/EgovMenuCreatManageSelect.do">메뉴 생성 관리</a>
+         	 <a class="collapse-item" href="${pageContext.request.contextPath}/sym/prm/EgovProgramListManageSelect.do">프로그램 관리</a>
          </div>
      </div>
  </li>
