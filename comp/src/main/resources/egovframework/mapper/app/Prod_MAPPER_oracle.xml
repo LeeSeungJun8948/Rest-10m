@@ -330,9 +330,10 @@
 	
 	<select id="getErrorList" resultType="com.rest.app.prod.vo.ErrorListVO">
 		select c.process_name, TO_CHAR(a.work_date, 'YYYY-MM-DD')AS work_date, a.work_count, a.error_count, d.product_code, 
-      	d.product_name, a.product_lot, a.work_code, a.error_code
-		from work a, process c, product d
+      	d.product_name, a.product_lot, a.work_code, e.error_name
+		from work a, process c, product d, error e
 		where a.process_code = c.process_code
+		and a.error_code = e.error_code
 		and a.product_code = d.product_code	
 			<if test = "startDate != null and startDate != '' and endDate != null and endDate != ''">
 			AND trunc(work_date) BETWEEN #{startDate} AND #{endDate} 

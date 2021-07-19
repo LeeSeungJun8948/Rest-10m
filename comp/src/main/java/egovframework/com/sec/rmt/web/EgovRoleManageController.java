@@ -141,7 +141,7 @@ public class EgovRoleManageController {
         model.addAttribute("authorManageList", authorManageVO.getAuthorManageList());
         model.addAttribute("cmmCodeDetailList", getCmmCodeDetailList(new ComDefaultCodeVO(),"COM029"));
 
-        return "egovframework/com/sec/rmt/EgovRoleUpdate";
+        return "egovframework/com/sec/rmt/EgovRoleUpdate.tiles";
 	}
 
     /**
@@ -159,7 +159,7 @@ public class EgovRoleManageController {
         model.addAttribute("authorManageList", authorManageVO.getAuthorManageList());
         model.addAttribute("cmmCodeDetailList", getCmmCodeDetailList(new ComDefaultCodeVO(),"COM029"));
 
-        return "egovframework/com/sec/rmt/EgovRoleInsert";
+        return "egovframework/com/sec/rmt/EgovRoleInsert.tiles";
     }
 
     /**
