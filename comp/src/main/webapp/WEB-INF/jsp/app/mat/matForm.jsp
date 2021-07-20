@@ -15,9 +15,9 @@
 		<h1 class="h3 mb-4 mt-4 text-gray-700">자재정보관리</h1>
 	</div>
 	<div class="col-md-4 mb-4" align="right">
-		<button class="btn btn-primary" id="btnNew" type="button"> 새 자재 </button>
-		<button class="btn btn-primary" id="btnSave" type="button"> 저장 </button>
-		<button class="btn btn-primary" id="btnDel" type="button"> 삭제 </button>
+		<button class="btn-two blue small" id="btnNew" type="button"> 새 자재 </button>
+		<button class="btn-two blue small" id="btnSave" type="button"> 저장 </button>
+		<button class="btn-two blue small" id="btnDel" type="button"> 삭제 </button>
 	</div>
 </div>	
 	<div class="row">				
