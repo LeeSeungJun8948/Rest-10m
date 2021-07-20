@@ -83,7 +83,6 @@ const grid = new tui.Grid({
 	}
 	]
 });
-grid.setLanguage('ko');
 
 // 초기화 버튼
 $("#btnReset").click(function() {

@@ -25,6 +25,7 @@
 <script src="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="${pageContext.request.contextPath}/js/toastr.js"></script>
+<script src="${pageContext.request.contextPath}/js/app/grid-common.js"></script>
 
 <script>
 	var contextPath = "${pageContext.request.contextPath}";

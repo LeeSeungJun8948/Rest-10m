@@ -15,7 +15,9 @@ var mcDataSource = {
 			data : mcDataSource,
 			rowHeaders: ['checkbox'],
 			scrollX : false,
-			scrollY : false,
+			scrollY : true,
+			bodyHeight: 450,
+			selectionUnit: 'row',
 			columns : [
 			
 				{

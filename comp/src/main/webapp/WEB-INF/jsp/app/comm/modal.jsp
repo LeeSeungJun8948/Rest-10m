@@ -71,10 +71,12 @@
 			</div>
 
 			<script type="text/javascript">
+				var para;
+				var paramPara = "";
 				var dataSourc = {
 					api : {
 						readData : {
-							url : 'ajax/bomList.do',
+							url : contextPath +'/ajax/bomList.do',
 							method : 'GET'
 						},
 
@@ -98,13 +100,16 @@
 						name : 'unitNo',
 					} ]
 				});
-
+				
+				
+			 	
 				matGrid.on('click', function(ev) {
 					var values = matGrid.getRow(ev.rowKey);
 					var prdCode = values.productCode;
-					$('#productCode').val(prdCode);
-					console.log(prdCode);
-
+					para = $('#productCode').val(prdCode).serializeObject();
+					paramPara = para;
+					console.log(paramPara);
+				
 				});
 
 				$.fn.serializeObject = function() {
@@ -127,18 +132,25 @@
 					var param = $('#productSearchForm').serializeObject();
 					matGrid.readData(1, param, true);
 				})
-			</script>
-
-		</div>
-	</div>
-</div>
-<script>
+	
+				
 	function fnSearch() {
 		$("#frm").submit();
 	}
 	// bom 자재리스트 버튼
 	$('#btnSearch').on('click', function() {
-		var prm = $('#frm').serializeObject();
-		grid.readData(1, prm, true);
+		if(paramPara == ""){
+			alert("행 클릭");
+			return;
+		} else{
+			grid.readData(1, paramPara , true);
+			alert("성공")
+		}
+		
 	})
-</script>
+				
+			</script>
+
+		</div>
+	</div>
+</div>

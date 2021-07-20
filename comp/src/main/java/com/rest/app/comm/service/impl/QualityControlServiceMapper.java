@@ -1,6 +1,7 @@
 package com.rest.app.comm.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,7 +23,7 @@ public class QualityControlServiceMapper implements QualityControlService {
 
 	@Override
 	public List<QualityControlVO> getProductList(QualityControlVO vo) {
-		// TODO 모달창 제품 조회
+		// TODO 제품List
 		return mapper.getProductList(vo);
 	}
 
@@ -73,6 +74,12 @@ public class QualityControlServiceMapper implements QualityControlService {
 	public int maxProductCode() {
 		// TODO Auto-generated method stub
 		return mapper.maxProductCode();
+	}
+
+	@Override
+	public List<QualityControlVO> getProductList(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return mapper.getProductList(param);
 	}
 	
 

@@ -2,8 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-
+	<form id="searchFrm" name="searchFrm" method="post" action="proudctListExcel.do">
+	<input type="submit" class="btn btn-primary" id="btnExcel" value="엑셀">
+	</form>
 	<form action="insertProduct.do" method="post" id="frm" encType="multipart/form-data">
 	<div class="flex row">
 		<div class="col-8">
@@ -109,5 +110,6 @@
 	
 
 
-<script type="text/javascript" src="js/app/comm/Quality.js"></script>
+<script type="text/javascript" 
+		 src="${pageContext.request.contextPath}/js/app/comm/Quality.js"></script>
 

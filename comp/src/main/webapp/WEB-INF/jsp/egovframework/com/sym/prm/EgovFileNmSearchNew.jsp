@@ -59,7 +59,7 @@ function choisProgramListSearch(vFileNm) {
 	//eval("opener.document.all."+opener.document.all.tmp_SearchElementName.value).value = vFileNm;
 	//opener.document.menuManageVO.progrmFileNm.value = vFileNm;
 	var parentFrom = parent.document.getElementsByTagName('form');
-	parentFrom[0].progrmFileNm.value = vFileNm;
+	parentFrom[1].progrmFileNm.value = vFileNm;
     parent.$('.ui-dialog-content').dialog('close');
 }
 -->

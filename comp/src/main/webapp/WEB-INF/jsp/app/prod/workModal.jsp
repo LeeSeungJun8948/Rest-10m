@@ -35,8 +35,8 @@
 	</div>
 		
 	<div class="modal-footer">
-		<button id="btnCloseBottom" class="btn btn-primary" data-dismiss="modal">닫기</button>
 		<button id="btnSelect" class="btn btn-success">선택</button>
+		<button id="btnCloseBottom" class="btn btn-primary" data-dismiss="modal">닫기</button>
 	</div>
 </div>
 

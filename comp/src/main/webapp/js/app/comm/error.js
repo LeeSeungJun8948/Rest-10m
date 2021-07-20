@@ -27,7 +27,7 @@ $("#btnRowInsert").on("click", function(){
 	}else{
 		$.ajax({
 			type : "get",
-			url : "ajax/getNewErrorCode.do",
+			url :  contextPath + "/ajax/getNewErrorCode.do",
 			dataType : "json",
 			async : false,
 			success : function(data) {

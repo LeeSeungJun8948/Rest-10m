@@ -64,9 +64,14 @@ public class BomController {
 	public String getProduct(Model model, BomVO vo) {
 		return "comm/bomList.page";
 	}
+	
+	@RequestMapping("/comm/procCodeModal.do")
+	public String procModal(Model model, BomVO vo) {
+		return "app/comm/procCodeModal";
+	}
 
 	// 제품코드,제품명,규격 리스트 ajax
-	@RequestMapping("/comm/ajax/bomList.do")
+	@RequestMapping("/ajax/bomList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetBomList(BomVO vo) {
 		Map<String, Object> datas = new HashMap<String, Object>();
@@ -95,7 +100,7 @@ public class BomController {
 	}
 
 	// ajax 소요자재조회
-	@RequestMapping("/comm/ajax/getInfoProduct.do")
+	@RequestMapping("/ajax/getInfoProduct.do")
 	@ResponseBody
 	public Map<String, Object> ajaxgetInfoProduct(BomVO vo) {
 		Map<String, Object> datas = new HashMap<String, Object>();
@@ -132,7 +137,7 @@ public class BomController {
 	}
 
 	// 소요자재 수정
-	@PutMapping(value = "/comm/ajax/updateBom.do")
+	@PutMapping(value = "/ajax/updateBom.do")
 	@ResponseBody
 	public Map<String, Object> updateBom(@RequestBody BomGridData bomGridData) {
 
@@ -145,7 +150,7 @@ public class BomController {
 		return data;
 	}
 
-	@PutMapping(value = "/comm/ajax/modifyBom.do")
+	@PutMapping(value = "/ajax/modifyBom.do")
 	@ResponseBody
 	public Map<String, Object> modifyBom(@RequestBody BomGridData bomGridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -161,18 +166,19 @@ public class BomController {
 		data.put("result", true);
 		data.put("data", bomGridData.createdRows);
 		data.put("data", bomGridData.updatedRows);
+		data.put("check", "save");
 		return data;
 	}
 
 	// 입출력 행 추가시 불러올 제품코드
-	@RequestMapping("/comm/ajax/getNewProductCode.do")
+	@RequestMapping("/ajax/getNewProductCode.do")
 	@ResponseBody
 	public BomVO getNewProductCode(BomVO vo) {
 		return dao.getNewProductCode();
 	}
 
 	// 소요자재 삭제
-	@PostMapping(value = "/comm/ajax/deleteBom.do")
+	@PostMapping(value = "/ajax/deleteBom.do")
 	@ResponseBody
 	public Map deleteBom(@RequestBody BomGridData bomGirdData) {
 		Map<String, Object> data = new HashMap();
@@ -198,7 +204,7 @@ public class BomController {
 		return "comm/processList.page";
 	}
 	//max 공정코드
-	@RequestMapping("/comm/ajax/maxProcessCode.do")
+	@RequestMapping("/ajax/maxProcessCode.do")
 	@ResponseBody
 	public ProcessVO maxProcessCode(ProcessVO vo) {
 		
@@ -206,7 +212,7 @@ public class BomController {
 	}
 
 	// 공정리스트 ajax
-	@RequestMapping("/comm/ajax/processList.do")
+	@RequestMapping("/ajax/processList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGetprocessList(ProcessVO vo) {
 		Map<String, Object> datas = new HashMap<String, Object>();
@@ -218,7 +224,7 @@ public class BomController {
 	}
 
 	// 공정 추가
-	@PostMapping(value = "/comm/ajax/insertProcess.do")
+	@PostMapping(value = "/ajax/insertProcess.do")
 	@ResponseBody
 	public Map<String, Object> insertProcess(@RequestBody ProGridData ProGridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -229,7 +235,7 @@ public class BomController {
 	}
 
 	// 공정 수정
-	@PutMapping(value = "/comm/ajax/updateProcess.do")
+	@PutMapping(value = "/ajax/updateProcess.do")
 	@ResponseBody
 	public Map<String, Object> updateProcess(@RequestBody ProGridData ProGridData) {
 
@@ -242,7 +248,7 @@ public class BomController {
 		return data;
 	}
 
-	@PutMapping(value = "/comm/ajax/modifyProcess.do")
+	@PutMapping(value = "/ajax/modifyProcess.do")
 	@ResponseBody
 	public Map<String, Object> modifyProcess(@RequestBody ProGridData ProGridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -261,7 +267,7 @@ public class BomController {
 	}
 
 	// 공정삭제
-	@PostMapping(value = "/comm/ajax/deleteProcess.do")
+	@PostMapping(value = "/ajax/deleteProcess.do")
 	@ResponseBody
 	public Map deleteProcess(@RequestBody ProGridData ProGridData) {
 		Map<String, Object> data = new HashMap();
@@ -284,7 +290,7 @@ public class BomController {
 	
 	
 	// 회사리스트
-	@RequestMapping("/comm/ajax/getCompList.do")
+	@RequestMapping("/ajax/getCompList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxgetCompList(ProcessVO vo) {
 		Map<String, Object> datas = new HashMap<String, Object>();
