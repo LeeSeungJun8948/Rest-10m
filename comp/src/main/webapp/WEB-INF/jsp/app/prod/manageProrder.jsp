@@ -4,10 +4,10 @@
 
 <h1 class="h3 mb-4 text-gray-700">생산지시 관리</h1>
 <div class="mb-4" align="right">
-	<button id="btnProrModal" type="button" class="btn btn-primary" data-remote="false" data-toggle="modal" data-target="#prorModal">조회</button>
-	<button type="reset" class="btn btn-primary" id="btnReset">초기화</button>
-	<button type="button" class="btn btn-primary" id="btnSave">저장</button>
-	<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
+	<button id="btnProrModal" type="button" class="btn-two blue small" data-remote="false" data-toggle="modal" data-target="#prorModal">조회</button>
+	<button type="reset" class="btn-two blue small" id="btnReset">초기화</button>
+	<button type="button" class="btn-two blue small" id="btnSave">저장</button>
+	<button type="button" class="btn-two red small" id="btnDel">삭제</button>
 </div>
 <div class="row">
 	<div class="mb-2 col-lg-6">
@@ -37,30 +37,20 @@
 		</div>
 		<div>
 			<form id="dateFrm" name="dateFrm">
-				<div class="form-row">
-					<div class="col-2" align="center">
-						<span>작업일자</span>
-					</div>
-					<div class="col-3">
-						<input type="date" class="form-control" id="prorderDtS" name="prorderDtS">
-					</div>
-					<div class="col-1" align="center">
-						<span>~</span>
-					</div>
-					<div class="col-3">
-						<input type="date" class="form-control" id="prorderDtE" name="prorderDtE">
-					</div>
-					<div class="col-2">
-						<button type="button" class="btn btn-primary" id="btnRead">불러오기</button>
-					</div>
+				<div class="form-inline form-group">
+					<span>작업일자</span>
+					<input type="date" class="form-control ml-4 mr-2" id="prorderDtS" name="prorderDtS">
+					<span>~</span>
+					<input type="date" class="form-control ml-2 mr-4" id="prorderDtE" name="prorderDtE">
+					<button type="button" class="btn-two blue small" id="btnRead">불러오기</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
 <div class="mb-4" align="right">
-	<button type="button" class="btn btn-primary" id="btnGridAdd">추가</button>
-	<button type="button" class="btn btn-danger" id="btnGridDel">삭제</button>
+	<button type="button" class="btn-two blue small" id="btnGridAdd">추가</button>
+	<button type="button" class="btn-two red small" id="btnGridDel">삭제</button>
 </div>
 <div class="col-lg-12">
 	<div id="grid"></div>

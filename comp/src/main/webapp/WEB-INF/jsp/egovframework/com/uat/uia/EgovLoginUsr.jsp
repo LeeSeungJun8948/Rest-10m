@@ -35,6 +35,7 @@
 <link href="${pageContext.request.contextPath}/css/sb-admin-2.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/app/prod/button.css" rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
@@ -213,13 +214,13 @@ function fnShowLogin(stat) {
 				<!-- 아이디 -->
 				<div class="form-inline form-group">
 					<c:set var="title"><spring:message code="comUatUia.loginForm.id"/></c:set>
-					<label for="id"><strong>${title}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<label for="id"><strong>${title}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 					<input class="form-control" type="text" name="id" id="id" maxlength="20" title="${title} ${inputTxt}" placeholder="${title} ${inputTxt}">
 				</div>
 				<!-- 비밀번호 -->
 				<div class="form-inline form-group">
 					<c:set var="title"><spring:message code="comUatUia.loginForm.pw"/></c:set>
-					<label for="password"><strong>${title}</strong>&nbsp;&nbsp;</label>
+					<label for="password"><strong>${title}</strong>&nbsp;&nbsp;&nbsp;</label>
 					<input class="form-control" type="password" name="password" id="password" maxlength="20" title="${title} ${inputTxt}" placeholder="${title} ${inputTxt}">
 				</div>
 				<!-- 아이디 저장 -->
@@ -230,7 +231,7 @@ function fnShowLogin(stat) {
 				</div>
 				<br>
 				<div>
-					<input type="button" class="btn_login btn btn-primary btn-user" value="<spring:message code="comUatUia.loginForm.login"/>" onclick="actionLogin()"> <!-- 로그인  -->
+					<input type="button" class="btn_login btn-two block blue btn-user" value="<spring:message code="comUatUia.loginForm.login"/>" onclick="actionLogin()"> <!-- 로그인  -->
 				</div>
 			</div>
 		</fieldset>

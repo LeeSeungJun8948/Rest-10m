@@ -48,8 +48,8 @@
 		</div>
 		<div class="col-md-2"></div>
 		<div class="col-md-3 mb-4" align="right" role="form">
-			<button type="button" class="btn btn-primary" id="btnRead">조회</button>
-			<button type="button" class="btn btn-primary" id="btnPrint">발행</button>
+			<button type="button" class="btn-two blue small" id="btnRead">조회</button>
+			<button type="button" class="btn-two blue small" id="btnPrint">발행</button>
 		</div>
 	</div>
 </form>

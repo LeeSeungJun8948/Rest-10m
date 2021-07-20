@@ -5,9 +5,9 @@
 <h1 class="h3 mb-4 text-gray-700">생산계획 조회</h1>
 <form id="searchFrm" name="searchFrm" method="post" action="viewPlanExcel.do">
 	<div class="mb-4" align="right">
-		<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
-		<input type="submit" class="btn btn-primary" id="btnExcel" value="엑셀">
-		<button type="reset" class="btn btn-primary" id="btnReset">초기화</button>
+		<button type="button" class="btn-two blue small" id="btnSearch">조회</button>
+		<input type="submit" class="btn-two blue small" id="btnExcel" value="엑셀">
+		<button type="reset" class="btn-two blue small" id="btnReset">초기화</button>
 	</div>
 	<div class="row">	
 		<div class="mb-2 col-lg-12">

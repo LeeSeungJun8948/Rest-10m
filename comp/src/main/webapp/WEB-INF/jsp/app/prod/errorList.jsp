@@ -8,8 +8,8 @@
 			<h1 class="h3 mb-4 text-gray-700">불량 내역 조회</h1>
 		</div>
 		<div class="col-md-4 mb-4" align="right" role="form">
-			<button type="button" class="btn btn-primary" id="btnRead">조회</button>
-			<input type="submit" class="btn btn-primary" id="btnExcel" value="엑셀">
+			<button type="button" class="btn-two blue small" id="btnRead">조회</button>
+			<input type="submit" class="btn-two blue small" id="btnExcel" value="엑셀">
 		</div>
 	</div>
 	<div class="row">

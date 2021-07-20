@@ -17,11 +17,11 @@
                                     <option value="employeeName" selected="">이름</option>
         </select>
         <input id="searchKeyword" name="searchKeyword" type="text" title="검색어" class="form-control" style="width:200px;margin-left:10px">                      		
-			<button type="button" class="btn btn-primary" id="btnRowInsert">행추가</button>
-			<button type="button" class="btn btn-primary" id="btnInsert">추가저장</button>
-			<button type="button" class="btn btn-primary" id="btnUpdate">저장</button>
-			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
-			<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
+			<button type="button" class="btn-two blue small" id="btnRowInsert">행추가</button>
+			<button type="button" class="btn-two blue small" id="btnInsert">추가저장</button>
+			<button type="button" class="btn-two blue small" id="btnUpdate">저장</button>
+			<button type="button" class="btn-two blue small" id="btnDelete">삭제</button>
+			<button type="button" class="btn-two blue small" id="btnSearch">조회</button>
 		</form>
 		</div>
 		<div id="grid">

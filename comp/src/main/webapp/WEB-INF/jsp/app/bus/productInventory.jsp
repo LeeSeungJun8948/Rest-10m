@@ -7,9 +7,9 @@
 	<form id="inputFrm" name="inputFrm" method="post"
 	action="productInventoryExcel.do">
 <div class="mb-4" align="right">
-	<button type="button" class="btn btn-primary" id="btnView">조회</button>
-	<input type="submit" class="btn btn-primary" id="btnExcel" value="엑셀">
-	<button type="reset" class="btn btn-primary" id="btnReset">새자료</button>
+	<button type="button" class="btn-two blue small" id="btnView">조회</button>
+	<input type="submit" class="btn-two blue small" id="btnExcel" value="엑셀">
+	<button type="reset" class="btn-two blue small" id="btnReset">새자료</button>
 	
 </div>
 <div class="mb-2 col-lg-6">

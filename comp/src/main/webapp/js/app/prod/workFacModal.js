@@ -15,7 +15,7 @@
 				el: document.getElementById('facGrid'),
 				data: facData,
 				scrollX: false,
-				scrollY: true,
+				scrollY: false,
 				bodyHeight: 360,
 				columns: [{
 					header: '설비코드',

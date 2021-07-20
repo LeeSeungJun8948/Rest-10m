@@ -17,9 +17,9 @@
 		<h1>공정관리 ${cName.companyName }</h1>
 	</div>
 	<div align="right" style="margin-bottom: 5px">
-		<button type="button" class="btn btn-primary" id="btnRowInsert">행추가</button>
-		<button type="button" class="btn btn-primary" id="btnInsert">저장</button>
-		<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
+		<button type="button" class="btn-two blue small" id="btnRowInsert">행추가</button>
+		<button type="button" class="btn-two blue small" id="btnInsert">저장</button>
+		<button type="button" class="btn-two blue small" id="btnDelete">삭제</button>
 	</div>
 	<div id="proGrid" style="z-index: 10" class="bgird"></div>
 	<script type="text/javascript">

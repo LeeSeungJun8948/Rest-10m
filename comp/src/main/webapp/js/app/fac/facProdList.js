@@ -51,7 +51,7 @@ $('#btnRead').on('click',  function(){
 var forGrid = false;
 
 $("#btnFacModal").on("click", function(e) {
-	    $('#facContent').load(contextPath + "/modal/facModel.do");
+	    $('#facContent').load(contextPath + "/modal/facModal.do");
 	});
 	
 $("#btnProdModal").on("click", function() {

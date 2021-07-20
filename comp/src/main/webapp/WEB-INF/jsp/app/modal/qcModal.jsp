@@ -55,7 +55,7 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				<button id=btnSearch type="button" onclick="fnSearch()"
-					class="btn btn-primary">검색</button>
+					class="btn-two blue small">검색</button>
 			</div>
 			<script type="text/javascript">
 			const qcdataSource = {

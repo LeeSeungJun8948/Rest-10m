@@ -25,7 +25,7 @@
 					<input id="keyword" name="keyword" type="text" class="form-control">
 				</div>
 				<div class="col-md-2">
-					<button type="button" class="btn btn-primary" id="btnReadModal">조회</button>
+					<button type="button" class="btn-two blue small" id="btnReadModal">조회</button>
 				</div>
 				<div class="col-md-1"></div>
 			</div>
@@ -38,7 +38,7 @@
 		
 	<div class="modal-footer">
 		<button id="btnCloseBottom" class="btn btn-default" data-dismiss="modal">닫기</button>
-		<button id="btnSelect" class="btn btn-success">선택</button>
+		<button id="btnSelect" class="btn-two cyan small">선택</button>
 	</div>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/modal/inorderModal.js"></script>

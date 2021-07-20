@@ -11,20 +11,12 @@
 	
 	<div class="modal-body">
 		<form class="form-row mb-4" id="dateFrm" name="dateFrm">
-			<div class="col-2">
-				<span>작업일자</span>
-			</div>
-			<div class="col-3">
-				<input type="date" class="form-control" id="workDtS" name="workDtS">
-			</div>
-			<div class="col-1">
+			<div class="form-inline form-group">
+				<span class="ml-4">작업일자</span>
+				<input type="date" class="form-control ml-4 mr-2" id="workDtS" name="workDtS">
 				<span>~</span>
-			</div>
-			<div class="col-3">						
-				<input type="date" class="form-control" id="workDtE" name="workDtE">
-			</div>
-			<div class="col-2">
-				<button type="button" class="btn btn-primary" id="btnSearch" name="btnSearch">검색</button>
+				<input type="date" class="form-control ml-2 mr-4" id="workDtE" name="workDtE">
+				<button type="button" class="btn-two blue small" id="btnSearch" name="btnSearch">검색</button>
 			</div>
 		</form>
 	</div>
@@ -35,8 +27,8 @@
 	</div>
 		
 	<div class="modal-footer">
-		<button id="btnSelect" class="btn btn-success">선택</button>
-		<button id="btnCloseBottom" class="btn btn-primary" data-dismiss="modal">닫기</button>
+		<button id="btnSelect" class="btn-two cyan small">선택</button>
+		<button id="btnCloseBottom" class="btn-two blue small" data-dismiss="modal">닫기</button>
 	</div>
 </div>
 

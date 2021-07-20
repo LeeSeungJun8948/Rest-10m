@@ -27,7 +27,7 @@ $(document).ready(function() {
 					str += '</div></div></li>';
 				}
 				if (result.data.contents[i].chkURL == 'dir') {
-					str += '<li class="nav-item"><a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse' + i + '" aria-expanded="true" aria-controls="collapse' + i + '">'
+					str += '<li class="nav-item"><a style="width: 200px;" class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse' + i + '" aria-expanded="true" aria-controls="collapse' + i + '">'
 						+ '<i class="fas fa-fw fa-book"></i>'
 						+ '<span>' + result.data.contents[i].menuNm + '</span>'
 						+ '</a>'
