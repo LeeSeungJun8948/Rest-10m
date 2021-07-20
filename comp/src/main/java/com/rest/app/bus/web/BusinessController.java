@@ -94,7 +94,7 @@ public class BusinessController {
 		headerMap.put("notCount","미납품량" );
 		headerMap.put("comments","비고" );
 		map.put("headerMap", headerMap);
-		map.put("filename", "excel_error");
+		map.put("filename", "excel_bus");
 		map.put("datas", data);
 		return new ModelAndView("commonExcelView",map);
 	}
@@ -275,7 +275,7 @@ public class BusinessController {
 			headerMap.put("productCount","재고량" );
 			headerMap.put("productState","제품상태" );
 			map.put("headerMap", headerMap);
-			map.put("filename", "excel_error");
+			map.put("filename", "excel_product");
 			map.put("datas", data);
 			return new ModelAndView("commonExcelView",map);
 		}
@@ -322,9 +322,9 @@ public class BusinessController {
 					System.out.println("=================");
 					HashMap<String, Object>map = new HashMap<String, Object>();
 					HashMap<String, Object>headerMap = new HashMap<String, Object>();
-					List<OrdersVO> list = dao.getBus(param);
+					List<ExportVO> list = dao.searchExport(param);
 					List<Map<String, String>> data = new ArrayList<>();
-					for(OrdersVO vo: list) {
+					for(ExportVO vo: list) {
 						data.add(BeanUtils.describe(vo));
 					}
 					headerMap.put("exportDate","출고일자");
@@ -339,7 +339,7 @@ public class BusinessController {
 					headerMap.put("price","금액" );
 					headerMap.put("comments","비고" );
 					map.put("headerMap", headerMap);
-					map.put("filename", "excel_error");
+					map.put("filename", "excel_export");
 					map.put("datas", data);
 					return new ModelAndView("commonExcelView",map);
 				}
