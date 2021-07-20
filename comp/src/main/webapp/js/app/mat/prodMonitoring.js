@@ -38,21 +38,22 @@ function setInfo(){
 			
 			for(var info of data){
 				if(checkNull(info.procName)){
-					$('<tr>').append($('<td>').html(info.facilitiesName).prop('align','center').css('border','2px solid'))
+					$('<tr>').append($('<td>').html(info.facilitiesName).prop('align','center').css('border','2px solid').css('backgroundColor','#ABF200'))
 						.append($('<td>').html(info.procName).prop('align','center').css('border','2px solid'))
 						.append($('<td>').html(info.prodName).prop('align','center').css('border','2px solid'))
 						.append($('<td>').html(info.prorCount + info.unitNo).prop('align','right').addClass('number').css('border','2px solid'))
 						.append($('<td>').html(info.workCount + info.unitNo).prop('align','right').addClass('number').css('border','2px solid'))
 						.append($('<td>').html(info.errorCount + info.unitNo).prop('align','right').addClass('number').css('border','2px solid'))
-						.append($('<td>').html(parseInt( (info.workCount*1) / (info.prorCount*1) * 100 ) +'%').addClass('number').prop('align','right').css('border','2px solid'))
+						.append($('<td>').html(parseInt( (info.workCount*1) / (info.prorCount*1) * 100 ) +'%').addClass('number').prop('align','right').css('border','2px solid')
+																																.css('backgroundColor','#FFA7A7'))
 						.css('border','2px solid')
 						.appendTo($('#data'));
 						
 				}else{
-					$('<tr>').append($('<td>').html(info.facilitiesName).prop('align','center').css('border','2px solid'))
+					$('<tr>').append($('<td>').html(info.facilitiesName).prop('align','center').css('border','2px solid').css('backgroundColor','#ABF200'))
 							.append($('<td>').prop('colspan','6').css('border','2px solid')
 											.prop('align','center')
-											.html('대기중'))
+											.html('대기중').css('backgroundColor','#BDBDBD'))
 							.css('border','2px solid')
 							.appendTo($('#data'));
 				}			

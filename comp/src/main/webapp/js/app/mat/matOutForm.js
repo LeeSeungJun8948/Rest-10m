@@ -74,11 +74,6 @@ const grid = new tui.Grid({
 			width : 150,
 			align: 'center'
 		}, {
-			header : '단위',
-			name : 'unitNo',
-			width : 70,
-			align: 'center'
-		}, {
 			header : '출고량',
 			name : 'ioVolume',
 			width : 120,
@@ -91,6 +86,11 @@ const grid = new tui.Grid({
 				dataType: 'number',
             	required: true
           	}
+		}, {
+			header : '단위',
+			name : 'unitNo',
+			width : 70,
+			align: 'center'
 		}, {
 			header : '자재LOT_NO',
 			name : 'lotNo',

@@ -29,17 +29,17 @@
 				<input type="text" id="srcCodeIdNm" name="srcCodeIdNm" class="form-control w-5" placeholder="코드ID명">
 			</div>
 			<div class="ml-0 mb-4">
-				<button class="btn btn-light" id="btnSrc" type="button"> 검색 </button>
-				<button class="btn btn-info" id="btnNewCodeId" type="button"> 추가 </button>
-				<button class="btn btn-info" id="btnDelCodeId" type="button"> 삭제 </button>
+				<button class="btn-two small blue" id="btnSrc" type="button"> 검색 </button>
+				<button class="btn-two small blue" id="btnNewCodeId" type="button"> 추가 </button>
+				<button class="btn-two small blue" id="btnDelCodeId" type="button"> 삭제 </button>
 			</div>
 		</div>
 	</div>
 	
 	<div class="col-7">
 		<div align="right" class="mb-4">
-			<button class="btn btn-info" id="btnNewCode" type="button"> 추가 </button>
-			<button class="btn btn-info" id="btnDelCode" type="button"> 삭제 </button>
+			<button class="btn-two small blue" id="btnNewCode" type="button"> 추가 </button>
+			<button class="btn-two small blue" id="btnDelCode" type="button"> 삭제 </button>
 		</div>
 		<div>
 			<form name="frm" id="frm">

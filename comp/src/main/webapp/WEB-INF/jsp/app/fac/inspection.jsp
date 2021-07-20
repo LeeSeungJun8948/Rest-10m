@@ -9,8 +9,8 @@
 	<div class="col-md-4 mb-4" align="right" role="form">
 		<button type="button" class="btn-two blue small" id="btnSave"
 			name="btnSave">저장</button>
-		<button type="button" class="btn btn-info" id="btnAdd" name="btnAdd">추가</button>
-		<button type="button" class="btn btn-info" id="btnDel" name="btnDel">삭제</button>
+		<button type="button" class="btn-two small blue" id="btnAdd" name="btnAdd">추가</button>
+		<button type="button" class="btn-two small blue" id="btnDel" name="btnDel">삭제</button>
 	</div>
 </div>
 <form id="frm" name="frm">

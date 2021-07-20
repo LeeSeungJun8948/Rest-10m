@@ -86,7 +86,7 @@
 	</div>
 </form>
 <div class="mb-4" align="right">
-	<button type="button" class="btn btn-info" id="btnGridDel">삭제</button>
+	<button type="button" class="btn-two small blue" id="btnGridDel">삭제</button>
 </div>
 <div class="col-lg-12">
 		<div id="adjustGrid"></div>

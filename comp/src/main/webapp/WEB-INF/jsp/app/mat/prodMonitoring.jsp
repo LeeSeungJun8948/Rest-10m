@@ -36,19 +36,19 @@ thead th{
 	<table class="col-10" align="center">
 		<thead>
 			<tr class="mb-4">
-				<td colspan="3">
-					<div class="col-8">
-						<h3> 진행 공정 작업실적 현황</h3>
+				<td colspan="3" style="background-color: #0054FF; ">
+					<div>
+						<h2 style=" margin: 5%;"> <b style="color: #ffffff;"> 진행 공정 작업실적 현황 </b> </h2>
 					</div>
 				</td>
-				<td colspan="4">
+				<td colspan="4" style="background-color: #0054FF; ">
 					<div class="col-12" align="right">
-						<span id="date" style="font-size: 24px"> </span> : <span style="font-size: 24px" id="time"></span>
+						<b><span id="date" style="font-size: 24px; color: #ffffff;"> </span> : <span style="font-size: 24px; color: #ffffff;" id="time"></span></b>
 						<button class="btn" id="btnRefresh"><img alt="btn_refresh" src="<c:url value='/images/app/all/btn_refresh.png'/>"></button>
 					</div> 
 				</td>
 			</tr>
-			<tr>
+			<tr style="background-color: #FFE400;">
 				<th>
 					설 비 명
 				</th>

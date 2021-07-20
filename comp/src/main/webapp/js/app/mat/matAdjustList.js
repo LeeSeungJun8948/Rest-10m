@@ -179,6 +179,18 @@ function getFormatDate(date){
     return  year + '-' + month + '-' + day;
 }
 
+//excel
+$("#btnExcel").on("click", function(e) {
+	var data = adjustGrid.getData();
+	for(var i = 0 ; i < data.length ; i++){
+		delete data[i]._attributes;
+		delete data[i].rowKey;
+	}
+	
+	$('#param').val(JSON.stringify(data));
+	console.log($('#param').val());
+	frmExcel.submit();	
+})
 
 // 모달
 var forGrid = false;
