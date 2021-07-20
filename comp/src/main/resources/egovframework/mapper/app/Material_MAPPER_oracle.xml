@@ -115,6 +115,13 @@
 		FROM inorder
 	</select>
 	
+	<select id="getInorderComp" parameterType="InorderVO" resultType="inorderVO">
+		SELECT company_code, 
+				f_find_comp_name(company_code) AS company_name
+		FROM material 
+		WHERE material_code = #{materialCode}
+	</select>
+	
 	<insert id="istInorder" parameterType="InorderVO">
 		INSERT INTO inorder(inorder_code, inorder_date, inorder_count, company_code, material_code, comments)
 		VALUES(#{inorderCode}, #{inorderDate}, #{inorderCount}, #{companyCode}, #{materialCode}, #{comments})

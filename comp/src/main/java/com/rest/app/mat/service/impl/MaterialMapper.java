@@ -34,7 +34,7 @@ public interface MaterialMapper {
 	public List<InorderVO> getInorderList(InorderVO vo); // 발주 리스트
 	
 	public InorderVO getNewInorderCode();
-	
+	public InorderVO getInorderComp(InorderVO vo);
 	public int istInorder(InorderVO vo);
 	public int udtInorder(InorderVO vo);
 	public int delInorder(InorderVO vo);

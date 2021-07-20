@@ -7,7 +7,7 @@ $( document ).ready(function() {
 const dataSource = {
 	api : {
 		readData : {url: contextPath + '/ajax/getInorderList.do' , method:'GET' },
-		modifyData : {url: contextPath + '/ajax/modifyInorder.do' , method:'POST' }
+		modifyData : {url: contextPath + '/ajax/modifyInorder.do' , method:'PUT' }
 	},
 	contentType: 'application/json'
 };
@@ -17,6 +17,7 @@ const grid = new tui.Grid({
 	data : dataSource,
 	scrollX : false,
 	scrollY : true,
+	rowHeaders: ['checkbox'],
 	bodyHeight: 360,
 	columns : [ 
 		{
@@ -44,7 +45,6 @@ const grid = new tui.Grid({
 			name : 'materialCode',
 			width : 80,
 			align: 'center',
-			className: 'white',
 			validation: {
             	required: true
           	}
@@ -52,7 +52,10 @@ const grid = new tui.Grid({
 			header : '자재명',
 			name : 'materialName',
 			width : 120,
-			align: 'center'
+			align: 'center',
+			onAfterChange(ev) {
+        		setComp(ev);
+      		},
 		},{
 			header : '발주코드',
 			name : 'companyCode',
@@ -62,7 +65,9 @@ const grid = new tui.Grid({
 			name : 'companyName',
 			width : 120,
 			align: 'center',
-			className: 'white'
+			validation: {
+            	required: true
+          	}
 		}, {
 			header : '입고일자',
 			name : 'inDate',
@@ -80,7 +85,10 @@ const grid = new tui.Grid({
 			validation: {
 				dataType: 'number',
             	required: true
-          	}
+          	},
+			onAfterChange(ev) {
+        		setCount(ev);
+      		},
 		}, {
 			header : '입고량',
 			name : 'inCount',
@@ -101,7 +109,8 @@ const grid = new tui.Grid({
 			header : '비고',
 			name : 'comments',
 			width : 210,
-			align: 'right'
+			align: 'center',
+			editor: 'text'
 		} 
 	],
 	summary : {
@@ -135,10 +144,33 @@ const grid = new tui.Grid({
 		}
 	}
 });
-	
+
 function format(value){
 	value = value * 1;
 	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function setComp(ev){
+	
+	$.ajax({
+		type : "get",
+		url : contextPath + "/ajax/getInorderComp.do",
+		data : {'materialCode' : grid.getValue(ev.rowKey, 'materialCode')},
+		dataType : "json",
+		async : false,
+		success : function(data) {
+			grid.setValue(ev.rowKey, 'companyCode', data.companyCode, false);
+			grid.setValue(ev.rowKey, 'companyName', data.companyName, false);
+		},
+		error : function() {
+		}
+	});		
+	
+}
+
+function setCount(ev){
+	var cal = grid.getValue(ev.rowKey, 'inorderCount') - grid.getValue(ev.rowKey, 'inCount') 
+	grid.setValue(ev.rowKey,'yetCount',cal,false);
 }
 
 $('#btnRead').on('click',  function(){
@@ -160,12 +192,9 @@ $("#btnGridAdd").on("click", function(){
 			dataType : "json",
 			async : false,
 			success : function(data) {
-				console.log(data)
-				console.log(data+"=========================")
 				newInorderCode = data.inorderCode;
 			},
 			error : function() {
-				console.log("아작스실패");
 			}
 		});		
 	}

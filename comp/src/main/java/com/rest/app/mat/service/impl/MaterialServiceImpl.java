@@ -260,4 +260,9 @@ public class MaterialServiceImpl implements MaterialService{
 	public int delInorder(InorderVO vo) {
 		return mapper.delInorder(vo);
 	}
+	
+	@Override
+	public InorderVO getInorderComp(InorderVO vo) {
+		return mapper.getInorderComp(vo);
+	}
 }

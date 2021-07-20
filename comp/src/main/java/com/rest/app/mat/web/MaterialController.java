@@ -103,13 +103,13 @@ public class MaterialController {
 		data.put("data", gridData.deletedRows);
 		return data;
 	}
-
+	
 	@RequestMapping("/mat/view/inorderList.do")
 	public String inorderList(Model model) {
 		return "mat/inorderList.page";
 	}
 
-	@RequestMapping("/mat/view/inorderForm.do")
+	@RequestMapping("/mat/mng/inorderForm.do")
 	public String inorderForm(Model model) {
 		return "mat/inorderForm.page";
 	}
@@ -132,6 +132,12 @@ public class MaterialController {
 	@ResponseBody
 	public InorderVO getNewInorderCode(InorderVO vo) { // 입출력 행 추가시 불러올 새 입출고 코드
 		return dao.getNewInorderCode();
+	}
+	
+	@RequestMapping("/ajax/getInorderComp.do")
+	@ResponseBody
+	public InorderVO ajaxGetInorderComp(InorderVO vo) {
+		return dao.getInorderComp(vo);
 	}
 	
 	@PutMapping("/ajax/modifyInorder.do")
