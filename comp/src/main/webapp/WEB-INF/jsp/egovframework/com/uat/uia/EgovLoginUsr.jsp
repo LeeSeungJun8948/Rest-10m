@@ -214,7 +214,7 @@ function fnShowLogin(stat) {
 				<!-- 아이디 -->
 				<div class="form-inline form-group">
 					<c:set var="title"><spring:message code="comUatUia.loginForm.id"/></c:set>
-					<label for="id"><strong>${title}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<label for="id"><strong>${title}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 					<input class="form-control" type="text" name="id" id="id" maxlength="20" title="${title} ${inputTxt}" placeholder="${title} ${inputTxt}">
 				</div>
 				<!-- 비밀번호 -->

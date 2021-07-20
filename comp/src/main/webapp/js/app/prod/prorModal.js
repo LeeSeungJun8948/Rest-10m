@@ -13,7 +13,7 @@
 			var gridModal = new tui.Grid({
 				el: document.getElementById('gridModal'),
 				scrollX: false,
-				scrollY: true,
+				scrollY: false,
 				data: dataSourceModal,
 				columns: [{
 					header: '생산지시번호',

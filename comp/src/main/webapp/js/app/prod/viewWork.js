@@ -8,7 +8,7 @@ var dataSourceWork = {
 const workGrid = new tui.Grid({
 	el: document.getElementById('workGrid'),
 	scrollX: false,
-	scrollY: true,
+	scrollY: false,
 	data: dataSourceWork,
 	columns: [ {
 		header: '작업번호',

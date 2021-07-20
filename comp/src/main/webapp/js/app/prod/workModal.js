@@ -14,7 +14,7 @@
 				el: document.getElementById('workGrid'),
 				data: workData,
 				scrollX: false,
-				scrollY: true,
+				scrollY: false,
 				bodyHeight: 450,
 				columns: [ {
 					header: '작업번호',
