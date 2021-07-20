@@ -19,10 +19,10 @@
 			<h1 class="h3 mb-4 text-gray-700">설비관리</h1>
 		</div>
 		<div class="col-md-4 mb-4" align="right">
-			<button class="btn btn-primary" id="btnNew" type="reset">
+			<button class="btn-two blue small" id="btnNew" type="reset">
 				새입력</button>
-			<button type="submit" class="btn btn-primary">저장</button>
-			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
+			<button type="submit" class="btn-two blue small">저장</button>
+			<button type="button" class="btn-two blue small" id="btnDelete">삭제</button>
 		</div>
 	</div>
 	<div class="row">
@@ -115,7 +115,7 @@
 		<div class="col-3">
 			<input type="file" id="img" name="uploadFile" accept="image/*"
 				style="display: none" onchange="setThumbnail(event);">
-			<button type="button" class="btn btn-primary" id="btnImg">이미지
+			<button type="button" class="btn-two blue small" id="btnImg">이미지
 				업로드</button>
 			<h3>이미지 미리보기</h3>
 			<div id="imagePreview">

@@ -19,7 +19,7 @@
 		<h1 class="h3 mb-4 mt-4 text-gray-700">공통코드관리</h1>
 	</div>
 	<div class="col-md-2 mb-4" align="right">
-		<button class="btn btn-primary" id="btnSave" type="button"> 저장 </button>
+		<button class="btn-two blue small" id="btnSave" type="button"> 저장 </button>
 	</div>
 </div>
 <div class="row">

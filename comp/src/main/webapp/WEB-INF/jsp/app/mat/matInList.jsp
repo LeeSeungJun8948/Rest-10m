@@ -18,7 +18,7 @@
 			<button type="button" class="btn btn-light" id="btnExcel">EXCEL</button>
 			<input type="hidden" id="param" name="param">
 		</form>
-		<button type="button" class="btn btn-primary" id="btnRead">조회</button>
+		<button type="button" class="btn-two blue small" id="btnRead">조회</button>
 	</div>
 </div>
 

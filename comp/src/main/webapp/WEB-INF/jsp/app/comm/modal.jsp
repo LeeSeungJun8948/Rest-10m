@@ -57,7 +57,7 @@
 				</select> <input id="searchKeyword" name="searchKeyword" type="text"
 					title="검색어" class="form-control"
 					style="width: 200px; margin-left: 10px">
-				<button type="button" class="btn btn-primary" id="btnCheck">조회</button>
+				<button type="button" class="btn-two blue small" id="btnCheck">조회</button>
 				</div>
 			</form>
 		</div>
@@ -65,9 +65,9 @@
 			<!-- 필요한것 집어넣기 BODY 부분 -->
 			<div id=matGrid></div>
 			<div class="modal-footer">
-			<a href="#" rel="modal:close" ><button class="btn btn-primary">닫기</button></a>
+			<a href="#" rel="modal:close" ><button class="btn-two blue small">닫기</button></a>
 				<button id=btnSearch type="button" onclick="fnSearch()"
-					class="btn btn-primary">검색</button>
+					class="btn-two blue small">검색</button>
 			</div>
 
 			<script type="text/javascript">

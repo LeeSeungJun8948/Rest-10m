@@ -26,16 +26,16 @@
 					<input id="keyword" name="keyword" type="text" class="form-control">
 				</div>
 				<div>
-					<button type="button" class="btn btn-primary" id="btnReadModal">조회</button>
+					<button type="button" class="btn-two blue small" id="btnReadModal">조회</button>
 				</div>
 			</div>
 			</form> 
 			<!-- 필요한것 집어넣기 BODY 부분 -->
 			<div id=procCodeGrid style="margin-top: 20px"></div>
 			<div class="modal-footer">
-			<a href="#" rel="modal:close" ><button class="btn btn-primary">닫기</button></a>
+			<a href="#" rel="modal:close" ><button class="btn-two blue small">닫기</button></a>
 				<button id=btnSelect type="button"
-					class="btn btn-primary">검색</button>
+					class="btn-two blue small">검색</button>
 				</div>
 			</div>
 		</div>

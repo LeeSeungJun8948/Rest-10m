@@ -18,7 +18,7 @@
 		<h1 class="h3 mb-4 text-gray-700">자재재고조정 전표 조회</h1>
 	</div>
 	<div class="col-md-4 mb-4" align="right">
-		<button type="button" class="btn btn-primary" id="btnRead">조회</button>
+		<button type="button" class="btn-two blue small" id="btnRead">조회</button>
 	</div>
 </div>
 

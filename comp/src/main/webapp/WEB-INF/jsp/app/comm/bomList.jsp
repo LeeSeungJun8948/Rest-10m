@@ -43,9 +43,9 @@
 				<input id="productCode2" name="productCode2" type="hidden"
 					value="productCode">
 			</form>
-			<button type="reset" class="btn btn-primary">초기화</button>
-			<button type="button" class="btn btn-primary" id="btnInsert">저장</button>
-			<button type="button" class="btn btn-primary" id="delBom">Bom삭제</button>
+			<button type="reset" class="btn-two blue small">초기화</button>
+			<button type="button" class="btn-two blue small" id="btnInsert">저장</button>
+			<button type="button" class="btn-two blue small" id="delBom">Bom삭제</button>
 		</div>
 	</div>
 	<div class="flex row">
@@ -99,8 +99,8 @@
 			<h3>제품 소요량 관리</h3>
 		</div>
 		<div class="col-4" align="right">
-			<button type="button" class="btn btn-primary" id="btnRowInsert">행추가</button>
-			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
+			<button type="button" class="btn-two blue small" id="btnRowInsert">행추가</button>
+			<button type="button" class="btn-two blue small" id="btnDelete">삭제</button>
 		</div>
 	</div>
 	<div id="bomgrid" style="z-index: 10" class="bgird"></div>

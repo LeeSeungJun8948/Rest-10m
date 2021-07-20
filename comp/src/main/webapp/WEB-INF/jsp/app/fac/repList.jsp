@@ -15,9 +15,9 @@
 			<h1 class="h3 mb-4 text-gray-700">설비 수리내역 관리</h1>
 		</div>
 		<div class="col-md-4 mb-4" align="right">
-			<input type="submit" class="btn btn-primary" value="저장">
-			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
-			<button type="reset" class="btn btn-primary">새입력</button>
+			<input type="submit" class="btn-two blue small" value="저장">
+			<button type="button" class="btn-two blue small" id="btnDelete">삭제</button>
+			<button type="reset" class="btn-two blue small">새입력</button>
 		</div>
 	</div>
 	<div class="row">

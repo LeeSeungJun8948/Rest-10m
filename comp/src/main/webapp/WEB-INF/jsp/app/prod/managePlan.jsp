@@ -1,13 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<h1 class="h3 mb-4 text-gray-700">생산계획 관리</h1>
+<h3 class="mb-4 text-gray-700">생산계획 관리</h3>
 <div class="mb-4" align="right">
-	<button id="btnPlanModal" type="button" class="btn btn-primary" data-remote="false" data-toggle="modal" data-target="#planModal">조회</button>
-	<button type="reset" class="btn btn-primary" id="btnReset">초기화</button>
-	<button type="button" class="btn btn-primary" id="btnSave">저장</button>
-	<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
+	<button id="btnPlanModal" type="button" class="btn-two blue small" data-remote="false" data-toggle="modal" data-target="#planModal">조회</button>
+	<button type="reset" class="btn-two blue small" id="btnReset">초기화</button>
+	<button type="button" class="btn-two blue small" id="btnSave">저장</button>
+	<button type="button" class="btn-two red small" id="btnDel">삭제</button>
 </div>
 <div class="row">
 	<div class="mb-2 col-lg-6">
@@ -37,30 +36,20 @@
 		</div>
 		<div>
 			<form id="dateFrm" name="dateFrm">
-				<div class="form-row">
-					<div class="col-2" align="center">
-						<span>납기일자</span>
-					</div>
-					<div class="col-3">
-						<input type="date" class="form-control" id="planDtS" name="planDtS">
-					</div>
-					<div class="col-1" align="center">
-						<span>~</span>
-					</div>
-					<div class="col-3">
-						<input type="date" class="form-control" id="planDtE" name="planDtE">
-					</div>
-					<div class="col-2">
-						<button type="button" class="btn btn-primary" id="btnRead">불러오기</button>
-					</div>
+				<div class="form-inline form-group">
+					<span>납기일자</span>
+					<input type="date" class="form-control ml-4 mr-2" id="planDtS" name="planDtS">
+					<span>~</span>
+					<input type="date" class="form-control ml-2 mr-4" id="planDtE" name="planDtE">
+					<button type="button" class="btn-two blue small" id="btnRead">불러오기</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
 <div class="mb-4" align="right">
-	<button type="button" class="btn btn-primary" id="btnGridAdd">추가</button>
-	<button type="button" class="btn btn-danger" id="btnGridDel">삭제</button>
+	<button type="button" class="btn-two blue small" id="btnGridAdd">추가</button>
+	<button type="button" class="btn-two red small" id="btnGridDel">삭제</button>
 </div>
 <div class="col-lg-12">
 	<div id="grid"></div>

@@ -18,7 +18,7 @@
 				<h1 class="h3 mb-4 text-gray-700">설비조회</h1>
 			</div>
 			<div class="col-md-4 mb-4" align="right">
-					<input type="submit" class="btn btn-primary" id="btnExcel"
+					<input type="submit" class="btn-two blue small" id="btnExcel"
 						value="엑셀">
 				</div>
 		</div>
@@ -39,7 +39,7 @@
 									<input id="searchKeyword" name="searchKeyword" type="text"
 										title="검색어" class="form-control">
 								</div>
-								<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
+								<button type="button" class="btn-two blue small" id="btnSearch">조회</button>
 							</div>
 						</td>
 					</tr>

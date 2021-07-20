@@ -9,13 +9,13 @@
 			<option value="employeeName">이름</option>
 		</select> 
 		<input id="searchKeyword" name="searchKeyword" type="text" title="검색어" class="form-control mr-2" style="width: 200px; margin-left: 10px">
-		<button type="button" class="btn btn-primary" id="btnSearch">
+		<button type="button" class="btn-two blue small" id="btnSearch">
 			<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
 		</button>
 	</div>	
 	<div class="mb-4" align="right">
-		<button id="btnEmpModal" type="button" class="btn btn-primary" data-remote="false" data-toggle="modal" data-target="#empModal">등록</button>
-		<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
+		<button id="btnEmpModal" type="button" class="btn-two blue small" data-remote="false" data-toggle="modal" data-target="#empModal">등록</button>
+		<button type="button" class="btn-two blue small" id="btnDelete">삭제</button>
 	</div>
 </form>
 <div id="grid"></div>
@@ -79,8 +79,8 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button id="btnSave" class="btn btn-primary" onclick="fnSearch()">저장</button> 
-					<button id="btnCloseBottom" class="btn btn-primary" data-dismiss="modal">닫기</button>
+					<button id="btnSave" class="btn-two blue small" onclick="fnSearch()">저장</button> 
+					<button id="btnCloseBottom" class="btn-two blue small" data-dismiss="modal">닫기</button>
 				</div>
 			</div>
 		</form>
