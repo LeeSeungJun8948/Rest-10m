@@ -63,7 +63,7 @@
 						<th>사원번호<span style="color: red">*</span></th>
 						<td>
 							<div class="row">
-								<div class="col-md-2">
+								<div class="col-md-3">
 									<input type="text" id="empNo" name="empNo" readonly
 										class="form-control">
 								</div>
@@ -72,7 +72,7 @@
 									<img alt="btn_search"
 										src="<c:url value='/images/app/all/btn_search.png'/>">
 								</button>
-								<div class="col-md-6">
+								<div class="col-md-5">
 									<input type="text" id="employeeName" name="employeeName" readonly
 										class="form-control">
 								</div>
