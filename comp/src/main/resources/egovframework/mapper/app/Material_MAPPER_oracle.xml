@@ -76,6 +76,7 @@
 				inorder_date, 
 				material_code, 
 				f_findMatName(material_code) as material_name,
+				company_code,
 				f_findCompName(company_code) as company_name,
 				(select max(io_date) from inout where inorder_code = inorder.inorder_code) as in_date,
 				inorder_count,
@@ -107,6 +108,35 @@
 		</if> 	
 		
 	</select>
+	
+	<select id="getNewInorderCode" resultType="InorderVO">
+		SELECT max(inorder_code) + 1 
+				AS inorder_code 
+		FROM inorder
+	</select>
+	
+	<select id="getInorderComp" parameterType="InorderVO" resultType="inorderVO">
+		SELECT company_code, 
+				f_find_comp_name(company_code) AS company_name
+		FROM material 
+		WHERE material_code = #{materialCode}
+	</select>
+	
+	<insert id="istInorder" parameterType="InorderVO">
+		INSERT INTO inorder(inorder_code, inorder_date, inorder_count, company_code, material_code, comments)
+		VALUES(#{inorderCode}, #{inorderDate}, #{inorderCount}, #{companyCode}, #{materialCode}, #{comments})
+	</insert>
+	
+	<update id="udtInorder" parameterType="InorderVO">
+		UPDATE inorder
+		SET inorder_date = #{inorderDate}, inorder_count = #{inorderCount}, company_code = #{companyCode}, material_code = #{materialCode}, comments = #{comments}
+		WHERE inorder_code = #{inorderCode}
+	</update>
+	
+	<update id="delInorder" parameterType="InorderVO">
+		DELETE FROM inorder
+		WHERE inorder_code = #{inorderCode}
+	</update>
 	
 	<!-- 입출고 -->
 	<select id="getMatInoutList" resultType="InoutVO"  parameterType="InoutVO">

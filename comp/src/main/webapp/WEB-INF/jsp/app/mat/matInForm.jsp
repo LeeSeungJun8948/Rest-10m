@@ -100,7 +100,6 @@
 <div class="mb-4" align="right">
 	<button type="button" class="btn btn-info" id="btnGridAdd">추가</button>
 	<button type="button" class="btn btn-info" id="btnGridDel">삭제</button>
-
 </div>
 <div class="col-lg-12">
 	<form id="gridFrm" name="gridFrm">

@@ -18,7 +18,11 @@
 		<h1 class="h3 mb-4 text-gray-700">자재재고조정 전표 조회</h1>
 	</div>
 	<div class="col-md-4 mb-4" align="right">
-		<button type="button" class="btn btn-primary" id="btnRead">조회</button>
+		<form id="frmExcel" name="frmExcel" action="${pageContext.request.contextPath}/mat/view/matAdjustExcel.do" method="post">
+			<button type="button" class="btn btn-light" id="btnExcel">EXCEL</button>
+			<input type="hidden" id="param" name="param">
+			<button type="button" class="btn btn-primary" id="btnRead">조회</button>
+		</form>
 	</div>
 </div>
 

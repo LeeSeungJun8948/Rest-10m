@@ -240,4 +240,29 @@ public class MaterialServiceImpl implements MaterialService{
 	public List<ProdVO> getProdMonitoring(){
 		return mapper.getProdMonitoring();
 	}
+
+	@Override
+	public InorderVO getNewInorderCode() {
+		return mapper.getNewInorderCode();
+	}
+
+	@Override
+	public int istInorder(InorderVO vo) {
+		return mapper.istInorder(vo);
+	}
+
+	@Override
+	public int udtInorder(InorderVO vo) {
+		return mapper.udtInorder(vo);
+	}
+
+	@Override
+	public int delInorder(InorderVO vo) {
+		return mapper.delInorder(vo);
+	}
+	
+	@Override
+	public InorderVO getInorderComp(InorderVO vo) {
+		return mapper.getInorderComp(vo);
+	}
 }

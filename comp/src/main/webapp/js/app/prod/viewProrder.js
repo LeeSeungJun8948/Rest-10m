@@ -81,6 +81,7 @@ $("#btnReset").click(function() {
 });
 
 //모달
+var forGrid = false;
 $("#btnCompModal").on("click", function() {
     $('#compContent').load("compSearchModal.do");
 });

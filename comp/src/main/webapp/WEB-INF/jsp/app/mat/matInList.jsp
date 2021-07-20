@@ -17,8 +17,8 @@
 		<form id="frmExcel" name="frmExcel" action="${pageContext.request.contextPath}/mat/view/matInExcel.do" method="post">
 			<button type="button" class="btn btn-light" id="btnExcel">EXCEL</button>
 			<input type="hidden" id="param" name="param">
+			<button type="button" class="btn btn-primary" id="btnRead">조회</button>
 		</form>
-		<button type="button" class="btn btn-primary" id="btnRead">조회</button>
 	</div>
 </div>
 
