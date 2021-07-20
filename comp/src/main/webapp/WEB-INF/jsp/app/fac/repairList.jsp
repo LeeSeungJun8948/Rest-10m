@@ -11,7 +11,7 @@
 				<h1 class="h3 mb-4 text-gray-700">설비 수리내역 조회</h1>
 			</div>
 			<div class="col-md-4 mb-4" align="right">
-					<input type="submit" class="btn btn-primary" id="btnExcel"
+					<input type="submit" class="btn-two blue small" id="btnExcel"
 						value="엑셀">
 				</div>
 		</div>

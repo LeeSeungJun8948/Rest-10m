@@ -16,7 +16,7 @@
 	
 		<div class="modal-footer">
 			<button id="btnCloseBottom" class="btn btn-default" data-dismiss="modal">닫기</button>
-			<button id="btnSelect" class="btn btn-success">선택</button>
+			<button id="btnSelect" class="btn-two cyan small">선택</button>
 		</div>
 	
 	</div>

@@ -8,6 +8,9 @@
 #companyCode, #materialCode{
 	background-color: #FFFFFF;
 }
+
+
+
 </style>
 
 <div class="row">
@@ -16,9 +19,9 @@
 	</div>
 	<div class="col-md-4 mb-4" align="right" role="form">
 		<form id="frmExcel" name="frmExcel" action="${pageContext.request.contextPath}/mat/view/inorderExcel.do" method="post">
-			<button type="button" class="btn btn-light" id="btnExcel">EXCEL</button>
+			<button type="button" class="btn-two blue small" id="btnExcel">엑셀</button>
 			<input type="hidden" id="param" name="param">
-			<button type="button" class="btn btn-primary" id="btnRead">조회</button>
+			<button type="button" class="btn-two blue small" id="btnRead">조회</button>
 		</form>
 	</div>
 </div>

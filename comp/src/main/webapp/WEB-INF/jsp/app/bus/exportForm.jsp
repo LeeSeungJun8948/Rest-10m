@@ -4,11 +4,11 @@
 
 <h1 class="h3 mb-4 text-gray-700">출고관리</h1>
 <div class="mb-4" align="right">
-	<button id="btnExportModal" type="button" class="btn btn-primary"
+	<button id="btnExportModal" type="button" class="btn-two blue small"
 		data-remote="false" data-toggle="modal" data-target="#exportModal">조회</button>
-	<button type="reset" class="btn btn-primary" id="btnReset">새자료</button>
-	<button type="button" class="btn btn-primary" id="btnSave">저장</button>
-	<button type="button" class="btn btn-primary" id="btnDel">삭제</button>
+	<button type="reset" class="btn-two blue small" id="btnReset">새자료</button>
+	<button type="button" class="btn-two blue small" id="btnSave">저장</button>
+	<button type="button" class="btn-two blue small" id="btnDel">삭제</button>
 </div>
 <div class="row">
 	<div class="mb-2 col-lg-6">
@@ -79,7 +79,7 @@
 						<input type="date" class="form-control" id="toDate" name="toDate">
 					</div>
 					<div class="col-2">
-						<button type="button" class="btn btn-primary" id="btnRead">불러오기</button>
+						<button type="button" class="btn-two blue small" id="btnRead">불러오기</button>
 					</div>
 				</div>
 			</form>
@@ -87,7 +87,7 @@
 	</div>
 </div>
 <div class="mb-4" align="right">
-	<button type="button" class="btn btn-primary" id="btnGridDel">삭제</button>
+	<button type="button" class="btn-two blue small" id="btnGridDel">삭제</button>
 </div>
 <div class="col-lg-12">
 	<div id="grid"></div>

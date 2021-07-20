@@ -17,7 +17,7 @@ var dataSourceInput = {
 const grid = new tui.Grid({
 	el: document.getElementById('grid'),
 	scrollX: false,
-	scrollY: true,
+	scrollY: false,
 	data: dataSource, 
 	rowHeaders: ['checkbox'],
 	columns: [ {

@@ -5,9 +5,9 @@
 <h1 class="h3 mb-4 text-gray-700">작업실적 조회</h1>
 <form id="searchFrm" name="searchFrm" method="post" action="viewWorkExcel.do">
 	<div class="mb-4" align="right">
-		<button type="button" class="btn btn-primary" id="btnSearch">조회</button>
-		<input type="submit" class="btn btn-primary" id="btnExcel" value="엑셀">
-		<button type="reset" class="btn btn-primary" id="btnReset">초기화</button>
+		<button type="button" class="btn-two blue small" id="btnSearch">조회</button>
+		<input type="submit" class="btn-two blue small" id="btnExcel" value="엑셀">
+		<button type="reset" class="btn-two blue small" id="btnReset">초기화</button>
 	</div>
 	<div class="row">	
 		<div class="mb-2 col-lg-12">
@@ -102,7 +102,7 @@
 				</table>
 			</div>
 			<div class="modal-footer">
-				<button id="btnCloseBottom" class="btn btn-primary" data-dismiss="modal">닫기</button>
+				<button id="btnCloseBottom" class="btn-two blue small" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
 	</div>

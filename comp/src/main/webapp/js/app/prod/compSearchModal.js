@@ -14,7 +14,7 @@
 				el : document.getElementById('compGrid'),
 				data : compData,
 				scrollX : false,	
-				scrollY : true,
+				scrollY : false,
 				bodyHeight: 360,
 				columns : [ {
 					header : '업체코드',

@@ -14,7 +14,7 @@
 				el : document.getElementById('prodGrid'),
 				data : prodData,
 				scrollX : false,	
-				scrollY : true,
+				scrollY : false,
 				bodyHeight: 360,
 				columns : [ {
 					header : '제품코드',

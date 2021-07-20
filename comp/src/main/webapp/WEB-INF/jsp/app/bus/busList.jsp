@@ -7,9 +7,9 @@
 <form id="dataForm" name="dataForm" method="post"
 	action="busListExcel.do">
 	<div class="mb-4" align="right">
-		<button type="button" class="btn btn-primary" id="searchBtn">조회</button>
-		<input type="submit" class="btn btn-primary" id="btnExcel" value="엑셀">
-		<button type="reset" class="btn btn-primary" id="resetBtn">새자료</button>
+		<button type="button" class="btn-two blue small" id="searchBtn">조회</button>
+		<input type="submit" class="btn-two blue small" id="btnExcel" value="엑셀">
+		<button type="reset" class="btn-two blue small" id="resetBtn">새자료</button>
 	</div>
 	<div class="row">
 		<div class="mb-2 col-lg-6">

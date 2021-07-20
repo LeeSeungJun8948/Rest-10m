@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 	
 <div id="modalContent">
 	<div class="modal-header">
@@ -23,7 +22,7 @@
 					<input id="keyword" name="keyword" type="text" class="form-control">
 				</div>
 				<div>
-					<button type="button" class="btn btn-primary" id="btnReadModal">검색</button>
+					<button type="button" class="btn-two blue small" id="btnReadModal">검색</button>
 				</div>
 			</div>
 		</form>
@@ -33,11 +32,10 @@
 		</div>
 	
 		<div class="modal-footer">
-			<button id="btnSelect" class="btn btn-success">선택</button>
-			<button id="btnCloseBottom" class="btn btn-primary" data-dismiss="modal">닫기</button>
+			<button id="btnSelect" class="btn-two cyan small">선택</button>
+			<button id="btnCloseBottom" class="btn-two blue small" data-dismiss="modal">닫기</button>
 		</div>
-	
 	</div>
-	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/prod/compSearchModal.js"></script>
 </div>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/prod/compSearchModal.js"></script>

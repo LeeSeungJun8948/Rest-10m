@@ -4,6 +4,6 @@
 
 <div align="center">
 	<div class="mb-8">
-		<h2>메인 페이지</h2>
+		<img alt="main" src="<c:url value='/images/app/all/main_img2.png'/>">
 	</div>
 </div>

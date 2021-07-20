@@ -15,7 +15,7 @@
 				el : document.getElementById('errorGrid'),
 				data : errorData,
 				scrollX : false,	
-				scrollY : true,
+				scrollY : false,
 				bodyHeight: 360,
 				columns : [ {
 					header : '불량코드',

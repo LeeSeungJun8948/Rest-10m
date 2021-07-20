@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 	<form id="searchFrm" name="searchFrm" method="post" action="proudctListExcel.do">
-	<input type="submit" class="btn btn-primary" id="btnExcel" value="엑셀">
+	<input type="submit" class="btn-two blue small" id="btnExcel" value="엑셀">
 	</form>
 	<form action="insertProduct.do" method="post" id="frm" encType="multipart/form-data">
 	<div class="flex row">
@@ -11,10 +11,10 @@
 			<h3>제품  / 품질 표준서 관리</h3>
 		</div>
 		<div class="col-4" align="right">
-			<button class="btn btn-primary" id="btnNew" type="reset">
+			<button class="btn-two blue small" id="btnNew" type="reset">
 				초기화</button>
-			<button type="button" class="btn btn-primary" id="btninsert" onclick="save()">저장</button>
-			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
+			<button type="button" class="btn-two blue small" id="btninsert" onclick="save()">저장</button>
+			<button type="button" class="btn-two blue small" id="btnDelete">삭제</button>
 		
 		</div>
 	</div>

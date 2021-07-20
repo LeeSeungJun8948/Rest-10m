@@ -15,7 +15,7 @@
 				el: document.getElementById('empGrid'),
 				data: empData,
 				scrollX: false,
-				scrollY: true,
+				scrollY: false,
 				bodyHeight: 360,
 				columns: [{
 					header: '사원번호',

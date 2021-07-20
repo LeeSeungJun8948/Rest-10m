@@ -72,8 +72,8 @@
 		</div>
 		<div class="col-md-2"></div>
 		<div class="col-md-3 mb-4" align="right" role="form">
-			<button type="button" class="btn btn-primary" id="btnRead">재고조회</button>
-			<button type="button" class="btn btn-info" id="btnWrite">선택작성</button>
+			<button type="button" class="btn-two blue small" id="btnRead">재고조회</button>
+			<button type="button" class="btn-two small blue" id="btnWrite">선택작성</button>
 		</div>
 	</div>
 </form>
@@ -83,8 +83,8 @@
 
 
 <div class="mb-4" align="right">
-	<button type="button" class="btn btn-info" id="btnGridDel">삭제</button>
-	<button type="button" class="btn btn-primary" id="btnSave">저장</button>
+	<button type="button" class="btn-two small blue" id="btnGridDel">삭제</button>
+	<button type="button" class="btn-two blue small" id="btnSave">저장</button>
 </div>
 
 <div class="col-md-12">

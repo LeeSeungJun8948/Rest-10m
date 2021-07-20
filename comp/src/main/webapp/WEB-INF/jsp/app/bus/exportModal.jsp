@@ -23,7 +23,7 @@
 								</form>
 							</div>
 							<div class="col-lg-4">
-								<button type="button" class="btn btn-primary" id="btnSearch"
+								<button type="button" class="btn-two blue small" id="btnSearch"
 									name="btnSearch">검색</button>
 							</div>
 						</div>
@@ -34,8 +34,8 @@
 		<div id="modalExportListGrid"></div>
 	</div>
 	<div class="modal-footer">
-		<button id="btnSelect" class="btn btn-success">선택</button>
-		<button id="btnCloseBottom" class="btn btn-primary"
+		<button id="btnSelect" class="btn-two cyan small">선택</button>
+		<button id="btnCloseBottom" class="btn-two blue small"
 			data-dismiss="modal">닫기</button>
 	</div>
 </div>

@@ -10,7 +10,7 @@
 			<div id=CodeListGird></div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<a href="#" rel="modal:close" ><button class="btn btn-primary">검색</button></a>
+				<a href="#" rel="modal:close" ><button class="btn-two blue small">검색</button></a>
 			</div>
 
 			<script type="text/javascript">

@@ -25,13 +25,13 @@
 				</table>
 				<input id="searchKeyword" name="searchKeyword" type="text" title="검색어" class="form-control"
 					style="width: 200px; margin-left: 10px; float:left" >
-				<button type="button" class="btn btn-primary" id="btnCheck">조회</button>
+				<button type="button" class="btn-two blue small" id="btnCheck">조회</button>
 				</div>
 			</form>
 		<div align="right"  style="margin-top: 28px">
-			<button type="button" class="btn btn-primary" id="btnRowInsert">행추가</button>
-			<button type="button" class="btn btn-primary" id="btnInsert">저장</button>
-			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
+			<button type="button" class="btn-two blue small" id="btnRowInsert">행추가</button>
+			<button type="button" class="btn-two blue small" id="btnInsert">저장</button>
+			<button type="button" class="btn-two blue small" id="btnDelete">삭제</button>
 		</div>
 			
 	<div id="errorGrid"></div>	
