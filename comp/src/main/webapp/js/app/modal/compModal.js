@@ -52,8 +52,16 @@
 			});
 			
 			function select(){
-				$('#companyCode').val(companyCode);
-				$('#companyName').val(companyName);
+				
+				if(forGrid){
+					grid.setValue(rowKey, 'companyCode', companyCode, false);
+					grid.setValue(rowKey, 'companyName', companyName, false);
+					forGrid = false;
+				}else{
+					$('#companyCode').val(companyCode);
+					$('#companyName').val(companyName);
+				}
+				
 				$('#compModal').modal('hide');
 				$('#modalContent').remove();
 			}

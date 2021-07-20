@@ -51,11 +51,6 @@ const grid = new tui.Grid({
 			width : 150,
 			align: 'center'
 		}, {
-			header : '단위',
-			name : 'unitNo',
-			width : 70,
-			align: 'center'
-		}, {
 			header : '출고량',
 			name : 'ioVolume',
 			width : 120,
@@ -67,6 +62,11 @@ const grid = new tui.Grid({
 				dataType: 'number',
             	required: true
           	}
+		}, {
+			header : '단위',
+			name : 'unitNo',
+			width : 70,
+			align: 'center'
 		}, {
 			header : '자재LOT_NO',
 			name : 'lotNo',
@@ -151,6 +151,20 @@ function toast(text, title){
  	};
 	toastr.error(text,title);
 }
+
+//excel
+$("#btnExcel").on("click", function(e) {
+
+	var data = grid.getData();
+	for(var i = 0 ; i < data.length ; i++){
+		delete data[i]._attributes;
+		delete data[i].rowKey;
+	}
+	
+	$('#param').val(JSON.stringify(data));
+	console.log($('#param').val());
+	frmExcel.submit();	
+})
 
 // 모달
 var forGrid = false;

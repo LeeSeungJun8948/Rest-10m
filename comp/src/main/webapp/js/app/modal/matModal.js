@@ -59,6 +59,7 @@
 				
 				if(forGrid){
 					grid.setValue(rowKey, 'materialCode', materialCode, false);
+					grid.setValue(rowKey, 'materialName', materialName, false);
 					forGrid = false;
 				}else{
 					$('#materialCode').val(materialCode);

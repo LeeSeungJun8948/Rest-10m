@@ -66,6 +66,7 @@ $("#btnReset").click(function() {
 	resetPage();
 });
 
+var forGrid = false;
 //모달
 $("#btnCompModal").on("click", function() {
 	$('#compContent').load(contextPath+"/modal/compModalForProd.do");
