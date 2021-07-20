@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.rest.app.comm.vo.EmployeeVO;
 import com.rest.app.fac.service.impl.FacilitiesMapper;
@@ -50,6 +54,7 @@ class GridData {
 
 @Controller
 public class FacilitiesController {
+	
 	@Autowired
 	FacilitiesMapper mapper;
 	
@@ -69,6 +74,36 @@ public class FacilitiesController {
 		datas.put("contents", mapper.getFac(vo));
 		data.put("data", datas);
 		return data;
+	}
+	
+	// 설비 조회 엑셀
+	@RequestMapping("/fac/view/facListExcel.do")
+	public ModelAndView facListExcel(@RequestParam Map<String, Object> param)
+			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> headerMap = new HashMap<String, Object>();
+		List<FacilitiesVO> list = mapper.getFac(param);
+		List<Map<String, String>> data = new ArrayList<>();
+		for(FacilitiesVO vo : list) {
+			data.add(BeanUtils.describe(vo));
+		}
+		headerMap.put("facCode", "설비코드");
+		headerMap.put("facilitiesName", "설비명");
+		headerMap.put("model", "모델");
+		headerMap.put("facSize", "규격");
+		headerMap.put("productionCompany", "제작업체");
+		headerMap.put("purpose", "용도");
+		headerMap.put("volume", "용량/규격");
+		headerMap.put("productionDate", "제작일자");
+		headerMap.put("employeeName", "사원명");
+		headerMap.put("price", "구매금액");
+		headerMap.put("facInspection", "정기점검주기");
+		headerMap.put("purchaseDate", "구매일자");
+		headerMap.put("processName", "공정명");
+		map.put("headerMap", headerMap);
+		map.put("filename", "excel_plan");
+		map.put("datas", data);
+		return new ModelAndView("commonExcelView", map); 
 	}
 	
 	// 설비관리
@@ -248,5 +283,4 @@ public class FacilitiesController {
 	 
 	        return fileName;
 	    }
-	
 }

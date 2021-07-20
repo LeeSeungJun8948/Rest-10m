@@ -38,7 +38,7 @@ public class ErrorController {
 	
 	
 	//불량 코드,명 리스트 
-	@RequestMapping("/comm/ajax/errorList.do")
+	@RequestMapping("/ajax/errorList.do")
 	@ResponseBody
 	public Map<String, Object> ajaxGeterrorList(ErrorVO vo) {
 		Map<String, Object> datas = new HashMap<String, Object>();
@@ -50,7 +50,7 @@ public class ErrorController {
 	}
 	
 	// 불량코드,명 삭제
-	@PostMapping(value = "/comm/ajax/deleteError.do")
+	@PostMapping(value = "/ajax/deleteError.do")
 	@ResponseBody
 	public Map<String, Object>deleteBom(@RequestBody ErrorGridData errorGridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -63,7 +63,7 @@ public class ErrorController {
 	}
 
 	//불량코드,명  modify
-	@PutMapping(value = "/comm/ajax/modifyError.do")
+	@PutMapping(value = "/ajax/modifyError.do")
 	@ResponseBody
 	public Map<String, Object> modifyError(@RequestBody ErrorGridData errorGridData) {
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -79,7 +79,7 @@ public class ErrorController {
 		data.put("data", errorGridData.updatedRows);
 		return data;
 	}
-	@RequestMapping("/comm/ajax/getNewErrorCode.do")
+	@RequestMapping("/ajax/getNewErrorCode.do")
 	@ResponseBody
 	public ErrorVO getNewErrorCode(ErrorVO vo) {
 		return dao.MaxErrorCode();

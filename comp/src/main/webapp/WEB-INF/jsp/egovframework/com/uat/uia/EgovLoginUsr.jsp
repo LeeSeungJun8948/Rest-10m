@@ -32,8 +32,15 @@
 <head>
 <title><spring:message code="comUatUia.title" /></title><!-- 로그인 -->
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/com/com.css' />">
-<link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/com/uat/uia/login.css' />">
+<link href="${pageContext.request.contextPath}/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/sb-admin-2.min.js"></script>
 <script type="text/javascript" src="<c:url value='/js/egovframework/com/cmm/showModalDialog.js'/>" ></script>
 <script type="text/javascript" src="<c:url value='/js/egovframework/com/cmm/jquery.js'/>" ></script>
 <script type="text/javaScript" language="javascript">
@@ -171,6 +178,25 @@ function fnShowLogin(stat) {
 }
 
 </script>
+
+<style type="text/css">
+.login_form { width: 100%; 
+	          height: 100vh; 
+	          display: -webkit-box; 
+	          display: -moz-box;
+	          display: -ms-flexbox; 
+	          display: flex; 
+	 
+	          -webkit-box-align: center; 
+	          -moz-box-align: center;
+	          -ms-flex-align: center;
+	          align-items: center; /* 수직 정렬 */
+	 
+	          -webkit-box-pack: center;
+	          -moz-box-pack: center; 
+	          -ms-flex-pack: center; 
+	          justify-content: center; /* 수평 정렬 */ }
+</style>
 </head>
 <body onLoad="fnInit();">
 
@@ -179,60 +205,38 @@ function fnShowLogin(stat) {
 
 
 <!-- 일반로그인 -->
-<div class="login_form">
+<div class="login_form" align="center">
 	<form name="loginForm" id="loginForm" action="<c:url value='/uat/uia/actionLogin.do'/>" method="post">
-	<input type="hidden" id="message" name="message" value="<c:out value='${message}'/>">
-	
-	<fieldset>
-		<div class="login_input">
-			<ul>
+		<input type="hidden" id="message" name="message" value="<c:out value='${message}'/>">
+		<fieldset>
+			<div class="login_input ">
 				<!-- 아이디 -->
-				<c:set var="title"><spring:message code="comUatUia.loginForm.id"/></c:set>
-				<li>
-					<label for="id">${title}</label>
-					<input type="text" name="id" id="id" maxlength="20" title="${title} ${inputTxt}" placeholder="${title} ${inputTxt}">
-				</li>
+				<div class="form-inline form-group">
+					<c:set var="title"><spring:message code="comUatUia.loginForm.id"/></c:set>
+					<label for="id"><strong>${title}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<input class="form-control" type="text" name="id" id="id" maxlength="20" title="${title} ${inputTxt}" placeholder="${title} ${inputTxt}">
+				</div>
 				<!-- 비밀번호 -->
-				<c:set var="title"><spring:message code="comUatUia.loginForm.pw"/></c:set>
-				<li>
-					<label for="password">${title}</label>
-					<input type="password" name="password" id="password" maxlength="20" title="${title} ${inputTxt}" placeholder="${title} ${inputTxt}">
-				</li>
+				<div class="form-inline form-group">
+					<c:set var="title"><spring:message code="comUatUia.loginForm.pw"/></c:set>
+					<label for="password"><strong>${title}</strong>&nbsp;&nbsp;</label>
+					<input class="form-control" type="password" name="password" id="password" maxlength="20" title="${title} ${inputTxt}" placeholder="${title} ${inputTxt}">
+				</div>
 				<!-- 아이디 저장 -->
-				<c:set var="title"><spring:message code="comUatUia.loginForm.idSave"/></c:set>
-				<li class="chk">
-					<input type="checkbox" name="checkId" class="check2" onclick="javascript:saveid(document.loginForm);" id="checkId">${title}
-				</li>
-				<li>
-					<input type="button" class="btn_login" value="<spring:message code="comUatUia.loginForm.login"/>" onclick="actionLogin()"> <!-- 로그인  -->
-				</li>
-			</ul>
-		</div>
+				<div>
+					<c:set var="title"><spring:message code="comUatUia.loginForm.idSave"/></c:set>
+					<input type="checkbox" name="checkId" class="check2" onclick="javascript:saveid(document.loginForm);" id="checkId">
+					<span class="small">&nbsp;${title}</span>
+				</div>
+				<br>
+				<div>
+					<input type="button" class="btn_login btn btn-primary btn-user" value="<spring:message code="comUatUia.loginForm.login"/>" onclick="actionLogin()"> <!-- 로그인  -->
+				</div>
+			</div>
+		</fieldset>
 		
-		<div class="login_input" style="display: none">
-			<ul>
-				<li>
-					<label for="password"><spring:message code="comUatUia.loginForm.pw"/></label><!-- 비밀번호 -->
-					<input type="password" name="pwd" id="" maxlength="20" title="${title} ${inputTxt}" placeholder="<spring:message code="comUatUia.loginForm.pw"/>"><!-- 비밀번호 -->
-				</li>
-				<li>
-					<input type="button" class="btn_login" value="<spring:message code="comUatUia.loginForm.login.gpki"/>" onclick="actionLogin()"><!-- 인증서로그인 -->
-				</li>
-				<li>
-					<ul class="btn_idpw" >
-						<li><a href="#" onclick="fnShowLogin(0);"><spring:message code="comUatUia.loginForm.login.normal"/></a></li><!-- 일반로그인 -->
-					</ul>
-					<ul class="btn_idpw" >
-						<li>※ <spring:message code="comUatUia.loginForm.gpki.descrption"/></li>
-					</ul>
-				</li>
-			</ul>
-			
-		</div>
-	</fieldset>
-	
-	<input name="userSe" type="hidden" value="GNR"/>
-	<input name="j_username" type="hidden"/>
+		<input name="userSe" type="hidden" value="GNR"/>
+		<input name="j_username" type="hidden"/>
 	</form>
 </div>
 
@@ -243,8 +247,6 @@ function fnShowLogin(stat) {
 </div>
 </form>
 <!-- login영역 //-->
-
-
 
 </body>
 </html>

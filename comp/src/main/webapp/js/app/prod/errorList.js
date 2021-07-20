@@ -4,6 +4,7 @@ var dataSource = {
 	},
 	contentType: 'application/json'
 };
+
 var errorGrid = new tui.Grid({
 	el: document.getElementById('errorGrid'),
 	data: dataSource,

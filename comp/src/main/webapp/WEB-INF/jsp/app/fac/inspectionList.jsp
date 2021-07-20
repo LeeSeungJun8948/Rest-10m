@@ -4,9 +4,18 @@
 <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
-	<div>
-	<h1 class="h3 mb-4 text-gray-700">설비 점검내역 조회</h1>
-	</div>
+	<form id="searchCheck" name="searchCheck" method="post"
+		action="inspectionExcel.do">
+		<div class="row">
+			<div class="col-md-8">
+				<h1 class="h3 mb-4 text-gray-700">설비 점검내역 조회</h1>
+			</div>
+			<div class="col-md-4 mb-4" align="right">
+					<input type="submit" class="btn btn-primary" id="btnExcel"
+						value="엑셀">
+				</div>
+		</div>
+	</form>
 	<div id="grid"></div>
 <script type="text/javascript">
 const dataSource = {

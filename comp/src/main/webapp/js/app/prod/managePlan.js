@@ -31,10 +31,10 @@ const grid = new tui.Grid({
 		}
 	}, {
 		header: '주문번호',
-		name: 'orderNo'
+		name: 'orderNo',
 	}, {
 		header: '납기일자',
-		name: 'outDate'
+		name: 'outDate',
 	}, {
 		header: '주문량',
 		name: 'orderCount',
@@ -83,7 +83,6 @@ const grid = new tui.Grid({
 	}
 	]
 });
-grid.setLanguage('ko');
 
 // 초기화 버튼
 $("#btnReset").click(function() {

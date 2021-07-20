@@ -27,7 +27,7 @@ $("#btnRowInsert").on("click", function(){
 	}else{
 		$.ajax({
 			type : "get",
-			url : "ajax/maxProcessCode.do",
+			url : contextPath + "/ajax/maxProcessCode.do",
 			dataType : "json",
 			async : false,
 			success : function(data) {

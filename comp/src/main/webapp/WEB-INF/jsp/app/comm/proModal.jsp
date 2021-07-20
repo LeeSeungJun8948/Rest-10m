@@ -38,7 +38,7 @@
 				var pdataSource = {
 					api : {
 						readData : {
-							url : 'ajax/getCompList.do',
+							url : contextPath +'/ajax/getCompList.do',
 							method : 'GET'
 						},
 					},
