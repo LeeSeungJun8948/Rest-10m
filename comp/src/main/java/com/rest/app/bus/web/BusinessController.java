@@ -10,7 +10,6 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,13 +49,6 @@ public class BusinessController {
 		return "bus/busList.page";
 	}
 
-//	@RequestMapping("/ajax/busList.do")
-//	@ResponseBody
-//	public List<OrdersVO> ajaxGetBus(Model model) {
-//		// TODO Auto-generated method stub
-//		return dao.getBus();
-//	}
-
 	@RequestMapping("/ajax/busList.do")
 	@ResponseBody
 	public Map<String, Object> busList(@RequestBody Map<String, Object> param) {
@@ -67,36 +59,36 @@ public class BusinessController {
 		data.put("data", datas);
 		return data;
 	}
-	
-	//주문관리참조조회-엑셀
+
+	// 주문관리참조조회-엑셀
 	@RequestMapping("/bus/view/busListExcel.do")
 	public ModelAndView busListExcel(@RequestParam Map<String, Object> param)
-			throws IllegalAccessException,InvocationTargetException, NoSuchMethodException {
+			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		System.out.println("=================");
-		HashMap<String, Object>map = new HashMap<String, Object>();
-		HashMap<String, Object>headerMap = new HashMap<String, Object>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> headerMap = new HashMap<String, Object>();
 		List<OrdersVO> list = dao.getBus(param);
 		List<Map<String, String>> data = new ArrayList<>();
-		for(OrdersVO vo: list) {
+		for (OrdersVO vo : list) {
 			data.add(BeanUtils.describe(vo));
 		}
-		headerMap.put("orderState","진행구분");
-		headerMap.put("inDate","접수일자" );
-		headerMap.put("outDate","납기일자" );
-		headerMap.put("compName","업체명");
-		headerMap.put("orderNo","주문번호" );
-		headerMap.put("productCode","제품코드" );
-		headerMap.put("productName","제품명" );
-		headerMap.put("stdId","규격" );
-		headerMap.put("unitId","단위" );
-		headerMap.put("orderCount","주문량" );
-		headerMap.put("outCount","출고량" );
-		headerMap.put("notCount","미납품량" );
-		headerMap.put("comments","비고" );
+		headerMap.put("orderState", "진행구분");
+		headerMap.put("inDate", "접수일자");
+		headerMap.put("outDate", "납기일자");
+		headerMap.put("compName", "업체명");
+		headerMap.put("orderNo", "주문번호");
+		headerMap.put("productCode", "제품코드");
+		headerMap.put("productName", "제품명");
+		headerMap.put("stdId", "규격");
+		headerMap.put("unitId", "단위");
+		headerMap.put("orderCount", "주문량");
+		headerMap.put("outCount", "출고량");
+		headerMap.put("notCount", "미납품량");
+		headerMap.put("comments", "비고");
 		map.put("headerMap", headerMap);
 		map.put("filename", "excel_error");
 		map.put("datas", data);
-		return new ModelAndView("commonExcelView",map);
+		return new ModelAndView("commonExcelView", map);
 	}
 
 	@RequestMapping("/bus/mng/exportForm.do") // 출고관리페이지
@@ -215,7 +207,7 @@ public class BusinessController {
 		return data;
 	}
 
-	//제품 lot CUD
+	// 제품 lot CUD
 	@RequestMapping("/ajax/saveExportLot.do")
 	@ResponseBody
 	public Map<String, Object> saveExportLot(@RequestBody ExportLotGridData gridData) {
@@ -254,96 +246,93 @@ public class BusinessController {
 		data.put("data", datas);
 		return data;
 	}
-	
-	//제품재고조회-엑셀
-		@RequestMapping("/bus/view/productInventoryExcel.do")
-		public ModelAndView productInventoryExcel(@RequestParam Map<String, Object> param)
-				throws IllegalAccessException,InvocationTargetException, NoSuchMethodException {
-			System.out.println("=================");
-			HashMap<String, Object>map = new HashMap<String, Object>();
-			HashMap<String, Object>headerMap = new HashMap<String, Object>();
-			List<OrdersVO> list = dao.getBus(param);
-			List<Map<String, String>> data = new ArrayList<>();
-			for(OrdersVO vo: list) {
-				data.add(BeanUtils.describe(vo));
-			}
-			headerMap.put("productCode","제품코드");
-			headerMap.put("productName","제품명" );
-			headerMap.put("stdId","규격" );
-			headerMap.put("unitId","단위");
-			headerMap.put("productLot","제품Lot" );
-			headerMap.put("productCount","재고량" );
-			headerMap.put("productState","제품상태" );
-			map.put("headerMap", headerMap);
-			map.put("filename", "excel_error");
-			map.put("datas", data);
-			return new ModelAndView("commonExcelView",map);
+
+	// 제품재고조회-엑셀
+	@RequestMapping("/bus/view/productInventoryExcel.do")
+	public ModelAndView productInventoryExcel(@RequestParam Map<String, Object> param)
+			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		System.out.println("=================");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> headerMap = new HashMap<String, Object>();
+		List<OrdersVO> list = dao.getBus(param);
+		List<Map<String, String>> data = new ArrayList<>();
+		for (OrdersVO vo : list) {
+			data.add(BeanUtils.describe(vo));
 		}
+		headerMap.put("productCode", "제품코드");
+		headerMap.put("productName", "제품명");
+		headerMap.put("stdId", "규격");
+		headerMap.put("unitId", "단위");
+		headerMap.put("productLot", "제품Lot");
+		headerMap.put("productCount", "재고량");
+		headerMap.put("productState", "제품상태");
+		map.put("headerMap", headerMap);
+		map.put("filename", "excel_error");
+		map.put("datas", data);
+		return new ModelAndView("commonExcelView", map);
+	}
 
 	// 출고관리 - 조회 모달
-		@RequestMapping("/modal/prodLotModal.do")
-		public String getProdLotModal() {
-			return "app/bus/prodLotModal";
-		}
+	@RequestMapping("/modal/prodLotModal.do")
+	public String getProdLotModal() {
+		return "app/bus/prodLotModal";
+	}
 
-		// 모달 출고검색
-		@RequestMapping("/ajax/searchProdLot.do")
-		@ResponseBody
-		public Map<String, Object> searchProdLotModal(@RequestBody Map<String, Object> param) {
-			System.out.println(param + "----------------");
-			Map<String, Object> data = new HashMap<String, Object>();
-			Map<String, Object> datas = new HashMap<String, Object>();
-			datas.put("contents", dao.searchProdLotModal(param));
-			data.put("result", true);
-			data.put("data", datas);
-			return data;
-		}
-		
-		@RequestMapping("/bus/view/viewExport.do") // 출고조회페이지
-		public String viewExport(Model model) {
-			return "bus/viewExport.page";
-		}
-		
-		@RequestMapping("/ajax/viewExportSearch.do")//출고조회 그리드
-		@ResponseBody
-		public Map<String, Object> viewExportSearch(@RequestBody Map<String, Object> param) {
-			Map<String, Object> datas = new HashMap<String, Object>();
-			Map<String, Object> data = new HashMap<String, Object>();
-			data.put("result", true);
-			datas.put("contents", dao.viewExportSearch(param));
-			data.put("data", datas);
-			return data;
-		}
-		
-		//출고조회-엑셀
-				@RequestMapping("/bus/view/exportExcel.do")
-				public ModelAndView exportExcel(@RequestParam Map<String, Object> param)
-						throws IllegalAccessException,InvocationTargetException, NoSuchMethodException {
-					System.out.println("=================");
-					HashMap<String, Object>map = new HashMap<String, Object>();
-					HashMap<String, Object>headerMap = new HashMap<String, Object>();
-					List<OrdersVO> list = dao.getBus(param);
-					List<Map<String, String>> data = new ArrayList<>();
-					for(OrdersVO vo: list) {
-						data.add(BeanUtils.describe(vo));
-					}
-					headerMap.put("exportDate","출고일자");
-					headerMap.put("productCode","제품코드");
-					headerMap.put("productName","제품명" );
-					headerMap.put("stdId","규격" );
-					headerMap.put("unitId","단위");
-					headerMap.put("orderNo","주문번호" );
-					headerMap.put("companyName","업체명" );
-					headerMap.put("orderCount","주문량" );
-					headerMap.put("exportCount","출고량" );
-					headerMap.put("price","금액" );
-					headerMap.put("comments","비고" );
-					map.put("headerMap", headerMap);
-					map.put("filename", "excel_error");
-					map.put("datas", data);
-					return new ModelAndView("commonExcelView",map);
-				}
+	// 모달 출고검색
+	@RequestMapping("/ajax/searchProdLot.do")
+	@ResponseBody
+	public Map<String, Object> searchProdLotModal(@RequestBody Map<String, Object> param) {
+		System.out.println(param + "----------------");
+		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> datas = new HashMap<String, Object>();
+		datas.put("contents", dao.searchProdLotModal(param));
+		data.put("result", true);
+		data.put("data", datas);
+		return data;
+	}
 
+	@RequestMapping("/bus/view/viewExport.do") // 출고조회페이지
+	public String viewExport(Model model) {
+		return "bus/viewExport.page";
+	}
 
+	@RequestMapping("/ajax/viewExportSearch.do") // 출고조회 그리드
+	@ResponseBody
+	public Map<String, Object> viewExportSearch(@RequestBody Map<String, Object> param) {
+		Map<String, Object> datas = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", dao.viewExportSearch(param));
+		data.put("data", datas);
+		return data;
+	}
 
+	// 출고조회-엑셀
+	@RequestMapping("/bus/view/exportExcel.do")
+	public ModelAndView exportExcel(@RequestParam Map<String, Object> param)
+			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		System.out.println("=================");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> headerMap = new HashMap<String, Object>();
+		List<OrdersVO> list = dao.getBus(param);
+		List<Map<String, String>> data = new ArrayList<>();
+		for (OrdersVO vo : list) {
+			data.add(BeanUtils.describe(vo));
+		}
+		headerMap.put("exportDate", "출고일자");
+		headerMap.put("productCode", "제품코드");
+		headerMap.put("productName", "제품명");
+		headerMap.put("stdId", "규격");
+		headerMap.put("unitId", "단위");
+		headerMap.put("orderNo", "주문번호");
+		headerMap.put("companyName", "업체명");
+		headerMap.put("orderCount", "주문량");
+		headerMap.put("exportCount", "출고량");
+		headerMap.put("price", "금액");
+		headerMap.put("comments", "비고");
+		map.put("headerMap", headerMap);
+		map.put("filename", "excel_error");
+		map.put("datas", data);
+		return new ModelAndView("commonExcelView", map);
+	}
 }

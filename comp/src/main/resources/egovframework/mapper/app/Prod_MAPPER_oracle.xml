@@ -133,7 +133,7 @@
 			d.product_lot, d.pror_code, d.product_code, d.pror_count, d.pror_count work_count, d.comments, d.deplan_idx, 
 			TO_CHAR(d.work_date, 'YYYY-MM-DD') work_date, p.product_name,
 			(SELECT plan_code FROM detailplan WHERE deplan_idx = d.deplan_idx) plan_code,
-			(SELECT plan_name FROM plan, detailplan dp 	WHERE dp.deplan_idx = d.deplan_idx
+			(SELECT plan.plan_name FROM plan, detailplan dp WHERE dp.deplan_idx = d.deplan_idx
 				AND dp.plan_code = plan.plan_code) plan_name,
 			(SELECT plan_count FROM detailplan WHERE deplan_idx = d.deplan_idx) plan_count, 
 			(SELECT plan_count - pror_count FROM detailplan WHERE deplan_idx = d.deplan_idx) unpror_count,

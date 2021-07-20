@@ -50,7 +50,7 @@
 									<td>아이디</td>
 									<td><input type="text" class="form-control" id="id" name="id"></td>
 									<td>비밀번호</td>
-									<td><input type="text" class="form-control" id="pwd" name="pwd"></td>
+									<td><input type="password" class="form-control" id="pwd" name="pwd"></td>
 									<td>부서코드</td>
 									<td><input type="text"  class="form-control" id="dept" name="dept"></td>
 								</tr>

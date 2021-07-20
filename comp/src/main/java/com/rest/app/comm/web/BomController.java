@@ -180,8 +180,8 @@ public class BomController {
 	// 소요자재 삭제
 	@PostMapping(value = "/ajax/deleteBom.do")
 	@ResponseBody
-	public Map deleteBom(@RequestBody BomGridData bomGirdData) {
-		Map<String, Object> data = new HashMap();
+	public Map<String, Object> deleteBom(@RequestBody BomGridData bomGirdData) {
+		Map<String, Object> data = new HashMap<String, Object>();
 		for (int i = 0; i < bomGirdData.deletedRows.size(); i++) {
 			dao.deleteBom(bomGirdData.deletedRows.get(i));
 		}
@@ -269,8 +269,8 @@ public class BomController {
 	// 공정삭제
 	@PostMapping(value = "/ajax/deleteProcess.do")
 	@ResponseBody
-	public Map deleteProcess(@RequestBody ProGridData ProGridData) {
-		Map<String, Object> data = new HashMap();
+	public Map<String, Object> deleteProcess(@RequestBody ProGridData ProGridData) {
+		Map<String, Object> data = new HashMap<String, Object>();
 		for (int i = 0; i < ProGridData.deletedRows.size(); i++) {
 			pdao.deleteProcess(ProGridData.deletedRows.get(i));
 		}
