@@ -38,10 +38,10 @@
 			<h1>제품BOM관리</h1>
 		</div>
 		<div class="col-4" align="right">
-			<form action="deleteBom.do" id="deletefrm" name="deletefrm"
+			<form action="deleteSelectBom.do" id="deletefrm" name="deletefrm"
 				method="post">
 				<input id="productCode2" name="productCode2" type="hidden"
-					value="productCode">
+					value="${info.productCode }">
 			</form>
 			<button type="reset" class="btn-two blue small">초기화</button>
 			<button type="button" class="btn-two blue small" id="btnInsert">저장</button>
@@ -89,9 +89,7 @@
 				class="form-control w-50" aria-label="Small"
 				aria-describedby="inputGroup-sizing-sm">
 		</div>
-		<div class="input-group-prepend col-4">
-			<button type="button" class="input-group-text" id="btnMaterial">자재소요관리</button>
-		</div>
+	
 
 	</div>
 	<div class="flex row" style="margin-top: 40px">
@@ -99,6 +97,7 @@
 			<h3>제품 소요량 관리</h3>
 		</div>
 		<div class="col-4" align="right">
+			<button type="button" class="btn-two blue small" id="btnMaterial">조회</button>
 			<button type="button" class="btn-two blue small" id="btnRowInsert">행추가</button>
 			<button type="button" class="btn-two blue small" id="btnDelete">삭제</button>
 		</div>
@@ -233,7 +232,7 @@
 					$.ajax({
 						type:"get",
 						data: {"materialCode" : materialCode},
-						url: "ajax/getMatName.do",
+						url: contextPath +"/ajax/getMatName.do",
 						datatype:"json",
 						async: false,
 						success : function(data){
@@ -253,7 +252,7 @@
 					$.ajax({
 						type:"get",
 						data: {"processCode" : processCode},
-						url: "ajax/getProName.do",
+						url: contextPath +"/ajax/getProName.do",
 						datatype:"json",
 						async: false,
 						success : function(data){

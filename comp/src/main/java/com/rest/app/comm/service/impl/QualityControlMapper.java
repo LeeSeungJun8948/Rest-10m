@@ -37,6 +37,6 @@ public interface QualityControlMapper {
 	public int maxProductCode();
 	
 	//excel
-	List<QualityControlVO> getProductList(Map<String, Object> param);
+	List<QualityControlVO> productExcel(Map<String, Object> param);
 		
 }

@@ -144,7 +144,7 @@
 			return;
 		} else{
 			grid.readData(1, paramPara , true);
-			alert("성공")
+			
 		}
 		
 	})

@@ -84,11 +84,18 @@
  		 where bom_no = #{bomNo}
 	</update>
 	
-	<!-- Bom delete -->
+	<!-- Bom 단건 삭제 delete -->
 	<delete id="deleteBom" parameterType="com.rest.app.comm.vo.BomVO">
 		delete from bom
 		where bom_no=#{bomNo}
 	</delete>
+	
+	<!-- 제품에대한 Bom 전체 삭제 -->
+	<delete id="deleteSelectBom" parameterType="com.rest.app.comm.vo.BomVO">
+		delete from bom
+		where product_code = #{productCode}
+	</delete>
+	
 	<!--  -->
 	<select id="getNewProductCode" resultType="com.rest.app.comm.vo.BomVO">
 		select product_code
