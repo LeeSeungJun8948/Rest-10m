@@ -183,7 +183,11 @@ function save(){
 		$('#frm').submit();	
  		}
 	}
+function excel(){
 
+		$('#excelFrm').submit();	
+ 	
+	}
 
 // 모달
 

@@ -82,6 +82,13 @@ public class BomServiceImpl implements BomService {
 		// TODO Auto-generated method stub
 		return mapper.matCodeList(vo);
 	}
+
+	@Override
+	public int deleteSelectBom(BomVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.deleteSelectBom(vo);
+		
+	}
 	
 	
 }

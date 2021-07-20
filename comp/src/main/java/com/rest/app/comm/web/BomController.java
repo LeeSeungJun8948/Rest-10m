@@ -191,9 +191,9 @@ public class BomController {
 	}
 
 	// Bom 삭제
-	@RequestMapping("/comm/deleteBom.do")
-	public String deleteBom(BomVO vo) {
-		dao.deleteBom(vo);
+	@RequestMapping("/comm/deleteSelectBom.do")
+	public String deleteSelectBom(BomVO vo) {
+		dao.deleteSelectBom(vo);
 		return "comm/bomList.page";
 	}
 

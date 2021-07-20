@@ -242,8 +242,9 @@
 	<select id="searchProdLotModal"
 		parameterType="com.rest.app.bus.vo.ExportLotVO"
 		resultType="com.rest.app.bus.vo.ExportLotVO">
-		SELECT product_lot
+		SELECT product_lot,product_code
 		FROM storage
+		order by product_code
 		<where>
 			<if test="keyword != null and keyword !=''">
 				 ${searchCondition} like '%'||#{keyword}||'%'

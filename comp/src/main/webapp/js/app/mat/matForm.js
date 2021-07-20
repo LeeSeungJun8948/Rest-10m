@@ -30,14 +30,16 @@ const listGrid = new tui.Grid({
 		validation: {
            	required: true
 		},
-		sortable: true
+		sortable: true,
+		className: 'white'
 	}, {
 		header : '자재명',
 		name : 'materialName',
 		validation: {
            	required: true
        	},
-		sortable: true
+		sortable: true,
+		className: 'white'
 	}, {
 		header : '구분',
 		name : 'matNm',
@@ -46,7 +48,8 @@ const listGrid = new tui.Grid({
 		validation: {
 			required: true
 		},
-		sortable: true
+		sortable: true,
+		className: 'white'
 	}, {
 		header : '자재구분',
 		name : 'matNo',
