@@ -15,7 +15,7 @@
 
 <div class="row">
 	<div class="col-md-8">
-		<h1 class="h3 mb-4 text-gray-700">발주 조회</h1>
+		<h1 class="h3 mb-4 text-gray-700">발주 관리</h1>
 	</div>
 	<div class="col-md-4 mb-4" align="right" role="form">
 		<button type="button" class="btn btn-primary" id="btnRead">조회</button>
