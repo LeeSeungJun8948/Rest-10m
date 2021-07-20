@@ -18,6 +18,11 @@
 				bodyHeight: 360,
 				columns: [
 					{
+						header: '제품코드',
+						name: 'productCode',
+						align: 'center'
+					},
+					{
 						header: '제품Lot',
 						name: 'productLot',
 						align: 'center'

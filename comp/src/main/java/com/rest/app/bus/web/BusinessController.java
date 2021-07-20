@@ -262,7 +262,7 @@ public class BusinessController {
 			System.out.println("=================");
 			HashMap<String, Object>map = new HashMap<String, Object>();
 			HashMap<String, Object>headerMap = new HashMap<String, Object>();
-			List<OrdersVO> list = dao.getBus(param);
+			List<OrdersVO> list = dao.getProInventory(param);
 			List<Map<String, String>> data = new ArrayList<>();
 			for(OrdersVO vo: list) {
 				data.add(BeanUtils.describe(vo));
@@ -322,9 +322,9 @@ public class BusinessController {
 					System.out.println("=================");
 					HashMap<String, Object>map = new HashMap<String, Object>();
 					HashMap<String, Object>headerMap = new HashMap<String, Object>();
-					List<ExportVO> list = dao.searchExport(param);
+					List<DetailExportVO> list = dao.viewExportSearch(param);
 					List<Map<String, String>> data = new ArrayList<>();
-					for(ExportVO vo: list) {
+					for(DetailExportVO vo: list) {
 						data.add(BeanUtils.describe(vo));
 					}
 					headerMap.put("exportDate","출고일자");
