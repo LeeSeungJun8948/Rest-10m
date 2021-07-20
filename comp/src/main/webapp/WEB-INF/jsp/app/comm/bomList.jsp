@@ -103,11 +103,10 @@
 		</div>
 	</div>
 	<div id="bomgrid" style="z-index: 10" class="bgird"></div>
-	<div id="bomgrid" style="z-index: 10" class="bgird"></div>
 	<script type="text/javascript">
     	const dataSource = {
 			api : {
-				readData : {url: contextPath +'/ajax/getInfoProduct.do', method:'get'},
+				readData : {url: contextPath +'/ajax/getInfoProduct.do', method:'get', initParams: { productCode: '${info.productCode }'}},
 				createData : { url: contextPath + '/ajax/insertBom.do', method: 'POST'},
 				updateData : { url: contextPath + '/ajax/updateBom.do', method: 'PUT' },
 				deleteData : { url: contextPath + '/ajax/deleteBom.do', method: 'POST' },
@@ -182,7 +181,7 @@
 			
 			
 			$("#btnMaterial").on("click",function() {
-				var param = $('#searchCheck').serializeObject();
+		
 				grid.readData(1, param, true);
 			})  
 			
