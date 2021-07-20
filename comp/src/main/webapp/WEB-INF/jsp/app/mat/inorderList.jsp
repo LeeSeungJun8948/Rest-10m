@@ -8,6 +8,9 @@
 #companyCode, #materialCode{
 	background-color: #FFFFFF;
 }
+
+
+
 </style>
 
 <div class="row">
