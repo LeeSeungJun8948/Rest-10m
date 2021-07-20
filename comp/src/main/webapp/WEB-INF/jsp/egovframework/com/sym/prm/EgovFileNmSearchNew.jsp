@@ -34,6 +34,7 @@
 <script type="text/javascript" src="<c:url value='/js/egovframework/com/cmm/jquery-1.4.2.min.js' />" ></script>
 <script language="javascript1.2"  type="text/javaScript">
 <!--
+-->
 /* ********************************************************
  * 페이징 처리 함수
  ******************************************************** */
@@ -59,10 +60,9 @@ function choisProgramListSearch(vFileNm) {
 	//eval("opener.document.all."+opener.document.all.tmp_SearchElementName.value).value = vFileNm;
 	//opener.document.menuManageVO.progrmFileNm.value = vFileNm;
 	var parentFrom = parent.document.getElementsByTagName('form');
-	parentFrom[1].progrmFileNm.value = vFileNm;
+	parentFrom[0].progrmFileNm.value = vFileNm;
     parent.$('.ui-dialog-content').dialog('close');
 }
--->
 </script>
 </head>
 <body>
