@@ -38,7 +38,7 @@
 </head>
 <body>
 	<div id="wrapper">
-		<ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+		<ul class="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
 			<tiles:insertAttribute name="left" />
 		</ul>
 		<div id="content-wrapper" class="d-flex flex-column">

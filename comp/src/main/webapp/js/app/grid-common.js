@@ -1,5 +1,5 @@
 var Grid = tui.Grid;
-	Grid.setLanguage('ko'); 
+Grid.setLanguage('ko'); 
 	
 Grid.applyTheme('default', {
 	cell: {
