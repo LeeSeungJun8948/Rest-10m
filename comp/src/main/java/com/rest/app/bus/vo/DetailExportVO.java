@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class DetailExportVO {
 
+	int lotIdx;//순번
 	int deIdx;//순번
 	String exportCode;//출고번호
 	int orderNo;//주문번호
@@ -23,4 +24,5 @@ public class DetailExportVO {
 	String companyName;
 	int dayCount;
 	int orderCount;
+	int productCount;//재고량
 }

@@ -9,8 +9,7 @@
 			<option value="employeeName">이름</option>
 		</select> 
 		<input id="searchKeyword" name="searchKeyword" type="text" title="검색어" class="form-control mr-2" style="width: 200px; margin-left: 10px">
-		<button type="button" class="btn-two blue small" id="btnSearch">
-			<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+		<button type="button" class="btn-two blue small" id="btnSearch">조회
 		</button>
 	</div>	
 	<div class="mb-4" align="right">
@@ -50,7 +49,7 @@
 									<td>아이디</td>
 									<td><input type="text" class="form-control" id="id" name="id"></td>
 									<td>비밀번호</td>
-									<td><input type="text" class="form-control" id="pwd" name="pwd"></td>
+									<td><input type="password" class="form-control" id="pwd" name="pwd"></td>
 									<td>부서코드</td>
 									<td><input type="text"  class="form-control" id="dept" name="dept"></td>
 								</tr>

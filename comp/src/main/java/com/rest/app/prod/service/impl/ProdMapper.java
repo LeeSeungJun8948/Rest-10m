@@ -28,7 +28,7 @@ public interface ProdMapper {
 	int updateDetailPlan(DetailPlanVO vo);
 	int deleteDetailPlan(int deplanIdx);
 	int deleteAllDetailPlan(String planCode);
-	List<PlanVO> getUnfinPlans(Map<String, Object> param);
+	List<DetailPlanVO> getUnfinPlans(Map<String, Object> param);
 	List<ProrderVO> searchProrder(Map<String, Object> param);
 	List<DetailProrderVO> getDetailProrder(Map<String, Object> param);
 	List<DetailProrderVO> viewProrderSearch(Map<String, Object> param);
@@ -60,4 +60,5 @@ public interface ProdMapper {
 	List<SelectListVO> ajaxProdSearchModal(SelectListVO vo);
 	List<SelectListVO> ajaxCompSearchModal(SelectListVO vo);
 	List<ErrorListVO> getErrorList(ErrorListVO vo);
+	WorkVO getStorage(String productLot);
 }

@@ -172,14 +172,18 @@ $('#btnSave').on('click', function() {
 					grid.setColumnValues('prorCode', prorCode);
 				}
 			});
-			grid.request('modifyData');
+			grid.request('modifyData', {
+				showConfirm: false
+			});
 			grid.on('successResponse', function(ev){
 				var text = JSON.parse(ev.xhr.responseText);
 				if(text.check == 'save') {
 					grid.readData(1, {prorCode: $('#prorCode').val()}, true);
 				}
 			});
-			gridInput.request('modifyData');
+			gridInput.request('modifyData', {
+				showConfirm: false
+			});
 			gridInput.clear();
 			toastr.success("저장되었습니다.");
 		}

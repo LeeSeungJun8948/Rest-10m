@@ -69,12 +69,13 @@
              		 on (b.material_code = m.material_code)) a
     		on (p.process_code=a.process_code)
     	 where a.product_code=#{productCode}
+    	 order by material_code
 	</select>
 	
 	<!--Bom Insert -->
 	<insert id="insertBom" parameterType="com.rest.app.comm.vo.BomVO">
 		insert into bom
-		values (#{productCode},#{materialCode},#{processCode},#{kg},#{etc},bom_seq.nextval)
+		values (#{productCode},#{materialCode},#{processCode},#{kg},#{etc},bom_seq.nextval,#{idx})
 	</insert>
 	
 	<!-- Bom Update -->
@@ -84,11 +85,18 @@
  		 where bom_no = #{bomNo}
 	</update>
 	
-	<!-- Bom delete -->
+	<!-- Bom 단건 삭제 delete -->
 	<delete id="deleteBom" parameterType="com.rest.app.comm.vo.BomVO">
 		delete from bom
 		where bom_no=#{bomNo}
 	</delete>
+	
+	<!-- 제품에대한 Bom 전체 삭제 -->
+	<delete id="deleteSelectBom" parameterType="com.rest.app.comm.vo.BomVO">
+		delete from bom
+		where product_code = #{productCode}
+	</delete>
+	
 	<!--  -->
 	<select id="getNewProductCode" resultType="com.rest.app.comm.vo.BomVO">
 		select product_code

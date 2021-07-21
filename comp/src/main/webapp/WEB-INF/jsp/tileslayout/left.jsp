@@ -4,7 +4,7 @@
 	<div class="sidebar-brand-icon rotate-n-15">
 		<i class="fas fa-building"></i>
 	</div>
-	<div class="sidebar-brand-text mx-3">MES</div>
+	<div class="sidebar-brand-text mx-3">Rest-10m</div>
 </a>
 
 <hr class="sidebar-divider my-0">
@@ -43,5 +43,3 @@ $(document).ready(function() {
 });
 </script>
 <hr class="sidebar-divider">
-
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/app/left.js"></script> --%>

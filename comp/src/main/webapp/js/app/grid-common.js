@@ -1,5 +1,5 @@
 var Grid = tui.Grid;
-Grid.setLanguage('ko'); 
+Grid.setLanguage('ko');
 	
 Grid.applyTheme('default', {
 	cell: {
@@ -9,9 +9,6 @@ Grid.applyTheme('default', {
 	    },
 		header: {
 			background: '#e8f4fd'
-		},
-		evenRow: {
-			
 		}
 	}
 });

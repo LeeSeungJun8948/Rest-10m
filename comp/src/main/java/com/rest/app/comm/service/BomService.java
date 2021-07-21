@@ -29,8 +29,11 @@ public interface BomService {
 	//Bom update
 	public int updateBom(BomVO vo);
 	
-	//Bom delete
+	//Bom delete bom 단건삭제
 	public int deleteBom(BomVO vo);
+	
+	//Bom delete 제품에 대한 bom 전체삭제
+	public int deleteSelectBom(BomVO vo);
 	
 	//자재번호 입력시 자재명 출력
 	public BomVO getMatName(BomVO vo);

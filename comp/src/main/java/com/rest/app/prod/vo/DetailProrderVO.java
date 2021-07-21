@@ -9,6 +9,7 @@ public class DetailProrderVO {
 	String productName;
 	String planDate;
 	String planCode;
+	String planName;
 	String prorName;
 	int productCode;
 	String workDate;
