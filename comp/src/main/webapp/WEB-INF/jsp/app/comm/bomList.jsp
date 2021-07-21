@@ -97,7 +97,7 @@
 			<h3>제품 소요량 관리</h3>
 		</div>
 		<div class="col-4" align="right">
-			<button type="button" class="btn-two blue small" id="btnMaterial">조회</button>
+			
 			<button type="button" class="btn-two blue small" id="btnRowInsert">행추가</button>
 			<button type="button" class="btn-two blue small" id="btnDelete">삭제</button>
 		</div>
@@ -154,6 +154,11 @@
 				{
 					header :'공정명',
 					name : 'processName'
+				},
+				{
+					header :'공정순서',
+					name : 'idx',
+					editor:'text'
 				},
 				{
 					header :'비고',
