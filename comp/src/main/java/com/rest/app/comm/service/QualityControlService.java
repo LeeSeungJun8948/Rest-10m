@@ -38,6 +38,6 @@ public interface QualityControlService {
 	public int maxProductCode();
 	
 	//excel
-	List<QualityControlVO> getProductList(Map<String, Object> param);
+	List<QualityControlVO> productExcel(Map<String, Object> param);
 	
 }

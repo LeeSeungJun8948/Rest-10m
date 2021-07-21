@@ -15,6 +15,7 @@ public class BomVO extends ComDefaultVO{
 	int materialCode;
 	String materialName;
 	int bomNo;
+	int idx;
 	String kg;
 	String etc;
 	

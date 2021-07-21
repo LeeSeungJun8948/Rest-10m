@@ -86,15 +86,16 @@ public class QcController {
 		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			HashMap<String, Object> headerMap = new HashMap<String, Object>();
-			List<QualityControlVO> list = dao.getProductList(param);
+			List<QualityControlVO> list = dao.productExcel(param);
 			List<Map<String, String>> data = new ArrayList<>();
 			for (QualityControlVO vo : list) {
 				data.add(BeanUtils.describe(vo));
 		}
 			headerMap.put("productCode", "제품코드");
 			headerMap.put("productName", "제품명");
+			headerMap.put("unitNo", "단위관리");
 			headerMap.put("empCode", "사원코드");
-			headerMap.put("employeeName", "제품코드");
+			headerMap.put("employeeName", "담당사원");
 			map.put("headerMap", headerMap);
 			map.put("filename", "excel_pro");
 			map.put("datas", data);
