@@ -490,8 +490,7 @@
 			(SELECT unit_no FROM product WHERE product_code = w.product_code) 
 				AS unit_no
 		FROM work w right join facilities
-		ON w.fac_code = facilities.fac_code --AND TRUNC(work.work_date) = TRUNC(sysdate)
-		WHERE w.end_time IS NULL
+		ON w.fac_code = facilities.fac_code --AND TRUNC(work.work_date) = TRUNC(sysdate) AND w.end_time IS NULL
 		
 	</select>
 	<!-- 모달 -->
