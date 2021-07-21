@@ -21,15 +21,18 @@
 					header : '발주코드',
 					name : 'inorderCode',
 					align: 'center',
-					width: 80
+					width: 80,
+					sortable: true
 				}, {
 					header : '발주일자',
 					name : 'inorderDate',
-					align: 'center'
+					align: 'center',
+					sortable: true
 				}, {
 					header : '발주자재',
 					name : 'materialName',
-					align: 'center'
+					align: 'center',
+					sortable: true
 				}, {
 					header : '발주업체',
 					name : 'companyName',
@@ -46,7 +49,8 @@
 				}, {
 					header : '미입고량',
 					name : 'yetCount',
-					align: 'right'
+					align: 'right',
+					sortable: true
 				}, {
 					header : '비고',
 					name : 'comments',

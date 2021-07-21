@@ -7,13 +7,20 @@ $( document ).ready(function() {
 	stockGrid.readData(1, param, true);
 });
 
-
 toastr.options = {
 	closeButton: true,
 	showDuration: "500",
 	 positionClass: "toast-top-center"
  };
 toastr.info('재고 열 더블클릭 혹은 선택 후 작성');
+
+$("#ckExceptZeroStock").change(function(){
+	if($("#ckExceptZeroStock").is(":checked")){
+	    $('#exceptZeroStock').val($('#ckExceptZeroStock').val());
+	}else{
+	    $('#exceptZeroStock').val('');
+	}
+});
 
 // 재고 리스트 
 const stockDataSource = {
@@ -35,17 +42,20 @@ const stockGrid = new tui.Grid({
 			header : '자재코드',
 			name : 'materialCode',
 			width : 80,
-			align: 'center'
+			align: 'center',
+			sortable: true
 		},
 		{
 			header : '자재명',
 			name : 'materialName',
-			align: 'center'
+			align: 'center',
+			sortable: true
 		},
 		{
 			header : 'LOT',
 			name : 'lotNo',
-			align: 'center'
+			align: 'center',
+			sortable: true
 		}, {
 			header : '입고단가',
 			name : 'unitPrice',
@@ -53,11 +63,13 @@ const stockGrid = new tui.Grid({
 			width : 100,
 			formatter({value}) {
       			return format(value);
-    		}
+    		},
+			sortable: true
 		}, {
 			header : '정산일자',
 			name : 'ioDate',
-			align: 'center'
+			align: 'center',
+			sortable: true
 		}, {
 			header : '현재고',
 			name : 'lotStock',
@@ -95,22 +107,26 @@ const adjustGrid = new tui.Grid({
 		{
 			header : '정산코드',
 			name : 'ioCode',
-			align: 'center'
+			align: 'center',
+			sortable: true
 		},
 		{
 			header : '자재코드',
 			name : 'materialCode',
-			align: 'center'
+			align: 'center',
+			sortable: true
 		},
 		{
 			header : '자재명',
 			name : 'materialName',
-			align: 'center'
+			align: 'center',
+			sortable: true
 		},
 		{
 			header : 'LOT',
 			name : 'lotNo',
-			align: 'center'
+			align: 'center',
+			sortable: true
 		}, {
 			header : '단가',
 			name : 'unitPrice',
@@ -201,12 +217,6 @@ function format(value){
 
 (function($) {
 	$('#btnRead').on('click',  function(){
-		if($('#ckExceptZeroStock').is(":checked")){
-			$('#exceptZeroStock').val($('#ckExceptZeroStock').val());
-		}else{
-			$('#exceptZeroStock').val('');
-		}
-
 		var param = $('#searchFrm').serializeObject();
 		console.log(param)
 		stockGrid.readData(1, param, true);
@@ -323,17 +333,9 @@ $("#btnSave").on("click", function(){
 		
 		adjustGrid.request('modifyData');
 		
-		(function($) {
-			if($('#ckExceptZeroStock').is(":checked")){
-				$('#exceptZeroStock').val($('#ckExceptZeroStock').val());
-			}else{
-				$('#exceptZeroStock').val('');
-			}
-		
-			var param = $('#searchFrm').serializeObject();
-			console.log(param)
-			stockGrid.readData(1, param, true);
-		})(jQuery);
+		var param = $('#searchFrm').serializeObject();
+		console.log(param)
+		stockGrid.readData(1, param, true);
 
 		adjustGrid.resetData([],{});
 		alert('작성완료');
