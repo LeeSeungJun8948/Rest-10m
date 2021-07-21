@@ -25,8 +25,8 @@
 					<td>
 						<select class="custom-select" name="workDiv" id="workDiv">
 							<option value="1" selected>배합공정</option>
-							<option value="4">검사공정</option>
-							<option value="5">포장공정</option>
+							<option value="2">검사공정</option>
+							<option value="3">포장공정</option>
 						</select>
 					</td>
 					<th>작업자<span style="color: red">*</span></th>

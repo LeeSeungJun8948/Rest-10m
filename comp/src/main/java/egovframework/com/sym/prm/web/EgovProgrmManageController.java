@@ -92,7 +92,7 @@ public class EgovProgrmManageController {
     	vo.setProgrmFileNm(tmp_progrmNm);
     	ProgrmManageVO progrmManageVO = progrmManageService.selectProgrm(vo);
         model.addAttribute("progrmManageVO", progrmManageVO);
-        return "egovframework/com/sym/prm/EgovProgramListDetailSelectUpdt";
+        return "egovframework/com/sym/prm/EgovProgramListDetailSelectUpdt.tiles";
     }
 
     /**

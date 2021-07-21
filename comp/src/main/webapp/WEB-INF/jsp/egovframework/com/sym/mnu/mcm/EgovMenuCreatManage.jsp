@@ -29,8 +29,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 <title><spring:message code="comSymMnuMpm.menuCreatManage.title" /></title><!-- 메뉴생성관리 -->
-<link href="<c:url value="/css/egovframework/com/com.css"/>" rel="stylesheet" type="text/css">
-<link href="<c:url value="/css/egovframework/com/button.css"/>" rel="stylesheet" type="text/css">
 <script  language="javascript1.2" type="text/javaScript">
 <!--
 /* ********************************************************
@@ -69,32 +67,30 @@ function selectMenuCreat(vAuthorCode) {
 }
 <c:if test="${!empty resultMsg}">alert("${resultMsg}");</c:if>
 -->
+$(document).ready(function() {
+	  $(".pagination").find("li").find("a").addClass("btn-two blue mini");
+	});
 </script>
 </head>
 <body>
 <noscript class="noScriptTitle"><spring:message code="common.noScriptTitle.msg" /></noscript><!-- 자바스크립트를 지원하지 않는 브라우저에서는 일부 기능을 사용하실 수 없습니다. -->
 
 <div class="board">
-	<h1><spring:message code="comSymMnuMpm.menuCreatManage.pageTop.title" /></h1><!-- 메뉴생성관리 -->
+	<h3 class="mb-4"><spring:message code="comSymMnuMpm.menuCreatManage.pageTop.title" /></h3><!-- 메뉴생성관리 -->
 
 	<form name="menuCreatManageForm" action ="<c:url value='/sym/mnu/mcm/EgovMenuCreatManageSelect.do'/>" method="post">
 	<input name="checkedMenuNoForDel" type="hidden" />
 	<input name="authorCode"          type="hidden" />
 	<input name="pageIndex" type="hidden" value="<c:out value='${searchVO.pageIndex}'/>"/>
 
-	<div class="search_box" title="<spring:message code="common.searchCondition.msg" />"><!-- 이 레이아웃은 하단 정보를 대한 검색 정보로 구성되어 있습니다. -->
-		<ul>
-			<li>
-				<label for=""><spring:message code="comSymMnuMpm.menuCreatManage.authCode" /> : </label><!-- 보안설정대상ID -->
-				<input class="s_input2 vat" name="searchKeyword" type="text"  value='<c:out value="${searchVO.searchKeyword}"/>'  size="80" maxlength="60" title="검색조건" />
-				
-				<input class="s_btn" type="submit" value='<spring:message code="button.inquire" />' title='<spring:message code="button.inquire" />' onclick="selectMenuCreatManageList(); return false;" />
-			</li>
-		</ul>
+	<div class="search_box mb-4" title="<spring:message code="common.searchCondition.msg" />"><!-- 이 레이아웃은 하단 정보를 대한 검색 정보로 구성되어 있습니다. -->
+		<div class="form-inline form-group">
+			<label class="mr-4" for=""><spring:message code="comSymMnuMpm.menuCreatManage.authCode" /> : </label><!-- 보안설정대상ID -->
+			<input class="form-control mr-4" name="searchKeyword" type="text"  value='<c:out value="${searchVO.searchKeyword}"/>'  size="40" maxlength="60" title="검색조건" />
+			<input class="btn-two blue small" type="submit" value='<spring:message code="button.inquire" />' title='<spring:message code="button.inquire" />' onclick="selectMenuCreatManageList(); return false;" />
 	</div>
 
-	<table class="board_list">
-		<caption></caption>
+	<table class="table">
 		<colgroup>
 			<col style="width:20%" />
 			<col style="width:20%" />
@@ -131,9 +127,7 @@ function selectMenuCreat(vAuthorCode) {
 
 	<!-- paging navigation -->
 	<div class="pagination">
-		<ul>
-			<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="linkPage"/>
-		</ul>
+		<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="linkPage"/>
 	</div>
 	
 	<input type="hidden" name="req_menuNo">

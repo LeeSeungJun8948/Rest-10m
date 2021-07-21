@@ -28,7 +28,6 @@
 <head>
 <title>${pageTitle} <spring:message code="title.list" /></title><!-- 권한롤관리 목록 -->
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/com/com.css' />">
 <script type="text/javaScript" language="javascript" defer="defer">
 function fncCheckAll() {
     var checkField = document.listForm.delYn;
@@ -158,30 +157,30 @@ function press() {
     	fncSelectAuthorRoleList();
     }
 }
+$(document).ready(function() {
+	  $(".pagination").find("li").find("a").addClass("btn-two blue mini");
+	});
 </script>
 </head>
 <body>
 <div class="board">
 <form:form name="listForm" action="${pageContext.request.contextPath}/sec/ram/EgovAuthorRoleList.do" method="post">
-	<h1>${pageTitle} <spring:message code="title.list" /></h1><!-- 권한롤관리 목록 -->
+	<h3 class="mb-4">${pageTitle} <spring:message code="title.list" /></h3><!-- 권한롤관리 목록 -->
 	<!-- 검색영역 -->
 	<div class="search_box" title="<spring:message code="common.searchCondition.msg" />">
-		<ul>
-			<li><div style="line-height:4px;">&nbsp;</div><div><spring:message code="comCopSecRam.regist.authorCode" /> : </div></li>
+		<div class="form-inline form-group">
+			<strong class="mr-4"><div style="line-height:4px;">&nbsp;</div><div><spring:message code="comCopSecRam.regist.authorCode" /> : </div></strong>
 			<!-- 검색키워드 및 조회버튼 -->
-			<li>
-				<input class="s_input" name="searchKeyword" type="text"  size="35" title="<spring:message code="title.search" /> <spring:message code="input.input" />" value='<c:out value="${searchVO.searchKeyword}"/>'  maxlength="155" >
-				<input type="submit" class="s_btn" value="<spring:message code="button.inquire" />" title="<spring:message code="title.inquire" /> <spring:message code="input.button" />" />
-				<input type="button" class="s_btn" value="<spring:message code="button.list" />" onClick="fncSelectAuthorList()" title="<spring:message code="button.list" /> <spring:message code="input.button" />" />
-				<input type="button" class="s_btn" value="<spring:message code="button.create" />" onClick="fncAddAuthorRoleInsert()" title="<spring:message code="button.create" /> <spring:message code="input.button" />" />
-			</li>
-		</ul>
+			<input class="form-control mr-4" name="searchKeyword" type="text"  size="35" title="<spring:message code="title.search" /> <spring:message code="input.input" />" value='<c:out value="${searchVO.searchKeyword}"/>'  maxlength="155" >
+			<input type="submit" class="btn-two small blue mr-4" value="<spring:message code="button.inquire" />" title="<spring:message code="title.inquire" /> <spring:message code="input.button" />" />
+			<input type="button" class="btn-two small blue mr-4" value="<spring:message code="button.list" />" onClick="fncSelectAuthorList()" title="<spring:message code="button.list" /> <spring:message code="input.button" />" />
+			<input type="button" class="btn-two small blue mr-4" value="<spring:message code="button.create" />" onClick="fncAddAuthorRoleInsert()" title="<spring:message code="button.create" /> <spring:message code="input.button" />" />
+		</div>
 	</div>
 	
 	
 	<!-- 목록영역 -->
-	<table class="board_list" summary="<spring:message code="common.summary.list" arguments="${pageTitle}" />">
-	<caption>${pageTitle} <spring:message code="title.list" /></caption>
+	<table class="table" summary="<spring:message code="common.summary.list" arguments="${pageTitle}" />">
 	<colgroup>
 		<col style="width: 3%;">
 		<col style="width: 12%;">
@@ -233,7 +232,7 @@ function press() {
 	<c:if test="${!empty authorRoleManageVO.pageIndex }">
 		<!-- paging navigation -->
 		<div class="pagination">
-			<ul><ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="linkPage"/></ul>
+			<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="linkPage"/></ul>
 		</div>
 	</c:if>
 	
