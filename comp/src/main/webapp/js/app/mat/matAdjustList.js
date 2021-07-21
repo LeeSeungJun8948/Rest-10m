@@ -23,23 +23,27 @@ const adjustGrid = new tui.Grid({
 			header : '정산코드',
 			name : 'ioCode',
 			align: 'center',
-			width : 120
+			width : 120,
+			sortable: true
 		},
 		{
 			header : '자재코드',
 			name : 'materialCode',
 			align: 'center',
-			width : 120
+			width : 120,
+			sortable: true
 		},
 		{
 			header : '자재명',
 			name : 'materialName',
-			align: 'center'
+			align: 'center',
+			sortable: true
 		},
 		{
 			header : 'LOT',
 			name : 'lotNo',
-			align: 'center'
+			align: 'center',
+			sortable: true
 		}, {
 			header : '단가',
 			name : 'unitPrice',
@@ -75,7 +79,8 @@ const adjustGrid = new tui.Grid({
 	                    { text: '', value: '' }
                 	]
 				}
-            }
+            },
+			sortable: true
 		}, {
 			header : '총액',
 			name : 'stock', // 걍 변수이름만 사용한거지 재고가 아니라 총액임
@@ -84,6 +89,7 @@ const adjustGrid = new tui.Grid({
 			formatter({value}) {
       			return format(value);
     		},
+			sortable: true
 		}, {
 			header : '단위',
 			name : 'unitNo',
@@ -104,7 +110,8 @@ const adjustGrid = new tui.Grid({
 			width : 120,
 			validation: {
             	required: true
-          	}
+          	},
+			sortable: true
 		}, {
 			header : '비고',
 			name : 'comments',
