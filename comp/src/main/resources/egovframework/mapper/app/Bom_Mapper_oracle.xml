@@ -69,12 +69,13 @@
              		 on (b.material_code = m.material_code)) a
     		on (p.process_code=a.process_code)
     	 where a.product_code=#{productCode}
+    	 order by material_code
 	</select>
 	
 	<!--Bom Insert -->
 	<insert id="insertBom" parameterType="com.rest.app.comm.vo.BomVO">
 		insert into bom
-		values (#{productCode},#{materialCode},#{processCode},#{kg},#{etc},bom_seq.nextval)
+		values (#{productCode},#{materialCode},#{processCode},#{kg},#{etc},bom_seq.nextval,#{idx})
 	</insert>
 	
 	<!-- Bom Update -->
