@@ -11,8 +11,11 @@ public interface BomService {
 	//제품코드,제품명,규격 리스트
 	public List<BomVO> getProduct(BomVO vo);
 	
-	//Bom 리스트
+	//Bom 리스트(제품)
 	public List<BomVO> getInfoBom(BomVO vo);
+	
+	//Bom 리스트(공정)
+	public List<BomVO> getProInfoBom(BomVO vo);
 	
 	//자재코드,명 리스트
 	public List<BomVO> matCodeList(BomVO vo);

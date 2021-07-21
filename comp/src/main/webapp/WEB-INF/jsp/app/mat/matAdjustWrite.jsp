@@ -63,7 +63,7 @@
 								<input class="form-check-input" type="checkbox" id="ckExceptZeroStock" name="ckExceptZeroStock" value="true">
 								<label class="form-check-label" for="ckExceptZeroStock"> 재고0 제외 </label>
 								
-								<input hidden id="exceptZeroStock" name="exceptZeroStock" type="text">
+								<input type="hidden" id="exceptZeroStock" name="exceptZeroStock" type="text">
 							</div>
 						</td>
 					</tr>

@@ -54,19 +54,29 @@ public class MaterialController {
 
 	@RequestMapping("/comm/matForm.do")
 	public String matForm(Model model) { // 자재 정보 관리 page
-		model.addAttribute("mats", dao.getMatNo());
-		model.addAttribute("units", dao.getUnitNo());
 		return "mat/matForm.page";
+	}
+	
+	@RequestMapping("/ajax/matNo.do")
+	@ResponseBody
+	public List<MaterialVO> ajaxMatNo(Model model) {
+		return dao.getMatNo();
+	}
+	
+	@RequestMapping("/ajax/unitNo.do")
+	@ResponseBody
+	public List<MaterialVO> ajaxUnitNo(Model model) {
+		return dao.getUnitNo();
 	}
 
 	@RequestMapping("/ajax/matList.do")
 	@ResponseBody
-	public Map<String, Object> ajaxMatForm(Model model) { // 자재 요약 리스트 출력
+	public Map<String, Object> ajaxMatForm(Model model, MaterialVO vo) { // 자재 요약 리스트 출력
 		Map<String, Object> datas = new HashMap<>();
 		Map<String, Object> data = new HashMap<>();
 
 		data.put("result", true);
-		datas.put("contents", dao.getMatList());
+		datas.put("contents", dao.getMatList(vo));
 		data.put("data", datas);
 
 		return data;
