@@ -16,6 +16,9 @@ public interface BomMapper {
 	//Bom 리스트
 	public List<BomVO> getInfoBom(BomVO vo);
 	
+	//Bom 리스트(공정)
+	public List<BomVO> getProInfoBom(BomVO vo);
+	
 	//자재코드,명 List
 	public List<BomVO> matCodeList(BomVO vo);
 	
