@@ -1,4 +1,4 @@
-console.log(contextPath);
+// 저장 시 필수항목 입력 확인 메세지
 function test() {
 	if(!checkNull($('#facilitiesName').val())) {
 			toastr.warning('설비명을 입력해주십시오.');
@@ -240,14 +240,15 @@ $( function() {
 function checkNull(value){
 		return value != null && value != '' && value != '[object HTMLInputElement]';
 	}; 
-	
+
+//금액에 , 표시
 function numberWithCommas(x) {
   x = x.replace(/[^0-9]/g,'');   
   x = x.replace(/,/g,'');        
   $("#price").val(x.replace(/\B(?=(\d{3})+(?!\d))/g, ","));  
 }
 
-
+//모달
 var forGrid = false;
 
 $('#btnProcModal').on('click',function(e){
