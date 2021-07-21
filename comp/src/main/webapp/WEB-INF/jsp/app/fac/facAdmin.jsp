@@ -117,7 +117,7 @@
 				style="display: none" onchange="setThumbnail(event);">
 			<button type="button" class="btn-two blue small" id="btnImg">이미지
 				업로드</button>
-			<h3>이미지 미리보기</h3>
+			<h3 class="h3 mb-4 text-gray-700">이미지 미리보기</h3>
 			<div id="imagePreview">
 				<img id="image" />
 			</div>

@@ -395,7 +395,11 @@ public class ProdController {
 	public Map<String, Object> selectDetailProrder(String productLot) {
 		Map<String, Object> data = new HashMap<String, Object>();
 		Map<String, Object> datas = new HashMap<String, Object>();
-		datas.put("contents", svc.selectDetailProrder(productLot));
+		if (svc.getStorage(productLot) != null) {
+			datas.put("contents", svc.getStorage(productLot));
+		} else {
+			datas.put("contents", svc.selectDetailProrder(productLot));
+		}
 		data.put("result", true);
 		data.put("data", datas);
 		return data;

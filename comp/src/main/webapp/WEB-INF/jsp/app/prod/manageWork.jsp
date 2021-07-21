@@ -9,7 +9,7 @@
 		<button id="btnWorkModal" type="button" class="btn-two blue small" data-remote="false" data-toggle="modal" data-target="#workModal">조회</button>
 		<button type="button" class="btn-two blue small" id="btnSave">저장</button>
 		<input type="reset" class="btn-two blue small" id="btnReset" value="초기화">
-		<button type="button" class="btn-two red small" id="btnDel">삭제</button>
+		<button type="button" class="btn-two blue small" id="btnDel">삭제</button>
 	</div>
 	<div>
 		<table class="table">

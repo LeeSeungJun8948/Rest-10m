@@ -13,7 +13,6 @@ const grid = new tui.Grid({
 	dataType:'local',
 	scrollX: false,
 	scrollY: false,
-	rowHeaders: ['checkbox'],
 	columns: [{
 		header: '제품코드',
 		name: 'productCode'

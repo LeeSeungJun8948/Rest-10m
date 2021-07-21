@@ -215,13 +215,13 @@ function fnShowLogin(stat) {
 				<div class="form-inline form-group">
 					<c:set var="title"><spring:message code="comUatUia.loginForm.id"/></c:set>
 					<label for="id"><strong>${title}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					<input class="form-control" type="text" name="id" id="id" maxlength="20" title="${title} ${inputTxt}" placeholder="${title} ${inputTxt}">
+					<input class="form-control" type="text" name="id" id="id" maxlength="20" title="${title} ${inputTxt}" placeholder="${title} ${inputTxt}" onkeypress="if(event.keyCode == 13){ actionLogin(); return; }">
 				</div>
 				<!-- 비밀번호 -->
 				<div class="form-inline form-group">
 					<c:set var="title"><spring:message code="comUatUia.loginForm.pw"/></c:set>
 					<label for="password"><strong>${title}</strong>&nbsp;&nbsp;&nbsp;</label>
-					<input class="form-control" type="password" name="password" id="password" maxlength="20" title="${title} ${inputTxt}" placeholder="${title} ${inputTxt}">
+					<input class="form-control" type="password" name="password" id="password" maxlength="20" title="${title} ${inputTxt}" placeholder="${title} ${inputTxt}" onkeypress="if(event.keyCode == 13){ actionLogin(); return; }">
 				</div>
 				<!-- 아이디 저장 -->
 				<div>
@@ -231,7 +231,8 @@ function fnShowLogin(stat) {
 				</div>
 				<br>
 				<div>
-					<input type="button" class="btn_login btn-two block blue btn-user" value="<spring:message code="comUatUia.loginForm.login"/>" onclick="actionLogin()"> <!-- 로그인  -->
+					<!-- 로그인  -->
+					<input type="button" class="btn_login btn-two block blue btn-user" value="<spring:message code="comUatUia.loginForm.login"/>" onclick="actionLogin()">
 				</div>
 			</div>
 		</fieldset>

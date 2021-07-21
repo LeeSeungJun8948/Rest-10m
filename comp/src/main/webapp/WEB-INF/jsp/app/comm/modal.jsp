@@ -66,7 +66,7 @@
 			<div id=matGrid></div>
 			<div class="modal-footer">
 			<a href="#" rel="modal:close" ><button class="btn-two blue small">닫기</button></a>
-				<button id=btnSearch type="button" onclick="fnSearch()"
+				<button id=btnSearch type="button"
 					class="btn-two blue small">검색</button>
 			</div>
 
@@ -106,8 +106,8 @@
 				matGrid.on('click', function(ev) {
 					var values = matGrid.getRow(ev.rowKey);
 					var prdCode = values.productCode;
-					para = $('#productCode').val(prdCode).serializeObject();
-					paramPara = para;
+				
+					$("#productCode").val(prdCode);
 					console.log(paramPara);
 				
 				});
@@ -135,16 +135,16 @@
 	
 				
 	function fnSearch() {
-		$("#frm").submit();
-	}
+		
+	} 
 	// bom 자재리스트 버튼
 	$('#btnSearch').on('click', function() {
-		if(paramPara == ""){
+		if($("#productCode").val()== ""){
 			alert("행 클릭");
-			return;
+
 		} else{
-			grid.readData(1, paramPara , true);
-			alert("성공")
+			$("#frm").submit();
+			
 		}
 		
 	})

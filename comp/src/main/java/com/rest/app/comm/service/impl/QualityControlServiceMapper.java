@@ -77,9 +77,9 @@ public class QualityControlServiceMapper implements QualityControlService {
 	}
 
 	@Override
-	public List<QualityControlVO> getProductList(Map<String, Object> param) {
+	public List<QualityControlVO> productExcel(Map<String, Object> param) {
 		// TODO Auto-generated method stub
-		return mapper.getProductList(param);
+		return mapper.productExcel(param);
 	}
 	
 

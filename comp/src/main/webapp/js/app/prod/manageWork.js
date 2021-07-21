@@ -1,6 +1,6 @@
 // 작업저장
 $("#btnSave").on("click", function() {
-	if(confirm("저장하시겠습니까?")) {
+	if (confirm("저장하시겠습니까?")) {
 		if (formCheck()) {
 			$.ajax({
 				type: 'POST',
@@ -31,14 +31,14 @@ $("#btnWorkModal").on("click", function() {
 });
 
 // 작업삭제 버튼
-$('#btnDel').on('click', function(){
-	if(confirm("삭제하시겠습니까?")) {
+$('#btnDel').on('click', function() {
+	if (confirm("삭제하시겠습니까?")) {
 		$.ajax({
 			type: 'POST',
 			url: 'deleteWork.do',
-			data: {workCode: $('#workCode').val()},
+			data: { workCode: $('#workCode').val() },
 			dataType: 'json',
-			success: function(){
+			success: function() {
 				toastr.success("삭제되었습니다.");
 				$("#workFrm")[0].reset();
 			}
@@ -76,6 +76,14 @@ function findLot(lot) {
 					$("#productCode").val(data.data.contents.productCode);
 					$("#productLot").val(data.data.contents.productLot);
 					$("#workCount").val(data.data.contents.workCount);
+					var workDiv = data.data.contents.productState;
+					if (checkNull(workDiv)) {
+						if (workDiv == '생산완료') {
+							$("#workDiv").val(4);
+						} else {
+							$("#workDiv").val(5);
+						}
+					}
 				} else {
 					$("#workFrm")[0].reset();
 				}

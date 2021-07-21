@@ -11,8 +11,11 @@ public interface BomService {
 	//제품코드,제품명,규격 리스트
 	public List<BomVO> getProduct(BomVO vo);
 	
-	//Bom 리스트
+	//Bom 리스트(제품)
 	public List<BomVO> getInfoBom(BomVO vo);
+	
+	//Bom 리스트(공정)
+	public List<BomVO> getProInfoBom(BomVO vo);
 	
 	//자재코드,명 리스트
 	public List<BomVO> matCodeList(BomVO vo);
@@ -29,8 +32,11 @@ public interface BomService {
 	//Bom update
 	public int updateBom(BomVO vo);
 	
-	//Bom delete
+	//Bom delete bom 단건삭제
 	public int deleteBom(BomVO vo);
+	
+	//Bom delete 제품에 대한 bom 전체삭제
+	public int deleteSelectBom(BomVO vo);
 	
 	//자재번호 입력시 자재명 출력
 	public BomVO getMatName(BomVO vo);

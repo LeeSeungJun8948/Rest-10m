@@ -59,36 +59,50 @@
 		  from process
 		 where process_code=#{processCode}
  	</select>
-	<!-- BomList -->
+	
+	<!-- BomList(제품) -->
 	<select id="getInfoBom" resultType="com.rest.app.comm.vo.BomVO">
-		select p.process_name, a.*
-  		  from process p
-  		  join ( select b.*,m.material_name
-          		   from bom b
-           	 	   join material m
-             		 on (b.material_code = m.material_code)) a
-    		on (p.process_code=a.process_code)
-    	 where a.product_code=#{productCode}
+	select * 
+	  from bom
+	 where product_code=#{productCode} and process_code IS null
+	 order by material_code
 	</select>
+	
+	<!-- BomList(공정) -->
+	<select id="getProInfoBom" resultType="com.rest.app.comm.vo.BomVO">
+	select * 
+	  from bom
+	 where product_code=#{productCode} and material_code IS null
+	 order by process_code
+	</select>
+	
 	
 	<!--Bom Insert -->
 	<insert id="insertBom" parameterType="com.rest.app.comm.vo.BomVO">
 		insert into bom
-		values (#{productCode},#{materialCode},#{processCode},#{kg},#{etc},bom_seq.nextval)
+		values (#{productCode},#{materialCode},#{processCode},#{kg},#{matEtc},bom_seq.nextval,#{idx},#{materialName},#{processName},#{proEtc})
 	</insert>
 	
 	<!-- Bom Update -->
 	<update id="updateBom" parameterType="com.rest.app.comm.vo.BomVO">
 		update bom
-   		   set material_Code = #{materialCode}, process_code= #{processCode} , kg = #{kg}, etc=#{etc}
+   		   set material_Code = #{materialCode}, process_code= #{processCode} , kg = #{kg}, mat_etc=#{matEtc}, pro_etc=#{proEtc}, 
+   		   material_name= #{materialName} , process_name=#{processName}
  		 where bom_no = #{bomNo}
 	</update>
 	
-	<!-- Bom delete -->
+	<!-- Bom 단건 삭제 delete -->
 	<delete id="deleteBom" parameterType="com.rest.app.comm.vo.BomVO">
 		delete from bom
 		where bom_no=#{bomNo}
 	</delete>
+	
+	<!-- 제품에대한 Bom 전체 삭제 -->
+	<delete id="deleteSelectBom" parameterType="com.rest.app.comm.vo.BomVO">
+		delete from bom
+		where product_code = #{productCode}
+	</delete>
+	
 	<!--  -->
 	<select id="getNewProductCode" resultType="com.rest.app.comm.vo.BomVO">
 		select product_code

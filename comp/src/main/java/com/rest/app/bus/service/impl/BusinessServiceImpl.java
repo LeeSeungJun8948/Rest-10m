@@ -145,7 +145,7 @@ public class BusinessServiceImpl implements BusinessService {
 	}
 
 	@Override
-	public List<ExportLotVO> viewExportSearch(Map<String, Object> param) {
+	public List<DetailExportVO> viewExportSearch(Map<String, Object> param) {
 		return mapper.viewExportSearch(param);
 	}
 }
