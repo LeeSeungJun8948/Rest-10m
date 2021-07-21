@@ -10,5 +10,11 @@ Grid.applyTheme('default', {
 		header: {
 			background: '#e8f4fd'
 		}
+	},
+	row: {
+		hover: {
+			background: '#e8fdfa'
+		}
 	}
 });
+

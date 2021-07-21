@@ -1,3 +1,8 @@
+$(document).ready(function() {	
+	document.getElementById('workDtS').valueAsDate = new Date();
+	document.getElementById('workDtE').valueAsDate = new Date();
+});
+
 var dataSourceWork = {
 	contentType: 'application/json',
 	api: {

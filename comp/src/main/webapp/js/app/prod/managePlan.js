@@ -1,3 +1,9 @@
+$(document).ready(function() {	
+	document.getElementById('planDate').valueAsDate = new Date();
+	document.getElementById('planDtS').valueAsDate = new Date();
+	document.getElementById('planDtE').valueAsDate = new Date();
+});
+
 var dataSource = {
 	contentType: 'application/json',
 	api: {

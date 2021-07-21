@@ -15,13 +15,13 @@
 		<table class="table">
 			<tbody>
 				<tr>
-					<th>제품LOT</th>
+					<th>제품LOT<span style="color: red">*</span></th>
 					<td><input type="text" class="form-control" id="productLot" name="productLot" onchange="findLot(this.value)"></td>
 				</tr>
 				<tr>
-					<th>작업일자</th>
+					<th>작업일자<span style="color: red">*</span></th>
 					<td><input type="date" class="form-control" id="workDate" name="workDate"></td>
-					<th>작업구분</th>
+					<th>작업구분<span style="color: red">*</span></th>
 					<td>
 						<select class="custom-select" name="workDiv" id="workDiv">
 							<option value="1" selected>배합공정</option>
@@ -29,7 +29,7 @@
 							<option value="5">포장공정</option>
 						</select>
 					</td>
-					<th>작업자</th>
+					<th>작업자<span style="color: red">*</span></th>
 					<td>
 						<div class="row">
 							<div class="col-6">
@@ -49,7 +49,7 @@
 					<td><input type="text" class="form-control" id="productName" name="productName" readonly>
 						<input type="hidden" id="productCode" name="productCode">
 					</td>
-					<th>설비명</th>
+					<th>설비명<span style="color: red">*</span></th>
 					<td>
 						<div class="row">
 							<div class="col-6">
@@ -62,7 +62,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th>작업량</th>
+					<th>작업량<span style="color: red">*</span></th>
 					<td><input type="text" class="form-control" id="workCount" name="workCount" value="0"></td>
 					<th>불량량</th>
 					<td><input type="text" class="form-control" id="errorCount" name="errorCount" value="0"></td>

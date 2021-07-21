@@ -30,7 +30,6 @@
 <head>
 <title>${pageTitle} <spring:message code="title.create" /></title><!-- 롤관리 등록 -->
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/com/com.css' />">
 
 <script type="text/javascript" src="<c:url value="/validator.do"/>"></script>
 <validator:javascript formName="roleManage" staticJavascript="false" xhtml="true" cdata="false"/>
@@ -81,14 +80,10 @@ function fncRoleDelete() {
 <form:form commandName="roleManage" method="post" action="${pageContext.request.contextPath}/sec/rmt/EgovRoleInsert.do" onSubmit="fncRoleInsert(document.forms[0]); return false;"> 
 <div class="wTableFrm">
 	<!-- 타이틀 -->
-	<h2>${pageTitle} <spring:message code="title.create" /></h2><!-- 롤관리 등록 -->
+	<h3 class="mb-4">${pageTitle} <spring:message code="title.create" /></h3><!-- 롤관리 등록 -->
 
 	<!-- 등록폼 -->
-	<table class="wTable" summary="<spring:message code="common.summary.list" arguments="${pageTitle}" />">
-	<caption>${pageTitle} <spring:message code="title.create" /></caption>
-	<colgroup>
-		<col style="width: 16%;"><col style="width: ;">
-	</colgroup>
+	<table class="table wTable" summary="<spring:message code="common.summary.list" arguments="${pageTitle}" />">
 	<tbody>
 		<!-- 입력 -->
 		<c:set var="inputTxt"><spring:message code="input.input" /></c:set>
@@ -106,36 +101,36 @@ function fncRoleDelete() {
 		<!-- 롤 명 -->
 		<c:set var="title"><spring:message code="comCopSecRam.regist.rollNm" /></c:set>
 		<tr>
-			<th>${title} <span class="pilsu">*</span></th>
+			<th style="width: 100px;">${title} <span class="pilsu" style="color: red">*</span></th>
 			<td class="left">
-				<form:input path="roleNm" title="${title} ${inputTxt}" size="40" maxlength="50" />
+				<form:input class="form-control" path="roleNm" title="${title} ${inputTxt}" style="width: 20%"/>
 				<div><form:errors path="roleNm" cssClass="error" /></div> 
 			</td>
 		</tr>
 		<!-- 롤 패턴 -->
 		<c:set var="title"><spring:message code="comCopSecRam.regist.rollPtn" /></c:set>
 		<tr>
-			<th>${title} <span class="pilsu">*</span></th>
+			<th>${title} <span class="pilsu" style="color: red">*</span></th>
 			<td class="left">
-				<form:input path="rolePtn" title="${title} ${inputTxt}" size="40" maxlength="200" />
+				<form:input class="form-control" path="rolePtn" title="${title} ${inputTxt}" style="width: 20%"/>
 				<div><form:errors path="rolePtn" cssClass="error" /></div> 
 			</td>
 		</tr>
 		<!-- 롤 설명 -->
 		<c:set var="title"><spring:message code="comCopSecRam.regist.rollDc" /></c:set>
 		<tr>
-			<th>${title} <span class="pilsu">*</span></th>
+			<th>${title} <span class="pilsu" style="color: red">*</span></th>
 			<td class="left">
-			    <form:textarea path="roleDc" title="${title} ${inputTxt}" cols="300" rows="10" />   
+			    <form:textarea class="form-control" path="roleDc" title="${title} ${inputTxt}" rows="8" style="width: 50%"/>   
 				<div><form:errors path="roleDc" cssClass="error" /></div> 
 			</td>
 		</tr>
 		<!-- 롤 타입 -->
 		<c:set var="title"><spring:message code="comCopSecRam.regist.rollType" /></c:set>
 		<tr>
-			<th>${title} <span class="pilsu">*</span></th>
+			<th>${title} <span class="pilsu" style="color: red">*</span></th>
 			<td class="left">
-				<form:select path="roleTyp">
+				<form:select class="custom-select" path="roleTyp" style="width: 10%">
 					<form:options items="${cmmCodeDetailList}" itemValue="code" itemLabel="codeNm"/>
 				</form:select>
 				<div><form:errors path="roleTyp" cssClass="error" /></div> 
@@ -144,9 +139,9 @@ function fncRoleDelete() {
 		<!-- 롤 Sort -->
 		<c:set var="title"><spring:message code="comCopSecRam.regist.rollSort" /></c:set>
 		<tr>
-			<th>${title} <span class="pilsu">*</span></th>
+			<th>${title} <span class="pilsu" style="color: red">*</span></th>
 			<td class="left">
-				<form:input path="roleSort" title="${title} ${inputTxt}" size="40" maxlength="10" />
+				<form:input class="form-control" path="roleSort" title="${title} ${inputTxt}" style="width: 20%"/>
 				<div><form:errors path="roleSort" cssClass="error" /></div> 
 			</td>
 		</tr>
@@ -155,8 +150,8 @@ function fncRoleDelete() {
 
 	<!-- 하단 버튼 -->
 	<div class="btn">
-		<span class="btn_s"><a href="<c:url value='/sec/rmt/EgovRoleList.do'/>"  title="<spring:message code="button.list" />  <spring:message code="input.button" />"><spring:message code="button.list" /></a></span><!-- 목록 -->
-		<input type="submit" class="s_submit" value="<spring:message code="button.create" />" title="<spring:message code="button.create" /> <spring:message code="input.button" />" /><!-- 등록 -->
+		<span class="btn-two blue small mr-4"><a href="<c:url value='/sec/rmt/EgovRoleList.do'/>"  title="<spring:message code="button.list" />  <spring:message code="input.button" />"><spring:message code="button.list" /></a></span><!-- 목록 -->
+		<input type="submit" class="btn-two blue small" value="<spring:message code="button.create" />" title="<spring:message code="button.create" /> <spring:message code="input.button" />" /><!-- 등록 -->
 	</div><div style="clear:both;"></div>
 	
 </div>
