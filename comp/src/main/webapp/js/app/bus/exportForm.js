@@ -46,12 +46,12 @@ const grid = new tui.Grid({
 	}, {
 		header: '출고코드',
 		name: 'exportCode',
-	}, {
+	},{
 		header: '규격',
-		name: 'stdId'
+		name: 'stdNo'
 	}, {
 		header: '단위',
-		name: 'unitId'
+		name: 'unitNo'
 	}, {
 		header: '주문번호',
 		name: 'orderNo',
@@ -117,6 +117,7 @@ const gridInput = new tui.Grid({
 	}, {
 		header: '재고량',
 		name: 'productCount',
+		
 	}, {
 		header: '출고량',
 		name: 'exportCount',
@@ -182,7 +183,9 @@ $('#btnSave').on('click', function() {
 					grid.setColumnValues('exportCode', exportCode);
 				}
 			});
-		
+			grid.request('modifyData', {
+				showConfirm: false
+			});
 			grid.on('successResponse', function(ev) {
 				var text = JSON.parse(ev.xhr.responseText);
 				if (text.check == 'save') {
@@ -190,10 +193,11 @@ $('#btnSave').on('click', function() {
 				}
 			});
 			
+			gridInput.request('modifyData', {
+				showConfirm: false
+			});
+			gridInput.clear();
 			toastr.success("저장되었습니다.");
-			grid.request('modifyData', {
-            showConfirm: false
-         });
 		}
 	}
 });
@@ -218,6 +222,7 @@ $('#btnRead').on('click', function() {
 	console.log(param)
 	grid.readData(1, param, true);
 });
+
 
 /*//제품코드입력창
 $('#productCode').on('click', function(){
@@ -257,6 +262,7 @@ function findProductName(ev) {
 		});
 	}
 }
+
 
 // 더블클릭해서 투입자재 설정
 grid.on('dblclick', (ev) => {
@@ -307,22 +313,16 @@ function countSum() {
 	$('#totalCount').val(sum);
 }
 
+//현재고 자동계산
+function countPro(){
+	var a = grid.getColumnValues('exportCount');
+	var b = grid.getColumnValues('dayCount');
+	var result = parseInt(b)-parseInt(a);
+	grid.getColumnValues('dayCount').value=result;
+}
 function checkNull(value) {
 	return value != null && value != '' && value != '[object HTMLInputElement]';
 }
-//모달
-var forGrid = false;
-$("#companyCode").on("click", function(e) {
-	$('#compContent').load(contextPath + "/modal/compModalForProd.do");
-});
-$("#companyName").on("click", function(e) {
-	$('#compContent').load(contextPath + "/modal/compModalForProd.do");
-});
-$("#btnCompModal").on("click", function(e) {
-	$('#compContent').load(contextPath + "/modal/compModalForProd.do");
-});
-$(document).on('show.bs.modal', '#btnCompModal', function() {
-});
 
 // 초기화
 function resetPage() {

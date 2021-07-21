@@ -30,10 +30,10 @@ const grid = new tui.Grid({
 		name: 'exportCode',
 	}, {
 		header: '규격',
-		name: 'stdId'
+		name: 'stdNo'
 	}, {
 		header: '단위',
-		name: 'unitId'
+		name: 'unitNo'
 	}, {
 		header: '주문번호',
 		name: 'orderNo',

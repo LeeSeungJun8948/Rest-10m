@@ -8,8 +8,8 @@
 		o.order_no,
 		p.product_code,
 		p.product_name,
-		p.std_id,
-		p.unit_id,
+		p.std_no,
+		p.unit_no,
 		o.order_count,
 		o.out_count,
 		o.comments,
@@ -24,7 +24,7 @@
 		AND TO_DATE(#{toDate}, 'YYYY-MM-DD')
 		AND o.product_code=p.product_code
 		<if test="companyCode !=null and companyCode !=''">
-			and o.company_code=#{companyCode}
+			and o.=#{companyCode}
 		</if>
 		<if test="productCode !=null and productCode !=''">
 			and o.product_code=#{productCode}
@@ -46,7 +46,7 @@
 		select distinct
 		p.product_code,
 		p.product_name,
-		p.std_id,p.unit_id,
+		p.std_no,p.unit_no,
 		o.order_no,
 		o.order_count,
 		o.out_count,
@@ -70,13 +70,13 @@
 	<insert id="insertExport"
 		parameterType="com.rest.app.bus.vo.ExportVO">
 		INSERT INTO export
-		values(#{exportCode},#{exportDate},#{companyCode},#{comments})
+		values(#{exportCode},#{exportDate},#{comments})
 
 	</insert>
 	<update id="updateExport"
 		parameterType="com.rest.app.bus.vo.ExportVO">
 		UPDATE export SET
-		export_date=#{exportDate},company_code=#{companyCode},comments=#{comments}
+		export_date=#{exportDate},comments=#{comments}
 		where export_code=#{exportCode}
 
 	</update>
@@ -93,9 +93,7 @@
 		SELECT e.export_code,
 		to_char(e.export_date,'YYYY-MM-DD')
 		export_date,
-		c.company_code,c.company_name,
 		e.comments from export e
-		join company c on e.company_code=c.company_code
 		WHERE export_date
 		BETWEEN TO_DATE(#{fromDate}, 'YYYY-MM-DD')
 		AND TO_DATE(#{toDate},
@@ -110,14 +108,13 @@
 		SELECT d.de_idx,d.export_code, d.order_no, d.product_code,
 		d.price,d.comments,d.export_count,
 		to_char(e.export_date,'YYYY-MM-DD')export_date,
-		p.product_name,p.std_id,p.unit_id,
+		p.product_name,p.std_no,p.unit_no,
 		(select out_count from orders where
 		order_no = d.order_no)out_count,
 		(select order_count - out_count from
 		orders where order_no = d.order_no)
 		unExport_count,
-		(select company_code
-		from orders where order_no = d.order_no)company_code,
+		(select company_code   from orders where order_no = d.order_no)company_code,
 		(select
 		sum(product_count) from storage where product_code =
 		d.product_code
@@ -216,7 +213,7 @@
 		parameterType="com.rest.app.bus.vo.OrdersVO">
 
 		select
-		p.product_code, p.product_name, p.std_id,p.unit_id,
+		p.product_code, p.product_name, p.std_no,p.unit_no,
 		s.product_lot,s.product_count, s.product_state
 		from product p,storage s
 		<where>
@@ -253,11 +250,10 @@
 	</select>
 	
 	<select id="viewExportSearch" resultType="com.rest.app.bus.vo.DetailExportVO">
-		SELECT d.*, TO_CHAR(e.export_date,'YYYY-MM-DD') export_date, e.company_code, p.*, o.order_count,
+		  SELECT d.*, TO_CHAR(e.export_date,'YYYY-MM-DD') export_date, p.*,o.company_code, o.order_count,
 			c.company_name
 		FROM detailexport d, export e, product p, orders o, company c
-		WHERE d.export_code = e.export_code
-		AND d.order_no = o.order_no
+		WHERE d.order_no = o.order_no
 		AND d.product_code = p.product_code
 		AND o.company_code = c.company_code
 		AND export_date
