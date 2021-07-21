@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rest.app.mat.service.impl.MaterialMapper">
 
-	<select id="getMatList" resultType="MatVO">
+	<select id="getMatList" resultType="MatVO" parameterType="MatVO">
 		SELECT m.material_code, 
 				material_name, 
 				mat_no, 
@@ -17,6 +17,9 @@
 				month_stock 
 		FROM material m LEFT JOIN COMTCCMMNDETAILCODE cm
 				ON m.mat_no = cm.code and m.mat_id = cm.code_id
+		<if test='materialName != null and materialName !=""'>
+			WHERE UPPER(material_name) LIKE '%'||UPPER(#{materialName})||'%'
+		</if>
 	</select>
 	
 	<!-- 자재 구분, 단위 들고오기 -->
@@ -32,7 +35,7 @@
         		code_nm AS unit_nm 
 		FROM COMTCCMMNDETAILCODE 
 		WHERE code_id = 'R_UNIT'
-	</select>
+	</select>	
 	
 	<select id="saveMat" parameterType="MatVO" resultType="int">
 		SELECT count(*) 
@@ -55,7 +58,7 @@
 	
 	<!-- 새 자재를 추가할때 code 값 불러오기 -->
 	<select id="newMatCode" resultType="MatVO">
-		SELECT max(material_code) + 1 AS material_code
+		SELECT max(NVL(material_code,0)) + 1 AS material_code
 		FROM material 
 	</select>
 	
@@ -110,7 +113,7 @@
 	</select>
 	
 	<select id="getNewInorderCode" resultType="InorderVO">
-		SELECT max(inorder_code) + 1 
+		SELECT MAX(NVL(inorder_code,0)) + 1 
 				AS inorder_code 
 		FROM inorder
 	</select>
@@ -194,7 +197,7 @@
 	
 	<!-- 입출고 행을 추가할때 code 값 불러오기 -->
 	<select id="getNewIoCode" resultType="InoutVO">
-		SELECT max(io_code) + 1  as io_code FROM inout
+		SELECT max(NVL(io_code,0)) + 1  as io_code FROM inout
 	</select>
 	
 	<!-- 발주번호 입력시 자재정보 불러오기 -->
@@ -395,16 +398,16 @@
 	<!-- 공정 -->
 	<select id="getProcStatus" parameterType="ProcMoveVO" resultType="ProcMoveVO">
 		SELECT work.work_code,
-		        pc.process_code, 
-		        f_find_proc_name(pc.process_code) as process_name,
-		        pc.idx,
+		       	bom.process_code, 
+		        f_find_proc_name(bom.process_code) as process_name,
+		       	bom.idx,
 				work.work_date,
 		        work.start_time,
 		        work.end_time
-		FROM pc LEFT JOIN work 
-		ON pc.process_code = work.process_code AND work.product_lot = #{productLot} 
-		WHERE pc.product_code = #{productCode} 
-		ORDER BY idx
+		FROM bom LEFT JOIN work 
+		ON bom.process_code = work.process_code AND work.product_lot = #{productLot} 
+		WHERE bom.product_code = #{productCode} 
+		ORDER BY bom.idx
 	</select>
 	
 	<!-- 공통코드 -->
@@ -478,11 +481,11 @@
 		      f_find_proc_name(work.process_code) AS proc_name, 
 		      f_find_prod_name(work.product_code) AS prod_name, 
 		      work.product_lot, 
-		      	(SELECT sum(pror_count) FROM detailprorder WHERE product_code = work.product_code and trunc(work_date) = trunc(sysdate)) 
+		      	(SELECT sum(NVL(pror_count,0)) FROM detailprorder WHERE product_code = work.product_code and trunc(work_date) = trunc(sysdate)) 
 		      AS pror_count,
-		     	 (SELECT sum(work_count) FROM work WHERE product_code = work.product_code and trunc(work_date) = trunc(sysdate)) 
+		     	 (SELECT SUM(NVL(work_count,0)) FROM work WHERE product_code = work.product_code and trunc(work_date) = trunc(sysdate) GROUP BY product_lot) 
 		      AS work_count,
-		      	(SELECT sum(error_count) FROM work WHERE product_code = work.product_code and trunc(work_date) = trunc(sysdate)) 
+		      	(SELECT sum(NVL(error_count,0)) FROM work WHERE product_code = work.product_code and trunc(work_date) = trunc(sysdate)) 
 		      AS error_count, 
 		      	(SELECT unit_no FROM product WHERE product_code = work.product_code) 
 		      AS unit_no
@@ -581,7 +584,8 @@
 	        f_find_mat_name(material_code) as material_name,
 	        inorder_count,
 	        nvl((select sum(io_volume) from inout where inorder_code = inorder.inorder_code),0) as in_count,
-	        inorder_count - nvl((select sum(io_volume) from inout where inorder_code = inorder.inorder_code),0) as yet_count
+	        inorder_count - nvl((select sum(io_volume) from inout where inorder_code = inorder.inorder_code),0) as yet_count, 
+	        comments
 		FROM inorder
 		<where>
 			inorder_count - nvl((select sum(io_volume) from inout where inorder_code = inorder.inorder_code),0) > 0 

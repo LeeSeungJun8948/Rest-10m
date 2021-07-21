@@ -167,7 +167,7 @@ function toast(text, title){
 }
 
 function checkNull(value){
-	return value != null && value != '' && value != '[object HTMLInputElement]';
+	return (value != null && value != '' && value != '[object HTMLInputElement]') || value === 0 || value === '0';
 }
 
 function getFormatDate(date){

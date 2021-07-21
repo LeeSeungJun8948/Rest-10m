@@ -133,7 +133,7 @@ $("#btnAdd").on("click", function(){
 
 // 행추가시 insCode, 날짜 추가시 자동입력때 필요한 함수
 function checkNull(value){
-	return value != null && value != '' && value != '[object HTMLInputElement]';
+	return (value != null && value != '' && value != '[object HTMLInputElement]') || value === 0 || value === '0';
 }
 
 function getFormatDate(date){
@@ -202,5 +202,5 @@ grid.on('dblclick', function(ev){
 	}
 });
 function checkNull(value){ 
-		return value != null && value != '' && value != '[object HTMLInputElement]';
+		return (value != null && value != '' && value != '[object HTMLInputElement]') || value === 0 || value === '0';
 	}; 
