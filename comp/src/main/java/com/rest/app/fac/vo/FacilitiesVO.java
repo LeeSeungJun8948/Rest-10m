@@ -22,7 +22,7 @@ public class FacilitiesVO {
 	String volume;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul" )
 	Date productionDate;
 	
 	String empNo;
@@ -30,7 +30,7 @@ public class FacilitiesVO {
 	String facInspection;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul" )
 	Date purchaseDate;
 	
 	String processCode;

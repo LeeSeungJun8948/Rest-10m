@@ -39,7 +39,7 @@
 	</update>
 	
 	<select id="getRepCode" resultType="int">
-    	select max(repair_code) + 1 as repair_code from repair
+    	select nvl(max(repair_code),0) + 1 as repair_code from repair
     </select>
     
     <select id="repairList" resultType="com.rest.app.fac.repair.vo.RepairVO">

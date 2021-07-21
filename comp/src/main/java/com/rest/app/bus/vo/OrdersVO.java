@@ -11,8 +11,8 @@ public class OrdersVO {
 	int productCode;//제품코드
 	String productName;//제품명
 	String productState;//제품상태
-	String stdId;//규격
-	String unitId;//단위
+	String stdNo;//규격
+	String unitNo;//단위
 	String inDate;//접수일자
 	String outDate;//납기일자
 	int companyCode;//업체코드

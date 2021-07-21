@@ -165,6 +165,7 @@ public class BomController {
 	@PutMapping(value = "/ajax/modifyBom.do")
 	@ResponseBody
 	public Map<String, Object> modifyBom(@RequestBody BomGridData bomGridData) {
+		BomVO vo = null;
 		Map<String, Object> data = new HashMap<String, Object>();
 
 		System.out.println(bomGridData.createdRows.size() + "++++++++++++++++");

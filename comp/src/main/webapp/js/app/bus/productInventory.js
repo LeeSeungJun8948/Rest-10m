@@ -27,10 +27,10 @@ const grid = new tui.Grid({
 		name: 'productCount'
 	},{
 		header: '규격',
-		name: 'stdId'
+		name: 'stdNo'
 	}, {
 		header: '단위',
-		name: 'unitId'
+		name: 'unitNo'
 	},
 	], summary: {
 		height: 40,

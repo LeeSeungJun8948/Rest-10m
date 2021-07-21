@@ -1,3 +1,9 @@
+$(document).ready(function() {	
+	document.getElementById('prorDate').valueAsDate = new Date();
+	document.getElementById('prorderDtS').valueAsDate = new Date();
+	document.getElementById('prorderDtE').valueAsDate = new Date();
+});
+
 var dataSource = {
 	contentType: 'application/json',
 	api: {
@@ -101,7 +107,7 @@ const grid = new tui.Grid({
 const gridInput = new tui.Grid({
 	el: document.getElementById('gridInput'),
 	scrollX: false,
-	scrollY: true,
+	scrollY: false,
 	data: dataSourceInput,
 	columns: [ {
 		header: '자재코드',

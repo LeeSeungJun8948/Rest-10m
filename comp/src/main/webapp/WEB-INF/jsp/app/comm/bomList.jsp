@@ -63,7 +63,7 @@
 			</a>
 		</div>
 		<div class="input-group-prepend col-4">
-			<span class="input-group-text">제품명</span> <input id="productName"
+			<span class="input-group-text">제품명</span> <input id="pdn"
 				name="productName" type="text" value="${info.productName }"
 				class="form-control w-50" aria-label="Small"
 				aria-describedby="inputGroup-sizing-sm">
@@ -227,8 +227,9 @@
 				return o;
 			};
 			
-			
-			
+			var newProcessName;
+			newProcessName = $('#pdn').val();
+				
 			$("#btnRowInsert1").on("click", function(){
 				var newProductCode;
 				newProductCode = $("#pdc").val();
@@ -240,7 +241,7 @@
 			});
 				
 			$("#btnRowInsert").on("click", function(){
-				var newProductCode;
+			var newProductCode;
 				newProductCode = $("#pdc").val();
 				<!--
 				$.ajax({
@@ -288,32 +289,39 @@
 			
 			$("#btnInsert").on("click", function(){
 				//grid.request('createData');
+				
 				var param = $('#searchCheck').serializeObject();
 				grid.readData(1, param, true);
+				
 				grid.request('modifyData', {
-					    checkedOnly: true
+					    checkedOnly: true,
+					    showConfirm: false
 				});
-				 grid.on('successResponse' , function(ev){
-				 var text = JSON.parse(ev.xhr.responseText);
+				 	grid.on('successResponse' , function(ev){
+				 	var text = JSON.parse(ev.xhr.responseText);
 					if (text.check == 'save') {
-							grid.readData();
+						grid.readData();
 						}
 				 	});
 				 	toastr.success("저장되었습니다.");
+				
 				var prcParam = $('#searchCheck').serializeObject();	
 				Progrid.readData(1, prcParam, true);
+			
 				Progrid.request('modifyData', {
-					checkedOnly: true
+					   checkedOnly: true,
+					   showConfirm: false
+					
 				});
 				Progrid.on('successResponse' , function(ev){
 					 var pText = JSON.parse(ev.xhr.responseText);
 						if (pText.check == 'save') {
 							Progrid.readData();
 						}
-				});
+					});
 				
-					
 			})
+				
 		  	function setMatCode(ev){
 				var rowKey = ev.rowKey;
 				var materialCode = grid.getValue(rowKey,'materialCode');

@@ -14,7 +14,7 @@ public class RepairVO {
 	String facCode;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul" )
 	Date repairDate;
 	
 	String repairComment;

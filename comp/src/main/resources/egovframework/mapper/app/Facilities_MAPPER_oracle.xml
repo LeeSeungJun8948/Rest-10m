@@ -66,7 +66,7 @@
 			fac_code=#{facCode}
 	</update>
 	<select id="getFacCode" resultType="int">
-    	select max(fac_code) + 1 as fac_code from facilities
+    	select nvl(max(fac_code),0) + 1 as fac_code from facilities
     </select>
     
     <select id="getFacList" resultType="com.rest.app.fac.vo.FacilitiesVO">

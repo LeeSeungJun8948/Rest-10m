@@ -28,7 +28,6 @@
 <head>
 <title>${pageTitle} <spring:message code="title.list" /></title><!-- 롤관리 목록 -->
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/com/com.css' />">
 
 <script type="text/javaScript" language="javascript" defer="defer">
 function fncCheckAll() {
@@ -144,6 +143,10 @@ function press() {
     	fncSelectRoleList('1');
     }
 }
+
+$(document).ready(function() {
+  $(".pagination").find("li").find("a").addClass("btn-two blue mini");
+});
 </script>
 </head>
 <body>
@@ -151,24 +154,21 @@ function press() {
 <noscript class="noScriptTitle"><spring:message code="common.noScriptTitle.msg" /></noscript>
 <form:form name="listForm" action="${pageContext.request.contextPath}/sec/rmt/EgovRoleList.do" method="post">
 <div class="board">
-	<h1>${pageTitle} <spring:message code="title.list" /></h1><!-- 롤관리 목록 -->
+	<h3 class="mb-4">${pageTitle} <spring:message code="title.list" /></h3><!-- 롤관리 목록 -->
 	<!-- 검색영역 -->
 	<div class="search_box" title="<spring:message code="common.searchCondition.msg" />">
-		<ul>
-			<li><div style="line-height:4px;">&nbsp;</div><div><spring:message code="comCopSecRmt.searchCondition.searchKeywordText" /> : </div></li><!-- 롤명-->
+		<div class="form-inline form-group">
+			<strong class="mr-4"><div style="line-height:4px;">&nbsp;</div><div><spring:message code="comCopSecRmt.searchCondition.searchKeywordText" /> : </div><!-- 롤명--></strong>
 			<!-- 검색키워드 및 조회버튼 -->
-			<li>
-				<input class="s_input" name="searchKeyword" type="text"  size="35" title="<spring:message code="title.search" /> <spring:message code="input.input" />" value='<c:out value="${roleManageVO.searchKeyword}"/>'  maxlength="155" >
-				<input type="submit" class="s_btn" value="<spring:message code="button.inquire" />" title="<spring:message code="title.inquire" /> <spring:message code="input.button" />" onClick="fncSelectRoleList(1);return false;"/><!-- 조회 -->
-				<input type="button" class="s_btn" onClick="fncRoleListDelete()" value="<spring:message code="title.delete" />" title="<spring:message code="title.delete" /> <spring:message code="input.button" />" /><!-- 삭제 -->
-				<span class="btn_b"><a href="<c:url value='/sec/rmt/EgovRoleInsertView.do'/>" onClick="javascript:fncAddRoleInsert();"  title="<spring:message code="button.create" /> <spring:message code="input.button" />"><spring:message code="button.create" /></a></span><!-- 등록 -->
-			</li>
-		</ul>
+			<input class="form-control mr-4" name="searchKeyword" type="text"  size="35" title="<spring:message code="title.search" /> <spring:message code="input.input" />" value='<c:out value="${roleManageVO.searchKeyword}"/>'  maxlength="155" >
+			<input type="submit" class="btn-two blue small mr-2" value="<spring:message code="button.inquire" />" title="<spring:message code="title.inquire" /> <spring:message code="input.button" />" onClick="fncSelectRoleList(1);return false;"/><!-- 조회 -->
+			<input type="button" class="btn-two blue small mr-2" onClick="fncRoleListDelete()" value="<spring:message code="title.delete" />" title="<spring:message code="title.delete" /> <spring:message code="input.button" />" /><!-- 삭제 -->
+			<span class="btn-two blue small"><a href="<c:url value='/sec/rmt/EgovRoleInsertView.do'/>" onClick="javascript:fncAddRoleInsert();"  title="<spring:message code="button.create" /> <spring:message code="input.button" />"><spring:message code="button.create" /></a></span><!-- 등록 -->
+		</div>
 	</div>
 
 	<!-- 목록영역 -->
-	<table class="board_list" summary="<spring:message code="common.summary.list" arguments="${pageTitle}" />">
-	<caption>${pageTitle} <spring:message code="title.list" /></caption>
+	<table class="board_list table" summary="<spring:message code="common.summary.list" arguments="${pageTitle}" />">
 	<colgroup>
 		<col style="width: 3%;">
 		<col style="width: 12%;">
@@ -216,7 +216,7 @@ function press() {
 	<c:if test="${!empty roleManageVO.pageIndex }">
 		<!-- paging navigation -->
 		<div class="pagination">
-			<ul><ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="linkPage"/></ul>
+			<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="linkPage"/>
 		</div>
 	</c:if>
 

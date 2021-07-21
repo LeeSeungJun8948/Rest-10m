@@ -30,7 +30,7 @@
 <head>
 <title>${pageTitle} <spring:message code="title.create" /></title><!-- 권한관리 등록 -->
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/com/com.css' />">
+<%-- <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/com/com.css' />"> --%>
 
 <script type="text/javascript" src="<c:url value="/validator.do"/>"></script>
 <validator:javascript formName="authorManage" staticJavascript="false" xhtml="true" cdata="false"/>
@@ -80,32 +80,28 @@ function fncAuthorDelete() {
 <form:form commandName="authorManage" action="${pageContext.request.contextPath}/sec/ram/EgovAuthorInsert.do" method="post" onSubmit="fncAuthorInsert(document.forms[0]); return false;"> 
 <div class="wTableFrm">
 	<!-- 타이틀 -->
-	<h2>${pageTitle} <spring:message code="title.create" /></h2><!-- 권한관리 등록 -->
+	<h3 class="mb-4">${pageTitle} <spring:message code="title.create" /></h3><!-- 권한관리 등록 -->
 
 	<!-- 등록폼 -->
-	<table class="wTable" summary="<spring:message code="common.summary.list" arguments="${pageTitle}" />">
-	<caption>${pageTitle} <spring:message code="title.create" /></caption>
-	<colgroup>
-		<col style="width: 16%;"><col style="width: ;">
-	</colgroup>
+	<table class="wTable table mb-4" summary="<spring:message code="common.summary.list" arguments="${pageTitle}" />">
 	<tbody>
 		<!-- 입력 -->
 		<c:set var="inputTxt"><spring:message code="input.input" /></c:set>
 		<!-- 권한코드 -->
 		<c:set var="title"><spring:message code="comCopSecRam.regist.authorCode" /></c:set>
 		<tr>
-			<th>${title} <span class="pilsu">*</span></th>
+			<th style="width: 100px;">${title} <span class="pilsu" style="color: red">*</span></th>
 			<td class="left">
-			    <form:input path="authorCode" title="${title} ${inputTxt}" size="40" maxlength="30" />
+			    <form:input class="form-control" path="authorCode" title="${title} ${inputTxt}" style="width: 20%"/>
    				<div><form:errors path="authorCode" cssClass="error" /></div> 
 			</td>
 		</tr>
 		<!-- 권한명 -->
 		<c:set var="title"><spring:message code="comCopSecRam.regist.authorNm" /></c:set>
 		<tr>
-			<th>${title} <span class="pilsu">*</span></th>
+			<th>${title} <span class="pilsu" style="color: red">*</span></th>
 			<td class="left">
-			    <form:input path="authorNm" title="${title} ${inputTxt}" size="40" maxlength="60" />
+			    <form:input class="form-control" path="authorNm" title="${title} ${inputTxt}" style="width: 20%"/>
    				<div><form:errors path="authorNm" cssClass="error" /></div> 
 			</td>
 		</tr>
@@ -114,7 +110,7 @@ function fncAuthorDelete() {
 		<tr>
 			<th>${title}</th>
 			<td class="left">
-			    <form:textarea path="authorDc" title="${title} ${inputTxt}" cols="300" rows="10" />   
+			    <form:textarea class="form-control" path="authorDc" title="${title} ${inputTxt}" rows="8" style="width: 50%"/>   
 				<div><form:errors path="authorDc" cssClass="error" /></div> 
 			</td>
 		</tr>
@@ -123,8 +119,8 @@ function fncAuthorDelete() {
 
 	<!-- 하단 버튼 -->
 	<div class="btn">
-		<input type="submit" class="s_submit" value="<spring:message code="button.create" />" title="<spring:message code="button.create" /> <spring:message code="input.button" />" /><!-- 등록 -->
-		<span class="btn_s"><a href="<c:url value='/sec/ram/EgovAuthorList.do' />"  title="<spring:message code="button.list" />  <spring:message code="input.button" />"><spring:message code="button.list" /></a></span><!-- 목록 -->
+		<input type="submit" class="s_submit btn-two blue small mr-4" value="<spring:message code="button.create" />" title="<spring:message code="button.create" /> <spring:message code="input.button" />" /><!-- 등록 -->
+		<span class="btn-two blue small"><a href="<c:url value='/sec/ram/EgovAuthorList.do' />"  title="<spring:message code="button.list" />  <spring:message code="input.button" />"><spring:message code="button.list" /></a></span><!-- 목록 -->
 	</div><div style="clear:both;"></div>
 	
 </div>
