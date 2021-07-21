@@ -10,14 +10,15 @@ public class BomVO extends ComDefaultVO{
 	String unitNo;
 	String companyName;
 	int companyCode;
-	int processCode;
+	String processCode;
 	String processName;
-	int materialCode;
+	String materialCode;
 	String materialName;
 	int bomNo;
 	int idx;
 	String kg;
-	String etc;
+	String matEtc;
+	String proEtc;
 	
 	String matNo;
 	String matNm;

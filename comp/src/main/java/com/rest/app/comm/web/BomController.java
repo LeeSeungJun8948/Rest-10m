@@ -110,7 +110,19 @@ public class BomController {
 		data.put("data", datas);
 		return data;
 	}
-
+	
+	// ajax 제품 필요공정 조회
+	@RequestMapping("/ajax/getProInfoBom.do")
+	@ResponseBody
+	public Map<String, Object> ajaxgetProInfoBom(BomVO vo) {
+		Map<String, Object> datas = new HashMap<String, Object>();
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("result", true);
+		datas.put("contents", dao.getProInfoBom(vo));
+		data.put("data", datas);
+		return data;
+	}
+	
 	// 자재명 불러오기
 	@RequestMapping("/ajax/getMatName.do")
 	@ResponseBody
@@ -153,6 +165,7 @@ public class BomController {
 	@PutMapping(value = "/ajax/modifyBom.do")
 	@ResponseBody
 	public Map<String, Object> modifyBom(@RequestBody BomGridData bomGridData) {
+		BomVO vo = null;
 		Map<String, Object> data = new HashMap<String, Object>();
 
 		System.out.println(bomGridData.createdRows.size() + "++++++++++++++++");
