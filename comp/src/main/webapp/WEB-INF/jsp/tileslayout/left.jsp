@@ -43,5 +43,3 @@ $(document).ready(function() {
 });
 </script>
 <hr class="sidebar-divider">
-
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/app/left.js"></script> --%>

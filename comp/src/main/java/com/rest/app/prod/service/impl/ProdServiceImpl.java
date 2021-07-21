@@ -147,7 +147,7 @@ public class ProdServiceImpl implements ProdService {
 	}
 
 	@Override
-	public List<PlanVO> getUnfinPlans(Map<String, Object> param) {
+	public List<DetailPlanVO> getUnfinPlans(Map<String, Object> param) {
 		return mapper.getUnfinPlans(param);
 	}
 
