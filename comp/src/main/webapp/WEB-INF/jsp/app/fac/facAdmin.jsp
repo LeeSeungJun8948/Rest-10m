@@ -35,7 +35,7 @@
 							value="${max}" readonly class="form-control"></td>
 					</tr>
 					<tr>
-						<th>설비명</th>
+						<th>설비명<span style="color: red">*</span></th>
 						<td><input type="text" id="facilitiesName"
 							name="facilitiesName" class="form-control"></td>
 						<th>모델</th>
@@ -83,7 +83,7 @@
 							onkeyup="numberWithCommas(this.value)" class="form-control"></td>
 					</tr>
 					<tr>
-						<th>정기점검주기(DAY)</th>
+						<th>정기점검주기(DAY)<span style="color: red">*</span></th>
 						<td><input type="text" id="facInspection"
 							name="facInspection" class="form-control"></td>
 						<th>구매일자</th>

@@ -17,7 +17,7 @@
     </delete>
     
     <select id="getInsCode" resultType="com.rest.app.fac.inspection.vo.InspectionVO">
-    	select max(inspection_code) + 1 as inspection_code from inspection
+    	select nvl(max(inspection_code),0) + 1 as inspection_code from inspection
     </select>
     
     <insert id="insertIns" parameterType="com.rest.app.fac.inspection.vo.InspectionVO">
