@@ -106,7 +106,9 @@ $('#btnSave').on('click', function() {
 					grid.setColumnValues('planCode', planCode);
 				}
 			});
-			grid.request('modifyData');
+			grid.request('modifyData', {
+				showConfirm: false
+			});
 			grid.on('successResponse', function(ev) {
 				var text = JSON.parse(ev.xhr.responseText);
 				if (text.check == 'save') {
