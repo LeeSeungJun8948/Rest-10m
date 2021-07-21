@@ -34,6 +34,12 @@ public class BomServiceImpl implements BomService {
 		return mapper.getInfoBom(vo);
 	}
 
+	@Override
+	public List<BomVO> getProInfoBom(BomVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.getProInfoBom(vo);
+	}
+	
 
 	@Override
 	public BomVO getMatName(BomVO vo) {
@@ -89,6 +95,6 @@ public class BomServiceImpl implements BomService {
 		return mapper.deleteSelectBom(vo);
 		
 	}
-	
+
 	
 }

@@ -34,10 +34,10 @@ const grid = new tui.Grid({
 		name : 'productName'
 	}, {
 		header : '규격',
-		name : 'stdId'
+		name : 'stdNo'
 	}, {
 		header : '단위',
-		name : 'unitId'
+		name : 'unitNo'
 	}, {
 		header : '접수일자',
 		name : 'inDate'
@@ -118,7 +118,7 @@ $('#resetBtn').on('click', function(){
 });
 	
 function checkNull(value){
-	return value != null && value != '' && value != '[object HTMLInputElement]';
+	return (value != null && value != '' && value != '[object HTMLInputElement]') || value === 0 || value === '0';
 }
 
 // 초기화

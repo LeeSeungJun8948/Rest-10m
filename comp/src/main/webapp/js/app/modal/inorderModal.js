@@ -41,12 +41,17 @@
 				}, {
 					header : '입고량',
 					name : 'inCount',
-					align: 'right'
+					align: 'right',
+					hidden: true
 				}, {
 					header : '미입고량',
 					name : 'yetCount',
 					align: 'right'
-				}, ]
+				}, {
+					header : '비고',
+					name : 'comments',
+					align: 'center'
+				}]
 			});
 			
 			$("#btnReadModal").on("click", function() {

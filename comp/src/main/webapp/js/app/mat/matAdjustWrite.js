@@ -1,10 +1,12 @@
-/**
 $( document ).ready(function() {	
-	var	nowDate = new Date();
-	document.getElementById('startDate').valueAsDate = new Date(nowDate.setDate(nowDate.getDate() - 7));
-	document.getElementById('endDate').valueAsDate = new Date();
+	$('#ckExceptZeroStock').prop("checked", true);
+	$('#exceptZeroStock').val($('#ckExceptZeroStock').val());
+	
+	var param = $('#searchFrm').serializeObject();
+	console.log(param)
+	stockGrid.readData(1, param, true);
 });
- */
+
 
 toastr.options = {
 	closeButton: true,
@@ -357,7 +359,7 @@ $('#materialCode').on('click', function(){
 });
 
 function checkNull(value){
-	return value != null && value != '' && value != '[object HTMLInputElement]';
+	return (value != null && value != '' && value != '[object HTMLInputElement]') || value === 0 || value === '0';
 }	
 
 function getFormatDate(date){

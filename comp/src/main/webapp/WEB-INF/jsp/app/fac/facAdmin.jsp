@@ -35,7 +35,7 @@
 							value="${max}" readonly class="form-control"></td>
 					</tr>
 					<tr>
-						<th>설비명</th>
+						<th>설비명<span style="color: red">*</span></th>
 						<td><input type="text" id="facilitiesName"
 							name="facilitiesName" class="form-control"></td>
 						<th>모델</th>
@@ -83,7 +83,7 @@
 							onkeyup="numberWithCommas(this.value)" class="form-control"></td>
 					</tr>
 					<tr>
-						<th>정기점검주기(DAY)</th>
+						<th>정기점검주기(DAY)<span style="color: red">*</span></th>
 						<td><input type="text" id="facInspection"
 							name="facInspection" class="form-control"></td>
 						<th>구매일자</th>
@@ -117,7 +117,7 @@
 				style="display: none" onchange="setThumbnail(event);">
 			<button type="button" class="btn-two blue small" id="btnImg">이미지
 				업로드</button>
-			<h3>이미지 미리보기</h3>
+			<h3 class="h3 mb-4 text-gray-700">이미지 미리보기</h3>
 			<div id="imagePreview">
 				<img id="image" />
 			</div>

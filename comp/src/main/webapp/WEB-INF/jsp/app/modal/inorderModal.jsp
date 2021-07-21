@@ -31,7 +31,7 @@
 			</div>
 		</form>
 	
-		<div class="col-md-11 m-3">
+		<div class="col-md-12 m-3">
 			<div id="inorderGrid"></div>
 		</div>
 	</div>

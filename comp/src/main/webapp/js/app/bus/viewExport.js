@@ -30,10 +30,10 @@ const grid = new tui.Grid({
 		name: 'exportCode',
 	}, {
 		header: '규격',
-		name: 'stdId'
+		name: 'stdNo'
 	}, {
 		header: '단위',
-		name: 'unitId'
+		name: 'unitNo'
 	}, {
 		header: '주문번호',
 		name: 'orderNo',
@@ -104,5 +104,5 @@ function resetPage() {
 
 // NULL값 체크, NULL이면 false
 function checkNull(value) {
-	return value != null && value != '' && value != '[object HTMLInputElement]';
+	return (value != null && value != '' && value != '[object HTMLInputElement]') || value === 0 || value === '0';
 }

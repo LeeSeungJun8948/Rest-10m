@@ -175,6 +175,7 @@ public class BusinessController {
 	@RequestMapping("/ajax/saveDetailExport.do")
 	@ResponseBody
 	public Map<String, Object> saveDetailExport(@RequestBody GridData gridData) {
+		System.out.println("-------------------------------");
 		Map<String, Object> data = new HashMap<String, Object>();
 		List<DetailExportVO> cList = gridData.createdRows;
 		List<DetailExportVO> uList = gridData.updatedRows;
