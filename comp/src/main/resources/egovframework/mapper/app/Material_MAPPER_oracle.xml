@@ -483,7 +483,8 @@
 			w.product_lot, 
 		    (SELECT sum(NVL(pror_count,0)) FROM detailprorder WHERE product_code = w.product_code and trunc(work_date) = trunc(sysdate)) 
 				AS pror_count,
-			(SELECT SUM(NVL(work_count,0)) FROM work WHERE product_code = w.product_code and trunc(work_date) = trunc(sysdate)) 
+			(SELECT sum(work_count) FROM work WHERE product_code = w.product_code and trunc(work_date) = trunc(sysdate) 
+                    	AND NVL(end_time,0) in (select max(nvl(end_time,0)) from work group by product_lot)) 
 				AS work_count,
 		    (SELECT sum(NVL(error_count,0)) FROM work WHERE product_code = w.product_code and trunc(work_date) = trunc(sysdate)) 
 				AS error_count, 
