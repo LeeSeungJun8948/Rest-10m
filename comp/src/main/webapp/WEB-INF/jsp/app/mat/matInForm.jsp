@@ -8,6 +8,9 @@
 #companyCode, #materialCode{
 	background-color: #FFFFFF;
 }
+.modal-lg {
+     width: 130%;
+}
 </style>
 <div class="row">
 	<div class="col-md-8">

@@ -13,9 +13,7 @@ import com.rest.app.mat.vo.SelectListVO;
 
 public interface MaterialService {
 	
-	public List<MaterialVO> getMatList(); // 자재 요약 리스트 출력
-	
-	public MaterialVO getMatInfo(MaterialVO vo); // 자재 리스트에서 클릭시 자재 상세 정보 출력
+	public List<MaterialVO> getMatList(MaterialVO vo); // 자재 요약 리스트 출력
 	
 	public List<MaterialVO> getMatNo();
 	
