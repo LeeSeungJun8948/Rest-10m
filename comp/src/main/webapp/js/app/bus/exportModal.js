@@ -23,15 +23,7 @@
 					header: '출고일자',
 					name: 'exportDate',
 					align: 'center'
-				}, {
-					header: '업체코드',
-					name: 'companyCode',
-					align: 'center'
-				}, {
-					header: '고객사',
-					name: 'companyName',
-					align: 'center'
-				},
+				}, 
 				 {
 					header: '특기사항',
 					name: 'comments',
