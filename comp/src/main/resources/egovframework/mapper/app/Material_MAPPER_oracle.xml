@@ -477,21 +477,23 @@
 	
 	<select id="getProdMonitoring" resultType="com.rest.app.mat.vo.ProdVO">
 		
-		SELECT facilities_name,
-			f_find_proc_name(w.process_code) AS proc_name, 
-			f_find_prod_name(w.product_code) AS prod_name, 
-			w.product_lot, 
-		    (SELECT sum(NVL(pror_count,0)) FROM detailprorder WHERE product_code = w.product_code and trunc(work_date) = trunc(sysdate)) 
-				AS pror_count,
-			(SELECT SUM(NVL(work_count,0)) FROM work WHERE product_code = w.product_code and trunc(work_date) = trunc(sysdate)) 
-				AS work_count,
-		    (SELECT sum(NVL(error_count,0)) FROM work WHERE product_code = w.product_code and trunc(work_date) = trunc(sysdate)) 
-				AS error_count, 
-			(SELECT unit_no FROM product WHERE product_code = w.product_code) 
-				AS unit_no
-		FROM work w right join facilities
-		ON w.fac_code = facilities.fac_code --AND TRUNC(work.work_date) = TRUNC(sysdate)
-		WHERE w.end_time IS NULL
+	    SELECT facilities_name,
+	            f_find_proc_name(w.process_code) AS proc_name, 
+	            f_find_prod_name(w.product_code) AS prod_name, 
+	            w.product_lot, 
+	               (SELECT sum(NVL(pror_count,0)) FROM detailprorder WHERE product_code = w.product_code and trunc(work_date) = trunc(sysdate)) 
+	            AS pror_count,
+	               (SELECT sum(work_count)
+	                FROM work 
+	                WHERE product_code = w.product_code and trunc(work_date) = trunc(sysdate) 
+	                    and nvl(end_time,0) in (select max(nvl(end_time,0)) from work group by product_lot))
+	            AS work_count,
+	               (SELECT sum(NVL(error_count,0)) FROM work WHERE product_code = w.product_code and trunc(work_date) = trunc(sysdate)) 
+	            AS error_count, 
+	               (SELECT unit_no FROM product WHERE product_code = w.product_code) 
+	            AS unit_no
+	      FROM facilities left outer join work w
+	      ON facilities.fac_code = w.fac_code and  w.end_time IS NULL
 		
 	</select>
 	<!-- 모달 -->

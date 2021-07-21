@@ -21,11 +21,13 @@
 					header : '제품코드',
 					name : 'productCode',
 					align: 'center',
-					width: 80
+					width: 80,
+					sortable: true
 				}, {
 					header : '제품명',
 					name : 'productName',
-					align: 'center'
+					align: 'center',
+					sortable: true
 				}]
 			});
 			

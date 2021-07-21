@@ -21,15 +21,18 @@
 					header : '자재코드',
 					name : 'materialCode',
 					align: 'center',
-					width: 80
+					width: 80,
+					sortable: true
 				}, {
 					header : '자재명',
 					name : 'materialName',
-					align: 'center'
+					align: 'center',
+					sortable: true
 				}, {
 					header : '구분',
 					name : 'matNm',
-					align: 'center'
+					align: 'center',
+					sortable: true
 				} ]
 			});
 			

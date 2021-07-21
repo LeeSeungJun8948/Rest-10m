@@ -22,31 +22,37 @@ const planGrid = new tui.Grid({
 			header : '생산계획코드',
 			name : 'prorCode',
 			width : 120,
-			align: 'center'
+			align: 'center',
+			sortable: true
 		},
 		{
 			header : '제품코드',
 			name : 'productCode',
 			align: 'center',
 			width : 120,
+			sortable: true
 		},
 		{
 			header : '제품명',
 			name : 'productName',
-			align: 'center'
+			align: 'center',
+			sortable: true
 		}, {
 			header : '제품LOT',
 			name : 'productLot',
-			align: 'center'
+			align: 'center',
+			sortable: true
 
 		}, {
 			header : '지시량',
 			name : 'prorCount',
-			align: 'center'
+			align: 'center',
+			sortable: true
 		}, {
 			header : '작업일자',
 			name : 'workDate',
-			align: 'center'
+			align: 'center',
+			sortable: true
 		}, {
 			header : '고객사',
 			name : 'companyName',

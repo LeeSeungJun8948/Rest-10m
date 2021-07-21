@@ -23,7 +23,8 @@ const grid = new tui.Grid({
 			header : '출고번호',
 			name : 'ioCode',
 			width : 80,
-			align: 'center'
+			align: 'center',
+			sortable: true
 		},
 		{
 			header : '출고일자',
@@ -39,7 +40,8 @@ const grid = new tui.Grid({
 			},
 			validation: {
             	required: true
-          	}
+          	},
+			sortable: true
 		},
 		{
 			header : '자재코드',
@@ -67,12 +69,14 @@ const grid = new tui.Grid({
 				disabled({ value }) {
                 	return !value;
               	}
-			} ]
+			} ],
+			sortable: true
 		}, {
 			header : '자재명',
 			name : 'materialName',
 			width : 150,
-			align: 'center'
+			align: 'center',
+			sortable: true
 		}, {
 			header : '출고량',
 			name : 'ioVolume',
@@ -85,7 +89,8 @@ const grid = new tui.Grid({
 			validation: {
 				dataType: 'number',
             	required: true
-          	}
+          	},
+			sortable: true
 		}, {
 			header : '단위',
 			name : 'unitNo',

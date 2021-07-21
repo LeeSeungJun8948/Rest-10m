@@ -21,11 +21,13 @@
 					header : '업체코드',
 					name : 'companyCode',
 					align: 'center',
-					width: 80
+					width: 80,
+					sortable: true
 				}, {
 					header : '업체명',
 					name : 'companyName',
-					align: 'center'
+					align: 'center',
+					sortable: true
 				}]
 			});
 			

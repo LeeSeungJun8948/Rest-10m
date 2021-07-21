@@ -24,7 +24,8 @@ const grid = new tui.Grid({
 			header : '발주번호',
 			name : 'inorderCode',
 			width : 80,
-			align: 'center'
+			align: 'center',
+			sortable: true
 		}, {
 			header : '발주일자',
 			name : 'inorderDate',
@@ -39,7 +40,8 @@ const grid = new tui.Grid({
 			},
 			validation: {
             	required: true
-          	}
+          	},
+			sortable: true
 		}, {
 			header : '자재코드',
 			name : 'materialCode',
@@ -47,7 +49,8 @@ const grid = new tui.Grid({
 			align: 'center',
 			validation: {
             	required: true
-          	}
+          	},
+			sortable: true
 		}, {
 			header : '자재명',
 			name : 'materialName',
@@ -56,8 +59,9 @@ const grid = new tui.Grid({
 			onAfterChange(ev) {
         		setComp(ev);
       		},
+			sortable: true
 		},{
-			header : '발주코드',
+			header : '업체코드',
 			name : 'companyCode',
 			hidden : true
 		}, {
@@ -104,7 +108,8 @@ const grid = new tui.Grid({
 			align: 'right',
 			formatter({value}) {
       			return format(value);
-    		}
+    		},
+			sortable: true
 		}, {
 			header : '비고',
 			name : 'comments',

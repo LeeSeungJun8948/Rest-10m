@@ -22,15 +22,18 @@
 				columns : [ {
 					header : 'LOT_NO',
 					name : 'lotNo',
-					align: 'center'
+					align: 'center',
+					sortable: true
 				}, {
 					header : '재고',
 					name : 'lotStock',
-					align: 'center'
+					align: 'center',
+					sortable: true
 				}, {
 					header : '입고일자',
 					name : 'ioDate',
-					align: 'center'
+					align: 'center',
+					sortable: true
 				} ]
 			});
 			

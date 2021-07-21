@@ -41,7 +41,7 @@
 						<th>모델</th>
 						<td><input type="text" id="model" name="model"
 							class="form-control"></td>
-						<th>설비규격</th>
+						<th>설비<br/>규격</th>
 						<td><input type="text" id="facSize" name="facSize"
 							class="form-control"></td>
 					</tr>
@@ -78,7 +78,7 @@
 								</div>
 							</div>
 						</td>
-						<th>구매금액</th>
+						<th>구매<br/>금액</th>
 						<td><input type="text" id="price" name="price"
 							onkeyup="numberWithCommas(this.value)" class="form-control"></td>
 					</tr>
@@ -89,7 +89,7 @@
 						<th>구매일자</th>
 						<td><input type="date" id="purchaseDate" name="purchaseDate"
 							class="form-control"></td>
-						<th>공정코드<span style="color: red">*</span></th>
+						<th>공정<br/>코드<span style="color: red">*</span></th>
 						<td>
 							<div class="row">
 								<div class="col-md-3">
