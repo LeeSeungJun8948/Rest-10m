@@ -397,7 +397,7 @@
 	
 	<!-- 공정 -->
 	<select id="getProcStatus" parameterType="ProcMoveVO" resultType="ProcMoveVO">
-		SELECT work.work_code,
+		SELECT distinct work.work_code,
 		       	bom.process_code, 
 		        f_find_proc_name(bom.process_code) as process_name,
 		       	bom.idx,
