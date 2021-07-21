@@ -58,7 +58,7 @@
 	
 	<!-- 새 자재를 추가할때 code 값 불러오기 -->
 	<select id="newMatCode" resultType="MatVO">
-		SELECT max(NVL(material_code,0)) + 1 AS material_code
+		SELECT NVL(MAX(material_code),0) + 1 AS material_code
 		FROM material 
 	</select>
 	
@@ -109,11 +109,11 @@
 				desc
 			</if>
 		</if> 	
-		
+			
 	</select>
 	
 	<select id="getNewInorderCode" resultType="InorderVO">
-		SELECT MAX(NVL(inorder_code,0)) + 1 
+		SELECT NVL(MAX(inorder_code),0) + 1 
 				AS inorder_code 
 		FROM inorder
 	</select>
@@ -197,7 +197,7 @@
 	
 	<!-- 입출고 행을 추가할때 code 값 불러오기 -->
 	<select id="getNewIoCode" resultType="InoutVO">
-		SELECT max(NVL(io_code,0)) + 1  as io_code FROM inout
+		SELECT NVL(max(io_code),0) + 1  as io_code FROM inout
 	</select>
 	
 	<!-- 발주번호 입력시 자재정보 불러오기 -->
