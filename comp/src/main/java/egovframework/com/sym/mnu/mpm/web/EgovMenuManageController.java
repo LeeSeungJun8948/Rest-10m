@@ -116,7 +116,7 @@ public class EgovMenuManageController {
     	MenuManageVO resultVO = menuManageService.selectMenuManage(searchVO);
         model.addAttribute("menuManageVO", resultVO);
 
-        return "egovframework/com/sym/mnu/mpm/EgovMenuDetailSelectUpdt";
+        return "egovframework/com/sym/mnu/mpm/EgovMenuDetailSelectUpdt.tiles";
     }
 
     /**
@@ -240,7 +240,7 @@ public class EgovMenuManageController {
     			}else{
     	        	menuManageService.insertMenuManage(menuManageVO);
             		resultMsg = egovMessageSource.getMessage("success.common.insert");
-    		        sLocationUrl = "forward:/sym/mnu/mpm/EgovMenuManageSelect.do";
+    		        sLocationUrl = "forward:/sym/mnu/mpm/EgovMenuManageSelect.tiles";
     			}
     		}else{
         		resultMsg = egovMessageSource.getMessage("common.isExist.msg");

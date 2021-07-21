@@ -27,8 +27,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 <title><spring:message code="comSymMnuMpm.menuRegist.title"/></title>
-<link href="<c:url value="/css/egovframework/com/com.css"/>" rel="stylesheet" type="text/css">
-<link href="<c:url value="/css/egovframework/com/button.css"/>" rel="stylesheet" type="text/css">
 <script  language="javascript1.2" type="text/javaScript">
 /* ********************************************************
  * 메뉴일괄생성처리 함수

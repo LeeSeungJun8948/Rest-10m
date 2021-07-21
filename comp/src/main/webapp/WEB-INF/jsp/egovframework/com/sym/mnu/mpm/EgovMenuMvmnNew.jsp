@@ -29,8 +29,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 <title><spring:message code="comSymMnuMpm.menuMvmn.title"/></title><!-- 메뉴이동 -->
-<link href="<c:url value="/css/egovframework/com/com.css"/>" rel="stylesheet" type="text/css">
-<link href="<c:url value="/css/egovframework/com/button.css"/>" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 var imgpath = "<c:url value='/images/egovframework/com/cmm/utl/'/>";
 </script>

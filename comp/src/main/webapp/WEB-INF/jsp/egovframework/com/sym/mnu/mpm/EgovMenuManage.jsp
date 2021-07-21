@@ -30,8 +30,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 <title><spring:message code="comSymMnuMpm.menuManage.title"/></title><!-- 메뉴관리리스트 -->
-<link href="<c:url value="/css/egovframework/com/com.css"/>" rel="stylesheet" type="text/css">
-<link href="<c:url value="/css/egovframework/com/button.css"/>" rel="stylesheet" type="text/css">
 <script language="javascript1.2" type="text/javaScript">
 <!--
 /* ********************************************************
@@ -154,6 +152,10 @@ function fMenuManageSelect(){
 }
 <c:if test="${!empty resultMsg}">alert("${resultMsg}");</c:if>
 -->
+
+$(document).ready(function() {
+	  $(".pagination").find("li").find("a").addClass("btn-two blue mini");
+	});
 </script>
 
 </head>
@@ -167,24 +169,19 @@ function fMenuManageSelect(){
 <input name="req_menuNo" type="hidden"  />
 
 <div class="board">
-	<h1><spring:message code="comSymMnuMpm.menuManage.pageTop.title"/></h1><!-- 메뉴관리리스트 -->
+	<h3 class="mb-4"><spring:message code="comSymMnuMpm.menuManage.pageTop.title"/></h3><!-- 메뉴관리리스트 -->
 
-	<div class="search_box" title="<spring:message code="common.searchCondition.msg" />"><!-- 이 레이아웃은 하단 정보를 대한 검색 정보로 구성되어 있습니다. -->
-		<ul>
-			<li>
-				<label for=""><spring:message code="comSymMnuMpm.menuManage.menuNm"/> : </label><!-- 메뉴명 -->
-				<input class="s_input2 vat" name="searchKeyword" type="text" value="${searchVO.searchKeyword }" size="25" title="<spring:message code="title.searchCondition"/>" /><!-- 검색조건 -->
-				
-				<input class="s_btn" type="submit" value='<spring:message code="button.inquire" />' title='<spring:message code="button.inquire" />' onclick="selectMenuManageList(); return false;" /><!-- 조회 -->
-				<span class="btn_b"><a href="<c:url value='/sym/mnu/mpm/EgovMenuRegistInsert.do'/>" onclick="bndeInsertMenuManage(); return false;" title="<spring:message code="button.bulkUpload" />"><spring:message code="button.bulkUpload" /></a></span><!-- 일괄등록 -->
-				<span class="btn_b"><a href="<c:url value='/sym/mnu/mpm/EgovMenuRegistInsert.do'/>" onclick="insertMenuManage(); return false;" title='<spring:message code="button.create" />'><spring:message code="button.create" /></a></span><!-- 등록 -->
-				<span class="btn_b"><a href="#" onclick="fDeleteMenuList(); return false;" title='<spring:message code="button.delete" />'><spring:message code="button.delete" /></a></span><!-- 삭제 -->
-			</li>
-		</ul>
+	<div class="search_box mb-4" title="<spring:message code="common.searchCondition.msg" />"><!-- 이 레이아웃은 하단 정보를 대한 검색 정보로 구성되어 있습니다. -->
+		<div class="form-inline form-group">
+			<label for="" class="mr-4"><spring:message code="comSymMnuMpm.menuManage.menuNm"/> : </label><!-- 메뉴명 -->
+			<input class="form-control mr-4" name="searchKeyword" type="text" value="${searchVO.searchKeyword }" size="25" title="<spring:message code="title.searchCondition"/>" /><!-- 검색조건 -->
+			<input class="btn-two blue small mr-4" type="submit" value='<spring:message code="button.inquire" />' title='<spring:message code="button.inquire" />' onclick="selectMenuManageList(); return false;" /><!-- 조회 -->
+			<span class="btn-two blue small mr-4"><a href="<c:url value='/sym/mnu/mpm/EgovMenuRegistInsert.do'/>" onclick="bndeInsertMenuManage(); return false;" title="<spring:message code="button.bulkUpload" />"><spring:message code="button.bulkUpload" /></a></span><!-- 일괄등록 -->
+			<span class="btn-two blue small mr-4"><a href="<c:url value='/sym/mnu/mpm/EgovMenuRegistInsert.do'/>" onclick="insertMenuManage(); return false;" title='<spring:message code="button.create" />'><spring:message code="button.create" /></a></span><!-- 등록 -->
+			<span class="btn-two blue small mr-4"><a href="#" onclick="fDeleteMenuList(); return false;" title='<spring:message code="button.delete" />'><spring:message code="button.delete" /></a></span><!-- 삭제 -->
 	</div>
 
-	<table class="board_list">
-		<caption></caption>
+	<table class="table mb-4">
 		<colgroup>
 			<col style="width:30px" />
 			<col style="width:100px" />
@@ -224,9 +221,7 @@ function fMenuManageSelect(){
 
 	<!-- paging navigation -->
 	<div class="pagination">
-		<ul>
-			<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="linkPage"/>
-		</ul>
+		<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="linkPage"/>
 	</div>
 </div>
 </form>
