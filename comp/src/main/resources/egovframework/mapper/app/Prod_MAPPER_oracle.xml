@@ -145,7 +145,7 @@
 	</select>	
 	<!-- 제품LOT로 정보찾기 -->
 	<select id="selectDetailProrder" resultType="DetailProrderVO">
-		SELECT d.product_lot, d.pror_code, d.pror_code, d.product_code, TO_CHAR(d.work_date, 'YYYY-MM-DD') work_date,
+		SELECT d.product_lot, d.pror_code, d.product_code, TO_CHAR(d.work_date, 'YYYY-MM-DD') work_date,
 			d.pror_count work_count, d.comments, p.product_name
 		FROM detailprorder d, product p
 		WHERE d.product_lot = #{productLot}
@@ -260,6 +260,14 @@
 	</select>
 	
 	<!-- 작업실적 -->
+	<select id="getStorage" resultType="WorkVO">
+		SELECT s.product_lot, TO_CHAR(d.work_date, 'YYYY-MM-DD') work_date, d.pror_code, p.product_name,
+			s.product_count work_count, s.product_state
+		FROM storage s, product p, detailprorder d
+		WHERE s.product_lot = #{productLot}
+		AND s.product_code = p.product_code		
+		AND s.product_lot = d.product_lot
+	</select>
 	<select id="searchWork" resultType="WorkVO">
 		SELECT DISTINCT
 			w.work_code, w.process_code, TO_CHAR(w.work_date,'YYYY-MM-DD') work_date, w.product_lot, 
@@ -328,6 +336,7 @@
 		ORDER BY fac_code
 	</select>
 	
+	<!-- 불량조회 -->
 	<select id="getErrorList" resultType="com.rest.app.prod.vo.ErrorListVO">
 		select c.process_name, TO_CHAR(a.work_date, 'YYYY-MM-DD')AS work_date, a.work_count, a.error_count, d.product_code, 
       	d.product_name, a.product_lot, a.work_code, e.error_name

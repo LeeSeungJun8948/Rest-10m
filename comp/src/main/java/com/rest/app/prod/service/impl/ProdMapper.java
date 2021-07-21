@@ -60,4 +60,5 @@ public interface ProdMapper {
 	List<SelectListVO> ajaxProdSearchModal(SelectListVO vo);
 	List<SelectListVO> ajaxCompSearchModal(SelectListVO vo);
 	List<ErrorListVO> getErrorList(ErrorListVO vo);
+	WorkVO getStorage(String productLot);
 }

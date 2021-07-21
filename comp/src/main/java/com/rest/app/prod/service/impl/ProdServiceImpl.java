@@ -260,4 +260,9 @@ public class ProdServiceImpl implements ProdService {
 	public List<ErrorListVO> getErrorList(ErrorListVO vo) {
 		return mapper.getErrorList(vo);
 	}
+
+	@Override
+	public WorkVO getStorage(String productLot) {
+		return mapper.getStorage(productLot);
+	}
 }
