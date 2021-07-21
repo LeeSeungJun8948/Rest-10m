@@ -14,7 +14,7 @@
 			<table class="table">
 				<tbody>
 					<tr>
-						<th>작업일자</th>
+						<th>작업일자<span style="color: red">*</span></th>
 						<td>
 							<div class="row">
 								<div class="col-3">

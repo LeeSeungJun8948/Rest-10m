@@ -28,7 +28,6 @@
 <head>
 <title>${pageTitle} <spring:message code="title.list" /></title><!-- 권한그룹관리 목록 -->
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/com/com.css' />">
 
 <script type="text/javaScript" language="javascript" defer="defer">
 function fncCheckAll() {
@@ -200,12 +199,14 @@ function onSearchCondition() {
 }
 
 function press() {
-
     if (event.keyCode==13) {
     	fncSelectAuthorGroupList('1');
     }
 }
 
+$(document).ready(function() {
+  $(".pagination").find("li").find("a").addClass("btn-two blue mini");
+});
 </script>
 </head>
 <body>
@@ -213,34 +214,29 @@ function press() {
 <noscript class="noScriptTitle"><spring:message code="common.noScriptTitle.msg" /></noscript>
 <form:form name="listForm" action="${pageContext.request.contextPath}/sec/ram/EgovAuthorGroupList.do" method="post">
 <div class="board">
-	<h1>${pageTitle} <spring:message code="title.list" /></h1><!-- 권한그룹관리 목록 -->
+	<h3 class="mb-4">${pageTitle} <spring:message code="title.list" /></h3><!-- 권한그룹관리 목록 -->
 	<!-- 검색영역 -->
 	<div class="search_box" title="<spring:message code="common.searchCondition.msg" />">
-		<ul>
+		<div class="form-inline form-group">
 			<!-- 조회조건 -->
-			<li>
-				<select name="searchCondition" onchange="onSearchCondition()" title="<spring:message code="title.searchCondition" /> <spring:message code="input.cSelect" />">
+				<select class="custom-select mr-4" name="searchCondition" onchange="onSearchCondition()" title="<spring:message code="title.searchCondition" /> <spring:message code="input.cSelect" />">
 				<option value="1" <c:if test="${authorGroupVO.searchCondition == '1'}">selected</c:if> ><spring:message code="comCopSecRgm.searchCondition.userId" /></option><!-- 사용자 ID -->
 				<option value="2" <c:if test="${authorGroupVO.searchCondition == '2'}">selected</c:if> ><spring:message code="comCopSecRgm.searchCondition.userNm" /></option><!-- 사용자 명- -->
 				<option value="3" <c:if test="${authorGroupVO.searchCondition == '3'}">selected</c:if> ><spring:message code="comCopSecRgm.searchCondition.group" /></option><!-- 그룹 -->
 				</select>
-			</li>
 			<!-- 검색키워드 및 조회버튼 -->
-			<li>
-				<input class="s_input" name="searchKeyword" type="text"  size="35" title="<spring:message code="title.search" /> <spring:message code="input.input" />" value='<c:out value="${searchVO.searchKeyword}"/>'  maxlength="155" >
+				<input class="form-control mr-4" name="searchKeyword" type="text"  size="35" title="<spring:message code="title.search" /> <spring:message code="input.input" />" value='<c:out value="${searchVO.searchKeyword}"/>'  maxlength="155" >
 
-				<input type="button" class="s_btn" onClick="fncSelectAuthorGroupPop()" value="<spring:message code="comCopSecRgm.btn.groupInquire" />" title="<spring:message code="comCopSecRgm.btn.groupInquire" /> <spring:message code="input.button" />" /><!-- 그룹조회팝업 -->
-				<input type="button" class="s_btn" onClick="fncSelectAuthorGroupList('1')" value="<spring:message code="button.inquire" />" title="<spring:message code="button.inquire" /> <spring:message code="input.button" />" /><!-- 조회 -->
+				<input type="button" class="btn-two blue small mr-2" onClick="fncSelectAuthorGroupPop()" value="<spring:message code="comCopSecRgm.btn.groupInquire" />" title="<spring:message code="comCopSecRgm.btn.groupInquire" /> <spring:message code="input.button" />" /><!-- 그룹조회팝업 -->
+				<input type="button" class="btn-two blue small mr-2" onClick="fncSelectAuthorGroupList('1')" value="<spring:message code="button.inquire" />" title="<spring:message code="button.inquire" /> <spring:message code="input.button" />" /><!-- 조회 -->
 				
-				<input type="button" class="s_btn" onClick="fncAuthorGroupDeleteList()" value="<spring:message code="title.delete" />" title="<spring:message code="title.delete" /> <spring:message code="input.button" />" /><!-- 삭제 -->
-				<input type="button" class="s_btn" onClick="fncAddAuthorGroupInsert()" value="<spring:message code="button.create" />" title="<spring:message code="button.create" /> <spring:message code="button.create" />" /><!-- 등록 -->
-			</li>
-		</ul>
+				<input type="button" class="btn-two blue small mr-2" onClick="fncAuthorGroupDeleteList()" value="<spring:message code="title.delete" />" title="<spring:message code="title.delete" /> <spring:message code="input.button" />" /><!-- 삭제 -->
+				<input type="button" class="btn-two blue small" onClick="fncAddAuthorGroupInsert()" value="<spring:message code="button.create" />" title="<spring:message code="button.create" /> <spring:message code="button.create" />" /><!-- 등록 -->
+		</div>
 	</div>
 
 	<!-- 목록영역 -->
-	<table class="board_list" summary="<spring:message code="common.summary.list" arguments="${pageTitle}" />">
-	<caption>${pageTitle} <spring:message code="title.list" /></caption>
+	<table class="board_list table" summary="<spring:message code="common.summary.list" arguments="${pageTitle}" />">
 	<colgroup>
 		<col style="width: 5%;">
 		<col style="width: 10%;">
@@ -271,7 +267,7 @@ function press() {
 		<td><c:out value="${authorGroup.userId}"/></td>
 		<td><c:out value="${authorGroup.userNm}"/></td>
 		<td><c:out value="${authorGroup.mberTyNm}"/><input type="hidden" name="mberTyCode" value="${authorGroup.mberTyCode}"/></td>
-		<td><select name="authorManageCombo" title="<spring:message code="comCopSecRgm.list.authorManageCombo" />"> <!-- 권한선택 -->
+		<td><select class="custom-select" name="authorManageCombo" title="<spring:message code="comCopSecRgm.list.authorManageCombo" />"> <!-- 권한선택 -->
 			<c:forEach var="authorManage" items="${authorManageList}" varStatus="status">
 			<option value="<c:out value="${authorManage.authorCode}"/>" <c:if test="${authorManage.authorCode == authorGroup.authorCode}">selected</c:if> ><c:out value="${authorManage.authorNm}"/></option>
 			</c:forEach>
@@ -285,7 +281,7 @@ function press() {
 	<c:if test="${!empty authorGroupVO.pageIndex }">
 		<!-- paging navigation -->
 		<div class="pagination">
-			<ul><ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="fn_egov_select_linkPage"/></ul>
+			<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="fn_egov_select_linkPage"/>
 		</div>
 	</c:if>
 

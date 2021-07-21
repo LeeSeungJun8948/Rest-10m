@@ -1,6 +1,11 @@
 (function($) {
 	$("#workModal").on('shown.bs.modal', function() {
 		if (!checkNull($('#workGrid').html())) {
+			$(document).ready(function() {	
+				document.getElementById('workDtS').valueAsDate = new Date();
+				document.getElementById('workDtE').valueAsDate = new Date();
+			});
+			
 			var workData = {
 				api: {
 					readData: {

@@ -14,7 +14,7 @@
 			<table class="table">
 				<tbody>
 					<tr>
-						<th>지시일자</th>
+						<th>지시일자<span style="color: red">*</span></th>
 						<td>
 							<div class="row">
 								<input type="date" class="form-control" id="searchDtS" name="searchDtS">

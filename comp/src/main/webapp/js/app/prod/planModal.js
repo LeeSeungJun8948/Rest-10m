@@ -1,7 +1,10 @@
 (function($) {
 	$("#planModal").on('shown.bs.modal', function() {
-
 		if (!checkNull($('#gridModal').html())) {
+			$("#planModal").ready(function() {	
+				document.getElementById('searchDtS').valueAsDate = new Date();
+				document.getElementById('searchDtE').valueAsDate = new Date();
+			});
 
 			var dataSourceModal = {
 				contentType: 'application/json',
