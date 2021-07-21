@@ -129,10 +129,10 @@
 				{
 					header : '자재코드',
 					name : 'materialCode',
-					editor:'text',
-						onAfterChange(ev){
+					editor:'text'
+				 		onAfterChange(ev){
 						setMatCode(ev);
-					}
+					} 
 				},
 				{
 					header :'자재명',
@@ -229,7 +229,7 @@
 				 		});
 				 		toastr.success("저장되었습니다.");
 			})
-			function setMatCode(ev){
+		 	function setMatCode(ev){
 				var rowKey = ev.rowKey;
 				var materialCode = grid.getValue(rowKey,'materialCode');
 				if(checkNull(materialCode)){
@@ -248,7 +248,8 @@
 						}
 					});
 				}
-			}
+			} 
+			
 			function setProCode(ev){
 				var rowKey = ev.rowKey;
 				var processCode = grid.getValue(rowKey,'processCode');
