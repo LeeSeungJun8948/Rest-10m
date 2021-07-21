@@ -7,7 +7,7 @@
 	<button id="btnProrModal" type="button" class="btn-two blue small" data-remote="false" data-toggle="modal" data-target="#prorModal">조회</button>
 	<button type="reset" class="btn-two blue small" id="btnReset">초기화</button>
 	<button type="button" class="btn-two blue small" id="btnSave">저장</button>
-	<button type="button" class="btn-two red small" id="btnDel">삭제</button>
+	<button type="button" class="btn-two blue small" id="btnDel">삭제</button>
 </div>
 <div class="row">
 	<div class="mb-2 col-lg-6">
@@ -50,7 +50,7 @@
 </div>
 <div class="mb-4" align="right">
 	<button type="button" class="btn-two blue small" id="btnGridAdd">추가</button>
-	<button type="button" class="btn-two red small" id="btnGridDel">삭제</button>
+	<button type="button" class="btn-two blue small" id="btnGridDel">삭제</button>
 </div>
 <div class="col-lg-12">
 	<div id="grid"></div>
