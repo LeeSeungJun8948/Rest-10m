@@ -123,7 +123,7 @@ public class EgovAuthorManageController {
 
     	model.addAttribute("authorManage", egovAuthorManageService.selectAuthor(authorManageVO));
     	model.addAttribute("message", egovMessageSource.getMessage("success.common.select"));
-    	return "egovframework/com/sec/ram/EgovAuthorUpdate";
+    	return "egovframework/com/sec/ram/EgovAuthorUpdate.tiles";
     }     
 
     /**

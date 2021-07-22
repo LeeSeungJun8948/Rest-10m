@@ -19,7 +19,6 @@ import com.rest.app.mat.vo.SelectListVO;
 import com.rest.app.prod.service.ProdService;
 import com.rest.app.prod.vo.DetailPlanVO;
 import com.rest.app.prod.vo.DetailProrderVO;
-import com.rest.app.prod.vo.ErrorListVO;
 import com.rest.app.prod.vo.InputMatVO;
 import com.rest.app.prod.vo.PlanVO;
 import com.rest.app.prod.vo.ProrderVO;
@@ -579,50 +578,6 @@ public class ProdController {
 		data.put("result", true);
 		data.put("data", datas);
 		return data;
-	}
-
-	// 불량내역조회 페이지
-	@RequestMapping("/pro/view/detailErrorList.do")
-	public String errorList() {
-		return "prod/errorList.page";
-	}
-
-	// 불량리스트
-	@RequestMapping("/pro/view/ajax/detailErrorList.do")
-	@ResponseBody
-	public Map<String, Object> ajaxGeterrorList(ErrorListVO vo) {
-		Map<String, Object> datas = new HashMap<String, Object>();
-		Map<String, Object> data = new HashMap<String, Object>();
-		data.put("result", true);
-		datas.put("contents", svc.getErrorList(vo));
-		data.put("data", datas);
-		return data;
-	}
-
-	// 불량내역 조회 - 엑셀
-	@RequestMapping("/pro/view/viewErrorExcel.do")
-	public ModelAndView viewErrorExcel(ErrorListVO vo)
-			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		HashMap<String, Object> headerMap = new HashMap<String, Object>();
-		List<ErrorListVO> list = svc.getErrorList(vo);
-		List<Map<String, String>> data = new ArrayList<>();
-		for (ErrorListVO errorVO : list) {
-			data.add(BeanUtils.describe(errorVO));
-		}
-		headerMap.put("processName", "공정명");
-		headerMap.put("workDate", "작업일자");
-		headerMap.put("workCount", "작업량");
-		headerMap.put("errorCount", "불량량");
-		headerMap.put("productCode", "제품코드");
-		headerMap.put("productName", "제품명");
-		headerMap.put("productLot", "제품LOT");
-		headerMap.put("workCode", "작업번호");
-		headerMap.put("errorCode", "불량코드");
-		map.put("headerMap", headerMap);
-		map.put("filename", "excel_error");
-		map.put("datas", data);
-		return new ModelAndView("commonExcelView", map);
 	}
 }
 

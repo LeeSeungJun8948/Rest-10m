@@ -262,7 +262,7 @@
 	<!-- 작업실적 -->
 	<select id="getStorage" resultType="WorkVO">
 		SELECT s.product_lot, TO_CHAR(d.work_date, 'YYYY-MM-DD') work_date, d.pror_code, p.product_name,
-			s.product_count work_count, s.product_state
+			s.product_count work_count, s.product_state, s.product_code
 		FROM storage s, product p, detailprorder d
 		WHERE s.product_lot = #{productLot}
 		AND s.product_code = p.product_code		
@@ -334,21 +334,5 @@
 			</if>
 		</where>
 		ORDER BY fac_code
-	</select>
-	
-	<!-- 불량조회 -->
-	<select id="getErrorList" resultType="com.rest.app.prod.vo.ErrorListVO">
-		select c.process_name, TO_CHAR(a.work_date, 'YYYY-MM-DD')AS work_date, a.work_count, a.error_count, d.product_code, 
-      	d.product_name, a.product_lot, a.work_code, e.error_name
-		from work a, process c, product d, error e
-		where a.process_code = c.process_code
-		and a.error_code = e.error_code
-		and a.product_code = d.product_code	
-			<if test = "startDate != null and startDate != '' and endDate != null and endDate != ''">
-			AND trunc(work_date) BETWEEN #{startDate} AND #{endDate} 
-			</if>
-			<if test="productCode != null and productCode != ''">
-				AND a.product_code = #{productCode}
-			</if>	
 	</select>
 </mapper>

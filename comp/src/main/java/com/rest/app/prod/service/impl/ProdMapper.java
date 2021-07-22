@@ -10,7 +10,6 @@ import com.rest.app.fac.vo.FacilitiesVO;
 import com.rest.app.mat.vo.SelectListVO;
 import com.rest.app.prod.vo.DetailPlanVO;
 import com.rest.app.prod.vo.DetailProrderVO;
-import com.rest.app.prod.vo.ErrorListVO;
 import com.rest.app.prod.vo.InputMatVO;
 import com.rest.app.prod.vo.PlanVO;
 import com.rest.app.prod.vo.ProrderVO;
@@ -59,6 +58,5 @@ public interface ProdMapper {
 	List<FacilitiesVO> searchFac(Map<String, Object> param);
 	List<SelectListVO> ajaxProdSearchModal(SelectListVO vo);
 	List<SelectListVO> ajaxCompSearchModal(SelectListVO vo);
-	List<ErrorListVO> getErrorList(ErrorListVO vo);
 	WorkVO getStorage(String productLot);
 }

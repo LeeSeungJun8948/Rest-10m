@@ -32,7 +32,7 @@
 	</div>
 	<div class="mb-2 col-lg-6">
 		<div class="mb-4">
-			<h5><strong>미완료주문 검색</strong></h5>
+			<h5><strong>미계획주문 검색</strong></h5>
 		</div>
 		<div>
 			<form id="dateFrm" name="dateFrm">

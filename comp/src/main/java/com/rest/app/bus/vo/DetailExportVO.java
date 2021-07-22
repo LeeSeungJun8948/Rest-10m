@@ -17,8 +17,8 @@ public class DetailExportVO {
 	String comments;//비고
 	String exportDate;
 	String productName;
-	String stdId;
-	String unitId;
+	String stdNo;
+	String unitNo;
 	int outCount;
 	int companyCode;
 	String companyName;

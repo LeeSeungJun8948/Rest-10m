@@ -31,9 +31,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 <title><spring:message code="comSymMnuMpm.menuRegist.title"/></title><!-- 메뉴정보등록 -->
-<link href="<c:url value="/css/egovframework/com/com.css"/>" rel="stylesheet" type="text/css">
-<link href="<c:url value="/css/egovframework/com/button.css"/>" rel="stylesheet" type="text/css">
-<link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/com/cmm/jqueryui.css' />">
 <script src="<c:url value='/js/egovframework/com/cmm/jquery.js' />"></script>
 <script src="<c:url value='/js/egovframework/com/cmm/jqueryui.js' />"></script>
 
@@ -170,67 +167,67 @@ function press() {
 
 <div class="wTableFrm">
 	<!-- 타이틀 -->
-	<h2><spring:message code="comSymMnuMpm.menuRegist.pageTop.title"/></h2><!-- 메뉴 등록 -->
+	<h3 class="mb-4"><spring:message code="comSymMnuMpm.menuRegist.pageTop.title"/></h3><!-- 메뉴 등록 -->
 
 	<!-- 등록폼 -->
-	<table class="wTable">
+	<table class="table">
 		<colgroup>
-			<col style="width:16%" />
+			<col style="width:12%" />
 			<col style="" />
-			<col style="width:16%" />
+			<col style="width:12%" />
 			<col style="" />
 		</colgroup>
 		<tr>
-			<th><spring:message code="comSymMnuMpm.menuRegist.menuNo"/> <span class="pilsu">*</span></th><!-- 메뉴No -->
+			<th><spring:message code="comSymMnuMpm.menuRegist.menuNo"/> <span class="pilsu" style="color: red">*</span></th><!-- 메뉴No -->
 			<td class="left">
-			    <form:input path="menuNo" maxlength="10" title="<spring:message code='comSymMnuMpm.menuRegist.menuNo'/>" cssStyle="width:50px" /><!-- 메뉴No -->
+			    <form:input class="form-control" path="menuNo" maxlength="10" title="<spring:message code='comSymMnuMpm.menuRegist.menuNo'/>" cssStyle="width:100px" /><!-- 메뉴No -->
       			<form:errors path="menuNo" />
 			</td>
-			<th><spring:message code="comSymMnuMpm.menuRegist.menuOrder"/> <span class="pilsu">*</span></th><!-- 메뉴순서 -->
+			<th><spring:message code="comSymMnuMpm.menuRegist.menuOrder"/> <span class="pilsu" style="color: red">*</span></th><!-- 메뉴순서 -->
 			<td class="left">
-			    <form:input path="menuOrdr" maxlength="10" title="<spring:message code='comSymMnuMpm.menuRegist.menuOrder'/>" cssStyle="width:50px" /><!-- 메뉴순서 -->
+			    <form:input class="form-control" path="menuOrdr" maxlength="10" title="<spring:message code='comSymMnuMpm.menuRegist.menuOrder'/>" cssStyle="width:100px" /><!-- 메뉴순서 -->
       			<form:errors path="menuOrdr" />
 			</td>
 		</tr>
 		<tr>
-			<th><spring:message code="comSymMnuMpm.menuRegist.menuNm"/> <span class="pilsu">*</span></th><!-- 메뉴명 -->
+			<th><spring:message code="comSymMnuMpm.menuRegist.menuNm"/> <span class="pilsu" style="color: red">*</span></th><!-- 메뉴명 -->
 			<td class="left">
-			    <form:input path="menuNm" maxlength="30" title="<spring:message code='comSymMnuMpm.menuRegist.menuNm'/>" /><!-- 메뉴명 -->
+			    <form:input class="form-control" path="menuNm" maxlength="30" title="<spring:message code='comSymMnuMpm.menuRegist.menuNm'/>" style="width: 40%"/><!-- 메뉴명 -->
       			<form:errors path="menuNm" />
 			</td>
-			<th><spring:message code="comSymMnuMpm.menuRegist.upperMenuId"/> <span class="pilsu">*</span></th><!-- 상위메뉴No -->
+			<th><spring:message code="comSymMnuMpm.menuRegist.upperMenuId"/> <span class="pilsu" style="color: red">*</span></th><!-- 상위메뉴No -->
 			<td class="left">
-			    <form:input path="upperMenuId" maxlength="10" title="<spring:message code='comSymMnuMpm.menuRegist.upperMenuId'/>" readonly="true" class="readOnlyClass" cssStyle="width:50px" /><!-- 상위메뉴No -->
+			    <form:input path="upperMenuId" maxlength="10" title="<spring:message code='comSymMnuMpm.menuRegist.upperMenuId'/>" readonly="true" class="readOnlyClass form-control" cssStyle="width:150px" /><!-- 상위메뉴No -->
 				<form:errors path="upperMenuId" />
 				<a id="popupUpperMenuId" href="<c:url value='/sym/mnu/mpm/EgovMenuListSelectMvmn.do' />" target="_blank" title="<spring:message code="comSymMnuMpm.menuRegist.newWindow"/>"><img src="<c:url value='/images/egovframework/com/cmm/icon/search2.gif' />"
 				alt='' />(<spring:message code="comSymMnuMpm.menuRegist.selectMenuSearch"/>)</a><!-- 새창으로 --><!-- 메뉴선택 검색 -->
 			</td>
 		</tr>
 		<tr>
-			<th><spring:message code="comSymMnuMpm.menuRegist.progrmFileNm"/> <span class="pilsu">*</span></th><!--  -->
+			<th><spring:message code="comSymMnuMpm.menuRegist.progrmFileNm"/> <span class="pilsu" style="color: red">*</span></th><!--  -->
 			<td class="left" colspan="3">
-			    <form:input path="progrmFileNm" maxlength="60" onkeypress="press();" title="파일명" readonly="true" class="readOnlyClass" cssStyle="width:350px" /><!-- 파일명 -->
+			    <form:input path="progrmFileNm" maxlength="60" onkeypress="press();" title="파일명" readonly="true" class="readOnlyClass form-control" style="width: 40%"/><!-- 파일명 -->
 			    <form:errors path="progrmFileNm" />
 		        <a id="popupProgrmFileNm" href="<c:url value='/sym/prm/EgovProgramListSearch.do'/>?tmp_SearchElementName=progrmFileNm" target="_blank" title="<spring:message code="comSymMnuMpm.menuRegist.newWindow"/>">
 					<img src="<c:url value='/images/egovframework/com/cmm/icon/search2.gif' />" alt='' />(<spring:message code="comSymMnuMpm.menuRegist.programFileNameSearch"/>)</a><!-- 새창으로 --><!-- 프로그램파일명 검색 -->
 			</td>
 		</tr>
 		<tr>
-			<th><spring:message code="comSymMnuMpm.menuRegist.relateImageNm"/> <span class="pilsu">*</span></th><!-- 관련이미지명 -->
+			<th><spring:message code="comSymMnuMpm.menuRegist.relateImageNm"/> <span class="pilsu" style="color: red">*</span></th><!-- 관련이미지명 -->
 			<td class="left">
-			    <form:input path="relateImageNm" maxlength="30" title="<spring:message code='comSymMnuMpm.menuRegist.relateImageNm'/>"/><!-- 관련이미지명 -->
+			    <form:input class="form-control" path="relateImageNm" maxlength="30" title="<spring:message code='comSymMnuMpm.menuRegist.relateImageNm'/>"  style="width: 87%"/><!-- 관련이미지명 -->
 	      		<form:errors path="relateImageNm" />
 			</td>
-			<th><spring:message code="comSymMnuMpm.menuRegist.relateImagePath"/> <span class="pilsu">*</span></th><!-- 관련이미지경로 -->
+			<th><spring:message code="comSymMnuMpm.menuRegist.relateImagePath"/> <span class="pilsu" style="color: red">*</span></th><!-- 관련이미지경로 -->
 			<td class="left">
-			    <form:input path="relateImagePath" maxlength="30" title="<spring:message code='comSymMnuMpm.menuRegist.relateImagePath'/>"/><!-- 관련이미지경로 -->
+			    <form:input class="form-control" path="relateImagePath" maxlength="30" title="<spring:message code='comSymMnuMpm.menuRegist.relateImagePath'/>"  style="width: 87%"/><!-- 관련이미지경로 -->
 	      		<form:errors path="relateImagePath" />
 			</td>
 		</tr>
 		<tr>
-			<th><spring:message code="comSymMnuMpm.menuRegist.menuDc"/> <span class="pilsu">*</span></th><!-- 메뉴설명 -->
+			<th><spring:message code="comSymMnuMpm.menuRegist.menuDc"/> <span class="pilsu" style="color: red">*</span></th><!-- 메뉴설명 -->
 			<td class="left" colspan="3">
-			    <form:textarea path="menuDc" rows="14" cols="75" cssClass="txaClass" title="<spring:message code='comSymMnuMpm.menuRegist.menuDc'/>" cssStyle="height:200px"/><!-- 메뉴설명 -->
+			    <form:textarea class="form-control" path="menuDc" rows="10" cols="75" title="<spring:message code='comSymMnuMpm.menuRegist.menuDc'/>" style="width: 40%"/><!-- 메뉴설명 -->
       			<form:errors path="menuDc"/>
 			</td>
 		</tr>
@@ -238,8 +235,8 @@ function press() {
 
 	<!-- 하단 버튼 -->
 	<div class="btn">
-		<input class="s_submit" type="submit" value='<spring:message code="button.create" />' onclick="insertMenuManage(document.forms[0]); return false;" /><!-- 등록 -->
-		<span class="btn_s"><a href="<c:url value='/sym/mnu/mpm/EgovMenuManageSelect.do'/>" onclick="selectList(); return false;"><spring:message code="button.list"/></a></span><!-- 목록 -->
+		<input class="btn-two blue small mr-4" type="submit" value='<spring:message code="button.create" />' onclick="insertMenuManage(document.forms[0]); return false;" /><!-- 등록 -->
+		<span class="btn-two blue small mr-4"><a href="<c:url value='/sym/mnu/mpm/EgovMenuManageSelect.do'/>" onclick="selectList(); return false;"><spring:message code="button.list"/></a></span><!-- 목록 -->
 	</div>
 	<div style="clear:both;"></div>
 </div>

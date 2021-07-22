@@ -22,11 +22,13 @@
 					header : '공정코드',
 					name : 'processCode',
 					align: 'center',
-					width: 80
+					width: 80,
+					sortable: true
 				}, {
 					header : '공정명',
 					name : 'processName',
-					align: 'center'
+					align: 'center',
+					sortable: true
 				}]
 			});
 			

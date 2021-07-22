@@ -31,8 +31,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title><spring:message code="comSymMnuMpm.MenuCreat.title" /></title><!-- 메뉴생성 -->
-<link href="<c:url value="/css/egovframework/com/com.css"/>" rel="stylesheet" type="text/css">
-<link href="<c:url value="/css/egovframework/com/button.css"/>" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 var imgpath = "<c:url value='/images/egovframework/com/cmm/utl/'/>";
 </script>
@@ -105,18 +103,15 @@ function fMenuCreatSiteMap() {
 <input name="checkedAuthorForInsert"  type="hidden" >
 
 <div class="board">
-	<h1><spring:message code="comSymMnuMpm.MenuCreat.pageTop.title" /></h1><!-- 메뉴생성 -->
+	<h3 class="mb-4"><spring:message code="comSymMnuMpm.MenuCreat.pageTop.title" /></h3><!-- 메뉴생성 -->
 
 	<div class="search_box" title="<spring:message code="common.searchCondition.msg" />">
-		<ul>
-			<li>
-				<label for=""><spring:message code="comSymMnuMpm.MenuCreat.authCode" /> : </label><!-- 권한코드 -->
-				<input class="s_input2 vat" name="authorCode" type="text" value="<c:out value='${resultVO.authorCode}'/>" maxlength="30" title="<spring:message code="comSymMnuMpm.MenuCreat.authCode" />" readonly="readonly" style="width:250px" /><!-- 권한코드 -->
-				
-				<span class="btn_b"><a href="#LINK" onclick="fInsertMenuCreat(); return false;" title="<spring:message code="comSymMnuMpm.MenuCreat.createMenu" />"><spring:message code="comSymMnuMpm.MenuCreat.createMenu" /></a></span><!-- 메뉴생성 -->
-				<input class="s_btn" type="submit" value="<spring:message code="comSymMnuMpm.MenuCreat.createSiteMap" />" title="<spring:message code="comSymMnuMpm.MenuCreat.createSiteMap" />" onclick="fMenuCreatSiteMap(); return false;" /><!-- 사이트맵생성 -->
-			</li>
-		</ul>
+		<div class="form-inline form-group">
+			<label class="mr-4" for=""><spring:message code="comSymMnuMpm.MenuCreat.authCode" /> : </label><!-- 권한코드 -->
+			<input class="form-control mr-4" name="authorCode" type="text" value="<c:out value='${resultVO.authorCode}'/>" maxlength="30" title="<spring:message code="comSymMnuMpm.MenuCreat.authCode" />" readonly="readonly" style="width:250px" /><!-- 권한코드 -->
+			<span class="btn-two blue small mr-4"><a href="#LINK" onclick="fInsertMenuCreat(); return false;" title="<spring:message code="comSymMnuMpm.MenuCreat.createMenu" />"><spring:message code="comSymMnuMpm.MenuCreat.createMenu" /></a></span><!-- 메뉴생성 -->
+			<input class="btn-two blue small" type="submit" value="<spring:message code="comSymMnuMpm.MenuCreat.createSiteMap" />" title="<spring:message code="comSymMnuMpm.MenuCreat.createSiteMap" />" onclick="fMenuCreatSiteMap(); return false;" /><!-- 사이트맵생성 -->
+		</div>
 	</div>
 	
 	<c:forEach var="result1" items="${list_menulist}" varStatus="status" >

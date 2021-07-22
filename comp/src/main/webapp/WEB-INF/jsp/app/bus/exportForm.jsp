@@ -18,7 +18,7 @@
 			<table class="table">
 				<tbody>
 					<tr>
-						<th>출고일자</th>
+						<th>출고일자*</th>
 						<td>
 							<div class="row">
 								<div class="col-md-5">
@@ -28,29 +28,7 @@
 							</div>
 						</td>
 					</tr>
-					<tr>
-						<th>업체명</th>
-						<td>
-							<div class="row">
-								<div class="col-md-4">
-									<input class="form-control" type="text"
-										id="companyCode" name="companyCode"data-remote="false" data-toggle="modal"
-									data-target="#compModal">
-								</div>
-								<button id="btnCompModal" type="button" class="btn btn-toggle"
-									data-remote="false" data-toggle="modal"
-									data-target="#compModal">
-									<img alt="btn_search"
-										src="<c:url value='/images/app/all/btn_search.png'/>">
-								</button>
-								<div class="col-md-6">
-									<input class="form-control" type="text"
-										id="companyName" name="companyName"data-remote="false" data-toggle="modal"
-									data-target="#compModal">
-								</div>
-							</div>
-						</td>
-					</tr>
+					
 
 						<th>특기사항</th>
 						<td><input class="form-control" type="text" id="comments" name="comments"></td>
@@ -118,12 +96,6 @@
 </div>
 <div>
 	<div id="gridInput" />
-</div>
-<div class="modal fade" id="compModal" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content" id="compContent" align="center"></div>
-	</div>
 </div>
 
 <div class="modal fade" id="exportModal" tabindex="-1" role="dialog"

@@ -1,8 +1,11 @@
 (function($) {
 	$("#prorModal").on('shown.bs.modal', function() {
-
 		if (!checkNull($('#gridModal').html())) {
-
+			$("#prorModal").ready(function() {	
+				document.getElementById('searchDtS').valueAsDate = new Date();
+				document.getElementById('searchDtE').valueAsDate = new Date();
+			});
+			
 			var dataSourceModal = {
 				contentType: 'application/json',
 				api: {

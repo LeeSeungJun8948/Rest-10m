@@ -34,8 +34,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 <title><spring:message code="comSymPrm.programListDetailSelectUpdt.title"/></title><!-- 프로그램목록 상세조회 /수정 -->
-<link href="<c:url value="/css/egovframework/com/com.css"/>" rel="stylesheet" type="text/css">
-<link href="<c:url value="/css/egovframework/com/button.css"/>" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<c:url value="/validator.do"/>"></script>
 <validator:javascript formName="progrmManageVO" staticJavascript="false" xhtml="true" cdata="false"/>
 <script language="javascript1.2" type="text/javaScript">
@@ -94,46 +92,46 @@ function selectList(){
 
 <div class="wTableFrm">
 	<!-- 타이틀 -->
-	<h2><spring:message code="comSymPrm.programListDetailSelectUpdt.pageTop.title"/></h2><!-- 프로그램목록 상세조회 /수정 -->
+	<h3 class="mb-4"><spring:message code="comSymPrm.programListDetailSelectUpdt.pageTop.title"/></h3><!-- 프로그램목록 상세조회 /수정 -->
 
 	<!-- 등록폼 -->
-	<table class="wTable">
+	<table class="table">
 		<colgroup>
-			<col style="width:20%" />
+			<col style="width:15%" />
 			<col style="" />
 		</colgroup>
 		<tr>
-			<th><spring:message code="comSymPrm.programListDetailSelectUpdt.progrmFileNm"/> <span class="pilsu">*</span></th><!-- 프로그램파일명 -->
+			<th><spring:message code="comSymPrm.programListDetailSelectUpdt.progrmFileNm"/> <span class="pilsu" style="color: red">*</span></th><!-- 프로그램파일명 -->
 			<td class="left">
-			    <form:input  path="progrmFileNm" size="50"  maxlength="50" title="${vprogrmFileNm}"/><!-- 프로그램파일명 -->
+			    <form:input class="form-control" path="progrmFileNm" size="50"  maxlength="50" title="${vprogrmFileNm}" style="width: 50%"/><!-- 프로그램파일명 -->
       			<form:errors path="progrmFileNm"/>
 			</td>
 		</tr>
 		<tr>
-			<th><spring:message code="comSymPrm.programListDetailSelectUpdt.progrmStrePath"/> <span class="pilsu">*</span></th><!-- 저장경로 -->
+			<th><spring:message code="comSymPrm.programListDetailSelectUpdt.progrmStrePath"/> <span class="pilsu" style="color: red">*</span></th><!-- 저장경로 -->
 			<td class="left">
-			    <form:input  path="progrmStrePath" size="50"  maxlength="50" title="${vprogrmStrePath}"/><!-- 저장경로 -->
+			    <form:input class="form-control" path="progrmStrePath" size="50"  maxlength="50" title="${vprogrmStrePath}" style="width: 50%"/><!-- 저장경로 -->
       			<form:errors path="progrmStrePath"/>
 			</td>
 		</tr>
 		<tr>
-			<th><spring:message code="comSymPrm.programListDetailSelectUpdt.progrmKoreanNm"/> <span class="pilsu">*</span></th><!-- 한글명 -->
+			<th><spring:message code="comSymPrm.programListDetailSelectUpdt.progrmKoreanNm"/> <span class="pilsu" style="color: red">*</span></th><!-- 한글명 -->
 			<td class="left">
-			    <form:input path="progrmKoreanNm" size="60"  maxlength="60"  title="${vprogrmKoreanNm}"/><!-- 한글명 -->
+			    <form:input class="form-control" path="progrmKoreanNm" size="60"  maxlength="60"  title="${vprogrmKoreanNm}" style="width: 50%"/><!-- 한글명 -->
       			<form:errors path="progrmKoreanNm" />
 			</td>
 		</tr>
 		<tr>
-			<th><spring:message code="comSymPrm.programListDetailSelectUpdt.url"/> <span class="pilsu">*</span></th>
+			<th><spring:message code="comSymPrm.programListDetailSelectUpdt.url"/> <span class="pilsu" style="color: red">*</span></th>
 			<td class="left">
-			    <form:input path="URL" size="60"  maxlength="60" title="${vurl}" />
+			    <form:input class="form-control" path="URL" size="60"  maxlength="60" title="${vurl}" style="width: 50%"/>
       			<form:errors path="URL" />
 			</td>
 		</tr>
 		<tr>
-			<th><spring:message code="comSymPrm.programListDetailSelectUpdt.progrmDc"/> <span class="pilsu">*</span></th><!-- 프로그램설명 -->
+			<th><spring:message code="comSymPrm.programListDetailSelectUpdt.progrmDc"/> <span class="pilsu" style="color: red">*</span></th><!-- 프로그램설명 -->
 			<td class="left">
-			    <form:textarea path="progrmDc" rows="14" cols="75" title="${vprogrmDc}"/><!-- 프로그램설명 -->
+			    <form:textarea class="form-control" path="progrmDc" rows="14" cols="75" title="${vprogrmDc}" style="width: 50%"/><!-- 프로그램설명 -->
       			<form:errors path="progrmDc"/>
 			</td>
 		</tr>
@@ -141,9 +139,9 @@ function selectList(){
 
 	<!-- 하단 버튼 -->
 	<div class="btn">
-		<span class="btn_s"><a onclick="selectList(); return false;"><spring:message code="button.list"/></a></span><!-- 목록 -->
-		<input class="s_submit" type="submit" value='<spring:message code="button.update" />' onclick="updateProgramListManage(document.forms[0]); return false;" /><!-- 수정 -->
-		<span class="btn_s"><a href="<c:url value='/sym/prm/EgovProgramListManageDelete.do'/>?progrmFileNm=<c:out value="${progrmManageVO.progrmFileNm  }"/>" onclick="deleteProgramListManage(document.forms[0]); return false;"><spring:message code="button.delete" /></a></span><!-- 삭제 -->
+		<span class="btn-two blue small mr-4"><a onclick="selectList(); return false;"><spring:message code="button.list"/></a></span><!-- 목록 -->
+		<input class="btn-two blue small mr-4" type="submit" value='<spring:message code="button.update" />' onclick="updateProgramListManage(document.forms[0]); return false;" /><!-- 수정 -->
+		<span class="btn-two blue small mr-4"><a href="<c:url value='/sym/prm/EgovProgramListManageDelete.do'/>?progrmFileNm=<c:out value="${progrmManageVO.progrmFileNm  }"/>" onclick="deleteProgramListManage(document.forms[0]); return false;"><spring:message code="button.delete" /></a></span><!-- 삭제 -->
 	</div>
 	<div style="clear:both;"></div>
 </div>

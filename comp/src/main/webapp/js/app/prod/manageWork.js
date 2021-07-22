@@ -1,7 +1,7 @@
 // 작업저장
 $("#btnSave").on("click", function() {
-	if (confirm("저장하시겠습니까?")) {
-		if (formCheck()) {
+	if (formCheck()) {
+		if (confirm("저장하시겠습니까?")) {
 			$.ajax({
 				type: 'POST',
 				url: 'saveWork.do',
@@ -98,8 +98,9 @@ function checkNull(value) {
 
 function formCheck() {
 	if (!checkNull($('#prorCode').val())) {
-		toastr.warning('공정이동표 바코드를 먼저 찍어주세요.');
-	} else if (!checkNull($('#workCount').val()) || !checkNull($('#startTime').val()) || !checkNull($('#empName').val())) {
+		toastr.warning('공정이동표의 바코드를 먼저 찍어주십시오.');
+		return false;
+	} else if (!checkNull($('#workCount').val()) || !checkNull($('#startTime').val()) || !checkNull($('#empName').val()) || !checkNull($('#facilitiesName').val()) || $('#workCount').val() == 0) {
 		toastr.warning('값을 입력해주십시오.');
 		return false;
 	} else {

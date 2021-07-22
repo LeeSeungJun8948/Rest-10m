@@ -37,13 +37,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title><spring:message code="comSymMnuMpm.menuList.title" /></title>
-<link href="<c:url value="/css/egovframework/com/com.css"/>" rel="stylesheet" type="text/css">
-<link href="<c:url value="/css/egovframework/com/button.css"/>" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<c:url value="/validator.do" />"></script>
 <script type="text/javascript">
 var imgpath = "<c:url value='/images/egovframework/com/cmm/utl/'/>";
 </script>
-<link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/com/cmm/jqueryui.css' />">
 <script src="<c:url value='/js/egovframework/com/cmm/jquery.js' />"></script>
 <script src="<c:url value='/js/egovframework/com/cmm/jqueryui.js' />"></script>
 
@@ -211,10 +208,10 @@ function checkNumber(str) {
 </head>
 <body>
 <noscript class="noScriptTitle"><spring:message code="common.noScriptTitle.msg" /></noscript>
-<div id="border" style="width:730px">
+<div id="border">
 <table border="0">
   <tr>
-    <td width="700">
+    <td>
 <!-- ********** 여기서 부터 본문 내용 *************** -->
 
 
@@ -222,17 +219,15 @@ function checkNumber(str) {
 <input type="hidden" name="req_RetrunPath" value="/sym/mnu/mpm/EgovMenuList">
 
 <div class="board">
-	<h1 style="background-position:left 3px"><spring:message code="comSymMnuMpm.menuList.pageTop.title" /></h1><!-- 메뉴 목록 -->
+	<h3 class="mb-4" style="background-position:left 3px"><spring:message code="comSymMnuMpm.menuList.pageTop.title" /></h3><!-- 메뉴 목록 -->
 
 	<div class="search_box" title="<spring:message code="common.searchCondition.msg" />"><!-- 이 레이아웃은 하단 정보를 대한 검색 정보로 구성되어 있습니다. -->
-		<ul>
-			<li>
-				<span class="btn_b"><a href="<c:url value='/sym/mnu/mpm/EgovMenuListSelect.do'/>" onclick="initlMenuList(); return false;" title="<spring:message code="button.init" />"><spring:message code="button.init" /></a></span><!-- 초기화 -->
-				<input class="s_btn" type="submit" value='<spring:message code="button.save" />' title='<spring:message code="button.save" />' onclick="insertMenuList(); return false;" />
-				<span class="btn_b"><a href="#LINK" onclick="updateMenuList(); return false;" title='<spring:message code="button.update" />'><spring:message code="button.update" /></a></span>
-				<span class="btn_b"><a href="#LINK" onclick="deleteMenuList(); return false;" title='<spring:message code="button.delete" />'><spring:message code="button.delete" /></a></span>
-			</li>
-		</ul>
+		<div class="form-inline form-group mb-4">
+			<span class="btn-two blue small mr-4"><a href="<c:url value='/sym/mnu/mpm/EgovMenuListSelect.do'/>" onclick="initlMenuList(); return false;" title="<spring:message code="button.init" />"><spring:message code="button.init" /></a></span><!-- 초기화 -->
+			<input class="btn-two blue small mr-4" type="submit" value='<spring:message code="button.save" />' title='<spring:message code="button.save" />' onclick="insertMenuList(); return false;" />
+			<span class="btn-two blue small mr-4"><a href="#LINK" onclick="updateMenuList(); return false;" title='<spring:message code="button.update" />'><spring:message code="button.update" /></a></span>
+			<span class="btn-two blue small mr-4"><a href="#LINK" onclick="deleteMenuList(); return false;" title='<spring:message code="button.delete" />'><spring:message code="button.delete" /></a></span>
+		</div>
 	</div>
 </div>
 
@@ -249,17 +244,13 @@ function checkNumber(str) {
 
 
 <table>
-	<colgroup>
-		<col style="width:240px" />
-		<col style="" />
-	</colgroup>
-  <tr>
-   <td style="vertical-align:top">
+  <tr style="max-width:100%;">
+   <td style="vertical-align:top; width:320px;">
 	<c:forEach var="result" items="${list_menulist}" varStatus="status" >
 	<input type="hidden" name="tmp_menuNmVal" value="${result.menuNo}|${result.upperMenuId}|${result.menuNm}|${result.progrmFileNm}|${result.menuNo}|${result.menuOrdr}|${result.menuNm}|${result.upperMenuId}|${result.menuDc}|${result.relateImagePath}|${result.relateImageNm}|${result.progrmFileNm}|">
 	</c:forEach>
 	
-	<div class="tree" style="overflow:scroll; width:218px; height:383px; padding:5px; border:1px solid #ddd">
+	<div class="tree" style="overflow:scroll; width:300px; height:600px; padding:5px; border:1px solid #ddd">
 		<script language="javascript" type="text/javaScript">
 		    var chk_Object = true;
 		    var chk_browse = "";
@@ -305,63 +296,58 @@ function checkNumber(str) {
 		</tr>
 	   </table>
    </td> --%>
-   <td style="vertical-align:top">
-
-		<table class="wTable" >
-			<colgroup>
-				<col style="width:30%" />
-				<col style="" />
-			</colgroup>
+   <td style="vertical-align:top; width: 700px;">
+		<table class="table" >
 		  <tr>
-		    <th><spring:message code="comSymMnuMpm.menuList.menuNo" /> <span class="pilsu">*</span></th><!-- 메뉴No -->
+		    <th style="width: 200px;"><spring:message code="comSymMnuMpm.menuList.menuNo" /> <span class="pilsu" style="color: red">*</span></th><!-- 메뉴No -->
 		    <td class="left">
-		      <input name="menuNo" type="text" value=""  maxlength="10" title="<spring:message code="comSymMnuMpm.menuList.menuNo" />" style="width:68px"/>
+		      <input class="form-control" name="menuNo" type="text" value=""  maxlength="10" title="<spring:message code="comSymMnuMpm.menuList.menuNo" />" style="width: 50%"/>
 		    </td>
 		  </tr>
 		  <tr>
-		    <th><spring:message code="comSymMnuMpm.menuList.menuOrdr" /> <span class="pilsu">*</span></th><!-- 메뉴순서 -->
+		    <th><spring:message code="comSymMnuMpm.menuList.menuOrdr" /> <span class="pilsu" style="color: red">*</span></th><!-- 메뉴순서 -->
 		    <td class="left">
-		      <input name="menuOrdr" type="text" value=""  maxlength="10" title="<spring:message code="comSymMnuMpm.menuList.menuOrdr" />" style="width:68px"/>
+		      <input class="form-control" name="menuOrdr" type="text" value=""  maxlength="10" title="<spring:message code="comSymMnuMpm.menuList.menuOrdr" />" style="width: 50%"/>
 		    </td>
 		  </tr>
 		  <tr>
-		    <th><spring:message code="comSymMnuMpm.menuList.menuNm" /> <span class="pilsu">*</span></th><!-- 메뉴명 -->
+		    <th><spring:message code="comSymMnuMpm.menuList.menuNm" /> <span class="pilsu" style="color: red">*</span></th><!-- 메뉴명 -->
 		    <td class="left">
-		      <input name="menuNm" type="text" size="30" value=""  maxlength="30" title="<spring:message code="comSymMnuMpm.menuList.menuNm" />">
+		      <input class="form-control" name="menuNm" type="text" size="30" value=""  maxlength="30" title="<spring:message code="comSymMnuMpm.menuList.menuNm" />" style="width: 50%">
 		    </td>
 		  </tr>
 		  <tr>
-		    <th><spring:message code="comSymMnuMpm.menuList.upperMenuId" /> <span class="pilsu">*</span></th><!-- 상위메뉴No -->
+		    <th><spring:message code="comSymMnuMpm.menuList.upperMenuId" /> <span class="pilsu" style="color: red">*</span></th><!-- 상위메뉴No -->
 		    <td class="left">
-		    <input name="upperMenuId" type="text" value=""  maxlength="10" title="<spring:message code="comSymMnuMpm.menuList.upperMenuId" />" style="width:190px"/>
+		    <input class="form-control" name="upperMenuId" type="text" value=""  maxlength="10" title="<spring:message code="comSymMnuMpm.menuList.upperMenuId" />"  style="width: 50%"/>
 	        <a id="popupUpperMenuId" href="/sym/mnu/mpm/EgovMenuListSelectMvmn.do" target="_blank" title="<spring:message code="comSymMnuMpm.menuList.upperMenuId" />" style="selector-dummy:expression(this.hideFocus=false);"><img src="<c:url value='/images/egovframework/com/cmm/icon/search2.gif' />"
 	         alt='' width="15" height="15" />(<spring:message code="comSymMnuMpm.menuList.mvmnMenuList" />)</a><!-- 메뉴선택 검색 -->
 		    </td>
 		  </tr>
 		  <tr>
-		    <th><spring:message code="comSymMnuMpm.menuList.progrmFileNm" /> <span class="pilsu">*</span></th><!-- 파일명 -->
+		    <th><spring:message code="comSymMnuMpm.menuList.progrmFileNm" /> <span class="pilsu" style="color: red">*</span></th><!-- 파일명 -->
 		    <td class="left">
-	        <input name="progrmFileNm" type="text" size="30" value=""  maxlength="60" title="<spring:message code="comSymMnuMpm.menuList.progrmFileNm" />" style="width:190px"/>
+	        <input class="form-control" name="progrmFileNm" type="text" size="30" value=""  maxlength="60" title="<spring:message code="comSymMnuMpm.menuList.progrmFileNm" />"  style="width: 50%"/>
 	        <a id="popupProgrmFileNm" href="/sym/prm/EgovProgramListSearch.do" target="_blank" title="<spring:message code="comSymMnuMpm.menuList.progrmFileNm" />" style="selector-dummy:expression(this.hideFocus=false);"><img src="<c:url value='/images/egovframework/com/cmm/icon/search2.gif' />"
 	         alt='' width="15" height="15" />(<spring:message code="comSymMnuMpm.menuList.searchFileNm" />)</a>
 		    </td>
 		  </tr>
 		  <tr>
-		    <th><spring:message code="comSymMnuMpm.menuList.relateImageNm" /> <span class="pilsu">*</span></th><!-- 관련이미지명 -->
-		    <td width="70%" nowrap>
-		      <input name="relateImageNm" type="text" size="30" value=""  maxlength="30" title="<spring:message code="comSymMnuMpm.menuList.relateImageNm" />">
+		    <th><spring:message code="comSymMnuMpm.menuList.relateImageNm" /> <span class="pilsu" style="color: red">*</span></th><!-- 관련이미지명 -->
+		    <td>
+		      <input class="form-control" name="relateImageNm" type="text" size="30" value=""  maxlength="30" title="<spring:message code="comSymMnuMpm.menuList.relateImageNm" />" style="width: 50%">
 		    </td>
 		  </tr>
 		  <tr>
-		    <th><spring:message code="comSymMnuMpm.menuList.relateImagePath" /> <span class="pilsu">*</span></th><!-- 관련이미지경로 -->
+		    <th><spring:message code="comSymMnuMpm.menuList.relateImagePath" /> <span class="pilsu" style="color: red">*</span></th><!-- 관련이미지경로 -->
 		    <td>
-		      <input name="relateImagePath" type="text" size="30" value=""  maxlength="60" title="<spring:message code="comSymMnuMpm.menuList.relateImagePath" />">
+		      <input class="form-control" name="relateImagePath" type="text" size="30" value=""  maxlength="60" title="<spring:message code="comSymMnuMpm.menuList.relateImagePath" />" style="width: 50%">
 		    </td>
 		  </tr>
 		  <tr>
 		    <th><spring:message code="comSymMnuMpm.menuList.menuDc" /></th><!-- 메뉴설명 -->
 		    <td width="70%">
-		      &nbsp; <textarea name="menuDc" class="textarea"  cols="45" rows="8"  style="width:350px;" title="<spring:message code="comSymMnuMpm.menuList.menuDc" />"></textarea>
+		      &nbsp; <textarea class="form-control" name="menuDc" class="textarea" rows="8"  style="width:100%;" title="<spring:message code="comSymMnuMpm.menuList.menuDc" />"></textarea>
 		    </td>
 		  </tr>
 		</table>

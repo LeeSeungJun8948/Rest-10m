@@ -1,3 +1,8 @@
+$(document).ready(function() {	
+	document.getElementById('searchDtS').valueAsDate = new Date();
+	document.getElementById('searchDtE').valueAsDate = new Date();
+});
+
 var dataSource = {
 	contentType: 'application/json',
 	api: {

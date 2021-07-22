@@ -30,8 +30,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 <title><spring:message code="comSymPrm.programListManage.title" /></title><!-- 프로그램목록리스트 -->
-<link href="<c:url value="/css/egovframework/com/com.css"/>" rel="stylesheet" type="text/css">
-<link href="<c:url value="/css/egovframework/com/button.css"/>" rel="stylesheet" type="text/css">
 <script language="javascript1.2" type="text/javaScript">
 <!--
 /* ********************************************************
@@ -140,34 +138,32 @@ function selectUpdtProgramListDetail(progrmFileNm) {
 
 <c:if test="${!empty resultMsg}">alert("${resultMsg}");</c:if>
 -->
+$(document).ready(function() {
+	  $(".pagination").find("li").find("a").addClass("btn-two blue mini");
+	});
 </script>
 </head>
 <body>
 <noscript class="noScriptTitle"><spring:message code="common.noScriptTitle.msg" /></noscript>
 
 <div class="board">
-	<h1><spring:message code="comSymPrm.programListManage.pageTop.title" /></h1><!-- 프로그램목록관리 -->
+	<h3 class="mb-4"><spring:message code="comSymPrm.programListManage.pageTop.title" /></h3><!-- 프로그램목록관리 -->
 	<form name="progrmManageForm" action ="<c:url value='/sym/prm/EgovProgramListManageSelect.do' />" method="post">
 	<input name="pageIndex" type="hidden" value="<c:out value='${searchVO.pageIndex}'/>"/>
 	<input name="checkedProgrmFileNmForDel" type="hidden" />
 	<div class="search_box" title="<spring:message code="common.searchCondition.msg" />">
-		<ul>
-			<li>
-				<label for=""><spring:message code="comSymPrm.programListManage.programName" /> : </label><!-- 프로그램명 -->
-				<input id="F1" class="s_input2 vat" name="searchKeyword" type="text" value="<c:out value='${searchVO.searchKeyword}'/>" size="60" maxlength="60" onkeypress="press();" title="<spring:message code="title.searchCondition" />" /><!-- 검색조건 -->
-				
-				<input class="s_btn" type="submit" value='<spring:message code="button.inquire" />' title='<spring:message code="button.inquire" />' onclick="selectProgramListManage(); return false;" /><!-- 조회 -->
-				<span class="btn_b"><a href="<c:url value='/sym/prm/EgovProgramListRegist.do'/>" onclick="insertProgramListManage(); return false;" title='<spring:message code="button.create" />'><spring:message code="button.create" /></a></span><!-- 등록 -->
-				<span class="btn_b"><a href="#LINK" onclick="fDeleteProgrmManageList(); return false;" title='<spring:message code="button.delete" />'><spring:message code="button.delete" /></a></span><!-- 삭제 -->
-			</li>
-		</ul>
+		<div class="form-inline form-group">
+			<label class="mr-4" for=""><spring:message code="comSymPrm.programListManage.programName" /> : </label><!-- 프로그램명 -->
+			<input id="F1" class="form-control mr-4" name="searchKeyword" type="text" value="<c:out value='${searchVO.searchKeyword}'/>" size="60" maxlength="60" onkeypress="press();" title="<spring:message code="title.searchCondition" />" /><!-- 검색조건 -->
+			<input class="btn-two small blue mr-4" type="submit" value='<spring:message code="button.inquire" />' title='<spring:message code="button.inquire" />' onclick="selectProgramListManage(); return false;" /><!-- 조회 -->
+			<span class="btn-two small blue mr-4"><a href="<c:url value='/sym/prm/EgovProgramListRegist.do'/>" onclick="insertProgramListManage(); return false;" title='<spring:message code="button.create" />'><spring:message code="button.create" /></a></span><!-- 등록 -->
+			<span class="btn-two small blue mr-4"><a href="#LINK" onclick="fDeleteProgrmManageList(); return false;" title='<spring:message code="button.delete" />'><spring:message code="button.delete" /></a></span><!-- 삭제 -->
 	</div>
 
-	<table class="board_list">
-		<caption></caption>
+	<table class="table">
 		<colgroup>
 			<col style="width:20px" />
-			<col style="" />
+			<col style="width:150px" />
 			<col style="width:137px" />
 			<col style="width:260px" />
 			<col style="width:150px" />
@@ -194,7 +190,7 @@ function selectUpdtProgramListDetail(progrmFileNm) {
 			 <c:forEach var="result" items="${list_progrmmanage}" varStatus="status">
 			  <tr>
 			    <td>
-			       <input type="checkbox" name="checkField" class="check2" title="선택">
+			       <input type="checkbox" name="checkField" class="check2 form-control" title="선택" style="width:13px;">
 			       <input name="checkProgrmFileNm" type="hidden" value="<c:out value='${result.progrmFileNm}'/>"/>
 			    </td>
 			    <td>
@@ -234,9 +230,7 @@ function selectUpdtProgramListDetail(progrmFileNm) {
 
 	<!-- paging navigation -->
 	<div class="pagination">
-		<ul>
-			<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="linkPage"/>
-		</ul>
+		<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="linkPage"/>
 	</div>
 	
 	<input type="hidden" name="cmd">
