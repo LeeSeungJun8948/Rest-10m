@@ -9,7 +9,7 @@
 <div class="mb-4" align="right">
 	<button type="button" class="btn-two blue small" id="btnView">조회</button>
 	<input type="submit" class="btn-two blue small" id="btnExcel" value="엑셀">
-	<button type="reset" class="btn-two blue small" id="btnReset">새자료</button>
+	<button type="reset" class="btn-two blue small" id="btnReset">초기화</button>
 	
 </div>
 <div class="mb-2 col-lg-6">
@@ -82,7 +82,6 @@
 			</tbody>
 		</table>
 	</form>
-
 </div>
 <div class="modal fade" id="prodLotModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -96,7 +95,7 @@
 		</div>
 	</div>
 </div>
-
+<br><br><br>
 <div id="grid"></div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/bus/productInventory.js"></script>
 	

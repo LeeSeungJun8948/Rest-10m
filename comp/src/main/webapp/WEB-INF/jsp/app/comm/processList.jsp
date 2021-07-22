@@ -14,10 +14,10 @@
 </head>
 <body>
 	<div>
-		<h3>공정관리 ${cName.companyName }</h3>
+		<h3 class="mb-8">공정관리 ${cName.companyName }</h3>
 	</div>
-	<div align="right" style="margin-bottom: 5px">
-		<button type="button" class="btn-two blue small" id="btnRowInsert">행추가</button>
+	<div align="right" class="mb-4">
+		<button type="button" class="btn-two blue small" id="btnRowInsert">추가</button>
 		<button type="button" class="btn-two blue small" id="btnInsert">저장</button>
 		<button type="button" class="btn-two blue small" id="btnDelete">삭제</button>
 	</div>

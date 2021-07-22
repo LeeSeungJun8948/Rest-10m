@@ -50,12 +50,12 @@
 		<div class="modal-header">
 			<form id="productSearchForm" name="productSearchForm">
 				<div class="row">
-				<select name="searchCondition" id="searchCondition"
-					title="검색조건2-검색어구분" style="width: 80px; height: 26px">
+				<select class="custom-select" name="searchCondition" id="searchCondition"
+					title="검색조건2-검색어구분" style="width: 100px; height: 35px">
 					<option value="productCode">제품코드</option>
 					<option value="productName" selected="selected">제품명</option>
 				</select> <input id="searchKeyword" name="searchKeyword" type="text"
-					title="검색어" class="form-control"
+					title="검색어" class="form-control mr-2"
 					style="width: 200px; margin-left: 10px">
 				<button type="button" class="btn-two blue small" id="btnCheck">조회</button>
 				</div>
@@ -65,9 +65,9 @@
 			<!-- 필요한것 집어넣기 BODY 부분 -->
 			<div id=matGrid></div>
 			<div class="modal-footer">
-			<a href="#" rel="modal:close" ><button class="btn-two blue small">닫기</button></a>
 				<button id=btnSearch type="button"
-					class="btn-two blue small">검색</button>
+					class="btn-two cyan small">선택</button>
+			<a href="#" rel="modal:close" ><button class="btn-two blue small">닫기</button></a>
 			</div>
 
 			<script type="text/javascript">

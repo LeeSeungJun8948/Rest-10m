@@ -34,8 +34,8 @@
 	</div>
 		
 	<div class="modal-footer">
-		<button id="btnCloseBottom" class="btn btn-default" data-dismiss="modal">닫기</button>
 		<button id="btnSelect" class="btn-two cyan small">선택</button>
+		<button id="btnCloseBottom" class="btn-two blue small" data-dismiss="modal">닫기</button>
 	</div>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/app/modal/facModal.js"></script>

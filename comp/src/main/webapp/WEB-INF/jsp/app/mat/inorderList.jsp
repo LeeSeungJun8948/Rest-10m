@@ -17,14 +17,14 @@
 	<div class="col-md-8">
 		<h1 class="h3 mb-4 text-gray-700">발주 조회</h1>
 	</div>
-	<div class="col-md-4 mb-4" align="right" role="form">
+</div>
+	<div align="right" role="form">
 		<form id="frmExcel" name="frmExcel" action="${pageContext.request.contextPath}/mat/view/inorderExcel.do" method="post">
 			<button type="button" class="btn-two blue small" id="btnExcel">엑셀</button>
 			<input type="hidden" id="param" name="param">
 			<button type="button" class="btn-two blue small" id="btnRead">조회</button>
 		</form>
 	</div>
-</div>
 
 <form id="frm" name="frm">
 	<div class="row">

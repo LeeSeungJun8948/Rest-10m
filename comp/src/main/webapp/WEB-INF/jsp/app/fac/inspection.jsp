@@ -6,13 +6,11 @@
 	<div class="col-md-8">
 		<h1 class="h3 mb-4 text-gray-700">설비 점검내역 관리</h1>
 	</div>
-	<div class="col-md-4 mb-4" align="right" role="form">
+</div>
+	<div class="mb-4" align="right" role="form">
 		<button type="button" class="btn-two blue small" id="btnSave"
 			name="btnSave">저장</button>
-		<button type="button" class="btn-two small blue" id="btnAdd" name="btnAdd">추가</button>
-		<button type="button" class="btn-two small blue" id="btnDel" name="btnDel">삭제</button>
 	</div>
-</div>
 <form id="frm" name="frm">
 	<div class="flax row">
 		<div class="mb-4 col-10f">
@@ -40,6 +38,10 @@
 		</div>
 	</div>
 </form>
+<div align="right" class="mb-4">
+	<button type="button" class="btn-two small blue" id="btnAdd" name="btnAdd">추가</button>
+	<button type="button" class="btn-two small blue" id="btnDel" name="btnDel">삭제</button>
+</div>
 <div id="grid"></div>
 
 <div class="modal fade" id="facModal" tabindex="-1" role="dialog"

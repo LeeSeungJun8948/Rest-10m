@@ -18,15 +18,15 @@
 		<div class="col-md-8">
 			<h1 class="h3 mb-4 text-gray-700">설비관리</h1>
 		</div>
-		<div class="col-md-4 mb-4" align="right">
+	</div>
+		<div class="mb-4" align="right">
 			<button class="btn-two blue small" id="btnNew" type="reset">
-				새입력</button>
+				초기화</button>
 			<button type="submit" class="btn-two blue small">저장</button>
 			<button type="button" class="btn-two blue small" id="btnDelete">삭제</button>
 		</div>
-	</div>
 	<div class="row">
-		<div class="mb-2 col-md-8">
+		<div class="mb-2 col-md-9">
 			<table class="table">
 				<tbody>
 					<tr>
@@ -38,11 +38,11 @@
 						<th>설비명<span style="color: red">*</span></th>
 						<td><input type="text" id="facilitiesName"
 							name="facilitiesName" class="form-control"></td>
-						<th>모델</th>
-						<td><input type="text" id="model" name="model"
+						<th width="100px;">모델</th>
+						<td width="280px;"><input type="text" id="model" name="model"
 							class="form-control"></td>
-						<th>설비<br/>규격</th>
-						<td><input type="text" id="facSize" name="facSize"
+						<th width="100px;">설비 규격</th>
+						<td width="300px;"><input type="text" id="facSize" name="facSize"
 							class="form-control"></td>
 					</tr>
 					<tr>
@@ -78,7 +78,7 @@
 								</div>
 							</div>
 						</td>
-						<th>구매<br/>금액</th>
+						<th>구매금액</th>
 						<td><input type="text" id="price" name="price"
 							onkeyup="numberWithCommas(this.value)" class="form-control"></td>
 					</tr>
@@ -89,7 +89,7 @@
 						<th>구매일자</th>
 						<td><input type="date" id="purchaseDate" name="purchaseDate"
 							class="form-control"></td>
-						<th>공정<br/>코드<span style="color: red">*</span></th>
+						<th>공정코드<span style="color: red">*</span></th>
 						<td>
 							<div class="row">
 								<div class="col-md-3">
@@ -117,7 +117,7 @@
 				style="display: none" onchange="setThumbnail(event);">
 			<button type="button" class="btn-two blue small" id="btnImg">이미지
 				업로드</button>
-			<h3 class="h3 mb-4 text-gray-700">이미지 미리보기</h3>
+			<h5 class="mb-4 text-gray-700">이미지 미리보기</h5>
 			<div id="imagePreview">
 				<img id="image" />
 			</div>

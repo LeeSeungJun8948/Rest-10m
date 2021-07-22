@@ -6,7 +6,7 @@
 <div class="mb-4" align="right">
 	<button id="btnExportModal" type="button" class="btn-two blue small"
 		data-remote="false" data-toggle="modal" data-target="#exportModal">조회</button>
-	<button type="reset" class="btn-two blue small" id="btnReset">새자료</button>
+	<button type="reset" class="btn-two blue small" id="btnReset">초기화</button>
 	<button type="button" class="btn-two blue small" id="btnSave">저장</button>
 	<button type="button" class="btn-two blue small" id="btnDel">삭제</button>
 </div>
@@ -18,7 +18,7 @@
 			<table class="table">
 				<tbody>
 					<tr>
-						<th>출고일자*</th>
+						<th>출고일자<span style="color: red">*</span></th>
 						<td>
 							<div class="row">
 								<div class="col-md-5">
@@ -28,8 +28,7 @@
 							</div>
 						</td>
 					</tr>
-					
-
+					<tr>
 						<th>특기사항</th>
 						<td><input class="form-control" type="text" id="comments" name="comments"></td>
 					</tr>
@@ -43,22 +42,12 @@
 		</div>
 		<div>
 			<form id="dateFrm" name="dateFrm">
-				<div class="form-row">
-					<div class="col-2" align="center">
-						<span>납기일자</span>
-					</div>
-					<div class="col-3">
-						<input type="date" class="form-control" id="fromDate" name="fromDate">
-					</div>
-					<div class="col-1" align="center">
-						<span>~&nbsp;&nbsp;</span>
-					</div>
-					<div class="col-3">
-						<input type="date" class="form-control" id="toDate" name="toDate">
-					</div>
-					<div class="col-2">
-						<button type="button" class="btn-two blue small" id="btnRead">불러오기</button>
-					</div>
+				<div class="form-inline form-group">
+					<span>납기일자</span>
+					<input type="date" class="form-control ml-4 mr-2" id="fromDate" name="fromDate">
+					<span>~&nbsp;&nbsp;</span>
+					<input type="date" class="form-control ml-2 mr-4" id="toDate" name="toDate">
+					<button type="button" class="btn-two blue small" id="btnRead">불러오기</button>
 				</div>
 			</form>
 		</div>
@@ -70,6 +59,7 @@
 <div class="col-lg-12">
 	<div id="grid"></div>
 </div>
+<br><br><br>
 <div>
 	<form>
 		<div class="table">
@@ -95,7 +85,7 @@
 	</form>
 </div>
 <div>
-	<div id="gridInput" />
+	<div id="gridInput"></div>
 </div>
 
 <div class="modal fade" id="exportModal" tabindex="-1" role="dialog"

@@ -17,11 +17,11 @@
 			<div class="col-md-8">
 				<h1 class="h3 mb-4 text-gray-700">설비조회</h1>
 			</div>
-			<div class="col-md-4 mb-4" align="right">
+		</div>
+			<div class="mb-4" align="right">
 					<input type="submit" class="btn-two blue small" id="btnExcel"
 						value="엑셀">
 				</div>
-		</div>
 		<div class="row">
 			<div class="mb-2 col-md-4">
 				<table class="table">

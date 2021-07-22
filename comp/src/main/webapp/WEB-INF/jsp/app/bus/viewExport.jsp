@@ -17,62 +17,48 @@
 						<tr>
 						<th>출고일자</th>
 						<td>
-							<div class="row">
-								<div class="col-md-4">
-									<input type="date" class="form-control" id="searchDtS"
-										name="searchDtS">
-								</div>
-								<span>~&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-								<div class="col-md-4">
-									<input type="date" class="form-control" id="searchDtE"
-										name="searchDtE">
-								</div>
+							<div class="form-inline form-group">
+								<input type="date" class="form-control mr-4" id="searchDtS"	name="searchDtS">
+								<span>~</span>
+								<input type="date" class="form-control ml-4" id="searchDtE"	name="searchDtE">
 							</div>
 						</td>
 					</tr>
 						<tr>
 							<th>업체명</th>
 							<td>
-								<div class="row">
-									<div class="col-md-4">
+								<div class="form-inline form-group">
 										<input class="form-control" type="text" id="companyCode"
 											name="companyCode" data-remote="false" data-toggle="modal"
-										data-target="#compModal">
-									</div>
+										data-target="#compModal" >
 									<button id="btnCompModal" type="button" class="btn btn-toggle"
 										data-remote="false" data-toggle="modal"
 										data-target="#compModal">
 										<img alt="btn_search"
 											src="<c:url value='/images/app/all/btn_search.png'/>">
 									</button>
-									<div class="col-md-6">
 										<input class="form-control" type="text" id="companyName"
 											name="companyName" data-remote="false" data-toggle="modal"
 										data-target="#compModal">
-									</div>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<th>제품명</th>
 							<td>
-								<div class="row">
-									<div class="col-md-4">
+								<div class="form-inline form-group">
 										<input class="form-control" type="text" id="productCode"
 											name="productCode" data-remote="false" data-toggle="modal"
 										data-target="#prodModal">
-									</div>
 									<button id="btnProdModal" type="button" class="btn btn-toggle"
 										data-remote="false" data-toggle="modal"
 										data-target="#prodModal">
 										<img alt="btn_search"
 											src="<c:url value='/images/app/all/btn_search.png'/>">
 									</button>
-									<div class="col-md-6">
 										<input class="form-control" type="text" id="productName"
 											name="productName" data-remote="false" data-toggle="modal"
 										data-target="#prodModal">
-									</div>
 								</div>
 							</td>
 						</tr>
