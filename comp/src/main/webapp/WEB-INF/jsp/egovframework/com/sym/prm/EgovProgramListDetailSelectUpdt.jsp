@@ -139,9 +139,9 @@ function selectList(){
 
 	<!-- 하단 버튼 -->
 	<div class="btn">
-		<a class="btn-two blue small mr-4" onclick="selectList(); return false;"><spring:message code="button.list"/></a><!-- 목록 -->
-		<input class="btn-two blue small mr-4" type="submit" value='<spring:message code="button.update" />' onclick="updateProgramListManage(document.forms[0]); return false;" /><!-- 수정 -->
-		<a class="btn-two blue small mr-4" href="<c:url value='/sym/prm/EgovProgramListManageDelete.do'/>?progrmFileNm=<c:out value="${progrmManageVO.progrmFileNm  }"/>" onclick="deleteProgramListManage(document.forms[0]); return false;"><spring:message code="button.delete" /></a><!-- 삭제 -->
+		<a class="btn-two blue small mr-2" onclick="selectList(); return false;"><spring:message code="button.list"/></a><!-- 목록 -->
+		<input class="btn-two blue small mr-2" type="submit" value='<spring:message code="button.update" />' onclick="updateProgramListManage(document.forms[0]); return false;" /><!-- 수정 -->
+		<a class="btn-two blue small mr-2" href="<c:url value='/sym/prm/EgovProgramListManageDelete.do'/>?progrmFileNm=<c:out value="${progrmManageVO.progrmFileNm  }"/>" onclick="deleteProgramListManage(document.forms[0]); return false;"><spring:message code="button.delete" /></a><!-- 삭제 -->
 	</div>
 	<div style="clear:both;"></div>
 </div>

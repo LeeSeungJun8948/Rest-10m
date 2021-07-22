@@ -239,8 +239,8 @@ function press() {
 
 	<!-- 하단 버튼 -->
 	<div class="btn">
-		<input class="btn-two blue small mr-4" type="submit" value='<spring:message code="button.create" />' onclick="insertMenuManage(document.forms[0]); return false;" /><!-- 등록 -->
-		<a class="btn-two blue small mr-4" href="<c:url value='/sym/mnu/mpm/EgovMenuManageSelect.do'/>" onclick="selectList(); return false;"><spring:message code="button.list"/></a><!-- 목록 -->
+		<input class="btn-two blue small mr-2" type="submit" value='<spring:message code="button.create" />' onclick="insertMenuManage(document.forms[0]); return false;" /><!-- 등록 -->
+		<a class="btn-two blue small mr-2" href="<c:url value='/sym/mnu/mpm/EgovMenuManageSelect.do'/>" onclick="selectList(); return false;"><spring:message code="button.list"/></a><!-- 목록 -->
 	</div>
 	<div style="clear:both;"></div>
 </div>

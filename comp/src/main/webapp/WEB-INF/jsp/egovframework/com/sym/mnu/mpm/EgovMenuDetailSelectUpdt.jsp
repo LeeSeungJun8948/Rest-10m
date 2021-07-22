@@ -239,9 +239,9 @@ function press() {
 
 	<!-- 하단 버튼 -->
 	<div class="btn">
-		<input class="btn-two blue small mr-4" type="submit" value='<spring:message code="button.update" />' onclick="updateMenuManage(document.forms[0]); return false;" /><!-- 수정 -->
-		<a class="btn-two blue small mr-4" href="<c:url value='/uss/ion/evt/selectEventRceptList.do'/>?menuNo=<c:out value='${menuManageVO.menuNo}'/>" onclick="deleteMenuManage(document.forms[0]); return false;"><spring:message code="button.delete" /></a><!-- 삭제 -->
-		<a class="btn-two blue small mr-4" href="<c:url value='/sym/mnu/mpm/EgovMenuManageSelect.do'/>" onclick="selectList(); return false;"><spring:message code="button.list"/></a><!-- 목록 -->
+		<input class="btn-two blue small mr-2" type="submit" value='<spring:message code="button.update" />' onclick="updateMenuManage(document.forms[0]); return false;" /><!-- 수정 -->
+		<a class="btn-two blue small mr-2" href="<c:url value='/uss/ion/evt/selectEventRceptList.do'/>?menuNo=<c:out value='${menuManageVO.menuNo}'/>" onclick="deleteMenuManage(document.forms[0]); return false;"><spring:message code="button.delete" /></a><!-- 삭제 -->
+		<a class="btn-two blue small mr-2" href="<c:url value='/sym/mnu/mpm/EgovMenuManageSelect.do'/>" onclick="selectList(); return false;"><spring:message code="button.list"/></a><!-- 목록 -->
 	</div>
 	<div style="clear:both;"></div>
 </div>
