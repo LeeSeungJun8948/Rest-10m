@@ -19,7 +19,7 @@ const planGrid = new tui.Grid({
 	bodyHeight: 250,
 	columns : [ 
 		{
-			header : '생산계획코드',
+			header : '생산지시코드',
 			name : 'prorCode',
 			width : 120,
 			align: 'center',

@@ -36,8 +36,10 @@ function setInfo(){
 		dataType: 'json',
 		success : function(data){
 			
+			console.log(data)
+			
 			for(var info of data){
-				if(checkNull(info.procName)){
+				if(checkNull(info.prodName)){
 					$('<tr>').append($('<td>').html(info.facilitiesName).prop('align','center').css('border','2px solid').css('backgroundColor','#ABF200'))
 						.append($('<td>').html(info.procName).prop('align','center').css('border','2px solid'))
 						.append($('<td>').html(info.prodName).prop('align','center').css('border','2px solid'))

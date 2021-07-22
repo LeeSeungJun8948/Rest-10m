@@ -8,7 +8,7 @@
 	<div class="col-md-8">
 		<h1 class="h3 mb-4 text-gray-700">자재 정보 관리</h1>
 	</div>
-	<div class="col-md-3 mb-4" align="right">
+	<div class="col-md-3 mb-4 mr-1" align="right">
 		<button type="button" class="btn-two blue small" id="btnSave">저장</button>
 	</div>
 </div>
