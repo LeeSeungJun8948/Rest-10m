@@ -49,7 +49,7 @@
         var pagetitle = "<spring:message code="comCmm.unitContent.20"/>"; // 비밀번호 유효기간 만료 안내
         var page = "${pageContext.request.contextPath}/uat/uia/noticeExpirePwd.do";
         $dialog = $('<div style="overflow:hidden;padding: 0px 0px 0px 0px;"></div>')
-				        .html('<iframe style="border: 0px; " src="' + page + '" width="100%" height="100%"></iframe>')
+				        .html('<iframe style="border: 10px solid; " src="' + page + '" width="100%" height="100%"></iframe>')
 				        .dialog({
 				        	autoOpen: false,
 				            modal: true,

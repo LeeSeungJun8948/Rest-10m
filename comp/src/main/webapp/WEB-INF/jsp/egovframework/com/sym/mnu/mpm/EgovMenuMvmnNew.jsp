@@ -32,6 +32,9 @@
 <script type="text/javascript">
 var imgpath = "<c:url value='/images/egovframework/com/cmm/utl/'/>";
 </script>
+<link href="${pageContext.request.contextPath}/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/app/prod/button.css" rel="stylesheet">
 <script language="javascript1.2" type="text/javaScript" src="<c:url value='/js/egovframework/com/sym/mnu/mpm/EgovMenuList.js' />" /></script>
 <script language="javascript1.2" type="text/javaScript">
 <!--
@@ -70,9 +73,9 @@ function selectMenuListTmp() {
 <input type="hidden" name="tmp_menuNmVal" value="${result.menuNo}|${result.upperMenuId}|${result.menuNm}|${result.progrmFileNm}|${result.menuNo}|${result.menuOrdr}|${result.menuNm}|${result.upperMenuId}|${result.menuDc}|${result.relateImagePath}|${result.relateImageNm}|${result.progrmFileNm}|">
 </c:forEach>
 
-<div class="wTableFrm" style="width:580px">
+<div class="wTableFrm" style="width:950px" align="center">
 	<!-- 타이틀 -->
-	<h2><spring:message code="comSymMnuMpm.menuMvmn.pageTop.title"/></h2><!-- 메뉴이동 -->
+	<h4 class="mb-4 mt-4"><spring:message code="comSymMnuMpm.menuMvmn.pageTop.title"/></h4><!-- 메뉴이동 -->
 
 	<!-- 등록폼 -->
 <%--

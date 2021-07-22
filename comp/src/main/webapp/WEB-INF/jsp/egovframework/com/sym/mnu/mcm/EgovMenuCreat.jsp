@@ -109,7 +109,7 @@ function fMenuCreatSiteMap() {
 		<div class="form-inline form-group">
 			<label class="mr-4" for=""><spring:message code="comSymMnuMpm.MenuCreat.authCode" /> : </label><!-- 권한코드 -->
 			<input class="form-control mr-4" name="authorCode" type="text" value="<c:out value='${resultVO.authorCode}'/>" maxlength="30" title="<spring:message code="comSymMnuMpm.MenuCreat.authCode" />" readonly="readonly" style="width:250px" /><!-- 권한코드 -->
-			<span class="btn-two blue small mr-4"><a href="#LINK" onclick="fInsertMenuCreat(); return false;" title="<spring:message code="comSymMnuMpm.MenuCreat.createMenu" />"><spring:message code="comSymMnuMpm.MenuCreat.createMenu" /></a></span><!-- 메뉴생성 -->
+			<a class="btn-two blue small mr-2" href="#LINK" onclick="fInsertMenuCreat(); return false;" title="<spring:message code="comSymMnuMpm.MenuCreat.createMenu" />"><spring:message code="comSymMnuMpm.MenuCreat.createMenu" /></a><!-- 메뉴생성 -->
 			<input class="btn-two blue small" type="submit" value="<spring:message code="comSymMnuMpm.MenuCreat.createSiteMap" />" title="<spring:message code="comSymMnuMpm.MenuCreat.createSiteMap" />" onclick="fMenuCreatSiteMap(); return false;" /><!-- 사이트맵생성 -->
 		</div>
 	</div>

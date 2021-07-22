@@ -99,7 +99,7 @@
             var page = "<c:url value='/sym/mnu/bmm/selectMenuList.do'/>";
         	
             var $dialog = $('<div></div>')
-	            .html('<iframe style="border: 0px; " src="' + page + '" width="100%" height="100%"></iframe>')
+	            .html('<iframe style="border: 10px solid; " src="' + page + '" width="100%" height="100%"></iframe>')
 	            .dialog({
 	            	autoOpen: false,
 	                modal: true,

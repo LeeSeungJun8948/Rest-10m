@@ -155,9 +155,9 @@ $(document).ready(function() {
 		<div class="form-inline form-group">
 			<label class="mr-4" for=""><spring:message code="comSymPrm.programListManage.programName" /> : </label><!-- 프로그램명 -->
 			<input id="F1" class="form-control mr-4" name="searchKeyword" type="text" value="<c:out value='${searchVO.searchKeyword}'/>" size="60" maxlength="60" onkeypress="press();" title="<spring:message code="title.searchCondition" />" /><!-- 검색조건 -->
-			<input class="btn-two small blue mr-4" type="submit" value='<spring:message code="button.inquire" />' title='<spring:message code="button.inquire" />' onclick="selectProgramListManage(); return false;" /><!-- 조회 -->
-			<span class="btn-two small blue mr-4"><a href="<c:url value='/sym/prm/EgovProgramListRegist.do'/>" onclick="insertProgramListManage(); return false;" title='<spring:message code="button.create" />'><spring:message code="button.create" /></a></span><!-- 등록 -->
-			<span class="btn-two small blue mr-4"><a href="#LINK" onclick="fDeleteProgrmManageList(); return false;" title='<spring:message code="button.delete" />'><spring:message code="button.delete" /></a></span><!-- 삭제 -->
+			<input class="btn-two small blue mr-2" type="submit" value='<spring:message code="button.inquire" />' title='<spring:message code="button.inquire" />' onclick="selectProgramListManage(); return false;" /><!-- 조회 -->
+			<a class="btn-two small blue mr-2" href="<c:url value='/sym/prm/EgovProgramListRegist.do'/>" onclick="insertProgramListManage(); return false;" title='<spring:message code="button.create" />'><spring:message code="button.create" /></a><!-- 등록 -->
+			<a class="btn-two small blue mr-2" href="#LINK" onclick="fDeleteProgrmManageList(); return false;" title='<spring:message code="button.delete" />'><spring:message code="button.delete" /></a><!-- 삭제 -->
 	</div>
 
 	<table class="table">
