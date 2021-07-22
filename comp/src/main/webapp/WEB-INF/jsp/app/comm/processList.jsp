@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div>
-		<h1>공정관리 ${cName.companyName }</h1>
+		<h3>공정관리 ${cName.companyName }</h3>
 	</div>
 	<div align="right" style="margin-bottom: 5px">
 		<button type="button" class="btn-two blue small" id="btnRowInsert">행추가</button>

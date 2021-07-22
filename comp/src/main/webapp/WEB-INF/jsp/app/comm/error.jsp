@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<h1>불량코드관리</h1>
+	<h3>불량코드관리</h3>
 	<form id="errorListSearchForm" name="errorListSearchForm">
 			<div class="row">
 				<table>

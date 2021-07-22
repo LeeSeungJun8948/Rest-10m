@@ -35,7 +35,7 @@
 <body>
 	<div class="flex row">
 		<div class="col-8">
-			<h1>제품BOM관리</h1>
+			<h3>제품BOM관리</h3>
 		</div>
 		<div class="col-4" align="right">
 			 <form id = "deletefrm" name="deletefrm" role="form" method="post">
