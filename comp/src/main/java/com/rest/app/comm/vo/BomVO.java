@@ -17,7 +17,7 @@ public class BomVO extends ComDefaultVO{
 	int bomNo;
 	int idx;
 	String kg;
-	String matEtc;
+	String etc;
 	String proEtc;
 	
 	String matNo;

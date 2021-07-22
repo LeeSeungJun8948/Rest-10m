@@ -120,96 +120,65 @@
 				rowHeaders: ['checkbox'],
 				scrollX : false,
 				scrollY : true,
+				bodyHeight: 450,
+				selectionUnit: 'row',
 				columns : [
 				{
 					header : '제품코드',
 					name : 'productCode',
 					hidden : true
 				},
+				{
+					header :'공정코드',
+					name : 'processCode',
+					editor:'text',
+					align: 'right',
+					onAfterChange(ev){
+					setProCode(ev);
+					}
+				},
+				{
+					header :'공정명',
+					name : 'processName',
+					align: 'center',
+				},
+				{
+					header :'공정순서',
+					name : 'idx',
+					editor:'text',
+					align: 'right'
+				},
 			 	{
 				 	header : '자재코드',
 					name : 'materialCode',
 					editor:'text',
+					align: 'right',
 					onAfterChange(ev){
 						setMatCode(ev); 
 					}   
 				}, 
 			 	{
 					header :'자재명',
-					name : 'materialName'
+					name : 'materialName',
+					align: 'center'
 				}, 
 				{
 					header :'사용량(KG)',
 					name : 'kg',
-					editor:'text'
+					editor:'text',
+					align: 'center'
 				},
 				{
 					header :'비고',
-					name : 'matEtc',
-					editor:'text'
+					name : 'etc',
+					editor:'text',
+					align: 'center'
 				}
 				
 				]
 			});
-			</script>
-			<div class="flex row" style="margin-top: 40px">
-			<div class="col-8">
-				<h3>제품  필요공정 관리</h3>
-			</div>
-			<div class="col-4" align="right">
-				
-				<button type="button" class="btn-two blue small" id="btnRowInsert1">행추가</button>
-				<button type="button" class="btn-two blue small" id="btnDelete1">삭제</button>
-			</div>
-		</div>
-		<div id="bomProgrid" style="z-index: 10" class="bgird"></div>
-		<script type="text/javascript">
-	    	var dataSource1 = {
-				api : {
-					readData : {url: contextPath +'/ajax/getProInfoBom.do', method:'get', initParams: { productCode: '${info.productCode }'}},
-					createData : { url: contextPath + '/ajax/insertBom.do', method: 'POST'},
-					updateData : { url: contextPath + '/ajax/updateBom.do', method: 'PUT' },
-					deleteData : { url: contextPath + '/ajax/deleteBom.do', method: 'POST' },
-					modifyData : { url: contextPath + '/ajax/modifyBom.do', method: 'PUT'}
-					},
-				contentType: 'application/json'
-				}; 
-				var Progrid = new tui.Grid({
-					el : document.getElementById('bomProgrid'),
-					data : dataSource1,
-					rowHeaders: ['checkbox'],
-					scrollX : false,
-					scrollY : true,
-					columns : [
-					{
-						header : '제품코드',
-						name : 'productCode',
-						hidden : true
-					},
-					{
-						header :'공정코드',
-						name : 'processCode',
-						editor:'text',
-						onAfterChange(ev){
-						setProCode(ev);
-						}
-					},
-					{
-						header :'공정명',
-						name : 'processName'
-					},
-					{
-						header :'공정순서',
-						name : 'idx',
-						editor:'text'
-					},
-					{
-						header :'비고',
-						name : 'proEtc',
-						editor:'text'
-					}
-					]
-				});
+			
+		
 		
 			$.fn.serializeObject = function() {
 				var o = {};
@@ -229,16 +198,7 @@
 			
 			var newProcessName;
 			newProcessName = $('#pdn').val();
-				
-			$("#btnRowInsert1").on("click", function(){
-				var newProductCode;
-				newProductCode = $("#pdc").val();
-				newRowData ={'productCode': newProductCode };
-				Progrid.appendRow(newRowData,{
-					at : Progrid.getRowCount(),
-					focus :true
-				});
-			});
+		
 				
 			$("#btnRowInsert").on("click", function(){
 			var newProductCode;
@@ -261,10 +221,7 @@
 				});
 			});
 
-			$("#btnDelete1").on("click",function() {
-				Progrid.removeCheckedRows(false);
-				Progrid.request('deleteData');
-			})
+			
 			
 			$("#btnDelete").on("click",function() {
 					grid.removeCheckedRows(false);
@@ -305,21 +262,6 @@
 				 	});
 				 	toastr.success("저장되었습니다.");
 				
-				var prcParam = $('#searchCheck').serializeObject();	
-				Progrid.readData(1, prcParam, true);
-			
-				Progrid.request('modifyData', {
-					   checkedOnly: true,
-					   showConfirm: false
-					
-				});
-				Progrid.on('successResponse' , function(ev){
-					 var pText = JSON.parse(ev.xhr.responseText);
-						if (pText.check == 'save') {
-							Progrid.readData();
-						}
-					});
-				
 			})
 				
 		  	function setMatCode(ev){
@@ -345,7 +287,7 @@
 			 
 			function setProCode(ev){
 				var rowKey = ev.rowKey;
-				var processCode = Progrid.getValue(rowKey,'processCode');
+				var processCode = grid.getValue(rowKey,'processCode');
 				if(checkNull(processCode)){
 					$.ajax({
 						type:"get",
@@ -354,7 +296,7 @@
 						datatype:"json",
 						async: false,
 						success : function(data){
-							Progrid.setValue(rowKey,'processName',data.processName,false);
+							grid.setValue(rowKey,'processName',data.processName,false);
 						},
 						error:function(request, status, error){
 							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -372,10 +314,10 @@
 			var context ='${pageContext.request.contextPath}';
 			var matCoderowKey;
 			//클릭시 모달 창 띄우기
-			Progrid.on('click', (ev) => {
+			grid.on('click', (ev) => {
 				procCoderowKey = ev.rowKey;
-				var pc = Progrid.getRow(ev.rowKey).processCode;
-				var pn = Progrid.getRow(ev.rowKey).processName;
+				var pc = grid.getRow(ev.rowKey).processCode;
+				var pn = grid.getRow(ev.rowKey).processName;
 				if(ev.columnName == 'processName'){
 					var href="procCodeModal.do";
 	               	window.event.preventDefault();
