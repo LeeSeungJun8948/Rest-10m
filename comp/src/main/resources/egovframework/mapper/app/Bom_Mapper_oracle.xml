@@ -64,30 +64,29 @@
 	<select id="getInfoBom" resultType="com.rest.app.comm.vo.BomVO">
 	select * 
 	  from bom
-	 where product_code=#{productCode} and process_code IS null
-	 order by material_code
+	 where product_code=#{productCode} 
+	 order by process_code
 	</select>
 	
-	<!-- BomList(공정) -->
-	<select id="getProInfoBom" resultType="com.rest.app.comm.vo.BomVO">
+	 <!-- BomList(공정) -->
+	<!-- <select id="getProInfoBom" resultType="com.rest.app.comm.vo.BomVO">
 	select * 
 	  from bom
 	 where product_code=#{productCode} and material_code IS null
 	 order by process_code
-	</select>
+	</select>  -->
 	
 	
 	<!--Bom Insert -->
 	<insert id="insertBom" parameterType="com.rest.app.comm.vo.BomVO">
 		insert into bom
-		values (#{productCode},#{materialCode},#{processCode},#{kg},#{matEtc},bom_seq.nextval,#{idx},#{materialName},#{processName},#{proEtc})
+		values (#{productCode},#{materialCode},#{processCode},#{kg},#{etc},bom_seq.nextval,#{idx},#{materialName},#{processName})
 	</insert>
 	
 	<!-- Bom Update -->
 	<update id="updateBom" parameterType="com.rest.app.comm.vo.BomVO">
 		update bom
-   		   set material_Code = #{materialCode}, process_code= #{processCode} , kg = #{kg}, mat_etc=#{matEtc}, pro_etc=#{proEtc}, 
-   		   material_name= #{materialName} , process_name=#{processName}
+   		   set material_Code = #{materialCode}, process_code= #{processCode} , kg = #{kg},etc=#{etc},
  		 where bom_no = #{bomNo}
 	</update>
 	
