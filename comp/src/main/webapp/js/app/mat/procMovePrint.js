@@ -46,7 +46,7 @@ const planGrid = new tui.Grid({
 		}, {
 			header : '지시량',
 			name : 'prorCount',
-			align: 'center',
+			align: 'right',
 			sortable: true
 		}, {
 			header : '작업일자',

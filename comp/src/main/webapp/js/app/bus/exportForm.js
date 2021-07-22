@@ -29,6 +29,7 @@ const grid = new tui.Grid({
 	columns: [{
 		header: '제품코드',
 		name: 'productCode',
+		align: 'center',
 		editor: 'text',
 		validation: {
 			required: true
@@ -40,31 +41,38 @@ const grid = new tui.Grid({
 	}, {
 		header: '제품명',
 		name: 'productName',
+		align: 'center',
 		onAfterChange(ev) {
 			valueInput(ev);
 		}
 	}, {
 		header: '출고코드',
 		name: 'exportCode',
+		align: 'center',
 	},{
 		header: '규격',
-		name: 'stdNo'
+		name: 'stdNo',
+		align: 'center'
 	}, {
 		header: '단위',
-		name: 'unitNo'
+		name: 'unitNo',
+		align: 'center'
 	}, {
 		header: '주문번호',
 		name: 'orderNo',
-		align: 'right'
+		align: 'center'
 	}, {
 		header: '기출고량',
-		name: 'outCount'
+		name: 'outCount',
+		align: 'right'
 	}, {
 		header: '미출고량',
 		name: 'unExportCount',
+		align: 'right'
 	}, {
 		header: '출고량',
 		name: 'exportCount',
+		align: 'right',
 		editor: 'text',
 		validation: {
 			dataType: 'number',
@@ -75,10 +83,12 @@ const grid = new tui.Grid({
 		}
 	}, {
 		header: '현재고',
-		name: 'dayCount'
+		name: 'dayCount',
+		align: 'right'
 	}, {
 		header: '금액',
 		name: 'price',
+		align: 'right',
 		editor: 'text',
 		validation: {
 			dataType: 'number',
@@ -91,10 +101,12 @@ const grid = new tui.Grid({
 	}, {
 		header: '비고',
 		name: 'comments',
+		align: 'center',
 		editor: 'text'
 	}, {
 		header: '순번',
 		name: 'deIdx',
+		align: 'center'
 	}]
 });
 const gridInput = new tui.Grid({

@@ -42,7 +42,7 @@ const grid = new tui.Grid({
 			header : '자재명',
 			name : 'materialName',
 			width : 120,
-			align: 'left',
+			align: 'center',
 			sortable: true
 		}, {
 			header : '발주업체',
@@ -83,7 +83,7 @@ const grid = new tui.Grid({
 			header : '비고',
 			name : 'comments',
 			width : 210,
-			align: 'right'
+			align: 'center'
 		} 
 	],
 	summary : {

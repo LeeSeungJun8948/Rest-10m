@@ -38,6 +38,7 @@ const codeIdGrid = new tui.Grid({
 		}, {
 			header : '코드ID설명',
 			name : 'codeIdDc',
+			align: 'center',
 			hidden: true,
 			validation: {
             	required: true

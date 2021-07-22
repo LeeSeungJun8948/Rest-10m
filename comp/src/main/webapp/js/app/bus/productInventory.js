@@ -15,22 +15,28 @@ const grid = new tui.Grid({
 	scrollY: false,
 	columns: [{
 		header: '제품코드',
-		name: 'productCode'
+		name: 'productCode',
+		align: 'center'
 	}, {
 		header: '제품명',
-		name: 'productName'
+		name: 'productName',
+		align: 'center'
 	},  {
-		header: '제품LOT_NO',
-		name: 'productLot'
+		header: '제품LOT',
+		name: 'productLot',
+		align: 'center'
 	}, {
 		header: '제품재고',
-		name: 'productCount'
+		name: 'productCount',
+		align: 'right'
 	},{
 		header: '규격',
-		name: 'stdNo'
+		name: 'stdNo',
+		align: 'center'
 	}, {
 		header: '단위',
-		name: 'unitNo'
+		name: 'unitNo',
+		align: 'center'
 	},
 	], summary: {
 		height: 40,

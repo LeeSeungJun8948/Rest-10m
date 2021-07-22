@@ -22,23 +22,29 @@ const grid = new tui.Grid({
 	rowHeaders : [ 'checkbox' ],
 	columns : [ {
 		header : '정기점검코드',
-		name : 'inspectionCode'
+		name : 'inspectionCode',
+		align: 'center'
 	}, {
 		header : '설비명',
 		name : 'facilitiesName',
+		align: 'center',
 		validation: { required: true }
 	}, {
 		header : '설비코드',
 		name : 'facCode',
+		align: 'center'
 	},  {
 		header : '설비점검주기',
-		name : 'facInspection'
+		name : 'facInspection',
+		align: 'center'
 	}, {
 		header : '전점검일',
 		name : 'beforeDate',
+		align: 'center'
 	}, {
 		header : '점검일',
 		name : 'today',
+		align: 'center',
 		editor: {
 			type: 'datePicker',
 			options: {
@@ -49,10 +55,12 @@ const grid = new tui.Grid({
 			
 	}, {
 		header : '차기점검일',
-		name : 'afterDate'
+		name : 'afterDate',
+		align: 'center'
 	}, {
 		header : '판정',
 		name : 'judgement',
+		align: 'center',
 		editor: { type: 'select',
         options: {
         listItems: [
@@ -63,6 +71,7 @@ const grid = new tui.Grid({
 	}, {
 		header : '조치사항',
 		name : 'insComment',
+		align: 'center',
 		editor: 'text'
 	}]
 });

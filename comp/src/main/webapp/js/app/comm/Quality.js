@@ -16,46 +16,50 @@ const progrid = new tui.Grid({
 				{
 					header : '제품코드',
 					name : 'productCode',
-					editor : 'text'
+					editor : 'text',
+					align: 'center'
 				}, 
 				{
 					header : '제품명',
 					name : 'productName',
-					editor : 'text'
+					editor : 'text',
+					align: 'center'
 				}, 
 				{
 					header : '규격',
-					name :  'stdId'
-					
+					name :  'stdId',
+					align: 'center'
 				},
 				{
 					header : '규격코드',
-					name :  'stdNo'
-						
+					name :  'stdNo',
+					align: 'center'
 				},
 				{
 					header : '단위',
-					name :  'unitId'
-						
+					name :  'unitId',
+					align: 'center'
 				},
 				{
 					header : '관리단위',
 					name :  'unitNo',
-						
+					align: 'center'
 				},
 				{
 					header : '사원코드',
-					name :  'empCode'
-				
+					name :  'empCode',
+					align: 'center'
 				},
 				{
 					header : '성적서',
-					name :  'qcImg'
+					name :  'qcImg',
+					align: 'center'
 				},
 				
 				{
 					header : '사용여부',
 					name :  'useAt',
+					align: 'center',
 					formatter:'listItemText',
 					editor:{
 						type:'select',

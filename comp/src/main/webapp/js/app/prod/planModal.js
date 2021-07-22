@@ -21,15 +21,19 @@
 				columns: [{
 					header: '생산계획번호',
 					name: 'planCode',
+					align: 'center'
 				}, {
 					header: '계획명',
 					name: 'planName',
+					align: 'center'
 				}, {
 					header: '계획일자',
 					name: 'planDate',
+					align: 'center'
 				}, {
 					header: '특기사항',
 					name: 'comments',
+					align: 'center'
 				}]
 			});
 
