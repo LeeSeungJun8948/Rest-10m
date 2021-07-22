@@ -163,7 +163,7 @@ $(document).ready(function() {
 			<input class="form-control mr-4" name="searchKeyword" type="text"  size="35" title="<spring:message code="title.search" /> <spring:message code="input.input" />" value='<c:out value="${roleManageVO.searchKeyword}"/>'  maxlength="155" >
 			<input type="submit" class="btn-two blue small mr-2" value="<spring:message code="button.inquire" />" title="<spring:message code="title.inquire" /> <spring:message code="input.button" />" onClick="fncSelectRoleList(1);return false;"/><!-- 조회 -->
 			<input type="button" class="btn-two blue small mr-2" onClick="fncRoleListDelete()" value="<spring:message code="title.delete" />" title="<spring:message code="title.delete" /> <spring:message code="input.button" />" /><!-- 삭제 -->
-			<span class="btn-two blue small"><a href="<c:url value='/sec/rmt/EgovRoleInsertView.do'/>" onClick="javascript:fncAddRoleInsert();"  title="<spring:message code="button.create" /> <spring:message code="input.button" />"><spring:message code="button.create" /></a></span><!-- 등록 -->
+			<a class="btn-two blue small" href="<c:url value='/sec/rmt/EgovRoleInsertView.do'/>" onClick="javascript:fncAddRoleInsert();"  title="<spring:message code="button.create" /> <spring:message code="input.button" />"><spring:message code="button.create" /></a><!-- 등록 -->
 		</div>
 	</div>
 

@@ -29,8 +29,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title><spring:message code="comSymPrm.fileNmSearch.title"/></title><!-- 프로그램파일명 검색 -->
-<link href="<c:url value="/css/egovframework/com/com.css"/>" rel="stylesheet" type="text/css">
-<link href="<c:url value="/css/egovframework/com/button.css"/>" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/app/prod/button.css" rel="stylesheet">
 <script type="text/javascript" src="<c:url value='/js/egovframework/com/cmm/jquery-1.4.2.min.js' />" ></script>
 <script language="javascript1.2"  type="text/javaScript">
 <!--
@@ -63,30 +64,32 @@ function choisProgramListSearch(vFileNm) {
 	parentFrom[0].progrmFileNm.value = vFileNm;
     parent.$('.ui-dialog-content').dialog('close');
 }
+
+$(document).ready(function() {
+	  $(".pagination").find("li").find("a").addClass("btn-two blue mini");
+	});
 </script>
 </head>
 <body>
 <form name="progrmManageForm" action ="<c:url value='/sym/prm/EgovProgramListSearchNew.do'/>" method="post">
 <input name="pageIndex" type="hidden" value="<c:out value='${searchVO.pageIndex}'/>"/>
-<div class="board" style="width:480px">
-	<h1><spring:message code="comSymPrm.fileNmSearch.pageTop.title"/></h1><!-- 프로그램파일명 검색 -->
+<div class="board" style="width:950px" align="center">
+	<h4 class="mb-4 mt-4"><spring:message code="comSymPrm.fileNmSearch.pageTop.title"/></h4><!-- 프로그램파일명 검색 -->
 
 	<div class="search_box" title="<spring:message code="common.searchCondition.msg" />"><!-- 이 레이아웃은 하단 정보를 대한 검색 정보로 구성되어 있습니다. -->
-		<ul>
-			<li>
-				<label for=""><spring:message code="comSymPrm.fileNmSearch.progrmNm"/> : </label><!-- 프로그램명 -->
-				<input class="s_input2 vat" name="searchKeyword" type="text"  value='<c:out value="${searchVO.searchKeyword}"/>'  size="30" maxlength="60" title="<spring:message code="title.searchCondition"/>" /><!-- 검색조건 -->
-				
-				<input class="s_btn" type="submit" value='<spring:message code="button.inquire" />' title="<spring:message code="title.inquire"/>" onclick="selectProgramListSearch(); return false;" /><!-- 조회 -->
-			</li>
-		</ul>
+		<div class="form-inline form-group" align="center">
+			<label class="ml-4 mr-4" for=""><spring:message code="comSymPrm.fileNmSearch.progrmNm"/> : </label><!-- 프로그램명 -->
+			<input class="form-control vat mr-4" name="searchKeyword" type="text"  value='<c:out value="${searchVO.searchKeyword}"/>'  size="30" maxlength="60" title="<spring:message code="title.searchCondition"/>" style="width: 50%"/><!-- 검색조건 -->
+					
+			<input class="btn-two blue small" type="submit" value='<spring:message code="button.inquire" />' title="<spring:message code="title.inquire"/>" onclick="selectProgramListSearch(); return false;" /><!-- 조회 -->
+		</div>
 	</div>
 
-	<table class="board_list">
+	<table class="table ml-4" style="width:800px;">
 		<caption></caption>
 		<colgroup>
-			<col style="width:50%" />
-			<col style="width:50%" />
+			<col style="width:20%" />
+			<col style="width:20%" />
 		</colgroup>
 		<thead>
 			<tr>
@@ -107,10 +110,8 @@ function choisProgramListSearch(vFileNm) {
 	</table>
 
 	<!-- paging navigation -->
-	<div class="pagination">
-		<ul>
-			<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="linkPage"/>
-		</ul>
+	<div class="pagination ml-4">
+		<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="linkPage"/>
 	</div>
 </div>
 

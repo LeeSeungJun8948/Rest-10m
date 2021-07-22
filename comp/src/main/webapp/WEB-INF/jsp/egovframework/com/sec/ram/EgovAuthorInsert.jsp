@@ -70,6 +70,7 @@ function fncAuthorDelete() {
 	    varFrom.submit();
 	}
 }
+
 </script>
 </head>
 
@@ -119,7 +120,7 @@ function fncAuthorDelete() {
 	<!-- 하단 버튼 -->
 	<div class="btn">
 		<input type="submit" class="s_submit btn-two blue small mr-4" value="<spring:message code="button.create" />" title="<spring:message code="button.create" /> <spring:message code="input.button" />" /><!-- 등록 -->
-		<span class="btn-two blue small"><a href="<c:url value='/sec/ram/EgovAuthorList.do' />"  title="<spring:message code="button.list" />  <spring:message code="input.button" />"><spring:message code="button.list" /></a></span><!-- 목록 -->
+		<a class="btn-two blue small" href="<c:url value='/sec/ram/EgovAuthorList.do' />"  title="<spring:message code="button.list" />  <spring:message code="input.button" />"><spring:message code="button.list" /></a><!-- 목록 -->
 	</div><div style="clear:both;"></div>
 	
 </div>

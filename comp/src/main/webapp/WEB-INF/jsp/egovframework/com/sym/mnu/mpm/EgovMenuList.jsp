@@ -175,12 +175,12 @@ function checkNumber(str) {
             var pagetitle = $(this).attr("title");
             var page = "<c:url value='/sym/prm/EgovProgramListSearchNew.do'/>";
             var $dialog = $('<div></div>')
-            .html('<iframe style="border: 0px; " src="' + page + '" width="100%" height="100%"></iframe>')
+            .html('<iframe style="border: 10px solid; " src="' + page + '" width="100%" height="100%"></iframe>')
             .dialog({
             	autoOpen: false,
                 modal: true,
-                width: 550,
-                height: 650,
+                width: 950,
+                height: 850,
                 title: pagetitle
         	});
         	$dialog.dialog('open');
@@ -192,12 +192,12 @@ function checkNumber(str) {
             var pagetitle = $(this).attr("title");
             var page = "<c:url value='/sym/mnu/mpm/EgovMenuListSelectMvmnNew.do'/>";
             var $dialog = $('<div style="overflow:hidden;padding: 0px 0px 0px 0px;"></div>')
-            .html('<iframe style="border: 0px; " src="' + page + '" width="100%" height="100%"></iframe>')
+            .html('<iframe style="border: 10px solid; " src="' + page + '" width="100%" height="100%"></iframe>')
             .dialog({
             	autoOpen: false,
                 modal: true,
-                width: 600,
-                height: 550,
+                width: 950,
+                height: 850,
                 title: pagetitle
         	});
         	$dialog.dialog('open');
@@ -223,10 +223,10 @@ function checkNumber(str) {
 
 	<div class="search_box" title="<spring:message code="common.searchCondition.msg" />"><!-- 이 레이아웃은 하단 정보를 대한 검색 정보로 구성되어 있습니다. -->
 		<div class="form-inline form-group mb-4">
-			<span class="btn-two blue small mr-4"><a href="<c:url value='/sym/mnu/mpm/EgovMenuListSelect.do'/>" onclick="initlMenuList(); return false;" title="<spring:message code="button.init" />"><spring:message code="button.init" /></a></span><!-- 초기화 -->
+			<a class="btn-two blue small mr-4" href="<c:url value='/sym/mnu/mpm/EgovMenuListSelect.do'/>" onclick="initlMenuList(); return false;" title="<spring:message code="button.init" />"><spring:message code="button.init" /></a><!-- 초기화 -->
 			<input class="btn-two blue small mr-4" type="submit" value='<spring:message code="button.save" />' title='<spring:message code="button.save" />' onclick="insertMenuList(); return false;" />
-			<span class="btn-two blue small mr-4"><a href="#LINK" onclick="updateMenuList(); return false;" title='<spring:message code="button.update" />'><spring:message code="button.update" /></a></span>
-			<span class="btn-two blue small mr-4"><a href="#LINK" onclick="deleteMenuList(); return false;" title='<spring:message code="button.delete" />'><spring:message code="button.delete" /></a></span>
+			<a class="btn-two blue small mr-4" href="#LINK" onclick="updateMenuList(); return false;" title='<spring:message code="button.update" />'><spring:message code="button.update" /></a>
+			<a class="btn-two blue small mr-4" href="#LINK" onclick="deleteMenuList(); return false;" title='<spring:message code="button.delete" />'><spring:message code="button.delete" /></a>
 		</div>
 	</div>
 </div>
@@ -319,17 +319,21 @@ function checkNumber(str) {
 		  <tr>
 		    <th><spring:message code="comSymMnuMpm.menuList.upperMenuId" /> <span class="pilsu" style="color: red">*</span></th><!-- 상위메뉴No -->
 		    <td class="left">
-		    <input class="form-control" name="upperMenuId" type="text" value=""  maxlength="10" title="<spring:message code="comSymMnuMpm.menuList.upperMenuId" />"  style="width: 50%"/>
-	        <a id="popupUpperMenuId" href="/sym/mnu/mpm/EgovMenuListSelectMvmn.do" target="_blank" title="<spring:message code="comSymMnuMpm.menuList.upperMenuId" />" style="selector-dummy:expression(this.hideFocus=false);"><img src="<c:url value='/images/egovframework/com/cmm/icon/search2.gif' />"
-	         alt='' width="15" height="15" />(<spring:message code="comSymMnuMpm.menuList.mvmnMenuList" />)</a><!-- 메뉴선택 검색 -->
+		    <div class="form-inline form-group">
+			    <input class="form-control mr-2" name="upperMenuId" type="text" value=""  maxlength="10" title="<spring:message code="comSymMnuMpm.menuList.upperMenuId" />"  style="width: 50%"/>
+		        <a id="popupUpperMenuId" href="/sym/mnu/mpm/EgovMenuListSelectMvmn.do" target="_blank" title="<spring:message code="comSymMnuMpm.menuList.upperMenuId" />" style="selector-dummy:expression(this.hideFocus=false);"><img src="<c:url value='/images/app/all/btn_search.png' />"
+		         alt='' width="15" height="15" /></a><!-- 메뉴선택 검색 -->
+	         </div>
 		    </td>
 		  </tr>
 		  <tr>
 		    <th><spring:message code="comSymMnuMpm.menuList.progrmFileNm" /> <span class="pilsu" style="color: red">*</span></th><!-- 파일명 -->
 		    <td class="left">
-	        <input class="form-control" name="progrmFileNm" type="text" size="30" value=""  maxlength="60" title="<spring:message code="comSymMnuMpm.menuList.progrmFileNm" />"  style="width: 50%"/>
-	        <a id="popupProgrmFileNm" href="/sym/prm/EgovProgramListSearch.do" target="_blank" title="<spring:message code="comSymMnuMpm.menuList.progrmFileNm" />" style="selector-dummy:expression(this.hideFocus=false);"><img src="<c:url value='/images/egovframework/com/cmm/icon/search2.gif' />"
-	         alt='' width="15" height="15" />(<spring:message code="comSymMnuMpm.menuList.searchFileNm" />)</a>
+		    <div class="form-inline form-group">
+		        <input class="form-control mr-2" name="progrmFileNm" type="text" size="30" value=""  maxlength="60" title="<spring:message code="comSymMnuMpm.menuList.progrmFileNm" />"  style="width: 50%"/>
+		        <a id="popupProgrmFileNm" href="/sym/prm/EgovProgramListSearch.do" target="_blank" title="<spring:message code="comSymMnuMpm.menuList.progrmFileNm" />" style="selector-dummy:expression(this.hideFocus=false);"><img src="<c:url value='/images/app/all/btn_search.png' />"
+		         alt='' width="15" height="15" /></a>
+	         </div>
 		    </td>
 		  </tr>
 		  <tr>

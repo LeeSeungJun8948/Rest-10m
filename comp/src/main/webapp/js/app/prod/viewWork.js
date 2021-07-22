@@ -44,10 +44,6 @@ const workGrid = new tui.Grid({
 		name: 'errorCode',
 		hidden: true
 		}, {
-		header: '불량명',
-		name: 'errorName',
-		hidden: true
-		}, {
 		header: '사원이름',
 		name: 'empName',
 		hidden: true
@@ -80,7 +76,10 @@ const workGrid = new tui.Grid({
 		}, {
 		header: '불량량',
 		name: 'errorCount',
-		}], summary: {
+		}, {
+		header: '불량명',
+		name: 'errorName',
+		}, ], summary: {
 			height: 40,
 			position: 'bottom',
 			columnContent: {
