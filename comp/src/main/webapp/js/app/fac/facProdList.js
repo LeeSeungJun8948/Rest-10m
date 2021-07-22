@@ -12,16 +12,20 @@ const dataSource = {
 			scrollY : false,
 			columns : [ {
 				header : '작업일자',
-				name : 'workDate'
+				name : 'workDate',
+				align: 'center'
 			}, {
 				header : '설비명',
-				name : 'facilitiesName'
+				name : 'facilitiesName',
+				align: 'center'
 			}, {
 				header : '제품명',
-				name : 'productName'
+				name : 'productName',
+				align: 'center'
 			}, {
 				header : '제품LOT',
-				name : 'productLot'
+				name : 'productLot',
+				align: 'center'
 			}]
 		});
 		

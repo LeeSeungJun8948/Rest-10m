@@ -29,8 +29,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title><spring:message code="comSymPrm.fileNmSearch.title"/></title><!-- 프로그램파일명 검색 -->
-<link href="<c:url value="/css/egovframework/com/com.css"/>" rel="stylesheet" type="text/css">
-<link href="<c:url value="/css/egovframework/com/button.css"/>" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<c:url value='/js/egovframework/com/cmm/jquery-1.4.2.min.js' />" ></script>
 <script language="javascript1.2"  type="text/javaScript">
 <!--
@@ -63,6 +61,9 @@ function choisProgramListSearch(vFileNm) {
     window.close();
 }
 -->
+$(document).ready(function() {
+	  $(".pagination").find("li").find("a").addClass("btn-two blue mini");
+	});
 </script>
 </head>
 <body>
@@ -76,14 +77,14 @@ function choisProgramListSearch(vFileNm) {
 		<ul>
 			<li>
 				<label for=""><spring:message code="comSymPrm.fileNmSearch.progrmFileNm"/> : </label><!-- 프로그램파일명 -->
-				<input class="s_input2 vat" name="searchKeyword" type="text" value="" size="30" maxlength="60" title="<spring:message code="title.searchCondition"/>" /><!-- 검색조건 -->
+				<input class="form-control vat" name="searchKeyword" type="text" value="" size="30" maxlength="60" title="<spring:message code="title.searchCondition"/>" /><!-- 검색조건 -->
 				
-				<input class="s_btn" type="submit" value='<spring:message code="button.inquire" />' title="<spring:message code="title.inquire"/>" onclick="selectProgramListSearch(); return false;" /><!-- 조회 -->
+				<input class="btn-two blue" type="submit" value='<spring:message code="button.inquire" />' title="<spring:message code="title.inquire"/>" onclick="selectProgramListSearch(); return false;" /><!-- 조회 -->
 			</li>
 		</ul>
 	</div>
 
-	<table class="board_list">
+	<table class="table">
 		<caption></caption>
 		<colgroup>
 			<col style="width:50%" />
@@ -109,9 +110,7 @@ function choisProgramListSearch(vFileNm) {
 
 	<!-- paging navigation -->
 	<div class="pagination">
-		<ul>
 			<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="linkPage"/>
-		</ul>
 	</div>
 </div>
 

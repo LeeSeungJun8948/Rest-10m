@@ -13,9 +13,11 @@
 					
 					columns : [ {
 						header : '규격코드',
-						name : 'codeId'
+						name : 'codeId',
+						align: 'center'
 					}, {
 						header : '규격',
-						name : 'code'
+						name : 'code',
+						align: 'center'
 					}]
 				});

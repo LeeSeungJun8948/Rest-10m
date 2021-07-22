@@ -18,36 +18,47 @@ const grid = new tui.Grid({
 	columns: [ {
 		header: '지시일자',
 		name: 'prorDate',
+		align: 'center'
 		}, {
 		header: '지시명',
-		name: 'prorName'
+		name: 'prorName',
+		align: 'center'
 		}, {
 		header: '제품코드',
 		name: 'productCode',
+		align: 'center'
 		}, {
 		header: '제품명',
 		name: 'productName',
+		align: 'center'
 		}, {
 		header: '주문번호',
 		name: 'orderNo',
+		align: 'center'
 		}, {
 		header: '업체명',
 		name: 'companyName',
+		align: 'center'
 		}, {
 		header: '납기일자',
 		name: 'outDate',
+		align: 'center'
 		}, {
 		header: '주문량',
 		name: 'orderCount',
+		align: 'right'
 		}, {
 		header: '지시량',
 		name: 'prorCount',
+		align: 'right'
 		}, {
 		header: '작업일자',
 		name: 'workDate',
+		align: 'center'
 		}, {
 		header: '비고',
 		name: 'comments',
+		align: 'center'
 		}], summary: {
 			height: 40,
 			position: 'bottom',

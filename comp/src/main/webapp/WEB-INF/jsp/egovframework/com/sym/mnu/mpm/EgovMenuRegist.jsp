@@ -129,12 +129,12 @@ function press() {
             var pagetitle = $(this).attr("title");
             var page = "<c:url value='/sym/prm/EgovProgramListSearchNew.do'/>";
             var $dialog = $('<div></div>')
-            .html('<iframe style="border: 0px; " src="' + page + '" width="100%" height="100%"></iframe>')
+            .html('<iframe style="border: 10px solid; " src="' + page + '" width="100%" height="100%"></iframe>')
             .dialog({
             	autoOpen: false,
                 modal: true,
-                width: 550,
-                height: 650,
+                width: 950,
+                height: 850,
                 title: pagetitle
         	});
         	$dialog.dialog('open');
@@ -146,12 +146,12 @@ function press() {
             var pagetitle = $(this).attr("title");
             var page = "<c:url value='/sym/mnu/mpm/EgovMenuListSelectMvmnNew.do'/>";
             var $dialog = $('<div style="overflow:hidden;padding: 0px 0px 0px 0px;"></div>')
-            .html('<iframe style="border: 0px; " src="' + page + '" width="100%" height="100%"></iframe>')
+            .html('<iframe style="border: 10px solid; " src="' + page + '" width="100%" height="100%"></iframe>')
             .dialog({
             	autoOpen: false,
                 modal: true,
-                width: 610,
-                height: 550,
+                width: 950,
+                height: 850,
                 title: pagetitle
         	});
         	$dialog.dialog('open');
@@ -192,35 +192,39 @@ function press() {
 		<tr>
 			<th><spring:message code="comSymMnuMpm.menuRegist.menuNm"/> <span class="pilsu" style="color: red">*</span></th><!-- 메뉴명 -->
 			<td class="left">
-			    <form:input class="form-control" path="menuNm" maxlength="30" title="<spring:message code='comSymMnuMpm.menuRegist.menuNm'/>" style="width: 40%"/><!-- 메뉴명 -->
+			    <form:input class="form-control" path="menuNm" maxlength="30" title="<spring:message code='comSymMnuMpm.menuRegist.menuNm'/>" style="width: 50%"/><!-- 메뉴명 -->
       			<form:errors path="menuNm" />
 			</td>
 			<th><spring:message code="comSymMnuMpm.menuRegist.upperMenuId"/> <span class="pilsu" style="color: red">*</span></th><!-- 상위메뉴No -->
 			<td class="left">
-			    <form:input path="upperMenuId" maxlength="10" title="<spring:message code='comSymMnuMpm.menuRegist.upperMenuId'/>" readonly="true" class="readOnlyClass form-control" cssStyle="width:150px" /><!-- 상위메뉴No -->
-				<form:errors path="upperMenuId" />
-				<a id="popupUpperMenuId" href="<c:url value='/sym/mnu/mpm/EgovMenuListSelectMvmn.do' />" target="_blank" title="<spring:message code="comSymMnuMpm.menuRegist.newWindow"/>"><img src="<c:url value='/images/egovframework/com/cmm/icon/search2.gif' />"
-				alt='' />(<spring:message code="comSymMnuMpm.menuRegist.selectMenuSearch"/>)</a><!-- 새창으로 --><!-- 메뉴선택 검색 -->
+				<div class="form-inline form-group">
+				    <form:input path="upperMenuId" maxlength="10" title="<spring:message code='comSymMnuMpm.menuRegist.upperMenuId'/>" readonly="true" class="readOnlyClass form-control mr-2" cssStyle="width:150px" /><!-- 상위메뉴No -->
+					<form:errors path="upperMenuId" />
+					<a id="popupUpperMenuId" href="<c:url value='/sym/mnu/mpm/EgovMenuListSelectMvmn.do' />" target="_blank" ><img src="<c:url value='/images/app/all/btn_search.png' />"
+					alt='' /></a><!-- 새창으로 --><!-- 메뉴선택 검색 -->
+				</div>
 			</td>
 		</tr>
 		<tr>
 			<th><spring:message code="comSymMnuMpm.menuRegist.progrmFileNm"/> <span class="pilsu" style="color: red">*</span></th><!--  -->
 			<td class="left" colspan="3">
-			    <form:input path="progrmFileNm" maxlength="60" onkeypress="press();" title="파일명" readonly="true" class="readOnlyClass form-control" style="width: 40%"/><!-- 파일명 -->
-			    <form:errors path="progrmFileNm" />
-		        <a id="popupProgrmFileNm" href="<c:url value='/sym/prm/EgovProgramListSearch.do'/>?tmp_SearchElementName=progrmFileNm" target="_blank" title="<spring:message code="comSymMnuMpm.menuRegist.newWindow"/>">
-					<img src="<c:url value='/images/egovframework/com/cmm/icon/search2.gif' />" alt='' />(<spring:message code="comSymMnuMpm.menuRegist.programFileNameSearch"/>)</a><!-- 새창으로 --><!-- 프로그램파일명 검색 -->
+				<div class="form-inline form-group">
+				    <form:input path="progrmFileNm" maxlength="60" onkeypress="press();" title="파일명" readonly="true" class="readOnlyClass form-control mr-2" style="width: 40%"/><!-- 파일명 -->
+				    <form:errors path="progrmFileNm" />
+			        <a id="popupProgrmFileNm" href="<c:url value='/sym/prm/EgovProgramListSearch.do'/>?tmp_SearchElementName=progrmFileNm" target="_blank" >
+						<img src="<c:url value='/images/app/all/btn_search.png' />" alt='' /></a><!-- 새창으로 --><!-- 프로그램파일명 검색 -->
+				</div>
 			</td>
 		</tr>
 		<tr>
 			<th><spring:message code="comSymMnuMpm.menuRegist.relateImageNm"/> <span class="pilsu" style="color: red">*</span></th><!-- 관련이미지명 -->
 			<td class="left">
-			    <form:input class="form-control" path="relateImageNm" maxlength="30" title="<spring:message code='comSymMnuMpm.menuRegist.relateImageNm'/>"  style="width: 87%"/><!-- 관련이미지명 -->
+			    <form:input class="form-control" path="relateImageNm" maxlength="30" title="<spring:message code='comSymMnuMpm.menuRegist.relateImageNm'/>"  style="width: 94%"/><!-- 관련이미지명 -->
 	      		<form:errors path="relateImageNm" />
 			</td>
 			<th><spring:message code="comSymMnuMpm.menuRegist.relateImagePath"/> <span class="pilsu" style="color: red">*</span></th><!-- 관련이미지경로 -->
 			<td class="left">
-			    <form:input class="form-control" path="relateImagePath" maxlength="30" title="<spring:message code='comSymMnuMpm.menuRegist.relateImagePath'/>"  style="width: 87%"/><!-- 관련이미지경로 -->
+			    <form:input class="form-control" path="relateImagePath" maxlength="30" title="<spring:message code='comSymMnuMpm.menuRegist.relateImagePath'/>"  style="width: 94%"/><!-- 관련이미지경로 -->
 	      		<form:errors path="relateImagePath" />
 			</td>
 		</tr>
@@ -235,8 +239,8 @@ function press() {
 
 	<!-- 하단 버튼 -->
 	<div class="btn">
-		<input class="btn-two blue small mr-4" type="submit" value='<spring:message code="button.create" />' onclick="insertMenuManage(document.forms[0]); return false;" /><!-- 등록 -->
-		<span class="btn-two blue small mr-4"><a href="<c:url value='/sym/mnu/mpm/EgovMenuManageSelect.do'/>" onclick="selectList(); return false;"><spring:message code="button.list"/></a></span><!-- 목록 -->
+		<input class="btn-two blue small mr-2" type="submit" value='<spring:message code="button.create" />' onclick="insertMenuManage(document.forms[0]); return false;" /><!-- 등록 -->
+		<a class="btn-two blue small mr-2" href="<c:url value='/sym/mnu/mpm/EgovMenuManageSelect.do'/>" onclick="selectList(); return false;"><spring:message code="button.list"/></a><!-- 목록 -->
 	</div>
 	<div style="clear:both;"></div>
 </div>

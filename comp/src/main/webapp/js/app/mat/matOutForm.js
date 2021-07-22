@@ -97,7 +97,7 @@ const grid = new tui.Grid({
 			width : 70,
 			align: 'center'
 		}, {
-			header : '자재LOT_NO',
+			header : '자재LOT',
 			name : 'lotNo',
 			width : 150,
 			align: 'center',

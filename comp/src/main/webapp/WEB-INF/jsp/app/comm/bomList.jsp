@@ -35,70 +35,66 @@
 <body>
 	<div class="flex row">
 		<div class="col-8">
-			<h1>제품BOM관리</h1>
+			<h3 class="mb-4">제품BOM관리</h3>
 		</div>
-		<div class="col-4" align="right">
+	</div>
+	<div>
+		<div align="right" class="mb-4">
 			 <form id = "deletefrm" name="deletefrm" role="form" method="post">
 				<input id="productCode2" name="productCode" type="hidden"
 					value="${info.productCode }">
 			</form>
 			<button type="reset" class="btn-two blue small" id="btnNew">초기화</button>
 			<button type="button" class="btn-two blue small" id="btnInsert">저장</button>
-			<button type="button" class="btn-two blue small" id="delBom">Bom삭제</button>
+			<button type="button" class="btn-two blue small" id="delBom">삭제</button>
 			
 		</div>
 	</div>
-	<div class="flex row">
-		<div class="input-group-prepend col-4">
-			<span class="input-group-text">제품코드</span>
+	<div style="width: 65%;">
+		<table class="table" >
+			<tr>
+			<th width="100px;">제품코드</th>
+			<td width="280px;">
+			<div class="form-inline form-group">
 			<form id="searchCheck" name="searchCheck" class="form w-a">
 				<input readonly id="pdc" name="productCode" type="text"
-					value="${info.productCode }" class="form-control w-50"
-					aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-					style="float: left">
+					value="${info.productCode }" class="form-control">
 			</form>
-			<a id="search" href="modal.do" rel="modal:open"> <img
+			<a class="ml-2" id="search" href="modal.do" rel="modal:open"> <img
 				alt="btn_search"
 				src="<c:url value='/images/app/all/btn_search.png'/>">
 			</a>
-		</div>
-		<div class="input-group-prepend col-4">
-			<span class="input-group-text">제품명</span> <input id="pdn"
-				name="productName" type="text" value="${info.productName }"
-				class="form-control w-50" aria-label="Small"
-				aria-describedby="inputGroup-sizing-sm">
-		</div>
-		<div class="input-group-prepend col-4">
-			<span class="input-group-text">규격</span> <input id="unitNo"
-				name="unitNo" type="text" value="${info.unitNo }"
-				class="form-control w-20" aria-label="Small"
-				aria-describedby="inputGroup-sizing-sm">
-		</div>
-
-		<div class="col-12" style="margin-bottom: 10px; top: 10px;"></div>
-
-		<div class="input-group-prepend col-4">
-			<span class="input-group-text">회사코드</span> <input id="companyCode"
-				name="companyCode" type="text" value="${compList.compCode }"
-				class="form-control w-30" aria-label="Small"
-				aria-describedby="inputGroup-sizing-sm">
-		</div>
-		<div class="input-group-prepend col-4">
-			<span class="input-group-text">회사명</span> <input id="companyName"
-				name="companyName" type="text" value="${compList.compName }"
-				class="form-control w-50" aria-label="Small"
-				aria-describedby="inputGroup-sizing-sm">
-		</div>
-	
-
+			</div>
+			</td>
+			<th width="100px;">제품명</th>
+			<td width="280px;"> 
+			<input id="pdn"
+				name="productName" type="text" value="${info.productName }" class="form-control">
+			</td>
+			<th width="100px;">규격</th>
+			<td width="280px;"> <input id="unitNo"
+				name="unitNo" type="text" value="${info.unitNo }" class="form-control">
+		</td>
+		</tr>
+		<tr>
+			<th>회사코드</th>
+			<td> <input id="companyCode"
+				name="companyCode" type="text" value="${compList.compCode }" class="form-control">
+			</td>
+			<th>회사명</th>
+			<td> <input id="companyName"
+				name="companyName" type="text" value="${compList.compName }" class="form-control">
+				</td>
+				</tr>
+		</table>
 	</div>
 	<div class="flex row" style="margin-top: 40px">
 		<div class="col-8">
-			<h3>제품 소요량 관리</h3>
+			<h4 class="mb-4">제품 소요량 관리</h4>
 		</div>
 		<div class="col-4" align="right">
 			
-			<button type="button" class="btn-two blue small" id="btnRowInsert">행추가</button>
+			<button type="button" class="btn-two blue small" id="btnRowInsert">추가</button>
 			<button type="button" class="btn-two blue small" id="btnDelete">삭제</button>
 		</div>
 	</div>

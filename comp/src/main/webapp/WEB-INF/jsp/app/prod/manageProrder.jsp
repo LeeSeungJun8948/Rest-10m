@@ -55,7 +55,7 @@
 <div class="col-lg-12">
 	<div id="grid"></div>
 </div>
-<br><br><br><br>
+<br><br><br>
 <div>
 	<form>
 		<div class="table">

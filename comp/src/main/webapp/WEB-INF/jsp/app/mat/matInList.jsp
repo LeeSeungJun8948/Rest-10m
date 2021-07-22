@@ -13,14 +13,14 @@
 	<div class="col-md-8">
 		<h1 class="h3 mb-4 text-gray-700">자재 입고 조회</h1>
 	</div>
-	<div class="col-md-4 mb-4" align="right">
+</div>
+	<div align="right">
 		<form id="frmExcel" name="frmExcel" action="${pageContext.request.contextPath}/mat/view/matInExcel.do" method="post">
 			<button type="button" class="btn-two small blue" id="btnExcel">엑셀</button>
 			<input type="hidden" id="param" name="param">
 			<button type="button" class="btn-two blue small" id="btnRead">조회</button>
 		</form>
 	</div>
-</div>
 
 <form id="searchFrm" name="searchFrm">
 	<div class="row">
@@ -28,7 +28,7 @@
 			<table class="table">
 				<tbody>
 					<tr>
-						<th>입고일자*</th>
+						<th>입고일자<span style="color: red">*</span></th>
 						<td>
 							<div class="row">
 								<div class="col-md-5">

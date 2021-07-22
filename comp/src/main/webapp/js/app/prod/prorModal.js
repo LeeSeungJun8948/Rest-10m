@@ -21,15 +21,19 @@
 				columns: [{
 					header: '생산지시번호',
 					name: 'prorCode',
+					align: 'center'
 				}, {
 					header: '지시명',
 					name: 'prorName',
+					align: 'center'
 				}, {
 					header: '지시일자',
 					name: 'prorDate',
+					align: 'center'
 				}, {
 					header: '특기사항',
 					name: 'comments',
+					align: 'center'
 				}]
 			});
 

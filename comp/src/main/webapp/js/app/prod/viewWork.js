@@ -44,10 +44,6 @@ const workGrid = new tui.Grid({
 		name: 'errorCode',
 		hidden: true
 		}, {
-		header: '불량명',
-		name: 'errorName',
-		hidden: true
-		}, {
 		header: '사원이름',
 		name: 'empName',
 		hidden: true
@@ -62,25 +58,36 @@ const workGrid = new tui.Grid({
 		}, {
 		header: '작업공정',
 		name: 'processName',
+		align: 'center'
 		}, {
 		header: '작업일자',
 		name: 'workDate',
+		align: 'center'
 		}, {
 		header: '제품코드',
 		name: 'productCode',
+		align: 'center'
 		}, {
 		header: '제품명',
 		name: 'productName',
+		align: 'center'
 		}, {
 		header: '제품LOT',
 		name: 'productLot',
+		align: 'center'
 		}, {
 		header: '작업량',
 		name: 'workCount',
+		align: 'right'
 		}, {
 		header: '불량량',
 		name: 'errorCount',
-		}], summary: {
+		align: 'right'
+		}, {
+		header: '불량명',
+		name: 'errorName',
+		align: 'center'
+		}, ], summary: {
 			height: 40,
 			position: 'bottom',
 			columnContent: {

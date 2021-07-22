@@ -20,7 +20,7 @@
 				scrollY : true,
 				bodyHeight: 360,
 				columns : [ {
-					header : 'LOT_NO',
+					header : 'LOT',
 					name : 'lotNo',
 					align: 'center',
 					sortable: true

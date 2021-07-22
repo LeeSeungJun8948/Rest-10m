@@ -19,39 +19,51 @@ const grid = new tui.Grid({
 	columns: [{
 		header: '출고일자',
 		name: 'exportDate',
+		align: 'center'
 	}, {
 		header: '제품코드',
 		name: 'productCode',
+		align: 'center'
 	}, {
 		header: '제품명',
 		name: 'productName',
+		align: 'center'
 	}, {
 		header: '출고코드',
 		name: 'exportCode',
+		align: 'center'
 	}, {
 		header: '규격',
-		name: 'stdNo'
+		name: 'stdNo',
+		align: 'center'
 	}, {
 		header: '단위',
-		name: 'unitNo'
+		name: 'unitNo',
+		align: 'center'
 	}, {
 		header: '주문번호',
 		name: 'orderNo',
+		align: 'center'
 	}, {
 		header: '업체명',
 		name: 'companyName',
+		align: 'center'
 	}, {
 		header: '주문량',
-		name: 'orderCount'
+		name: 'orderCount',
+		align: 'right'
 	}, {
 		header: '출고량',
 		name: 'exportCount',
+		align: 'right'
 	}, {
 		header: '금액',
 		name: 'price',
+		align: 'right'
 	}, {
 		header: '비고',
 		name: 'comments',
+		align: 'center'
 	}]
 });
 

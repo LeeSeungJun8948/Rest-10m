@@ -34,10 +34,10 @@
 			<!-- 필요한것 집어넣기 BODY 부분 -->
 			<div id=matCodeGrid style="margin-top: 20px"></div>
 			<div class="modal-footer">
-			<a href="#" rel="modal:close" ><button class="btn-two blue small">닫기</button></a>
 				<button id=btnSelect type="button"
-					class="btn-two blue small">검색</button>
+					class="btn-two cyan small">선택</button>
 				</div>
+			<a href="#" rel="modal:close" ><button class="btn-two blue small">닫기</button></a>
 			</div>
 		</div>
 	</div>
