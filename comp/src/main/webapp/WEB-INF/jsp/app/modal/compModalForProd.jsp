@@ -38,7 +38,7 @@
 					<div class="col-md-3 ml-0">
 						<input class="form-check-input" type="radio" name="compNo"
 							id="compNo2" value="04"> <label class="form-check-label"
-							for="compNo2">자재업체</label>
+							for="compNo2">주문업체</label>
 					</div>
 				</div>
 			</form>

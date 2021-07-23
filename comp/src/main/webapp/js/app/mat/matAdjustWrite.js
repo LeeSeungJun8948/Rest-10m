@@ -12,7 +12,6 @@ toastr.options = {
 	showDuration: "500",
 	 positionClass: "toast-top-center"
  };
-toastr.info('재고 열 더블클릭 혹은 선택 후 작성');
 
 $("#ckExceptZeroStock").change(function(){
 	if($("#ckExceptZeroStock").is(":checked")){
@@ -331,14 +330,21 @@ $("#btnSave").on("click", function(){
 	
 	if(adjustGrid.validate().length == 0){
 		
-		adjustGrid.request('modifyData');
+		if(confirm('저장하시겠습니까?')){
+			adjustGrid.request('modifyData', {
+	            showConfirm: false
+	         });
+			toastr.success("저장되었습니다.");
+			
+			var param = $('#searchFrm').serializeObject();
+			console.log(param)
+			stockGrid.readData(1, param, true);
+	
+			adjustGrid.resetData([],{});
 		
-		var param = $('#searchFrm').serializeObject();
-		console.log(param)
-		stockGrid.readData(1, param, true);
+		}
+		
 
-		adjustGrid.resetData([],{});
-		alert('작성완료');
 	}
 
 });
