@@ -49,7 +49,8 @@ const codeIdGrid = new tui.Grid({
 			hidden: true,
 			validation: {
             	required: true
-          	}
+          	},	
+			width : 100
 		} ]
 });
 
@@ -187,8 +188,6 @@ $('#btnSrc').on('click',function(){
 // 코드 선택
 function grinOnEvent(){
 	
-
-	
 	$('#codeId').val(codeIdGrid.getValue(idRowKey, 'codeId'));
 	$('#codeIdNm').val(codeIdGrid.getValue(idRowKey, 'codeIdNm'));
 	$('#codeIdDc').val(codeIdGrid.getValue(idRowKey, 'codeIdDc'));
@@ -207,7 +206,7 @@ $('#btnNewCodeId').on('click', function(){
 		newRowKey = codeIdGrid.getRowCount();
 		idRowKey = newRowKey;
 		
-		codeIdGrid.appendRow({},{
+		codeIdGrid.appendRow({"codeIdUseAt" : 'Y'},{
 			at : codeIdGrid.getRowCount(),
 			focus : true
 		});
@@ -285,22 +284,24 @@ $('#btnSave').on('click',function(){
 		}
 	}
 			
-	if(change && codeIdGrid.validate().length == 0 && codeGrid.validate().length == 0){
-		codeIdGrid.request('modifyData');
-		toastr.success("저장되었습니다.");
-		newRowKey = null;
-		change = false;
+	if(codeIdGrid.validate().length == 0 && codeGrid.validate().length == 0){
+		
+		if(confirm('저장하시겠습니까?')){
+			codeIdGrid.request('modifyData', {
+	            showConfirm: false
+	         });
+			codeGrid.request('modifyData', {
+	            showConfirm: false
+	         });
+			toastr.success("저장되었습니다.");
+			newRowKey = null;
+		}
 	}
 	
 	for(modified in codeGrid.getModifiedRows()){
 		if(codeGrid.getModifiedRows()[modified].length > 0){
 			change = true;
 		}
-	}
-	
-	if(change && codeIdGrid.validate().length == 0 && codeGrid.validate().length == 0){
-		codeGrid.request('modifyData');
-		toastr.success("저장되었습니다.");
 	}
 })
 

@@ -227,8 +227,12 @@ $("#btnSave").on("click", function(){
 	}
 	
 	if(grid.validate().length == 0){
-		grid.request('modifyData');
-		toastr.success("저장되었습니다.");
+		if(confirm('저장하시겠습니까?')){
+			grid.request('modifyData', {
+	            showConfirm: false
+	         });
+			toastr.success("저장되었습니다.");
+		}
 	}
 
 });
