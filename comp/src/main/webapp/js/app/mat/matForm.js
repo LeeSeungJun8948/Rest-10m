@@ -203,6 +203,7 @@ $('#btnSave').on('click',function(){
 	
 	if(grid.validate().length == 0)
 		grid.request('modifyData');
+		toastr.success("저장되었습니다.");
 	
 });
 	

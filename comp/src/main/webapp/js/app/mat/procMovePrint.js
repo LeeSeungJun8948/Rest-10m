@@ -47,7 +47,10 @@ const planGrid = new tui.Grid({
 			header : '지시량',
 			name : 'prorCount',
 			align: 'right',
-			sortable: true
+			sortable: true,
+			formatter({value}) {
+      			return format(value);
+    		},
 		}, {
 			header : '작업일자',
 			name : 'workDate',
@@ -153,7 +156,7 @@ planGrid.on('click',function(ev){
 				};
 				inputGrid.appendRow(newRowData, {
 					at : inputGrid.getRowCount(),
-					focus : true
+					focus : false
 				});
 			}
 		},
@@ -180,7 +183,7 @@ planGrid.on('click',function(ev){
 				};
 				procGrid.appendRow(newRowData, {
 					at : procGrid.getRowCount(),
-					focus : true
+					focus : false
 				});
 			}
 		},

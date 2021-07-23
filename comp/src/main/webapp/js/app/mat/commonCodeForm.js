@@ -287,6 +287,7 @@ $('#btnSave').on('click',function(){
 			
 	if(change && codeIdGrid.validate().length == 0 && codeGrid.validate().length == 0){
 		codeIdGrid.request('modifyData');
+		toastr.success("저장되었습니다.");
 		newRowKey = null;
 		change = false;
 	}
@@ -299,6 +300,7 @@ $('#btnSave').on('click',function(){
 	
 	if(change && codeIdGrid.validate().length == 0 && codeGrid.validate().length == 0){
 		codeGrid.request('modifyData');
+		toastr.success("저장되었습니다.");
 	}
 })
 
