@@ -9,7 +9,7 @@
 		</div>
 		<div class="col-md-4 mb-4" align="right" role="form">
 			<button type="button" class="btn-two blue small" id="btnRead">조회</button>
-			<input type="submit" class="btn-two blue small" id="btnExcel" value="엑셀">
+			<input type="submit" class="btn-two blue small" id="btnExcel" value="Excel">
 		</div>
 	</div>
 	<div class="row">

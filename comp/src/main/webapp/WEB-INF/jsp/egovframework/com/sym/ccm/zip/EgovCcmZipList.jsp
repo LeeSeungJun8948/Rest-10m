@@ -62,7 +62,7 @@ function fn_egov_regist_Zip(no){
 	varForm.submit();
 }
 /* ********************************************************
- * 엑셀등록 처리 함수
+ * Excel등록 처리 함수
  ******************************************************** */
 function fn_egov_regist_ExcelZip(no){
 //	location.href = "<c:url value='/sym/ccm/zip/EgovCcmExcelZipRegist.do' />";
@@ -153,8 +153,8 @@ function fn_egov_list(){
 		    <li style="margin-top:5px;">
 		    <input type="submit" class="s_btn" value="<spring:message code="comSymCcmZip.zipVO.SearchAddrr" /> <spring:message code="title.create" />" onclick="fn_egov_regist_Zip(1); return false;">	<!-- 일반주소 등록 -->
 		    <input type="submit" class="s_btn" value="<spring:message code="comSymCcmZip.zipVO.SearchRdmn" /> <spring:message code="title.create" />" onclick="fn_egov_regist_Zip(2); return false;">	<!-- 도로명주소 등록 -->
-		    <input type="submit" class="s_btn" value="<spring:message code="comSymCcmZip.zipVO.SearchAddrr" /> <spring:message code="comSymCcmZip.zipVO.excelFile" /> <spring:message code="title.create" />" onclick="fn_egov_regist_ExcelZip(1); return false;">	<!-- 일반주소 엑셀파일 등록 -->
-		    <input type="submit" class="s_btn" value="<spring:message code="comSymCcmZip.zipVO.SearchRdmn" /> <spring:message code="comSymCcmZip.zipVO.excelFile" /> <spring:message code="title.create" />" onclick="fn_egov_regist_ExcelZip(2); return false;">	<!-- 도로명주소 엑셀파일 등록 -->
+		    <input type="submit" class="s_btn" value="<spring:message code="comSymCcmZip.zipVO.SearchAddrr" /> <spring:message code="comSymCcmZip.zipVO.excelFile" /> <spring:message code="title.create" />" onclick="fn_egov_regist_ExcelZip(1); return false;">	<!-- 일반주소 Excel파일 등록 -->
+		    <input type="submit" class="s_btn" value="<spring:message code="comSymCcmZip.zipVO.SearchRdmn" /> <spring:message code="comSymCcmZip.zipVO.excelFile" /> <spring:message code="title.create" />" onclick="fn_egov_regist_ExcelZip(2); return false;">	<!-- 도로명주소 Excel파일 등록 -->
 		    </li>
 	  	<ul>
 	  </div>

@@ -6,7 +6,7 @@
 <form id="searchFrm" name="searchFrm" method="post" action="exportExcel.do">
 	<div class="mb-4" align="right">
 		<button type="button" class="btn-two blue small" id="btnSearch">조회</button>
-		<input type="submit" class="btn-two blue small" id="btnExcel" value="엑셀">
+		<input type="submit" class="btn-two blue small" id="btnExcel" value="Excel">
 		<button type="reset" class="btn-two blue small" id="btnReset">초기화</button>
 	</div>
 	<div class="row">

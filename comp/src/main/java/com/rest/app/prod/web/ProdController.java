@@ -161,7 +161,7 @@ public class ProdController {
 		return data;
 	}
 
-	// 생산계획 조회 - 엑셀
+	// 생산계획 조회 - Excel
 	@RequestMapping("/pro/view/viewPlanExcel.do")
 	public ModelAndView viewPlanExcel(@RequestParam Map<String, Object> param)
 			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
@@ -219,7 +219,7 @@ public class ProdController {
 		return data;
 	}
 
-	// 생산지시 조회 - 엑셀
+	// 생산지시 조회 - Excel
 	@RequestMapping("/pro/view/viewProrExcel.do")
 	public ModelAndView viewProrExcel(@RequestParam Map<String, Object> param)
 			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
@@ -494,7 +494,7 @@ public class ProdController {
 		return data;
 	}
 
-	// 작업실적 조회 - 엑셀
+	// 작업실적 조회 - Excel
 	@RequestMapping("/pro/view/viewWorkExcel.do")
 	public ModelAndView viewWorkExcel(@RequestParam Map<String, Object> param)
 			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {

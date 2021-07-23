@@ -20,7 +20,7 @@
 		</div>
 			<div class="mb-4" align="right">
 					<input type="submit" class="btn-two blue small" id="btnExcel"
-						value="엑셀">
+						value="Excel">
 				</div>
 		<div class="row">
 			<div class="mb-2 col-md-4">

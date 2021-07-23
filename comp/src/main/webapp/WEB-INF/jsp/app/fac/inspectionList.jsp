@@ -13,7 +13,7 @@
 		</div>
 			<div class="mb-4" align="right">
 					<input type="submit" class="btn-two blue small" id="btnExcel"
-						value="엑셀">
+						value="Excel">
 				</div>
 	</form>
 	<div id="grid"></div>

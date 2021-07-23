@@ -8,7 +8,7 @@
 	action="busListExcel.do">
 	<div class="mb-4" align="right">
 		<button type="button" class="btn-two blue small" id="searchBtn">조회</button>
-		<input type="submit" class="btn-two blue small" id="btnExcel" value="엑셀">
+		<input type="submit" class="btn-two blue small" id="btnExcel" value="Excel">
 		<button type="reset" class="btn-two blue small" id="resetBtn">초기화</button>
 	</div>
 	<div class="row">

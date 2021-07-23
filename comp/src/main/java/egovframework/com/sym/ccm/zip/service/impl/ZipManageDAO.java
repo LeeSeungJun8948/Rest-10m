@@ -55,7 +55,7 @@ public class ZipManageDAO extends EgovComAbstractDAO {
 	}
 
 	/**
-	 * 우편번호 엑셀파일을 등록한다.
+	 * 우편번호 Excel파일을 등록한다.
 	 * @param zip
 	 * @throws Exception
 	 */

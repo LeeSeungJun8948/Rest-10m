@@ -76,7 +76,7 @@ public class RepairController {
 		return data;
 	}
 	
-	// 수리 조회 엑셀
+	// 수리 조회 Excel
 	@RequestMapping("/fac/view/repairListExcel.do")
 	public ModelAndView repairListExcel(@RequestParam Map<String, Object> param)
 			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {

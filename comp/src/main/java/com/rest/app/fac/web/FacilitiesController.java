@@ -76,7 +76,7 @@ public class FacilitiesController {
 		return data;
 	}
 	
-	// 설비 조회 엑셀
+	// 설비 조회 Excel
 	@RequestMapping("/fac/view/facListExcel.do")
 	public ModelAndView facListExcel(@RequestParam Map<String, Object> param)
 			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {

@@ -291,8 +291,8 @@ public class EgovMenuManageServiceImpl extends EgovAbstractServiceImpl implement
 				sMessage = "메뉴정보시트의 cell 갯수 오류.";
 				break;
 			case 93:
-				LOGGER.debug("엑셀 시트갯수 오류.");
-				sMessage = "엑셀 시트갯수 오류.";
+				LOGGER.debug("Excel 시트갯수 오류.");
+				sMessage = "Excel 시트갯수 오류.";
 				break;
 			case 95:
 				LOGGER.debug("메뉴정보 입력시 에러.");
@@ -331,7 +331,7 @@ public class EgovMenuManageServiceImpl extends EgovAbstractServiceImpl implement
 			message = "90";	//파일존재하지 않음.
 			message = "91";	//프로그램시트의 cell 갯수 오류
 			message = "92";	//메뉴정보시트의 cell 갯수 오류
-			message = "93";	//엑셀 시트갯수 오류
+			message = "93";	//Excel 시트갯수 오류
 			message = "95";	//메뉴정보 입력시 에러
 			message = "96";	//프로그램목록입력시 에러
 			message = "0";	//일괄배치처리 완료
@@ -345,7 +345,7 @@ public class EgovMenuManageServiceImpl extends EgovAbstractServiceImpl implement
 			} //메뉴정보테이블 데이타 존재오류.
 
 			HSSFWorkbook hssfWB = (HSSFWorkbook) excelZipService.loadWorkbook(inputStream);
-			// 엑셀 파일 시트 갯수 확인 sheet = 2  첫번째시트 = 프로그램목록  두번째시트 = 메뉴목록
+			// Excel 파일 시트 갯수 확인 sheet = 2  첫번째시트 = 프로그램목록  두번째시트 = 메뉴목록
 			if (hssfWB.getNumberOfSheets() == 2) {
 				HSSFSheet progrmSheet = hssfWB.getSheetAt(0); //프로그램목록 시트 가져오기
 				HSSFSheet menuSheet = hssfWB.getSheetAt(1); //메뉴정보 시트 가져오기
@@ -382,7 +382,7 @@ public class EgovMenuManageServiceImpl extends EgovAbstractServiceImpl implement
 					return requestValue = "96"; // 프로그램목록입력시 에러
 				}
 			} else {
-				return requestValue = "93"; // 엑셀 시트갯수 오류
+				return requestValue = "93"; // Excel 시트갯수 오류
 			}
 		} catch (BaseException e) {
 			LOGGER.error("["+ e.getClass() +"] : ", e.getMessage());

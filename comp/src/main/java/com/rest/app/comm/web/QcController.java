@@ -80,7 +80,7 @@ public class QcController {
 		return data;
 	}
 	
-	//제품List 엑셀
+	//제품List Excel
 	@RequestMapping("/comm/proudctListExcel.do")
 	public ModelAndView proudctListExcel(@RequestParam Map<String, Object> param) 
 		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
