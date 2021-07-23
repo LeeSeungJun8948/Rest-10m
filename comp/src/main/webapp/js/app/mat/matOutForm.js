@@ -22,14 +22,13 @@ const grid = new tui.Grid({
 		{
 			header : '출고번호',
 			name : 'ioCode',
-			width : 80,
+			width : 120,
 			align: 'center',
 			sortable: true
 		},
 		{
 			header : '출고일자',
 			name : 'ioDate',
-			width : 120,
 			align: 'center',
 			editor: {
 				type: 'datePicker',
@@ -46,7 +45,7 @@ const grid = new tui.Grid({
 		{
 			header : '자재코드',
 			name : 'materialCode',
-			width : 80,
+			width : 120,
 			align: 'center',
 			className: 'white',
 			onAfterChange(ev) {
@@ -74,7 +73,6 @@ const grid = new tui.Grid({
 		}, {
 			header : '자재명',
 			name : 'materialName',
-			width : 150,
 			align: 'center',
 			sortable: true
 		}, {
@@ -94,12 +92,11 @@ const grid = new tui.Grid({
 		}, {
 			header : '단위',
 			name : 'unitNo',
-			width : 70,
+			width : 80,
 			align: 'center'
 		}, {
-			header : '자재LOT_NO',
+			header : '자재LOT',
 			name : 'lotNo',
-			width : 150,
 			align: 'center',
 			className: 'white',
 			validation: {
@@ -108,7 +105,6 @@ const grid = new tui.Grid({
 		}, {
 			header : '출고공정',
 			name : 'processCode',
-			width : 120,
 			align: 'center',	
 			className: 'white',
 			formatter: 'listItemText',
@@ -132,7 +128,6 @@ const grid = new tui.Grid({
 		}, {
 			header : '비고',
 			name : 'comments',
-			width : 160,
 			align: 'center',
 			editor: 'text'
 		}
@@ -281,6 +276,7 @@ $("#btnSave").on("click", function(){
 	
 	if(grid.validate().length == 0){
 		grid.request('modifyData');
+		toastr.success("저장되었습니다.");
 	}
 
 });

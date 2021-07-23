@@ -54,18 +54,17 @@
 				columns : [ 
 					{
 						header : '불량코드',
-						name : 'errorCode'
-
+						name : 'errorCode',
 					}, 
 					{
 						header : '불량명',
 						name : 'errorName',
-						editor : 'text'
+						editor : 'text',
 					}, 
 					{
 						header : '비고',
 						name : 'errorComment',
-						editor : 'text'
+						editor : 'text',
 					}
 
 					]

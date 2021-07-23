@@ -35,31 +35,40 @@ const dataSource = {
 		scrollY : false,
 		columns : [ {
 			header : '수리코드',
-			name : 'repairCode'
+			name : 'repairCode',
+			align: 'center'
 		}, {
 			header : '설비코드',
-			name : 'facCode'
+			name : 'facCode',
+			align: 'center'
 		}, {
 			header : '설비명',
-			name : 'facilitiesName'
+			name : 'facilitiesName',
+			align: 'center'
 		}, {
 			header : '수리일자',
-			name : 'repairDate'
+			name : 'repairDate',
+			align: 'center'
 		}, {
 			header : '수리내역',
-			name : 'repairComment'
+			name : 'repairComment',
+			align: 'center'
 		}, {
 			header : '업체코드',
-			name : 'companyCode'
+			name : 'companyCode',
+			align: 'center'
 		}, {
 			header : '업체명',
-			name : 'companyName'
+			name : 'companyName',
+			align: 'center'
 		}, {
 			header : '수리금액',
-			name : 'cost'
+			name : 'cost',
+			align: 'right'
 		}, {
 			header : '비고',
-			name : 'etc'
+			name : 'etc',
+			align: 'center'
 		} ]
 	});
 

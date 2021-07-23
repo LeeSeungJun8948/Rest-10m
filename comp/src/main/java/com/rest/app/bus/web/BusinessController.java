@@ -68,7 +68,7 @@ public class BusinessController {
 		return data;
 	}
 	
-	//주문관리참조조회-엑셀
+	//주문관리참조조회-Excel
 	@RequestMapping("/bus/view/busListExcel.do")
 	public ModelAndView busListExcel(@RequestParam Map<String, Object> param)
 			throws IllegalAccessException,InvocationTargetException, NoSuchMethodException {
@@ -256,7 +256,7 @@ public class BusinessController {
 		return data;
 	}
 	
-	//제품재고조회-엑셀
+	//제품재고조회-Excel
 		@RequestMapping("/bus/view/productInventoryExcel.do")
 		public ModelAndView productInventoryExcel(@RequestParam Map<String, Object> param)
 				throws IllegalAccessException,InvocationTargetException, NoSuchMethodException {
@@ -316,7 +316,7 @@ public class BusinessController {
 			return data;
 		}
 		
-		//출고조회-엑셀
+		//출고조회-Excel
 				@RequestMapping("/bus/view/exportExcel.do")
 				public ModelAndView exportExcel(@RequestParam Map<String, Object> param)
 						throws IllegalAccessException,InvocationTargetException, NoSuchMethodException {

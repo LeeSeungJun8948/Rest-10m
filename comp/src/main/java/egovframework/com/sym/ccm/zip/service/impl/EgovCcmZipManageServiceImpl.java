@@ -29,7 +29,7 @@ import org.springframework.stereotype.Service;
  *   수정일      수정자           수정내용
  *  -------    --------    ---------------------------
  *   2009.04.01  이중호          최초 생성
- *   2011.11.22  이기하          엑셀업로드 시작위치 수정(2 -> 1)
+ *   2011.11.22  이기하          Excel업로드 시작위치 수정(2 -> 1)
  *
  * </pre>
  */
@@ -67,7 +67,7 @@ public class EgovCcmZipManageServiceImpl extends EgovAbstractServiceImpl impleme
 	}
 
 	/**
-	 * 우편번호 엑셀파일을 등록한다.
+	 * 우편번호 Excel파일을 등록한다.
 	 * @param zip
 	 * @throws Exception
 	 */

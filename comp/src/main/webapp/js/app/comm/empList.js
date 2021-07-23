@@ -29,33 +29,42 @@ const grid = new tui.Grid({
 	columns : [ {
 		header : '아이디',
 		name : 'id',
+		align: 'center'
 		}, {
 		header : '사원명',
 		name : 'employeeName',
+		align: 'center'
 		}, {
 		header : '직책',
 		name : 'auth',
+		align: 'center'
 		}, {
 		header : '전화번호',
 		name : 'phone',
+		align: 'center'
 		}, {
 		header : '이메일',
 		name : 'email',
+		align: 'center'
 		}, {
 		header : '입사일',
 		name : 'hireDate',
+		align: 'center'
 		}, {
 		header : '소속업체',
 		name : 'companyCode',
+		align: 'center'
 		}, {
 		header : '월급',
 		name : 'salary',
+		align: 'right',
 		 formatter({value}) {
    			return format(value);
 	   		}
 		}, {
 		header : '생년월일',
 		name : 'birthDay',
+		align: 'center'
 		},  {
 		header : '부서코드',
 		name : 'dept',

@@ -51,7 +51,7 @@ function fn_egov_regist_ExcelZip(){
 	var strExt      = arrTmp[arrTmp.length-1].toLowerCase();
 
 	if (!(arrExt == strExt || arrExt1 == strExt)) {
-		alert("엑셀 파일을 첨부하지 않았습니다.\n확인후 다시 처리하십시오. ");
+		alert("Excel 파일을 첨부하지 않았습니다.\n확인후 다시 처리하십시오. ");
 		abort;
 	}
 	varForm.action           = "<c:url value='/sym/ccm/zip/EgovCcmExcelZipRegist.do' />";
@@ -64,7 +64,7 @@ function fn_egov_regist_ExcelZip(){
 </head>
 <body>
 <noscript class="noScriptTitle"><spring:message code="common.noScriptTitle.msg"/></noscript>
-<!-- 엑셀 등록 메시지  -->
+<!-- Excel 등록 메시지  -->
 ${sResult}
 <DIV id="note" style="width:712px">
 <!-- 상단타이틀 -->
@@ -74,17 +74,17 @@ ${sResult}
  <tr>
   <td width="100%"class="title_left"><h1 class="title_left">
   <c:if test ="${searchList == '1'}">
-	<img src="<c:url value='/images/egovframework/com/cmm/icon/tit_icon.gif' />" width="16" height="16" hspace="3" style="vertical-align: middle" alt="<spring:message code="comSymCcmZip.zipVO.altImg"/>">&nbsp;${pageTitle} <spring:message code="comSymCcmZip.zipVO.SearchAddrr" /> <spring:message code="comSymCcmZip.zipVO.excelFile" /> <spring:message code="title.create" /></h1></td><!-- 우편번호 일반주소 엑셀파일 등록 -->
+	<img src="<c:url value='/images/egovframework/com/cmm/icon/tit_icon.gif' />" width="16" height="16" hspace="3" style="vertical-align: middle" alt="<spring:message code="comSymCcmZip.zipVO.altImg"/>">&nbsp;${pageTitle} <spring:message code="comSymCcmZip.zipVO.SearchAddrr" /> <spring:message code="comSymCcmZip.zipVO.excelFile" /> <spring:message code="title.create" /></h1></td><!-- 우편번호 일반주소 Excel파일 등록 -->
   </c:if>
   <c:if test ="${searchList == '2'}">
-	<img src="<c:url value='/images/egovframework/com/cmm/icon/tit_icon.gif' />" width="16" height="16" hspace="3" style="vertical-align: middle" alt="<spring:message code="comSymCcmZip.zipVO.altImg"/>">&nbsp;${pageTitle} <spring:message code="comSymCcmZip.zipVO.SearchRdmn" /> <spring:message code="comSymCcmZip.zipVO.excelFile" /> <spring:message code="title.create" /></h1></td> <!-- 우편번호 도로명주소 엑셀파일 등록 -->
+	<img src="<c:url value='/images/egovframework/com/cmm/icon/tit_icon.gif' />" width="16" height="16" hspace="3" style="vertical-align: middle" alt="<spring:message code="comSymCcmZip.zipVO.altImg"/>">&nbsp;${pageTitle} <spring:message code="comSymCcmZip.zipVO.SearchRdmn" /> <spring:message code="comSymCcmZip.zipVO.excelFile" /> <spring:message code="title.create" /></h1></td> <!-- 우편번호 도로명주소 Excel파일 등록 -->
   </c:if>
  </tr>
 </table>
 
 <!-- 등록  폼 영역  -->
-<table class="tbl_note" width="700" border="0" cellpadding="0" cellspacing="1" class="table-register" summary="<spring:message code="comSymCcmZip.zipVO.summaryExcel"/>"> <!-- 우편번호 엑셀파일을 첨부할 수 있는 등록 테이블입니다. -->
-<CAPTION style="display: none;">${pageTitle} <spring:message code="comSymCcmZip.zipVO.excelFile"/> <spring:message code="title.create" /></CAPTION> <!-- 우편번호 엑셀파일 등록 -->
+<table class="tbl_note" width="700" border="0" cellpadding="0" cellspacing="1" class="table-register" summary="<spring:message code="comSymCcmZip.zipVO.summaryExcel"/>"> <!-- 우편번호 Excel파일을 첨부할 수 있는 등록 테이블입니다. -->
+<CAPTION style="display: none;">${pageTitle} <spring:message code="comSymCcmZip.zipVO.excelFile"/> <spring:message code="title.create" /></CAPTION> <!-- 우편번호 Excel파일 등록 -->
   <tr>
     <th>${pageTitle} <spring:message code="comSymCcmZip.zipVO.excelFile"/></th>
   	<td>

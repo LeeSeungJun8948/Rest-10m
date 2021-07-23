@@ -43,22 +43,6 @@
 						</td>
 					</tr>
 					<tr>
-						<th>발주업체</th>
-						<td>
-							<div class="row">
-								<div class="col-md-4">
-									<input readonly class="form-control" type="text" id="companyCode" name="companyCode">
-								</div>
-								<button id="btnCompModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#compModal">
-										<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
-								</button>	
-								<div class="col-md-6">					
-									<input readonly class="form-control" type="text" id="companyName" name="companyName">
-								</div>
-							</div>
-						</td>
-					</tr>
-					<tr>
 						<th>발주자재</th>
 						<td>
 							<div class="row">
@@ -70,6 +54,22 @@
 								</button>	
 								<div class="col-md-6">					
 									<input readonly class="form-control" type="text" id="materialName" name="materialName">
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>발주업체</th>
+						<td>
+							<div class="row">
+								<div class="col-md-4">
+									<input readonly class="form-control" type="text" id="companyCode" name="companyCode">
+								</div>
+								<button id="btnCompModal" type="button" class="btn btn-toggle" data-remote="false" data-toggle="modal" data-target="#compModal">
+										<img alt="btn_search" src="<c:url value='/images/app/all/btn_search.png'/>">
+								</button>	
+								<div class="col-md-6">					
+									<input readonly class="form-control" type="text" id="companyName" name="companyName">
 								</div>
 							</div>
 						</td>

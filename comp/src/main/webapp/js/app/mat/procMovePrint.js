@@ -19,7 +19,7 @@ const planGrid = new tui.Grid({
 	bodyHeight: 250,
 	columns : [ 
 		{
-			header : '생산계획코드',
+			header : '생산지시코드',
 			name : 'prorCode',
 			width : 120,
 			align: 'center',
@@ -46,8 +46,11 @@ const planGrid = new tui.Grid({
 		}, {
 			header : '지시량',
 			name : 'prorCount',
-			align: 'center',
-			sortable: true
+			align: 'right',
+			sortable: true,
+			formatter({value}) {
+      			return format(value);
+    		},
 		}, {
 			header : '작업일자',
 			name : 'workDate',
@@ -153,7 +156,7 @@ planGrid.on('click',function(ev){
 				};
 				inputGrid.appendRow(newRowData, {
 					at : inputGrid.getRowCount(),
-					focus : true
+					focus : false
 				});
 			}
 		},
@@ -180,7 +183,7 @@ planGrid.on('click',function(ev){
 				};
 				procGrid.appendRow(newRowData, {
 					at : procGrid.getRowCount(),
-					focus : true
+					focus : false
 				});
 			}
 		},

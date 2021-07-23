@@ -22,6 +22,7 @@ const grid = new tui.Grid({
 		header: '제품코드',
 		name: 'productCode',
 		editor: 'text',
+		align: 'center',
 		validation: {
 			required: true
 		},
@@ -32,27 +33,34 @@ const grid = new tui.Grid({
 	}, {
 		header: '제품명',
 		name: 'productName',
+		align: 'center',
 		onAfterChange(ev) {
 			valueInput(ev);
 		}
 	}, {
 		header: '주문번호',
 		name: 'orderNo',
+		align: 'center',
 	}, {
 		header: '납기일자',
 		name: 'outDate',
+		align: 'center',
 	}, {
 		header: '주문량',
 		name: 'orderCount',
+		align: 'right',
 	}, {
 		header: '기계획량',
-		name: 'planCount'
+		name: 'planCount',
+		align: 'right',
 	}, {
 		header: '미계획량',
 		name: 'unplanCount',
+		align: 'right',
 	}, {
 		header: '작업량',
 		name: 'workCount',
+		align: 'right',
 		editor: 'text',
 		validation: {
 			dataType: 'number',
@@ -64,6 +72,7 @@ const grid = new tui.Grid({
 	}, {
 		header: '작업일자',
 		name: 'workDate',
+		align: 'center',
 		editor: {
 			type: 'datePicker',
 			options: {
@@ -81,6 +90,7 @@ const grid = new tui.Grid({
 	}, {
 		header: '비고',
 		name: 'comments',
+		align: 'center',
 		editor: 'text'
 	}, {
 		header: '생산계획번호',

@@ -42,7 +42,7 @@
 	</div>
 </form>
 <div class="col-lg-12">
-	<div id="workGrid"/>
+	<div id="workGrid"></div>
 </div>
 
 <div class="modal fade" id="workViewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -50,7 +50,7 @@ import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
  *  2011.07.01   서준식            메뉴정보 삭제시 참조되고 있는 하위 메뉴가 있는지 체크하는 로직 추가
  *  2011.07.27   서준식            deleteMenuManageList() 메서드에서 메뉴 멀티 삭제 버그 수정
  *  2011.08.26   정진오            IncludedInfo annotation 추가
- *  2011.10.07   이기하            보안취약점 수정(파일 업로드시 엑셀파일만 가능하도록 추가)
+ *  2011.10.07   이기하            보안취약점 수정(파일 업로드시 Excel파일만 가능하도록 추가)
  *  2015.05.28   조정국            메뉴리스트관리 선택시 "정상적으로 조회되었습니다"라는 alert창이 제일 먼저 뜨는것 수정 : 출력메시지 주석처리
  *  2020.11.02   신용호            KISA 보안약점 조치 - 자원해제
  *  2021.02.16   신용호            WebUtils.getNativeRequest(request,MultipartHttpServletRequest.class);

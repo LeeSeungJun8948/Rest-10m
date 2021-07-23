@@ -50,7 +50,7 @@ import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
  *  ----------   --------   ---------------------------
  *  2009.04.01   이중호            최초 생성
  *  2011.08.26   정진오            IncludedInfo annotation 추가
- *  2011.10.07   이기하            보안취약점 수정(파일 업로드시 엑셀파일만 가능하도록 추가)
+ *  2011.10.07   이기하            보안취약점 수정(파일 업로드시 Excel파일만 가능하도록 추가)
  *  2011.11.21   이기하            도로명주소 추가(rdnmadZip)
  *  2021.02.16   신용호            WebUtils.getNativeRequest(request,MultipartHttpServletRequest.class);
  *
@@ -198,7 +198,7 @@ public class EgovCcmZipManageController {
 	}
 
 	/**
-	 * 엑셀파일을 업로드하여 우편번호를 등록한다.
+	 * Excel파일을 업로드하여 우편번호를 등록한다.
 	 * @param loginVO
 	 * @param request
 	 * @param commandMap

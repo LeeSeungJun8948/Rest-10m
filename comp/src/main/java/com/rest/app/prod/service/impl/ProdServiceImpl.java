@@ -210,23 +210,22 @@ public class ProdServiceImpl implements ProdService {
 	}
 
 	public String makeLot(DetailProrderVO vo) {
-		String productLot = "PR-" + vo.getWorkDate().replace("-", "").substring(2) + "-"
-				+ String.valueOf(countDetailPror());
+		String productLot = "PR-" + vo.getWorkDate().replace("-", "").substring(2) + "-" +  String.valueOf((int)((Math.random() + 1) * 1000)) + "-" + String.valueOf(countDetailPror());
 		return productLot;
 	}
 
 	public String makePlanCode(PlanVO vo) {
-		String planCode = "PL-" + vo.getPlanDate().replace("-", "").substring(2) + "-" + String.valueOf(countPlan());
+		String planCode = "PL-" + vo.getPlanDate().replace("-", "").substring(2) + "-" + String.valueOf((int)((Math.random() + 1) * 1000)) + "-" + String.valueOf(countPlan());
 		return planCode;
 	}
 
 	public String makeProrCode(ProrderVO vo) {
-		String planCode = "PO-" + vo.getProrDate().replace("-", "").substring(2) + "-" + String.valueOf(countPror());
+		String planCode = "PO-" + vo.getProrDate().replace("-", "").substring(2) + "-" + String.valueOf((int)((Math.random() + 1) * 1000)) + "-" + String.valueOf(countPror());
 		return planCode;
 	}
 
 	public String makeWorkCode(WorkVO vo) {
-		String workCode = "WK-" + vo.getWorkDate().replace("-", "").substring(2) + "-" + String.valueOf(countWork());
+		String workCode = "WK-" + vo.getWorkDate().replace("-", "").substring(2) + "-" + String.valueOf((int)((Math.random() + 1) * 1000)) + "-" + String.valueOf(countWork());
 		return workCode;
 	}
 

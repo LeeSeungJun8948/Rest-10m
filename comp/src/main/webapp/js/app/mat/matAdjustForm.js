@@ -218,6 +218,7 @@ $("#btnSave").on("click", function(){
 	
 	if(adjustGrid.validate().length == 0){
 		adjustGrid.request('modifyData');
+		toastr.success("저장되었습니다.");
 	}
 });
 
