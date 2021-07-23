@@ -20,7 +20,7 @@
 </div>
 	<div align="right" role="form">
 		<form id="frmExcel" name="frmExcel" action="${pageContext.request.contextPath}/mat/view/inorderExcel.do" method="post">
-			<button type="button" class="btn-two blue small" id="btnExcel">Excel</button>
+			<button type="button" class="btn-two blue small" id="btnExcel">엑셀</button>
 			<input type="hidden" id="param" name="param">
 			<button type="button" class="btn-two blue small" id="btnRead">조회</button>
 		</form>

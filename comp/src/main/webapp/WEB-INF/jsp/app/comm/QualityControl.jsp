@@ -11,7 +11,7 @@
 	</div>
 		<div class="mb-4" align="right">
 			<button type="reset"  class="btn-two blue small" id="btnNew">초기화</button>
-			<button type="button" class="btn-two blue small" id="btnexcel" onclick="excel()">Excel</button>
+			<button type="button" class="btn-two blue small" id="btnexcel" onclick="excel()">엑셀</button>
 			<button type="button" class="btn-two blue small" id="btninsert" onclick="save()">저장</button>
 			<button type="button" class="btn-two blue small" id="btnDelete">삭제</button>
 		</div>
