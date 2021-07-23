@@ -187,6 +187,8 @@ $('#btnSrc').on('click',function(){
 // 코드 선택
 function grinOnEvent(){
 	
+
+	
 	$('#codeId').val(codeIdGrid.getValue(idRowKey, 'codeId'));
 	$('#codeIdNm').val(codeIdGrid.getValue(idRowKey, 'codeIdNm'));
 	$('#codeIdDc').val(codeIdGrid.getValue(idRowKey, 'codeIdDc'));
