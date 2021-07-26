@@ -34,7 +34,6 @@ const stockGrid = new tui.Grid({
 	data : stockDataSource,
 	scrollX : false,
 	scrollY : true,
-	bodyHeight: 200,
 	rowHeaders: ['checkbox'],
 	columns : [ 
 		{
@@ -83,7 +82,25 @@ const stockGrid = new tui.Grid({
 			align: 'center',
 			width : 80
 		} 
-	]
+	],
+	summary : {
+		
+		height: 40,
+	   	position: 'bottom',
+	   	columnContent: {
+        	ioDate: {
+                template(summary) {
+        			return '합 계';
+                } 
+            },	
+			lotStock: {
+                template(summary) {
+        			var summaryResult = (summary.sum);
+        			return format(summaryResult);
+                } 
+            }
+		}
+	}
 		
 });
 

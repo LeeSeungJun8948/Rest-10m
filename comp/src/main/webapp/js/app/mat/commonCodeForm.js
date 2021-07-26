@@ -137,45 +137,50 @@ const codeGrid = new tui.Grid({
 		} ]
 });
 
-var idRowKey;
+// 급한게 막짠거라 더이상 수습 불가능.. 여기서 기능 추가하거나 수정하려면 다시 쓰는게 나을듯.. 
+var idRowKey
 var newRowKey;
 
 codeIdGrid.on('click',function(e){
 	var change = true;	
 	
-	if(!checkNull(idRowKey))
-		idRowKey = e.rowKey;
-	
-	if(e.rowKey != newRowKey && checkNull(newRowKey)){
-		if(confirm('작성한 내용이 사라집니다. 정말로 이동하시겠습니까?')){
+	console.log(e.rowKey != idRowKey);
+	if(e.rowKey != idRowKey){
+			if(!checkNull(idRowKey))
 			idRowKey = e.rowKey;
-			codeIdGrid.removeRow(newRowKey, {});
-			newRowKey = null;
-			$('#codeId').prop('readonly', true);
-		}else{
-			codeIdGrid.focusAt(newRowKey, 0, true);
-			idRowKey = newRowKey;
-		}
-	}
-			
-	for(modified in codeGrid.getModifiedRows()){
-		if(codeGrid.getModifiedRows()[modified].length > 0){
-			change = false;
-			if(confirm('변경된 값이 있습니다. 정말로 이동하시겠습니까?')){
+		
+		if(e.rowKey != newRowKey && checkNull(newRowKey)){
+			if(confirm('작성한 내용이 사라집니다. 정말로 이동하시겠습니까?')){
 				idRowKey = e.rowKey;
-				grinOnEvent();
+				codeIdGrid.removeRow(newRowKey, {});
+				newRowKey = null;
+				$('#codeId').prop('readonly', true);
 			}else{
-				codeIdGrid.focusAt(idRowKey, 0, true);
+				codeIdGrid.focusAt(newRowKey, 0, true);
+				idRowKey = newRowKey;
 			}
-		}else{
-			if(change && modified == 'deletedRows'){
-				if(!checkNull(newRowKey)){
+		}
+				
+		for(modified in codeGrid.getModifiedRows()){
+			if(codeGrid.getModifiedRows()[modified].length > 0){
+				change = false;
+				if(confirm('변경된 값이 있습니다. 정말로 이동하시겠습니까?')){
 					idRowKey = e.rowKey;
-					grinOnEvent();	
+					grinOnEvent();
+				}else{
+					codeIdGrid.focusAt(idRowKey, 0, true);
+				}
+			}else{
+				if(change && modified == 'deletedRows'){
+					if(!checkNull(newRowKey)){
+						idRowKey = e.rowKey;
+						grinOnEvent();	
+					}
 				}
 			}
 		}
 	}
+	
 	
 })
 
@@ -287,15 +292,19 @@ $('#btnSave').on('click',function(){
 	if(codeIdGrid.validate().length == 0 && codeGrid.validate().length == 0){
 		
 		if(confirm('저장하시겠습니까?')){
-			codeIdGrid.request('modifyData', {
-	            showConfirm: false
-	         });
+
 			codeGrid.request('modifyData', {
 	            showConfirm: false
 	         });
+
+			codeIdGrid.request('modifyData', {
+	            showConfirm: false
+	         });
+			
 			toastr.success("저장되었습니다.");
 			newRowKey = null;
 		}
+		
 	}
 	
 	for(modified in codeGrid.getModifiedRows()){
