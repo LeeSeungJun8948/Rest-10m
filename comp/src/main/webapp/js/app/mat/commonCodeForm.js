@@ -292,12 +292,15 @@ $('#btnSave').on('click',function(){
 	if(codeIdGrid.validate().length == 0 && codeGrid.validate().length == 0){
 		
 		if(confirm('저장하시겠습니까?')){
-			codeIdGrid.request('modifyData', {
-	            showConfirm: false
-	         });
+
 			codeGrid.request('modifyData', {
 	            showConfirm: false
 	         });
+
+			codeIdGrid.request('modifyData', {
+	            showConfirm: false
+	         });
+			
 			toastr.success("저장되었습니다.");
 			newRowKey = null;
 		}
