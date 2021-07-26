@@ -105,7 +105,7 @@ public class BusinessServiceImpl implements BusinessService {
 
 	public String makeExportCode(ExportVO vo) {
 		String exportCode = "EX-" + vo.getExportDate().replace("-", "").substring(2) + "-"
-				+ String.valueOf(countExportCode());
+				+ String.valueOf((int) ((Math.random() + 1) * 1000)) + "-" + String.valueOf(countExportCode());
 		return exportCode;
 	}
 

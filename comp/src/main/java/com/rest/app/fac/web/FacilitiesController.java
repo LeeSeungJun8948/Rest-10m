@@ -76,7 +76,7 @@ public class FacilitiesController {
 		return data;
 	}
 	
-	// 설비 조회 엑셀
+	// 설비 조회 Excel
 	@RequestMapping("/fac/view/facListExcel.do")
 	public ModelAndView facListExcel(@RequestParam Map<String, Object> param)
 			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
@@ -233,7 +233,7 @@ public class FacilitiesController {
 	// 파일
 	@RequestMapping(value = "/fac/mng/filedown.do")
 	public void getDown(HttpServletResponse response, @RequestParam String fileName) throws Exception{
-		String serverSubPath  = "c:/upload";
+		String serverSubPath  = EgovProperties.getProperty("Globals.fileStorePath");
 		String downFileName = serverSubPath + "/" + fileName;
 
 		File file = new File(EgovWebUtil.filePathBlackList(downFileName));

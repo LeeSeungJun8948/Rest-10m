@@ -28,7 +28,7 @@ import org.apache.poi.ss.usermodel.Row;
 public class EgovCcmExcelZipMapping extends EgovExcelMapping {
 
 	/**
-	 * 우편번호 엑셀파일 맵핑
+	 * 우편번호 Excel파일 맵핑
 	 */
 	@Override
 	public Object mappingColumn(Row row) {
