@@ -168,7 +168,7 @@
 		DELETE FROM detailprorder WHERE pror_code = #{prorCode}
 	</delete>
 	<select id="countDetailPror" resultType="int">
-		SELECT count(*)+1 FROM detailprorder
+		SELECT NVL(count(*),0)+1 FROM detailprorder
 	</select>
 	<select id="viewProrderSearch" resultType="DetailProrderVO">
 		SELECT TO_CHAR(p.pror_date, 'YYYY-MM-DD') pror_date, d.product_code, pr.product_name,
