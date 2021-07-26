@@ -28,7 +28,7 @@
 		DELETE FROM plan WHERE plan_code = #{planCode}
 	</delete>
 	<select id="countPlan" resultType="int">
-		SELECT count(*)+1 FROM plan 
+		SELECT NVL(count(*),0)+1 FROM plan 
 	</select>
 	<select id="searchPlan" resultType="PlanVO">
 		SELECT plan_code, plan_name, TO_CHAR(plan_date, 'YYYY-MM-DD') plan_date, comments FROM plan 
@@ -118,7 +118,7 @@
 		DELETE FROM prorder WHERE pror_code = #{prorCode}
 	</delete>
 	<select id="countPror" resultType="int">
-		SELECT count(*)+1 FROM prorder
+		SELECT NVL(count(*),0)+1 FROM prorder
 	</select>
 	<select id="searchProrder" resultType="ProrderVO">
 		SELECT pror_code, pror_name, TO_CHAR(pror_date, 'YYYY-MM-DD') pror_date, comments FROM prorder 
@@ -304,7 +304,7 @@
 		DELETE FROM work WHERE work_code = #{workCode}
 	</delete>	
 	<select id="countWork" resultType="int">
-		SELECT COUNT(*)+1 FROM work
+		SELECT NVL(COUNT(*), 0)+1 FROM work
 	</select>
 	
 	<select id="searchEmp" resultType="com.rest.app.comm.vo.EmployeeVO">
