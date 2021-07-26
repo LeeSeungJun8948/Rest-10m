@@ -395,7 +395,7 @@
 		WHERE product_lot = #{productLot}
 	</select>
 	
-	<!-- 공정 -->
+	<!-- 공정진행 -->
 	<select id="getProcStatus" parameterType="ProcMoveVO" resultType="ProcMoveVO">
 		SELECT distinct work.work_code,
 		       	bom.process_code, 
@@ -483,9 +483,9 @@
 				f_find_proc_name(process_code) 
 			AS proc_name,
 				(SELECT distinct product_code FROM work WHERE end_time IS NULL AND fac_code = f.fac_code) 
-			as prod_code,
+			AS prod_code,
 				f_find_prod_name((SELECT distinct product_code FROM work WHERE end_time IS NULL AND fac_code = f.fac_code)) 
-			as prod_name,
+			AS prod_name,
 				(SELECT unit_no FROM product WHERE product_code = (SELECT distinct product_code FROM work WHERE end_time IS NULL AND fac_code = f.fac_code)) 
 			AS unit_no,
 				(SELECT SUM(pror_count) FROM DETAILPRORDER WHERE product_code IN
